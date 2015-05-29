@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-05-29T17:09:54.181Z</updated>
+  <updated>2015-05-29T17:11:19.024Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yoursite.com/2015/05/27/%E9%87%8D%E6%96%B0%E8%B5%B7%E8%88%AA/"/>
     <id>http://yoursite.com/2015/05/27/重新起航/</id>
     <published>2015-05-27T14:23:58.000Z</published>
-    <updated>2015-05-29T17:09:54.181Z</updated>
+    <updated>2015-05-29T17:11:19.024Z</updated>
     <content type="html"><![CDATA[<p>　　几个月前,在网上看到了一篇<a href="http://www.cnblogs.com/jesse2013/p/how-to-learn-english.html" target="_blank" rel="external">Jesse Liu写的学习英语的文章</a>,受到Jesse的启发,制定了学习计划和任务监控时间表,也按照计划执行了很长一段时间,可惜一个多月前生病后因为种种原因就落下了,后面虽然有断断续续地学习,但仍造成学习进度严重滞后了.</p>
 <p>　　虽然之前没能一直坚持,但按照计划来学习来工作很有帮助,能帮我克服懒惰等坏习惯,让自己每天知道应该干什么,养成好的学习习惯.所以今天重新拟定计划,然后按照计划来学习提升自己.就目前来看自己主要有英语\Linux\Android\Java四个大部分需要花几乎所有时间来学习.</p>
 <p>　　对于自己来说执行计划的最大阻碍是时间,由于工作性质的原因,很多时候会加班.所以得随时关注自己的计划,将琐碎时间完全利用起来,#若什么时候未能完成当天的任务,就协调时间将其补起来#,如此就好.男人就是得逼自己一把,才能知道自己又多优秀,何况自己已经27了,能让自己拼的时间已不多.</p>
@@ -173,7 +173,7 @@
 </tr>
 </tbody>
 </table>
-<!--Read more-->
+<a id="more"></a>
 <h2 id="Linux学习">Linux学习</h2><h3 id="Linux相关书籍阅读监控">Linux相关书籍阅读监控</h3><table>
 <thead>
 <tr>
@@ -338,7 +338,160 @@
 <p>　不仅仅需要按照上面计划来完成,学无止境,需要不断的阅读.<br>记得随时更新Blog.<br>此文持续更新中,直至完成计划.</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>　　几个月前,在网上看到了一篇<a href="http://www.cnblogs.com/jesse2013/p/how-to-learn-english.html" target="_blank" rel="external">Jesse Liu写的学习英语的文章</]]>
+    <![CDATA[<p>　　几个月前,在网上看到了一篇<a href="http://www.cnblogs.com/jesse2013/p/how-to-learn-english.html">Jesse Liu写的学习英语的文章</a>,受到Jesse的启发,制定了学习计划和任务监控时间表,也按照计划执行了很长一段时间,可惜一个多月前生病后因为种种原因就落下了,后面虽然有断断续续地学习,但仍造成学习进度严重滞后了.</p>
+<p>　　虽然之前没能一直坚持,但按照计划来学习来工作很有帮助,能帮我克服懒惰等坏习惯,让自己每天知道应该干什么,养成好的学习习惯.所以今天重新拟定计划,然后按照计划来学习提升自己.就目前来看自己主要有英语\Linux\Android\Java四个大部分需要花几乎所有时间来学习.</p>
+<p>　　对于自己来说执行计划的最大阻碍是时间,由于工作性质的原因,很多时候会加班.所以得随时关注自己的计划,将琐碎时间完全利用起来,#若什么时候未能完成当天的任务,就协调时间将其补起来#,如此就好.男人就是得逼自己一把,才能知道自己又多优秀,何况自己已经27了,能让自己拼的时间已不多.</p>
+<h2 id="英语学习">英语学习</h2><p>　　在开始再次学习之前,自己仅仅因为工作经常接触英语的原因,看到大篇英文不会恐惧,能基本看懂,但是词汇量估计就高中水平吧,听说写就更凄惨,对语法几乎忘得一干二净,能写出通顺的话语都很困难,听说就更丢脸了.</p>
+<h3 id="英语学习时间监控">英语学习时间监控</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th></th>
+<th style="text-align:center">标题</th>
+<th></th>
+<th style="text-align:center">开始时间</th>
+<th></th>
+<th style="text-align:center">结束时间</th>
+<th></th>
+<th style="text-align:center">持续时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td></td>
+<td style="text-align:center">CET-4词汇</td>
+<td></td>
+<td style="text-align:center">2015/5/28</td>
+<td></td>
+<td style="text-align:center">2015/7/1</td>
+<td></td>
+<td style="text-align:center">35天</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td></td>
+<td style="text-align:center">NEC2</td>
+<td></td>
+<td style="text-align:center">2015/5/28</td>
+<td></td>
+<td style="text-align:center">2015/7/19</td>
+<td></td>
+<td style="text-align:center">53天</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td></td>
+<td style="text-align:center">NEC1 + 音标Review</td>
+<td></td>
+<td style="text-align:center">2015/5/29</td>
+<td></td>
+<td style="text-align:center">2015/6/7</td>
+<td></td>
+<td style="text-align:center">10天</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td></td>
+<td style="text-align:center">NEC3</td>
+<td></td>
+<td style="text-align:center">2015/7/19</td>
+<td></td>
+<td style="text-align:center">2015/8/23</td>
+<td></td>
+<td style="text-align:center">35天</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td></td>
+<td style="text-align:center">NEC4</td>
+<td></td>
+<td style="text-align:center">2015/8/23</td>
+<td></td>
+<td style="text-align:center">2015/9/27</td>
+<td></td>
+<td style="text-align:center">35天</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td></td>
+<td style="text-align:center">专项阅读训练</td>
+<td></td>
+<td style="text-align:center">2015/9/27</td>
+<td></td>
+<td style="text-align:center">2015/11/29</td>
+<td></td>
+<td style="text-align:center">63天</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td></td>
+<td style="text-align:center">CET-6词汇</td>
+<td></td>
+<td style="text-align:center">2015/10/2</td>
+<td></td>
+<td style="text-align:center">2015/11/1</td>
+<td></td>
+<td style="text-align:center">30天</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td></td>
+<td style="text-align:center">口语900句</td>
+<td></td>
+<td style="text-align:center">2015/10/1</td>
+<td></td>
+<td style="text-align:center">2015/12/12</td>
+<td></td>
+<td style="text-align:center">73天</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td></td>
+<td style="text-align:center">专项写作训练</td>
+<td></td>
+<td style="text-align:center">2015/11/29</td>
+<td></td>
+<td style="text-align:center">2015/12/13</td>
+<td></td>
+<td style="text-align:center">14天</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td></td>
+<td style="text-align:center">听说训练</td>
+<td></td>
+<td style="text-align:center">2015/12/13</td>
+<td></td>
+<td style="text-align:center">2017/1/1</td>
+<td></td>
+<td style="text-align:center">N天</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td></td>
+<td style="text-align:center">商务英语</td>
+<td></td>
+<td style="text-align:center">2015/12/7</td>
+<td></td>
+<td style="text-align:center">2015/12/30</td>
+<td></td>
+<td style="text-align:center">23天</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td></td>
+<td style="text-align:center">51Talk对话训练</td>
+<td></td>
+<td style="text-align:center">2016/1/1</td>
+<td></td>
+<td style="text-align:center">2016/6/30</td>
+<td></td>
+<td style="text-align:center">N天</td>
+</tr>
+</tbody>
+</table>]]>
+    
     </summary>
     
       <category term="Life" scheme="http://yoursite.com/categories/Life/"/>
