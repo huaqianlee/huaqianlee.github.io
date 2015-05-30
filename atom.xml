@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-05-30T09:33:52.043Z</updated>
+  <updated>2015-05-30T09:46:29.687Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Android开关机充电流程]]></title>
+    <link href="http://yoursite.com/2015/05/30/Android%E5%BC%80%E5%85%B3%E6%9C%BA%E5%85%85%E7%94%B5%E6%B5%81%E7%A8%8B/"/>
+    <id>http://yoursite.com/2015/05/30/Android开关机充电流程/</id>
+    <published>2015-05-30T09:46:29.000Z</published>
+    <updated>2015-05-30T09:46:29.687Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android开机关机以及重启流程]]></title>
+    <link href="http://yoursite.com/2015/05/30/Android%E5%BC%80%E5%85%B3%E6%9C%BA%E4%BB%A5%E5%8F%8A%E9%87%8D%E5%90%AF%E6%B5%81%E7%A8%8B/"/>
+    <id>http://yoursite.com/2015/05/30/Android开关机以及重启流程/</id>
+    <published>2015-05-30T09:45:55.000Z</published>
+    <updated>2015-05-30T09:45:55.608Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android电池信息监控]]></title>
+    <link href="http://yoursite.com/2015/05/30/Android%E7%94%B5%E6%B1%A0%E4%BF%A1%E6%81%AF%E7%9B%91%E6%8E%A7/"/>
+    <id>http://yoursite.com/2015/05/30/Android电池信息监控/</id>
+    <published>2015-05-30T09:45:19.000Z</published>
+    <updated>2015-05-30T10:08:25.003Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="电源管理" scheme="http://yoursite.com/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Android 电源管理架构]]></title>
