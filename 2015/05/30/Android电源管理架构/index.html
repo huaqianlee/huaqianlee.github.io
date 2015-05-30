@@ -4,25 +4,32 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | Andy.Lee</title>
+    <title>Android 电源管理架构 | Andy.Lee</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Andy.Lee">
     
 
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in trobuleshooting or you can ask me on GitHub.
-Quick">
+    <meta name="description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。
+高通的引导体系结构SBL- Second BootLoader
+电源管理框图　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2014/10/20/hello-world/index.html">
+<meta property="og:title" content="Android 电源管理架构">
+<meta property="og:url" content="http://yoursite.com/2015/05/30/Android电源管理架构/index.html">
 <meta property="og:site_name" content="Andy.Lee">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in trobuleshooting or you can ask me on GitHub.
-Quick">
+<meta property="og:description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。
+高通的引导体系结构SBL- Second BootLoader
+电源管理框图　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in trobuleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="Android 电源管理架构">
+<meta name="twitter:description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。
+高通的引导体系结构SBL- Second BootLoader
+电源管理框图　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图">
 <meta name="twitter:creator" content="@https://twitter.com/Andylee_sarah">
 <link rel="publisher" href="https://plus.google.com/u/0/107850537041795428182">
 
@@ -88,29 +95,36 @@ Quick">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/10/20/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2015/05/30/Android电源管理架构/" title="Android 电源管理架构" itemprop="url">Android 电源管理架构</a>
   </h1>
   <p class="article-author">By
        
 		<a href="https://plus.google.com/https://plus.google.com/u/0/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
 		
   <p class="article-time">
-    <time datetime="2014-10-19T17:12:15.000Z" itemprop="datePublished"> 發表於 Oct 20 2014</time>
+    <time datetime="2015-05-30T08:04:45.000Z" itemprop="datePublished"> 發表於 May 30 2015</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
+<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong></p>
+<h2 id="电源管理框图">电源管理框图</h2><p>　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图补上来。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg" alt="power"></p>
+<h2 id="主要文件及路径">主要文件及路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kernel\kernel\power\*</span><br><span class="line">   arch\arm\match-xxx\pm.c</span><br><span class="line">   driver\power\*</span><br><span class="line">   system\core\charger\charger.c   - 关机充电信息，显示充电<span class="built_in">log</span>等</span><br><span class="line">   上层文件太分散，待后期文件详解再一一列出</span><br></pre></td></tr></table></figure>
+<h2 id="Android结构">Android结构</h2><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(即三种低功耗状态)，使系统功耗降到最低。 电源管理架构分为四大部分： APP，Framework，Hal，Kernel。</p>
+<h3 id="应用层(APP)">应用层(APP)</h3><p>　　应用层主要指应用程序及其他使用电源管理的service。</p>
+<h3 id="架构层(Framework)">架构层(Framework)</h3><p>　　Framework层为APP提供API接口及协调电源的管理工作，主要包含：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PowerManager.java  // 提供给应用层调用</span><br><span class="line">PowerManagerService.java  // 核心文件</span><br><span class="line">com_android_server_PowerManagerService.cpp、</span><br><span class="line">Power.java  // 提供底层的函数接口,与JNI交互</span><br><span class="line">android_os_Power.cpp  //jni交互文件</span><br></pre></td></tr></table></figure></p>
+<p>　　这一层的功能相对比较复杂,比如系统状态的切换，背光的调节及开关，Wake Lock的申请和释放等等，但这一层跟硬件平台无关。</p>
+<h3 id="Hal层">Hal层</h3><p>　　Hal层为一个Power.c文件，该文件通过sysfs的方式与kernel进行通信。主要功能有申请wake_lock，释放wake_lock，设置屏幕状态等。所有对电源管理的调用应通过Android的PowerManager API来完成。</p>
+<h3 id="Kernel层">Kernel层</h3><p>　　Kernel层的电源管理方案实现主要包含三部分：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kernel\power\：实现了系统电源管理框架机制</span><br><span class="line">Arch\arm(or mips or powerpc)\mach-XXX\pm.c:实现对特定板的处理器电源管理</span><br><span class="line">drivers\power:是设备电源管理的基础框架，为驱动提供了电源管理接口. 实现了针对所有设备的sysfs操作函数.</span><br></pre></td></tr></table></figure></p>
+<p>　　android提供了三种低功耗状态：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">earlysuspend //让某些设备选择进入某种功耗较低的状态，如LCD灭掉</span><br><span class="line"><span class="built_in">suspend</span> // 除电源模块以外的外围模块和CPU均不工作，只有内存保持自刷新的一个工作状态</span><br><span class="line">hibernation// 所有内存镜像都被写入到磁盘中，然后系统关机，重启后系统将恢复到关机之前的状态</span><br></pre></td></tr></table></figure></p>
+<h2 id="">　</h2><p>　</p>
+<h3 id="电源管理机制">电源管理机制</h3><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(如上述三种低功耗状态),使系统功耗降到最低.
+　</p>
+<h4 id="实现流程">实现流程</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png" alt="framework">
+　</p>
+<h4 id="状态切换流程">状态切换流程</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png" alt="state"></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -118,13 +132,13 @@ Quick">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Tools/">Tools</a>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Hexo/">Hexo</a>
+  <span></span> <a href="/tags/电源管理/">电源管理</a>
   </div>
 
 </div>
@@ -133,7 +147,7 @@ Quick">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2014/10/20/hello-world/" data-title="Hello World | Andy.Lee" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/05/30/Android电源管理架构/" data-title="Android 电源管理架构 | Andy.Lee" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -146,20 +160,20 @@ Quick">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/10/24/build-person-blog-with-hexo/" title="Build person blog with hexo and  github">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Build person blog with hexo and  github</span>
+
+<div class="next">
+<a href="/2015/05/27/重新起航/"  title="重新起航">
+ <strong>下一篇：</strong><br/> 
+ <span>重新起航
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2014/10/20/hello-world/" data-title="Hello World" data-url="http://yoursite.com/2014/10/20/hello-world/"></div>
+	<div class="ds-thread" data-thread-key="2015/05/30/Android电源管理架构/" data-title="Android 电源管理架构" data-url="http://yoursite.com/2015/05/30/Android电源管理架构/"></div>
 </section>
 
 
@@ -175,7 +189,7 @@ Quick">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#高通的引导体系结构"><span class="toc-number">1.</span> <span class="toc-text">高通的引导体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电源管理框图"><span class="toc-number">2.</span> <span class="toc-text">电源管理框图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要文件及路径"><span class="toc-number">3.</span> <span class="toc-text">主要文件及路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android结构"><span class="toc-number">4.</span> <span class="toc-text">Android结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层(APP)"><span class="toc-number">4.1.</span> <span class="toc-text">应用层(APP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构层(Framework)"><span class="toc-number">4.2.</span> <span class="toc-text">架构层(Framework)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hal层"><span class="toc-number">4.3.</span> <span class="toc-text">Hal层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel层"><span class="toc-number">4.4.</span> <span class="toc-text">Kernel层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">5.</span> <span class="toc-text">　</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#电源管理机制"><span class="toc-number">5.1.</span> <span class="toc-text">电源管理机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现流程"><span class="toc-number">5.1.1.</span> <span class="toc-text">实现流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态切换流程"><span class="toc-number">5.1.2.</span> <span class="toc-text">状态切换流程</span></a></li></ol></li></ol></li></ol>
  
   </div>
 

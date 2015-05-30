@@ -87,6 +87,85 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/30/Android电源管理架构/" title="Android 电源管理架构" itemprop="url">Android 电源管理架构</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/https://plus.google.com/u/0/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-30T08:04:45.000Z" itemprop="datePublished"> 發表於 May 30 2015</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
+<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong></p>
+<h2 id="电源管理框图">电源管理框图</h2><p>　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图补上来。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg" alt="power"></p>
+<h2 id="主要文件及路径">主要文件及路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kernel\kernel\power\*</span><br><span class="line">   arch\arm\match-xxx\pm.c</span><br><span class="line">   driver\power\*</span><br><span class="line">   system\core\charger\charger.c   - 关机充电信息，显示充电<span class="built_in">log</span>等</span><br><span class="line">   上层文件太分散，待后期文件详解再一一列出</span><br></pre></td></tr></table></figure>
+<h2 id="Android结构">Android结构</h2><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(即三种低功耗状态)，使系统功耗降到最低。 电源管理架构分为四大部分： APP，Framework，Hal，Kernel。</p>
+<h3 id="应用层(APP)">应用层(APP)</h3><p>　　应用层主要指应用程序及其他使用电源管理的service。</p>
+<h3 id="架构层(Framework)">架构层(Framework)</h3><p>　　Framework层为APP提供API接口及协调电源的管理工作，主要包含：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PowerManager.java  // 提供给应用层调用</span><br><span class="line">PowerManagerService.java  // 核心文件</span><br><span class="line">com_android_server_PowerManagerService.cpp、</span><br><span class="line">Power.java  // 提供底层的函数接口,与JNI交互</span><br><span class="line">android_os_Power.cpp  //jni交互文件</span><br></pre></td></tr></table></figure></p>
+<p>　　这一层的功能相对比较复杂,比如系统状态的切换，背光的调节及开关，Wake Lock的申请和释放等等，但这一层跟硬件平台无关。</p>
+<h3 id="Hal层">Hal层</h3><p>　　Hal层为一个Power.c文件，该文件通过sysfs的方式与kernel进行通信。主要功能有申请wake_lock，释放wake_lock，设置屏幕状态等。所有对电源管理的调用应通过Android的PowerManager API来完成。</p>
+<h3 id="Kernel层">Kernel层</h3><p>　　Kernel层的电源管理方案实现主要包含三部分：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kernel\power\：实现了系统电源管理框架机制</span><br><span class="line">Arch\arm(or mips or powerpc)\mach-XXX\pm.c:实现对特定板的处理器电源管理</span><br><span class="line">drivers\power:是设备电源管理的基础框架，为驱动提供了电源管理接口. 实现了针对所有设备的sysfs操作函数.</span><br></pre></td></tr></table></figure></p>
+<p>　　android提供了三种低功耗状态：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">earlysuspend //让某些设备选择进入某种功耗较低的状态，如LCD灭掉</span><br><span class="line"><span class="built_in">suspend</span> // 除电源模块以外的外围模块和CPU均不工作，只有内存保持自刷新的一个工作状态</span><br><span class="line">hibernation// 所有内存镜像都被写入到磁盘中，然后系统关机，重启后系统将恢复到关机之前的状态</span><br></pre></td></tr></table></figure></p>
+<h2 id="">　</h2><p>　</p>
+<h3 id="电源管理机制">电源管理机制</h3><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(如上述三种低功耗状态),使系统功耗降到最低.
+　</p>
+<h4 id="实现流程">实现流程</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png" alt="framework">
+　</p>
+<h4 id="状态切换流程">状态切换流程</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png" alt="state"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/电源管理/">电源管理</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/30/Android电源管理架构/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/30/Android电源管理架构/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/27/重新起航/" title="重新起航" itemprop="url">重新起航</a>
   </h1>
   <p class="article-author">By
@@ -312,8 +391,8 @@
 </header>
     <div class="article-content">
         
-        <p>　　我这里想谈的是关于编程等学习方面的阅读. 不知道其他人怎么样,关于我一直以来总是有一个错误的方法去阅读书籍.　　</p>
-<p>　　从初中伊始,我对于学习就有了一个错误的想法:想一步步的认真学习每个知识点,掌握每个知识点;因为这个想法让我一直学得很累.当我上了大学后,开始接触单片机、c语言、PCB等新鲜而有趣的知识，但是悲哀的我还是秉承着错误的学习方法。所以在大学阶段虽然自己很辛苦很认真的在学习，可是最终发现这样效果并不好，反而在一直消磨着自己的兴趣。这样子一度都让自己怀疑自己的能力。不过还好，我一直没有放弃，不管怎么样一直在坚持学习者，到后面开始学习Linux、Java及Android之后，自己终于深刻意识到自己之前的错误方法。　　<br>
+        <p>　　我这里想谈的是关于技术等方面学习的阅读. 不知道其他人怎么样,关于我一直以来总是有一个错误的方法去阅读书籍.　　</p>
+<p>　　从初中伊始,我对于学习就有了一个错误的想法:想一步步的认真学好每个知识点,掌握每个知识点;因为这个想法让我一直学得很累.当我上了大学后,开始接触单片机、c语言、PCB等新鲜而有趣的知识，但是我还是秉承着错误的学习方法。所以在大学阶段虽然自己很认真的在学习，可是最终发现这样效果并不好，反而在一直消磨着自己的兴趣。这一度都让我怀疑自己的能力。不过幸好，我一直没有放弃，一直在坚持学习，直到后面学习Linux、Java及Android之后，终于深刻意识到自己之前的错误方法。　　<br>
         
         
         <p class="article-more-link">
@@ -574,6 +653,10 @@
 		<ul>
 		
 		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
 		  
 		
@@ -600,6 +683,10 @@
 		
 			
 				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
 			
 		
 			
