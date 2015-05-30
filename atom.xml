@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-05-30T09:46:29.687Z</updated>
+  <updated>2015-05-30T10:27:27.520Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,19 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Android待机唤醒流程]]></title>
+    <link href="http://yoursite.com/2015/05/30/Android%E5%BE%85%E6%9C%BA%E5%94%A4%E9%86%92%E6%B5%81%E7%A8%8B/"/>
+    <id>http://yoursite.com/2015/05/30/Android待机唤醒流程/</id>
+    <published>2015-05-30T10:27:27.000Z</published>
+    <updated>2015-05-30T10:27:27.520Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Android开关机充电流程]]></title>
@@ -98,7 +111,7 @@
     <link href="http://yoursite.com/2015/05/27/%E9%87%8D%E6%96%B0%E8%B5%B7%E8%88%AA/"/>
     <id>http://yoursite.com/2015/05/27/重新起航/</id>
     <published>2015-05-27T14:23:58.000Z</published>
-    <updated>2015-05-30T06:12:23.614Z</updated>
+    <updated>2015-05-30T15:49:47.215Z</updated>
     <content type="html"><![CDATA[<p>　　几个月前，在网上看到了一篇<a href="http://www。cnblogs。com/jesse2013/p/how-to-learn-english。html" target="_blank" rel="external">Jesse Liu写的学习英语的文章</a>，受到Jesse的启发，制定了学习计划和任务监控时间表，也按照计划执行了很长一段时间，可惜一个多月前生病后因为种种原因就落下了，后面虽然有断断续续地学习，但仍造成学习进度严重滞后了。</p>
 <p>　　按照计划来学习来工作很有帮助，能帮我克服懒惰等坏习惯，让自己每天知道应该干什么，养成好的学习习惯。所以今天重新拟定计划，然后按照计划来学习提升自己。就目前来看自己主要有英语\Linux\Android\Java四个大部分需要花几乎所有时间来学习。</p>
 <p>　　执行计划的最大阻碍是时间和身体，由于工作性质的原因，很多时候会加班。因此需要随时关注自己的计划，将琐碎时间完全利用起来，<strong>若什么时候未能完成当天的任务，就协调时间将其补起来</strong>，如此就好。男人就是得逼自己一把，才能知道自己有多优秀，何况自己已经27了，时间不等人,能让自己拼的时间已不多。</p>
@@ -254,6 +267,7 @@
 </tbody>
 </table>
 <a id="more"></a>
+<h4 id="CET-4词汇背诵计划">CET-4词汇背诵计划</h4><p><em>2015/5/28~2015/7/1</em><br>|Week||Monday||Tuesday||Wednesday||Thursday||Friday||Saturday||Sunday|<br>|:—-:||:—-:||:———:||:———:||:——-:||:———:||:——-:||:——-:|<br>|第一周||none||none||none||WordList1||WordList2||WordList3||WordList4|<br>|第二周||WordList5||WordList6||WordList7||WordList8||WordList9||WordList10||WordList11|<br>|第三周||WordList12||WordList13||WordList14||WordList15||WordList16||WordList17||WordList18|<br>|第四周||WordList19||WordList20||WordList21||WordList22||WordList23||WordList24||WordList25|<br>|第五周||WordList26||WordList27||WordList28||WordList29||WordList30||WordList31||WordList32|<br>|第六周||WordList33||WordList34||WordList35||none||none||none||review|</p>
 <h2 id="Linux学习">Linux学习</h2><p>　　关于Linux，断断续续也搞了这么些日子了，但是也还只学了皮毛，所以很有必要继续深入学习，对Linux内核有更深入的了解，这样也有助于打通Android的任督二脉， 所以今年就看一些一直没能看完的经典书籍。</p>
 <h3 id="Linux相关书籍阅读监控">Linux相关书籍阅读监控</h3><table>
 <thead>
