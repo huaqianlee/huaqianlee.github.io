@@ -58,7 +58,7 @@
     <link href="http://yoursite.com/2015/05/30/Android%E7%94%B5%E6%B1%A0%E4%BF%A1%E6%81%AF%E7%9B%91%E6%8E%A7/"/>
     <id>http://yoursite.com/2015/05/30/Android电池信息监控/</id>
     <published>2015-05-30T09:45:19.000Z</published>
-    <updated>2015-05-30T10:08:25.003Z</updated>
+    <updated>2015-06-01T13:43:35.684Z</updated>
     <content type="html"></content>
     <summary type="html">
     
@@ -66,7 +66,7 @@
     
       <category term="电源管理" scheme="http://yoursite.com/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android System" scheme="http://yoursite.com/categories/Android-System/"/>
     
   </entry>
   
@@ -75,7 +75,7 @@
     <link href="http://yoursite.com/2015/05/30/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/"/>
     <id>http://yoursite.com/2015/05/30/Android电源管理架构/</id>
     <published>2015-05-30T08:04:45.000Z</published>
-    <updated>2015-05-30T09:33:52.043Z</updated>
+    <updated>2015-06-01T13:43:25.022Z</updated>
     <content type="html"><![CDATA[<p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
 <h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br><a id="more"></a></p>
 <h2 id="电源管理框图">电源管理框图</h2><p>　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图补上来。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg" alt="power"></p>
@@ -102,7 +102,7 @@
     
       <category term="电源管理" scheme="http://yoursite.com/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android System" scheme="http://yoursite.com/categories/Android-System/"/>
     
   </entry>
   
