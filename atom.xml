@@ -3,9 +3,9 @@
   <title><![CDATA[Andy.Lee]]></title>
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
+  <link href="http://huaqianlee.me/"/>
   <updated>2015-06-06T14:35:03.137Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://huaqianlee.me/</id>
   
   <author>
     <name><![CDATA[Andy.Lee]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[Android电池监控系统(BMS)之一电池系统架构]]></title>
-    <link href="http://yoursite.com/2015/06/06/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
-    <id>http://yoursite.com/2015/06/06/Android电池监控系统-BMS-之电池系统架构/</id>
+    <link href="http://huaqianlee.me/2015/06/06/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+    <id>http://huaqianlee.me/2015/06/06/Android电池监控系统-BMS-之电池系统架构/</id>
     <published>2015-06-06T14:17:36.000Z</published>
     <updated>2015-06-06T14:35:03.137Z</updated>
     <content type="html"><![CDATA[<p><strong>　　Platform Information :<br>　　　System:    Ａndroid4.4.4<br>　　　Platform:  Qualcomm msm8916<br>　　　Author:     Andy Lee<br>　　　Email:        huaqianlee@gmail.com</strong></p>
@@ -36,16 +36,16 @@
     <![CDATA[<p><strong>　　Platform Information :<br>　　　System:    Ａndroid4.4.4<br>　　　Platform:  Qualcomm msm8916<br>　　　Author:     Andy Lee<br>　　　Email: ]]>
     </summary>
     
-      <category term="电源管理" scheme="http://yoursite.com/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
+      <category term="电源管理" scheme="http://huaqianlee.me/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
     
-      <category term="Android System" scheme="http://yoursite.com/categories/Android-System/"/>
+      <category term="Android System" scheme="http://huaqianlee.me/categories/Android-System/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Android 电源管理架构]]></title>
-    <link href="http://yoursite.com/2015/05/30/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/"/>
-    <id>http://yoursite.com/2015/05/30/Android电源管理架构/</id>
+    <link href="http://huaqianlee.me/2015/05/30/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/"/>
+    <id>http://huaqianlee.me/2015/05/30/Android电源管理架构/</id>
     <published>2015-05-30T08:04:45.000Z</published>
     <updated>2015-06-01T13:43:25.022Z</updated>
     <content type="html"><![CDATA[<p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
@@ -72,16 +72,16 @@
     
     </summary>
     
-      <category term="电源管理" scheme="http://yoursite.com/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
+      <category term="电源管理" scheme="http://huaqianlee.me/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
     
-      <category term="Android System" scheme="http://yoursite.com/categories/Android-System/"/>
+      <category term="Android System" scheme="http://huaqianlee.me/categories/Android-System/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[重新起航+暴力学习计划]]></title>
-    <link href="http://yoursite.com/2015/05/27/%E9%87%8D%E6%96%B0%E8%B5%B7%E8%88%AA/"/>
-    <id>http://yoursite.com/2015/05/27/重新起航/</id>
+    <link href="http://huaqianlee.me/2015/05/27/%E9%87%8D%E6%96%B0%E8%B5%B7%E8%88%AA/"/>
+    <id>http://huaqianlee.me/2015/05/27/重新起航/</id>
     <published>2015-05-27T14:23:58.000Z</published>
     <updated>2015-06-02T14:50:34.228Z</updated>
     <content type="html"><![CDATA[<p>　　几个月前，在网上看到了一篇<a href="http://www。cnblogs。com/jesse2013/p/how-to-learn-english。html" target="_blank" rel="external">Jesse Liu写的学习英语的文章</a>，受到Jesse的启发，制定了学习计划和任务监控时间表，也按照计划执行了很长一段时间，可惜一个多月前生病后因为种种原因就落下了，后面虽然有断断续续地学习，但仍造成学习进度严重滞后了。</p>
@@ -889,14 +889,14 @@
     
     </summary>
     
-      <category term="Life" scheme="http://yoursite.com/categories/Life/"/>
+      <category term="Life" scheme="http://huaqianlee.me/categories/Life/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[How to read]]></title>
-    <link href="http://yoursite.com/2014/11/01/How-to-read/"/>
-    <id>http://yoursite.com/2014/11/01/How-to-read/</id>
+    <link href="http://huaqianlee.me/2014/11/01/How-to-read/"/>
+    <id>http://huaqianlee.me/2014/11/01/How-to-read/</id>
     <published>2014-10-31T16:26:22.000Z</published>
     <updated>2015-05-30T08:44:53.379Z</updated>
     <content type="html"><![CDATA[<p>　　我这里想谈的是关于技术等方面学习的阅读. 不知道其他人怎么样,关于我一直以来总是有一个错误的方法去阅读书籍.　　</p>
@@ -917,16 +917,16 @@
     
     </summary>
     
-      <category term="Experience" scheme="http://yoursite.com/tags/Experience/"/>
+      <category term="Experience" scheme="http://huaqianlee.me/tags/Experience/"/>
     
-      <category term="Thinking" scheme="http://yoursite.com/categories/Thinking/"/>
+      <category term="Thinking" scheme="http://huaqianlee.me/categories/Thinking/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[The document convetions for Java]]></title>
-    <link href="http://yoursite.com/2014/10/27/The-document-convetions-for-Java/"/>
-    <id>http://yoursite.com/2014/10/27/The-document-convetions-for-Java/</id>
+    <link href="http://huaqianlee.me/2014/10/27/The-document-convetions-for-Java/"/>
+    <id>http://huaqianlee.me/2014/10/27/The-document-convetions-for-Java/</id>
     <published>2014-10-27T14:28:28.000Z</published>
     <updated>2014-10-31T16:30:26.376Z</updated>
     <content type="html"><![CDATA[<p>　　注释一直是编程最重要的部分之一,学习Java很长一段时间了,由于之前一直没有很正式的写过项目，所以一直也就没怎么认真的写过注释．因为注释又是如此的重要，所以今天对Java的注释规范加以总结，也促使自己以后写代码注意注释．</p>
@@ -965,16 +965,16 @@
     
     </summary>
     
-      <category term="Program Kill" scheme="http://yoursite.com/tags/Program-Kill/"/>
+      <category term="Program Kill" scheme="http://huaqianlee.me/tags/Program-Kill/"/>
     
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+      <category term="Java" scheme="http://huaqianlee.me/categories/Java/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Build person blog with hexo and  github]]></title>
-    <link href="http://yoursite.com/2014/10/24/build-person-blog-with-hexo/"/>
-    <id>http://yoursite.com/2014/10/24/build-person-blog-with-hexo/</id>
+    <link href="http://huaqianlee.me/2014/10/24/build-person-blog-with-hexo/"/>
+    <id>http://huaqianlee.me/2014/10/24/build-person-blog-with-hexo/</id>
     <published>2014-10-23T17:12:15.000Z</published>
     <updated>2015-05-27T14:24:04.106Z</updated>
     <content type="html"><![CDATA[<p>　　基于Hexo和Github的个人博客构建，我参照<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">hexo你的博客</a>、<a href="http://hexo.io/docs/" target="_blank" rel="external">hexo官方文档</a>及<a href="https://help.github.com/articles/set-up-git/" target="_blank" rel="external">github官方文档</a>完成了自己的个人blog。通过前段时间学习Android和这些天build自己的github、个人blog，关于学习新东西有一个新的体会，就是官方文档和帮助是最好的资料，虽然是英文的，但是看官方的源文档能提升自己的效率。</p>
@@ -1044,16 +1044,16 @@
     
     </summary>
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://huaqianlee.me/tags/Hexo/"/>
     
-      <category term="Tools" scheme="http://yoursite.com/categories/Tools/"/>
+      <category term="Tools" scheme="http://huaqianlee.me/categories/Tools/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
-    <link href="http://yoursite.com/2014/10/20/hello-world/"/>
-    <id>http://yoursite.com/2014/10/20/hello-world/</id>
+    <link href="http://huaqianlee.me/2014/10/20/hello-world/"/>
+    <id>http://huaqianlee.me/2014/10/20/hello-world/</id>
     <published>2014-10-19T17:12:15.000Z</published>
     <updated>2014-12-25T06:29:20.273Z</updated>
     <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
@@ -1073,9 +1073,9 @@
     
     </summary>
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://huaqianlee.me/tags/Hexo/"/>
     
-      <category term="Tools" scheme="http://yoursite.com/categories/Tools/"/>
+      <category term="Tools" scheme="http://huaqianlee.me/categories/Tools/"/>
     
   </entry>
   
