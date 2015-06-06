@@ -4,25 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | Andy.Lee</title>
+    <title>Android电池监控系统(bms)之一电池系统架构 | Andy.Lee</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Andy.Lee">
     
 
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in trobuleshooting or you can ask me on GitHub.
-Quick">
+    <meta name="description" content="Platform Information :　　　System:    Ａndroid4.4.4　　　Platform:  Qualcomm msm8916　　　Author:     Andy Lee　　　Email:        huaqianlee@gmail.com
+欢迎指出错误，共同学习，共同进步　　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2014/10/20/hello-world/index.html">
+<meta property="og:title" content="Android电池监控系统(bms)之一电池系统架构">
+<meta property="og:url" content="http://yoursite.com/2015/06/06/Android电池监控系统-BMS-之电池系统架构/index.html">
 <meta property="og:site_name" content="Andy.Lee">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in trobuleshooting or you can ask me on GitHub.
-Quick">
+<meta property="og:description" content="Platform Information :　　　System:    Ａndroid4.4.4　　　Platform:  Qualcomm msm8916　　　Author:     Andy Lee　　　Email:        huaqianlee@gmail.com
+欢迎指出错误，共同学习，共同进步　　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/201566Android-bms-arch.png">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/201566battery-info.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in trobuleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="Android电池监控系统(bms)之一电池系统架构">
+<meta name="twitter:description" content="Platform Information :　　　System:    Ａndroid4.4.4　　　Platform:  Qualcomm msm8916　　　Author:     Andy Lee　　　Email:        huaqianlee@gmail.com
+欢迎指出错误，共同学习，共同进步　　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就">
 <meta name="twitter:creator" content="@https://twitter.com/Andylee_sarah">
 <link rel="publisher" href="https://plus.google.com/u/0/107850537041795428182">
 
@@ -88,29 +90,30 @@ Quick">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/10/20/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2015/06/06/Android电池监控系统-BMS-之电池系统架构/" title="Android电池监控系统(bms)之一电池系统架构" itemprop="url">Android电池监控系统(bms)之一电池系统架构</a>
   </h1>
   <p class="article-author">By
        
 		<a href="https://plus.google.com/https://plus.google.com/u/0/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
 		
   <p class="article-time">
-    <time datetime="2014-10-19T17:12:15.000Z" itemprop="datePublished"> 發表於 Oct 20 2014</time>
+    <time datetime="2015-06-06T14:17:36.000Z" itemprop="datePublished"> 發表於 Jun 6 2015</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<p><strong>　　Platform Information :<br>　　　System:    Ａndroid4.4.4<br>　　　Platform:  Qualcomm msm8916<br>　　　Author:     Andy Lee<br>　　　Email:        huaqianlee@gmail.com</strong></p>
+<p><strong>欢迎指出错误，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。</p>
+<h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
+<p>自上而下，Android电池监控系统分为如下几个部分：</p>
+<h3 id="电池信息查看APP">电池信息查看APP</h3><p>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入<em>#360</em>#，则会打开电池信息查看APP。如下所示：<br>　<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/201566battery-info.png" alt="电池信息"></p>
+<p>　　代码主要路径：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">packages\apps\Settings\src\com\android\settings\BatteryOemInfo.java  //APP</span><br><span class="line">packages\apps\Dialer\src\com\android\dialer\SpecialCharSequenceMgr.java   // 命令 配置</span><br></pre></td></tr></table></figure></p>
+<p>　　在手机 /sys/class/power_supply/bms/、/sys/class/power_supply/battery/文件夹中保存了电池的所有相关信息节点，这些节点是有Linux内核创建，待会儿驱动部分将讲到此内容。此APP比较简单，主要就是读取这些文件节点、接收电池信息广播（后面将讲到此广播由BatteryService.java中发出Intent.ACTION_BATTERY_CHANGED），电池信息包括充电设备等信息，然后将这些内容更新到UI界面加以显示，SpecialCharSequenceMgr.Java中主要实现通过判断拨号命令掉用此APP。</p>
+<h3 id="Java框架及本地框架">Java框架及本地框架</h3><p>　　此部分的核心文件是BatteryService.java，作为电池、充电相关的服务，其监听Uevent、读取sysfs 中的状态 、广播Intent.ACTION_BATTERY_CHANGED。此部分代码路径如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">frameworks\base\services\java\com\android\server\BatteryService.java   // 电池管理，开机充电led控制</span><br><span class="line">frameworks\base\services\java\com\android\server\am\BatteryStatsService.java // 被收集的影响电池的所有信息及操作，如：关机，屏幕亮度、wakelock、GPS等。</span><br><span class="line"></span><br><span class="line"><span class="comment">#frameworks\base\core\java\android\os</span></span><br><span class="line">frameworks\base\core\java\android\os\BatteryManager.java // 电池信息广播Intent（ACTION_BATTERY_CHANGED）用到的字符串和常量</span><br><span class="line">frameworks\base\core\java\android\os\BatteryStats.java  // 存取电池使用情况统计，包括wakelocks, processes, packages, and services等</span><br><span class="line">frameworks\base\core\java\android\os\BatteryProperties.java  // 打包电池信息读写代码，与下BatteryProperties.cpp同步</span><br><span class="line"></span><br><span class="line">frameworks\base\core\java\com\android\internal\os\BatteryStatsImpl.java // 被收集的影响电池的所有信息及操作，时间以ms为单位</span><br><span class="line">frameworks\base\core\java\com\android\internal\app\IBatteryStats.aidl    // .aidl为接口定义文件</span><br><span class="line"></span><br><span class="line"><span class="comment">#frameworks\base\packages\SystemUI\src\com\android\systemui</span></span><br><span class="line">frameworks\base\packages\SystemUI\src\com\android\systemui\BatteryMeterView.java // 创建系统广播接收器，接收电池信息广播，绘制电池状态图标</span><br><span class="line">frameworks\base\packages\SystemUI\src\com\android\systemui\statusbar\policy\BatteryController.java // 定义一个广播接收器并在构造器里注册接收电池信息广播，收到自己广播后回调修改pluged、level</span><br><span class="line">frameworks\base\packages\SystemUI\src\com\android\systemui\statusbar\policy\BatteryLevel.java // 定义电量百分比TextView类</span><br><span class="line">frameworks\base\packages\SystemUI\src\com\android\systemui\power\PowerUI.java // 创建系统广播接收器，接收电池信息广播，弹出低电警告等</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">frameworks\native\services\sensorservice\BatteryService.cpp // 不怎么懂C++，暂未看懂</span><br><span class="line">frameworks\native\services\batteryservice\BatteryProperties.cpp // 打包电池信息读写代码,与上BatteryProperties.java同步</span><br><span class="line">frameworks\native\services\batteryservice\IBatteryPropertiesListener.cpp // 监听电池信息  ，和下文件一起为BatteryService.java中的update(BatteryProperties)服务</span><br><span class="line">frameworks\native\services\batteryservice\IBatteryPropertiesRegistrar.cpp  // 注册电池监听</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#system\core\healthd</span></span><br><span class="line">system\core\healthd\BatteryMonitor.cpp // 从/sys/class/power_supply中获取电池信息，并update BatteryProperties</span><br><span class="line">system\core\healthd\BatteryPropertiesRegistrar.cpp // 好像系统没有用到，暂时还不知道此文件的用处</span><br><span class="line">system\core\healthd\healthd.cpp // 监听底层上报事件，调用BatteryMonitor.cpp中的update</span><br></pre></td></tr></table></figure></p>
+<p>// BatteryService.java<br>processValuesLocked   connect /dis/ led   广播<br>sendIntentLocked() 电池状态改变，广播</p>
+<p>mBatteryPropertiesRegistrar = IBatteryPropertiesRegistrar.Stub.asInterface(b); 注册<br>    BatteryService.this.update(props)<br>      update()<br>        processValuesLocked(); </p>
+<p> mBatteryPropertiesRegistrar.registerListener(mBatteryPropertiesListener);<br>frameworks\native\services\batteryservice\IBatteryPropertiesRegistrar.cpp<br>frameworks\native\services\batteryservice\IBatteryPropertiesListener.cpp</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -118,13 +121,13 @@ Quick">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Tools/">Tools</a>
+  <a class="article-category-link" href="/categories/Android-System/">Android System</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Hexo/">Hexo</a>
+  <span></span> <a href="/tags/电源管理/">电源管理</a>
   </div>
 
 </div>
@@ -133,7 +136,7 @@ Quick">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2014/10/20/hello-world/" data-title="Hello World | Andy.Lee" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/06/06/Android电池监控系统-BMS-之电池系统架构/" data-title="Android电池监控系统(bms)之一电池系统架构 | Andy.Lee" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -146,20 +149,20 @@ Quick">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/10/24/build-person-blog-with-hexo/" title="Build person blog with hexo and  github">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Build person blog with hexo and  github</span>
+
+<div class="next">
+<a href="/2015/05/30/Android电源管理架构/"  title="Android 电源管理架构">
+ <strong>下一篇：</strong><br/> 
+ <span>Android 电源管理架构
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2014/10/20/hello-world/" data-title="Hello World" data-url="http://yoursite.com/2014/10/20/hello-world/"></div>
+	<div class="ds-thread" data-thread-key="2015/06/06/Android电池监控系统-BMS-之电池系统架构/" data-title="Android电池监控系统(bms)之一电池系统架构" data-url="http://yoursite.com/2015/06/06/Android电池监控系统-BMS-之电池系统架构/"></div>
 </section>
 
 
@@ -175,7 +178,7 @@ Quick">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#电池系统架构"><span class="toc-number">1.</span> <span class="toc-text">电池系统架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#电池信息查看APP"><span class="toc-number">1.1.</span> <span class="toc-text">电池信息查看APP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java框架及本地框架"><span class="toc-number">1.2.</span> <span class="toc-text">Java框架及本地框架</span></a></li></ol></li></ol>
  
   </div>
 
