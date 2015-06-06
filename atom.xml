@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-06-06T14:32:36.074Z</updated>
+  <updated>2015-06-06T14:35:03.137Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Android电池监控系统(bms)之一电池系统架构]]></title>
+    <title><![CDATA[Android电池监控系统(BMS)之一电池系统架构]]></title>
     <link href="http://yoursite.com/2015/06/06/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
     <id>http://yoursite.com/2015/06/06/Android电池监控系统-BMS-之电池系统架构/</id>
     <published>2015-06-06T14:17:36.000Z</published>
-    <updated>2015-06-06T14:32:36.074Z</updated>
+    <updated>2015-06-06T14:35:03.137Z</updated>
     <content type="html"><![CDATA[<p><strong>　　Platform Information :<br>　　　System:    Ａndroid4.4.4<br>　　　Platform:  Qualcomm msm8916<br>　　　Author:     Andy Lee<br>　　　Email:        huaqianlee@gmail.com</strong></p>
 <p><strong>欢迎指出错误，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。</p>
 <h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
