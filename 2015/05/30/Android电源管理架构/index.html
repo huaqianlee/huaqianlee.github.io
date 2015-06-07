@@ -1,10 +1,10 @@
 
  <!DOCTYPE HTML>
-<html >
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   
-    <title>Android 电源管理架构 | Andy.Lee</title>
+    <title>Android 电源管理架构 | Andy.Lee&#39;s bolg</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Andy.Lee">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 电源管理架构">
 <meta property="og:url" content="http://huaqianlee.me/2015/05/30/Android电源管理架构/index.html">
-<meta property="og:site_name" content="Andy.Lee">
+<meta property="og:site_name" content="Andy.Lee's bolg">
 <meta property="og:description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。
 高通的引导体系结构SBL- Second BootLoader">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg">
@@ -27,11 +27,11 @@
 <meta name="twitter:title" content="Android 电源管理架构">
 <meta name="twitter:description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。
 高通的引导体系结构SBL- Second BootLoader">
-<meta name="twitter:creator" content="@https://twitter.com/Andylee_sarah">
-<link rel="publisher" href="https://plus.google.com/u/0/107850537041795428182">
+<meta name="twitter:creator" content="@Andylee_sarah">
+<link rel="publisher" href="107850537041795428182">
 
     
-    <link rel="alternative" href="/atom.xml" title="Andy.Lee" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Andy.Lee&#39;s bolg" type="application/atom+xml">
     
     
     <link rel="icon" href="/img/favicon.ico">
@@ -49,14 +49,14 @@
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="Andy.Lee" title="Andy.Lee"/></a>
+				<a href="/"><img src="/img/logo.png" alt="Andy.Lee&#39;s bolg" title="Andy.Lee&#39;s bolg"/></a>
 			</div>
 			
 			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Andy.Lee">Andy.Lee</a></h1>
+				<h1 class="site-name"><a href="/" title="Andy.Lee&#39;s bolg">Andy.Lee&#39;s bolg</a></h1>
 				<h2 class="blog-motto">Good good study, day day up !</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -96,10 +96,10 @@
   </h1>
   <p class="article-author">By
        
-		<a href="https://plus.google.com/https://plus.google.com/u/0/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-30T08:04:45.000Z" itemprop="datePublished"> 發表於 May 30 2015</time>
+    <time datetime="2015-05-30T08:04:45.000Z" itemprop="datePublished"> 发表于 May 30 2015</time>
     
   </p>
 </header>
@@ -125,6 +125,10 @@
   
 	</div>
 		<footer class="article-footer clearfix">
+<div>
+  	<span> </span>
+	原创文章,转载请注明原地址:<a href=huaqianlee.me>huaqian.me</a>
+</div>
 <div class="article-catetags">
 
 <div class="article-categories">
@@ -144,8 +148,30 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://huaqianlee.me/2015/05/30/Android电源管理架构/" data-title="Android 电源管理架构 | Andy.Lee" data-tsina="null" class="share clearfix">
-	  </div>
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
 	
 	</div>
 
@@ -189,22 +215,22 @@
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">文章目录</strong>
  
  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#高通的引导体系结构"><span class="toc-number">1.</span> <span class="toc-text">高通的引导体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电源管理框图"><span class="toc-number">2.</span> <span class="toc-text">电源管理框图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要文件及路径"><span class="toc-number">3.</span> <span class="toc-text">主要文件及路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android结构"><span class="toc-number">4.</span> <span class="toc-text">Android结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层(APP)"><span class="toc-number">4.1.</span> <span class="toc-text">应用层(APP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构层(Framework)"><span class="toc-number">4.2.</span> <span class="toc-text">架构层(Framework)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hal层"><span class="toc-number">4.3.</span> <span class="toc-text">Hal层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel层"><span class="toc-number">4.4.</span> <span class="toc-text">Kernel层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">5.</span> <span class="toc-text">　</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#电源管理机制"><span class="toc-number">5.1.</span> <span class="toc-text">电源管理机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现流程"><span class="toc-number">5.1.1.</span> <span class="toc-text">实现流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态切换流程"><span class="toc-number">5.1.2.</span> <span class="toc-text">状态切换流程</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">分类</p>
 		<ul>
 		
 		  
@@ -233,7 +259,7 @@
 
   
 <div class="tagslist">
-	<p class="asidetitle">標簽</p>
+	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
 			
@@ -257,7 +283,7 @@
 
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">友情链接</p>
     <ul>
         
           <li>
@@ -279,7 +305,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
 </div>
 
 </aside>
@@ -300,27 +326,27 @@
 	 
 	<div class="social-font" class="clearfix">
 		
-		<a href="http://weibo.com/http://weibo.com/huaqianlee" target="_blank" class="icon-weibo" title="微博"></a>
+		<a href="http://weibo.com/huaqianlee" target="_blank" class="icon-weibo" title="微博"></a>
 		
 		
-		<a href="https://github.com/https://github.com/AndyLee-Github" target="_blank" class="icon-github" title="github"></a>
+		<a href="https://github.com/AndyLee-Github" target="_blank" class="icon-github" title="github"></a>
 		
 		
-		<a href="http://stackoverflow.com/users/http://stackoverflow.com/users/4511267/huaqian-lee" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		<a href="http://stackoverflow.com/users/4511267/huaqian-lee" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
 		
 		
-		<a href="https://twitter.com/https://twitter.com/Andylee_sarah" target="_blank" class="icon-twitter" title="twitter"></a>
+		<a href="https://twitter.com/Andylee_sarah" target="_blank" class="icon-twitter" title="twitter"></a>
 		
 		
-		<a href="https://www.facebook.com/https://www.facebook.com/profile.php?id=100008402404430" target="_blank" class="icon-facebook" title="facebook"></a>
+		<a href="https://www.facebook.com/huaqianlee" target="_blank" class="icon-facebook" title="facebook"></a>
 		
 		
 		
 		
-		<a href="https://www.zhihu.com/people/http://www.zhihu.com/people/andy-lee-50" target="_blank" class="icon-zhihu" title="知乎"></a>
+		<a href="https://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
 		
 		
-		<a href="https://plus.google.com/https://plus.google.com/u/0/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		<a href="https://plus.google.com/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
 		
 		
 		<a href="mailto:huaqianlee@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
@@ -416,35 +442,6 @@ $(document).ready(function(){
 </script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
-
 
 
 <script type="text/javascript">
@@ -510,7 +507,21 @@ $(document).ready(function(){
 
 <!-- Analytics Begin -->
 
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'null', 'null');  
+ga('send', 'pageview');
+</script>
 
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5ab1107031547fb5411cd06ed47f1348## e.g. e6d1f421bbc9962127a50488f9ed37d1 your baidu tongji site code' type='text/javascript'%3E%3C/script%3E"));
+</script>
 
 
 
@@ -519,7 +530,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
