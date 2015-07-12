@@ -1,0 +1,564 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析 | Andy.Lee&#39;s bolg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Andy.Lee">
+    
+
+    
+    <meta name="description" content="ActivityNotFoundException 　　　最近将Android从4.4移植到5.1时，添加一个从拨号界面输入*#360*#进入battery info查看界面的功能时（如感兴趣，详情见Android电池监控系统(bms)之一电池系统架构），activity跳转部分代码如下：1234567891011121314else if(input.equals(BATTERY_INFO))&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="About ActivityNotFoundException Unable to find explicit activity class && Android.mk解析">
+<meta property="og:url" content="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/index.html">
+<meta property="og:site_name" content="Andy.Lee's bolg">
+<meta property="og:description" content="ActivityNotFoundException 　　　最近将Android从4.4移植到5.1时，添加一个从拨号界面输入*#360*#进入battery info查看界面的功能时（如感兴趣，详情见Android电池监控系统(bms)之一电池系统架构），activity跳转部分代码如下：1234567891011121314else if(input.equals(BATTERY_INFO))&amp;">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="About ActivityNotFoundException Unable to find explicit activity class && Android.mk解析">
+<meta name="twitter:description" content="ActivityNotFoundException 　　　最近将Android从4.4移植到5.1时，添加一个从拨号界面输入*#360*#进入battery info查看界面的功能时（如感兴趣，详情见Android电池监控系统(bms)之一电池系统架构），activity跳转部分代码如下：1234567891011121314else if(input.equals(BATTERY_INFO))&amp;">
+<meta name="twitter:creator" content="@Andylee_sarah">
+<link rel="publisher" href="107850537041795428182">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Andy.Lee&#39;s bolg" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Andy.Lee&#39;s bolg" title="Andy.Lee&#39;s bolg"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Andy.Lee&#39;s bolg">Andy.Lee&#39;s bolg</a></h1>
+				<h2 class="blog-motto">Good good study, day day up !</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/categories">Categories</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:huaqianlee.me">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+<a href="https://github.com/AndyLee-Github"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" title="About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析" itemprop="url">About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-12T06:06:35.000Z" itemprop="datePublished"> 发表于 Jul 12 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<h2 id="ActivityNotFoundException">ActivityNotFoundException 　</h2><p>　　最近将Android从4.4移植到5.1时，添加一个从拨号界面输入*#360*#进入battery info查看界面的功能时（如感兴趣，详情见<a href="http://huaqianlee.me/2015/06/06/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" target="_blank" rel="external">Android电池监控系统(bms)之一电池系统架构</a>），activity跳转部分代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">else</span> <span class="title">if</span><span class="params">(input.equals(BATTERY_INFO)</span>)</span><br><span class="line"></span>&#123;<span class="comment">//added by lihuaqian</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ComponentName Component = <span class="keyword">new</span> ComponentName(<span class="string">"com.android.settings"</span>,<span class="string">"com.android.settings.BatteryOemInfo"</span>); </span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">        intent.setComponent(Component);</span><br><span class="line">        intent.setAction(Intent.ACTION_VIEW);   </span><br><span class="line">        context.startActivity(intent);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ActivityNotFoundException e) &#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"no activity to battery cmd."</span>); </span><br><span class="line">        <span class="comment">//e.printStackTrace();   </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　遇到如下问题：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　ActivityNotFoundException : Unable to find explicit activity class; have you declared this activity <span class="keyword">in</span> your AndroidManifest.xml?</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>　<br>　　我将流程检查了一遍又一遍，都完全没有问题，Google了很久也无结果。后灵光一现：是否Setting这个apk根本就没有安装成功，所以才导致找不到Activity。<br>　<br><strong>于是，我首先通过命令 adb install -r Setting.apk 手动安装，但总是提示安装失败，这时已有些小小兴奋，因为感觉自己快找到原因了。</strong><br>　<br><strong>然后，我将apk push进手机相应文件系统路径，重启，通过logcat打印log，后发现关键信息，如下：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed to parse /system/priv-app/Settings: Signature mismatch <span class="keyword">for</span> shared user : SharedUserSetting&#123;<span class="number">2</span>a5b4702 android.uid.system/<span class="number">1000</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>通过此log信息可知：系统没有能成功安装此apk，原因是app签名不匹配。 这样就找到了问题的根源。 向应用软件部同事了解情况后得知，是因为此项目客户指定Signature。<br>　<br><strong>所以，接下来我就有两种选择：</strong></p>
+<ol>
+<li>自己整编整个系统，然后刷机，但是整编时间太长，所以放弃。</li>
+<li>将修改代码给出软件同事，让其帮忙编一apk。（我选择了此方式，然后push进系统一下就OK了）<br>　<br><strong>当然，这种问题主要是做系统级APP，需要用到root权限或运行于系统进程时时才会遇到，其他一般都是如下几个情况：</strong></li>
+<li>如log中提示，没有再AndroidManifest.xml中定义此Activity。</li>
+<li>包名或者类名书写错误，不统一。</li>
+<li>自己定义的包名或者类名与系统自带类重复。</li>
+</ol>
+<h2 id="Android-mk解析">Android.mk解析</h2><p>　　因为上面问题时由签名引起的，所以就深入看了一下什么地方指定签名，后发现在APP目录中的Android.mk中制定。Android.mk允许将source打包为 modules：<br>　　　1. APK程序<br>  　　　　一般的Android程序，编译打包生成apk文件<br>　　　2. JAVA库<br>  　　　　java类库，编译打包生成jar文件<br>　　　3. C\C++应用程序<br> 　　　　可执行的C\C++应用程序<br>　　　4. C\C++静态库<br>　　　　编译生成C\C++静态库，并打包成.a文件，静态库则可被链接到动态库。<br>　　　5. C\C++动态库<br>　　　　编译生成共享库（动态链接库），并打包成.so文， 只有动态库才能被install or copy到apk。<br>　<br>下面为Qualcomm Settings中的Android.mk （带“Lee:”为我自己加入以详解Android.mk）:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">LOCAL_PATH:= $(call my-dir)   //必须以此开头，用于定位源码路径，my-dir即当前路径</span><br><span class="line"> /*CLEAR_VARS-清理除LOCAL_PATH外的很多LOCAL_XX变量,因变量皆为全局变量，清理后避免相互影响。*/</span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line"></span><br><span class="line">/*链接外部JAVA包*/</span><br><span class="line">LOCAL_JAVA_LIBRARIES := bouncycastle conscrypt telephony-common ims-common</span><br><span class="line">LOCAL_STATIC_JAVA_LIBRARIES := android-support-v4 android-support-v13 jsr305</span><br><span class="line"></span><br><span class="line">Lee:LOCAL_SHARED_LIBRARIES /LOCAL_STATIC_LIBRARIES   //链接时需要的外部动态/静态库</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">  *user:       该模块只在user版本下才编译</span><br><span class="line">  *eng:        该模块只在eng版本下才编译</span><br><span class="line">  *debug:    该模块只在debug版本下才编译</span><br><span class="line">  *optional:  该模块在所有版本下都编译</span><br><span class="line"> **/</span><br><span class="line">LOCAL_MODULE_TAGS := optional //定义该模块什么情况被编译</span><br><span class="line"></span><br><span class="line">Lee:LOCAL_MODULE    :=    //名字唯一不含空格，编译的目标对象</span><br><span class="line">Lee:LOCAL_C_INCLUDES          //需要包含的头文件目录</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">  *编译模块的源码</span><br><span class="line"> **/</span><br><span class="line">LOCAL_SRC_FILES := \</span><br><span class="line">        $(call all-java-files-under, src) \</span><br><span class="line">        src/com/android/settings/EventLogTags.logtags \</span><br><span class="line">        src/com/android/cabl/ICABLService.aidl</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">  *编译模块的资源路径</span><br><span class="line"> **/</span><br><span class="line">LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res</span><br><span class="line"></span><br><span class="line">LOCAL_SRC_FILES += \</span><br><span class="line">        src/com/android/location/XT/IXTSrv.aidl \</span><br><span class="line">        src/com/android/location/XT/IXTSrvCb.aidl \</span><br><span class="line">        src/com/android/display/IPPService.aidl</span><br><span class="line">LOCAL_PACKAGE_NAME := Settings //apk名</span><br><span class="line">LOCAL_CERTIFICATE := platform  // 此处定义签名</span><br><span class="line">LOCAL_PRIVILEGED_MODULE := <span class="literal">true</span>//声明apk放到system/priv-app</span><br><span class="line"></span><br><span class="line">Lee:LOCAL_CFLAGS +=$(OEM_CFLAGS)  // 声明customer（客户文件）中定义的相关宏，以便c/c++中<span class="comment">#if defined </span></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">  * external/proguard - 抑制apk反编译的，对class混淆处理的代码路径</span><br><span class="line">  * proguard.flags 指定不需要混淆处理的native方法和变量</span><br><span class="line"> **/</span><br><span class="line">LOCAL_PROGUARD_FLAG_FILES := proguard.flags//加载当前路径proguard.flags文件</span><br><span class="line"></span><br><span class="line">include frameworks/opt/setupwizard/navigationbar/common.mk //包含指定</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">  *BUILD_STATIC_LIBRARY:  编译为静态库</span><br><span class="line">  *BUILD_SHARED_LIBRARY : 编译为动态库 </span><br><span class="line">  *BUILD_EXECUTABLE:    编译为Native C可执行程序</span><br><span class="line">  * BUILD_PACKAGE:  编译为apk</span><br><span class="line"> **/</span><br><span class="line">include $(BUILD_PACKAGE) //编译为apk</span><br><span class="line"></span><br><span class="line"><span class="comment"># Use the following include to make our test apk.</span></span><br><span class="line">ifeq (,$(ONE_SHOT_MAKEFILE))</span><br><span class="line">include $(call all-makefiles-under,$(LOCAL_PATH)) <span class="comment">#表示需要编译该目录下文件，系统在当前路径查找Android.mk来编译</span></span><br><span class="line">endif</span><br><span class="line">Lee:还有很多其他定义和语法，这里就不一一分析，不过从变量名就能窥知一二</span><br></pre></td></tr></table></figure>
+<h3 id="LOCAL_CERTIFICATE">LOCAL_CERTIFICATE</h3><p>　　分析了Android.mk,再来详细说说我之前问题相关的一个属性：LOCAL_CERTIFICATE ，用于指定签名是使用的key，如不指定默认testkey。<br>　<br>分析这个属性就先得谈谈此apkAndroidManifest.xm了中的sharedUserId属性说起，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">        package=<span class="string">"com.android.settings"</span></span><br><span class="line">        coreApp=<span class="string">"true"</span></span><br><span class="line">        android:sharedUserId=<span class="string">"android.uid.system"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>　　通过将sharedUserId配置为”android.uid.system”，即让程序运行在系统进程，而运行在系统进程则需要目标系统的platform key，Android.mk中的 LOCAL_CERTIFICATE := platform  即是声明相应签名key文件。key文件的源码路径在 build\target\product\security。通过这样处理的apk则只能在自己编译的系统里面才能使用，如若装到其他Android系统会提示：”Package … has no signatures that match those in shared user android.uid.system”。<br>　<br>　　另，android:sharedUserId属性不仅仅可以把apk放到系统进程中，也可以配置多个APK运行在一个进程中，这样可以共享数据，就会很有用处。就像我上面的Settings.apk。</p>
+<p>在Android.mk中,LOCAL_CERTIFICATE可设置的值如下：</p>
+<ul>
+<li>LOCAL_CERTIFICATE := platform</li>
+<li>LOCAL_CERTIFICATE := shared</li>
+<li>LOCAL_CERTIFICATE := media　<br>然后，需要在APK源码的AndroidManifest.xml文件中的manifest节点添加如下内容：</li>
+<li>android:sharedUserId=”android.uid.system”</li>
+<li>android:sharedUserId=”android.uid.shared”</li>
+<li>android:sharedUserId=”android.media”　<br>在Android源码的build/target/product/security/目录下有如下的4对KEY：<ol>
+<li>media.pk8与media.x509.pem；</li>
+<li>platform.pk8与platform.x509.pem；</li>
+<li>shared.pk8与shared.x509.pem；</li>
+<li>testkey.pk8与testkey.x509.pem；<br>其中，”<em>.pk8”文件为私钥，”</em>.x509.pem”文件为公钥，这需要了解非对称加密方式。</li>
+</ol>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div>
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" >huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/ </a>
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Bug/">Bug</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/06/06/Android电池监控系统-BMS-之电池系统架构/"  title="Android电池监控系统(BMS)之一电池系统架构">
+ <strong>下一篇：</strong><br/> 
+ <span>Android电池监控系统(BMS)之一电池系统架构
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" data-title="About ActivityNotFoundException Unable to find explicit activity class && Android.mk解析" data-url="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ActivityNotFoundException"><span class="toc-number">1.</span> <span class="toc-text">ActivityNotFoundException 　</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-mk解析"><span class="toc-number">2.</span> <span class="toc-text">Android.mk解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LOCAL_CERTIFICATE"><span class="toc-number">2.1.</span> <span class="toc-text">LOCAL_CERTIFICATE</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Android-System/" title="Android System">Android System<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Tools/" title="Tools">Tools<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.stormzhang.com/" target="_blank" title="stormzhang">stormzhang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Andy Lau in Hongkong. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/huaqianlee" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/AndyLee-Github" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4511267/huaqian-lee" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/Andylee_sarah" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/huaqianlee" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="https://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:huaqianlee@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+	</span>	
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/AndyLee-Github/customtheme" target="_blank" title="Andy Lee">Andy Lee</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Andy.Lee">Andy.Lee</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"AndyLee"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'AndyLee';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-63838023-1', 'huaqianlee.me');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5ab1107031547fb5411cd06ed47f1348## e.g. e6d1f421bbc9962127a50488f9ed37d1 your baidu tongji site code' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
