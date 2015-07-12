@@ -89,6 +89,139 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/12/Android编译过程详解之二/" title="Android编译过程详解之二" itemprop="url">Android编译过程详解之二</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-12T08:43:04.000Z" itemprop="datePublished"> 发表于 Jul 12 2015</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：./go.sh -j8 or make -j8。参数“-j”指定了同时编译的线程数量，通常是编译主机 CPU 支持的并发线程总数的 1 倍或 2 倍（如：在一个 4 核，每个核支持两个线程的 CPU 上，可以使用 make -j8 或 make -j16）。在调用 make 命令时，如果没有指定任何目标，则将使用默认的名称为“droid”目标，该目标会编译出完整的 Android 系统镜像。</p>
+<h2 id="build结果">build结果</h2><p>所有的编译产物都将位于 /out 目录下，该目录下主要有以下几个子目录：</p>
+<ul>
+<li>/out/host/：该目录下包含了针对主机的 Android 开发工具的产物。即 SDK 中的各种工具，例如：emulator，adb，aapt 等。</li>
+<li>/out/target/common/：该目录下包含了针对设备的共通的编译产物，主要是 Java 应用代码和 Java 库。</li>
+<li>/out/target/product/<product_name>/：包含了针对特定设备的编译结果以及平台相关的 C/C++ 库和二进制文件。其中，<product_name>是具体目标设备的名称。</li>
+<li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。</li>
+</ul>
+<p>Build 的产物中最重要的是三个镜像文件，它们都位于 /out/target/product/<product_name>/ 目录下。</p>
+<ul>
+<li>system.img：包含了 Android OS 的系统文件，库，可执行文件以及预置的应用程序，将被挂载为根分区。</li>
+<li>ramdisk.img：在启动时将被 Linux 内核挂载为只读分区，它包含了 /init 文件和一些配置文件。它用来挂载其他系统镜像并启动 init 进程。</li>
+<li>userdata.img：将被挂载为 /data，包含了应用程序相关的数据以及和用户相关的数据。
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/12/Android编译过程详解之二/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div>
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/07/12/Android编译过程详解之二/" >huaqianlee.me/2015/07/12/Android编译过程详解之二/ </a>
+</div>
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/12/Android编译过程详解之二/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/12/Android编译过程详解之二/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/12/Android编译过程详解之一/" title="Android编译过程详解之一" itemprop="url">Android编译过程详解之一</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-12T08:42:41.000Z" itemprop="datePublished"> 发表于 Jul 12 2015</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><strong>　　Platform Information :<br>　　　System:    Ａndroid4.4.4<br>　　　Platform:  Qualcomm msm8916<br>　　　Author:     Andy Lee<br>　　　Email:        huaqianlee@gmail.com</strong></p>
+<p><strong>欢迎指出错误，共同学习，共同进步</strong><br>　<br>　　Google给出的编译过程见：<a href="http://source.android.com/source/building.html">http://source.android.com/source/building.html</a>，不过这是解释怎么编译一个通用的系统，没有详细描述细节，接下来我就准备跟着高通平台的编译过程来详细了解一下。</p>
+<p>我平时的编译步骤如下：<br>　1. source setup.sh project-name debug/release　加载命令配置环境　<br>　2. ./go.sh  [target] or make  [target]　编译<br>　<br>接下来就按照步骤来详细分析一下流程：</p>
+<h2 id="source_setup-sh_project-name_debug">source setup.sh project-name debug</h2><p>　　setup.sh是自定义的一个脚本文件，用来配置环境变量，其主要内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/*配置用到的jdk、jre*/</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/workspace/bin/jdk1.<span class="number">6.0</span>_37</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre </span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib </span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$&#123;JRE_HOME&#125;</span>/bin:<span class="variable">$PATH</span> </span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> build/envsetup.sh // 官网的第一步，加载命令，待会儿再详细解释</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="operator">-d</span> /workspace/bin/eric-PAY4/links-<span class="number">8916</span> ];<span class="keyword">then</span></span><br><span class="line">	cp <span class="operator">-a</span> /workspace/bin/eric-PAY4/links-<span class="number">8916</span> links</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> <span class="operator">-lt</span> <span class="number">2</span> ];<span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> You can input like <span class="string">"source setup.sh s5_common [debug|release]"</span></span><br><span class="line">	<span class="built_in">return</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> product=<span class="variable">$1</span> var=<span class="variable">$2</span> //打印输入选择 project-name  debug/release</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$2</span> = <span class="string">"debug"</span> ];<span class="keyword">then</span></span><br><span class="line">	choosecombo <span class="number">2</span> msm8916_32 <span class="number">3</span> <span class="variable">$1</span> // 根据参数选择编译项</span><br><span class="line">	<span class="built_in">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$2</span> = <span class="string">"release"</span> ];<span class="keyword">then</span></span><br><span class="line">	choosecombo <span class="number">1</span> msm8916_32 <span class="number">1</span> <span class="variable">$1</span></span><br><span class="line">	<span class="built_in">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Your input is wrong please check again"</span></span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/12/Android编译过程详解之一/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div>
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/07/12/Android编译过程详解之一/" >huaqianlee.me/2015/07/12/Android编译过程详解之一/ </a>
+</div>
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/12/Android编译过程详解之一/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/12/Android编译过程详解之一/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" title="About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析" itemprop="url">About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析</a>
   </h1>
   <p class="article-author">By
