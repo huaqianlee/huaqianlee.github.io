@@ -96,6 +96,8 @@
     
       <a href="/2015/05/30/Android电源管理架构/" title="Android 电源管理架构" itemprop="url">Android 电源管理架构</a>
   </h1>
+
+  
   <p class="article-author">By
        
 		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
@@ -104,8 +106,16 @@
     <time datetime="2015-05-30T08:04:45.000Z" itemprop="datePublished"> 发表于 May 30 2015</time>
     
   </p>
+  
 </header>
 	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#高通的引导体系结构"><span class="toc-number">1.</span> <span class="toc-text">高通的引导体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电源管理框图"><span class="toc-number">2.</span> <span class="toc-text">电源管理框图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要文件及路径"><span class="toc-number">3.</span> <span class="toc-text">主要文件及路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android结构"><span class="toc-number">4.</span> <span class="toc-text">Android结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层(APP)"><span class="toc-number">4.1.</span> <span class="toc-text">应用层(APP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构层(Framework)"><span class="toc-number">4.2.</span> <span class="toc-text">架构层(Framework)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hal层"><span class="toc-number">4.3.</span> <span class="toc-text">Hal层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel层"><span class="toc-number">4.4.</span> <span class="toc-text">Kernel层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">5.</span> <span class="toc-text">　</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#电源管理机制"><span class="toc-number">5.1.</span> <span class="toc-text">电源管理机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现流程"><span class="toc-number">5.1.1.</span> <span class="toc-text">实现流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态切换流程"><span class="toc-number">5.1.2.</span> <span class="toc-text">状态切换流程</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
 		
 		<p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
 <h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br><a id="more"></a></p>
@@ -127,12 +137,13 @@
   
 	</div>
 		<footer class="article-footer clearfix">
-<div>
 	
+<div>
+
   	<span> </span>
   	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
 	欢迎转载，但请注明原地址: <a href="/2015/05/30/Android电源管理架构/" >huaqianlee.me/2015/05/30/Android电源管理架构/ </a>
-	
+
 </div>
 <div class="article-catetags">
 
@@ -174,6 +185,7 @@
 	 </div>
 	
 	</div>
+
 
 
 </footer>
@@ -234,7 +246,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>4</sup></a></li>
+			<li><a href="/categories/Android/" title="Android">Android<sup>5</sup></a></li>
 		  
 		
 		  
@@ -289,6 +301,12 @@
   <div class="linkslist">
   <p class="asidetitle">友情链接</p>
     <ul>
+        
+          <li>
+            
+            	<a href="http://blog.daimajia.com/" target="_blank" title="代码家">代码家</a>
+            
+          </li>
         
           <li>
             
@@ -353,7 +371,7 @@
 		
 		
 		
-		<a href="https://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
+		<a href="http://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
 		
 		
 		<a href="https://plus.google.com/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
@@ -364,7 +382,7 @@
 	</div>
 			
 		
-	</span>	
+
 		<p class="copyright">
 		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/AndyLee-Github/customtheme" target="_blank" title="Andy Lee">Andy Lee</a> © 2015 
 		
@@ -376,6 +394,7 @@
     <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){ 
