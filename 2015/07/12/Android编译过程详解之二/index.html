@@ -155,15 +155,15 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 </thead>
 <tbody>
 <tr>
-<td>\$(modules_to_install)</td>
+<td>$(modules_to_install)</td>
 <td>modules_to_install 变量包含了当前配置下所有会被安装的模块（一个模块是否会被安装依赖于该产品的配置文件，模块的标签等信息），因此该目标将导致所有会被安装的模块的编译</td>
 </tr>
 <tr>
-<td>\$(modules_to_check)</td>
+<td>$(modules_to_check)</td>
 <td>该目标用来确保我们定义的构建模块是没有冗余的</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_ANDROID_INFO_TXT_TARGET)</td>
+<td>$(INSTALLED_ANDROID_INFO_TXT_TARGET)</td>
 <td>该目标会生成一个关于当前 Build 配置的设备信息的文件，该文件的生成路径是：out/target/product/<product_name>/android-info.txt</product_name></td>
 </tr>
 <tr>
@@ -171,23 +171,23 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <td>生成 system.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_BOOTIMAGE_TARGET)</td>
+<td>$(INSTALLED_BOOTIMAGE_TARGET)</td>
 <td>生成 boot.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_RECOVERYIMAGE_TARGET)</td>
+<td>$(INSTALLED_RECOVERYIMAGE_TARGET)</td>
 <td>生成 recovery.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_USERDATAIMAGE_TARGET)</td>
+<td>$(INSTALLED_USERDATAIMAGE_TARGET)</td>
 <td>生成 userdata.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_CACHEIMAGE_TARGET)</td>
+<td>$(INSTALLED_CACHEIMAGE_TARGET)</td>
 <td>生成 cache.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_FILES_FILE)</td>
+<td>$(INSTALLED_FILES_FILE)</td>
 <td>该目标会生成 out/target/product/<product_name>/ installed-files.txt 文件，该文件中内容是当前系统镜像中已经安装的文件列表</product_name></td>
 </tr>
 </tbody>

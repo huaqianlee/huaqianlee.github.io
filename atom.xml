@@ -130,7 +130,7 @@
     <link href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/"/>
     <id>http://huaqianlee.me/2015/07/12/Android编译过程详解之二/</id>
     <published>2015-07-12T08:43:04.000Z</published>
-    <updated>2015-07-16T14:25:40.461Z</updated>
+    <updated>2015-07-16T14:33:55.278Z</updated>
     <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a><br>　<br>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　　./go.sh -j8 or make -j8／--jobs</span><br></pre></td></tr></table></figure></p>
 <p>参数“-j“ 和”—jobs ”指定了同时编译的线程数量，通常是编译主机 CPU 支持的并发线程总数的 1 倍或 2 倍（如：在一个 4 核，每个核支持两个线程的 CPU 上，可以使用 make -j8 或 make -j16）。在调用 make 命令时，如果没有指定任何目标，则将编译默认目标“droid”（下面详解），然后将会编译出完整的 Android 系统镜像。</p>
 <h2 id="build系统分类">build系统分类</h2><p>　　整个build系统的Make文件可以分为三类：</p>
@@ -171,15 +171,15 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 </thead>
 <tbody>
 <tr>
-<td>\$(modules_to_install)</td>
+<td>$(modules_to_install)</td>
 <td>modules_to_install 变量包含了当前配置下所有会被安装的模块（一个模块是否会被安装依赖于该产品的配置文件，模块的标签等信息），因此该目标将导致所有会被安装的模块的编译</td>
 </tr>
 <tr>
-<td>\$(modules_to_check)</td>
+<td>$(modules_to_check)</td>
 <td>该目标用来确保我们定义的构建模块是没有冗余的</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_ANDROID_INFO_TXT_TARGET)</td>
+<td>$(INSTALLED_ANDROID_INFO_TXT_TARGET)</td>
 <td>该目标会生成一个关于当前 Build 配置的设备信息的文件，该文件的生成路径是：out/target/product/<product_name>/android-info.txt</product_name></td>
 </tr>
 <tr>
@@ -187,23 +187,23 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <td>生成 system.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_BOOTIMAGE_TARGET)</td>
+<td>$(INSTALLED_BOOTIMAGE_TARGET)</td>
 <td>生成 boot.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_RECOVERYIMAGE_TARGET)</td>
+<td>$(INSTALLED_RECOVERYIMAGE_TARGET)</td>
 <td>生成 recovery.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_USERDATAIMAGE_TARGET)</td>
+<td>$(INSTALLED_USERDATAIMAGE_TARGET)</td>
 <td>生成 userdata.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_CACHEIMAGE_TARGET)</td>
+<td>$(INSTALLED_CACHEIMAGE_TARGET)</td>
 <td>生成 cache.img</td>
 </tr>
 <tr>
-<td>\$(INSTALLED_FILES_FILE)</td>
+<td>$(INSTALLED_FILES_FILE)</td>
 <td>该目标会生成 out/target/product/<product_name>/ installed-files.txt 文件，该文件中内容是当前系统镜像中已经安装的文件列表</product_name></td>
 </tr>
 </tbody>
