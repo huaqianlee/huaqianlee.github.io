@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Andro编译过程详解之三 | Andy.Lee&#39;s bolg</title>
+    <title>Android编译过程详解之三 | Andy.Lee&#39;s bolg</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Andy.Lee">
@@ -14,13 +14,13 @@
     <meta name="description" content="Android编译过程详解之一　　Android编译过程详解之二　　Android编译过程详解之三　　Android.mk解析
 　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：12build/target/product # 当前产品配置的mk文件，如：需要包含哪些apk在此产品中build/target/board  #">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Andro编译过程详解之三">
-<meta property="og:url" content="http://huaqianlee.me/2015/07/12/Andro编译过程详解之三/index.html">
+<meta property="og:title" content="Android编译过程详解之三">
+<meta property="og:url" content="http://huaqianlee.me/2015/07/12/Android编译过程详解之三/index.html">
 <meta property="og:site_name" content="Andy.Lee's bolg">
 <meta property="og:description" content="Android编译过程详解之一　　Android编译过程详解之二　　Android编译过程详解之三　　Android.mk解析
 　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：12build/target/product # 当前产品配置的mk文件，如：需要包含哪些apk在此产品中build/target/board  #">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Andro编译过程详解之三">
+<meta name="twitter:title" content="Android编译过程详解之三">
 <meta name="twitter:description" content="Android编译过程详解之一　　Android编译过程详解之二　　Android编译过程详解之三　　Android.mk解析
 　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：12build/target/product # 当前产品配置的mk文件，如：需要包含哪些apk在此产品中build/target/board  #">
 <meta name="twitter:creator" content="@Andylee_sarah">
@@ -89,7 +89,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/12/Andro编译过程详解之三/" title="Andro编译过程详解之三" itemprop="url">Andro编译过程详解之三</a>
+      <a href="/2015/07/12/Android编译过程详解之三/" title="Android编译过程详解之三" itemprop="url">Android编译过程详解之三</a>
   </h1>
 
   
@@ -204,7 +204,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/07/12/Andro编译过程详解之三/" >huaqianlee.me/2015/07/12/Andro编译过程详解之三/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/07/12/Android编译过程详解之三/" >huaqianlee.me/2015/07/12/Android编译过程详解之三/ </a>
 
 </div>
 <div class="article-catetags">
@@ -275,7 +275,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/07/12/Andro编译过程详解之三/" data-title="Andro编译过程详解之三" data-url="http://huaqianlee.me/2015/07/12/Andro编译过程详解之三/"></div>
+	<div class="ds-thread" data-thread-key="2015/07/12/Android编译过程详解之三/" data-title="Android编译过程详解之三" data-url="http://huaqianlee.me/2015/07/12/Android编译过程详解之三/"></div>
 </section>
 
 
@@ -305,7 +305,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>6</sup></a></li>
+			<li><a href="/categories/Android/" title="Android">Android<sup>8</sup></a></li>
 		  
 		
 		  
@@ -317,11 +317,19 @@
 		  
 		
 		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Tools/" title="Tools">Tools<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/tools/" title="tools">tools<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -338,11 +346,15 @@
 			
 		
 			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
+				<li><a href="/tags/文件IO/" title="文件IO">文件IO<sup>2</sup></a></li>
 			
 		
 			
@@ -350,13 +362,31 @@
 			
 		
 			
-				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
 			
 		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -1,0 +1,605 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>如何在内核里操作文件(create/open/read/write) | Andy.Lee&#39;s bolg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Andy.Lee">
+    
+
+    
+    <meta name="description" content="因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：
+Includes1234#include &amp;lt;linux/fs.h&amp;gt;#include &amp;lt;asm/segment.h&amp;gt;#include &amp;lt;asm/uaccess.h&amp;gt;#include &amp;lt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在内核里操作文件(create/open/read/write)">
+<meta property="og:url" content="http://huaqianlee.me/2015/03/17/如何在内核里操作读写文件-create-open-read-write/index.html">
+<meta property="og:site_name" content="Andy.Lee's bolg">
+<meta property="og:description" content="因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：
+Includes1234#include &amp;lt;linux/fs.h&amp;gt;#include &amp;lt;asm/segment.h&amp;gt;#include &amp;lt;asm/uaccess.h&amp;gt;#include &amp;lt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在内核里操作文件(create/open/read/write)">
+<meta name="twitter:description" content="因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：
+Includes1234#include &amp;lt;linux/fs.h&amp;gt;#include &amp;lt;asm/segment.h&amp;gt;#include &amp;lt;asm/uaccess.h&amp;gt;#include &amp;lt">
+<meta name="twitter:creator" content="@Andylee_sarah">
+<link rel="publisher" href="107850537041795428182">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Andy.Lee&#39;s bolg" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Andy.Lee&#39;s bolg" title="Andy.Lee&#39;s bolg"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Andy.Lee&#39;s bolg">Andy.Lee&#39;s bolg</a></h1>
+				<h2 class="blog-motto">Good good study, day day up !</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/categories">Categories</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:huaqianlee.me">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+<!--<a href="https://github.com/AndyLee-Github"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>-->
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" title="如何在内核里操作文件(create/open/read/write)" itemprop="url">如何在内核里操作文件(create/open/read/write)</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-03-17T14:15:42.000Z" itemprop="datePublished"> 发表于 Mar 17 2015</time>
+    
+  </p>
+  
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Includes"><span class="toc-number">1.</span> <span class="toc-text">Includes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Opening_a_file"><span class="toc-number">2.</span> <span class="toc-text">Opening a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Close_a_file"><span class="toc-number">3.</span> <span class="toc-text">Close a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading_from_a_file"><span class="toc-number">4.</span> <span class="toc-text">Reading from a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Writing_to_a_file"><span class="toc-number">5.</span> <span class="toc-text">Writing to a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Syncing_changes_a_file"><span class="toc-number">6.</span> <span class="toc-text">Syncing changes a file</span></a></li></ol>
+		
+		</div>
+		
+		<p>　　因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：</p>
+<h2 id="Includes">Includes</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/fs.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/segment.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/uaccess.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/buffer_head.h&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Opening_a_file">Opening a file</h2><a id="more"></a>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> file* file_open(<span class="keyword">const</span> <span class="keyword">char</span>* path, <span class="keyword">int</span> flags, <span class="keyword">int</span> rights) &#123;</span><br><span class="line">    <span class="keyword">struct</span> file* filp = NULL;</span><br><span class="line">    mm_segment_t oldfs;</span><br><span class="line">    <span class="keyword">int</span> err = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/* 内核中进行系统调用（如文件操作）时，必须调用下面两句，对其进行保护，其作用是让内核能访问用户空间 */</span></span><br><span class="line">    oldfs = get_fs();  <span class="comment">// 备份当前进程地址空间</span></span><br><span class="line">    set_fs(get_ds()); <span class="comment">// 设置进程地址空间为虚拟地址空间上限，#define get_ds() (KERNEL_DS) ,</span></span><br><span class="line">    filp = filp_open(path, flags, rights); <span class="comment">// 调用文件打开函数</span></span><br><span class="line">    set_fs(oldfs); <span class="comment">//恢复进程地址空间</span></span><br><span class="line">    <span class="keyword">if</span>(IS_ERR(filp)) &#123;</span><br><span class="line">        err = PTR_ERR(filp);</span><br><span class="line">        <span class="keyword">return</span> NULL;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> filp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Close_a_file">Close a file</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">file_close</span><span class="params">(<span class="keyword">struct</span> file* file)</span> </span>&#123;</span><br><span class="line">    filp_close(file, NULL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Reading_from_a_file">Reading from a file</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">file_read</span><span class="params">(<span class="keyword">struct</span> file* file, <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> offset, <span class="keyword">unsigned</span> <span class="keyword">char</span>* data, <span class="keyword">unsigned</span> <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    mm_segment_t oldfs;</span><br><span class="line">    <span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">    oldfs = get_fs();</span><br><span class="line">    set_fs(get_ds());</span><br><span class="line"></span><br><span class="line">    ret = vfs_read(file, data, size, &amp;offset);  <span class="comment">// 读取文件，文件存在用户空间</span></span><br><span class="line"></span><br><span class="line">    set_fs(oldfs);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Writing_to_a_file">Writing to a file</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">file_write</span><span class="params">(<span class="keyword">struct</span> file* file, <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> offset, <span class="keyword">unsigned</span> <span class="keyword">char</span>* data, <span class="keyword">unsigned</span> <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    mm_segment_t oldfs;</span><br><span class="line">    <span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">    oldfs = get_fs();</span><br><span class="line">    set_fs(get_ds());</span><br><span class="line"></span><br><span class="line">    ret = vfs_write(file, data, size, &amp;offset); <span class="comment">// 写文件</span></span><br><span class="line"></span><br><span class="line">    set_fs(oldfs);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Syncing_changes_a_file">Syncing changes a file</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">file_sync</span><span class="params">(<span class="keyword">struct</span> file* file)</span> </span>&#123;</span><br><span class="line">    vfs_fsync(file, <span class="number">0</span>); <span class="comment">// 同步文件，确定文件写到硬盘</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" >huaqianlee.me/2015/03/17/如何在内核里操作读写文件-create-open-read-write/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/kernel/">kernel</a><a href="/tags/文件IO/">文件IO</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/27/重新起航/" title="重新起航+暴力学习计划">
+  <strong>上一篇：</strong><br/>
+  <span>
+  重新起航+暴力学习计划</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/21/高通Android不带电量计的电量计算方式/"  title="Android不带电量计的电量计算">
+ <strong>下一篇：</strong><br/> 
+ <span>Android不带电量计的电量计算
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/03/17/如何在内核里操作读写文件-create-open-read-write/" data-title="如何在内核里操作文件(create/open/read/write)" data-url="http://huaqianlee.me/2015/03/17/如何在内核里操作读写文件-create-open-read-write/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Includes"><span class="toc-number">1.</span> <span class="toc-text">Includes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Opening_a_file"><span class="toc-number">2.</span> <span class="toc-text">Opening a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Close_a_file"><span class="toc-number">3.</span> <span class="toc-text">Close a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading_from_a_file"><span class="toc-number">4.</span> <span class="toc-text">Reading from a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Writing_to_a_file"><span class="toc-number">5.</span> <span class="toc-text">Writing to a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Syncing_changes_a_file"><span class="toc-number">6.</span> <span class="toc-text">Syncing changes a file</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Tools/" title="Tools">Tools<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/tools/" title="tools">tools<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/编译/" title="编译">编译<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/文件IO/" title="文件IO">文件IO<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.daimajia.com/" target="_blank" title="代码家">代码家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.stormzhang.com/" target="_blank" title="stormzhang">stormzhang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Andy Lau in Hongkong. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/huaqianlee" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/AndyLee-Github" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4511267/huaqian-lee" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/Andylee_sarah" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/huaqianlee" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:huaqianlee@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/AndyLee-Github/customtheme" target="_blank" title="Andy Lee">Andy Lee</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Andy.Lee">Andy.Lee</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"AndyLee"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'AndyLee';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-63838023-1', 'huaqianlee.me');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5ab1107031547fb5411cd06ed47f1348## e.g. e6d1f421bbc9962127a50488f9ed37d1 your baidu tongji site code' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

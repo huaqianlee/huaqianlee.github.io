@@ -88,6 +88,485 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/01/21/高通Android不带电量计的电量计算方式/" title="Android不带电量计的电量计算" itemprop="url">Android不带电量计的电量计算</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-21T12:10:01.000Z" itemprop="datePublished"> 发表于 Jan 21 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。</p>
+<h2 id="SOC（state_of_charge_荷电状态_-_电量）">SOC（state of charge 荷电状态 - 电量）</h2><p>英文缩写:<br>FCC　　Full-charge capacity<br>RC 　　Remaining capacity (剩余电量)<br>CC 　　Coulumb counter<br>UUC　　Unusable capacity<br>RUC　　Remaining usable capacity<br>SoC　　State of charge<br>OCV　　Open circuit voltage</p>
+<p>SOC=(RC-CC-UUC)/(FCC-UUC)<br>RUC=RC-CC-UUC</p>
+<h2 id="电池电量决定因素">电池电量决定因素</h2><p>　　电池电量百分比主要有电池dtsi文件中百分比参数计算而得，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">	qcom,pc-temp-ocv-lut &#123;</span><br><span class="line">		qcom,lut-col-legend = &lt;(-<span class="number">10</span>) <span class="number">0</span> <span class="number">25</span> <span class="number">50</span>&gt;;  // Temperature      lut-data（电池OCV ）的column</span><br><span class="line">		qcom,lut-row-legend =  &lt;<span class="number">100</span> <span class="number">89</span> <span class="number">78</span>&gt;,     // Capacity Percent        row</span><br><span class="line">				&lt;<span class="number">67</span> <span class="number">56</span> <span class="number">45</span>&gt;,</span><br><span class="line">				&lt;<span class="number">34</span> <span class="number">23</span> <span class="number">14</span>&gt;,</span><br><span class="line">				&lt;<span class="number">8</span> <span class="number">4</span> <span class="number">0</span>&gt;;</span><br><span class="line">...				</span><br><span class="line">		qcom,lut-data = </span><br><span class="line">		&lt;<span class="number">4290</span>	<span class="number">4285</span>	<span class="number">4327</span>	<span class="number">4328</span>&gt;,</span><br><span class="line">		&lt;<span class="number">4151</span>	<span class="number">4162</span>	<span class="number">4193</span>	<span class="number">4208</span>&gt;,</span><br><span class="line">		&lt;<span class="number">4064</span>	<span class="number">4072</span>	<span class="number">4080</span>	<span class="number">4016</span>&gt;,</span><br><span class="line">		&lt;<span class="number">3928</span>	<span class="number">3943</span>	<span class="number">3963</span>	<span class="number">3980</span>&gt;,</span><br><span class="line">		&lt;<span class="number">3874</span>	<span class="number">3881</span>	<span class="number">3881</span>	<span class="number">3894</span>&gt;,</span><br><span class="line">		&lt;<span class="number">3809</span>	<span class="number">3834</span>	<span class="number">3823</span>	<span class="number">3820</span>&gt;,</span><br><span class="line"></span><br><span class="line">		&lt;<span class="number">3768</span>	<span class="number">3785</span>	<span class="number">3793</span>	<span class="number">3792</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3733</span>	<span class="number">3756</span>	<span class="number">3784</span>	<span class="number">3785</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3701</span>	<span class="number">3723</span>	<span class="number">3762</span>	<span class="number">3761</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3624</span>	<span class="number">3643</span>	<span class="number">3739</span>	<span class="number">3738</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3614</span>	<span class="number">3623</span>	<span class="number">3689</span>	<span class="number">3688</span>&gt;, 	</span><br><span class="line">		&lt;<span class="number">3510</span>	<span class="number">3499</span>	<span class="number">3455</span>	<span class="number">3458</span>&gt;; </span><br><span class="line">	</span><br><span class="line">	&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="关键结构">关键结构</h2><h3 id="dts_table_structure：">dts table structure：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * struct pc_temp_ocv_lut -</span><br><span class="line"> * @rows:	number of percent charge entries should be &lt;= PC_TEMP_ROWS</span><br><span class="line"> * @cols:	number of temperature entries should be &lt;= PC_TEMP_COLS</span><br><span class="line"> * @temp:	the temperatures at <span class="built_in">which</span> ocv data is available <span class="keyword">in</span> the table</span><br><span class="line"> *		The temperatures must be <span class="keyword">in</span> increasing order from <span class="number">0</span> to rows.</span><br><span class="line"> * @percent:	the percent charge at <span class="built_in">which</span> ocv data is available <span class="keyword">in</span> the table</span><br><span class="line"> *		The  percentcharge must be <span class="keyword">in</span> decreasing order from <span class="number">0</span> to cols.</span><br><span class="line"> * @ocv:	the open circuit voltage</span><br><span class="line"> */</span><br><span class="line">struct pc_temp_ocv_lut &#123;</span><br><span class="line">	int rows;</span><br><span class="line">	int cols;</span><br><span class="line">	int temp[PC_TEMP_COLS];</span><br><span class="line">	int percent[PC_TEMP_ROWS];</span><br><span class="line">	int ocv[PC_TEMP_ROWS][PC_TEMP_COLS];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="calculate_percentcharge_function">calculate percentcharge  function</h2><p>int linear_interpolate(int y0, int x0, int y1, int x1, int x)<br>    if (y0 == y1 || x == x0)    return y0;<br>    if (x1 == x0 || x == x1)    return y1;<br>    return y0 + ((y1 - y0) * (x - x0) / (x1 - x0));</p>
+<h2 id="驱动分析">驱动分析</h2><h3 id="关键函数：">关键函数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// File:  qpnp-vm-bms.c</span><br><span class="line">    lookup_soc_ocv(struct qpnp_bms_chip *chip, int ocv_uv, int batt_temp)、</span><br><span class="line">soc_ocv = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, ocv_uv / <span class="number">1000</span>);  //calculate the  capacity percent</span><br><span class="line">soc_cutoff = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, chip-&gt;dt.cfg_v_cutoff_uv / <span class="number">1000</span>);</span><br><span class="line">soc_final = DIV_ROUND_CLOSEST(<span class="number">100</span> * (soc_ocv - soc_cutoff),(<span class="number">100</span> - soc_cutoff));</span><br><span class="line">      DIV_ROUND_CLOSEST(x,y)    ---&gt;    (x-<span class="number">1</span>&gt;<span class="number">0</span>) || (y-<span class="number">1</span>&gt;<span class="number">0</span>) || x&gt;<span class="number">0</span>  ? (x+y/<span class="number">2</span>)/y : (x-y/<span class="number">2</span>)/y</span><br><span class="line"><span class="keyword">if</span> (!is_battery_charging(chip) &amp;&amp; chip-&gt;current_now &gt; <span class="number">0</span>) // 没有充电 重新计算电量</span><br><span class="line">        iavg_ma = calculate_uuc_iavg(chip);</span><br><span class="line">        fcc = interpolate_fcc(chip-&gt;batt_data-&gt;fcc_temp_lut,batt_temp);</span><br><span class="line">        acc = interpolate_acc(chip-&gt;batt_data-&gt;ibat_acc_lut,	batt_temp, iavg_ma);</span><br><span class="line">    both call ：</span><br><span class="line">linear_interpolate(int y0, int x0, int y1, int x1, int x)</span><br><span class="line">        soc_uuc = ((fcc - acc) * <span class="number">100</span>) / fcc;</span><br><span class="line">	soc_uuc = adjust_uuc(chip, soc_uuc);</span><br><span class="line">	soc_acc = DIV_ROUND_CLOSEST(<span class="number">100</span> * (soc_ocv - soc_uuc),(<span class="number">100</span> - soc_uuc));</span><br><span class="line">        soc_final = soc_acc;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        ... // charging - reset all the counters</span><br><span class="line">soc_final = bound_soc(soc_final) // 最终电量</span><br></pre></td></tr></table></figure>
+<h3 id="百分比计算函数：">百分比计算函数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, ocv_uv / <span class="number">1000</span>);  //calculate the  capacity percent</span><br><span class="line"><span class="keyword">if</span> (batt_temp == pc_temp_ocv-&gt;temp[j] * DEGC_SCALE) &#123;  /* found an exact match <span class="keyword">for</span> temp <span class="keyword">in</span> the table */</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; rows; i++)    // i: rows- Capacity Percent  j: columns-Temperature</span><br><span class="line">                   ...</span><br><span class="line">	    pc = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;percent[i - <span class="number">1</span>],pc_temp_ocv-&gt;ocv[i - <span class="number">1</span>][j],ocv); // calculate 不匹配dts表格的percentcharge </span><br><span class="line">                   转换为公式见下公式一;                                </span><br><span class="line"></span><br><span class="line">  /* batt_temp is within temperature <span class="keyword">for</span> column j-<span class="number">1</span> and j */</span><br><span class="line"> is_between(pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j], ocv)   // caculate temp1 percentcharge</span><br><span class="line">        pcj = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;percent[i + <span class="number">1</span>],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j],	ocv);</span><br><span class="line">                  转换为公式见下公式二;                         </span><br><span class="line">           is_between(pc_temp_ocv-&gt;ocv[i][j-<span class="number">1</span>],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j-<span class="number">1</span>], ocv)) // caculate temp2 percentcharge</span><br><span class="line">	    pcj_minus_one = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j-<span class="number">1</span>],pc_temp_ocv-&gt;percent[i + <span class="number">1</span>],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j-<span class="number">1</span>],ocv);</span><br><span class="line">                   转换为公式见下公式三;                       </span><br><span class="line">          <span class="keyword">if</span> (pcj &amp;&amp; pcj_minus_one) // temp1 and temp2 都存在，calculate percentcharge </span><br><span class="line">                   pc = linear_interpolate(pcj_minus_one,pc_temp_ocv-&gt;temp[j-<span class="number">1</span>] * DEGC_SCALE,	pcj,pc_temp_ocv-&gt;temp[j] * DEGC_SCALE,batt_temp);</span><br><span class="line">                   转换为公式见下公式四;                      </span><br><span class="line">           否则：<span class="built_in">return</span> pcj 、pcj_minus_one、其他临界值</span><br></pre></td></tr></table></figure>
+<h3 id="公式一">公式一</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式1.png" alt="公式一"></p>
+<h3 id="公式二">公式二</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式2.png" alt="公式二"></p>
+<h3 id="公式三">公式三</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式3.png" alt="公式三"></p>
+<h3 id="公式四">公式四</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式4.png" alt="公式四"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/01/21/高通Android不带电量计的电量计算方式/" >huaqianlee.me/2015/01/21/高通Android不带电量计的电量计算方式/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/01/21/高通Android不带电量计的电量计算方式/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/01/21/高通Android不带电量计的电量计算方式/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/12/21/Linux常用快捷键及命令总结/" title="Linux常用快捷键及命令总结" itemprop="url">Linux常用快捷键及命令总结</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2014-12-21T12:10:01.000Z" itemprop="datePublished"> 发表于 Dec 21 2014</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　或许我是一个geek范的人，又或许是想显得很有逼格， whatever， 反正我就喜欢Linux的命令行，喜欢黑黑的geek风，这样完全体现出了技术的酷炫。现将一些自己觉得很有用能让自己显得很牛的装X快捷键和指令总结如下，其中有一部分相当有用，使用后逼格瞬间提升。</p>
+<h2 id="Shell终端常用快捷键">Shell终端常用快捷键</h2><p>　　当进行命令行操作时，使用快捷键将极大提高工作效率，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + U – 剪切光标前的内容</span><br><span class="line">Ctrl + K – 剪切光标至行末的内容</span><br><span class="line">Ctrl + Y – 粘贴</span><br><span class="line">Ctrl + E – 移动光标到行末</span><br><span class="line">Ctrl + A – 移动光标到行首</span><br><span class="line">ALT + F – 跳向下一个空格</span><br><span class="line">ALT + B – 跳回上一个空格</span><br><span class="line">ALT + Backspace – 删除前一个单词</span><br><span class="line">Ctrl + W – 剪切光标前一个单词</span><br><span class="line">Ctrl + Insert – 复制</span><br><span class="line">Shift + Insert – 粘贴</span><br><span class="line"><span class="comment"># 下面两个命令的用法，如： 在shell终端输入vi main.c进入vi界面后，想切换到命令行，可以通过Ctrl+Z</span></span><br><span class="line">Ctrl + Z – 暂停应用程序</span><br><span class="line"><span class="built_in">fg</span> – 重新将程序唤到前台</span><br></pre></td></tr></table></figure></p>
+<h2 id="常用Shell命令">常用Shell命令</h2><p>　　使用Linux，最酷炫的就是命令行操作，所以熟悉命令是必须，现将常用的Shell命令总结如下：</p>
+<h3 id="硬件相关命令">硬件相关命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">lscpu                   <span class="comment">#查看的是cpu信息.</span></span><br><span class="line">cat /proc/cpuinfo       <span class="comment">#查看CPU信息详细信息</span></span><br><span class="line">free -m                 <span class="comment">#概要查看内存情况，单位MB</span></span><br><span class="line">cat /proc/meminfo       <span class="comment">#查看内存详细信息</span></span><br><span class="line">lsblk                   <span class="comment">#查看硬盘和分区分布</span></span><br><span class="line">df -h                   <span class="comment">#查看各分区使用情况</span></span><br><span class="line">cat /proc/partitions    <span class="comment">#查看硬盘和分区</span></span><br><span class="line">mount | column -t       <span class="comment">#查看挂接的分区状态</span></span><br><span class="line">lspci | grep -i <span class="string">'eth'</span>   <span class="comment">#查看网卡硬件信息</span></span><br><span class="line">ifconfig <span class="operator">-a</span>             <span class="comment">#查看系统的所有网络接口</span></span><br><span class="line">ethtool eth0            <span class="comment">#如果要查看某个网络接口的详细信息，例如eth0的详细参数和指标</span></span><br></pre></td></tr></table></figure>
+<h3 id="系统相关命令">系统相关命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#内核相关命令</span></span><br><span class="line">uname <span class="operator">-a</span>                <span class="comment">#查看版本当前操作系统内核信息）</span></span><br><span class="line">cat /proc/version       <span class="comment">#查看当前操作系统版本信息</span></span><br><span class="line">cat /etc/issue          <span class="comment">#查看版本当前操作系统发行版信息</span></span><br><span class="line">cat /etc/redhat-release <span class="comment">#同上</span></span><br><span class="line">cat /etc/SuSE-release   <span class="comment">#suse系统下才可使用</span></span><br><span class="line">lsb_release <span class="operator">-a</span>          <span class="comment">#用来查看linux兼容性的发行版信息</span></span><br><span class="line">lsmod                   <span class="comment">#列出加载的内核模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#网络常用命令</span></span><br><span class="line">ifconfig                <span class="comment">#查看所有网络接口的属性</span></span><br><span class="line">iptables -L             <span class="comment">#查看防火墙设置</span></span><br><span class="line">service iptables status <span class="comment">#查看防火墙状态</span></span><br><span class="line">service iptables stop   <span class="comment">#关闭防火墙</span></span><br><span class="line">route -n                <span class="comment">#查看路由表</span></span><br><span class="line">netstat -lntp           <span class="comment">#查看所有监听端口</span></span><br><span class="line">netstat -antp           <span class="comment">#查看所有已经建立的连接</span></span><br><span class="line">netstat <span class="operator">-s</span>              <span class="comment">#查看网络统计信息进程</span></span><br><span class="line">netstat -at             <span class="comment">#列出所有tcp端口</span></span><br><span class="line">netstat -au             <span class="comment">#列出所有udp端口</span></span><br><span class="line">netstat <span class="operator">-lt</span>             <span class="comment">#只列出所有监听tcp端口</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#管理常用命令</span></span><br><span class="line">top                     <span class="comment">#查看系统所有进程的详细信息，比如CPU、内存等,信息很多！</span></span><br><span class="line">df -lh                  <span class="comment">#查看硬盘大小及使用率</span></span><br><span class="line">mount                   <span class="comment">#挂接远程目录、NFS、本地共享目录到linux下</span></span><br><span class="line">hostname                <span class="comment">#查看/修改计算机名</span></span><br><span class="line">w                       <span class="comment">#查看活动用户</span></span><br><span class="line">id                      <span class="comment">#查看指定用户信息</span></span><br><span class="line">last                    <span class="comment">#查看用户登录日志</span></span><br><span class="line">cut <span class="operator">-d</span>: <span class="operator">-f</span>1 /etc/passwd <span class="comment">#查看系统所有用户</span></span><br><span class="line">cut <span class="operator">-d</span>: <span class="operator">-f</span>1 /etc/group  <span class="comment">#查看系统所有组</span></span><br><span class="line">crontab <span class="operator">-l</span>              <span class="comment">#查看当前用户的计划任务服务</span></span><br><span class="line">chkconfig –list         <span class="comment">#列出所有系统服务</span></span><br><span class="line">chkconfig –list | grep on <span class="comment">#列出所有启动的系统服务程序</span></span><br><span class="line">rpm -qa                 <span class="comment">#查看所有安装的软件包</span></span><br><span class="line">uptime                  <span class="comment">#查看系统运行时间、用户数、负载    </span></span><br><span class="line">/sbin/chkconfig --list  <span class="comment">#查看系统自动启动列表</span></span><br><span class="line">/sbin/chkconfig　–add　mysql <span class="comment">#把MySQL添加到系统的启动服务组里面</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#文件操作常用命令</span></span><br><span class="line">ranger               <span class="comment">#文件浏览系统，需要先安装ranger，超级方便，用了就知道</span></span><br><span class="line">ls -lht                 <span class="comment">#列出一个文件夹下所有文件及大小、访问权限</span></span><br><span class="line">du -sh &lt;dir&gt;            <span class="comment">#查看指定目录的大小 </span></span><br><span class="line">du -lh &lt;dir&gt;            <span class="comment">#查看指定目录及各文件的大小 </span></span><br><span class="line">ln <span class="operator">-s</span>                   <span class="comment">#建立软链接</span></span><br><span class="line">ls -lh                  <span class="comment">#以M为单位显示文件大小，去掉h，则单位为k</span></span><br><span class="line">du -skh  file        <span class="comment">#以M为单位显示文件大小 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">#进程相关命令</span></span><br><span class="line">htop                      <span class="comment">#在终端以列表形式查看进程，需要安装htop，比ps好看好用太多了</span></span><br><span class="line">pstree -p pid           <span class="comment">#查看一个进程下的所有线程</span></span><br><span class="line">pstree  <span class="operator">-a</span>              <span class="comment">#显示所有进程的所有详细信息，遇到相同的进程名可以压缩显示。</span></span><br><span class="line">ps -ef                  <span class="comment">#查看所有进程</span></span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span> pid             <span class="comment">#杀死进程</span></span><br><span class="line"><span class="built_in">kill</span> all <span class="built_in">test</span>           <span class="comment">#杀死进程</span></span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span> `pgrep <span class="built_in">test</span>`    <span class="comment">#杀死进程</span></span><br><span class="line">./test.sh &amp;             <span class="comment">#使程序在后台运行</span></span><br><span class="line">nohup ./test.sh &amp;       <span class="comment">#使程序在后台运行</span></span><br><span class="line"></span><br><span class="line">压缩解压缩 </span><br><span class="line">zip -r dir.zip dir file  <span class="comment">#将目录dir、文件file等压缩到zip包,</span></span><br><span class="line">zip -re dir.zip dir file <span class="comment">#创建zip包，且加密</span></span><br><span class="line">unzip dir.zip            <span class="comment">#解压</span></span><br><span class="line">tar -zcvf dir.tar.gz dir file    <span class="comment">#将目录dir、文件file等压缩到tar包</span></span><br><span class="line">tar -xf dir.tar.gz       <span class="comment">#解压</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#screen命令，screen命令运行的服务不受shell终端影响，即使shell终端关闭仍存在</span></span><br><span class="line">screen -S <span class="built_in">test</span>          <span class="comment">#创建一个名字为test的screen</span></span><br><span class="line">screen -r <span class="built_in">test</span>          <span class="comment">#打开名字为test的screen</span></span><br><span class="line">screen -r pid           <span class="comment">#打开进程号为pid的screen</span></span><br><span class="line">screen -ls              <span class="comment">#列出所有的screen</span></span><br><span class="line">ctrl + a,d              <span class="comment">#当在一个screen时，退出screen</span></span><br><span class="line">ctrl + a,n              <span class="comment">#当在一个screen时，切换到下一个窗口</span></span><br><span class="line">ctrl + a,c              <span class="comment">#当在一个screen时，创建一个新的窗口</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#远程拷贝</span></span><br><span class="line">scp <span class="built_in">local</span>_file remote_username@remote_ip:remote_dir    <span class="comment">#拷贝本地文件到远程机器上</span></span><br><span class="line">scp -r <span class="built_in">local</span>_dir remote_username@remote_ip:remote_dir  <span class="comment">#拷贝本地整个目录到远程机器上</span></span><br></pre></td></tr></table></figure>
+<h3 id="软件包安装">软件包安装</h3><p>　　如下为Ubuntu下的是命令，如果账户没有root权限的话，需要在前面添加sudo以获取root权限。其实不知道命令的话，只需要输入软件名，终端将会打印出下载安装的命令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apt-get install package     <span class="comment">#安装</span></span><br><span class="line">apt-get update package      <span class="comment">#更新</span></span><br><span class="line">apt-get remove package      <span class="comment">#删除    </span></span><br><span class="line">apt-cache search package    <span class="comment">#搜索软件包</span></span><br><span class="line">dpkg -i package.deb         <span class="comment">#安装deb包</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="后记">后记</h2><p>　　为了让大家相信使用了这些命令或快捷键确实会逼格提升，专门贴图两张，哈哈。。。</p>
+<h3 id="图一_执行htop（进程管理）">图一 执行htop（进程管理）</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/bloghtop.png" alt="htop"></p>
+<h3 id="图二_执行ranger_（文件浏览）">图二 执行ranger （文件浏览）</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogranger.png" alt="ranger"></p>
+<p>　　有很多命令引用自<a href="http://www.xprogrammer.com/1799.html" target="_blank" rel="external">Linux常用的shell命令</a>，感谢此文作者.</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2014/12/21/Linux常用快捷键及命令总结/" >huaqianlee.me/2014/12/21/Linux常用快捷键及命令总结/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/shell/">shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2014/12/21/Linux常用快捷键及命令总结/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/12/21/Linux常用快捷键及命令总结/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/17/Linux文件IO操作及网络架构/" title="Linux文件I/O操作及网络架构" itemprop="url">Linux文件I/O操作及网络架构</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-17T12:15:42.000Z" itemprop="datePublished"> 发表于 Nov 17 2014</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>图片摘自网络，这些图片清晰的描述出了文件I/O和网络操作的脉络。<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2014/11/17/Linux文件IO操作及网络架构/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2014/11/17/Linux文件IO操作及网络架构/" >huaqianlee.me/2014/11/17/Linux文件IO操作及网络架构/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/kernel/">kernel</a><a href="/tags/文件IO/">文件IO</a><a href="/tags/网络/">网络</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2014/11/17/Linux文件IO操作及网络架构/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/11/17/Linux文件IO操作及网络架构/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/01/How-to-read/" title="How to read" itemprop="url">How to read</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2014-10-31T16:26:22.000Z" itemprop="datePublished"> 发表于 Nov 1 2014</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　我这里想谈的是关于技术等方面学习的阅读. 不知道其他人怎么样,关于我一直以来总是有一个错误的方法去阅读书籍.　　</p>
+<p>　　从初中伊始,我对于学习就有了一个错误的想法:想一步步的认真学好每个知识点,掌握每个知识点;因为这个想法让我一直学得很累.当我上了大学后,开始接触单片机、c语言、PCB等新鲜而有趣的知识，但是我还是秉承着错误的学习方法。所以在大学阶段虽然自己很认真的在学习，可是最终发现这样效果并不好，反而在一直消磨着自己的兴趣。这一度都让我怀疑自己的能力。不过幸好，我一直没有放弃，一直在坚持学习，直到后面学习Linux、Java及Android之后，终于深刻意识到自己之前的错误方法。　　<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2014/11/01/How-to-read/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2014/11/01/How-to-read/" >huaqianlee.me/2014/11/01/How-to-read/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Thinking/">Thinking</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Experience/">Experience</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2014/11/01/How-to-read/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/11/01/How-to-read/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/10/27/The-document-convetions-for-Java/" title="The document convetions for Java" itemprop="url">The document convetions for Java</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2014-10-27T14:28:28.000Z" itemprop="datePublished"> 发表于 Oct 27 2014</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　注释一直是编程最重要的部分之一,学习Java很长一段时间了,由于之前一直没有很正式的写过项目，所以一直也就没怎么认真的写过注释．因为注释又是如此的重要，所以今天对Java的注释规范加以总结，也促使自己以后写代码注意注释．</p>
+<h2 id="注释的地方">注释的地方</h2><ol>
+<li>每个源文件开头应该有一段注释,介绍代码的作者\时间等信息.</li>
+<li>当代码比较长,嵌套较深时,应该在某些花括号末尾注明花括号对应的起点.</li>
+<li>重要的属性需要添加注释,每个方法需要添加注释.</li>
+<li>典型的算法等需要特别注意的地方需要添加注释.</li>
+<li>有bug的地方需要加以注释,修改过的代码需要加修改标志注释.</li>
+</ol>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2014/10/27/The-document-convetions-for-Java/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2014/10/27/The-document-convetions-for-Java/" >huaqianlee.me/2014/10/27/The-document-convetions-for-Java/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Program-Kill/">Program Kill</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2014/10/27/The-document-convetions-for-Java/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/10/27/The-document-convetions-for-Java/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/10/24/build-person-blog-with-hexo/" title="Build person blog with hexo and  github" itemprop="url">Build person blog with hexo and  github</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2014-10-23T17:12:15.000Z" itemprop="datePublished"> 发表于 Oct 24 2014</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　基于Hexo和Github的个人博客构建，我参照<a href="http://ibruce.info/2013/11/22/hexo-your-blog/">hexo你的博客</a>、<a href="http://hexo.io/docs/">hexo官方文档</a>及<a href="https://help.github.com/articles/set-up-git/">github官方文档</a>完成了自己的个人blog。通过前段时间学习Android和这些天build自己的github、个人blog，关于学习新东西有一个新的体会，就是官方文档和帮助是最好的资料，虽然是英文的，但是看官方的源文档能提升自己的效率。</p>
+<p>现在写博客只需要几个简单的命令就能完成发布了．</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br><span class="line">$ hexo generat</span><br><span class="line">$ hexo deploy</span><br><span class="line">也可以直接简写为：</span><br><span class="line">$ hexo n <span class="string">"My New Post"</span></span><br><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2014/10/24/build-person-blog-with-hexo/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2014/10/24/build-person-blog-with-hexo/" >huaqianlee.me/2014/10/24/build-person-blog-with-hexo/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tools/">Tools</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Hexo/">Hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2014/10/24/build-person-blog-with-hexo/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/10/24/build-person-blog-with-hexo/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2014/10/20/hello-world/" title="Hello World" itemprop="url">Hello World</a>
   </h1>
 
@@ -177,7 +656,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>6</sup></a></li>
+			<li><a href="/categories/Android/" title="Android">Android<sup>8</sup></a></li>
 		  
 		
 		  
@@ -189,11 +668,19 @@
 		  
 		
 		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Tools/" title="Tools">Tools<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/tools/" title="tools">tools<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -210,11 +697,15 @@
 			
 		
 			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
+				<li><a href="/tags/文件IO/" title="文件IO">文件IO<sup>2</sup></a></li>
 			
 		
 			
@@ -222,13 +713,31 @@
 			
 		
 			
-				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
 			
 		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
 			
 		
 		</ul>
