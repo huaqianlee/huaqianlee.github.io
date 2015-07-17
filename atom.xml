@@ -454,7 +454,7 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     <link href="http://huaqianlee.me/2015/06/11/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
     <id>http://huaqianlee.me/2015/06/11/git常用及进阶命令总结/</id>
     <published>2015-06-11T14:10:41.000Z</published>
-    <updated>2015-07-17T17:06:43.251Z</updated>
+    <updated>2015-07-17T17:12:01.858Z</updated>
     <content type="html"><![CDATA[<p>　　Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　<br>　<br>　　言归正传，Git十分好用，现在大多数公司或者个人都在使用，但要熟练使用还是要花一些苦功夫的，我现在也还是只会基本的应用，更深层次的使用还不熟悉。为了方便自己以后使用，将自己常用的一些命令加以总结，并Google了一些常用及进阶命令，一并列出，方便查询使用。</p>
 <a id="more"></a>
 <h2 id="Git配置">Git配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"huaqianlee"</span>   </span><br><span class="line">git config --global user.email <span class="string">"huaqianlee@gmail.com"</span></span><br><span class="line">git config --global color.ui <span class="literal">true</span></span><br><span class="line">git config --global alias.co checkout <span class="comment"># 配置别名，co 配为checkout 别名， 不过我没用</span></span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global core.editor <span class="string">"mate -w"</span>    <span class="comment"># 设置Editor使用textmate</span></span><br><span class="line">git config <span class="operator">-l</span>  <span class="comment"># 列举所有配置</span></span><br></pre></td></tr></table></figure>
@@ -471,9 +471,9 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     
     </summary>
     
-      <category term="git" scheme="http://huaqianlee.me/tags/git/"/>
+      <category term="Tools" scheme="http://huaqianlee.me/tags/Tools/"/>
     
-      <category term="Tools" scheme="http://huaqianlee.me/categories/Tools/"/>
+      <category term="Git" scheme="http://huaqianlee.me/categories/Git/"/>
     
   </entry>
   
@@ -589,7 +589,7 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     <link href="http://huaqianlee.me/2015/05/29/Android-Stdudio-Linux-windows-mac%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://huaqianlee.me/2015/05/29/Android-Stdudio-Linux-windows-mac常用快捷键/</id>
     <published>2015-05-29T12:10:41.000Z</published>
-    <updated>2015-07-17T17:07:14.124Z</updated>
+    <updated>2015-07-17T17:12:16.488Z</updated>
     <content type="html"><![CDATA[<p>　　前些时间把Android Studio的环境折腾好，典型的geek风一下子完全吸引了我，比eclipse好用太多了，有很多意外的功能,快捷键可以自定义，但我基本都用的默认的。本来用Macbook Pro做Android开发是最好的选择，但自己平时要搞Linux/Android底层相关的东西，thinkpad就成为最好的选择，所以就入手了thinkpad，用着Ubuntu和Windows，先总结我使用环境下的快捷键，等入手Mac后再添加Mac的快捷键。<br><a id="more"></a>　　</p>
 <h2 id="AS快捷键">AS快捷键</h2><table>
 <thead>
@@ -818,6 +818,8 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     </summary>
     
       <category term="Android Studio" scheme="http://huaqianlee.me/tags/Android-Studio/"/>
+    
+      <category term="Tools" scheme="http://huaqianlee.me/tags/Tools/"/>
     
       <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
     
@@ -1897,7 +1899,7 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     <link href="http://huaqianlee.me/2014/10/24/build-person-blog-with-hexo/"/>
     <id>http://huaqianlee.me/2014/10/24/build-person-blog-with-hexo/</id>
     <published>2014-10-23T17:12:15.000Z</published>
-    <updated>2015-05-27T14:24:04.106Z</updated>
+    <updated>2015-07-17T17:11:40.561Z</updated>
     <content type="html"><![CDATA[<p>　　基于Hexo和Github的个人博客构建，我参照<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">hexo你的博客</a>、<a href="http://hexo.io/docs/" target="_blank" rel="external">hexo官方文档</a>及<a href="https://help.github.com/articles/set-up-git/" target="_blank" rel="external">github官方文档</a>完成了自己的个人blog。通过前段时间学习Android和这些天build自己的github、个人blog，关于学习新东西有一个新的体会，就是官方文档和帮助是最好的资料，虽然是英文的，但是看官方的源文档能提升自己的效率。</p>
 <p>现在写博客只需要几个简单的命令就能完成发布了．</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br><span class="line">$ hexo generat</span><br><span class="line">$ hexo deploy</span><br><span class="line">也可以直接简写为：</span><br><span class="line">$ hexo n <span class="string">"My New Post"</span></span><br><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
@@ -1965,9 +1967,9 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     
     </summary>
     
-      <category term="Hexo" scheme="http://huaqianlee.me/tags/Hexo/"/>
+      <category term="Tools" scheme="http://huaqianlee.me/tags/Tools/"/>
     
-      <category term="Tools" scheme="http://huaqianlee.me/categories/Tools/"/>
+      <category term="Hexo" scheme="http://huaqianlee.me/categories/Hexo/"/>
     
   </entry>
   
@@ -1976,7 +1978,7 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     <link href="http://huaqianlee.me/2014/10/20/hello-world/"/>
     <id>http://huaqianlee.me/2014/10/20/hello-world/</id>
     <published>2014-10-19T17:12:15.000Z</published>
-    <updated>2014-12-25T06:29:20.273Z</updated>
+    <updated>2015-07-17T17:11:30.670Z</updated>
     <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -1994,9 +1996,9 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     
     </summary>
     
-      <category term="Hexo" scheme="http://huaqianlee.me/tags/Hexo/"/>
+      <category term="Tools" scheme="http://huaqianlee.me/tags/Tools/"/>
     
-      <category term="Tools" scheme="http://huaqianlee.me/categories/Tools/"/>
+      <category term="Hexo" scheme="http://huaqianlee.me/categories/Hexo/"/>
     
   </entry>
   
