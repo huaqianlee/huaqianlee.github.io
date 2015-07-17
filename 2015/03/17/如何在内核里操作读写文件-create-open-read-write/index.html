@@ -105,13 +105,6 @@ Includes1234#include &amp;lt;linux/fs.h&amp;gt;#include &amp;lt;asm/segment.h&am
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Includes"><span class="toc-number">1.</span> <span class="toc-text">Includes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Opening_a_file"><span class="toc-number">2.</span> <span class="toc-text">Opening a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Close_a_file"><span class="toc-number">3.</span> <span class="toc-text">Close a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading_from_a_file"><span class="toc-number">4.</span> <span class="toc-text">Reading from a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Writing_to_a_file"><span class="toc-number">5.</span> <span class="toc-text">Writing to a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Syncing_changes_a_file"><span class="toc-number">6.</span> <span class="toc-text">Syncing changes a file</span></a></li></ol>
-		
-		</div>
-		
 		<p>　　因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：</p>
 <h2 id="Includes">Includes</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/fs.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/segment.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/uaccess.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/buffer_head.h&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="Opening_a_file">Opening a file</h2><a id="more"></a>
@@ -219,13 +212,6 @@ Includes1234#include &amp;lt;linux/fs.h&amp;gt;#include &amp;lt;asm/segment.h&am
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Includes"><span class="toc-number">1.</span> <span class="toc-text">Includes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Opening_a_file"><span class="toc-number">2.</span> <span class="toc-text">Opening a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Close_a_file"><span class="toc-number">3.</span> <span class="toc-text">Close a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading_from_a_file"><span class="toc-number">4.</span> <span class="toc-text">Reading from a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Writing_to_a_file"><span class="toc-number">5.</span> <span class="toc-text">Writing to a file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Syncing_changes_a_file"><span class="toc-number">6.</span> <span class="toc-text">Syncing changes a file</span></a></li></ol>
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -462,8 +448,6 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });

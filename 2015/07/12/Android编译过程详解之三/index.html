@@ -105,13 +105,6 @@
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AndroidProducts-mk"><span class="toc-number">1.</span> <span class="toc-text">AndroidProducts.mk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产品版本定义文件"><span class="toc-number">2.</span> <span class="toc-text">产品版本定义文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#产品版本定义文件定义变量"><span class="toc-number">2.1.</span> <span class="toc-text">产品版本定义文件定义变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msm8916_32-mk"><span class="toc-number">2.2.</span> <span class="toc-text">msm8916_32.mk</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BoardConfig-mk"><span class="toc-number">3.</span> <span class="toc-text">BoardConfig.mk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vendorsetup-sh"><span class="toc-number">4.</span> <span class="toc-text">vendorsetup.sh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-number">5.</span> <span class="toc-text">后记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
-		
-		</div>
-		
 		<p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
 <p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
 <p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
@@ -287,13 +280,6 @@
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AndroidProducts-mk"><span class="toc-number">1.</span> <span class="toc-text">AndroidProducts.mk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产品版本定义文件"><span class="toc-number">2.</span> <span class="toc-text">产品版本定义文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#产品版本定义文件定义变量"><span class="toc-number">2.1.</span> <span class="toc-text">产品版本定义文件定义变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msm8916_32-mk"><span class="toc-number">2.2.</span> <span class="toc-text">msm8916_32.mk</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BoardConfig-mk"><span class="toc-number">3.</span> <span class="toc-text">BoardConfig.mk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vendorsetup-sh"><span class="toc-number">4.</span> <span class="toc-text">vendorsetup.sh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-number">5.</span> <span class="toc-text">后记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -530,8 +516,6 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });

@@ -589,9 +589,8 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     <link href="http://huaqianlee.me/2015/05/29/Android-Stdudio-Linux-windows-mac%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://huaqianlee.me/2015/05/29/Android-Stdudio-Linux-windows-mac常用快捷键/</id>
     <published>2015-05-29T12:10:41.000Z</published>
-    <updated>2015-07-17T16:16:02.316Z</updated>
-    <content type="html"><![CDATA[<p>　　前些时间把Android Studio的环境折腾好，典型的geek风一下子完全吸引了我，比eclipse好用太多了，有很多意外的功能,快捷键可以自定义，但我基本都用的默认的。本来用Macbook Pro做Android开发是最好的选择，但自己平时要搞Linux/Android底层相关的东西，thinkpad就成为最好的选择，所以就入手了thinkpad，用着Ubuntu和Windows，先总结我使用环境下的快捷键，等入手Mac后再添加Mac的快捷键。
-　　　</p>
+    <updated>2015-07-17T16:29:02.271Z</updated>
+    <content type="html"><![CDATA[<p>　　前些时间把Android Studio的环境折腾好，典型的geek风一下子完全吸引了我，比eclipse好用太多了，有很多意外的功能,快捷键可以自定义，但我基本都用的默认的。本来用Macbook Pro做Android开发是最好的选择，但自己平时要搞Linux/Android底层相关的东西，thinkpad就成为最好的选择，所以就入手了thinkpad，用着Ubuntu和Windows，先总结我使用环境下的快捷键，等入手Mac后再添加Mac的快捷键。<br>　<br><a id="more"></a>　　</p>
 <h2 id="AS快捷键">AS快捷键</h2><table>
 <thead>
 <tr>
@@ -624,53 +623,197 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <tr>
 <td>git push</td>
 <td>Ctrl+Shift+K</td>
+<td></td>
+</tr>
+<tr>
+<td>打开Project Structure</td>
+<td>Ctrl+Alt+Shift+S</td>
+<td></td>
+</tr>
+<tr>
+<td>打开settings</td>
+<td>Ctrl+Alt+S</td>
+<td></td>
+</tr>
+<tr>
+<td>重命名</td>
+<td>Shift +F６</td>
+<td></td>
+</tr>
+<tr>
+<td>查找</td>
+<td>Ctrl+F</td>
+<td></td>
+</tr>
+<tr>
+<td>全局查找</td>
+<td>Ctrl+Shift+F</td>
+<td></td>
+</tr>
+<tr>
+<td>文件查找</td>
+<td>双击Shift</td>
+<td></td>
+</tr>
+<tr>
+<td>最近文件</td>
+<td>Ctrl+E</td>
+<td></td>
+</tr>
+<tr>
+<td>最近编辑文件</td>
+<td>Ctrl+Shift+E</td>
+<td></td>
+</tr>
+<tr>
+<td>查看继承类</td>
+<td>F4</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Code：</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>导入包</td>
+<td>Alt+Enter</td>
+<td></td>
+</tr>
+<tr>
+<td>注释代码(//)</td>
+<td>Ctrl + /</td>
+<td></td>
+</tr>
+<tr>
+<td>注释代码(/**/)</td>
+<td>Ctrl + Shift + /</td>
+<td></td>
+</tr>
+<tr>
+<td>格式化代码</td>
+<td>Ctrl + Alt + L</td>
+<td></td>
+</tr>
+<tr>
+<td>清除无效包引用</td>
+<td>Alt + Ctrl + O</td>
+<td></td>
+</tr>
+<tr>
+<td>查找</td>
+<td>Ctrl + F</td>
+<td></td>
+</tr>
+<tr>
+<td>查找+替换</td>
+<td>Ctrl + R</td>
+<td></td>
+</tr>
+<tr>
+<td>上下移动代码</td>
+<td>Alt + Shift + Up/Down</td>
+<td></td>
+</tr>
+<tr>
+<td>删除行</td>
+<td>Ctrl + Y</td>
+<td></td>
+</tr>
+<tr>
+<td>重命名</td>
+<td>Ctrl+Shift+R</td>
+<td></td>
+</tr>
+<tr>
+<td>以代码块单位移动光标</td>
+<td>Alt+Up/Down</td>
+<td></td>
+</tr>
+<tr>
+<td>扩大缩小选中范围</td>
+<td>Ctrl + W/Ctrl + Shift + W</td>
+<td></td>
+</tr>
+<tr>
+<td>快捷生成结构体</td>
+<td>Ctrl + Alt + T</td>
+<td></td>
+</tr>
+<tr>
+<td>快捷覆写方法</td>
+<td>Ctrl + O</td>
+<td></td>
+</tr>
+<tr>
+<td>快捷定位到行首/尾</td>
+<td>Ctrl + Left/Right</td>
+<td></td>
+</tr>
+<tr>
+<td>快速切换到上/下一视图</td>
+<td>Alt+ Left/Right</td>
+<td></td>
+</tr>
+<tr>
+<td>折叠展开代码块</td>
+<td>Ctrl + Plus/Minus(+/-)</td>
+<td></td>
+</tr>
+<tr>
+<td>折叠展开全部代码块</td>
+<td>Ctrl + Shift + Plus/Minus</td>
+<td></td>
+</tr>
+<tr>
+<td>文件方法结构</td>
+<td>Ctrl + F12</td>
+<td></td>
+</tr>
+<tr>
+<td>查找调用的位置</td>
+<td>Ctrl + Alt + H</td>
+<td></td>
+</tr>
+<tr>
+<td>大小写转换</td>
+<td>Ctrl + Shift + U</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Debug：</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>单步调试，进入函数</td>
+<td>F5</td>
+<td></td>
+</tr>
+<tr>
+<td>单步调试，不进入函数</td>
+<td>F6</td>
+<td></td>
+</tr>
+<tr>
+<td>跳出函数</td>
+<td>F7</td>
+<td></td>
+</tr>
+<tr>
+<td>执行到下一断点</td>
+<td>F8</td>
+<td></td>
+<td>　</td>
 </tr>
 </tbody>
 </table>
-<a id="more"></a>
-<p>|打开Project Structure|Ctrl+Alt+Shift+S||<br>|打开settings|Ctrl+Alt+S||<br>|重命名|Shift +F６||<br>|查找|Ctrl+F||<br>|全局查找|Ctrl+Shift+F||<br>|文件查找|双击Shift||<br>|最近文件|Ctrl+E||<br>|最近编辑文件|Ctrl+Shift+E||<br>|查看继承类|F4||<br>|<strong>Code：</strong>|||<br>|导入包|Alt+Enter||<br>|注释代码(//)|Ctrl + /||<br>|注释代码(/<strong>/)|Ctrl + Shift + /||<br>|格式化代码|Ctrl + Alt + L||<br>|清除无效包引用|Alt + Ctrl + O||<br>|查找|Ctrl + F||<br>|查找+替换|Ctrl + R||<br>|上下移动代码|Alt + Shift + Up/Down||<br>|删除行|Ctrl + Y||<br>|重命名|Ctrl+Shift+R||<br>|以代码块单位移动光标|Alt+Up/Down||<br>|扩大缩小选中范围|Ctrl + W/Ctrl + Shift + W||<br>|快捷生成结构体    |Ctrl + Alt + T||<br>|快捷覆写方法|Ctrl + O||<br>|快捷定位到行首/尾|Ctrl + Left/Right||<br>|快速切换到上/下一视图|Alt+ Left/Right||<br>|折叠展开代码块    |Ctrl + Plus/Minus(+/-)||<br>|折叠展开全部代码块|Ctrl + Shift + Plus/Minus||<br>|文件方法结构|Ctrl + F12||<br>|查找调用的位置    |Ctrl + Alt + H||<br>|大小写转换|Ctrl + Shift + U||<br>|</strong>Debug：**|||<br>|单步调试，进入函数|F5||<br>|单步调试，不进入函数|F6||<br>|跳出函数|F7||<br>|执行到下一断点|F8||　</p>
 <blockquote>
 <p>计划过些时间入手一台MacBook Pro， 到时候再将Mac的快捷方式加进来，并在使用中不断完善此表格.</p>
 </blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>　　前些时间把Android Studio的环境折腾好，典型的geek风一下子完全吸引了我，比eclipse好用太多了，有很多意外的功能,快捷键可以自定义，但我基本都用的默认的。本来用Macbook Pro做Android开发是最好的选择，但自己平时要搞Linux/Android底层相关的东西，thinkpad就成为最好的选择，所以就入手了thinkpad，用着Ubuntu和Windows，先总结我使用环境下的快捷键，等入手Mac后再添加Mac的快捷键。
-　　　</p>
-<h2 id="AS快捷键">AS快捷键</h2><table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Win/Linux</th>
-<th>Mac</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Common：</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>编译工程</td>
-<td>Ctrl+F9</td>
-<td></td>
-</tr>
-<tr>
-<td>运行</td>
-<td>Alt+Shift+X</td>
-<td></td>
-</tr>
-<tr>
-<td>调试运行</td>
-<td>Alt+Shift+D</td>
-<td></td>
-</tr>
-<tr>
-<td>git push</td>
-<td>Ctrl+Shift+K</td>
-</tr>
-</tbody>
-</table>]]>
+    <![CDATA[<p>　　前些时间把Android Studio的环境折腾好，典型的geek风一下子完全吸引了我，比eclipse好用太多了，有很多意外的功能,快捷键可以自定义，但我基本都用的默认的。本来用Macbook Pro做Android开发是最好的选择，但自己平时要搞Linux/Android底层相关的东西，thinkpad就成为最好的选择，所以就入手了thinkpad，用着Ubuntu和Windows，先总结我使用环境下的快捷键，等入手Mac后再添加Mac的快捷键。<br>　<br>]]>
     
     </summary>
     
@@ -1591,13 +1734,12 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     <link href="http://huaqianlee.me/2015/01/21/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/"/>
     <id>http://huaqianlee.me/2015/01/21/高通Android不带电量计的电量计算方式/</id>
     <published>2015-01-21T12:10:01.000Z</published>
-    <updated>2015-07-17T15:27:52.511Z</updated>
+    <updated>2015-07-17T16:30:20.631Z</updated>
     <content type="html"><![CDATA[<p>　　一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。</p>
 <h2 id="SOC（state_of_charge_荷电状态_-_电量）">SOC（state of charge 荷电状态 - 电量）</h2><p>英文缩写:<br>FCC　　Full-charge capacity<br>RC 　　Remaining capacity (剩余电量)<br>CC 　　Coulumb counter<br>UUC　　Unusable capacity<br>RUC　　Remaining usable capacity<br>SoC　　State of charge<br>OCV　　Open circuit voltage<br><a id="more"></a><br>SOC=(RC-CC-UUC)/(FCC-UUC)<br>RUC=RC-CC-UUC</p>
 <h2 id="电池电量决定因素">电池电量决定因素</h2><p>　　电池电量百分比主要有电池dtsi文件中百分比参数计算而得，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">	qcom,pc-temp-ocv-lut &#123;</span><br><span class="line">		qcom,lut-col-legend = &lt;(-<span class="number">10</span>) <span class="number">0</span> <span class="number">25</span> <span class="number">50</span>&gt;;  // Temperature      lut-data（电池OCV ）的column</span><br><span class="line">		qcom,lut-row-legend =  &lt;<span class="number">100</span> <span class="number">89</span> <span class="number">78</span>&gt;,     // Capacity Percent        row</span><br><span class="line">				&lt;<span class="number">67</span> <span class="number">56</span> <span class="number">45</span>&gt;,</span><br><span class="line">				&lt;<span class="number">34</span> <span class="number">23</span> <span class="number">14</span>&gt;,</span><br><span class="line">				&lt;<span class="number">8</span> <span class="number">4</span> <span class="number">0</span>&gt;;</span><br><span class="line">...				</span><br><span class="line">		qcom,lut-data = </span><br><span class="line">		&lt;<span class="number">4290</span>	<span class="number">4285</span>	<span class="number">4327</span>	<span class="number">4328</span>&gt;,</span><br><span class="line">		&lt;<span class="number">4151</span>	<span class="number">4162</span>	<span class="number">4193</span>	<span class="number">4208</span>&gt;,</span><br><span class="line">		&lt;<span class="number">4064</span>	<span class="number">4072</span>	<span class="number">4080</span>	<span class="number">4016</span>&gt;,</span><br><span class="line">		&lt;<span class="number">3928</span>	<span class="number">3943</span>	<span class="number">3963</span>	<span class="number">3980</span>&gt;,</span><br><span class="line">		&lt;<span class="number">3874</span>	<span class="number">3881</span>	<span class="number">3881</span>	<span class="number">3894</span>&gt;,</span><br><span class="line">		&lt;<span class="number">3809</span>	<span class="number">3834</span>	<span class="number">3823</span>	<span class="number">3820</span>&gt;,</span><br><span class="line"></span><br><span class="line">		&lt;<span class="number">3768</span>	<span class="number">3785</span>	<span class="number">3793</span>	<span class="number">3792</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3733</span>	<span class="number">3756</span>	<span class="number">3784</span>	<span class="number">3785</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3701</span>	<span class="number">3723</span>	<span class="number">3762</span>	<span class="number">3761</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3624</span>	<span class="number">3643</span>	<span class="number">3739</span>	<span class="number">3738</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3614</span>	<span class="number">3623</span>	<span class="number">3689</span>	<span class="number">3688</span>&gt;, 	</span><br><span class="line">		&lt;<span class="number">3510</span>	<span class="number">3499</span>	<span class="number">3455</span>	<span class="number">3458</span>&gt;; </span><br><span class="line">	</span><br><span class="line">	&#125;;</span><br></pre></td></tr></table></figure></p>
 <h2 id="关键结构">关键结构</h2><h3 id="dts_table_structure：">dts table structure：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * struct pc_temp_ocv_lut -</span><br><span class="line"> * @rows:	number of percent charge entries should be &lt;= PC_TEMP_ROWS</span><br><span class="line"> * @cols:	number of temperature entries should be &lt;= PC_TEMP_COLS</span><br><span class="line"> * @temp:	the temperatures at <span class="built_in">which</span> ocv data is available <span class="keyword">in</span> the table</span><br><span class="line"> *		The temperatures must be <span class="keyword">in</span> increasing order from <span class="number">0</span> to rows.</span><br><span class="line"> * @percent:	the percent charge at <span class="built_in">which</span> ocv data is available <span class="keyword">in</span> the table</span><br><span class="line"> *		The  percentcharge must be <span class="keyword">in</span> decreasing order from <span class="number">0</span> to cols.</span><br><span class="line"> * @ocv:	the open circuit voltage</span><br><span class="line"> */</span><br><span class="line">struct pc_temp_ocv_lut &#123;</span><br><span class="line">	int rows;</span><br><span class="line">	int cols;</span><br><span class="line">	int temp[PC_TEMP_COLS];</span><br><span class="line">	int percent[PC_TEMP_ROWS];</span><br><span class="line">	int ocv[PC_TEMP_ROWS][PC_TEMP_COLS];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="calculate_percentcharge_function">calculate percentcharge  function</h2><p>int linear_interpolate(int y0, int x0, int y1, int x1, int x)<br>    if (y0 == y1 || x == x0)    return y0;<br>    if (x1 == x0 || x == x1)    return y1;<br>    return y0 + ((y1 - y0) * (x - x0) / (x1 - x0));</p>
-<h2 id="驱动分析">驱动分析</h2><h3 id="关键函数：">关键函数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// File:  qpnp-vm-bms.c</span><br><span class="line">    lookup_soc_ocv(struct qpnp_bms_chip *chip, int ocv_uv, int batt_temp)、</span><br><span class="line">soc_ocv = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, ocv_uv / <span class="number">1000</span>);  //calculate the  capacity percent</span><br><span class="line">soc_cutoff = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, chip-&gt;dt.cfg_v_cutoff_uv / <span class="number">1000</span>);</span><br><span class="line">soc_final = DIV_ROUND_CLOSEST(<span class="number">100</span> * (soc_ocv - soc_cutoff),(<span class="number">100</span> - soc_cutoff));</span><br><span class="line">      DIV_ROUND_CLOSEST(x,y)    ---&gt;    (x-<span class="number">1</span>&gt;<span class="number">0</span>) || (y-<span class="number">1</span>&gt;<span class="number">0</span>) || x&gt;<span class="number">0</span>  ? (x+y/<span class="number">2</span>)/y : (x-y/<span class="number">2</span>)/y</span><br><span class="line"><span class="keyword">if</span> (!is_battery_charging(chip) &amp;&amp; chip-&gt;current_now &gt; <span class="number">0</span>) // 没有充电 重新计算电量</span><br><span class="line">        iavg_ma = calculate_uuc_iavg(chip);</span><br><span class="line">        fcc = interpolate_fcc(chip-&gt;batt_data-&gt;fcc_temp_lut,batt_temp);</span><br><span class="line">        acc = interpolate_acc(chip-&gt;batt_data-&gt;ibat_acc_lut,	batt_temp, iavg_ma);</span><br><span class="line">    both call ：</span><br><span class="line">linear_interpolate(int y0, int x0, int y1, int x1, int x)</span><br><span class="line">        soc_uuc = ((fcc - acc) * <span class="number">100</span>) / fcc;</span><br><span class="line">	soc_uuc = adjust_uuc(chip, soc_uuc);</span><br><span class="line">	soc_acc = DIV_ROUND_CLOSEST(<span class="number">100</span> * (soc_ocv - soc_uuc),(<span class="number">100</span> - soc_uuc));</span><br><span class="line">        soc_final = soc_acc;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        ... // charging - reset all the counters</span><br><span class="line">soc_final = bound_soc(soc_final) // 最终电量</span><br></pre></td></tr></table></figure>
+<h2 id="calculate_percentcharge_function">calculate percentcharge  function</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">int linear_interpolate(int y0, int x0, int y1, int x1, int x)</span><br><span class="line">	<span class="keyword">if</span> (y0 == y1 || x == x0)	<span class="built_in">return</span> y0;</span><br><span class="line">	<span class="keyword">if</span> (x1 == x0 || x == x1)	<span class="built_in">return</span> y1;</span><br><span class="line">	<span class="built_in">return</span> y0 + ((y1 - y0) * (x - x0) / (x1 - x0));</span><br><span class="line">```	</span><br><span class="line"><span class="comment">##驱动分析</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###关键函数： </span></span><br><span class="line">```bash</span><br><span class="line">// File:  qpnp-vm-bms.c</span><br><span class="line">    lookup_soc_ocv(struct qpnp_bms_chip *chip, int ocv_uv, int batt_temp)、</span><br><span class="line">soc_ocv = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, ocv_uv / <span class="number">1000</span>);  //calculate the  capacity percent</span><br><span class="line">soc_cutoff = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, chip-&gt;dt.cfg_v_cutoff_uv / <span class="number">1000</span>);</span><br><span class="line">soc_final = DIV_ROUND_CLOSEST(<span class="number">100</span> * (soc_ocv - soc_cutoff),(<span class="number">100</span> - soc_cutoff));</span><br><span class="line">      DIV_ROUND_CLOSEST(x,y)    ---&gt;    (x-<span class="number">1</span>&gt;<span class="number">0</span>) || (y-<span class="number">1</span>&gt;<span class="number">0</span>) || x&gt;<span class="number">0</span>  ? (x+y/<span class="number">2</span>)/y : (x-y/<span class="number">2</span>)/y</span><br><span class="line"><span class="keyword">if</span> (!is_battery_charging(chip) &amp;&amp; chip-&gt;current_now &gt; <span class="number">0</span>) // 没有充电 重新计算电量</span><br><span class="line">        iavg_ma = calculate_uuc_iavg(chip);</span><br><span class="line">        fcc = interpolate_fcc(chip-&gt;batt_data-&gt;fcc_temp_lut,batt_temp);</span><br><span class="line">        acc = interpolate_acc(chip-&gt;batt_data-&gt;ibat_acc_lut,	batt_temp, iavg_ma);</span><br><span class="line">    both call ：</span><br><span class="line">linear_interpolate(int y0, int x0, int y1, int x1, int x)</span><br><span class="line">        soc_uuc = ((fcc - acc) * <span class="number">100</span>) / fcc;</span><br><span class="line">	soc_uuc = adjust_uuc(chip, soc_uuc);</span><br><span class="line">	soc_acc = DIV_ROUND_CLOSEST(<span class="number">100</span> * (soc_ocv - soc_uuc),(<span class="number">100</span> - soc_uuc));</span><br><span class="line">        soc_final = soc_acc;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        ... // charging - reset all the counters</span><br><span class="line">soc_final = bound_soc(soc_final) // 最终电量</span><br></pre></td></tr></table></figure>
 <h3 id="百分比计算函数：">百分比计算函数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, ocv_uv / <span class="number">1000</span>);  //calculate the  capacity percent</span><br><span class="line"><span class="keyword">if</span> (batt_temp == pc_temp_ocv-&gt;temp[j] * DEGC_SCALE) &#123;  /* found an exact match <span class="keyword">for</span> temp <span class="keyword">in</span> the table */</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; rows; i++)    // i: rows- Capacity Percent  j: columns-Temperature</span><br><span class="line">                   ...</span><br><span class="line">	    pc = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;percent[i - <span class="number">1</span>],pc_temp_ocv-&gt;ocv[i - <span class="number">1</span>][j],ocv); // calculate 不匹配dts表格的percentcharge </span><br><span class="line">                   转换为公式见下公式一;                                </span><br><span class="line"></span><br><span class="line">  /* batt_temp is within temperature <span class="keyword">for</span> column j-<span class="number">1</span> and j */</span><br><span class="line"> is_between(pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j], ocv)   // caculate temp1 percentcharge</span><br><span class="line">        pcj = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;percent[i + <span class="number">1</span>],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j],	ocv);</span><br><span class="line">                  转换为公式见下公式二;                         </span><br><span class="line">           is_between(pc_temp_ocv-&gt;ocv[i][j-<span class="number">1</span>],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j-<span class="number">1</span>], ocv)) // caculate temp2 percentcharge</span><br><span class="line">	    pcj_minus_one = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j-<span class="number">1</span>],pc_temp_ocv-&gt;percent[i + <span class="number">1</span>],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j-<span class="number">1</span>],ocv);</span><br><span class="line">                   转换为公式见下公式三;                       </span><br><span class="line">          <span class="keyword">if</span> (pcj &amp;&amp; pcj_minus_one) // temp1 and temp2 都存在，calculate percentcharge </span><br><span class="line">                   pc = linear_interpolate(pcj_minus_one,pc_temp_ocv-&gt;temp[j-<span class="number">1</span>] * DEGC_SCALE,	pcj,pc_temp_ocv-&gt;temp[j] * DEGC_SCALE,batt_temp);</span><br><span class="line">                   转换为公式见下公式四;                      </span><br><span class="line">           否则：<span class="built_in">return</span> pcj 、pcj_minus_one、其他临界值</span><br></pre></td></tr></table></figure>
 <h3 id="公式一">公式一</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式1.png" alt="公式一"></p>
 <h3 id="公式二">公式二</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式2.png" alt="公式二"></p>

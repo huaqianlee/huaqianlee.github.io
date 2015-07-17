@@ -109,13 +109,6 @@
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#高通的引导体系结构"><span class="toc-number">1.</span> <span class="toc-text">高通的引导体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电源管理框图"><span class="toc-number">2.</span> <span class="toc-text">电源管理框图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要文件及路径"><span class="toc-number">3.</span> <span class="toc-text">主要文件及路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android结构"><span class="toc-number">4.</span> <span class="toc-text">Android结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层(APP)"><span class="toc-number">4.1.</span> <span class="toc-text">应用层(APP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构层(Framework)"><span class="toc-number">4.2.</span> <span class="toc-text">架构层(Framework)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hal层"><span class="toc-number">4.3.</span> <span class="toc-text">Hal层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel层"><span class="toc-number">4.4.</span> <span class="toc-text">Kernel层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">5.</span> <span class="toc-text">　</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#电源管理机制"><span class="toc-number">5.1.</span> <span class="toc-text">电源管理机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现流程"><span class="toc-number">5.1.1.</span> <span class="toc-text">实现流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态切换流程"><span class="toc-number">5.1.2.</span> <span class="toc-text">状态切换流程</span></a></li></ol></li></ol></li></ol>
-		
-		</div>
-		
 		<p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
 <h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br><a id="more"></a></p>
 <h2 id="电源管理框图">电源管理框图</h2><p>　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图补上来。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg" alt="power"></p>
@@ -227,13 +220,6 @@
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#高通的引导体系结构"><span class="toc-number">1.</span> <span class="toc-text">高通的引导体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电源管理框图"><span class="toc-number">2.</span> <span class="toc-text">电源管理框图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要文件及路径"><span class="toc-number">3.</span> <span class="toc-text">主要文件及路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android结构"><span class="toc-number">4.</span> <span class="toc-text">Android结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层(APP)"><span class="toc-number">4.1.</span> <span class="toc-text">应用层(APP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构层(Framework)"><span class="toc-number">4.2.</span> <span class="toc-text">架构层(Framework)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hal层"><span class="toc-number">4.3.</span> <span class="toc-text">Hal层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel层"><span class="toc-number">4.4.</span> <span class="toc-text">Kernel层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">5.</span> <span class="toc-text">　</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#电源管理机制"><span class="toc-number">5.1.</span> <span class="toc-text">电源管理机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现流程"><span class="toc-number">5.1.1.</span> <span class="toc-text">实现流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#状态切换流程"><span class="toc-number">5.1.2.</span> <span class="toc-text">状态切换流程</span></a></li></ol></li></ol></li></ol>
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -470,8 +456,6 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });

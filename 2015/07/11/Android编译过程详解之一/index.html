@@ -109,13 +109,6 @@
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#source_setup-sh_project-name_debug"><span class="toc-number">1.</span> <span class="toc-text">source setup.sh project-name debug</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#source_build/envsetup-sh"><span class="toc-number">1.1.</span> <span class="toc-text">source build/envsetup.sh</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lunch"><span class="toc-number">2.</span> <span class="toc-text">lunch</span></a></li></ol>
-		
-		</div>
-		
 		<p><strong>　　Platform Information :<br>　　　System:    Ａndroid4.4.4<br>　　　Platform:  Qualcomm msm8916<br>　　　Author:     Andy Lee<br>　　　Email:        huaqianlee@gmail.com</strong></p>
 <p><strong>欢迎指出错误，共同学习，共同进步</strong></p>
 <p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a><br>　<br>　　Google给出的编译环境和构建方法见：<a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a>，过程见：<a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a>，不过这是解释怎么编译一个通用的系统，没有详细描述细节，而且需要翻墙。接下来我就准备跟着高通平台的编译过程来详细了解一下。</p>
@@ -240,13 +233,6 @@
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#source_setup-sh_project-name_debug"><span class="toc-number">1.</span> <span class="toc-text">source setup.sh project-name debug</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#source_build/envsetup-sh"><span class="toc-number">1.1.</span> <span class="toc-text">source build/envsetup.sh</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lunch"><span class="toc-number">2.</span> <span class="toc-text">lunch</span></a></li></ol>
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -483,8 +469,6 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
