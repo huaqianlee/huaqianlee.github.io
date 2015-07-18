@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-07-18T16:54:04.899Z</updated>
+  <updated>2015-07-18T17:11:12.392Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -19,11 +19,11 @@
     <link href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/"/>
     <id>http://huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/</id>
     <published>2015-07-19T13:43:04.000Z</published>
-    <updated>2015-07-18T16:54:04.899Z</updated>
-    <content type="html"><![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试(How to debug with Android logging">How to debug with Android logging</a>/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件(How to get android log file">怎么抓取Android日志文件</a>/)</p>
+    <updated>2015-07-18T17:11:12.392Z</updated>
+    <content type="html"><![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么用A]]>
+    <![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用An]]>
     </summary>
     
       <category term="Log" scheme="http://huaqianlee.me/tags/Log/"/>
@@ -37,13 +37,14 @@
     <link href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/"/>
     <id>http://huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/</id>
     <published>2015-07-19T07:43:04.000Z</published>
-    <updated>2015-07-18T17:06:31.688Z</updated>
-    <content type="html"><![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How to debug with Android logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How to get android log file/">怎么抓取Android日志文件</a></p>
-<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
+    <updated>2015-07-18T17:10:27.708Z</updated>
+    <content type="html"><![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
+<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
 <blockquote>
-<p>新版Android中log_kernel已改为log_system　<br><a id="more"></a></p>
-<h2 id="Java应用Logging接口">Java应用Logging接口</h2><h3 id="Logging类">Logging类</h3><p>类名：android.util.Log，主要方法如下：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Log</span>.v();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">d</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">i</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">w</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">e</span>();</span><br><span class="line"><span class="keyword">Log</span>.a();</span><br></pre></td></tr></table></figure></p>
+<p>新版Android中log_kernel已改为log_system</p>
 </blockquote>
+<a id="more"></a>
+<h2 id="Java应用Logging接口">Java应用Logging接口</h2><h3 id="Logging类">Logging类</h3><p>类名：android.util.Log，主要方法如下：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Log</span>.v();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">d</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">i</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">w</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">e</span>();</span><br><span class="line"><span class="keyword">Log</span>.a();</span><br></pre></td></tr></table></figure></p>
 <p>Log信息显示等级从高到底分别为：ERROR，WARN，INFO，DEBUG，VERBOSE。VERBOSE除了开发期间，是不应该被编译进APP的，DEBUG应该编译但在runtime被忽略，ERROR，WARN和INFO logs则一直被保留。更加详细的内容见 ：<a href="http://developer.android.com/reference/android/util/Log.html" target="_blank" rel="external">Log.html</a>。</p>
 <blockquote>
 <p>一个好的习惯是在自己的类中定义一个TAG常量，如：private static final String TAG = “MyActivity”;然后通过Log.i(TAG，”I am “+name);　</p>
@@ -61,10 +62,11 @@
 <h2 id="Reference">Reference</h2><p><a href="http://log4think.com/debug-android-logging/" target="_blank" rel="external">http://log4think.com/debug-android-logging/</a><br><a href="http://developer.android.com/reference/android/util/Log.html" target="_blank" rel="external">http://developer.android.com/reference/android/util/Log.html</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How to debug with Android logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How to get android log file/">怎么抓取Android日志文件</a></p>
-<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
+    <![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
+<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
 <blockquote>
-<p>新版Android中log_kernel已改为log_system　<br>]]>
+<p>新版Android中log_kernel已改为log_system</p>
+</blockquote>]]>
     
     </summary>
     
@@ -79,18 +81,17 @@
     <link href="http://huaqianlee.me/2015/07/19/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/"/>
     <id>http://huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/</id>
     <published>2015-07-19T05:43:04.000Z</published>
-    <updated>2015-07-18T16:54:56.794Z</updated>
-    <content type="html"><![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试(How to debug with Android logging">How to debug with Android logging</a>/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件(How to get android log file">怎么抓取Android日志文件</a>/)</p>
+    <updated>2015-07-18T17:10:56.215Z</updated>
+    <content type="html"><![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
 <p>　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。</p>
-<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br>　<br>Logging system由如下几部分组成：</p>
+<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br><a id="more"></a>　<br>Logging system由如下几部分组成：</p>
 <ul>
 <li>实现loging信息存储的kernel驱动和缓存区</li>
 <li>C，C++和Java 类添加与读取log</li>
 <li>一个单独浏览log信息的程序（logcat）</li>
-<li>能够查看和过滤来自主机的log信息（通过Android Studio 或者 DDMS）<a id="more"></a>
-其在kernel中为系统的不同部分提供了四个不同log缓存区，可以通过/dev/log查看这些不同的设备节点，如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dev/<span class="built_in">log</span>/mian ： 主应用程序<span class="built_in">log</span>，除了下两个外，其他用户空间<span class="built_in">log</span>将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/events ： 系统事件信息，二进制<span class="built_in">log</span>信息将写入此节点，需要程序解析</span><br><span class="line">/dev/<span class="built_in">log</span>/radio ： 射频通话相关信息，tag 为<span class="string">"HTC_RIL"</span> <span class="string">"RILJ"</span> <span class="string">"RILC"</span> <span class="string">"RILD"</span> <span class="string">"RIL"</span> <span class="string">"AT"</span> <span class="string">"GSM"</span> <span class="string">"STK"</span>的<span class="built_in">log</span>信息将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/system ： 低等级系统信息和debugging</span><br></pre></td></tr></table></figure>
-</li>
+<li>能够查看和过滤来自主机的log信息（通过Android Studio 或者 DDMS）</li>
 </ul>
+<p>其在kernel中为系统的不同部分提供了四个不同log缓存区，可以通过/dev/log查看这些不同的设备节点，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dev/<span class="built_in">log</span>/mian ： 主应用程序<span class="built_in">log</span>，除了下两个外，其他用户空间<span class="built_in">log</span>将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/events ： 系统事件信息，二进制<span class="built_in">log</span>信息将写入此节点，需要程序解析</span><br><span class="line">/dev/<span class="built_in">log</span>/radio ： 射频通话相关信息，tag 为<span class="string">"HTC_RIL"</span> <span class="string">"RILJ"</span> <span class="string">"RILC"</span> <span class="string">"RILD"</span> <span class="string">"RIL"</span> <span class="string">"AT"</span> <span class="string">"GSM"</span> <span class="string">"STK"</span>的<span class="built_in">log</span>信息将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/system ： 低等级系统信息和debugging</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>用户空间log： main、radio、events；内核空间log：system</p>
 </blockquote>
@@ -137,14 +138,9 @@
 <h2 id="Reference">Reference　　</h2><p><a href="http://elinux.org/Android_Logging_System" target="_blank" rel="external">http://elinux.org/Android_Logging_System</a> (大部分内容译自此文档)<br><a href="http://developer.android.com/guide/developing/tools/adb.html" target="_blank" rel="external">http://developer.android.com/guide/developing/tools/adb.html</a><br><a href="http://groups.google.com/group/android-kernel/browse_thread/thread/87d929863ce7c29e/f8b0da9ed6376b2f?pli=1" target="_blank" rel="external">http://groups.google.com/group/android-kernel/browse_thread/thread/87d929863ce7c29e/f8b0da9ed6376b2f?pli=1</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试(How to debug with Android logging">How to debug with Android logging</a>/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件(How to get android log file">怎么抓取Android日志文件</a>/)</p>
+    <![CDATA[<p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
 <p>　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。</p>
-<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br>　<br>Logging system由如下几部分组成：</p>
-<ul>
-<li>实现loging信息存储的kernel驱动和缓存区</li>
-<li>C，C++和Java 类添加与读取log</li>
-<li>一个单独浏览log信息的程序（logcat）</li>
-<li>能够查看和过滤来自主机的log信息（通过Android Studio 或者 DDMS）]]>
+<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br>]]>
     
     </summary>
     

@@ -104,7 +104,7 @@
 </header>
     <div class="article-content">
         
-        <p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试(How to debug with Android logging">How to debug with Android logging</a>/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件(How to get android log file">怎么抓取Android日志文件</a>/)</p>
+        <p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
 
         
         
@@ -179,10 +179,11 @@
 </header>
     <div class="article-content">
         
-        <p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How to debug with Android logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How to get android log file/">怎么抓取Android日志文件</a></p>
-<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
+        <p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
+<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
 <blockquote>
-<p>新版Android中log_kernel已改为log_system　<br>
+<p>新版Android中log_kernel已改为log_system</p>
+</blockquote>
         
         
         <p class="article-more-link">
@@ -258,14 +259,9 @@
 </header>
     <div class="article-content">
         
-        <p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试(How to debug with Android logging">How to debug with Android logging</a>/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件(How to get android log file">怎么抓取Android日志文件</a>/)</p>
+        <p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
 <p>　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。</p>
-<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br>　<br>Logging system由如下几部分组成：</p>
-<ul>
-<li>实现loging信息存储的kernel驱动和缓存区</li>
-<li>C，C++和Java 类添加与读取log</li>
-<li>一个单独浏览log信息的程序（logcat）</li>
-<li>能够查看和过滤来自主机的log信息（通过Android Studio 或者 DDMS）
+<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br>
         
         
         <p class="article-more-link">

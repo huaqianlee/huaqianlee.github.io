@@ -11,22 +11,22 @@
     
 
     
-    <meta name="description" content="Android日志系统详解详解/)　　How to debug with Android logging/)　　怎么抓取Android日志文件/)
+    <meta name="description" content="Android日志系统详解　　How to debug with Android logging　　怎么抓取Android日志文件
 　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。
-概览　　An">
+概览　　Android提供了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android日志系统(logging system)详解">
 <meta property="og:url" content="http://huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/index.html">
 <meta property="og:site_name" content="Andy.Lee's blog">
-<meta property="og:description" content="Android日志系统详解详解/)　　How to debug with Android logging/)　　怎么抓取Android日志文件/)
+<meta property="og:description" content="Android日志系统详解　　How to debug with Android logging　　怎么抓取Android日志文件
 　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。
-概览　　An">
+概览　　Android提供了">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android日志系统(logging system)详解">
-<meta name="twitter:description" content="Android日志系统详解详解/)　　How to debug with Android logging/)　　怎么抓取Android日志文件/)
+<meta name="twitter:description" content="Android日志系统详解　　How to debug with Android logging　　怎么抓取Android日志文件
 　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。
-概览　　An">
+概览　　Android提供了">
 <meta name="twitter:creator" content="@Andylee_sarah">
 <link rel="publisher" href="107850537041795428182">
 
@@ -109,17 +109,16 @@
 </header>
 	<div class="article-content">
 		
-		<p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试(How to debug with Android logging">How to debug with Android logging</a>/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件(How to get android log file">怎么抓取Android日志文件</a>/)</p>
+		<p>　　<a href="huaqianlee.me/2015/07/19/Android-Logging-system-Android日志系统详解/">Android日志系统详解</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
 <p>　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。</p>
-<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br>　<br>Logging system由如下几部分组成：</p>
+<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br><a id="more"></a>　<br>Logging system由如下几部分组成：</p>
 <ul>
 <li>实现loging信息存储的kernel驱动和缓存区</li>
 <li>C，C++和Java 类添加与读取log</li>
 <li>一个单独浏览log信息的程序（logcat）</li>
-<li>能够查看和过滤来自主机的log信息（通过Android Studio 或者 DDMS）<a id="more"></a>
-其在kernel中为系统的不同部分提供了四个不同log缓存区，可以通过/dev/log查看这些不同的设备节点，如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dev/<span class="built_in">log</span>/mian ： 主应用程序<span class="built_in">log</span>，除了下两个外，其他用户空间<span class="built_in">log</span>将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/events ： 系统事件信息，二进制<span class="built_in">log</span>信息将写入此节点，需要程序解析</span><br><span class="line">/dev/<span class="built_in">log</span>/radio ： 射频通话相关信息，tag 为<span class="string">"HTC_RIL"</span> <span class="string">"RILJ"</span> <span class="string">"RILC"</span> <span class="string">"RILD"</span> <span class="string">"RIL"</span> <span class="string">"AT"</span> <span class="string">"GSM"</span> <span class="string">"STK"</span>的<span class="built_in">log</span>信息将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/system ： 低等级系统信息和debugging</span><br></pre></td></tr></table></figure>
-</li>
+<li>能够查看和过滤来自主机的log信息（通过Android Studio 或者 DDMS）</li>
 </ul>
+<p>其在kernel中为系统的不同部分提供了四个不同log缓存区，可以通过/dev/log查看这些不同的设备节点，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dev/<span class="built_in">log</span>/mian ： 主应用程序<span class="built_in">log</span>，除了下两个外，其他用户空间<span class="built_in">log</span>将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/events ： 系统事件信息，二进制<span class="built_in">log</span>信息将写入此节点，需要程序解析</span><br><span class="line">/dev/<span class="built_in">log</span>/radio ： 射频通话相关信息，tag 为<span class="string">"HTC_RIL"</span> <span class="string">"RILJ"</span> <span class="string">"RILC"</span> <span class="string">"RILD"</span> <span class="string">"RIL"</span> <span class="string">"AT"</span> <span class="string">"GSM"</span> <span class="string">"STK"</span>的<span class="built_in">log</span>信息将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/system ： 低等级系统信息和debugging</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>用户空间log： main、radio、events；内核空间log：system</p>
 </blockquote>
