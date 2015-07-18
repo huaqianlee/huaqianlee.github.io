@@ -109,9 +109,9 @@
 		<p>　　<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试(How to debug with Android logging">How to debug with Android logging</a>/)<br>　　<a href="huaqianlee.me/2015/07/19/怎么抓取Android测试日志文件(How to get android log file">怎么抓取Android日志文件</a>/)</p>
 <p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：<a href="huaqianlee.me/2015/07/19/Android Logging system(Android日志系统">Android日志系统详解</a>详解/)。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
 <blockquote>
-<p>新版Android中log_kernel已改为log_system　</p>
-</blockquote>
+<p>新版Android中log_kernel已改为log_system　<br><a id="more"></a></p>
 <h2 id="Java应用Logging接口">Java应用Logging接口</h2><h3 id="Logging类">Logging类</h3><p>类名：android.util.Log，主要方法如下：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Log</span>.v();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">d</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">i</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">w</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">e</span>();</span><br><span class="line"><span class="keyword">Log</span>.a();</span><br></pre></td></tr></table></figure></p>
+</blockquote>
 <p>Log信息显示等级从高到底分别为：ERROR，WARN，INFO，DEBUG，VERBOSE。VERBOSE除了开发期间，是不应该被编译进APP的，DEBUG应该编译但在runtime被忽略，ERROR，WARN和INFO logs则一直被保留。更加详细的内容见 ：<a href="http://developer.android.com/reference/android/util/Log.html" target="_blank" rel="external">Log.html</a>。</p>
 <blockquote>
 <p>一个好的习惯是在自己的类中定义一个TAG常量，如：private static final String TAG = “MyActivity”;然后通过Log.i(TAG，”I am “+name);　</p>

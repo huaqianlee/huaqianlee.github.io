@@ -116,9 +116,10 @@
 <li>实现loging信息存储的kernel驱动和缓存区</li>
 <li>C，C++和Java 类添加与读取log</li>
 <li>一个单独浏览log信息的程序（logcat）</li>
-<li>能够查看和过滤来自主机的log信息（通过Android Studio 或者 DDMS）</li>
+<li>能够查看和过滤来自主机的log信息（通过Android Studio 或者 DDMS）<a id="more"></a>
+其在kernel中为系统的不同部分提供了四个不同log缓存区，可以通过/dev/log查看这些不同的设备节点，如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dev/<span class="built_in">log</span>/mian ： 主应用程序<span class="built_in">log</span>，除了下两个外，其他用户空间<span class="built_in">log</span>将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/events ： 系统事件信息，二进制<span class="built_in">log</span>信息将写入此节点，需要程序解析</span><br><span class="line">/dev/<span class="built_in">log</span>/radio ： 射频通话相关信息，tag 为<span class="string">"HTC_RIL"</span> <span class="string">"RILJ"</span> <span class="string">"RILC"</span> <span class="string">"RILD"</span> <span class="string">"RIL"</span> <span class="string">"AT"</span> <span class="string">"GSM"</span> <span class="string">"STK"</span>的<span class="built_in">log</span>信息将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/system ： 低等级系统信息和debugging</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>其在kernel中为系统的不同部分提供了四个不同log缓存区，可以通过/dev/log查看这些不同的设备节点，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dev/<span class="built_in">log</span>/mian ： 主应用程序<span class="built_in">log</span>，除了下两个外，其他用户空间<span class="built_in">log</span>将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/events ： 系统事件信息，二进制<span class="built_in">log</span>信息将写入此节点，需要程序解析</span><br><span class="line">/dev/<span class="built_in">log</span>/radio ： 射频通话相关信息，tag 为<span class="string">"HTC_RIL"</span> <span class="string">"RILJ"</span> <span class="string">"RILC"</span> <span class="string">"RILD"</span> <span class="string">"RIL"</span> <span class="string">"AT"</span> <span class="string">"GSM"</span> <span class="string">"STK"</span>的<span class="built_in">log</span>信息将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/system ： 低等级系统信息和debugging</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>用户空间log： main、radio、events；内核空间log：system</p>
 </blockquote>
