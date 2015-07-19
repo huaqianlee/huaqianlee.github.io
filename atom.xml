@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-07-19T14:07:38.132Z</updated>
+  <updated>2015-07-19T14:34:02.720Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -19,14 +19,12 @@
     <link href="http://huaqianlee.me/2015/07/19/Android%E4%B8%ADadb-Android-Debug-Bridge-%E5%91%BD%E4%BB%A4%E7%9A%84%E7%94%A8%E6%B3%95/"/>
     <id>http://huaqianlee.me/2015/07/19/Android中adb-Android-Debug-Bridge-命令的用法/</id>
     <published>2015-07-19T11:29:58.000Z</published>
-    <updated>2015-07-19T14:07:38.132Z</updated>
+    <updated>2015-07-19T14:34:02.720Z</updated>
     <content type="html"><![CDATA[<p>　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去<a href="http://developer.android.com/tools/help/adb.html" target="_blank" rel="external">http://developer.android.com/tools/help/adb.html</a>学习了一下,今天准备按照自己的理解加以修改总结并整理出一篇博文。</p>
 <h2 id="概览">概览</h2><p>　　adb是Android Debug Bridge的简写，按字面意思理解就是在开发者和Android之间搭建的一个debug桥。adb是一个连接仿真实例或者Android设备的命令行工具，是一个客服端-服务器模式的程序，包括如下三部分：<br>　　1. 一个运行在开发用的Android手机或者仿真器上面的client，我们可以通过adb命令调用client。其他像ADT插件和DDMS也会创建client。<br>　<br>　　2. 一个运行在开发用的Android手机或者仿真器后台的server，这个server负责管理本设备上运行的client和daemon(守护进程)。<br>　<br>　　3. 一个在每个仿真器或者Android设备后台运行的daemon。</p>
 <blockquote>
-<p>adb tool 可以再<sdk>/platform-tools/中找到</sdk></p>
-</blockquote>
+<p>adb tool 可以再<sdk>/platform-tools/中找到<br><a id="more"></a></sdk></p>
 <h2 id="adb工具的构成关系">adb工具的构成关系</h2><p>　　当启动adb client时，client会检查是否有server在运行，若无则启动一个server进程。server进程启动后，会绑定到TCP端口号为5037的端口，然后监听从adb clients发送来的命令（所有adb clients 使用同一端口5037与server通信）。然后，server通过扫描手机或仿真器用到的5555到5585之间的奇数端口号，在所有运行的实例之间建立连接。server在发现adb daemon的地方为那个端口建立连接。每个仿真器或者设备需给console连接提供一个偶数端口号，为adb连接提供一个奇数端口号。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Emulator <span class="number">1</span>, console: <span class="number">5554</span></span><br><span class="line">Emulator <span class="number">1</span>, adb: <span class="number">5555</span></span><br><span class="line">Emulator <span class="number">2</span>, console: <span class="number">5556</span></span><br><span class="line">Emulator <span class="number">2</span>, adb: <span class="number">5557</span></span><br><span class="line">and so on...</span><br></pre></td></tr></table></figure></p>
-<blockquote>
 <p>当server为所有仿真器创建了连接后,我们可以通过adb 命令进入这些实例,而且可以从任何client(或者script脚本)控制所有的仿真器.　</p>
 </blockquote>
 <h2 id="adb调试">adb调试</h2><p>　　首先需要同USB将电脑和设备相连,然后在开发者模式中打开USB debugging。4.2以上的系统默认都是隐藏了开发者模式，所以需要去到<strong>Setting&gt;About phone&gt;</strong>菜单下点击<strong>Build number</strong>七次以显示开发者模式,然后到开发者模式菜单下打开USB debugging。</p>
@@ -35,7 +33,7 @@
 <p>如果仅仅一个仿真器或设备被连接,这adb命令将自己发送本机.如果有多个的话,需要用-d -s 或 -e来指明目标设备.　</p>
 </blockquote>
 <h2 id="adb命令详解">adb命令详解</h2><p>　</p>
-<h4 id="目标设备">目标设备</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">-d</span>      <span class="comment">#只发送到连接的USB设备,如果USB设备超过一个则返回错误</span></span><br><span class="line"><span class="operator">-e</span>      <span class="comment">#只发送到运行的仿真器,如果超过一个仿真器则返回错误</span></span><br><span class="line"><span class="operator">-s</span>&lt;serialNumber&gt;  <span class="comment">#发送到指定的仿真器或设备,如emulator-5556,详见下查询仿真器或设备</span></span><br></pre></td></tr></table></figure>
+<h4 id="目标设备">目标设备</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">-d</span>      <span class="comment">#指向连接的USB设备,如果USB设备超过一个则返回错误</span></span><br><span class="line"><span class="operator">-e</span>      <span class="comment">#指向运行的仿真器,如果超过一个仿真器则返回错误</span></span><br><span class="line"><span class="operator">-s</span>&lt;serialNumber&gt;  <span class="comment">#指向指定的仿真器或设备,如emulator-5556,详见下查询仿真器或设备</span></span><br></pre></td></tr></table></figure>
 <p>　</p>
 <h4 id="通用">通用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">devices   <span class="comment">#打印所有连接的仿真器或设备,见下查询仿真器或设备</span></span><br><span class="line"><span class="built_in">help</span>    <span class="comment"># 打印所有adb命令</span></span><br><span class="line">version   <span class="comment">#打印adb工具的版本号</span></span><br></pre></td></tr></table></figure>
 <p>　</p>
@@ -49,7 +47,7 @@
 <p>　</p>
 <h4 id="Server">Server</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-server  <span class="comment">#检查是否有server运行,若无,则启动</span></span><br><span class="line"><span class="built_in">kill</span>-server   <span class="comment">#终止server进程</span></span><br></pre></td></tr></table></figure>
 <p>　</p>
-<h4 id="Shell">Shell</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shell <span class="comment">#为仿真器或者设备打开一个远程shell终端</span></span><br><span class="line">shell [shellCommand] <span class="comment">#打开一个远程终端,执行某指令后退出</span></span><br></pre></td></tr></table></figure>
+<h4 id="Shell">Shell</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shell <span class="comment">#为仿真器或者设备打开一个远程shell终端,exit退出</span></span><br><span class="line">shell [shellCommand] <span class="comment">#打开一个远程终端,执行某指令后退出</span></span><br></pre></td></tr></table></figure>
 <h3 id="查询仿真器或者设备">查询仿真器或者设备</h3><p>　　在执行adb命令前,我们可以通过命令去查看仿真器或设备的连接清单，命令如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure></p>
 <p>　　执行这个命令后，adb将打印每个实例的状态信息：</p>
 <ul>
@@ -100,11 +98,17 @@
 <ol>
 <li>确认PC机与Android设备是否处于同一WiFi网络环境。</li>
 <li>通过adb connect重现连接。</li>
-<li>重启adb host<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="built_in">kill</span>-server</span><br><span class="line">adb start-server</span><br></pre></td></tr></table></figure></li>
+<li>重启adb host<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="built_in">kill</span>-server</span><br><span class="line">adb start-server</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
+<h2 id="其他命令">其他命令</h2><p>　　虽然官方文档已经介绍得挺详细了，但还是有一些命令没介绍到，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">adb uninstall &lt;package name&gt; <span class="comment">#卸载指定app，参数为包名</span></span><br><span class="line">adb uninstall -k &lt;package name&gt;   <span class="comment">#卸载指定app，保留配置文件和缓存</span></span><br><span class="line">adb shell dumpsys activity <span class="comment">#列出activity栈(back stack)和任务(task)及其他组件信息和进程信息</span></span><br><span class="line">adb shell dumpsys packages <span class="comment">#(若出错，则dumpsy)列出一些系统信息和所有应用的信息。包括Features，Activity Resolver Table等。</span></span><br><span class="line">adb shell pm list permissions <span class="comment">#列出目标实例的所有权限</span></span><br><span class="line">adb shell pm list packages  <span class="comment">#列出目标设备上安装的所有app包名</span></span><br><span class="line">adb shell pm list features  <span class="comment">#列出目标设备上的所有feature</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用adb命令启动一个Activity</span></span><br><span class="line">adb shell am start PACKAGE_NAME/ACTIVITY_IN_PACKAGE  </span><br><span class="line">adb shell am start PACKAGE_NAME/FULLY_QUALIFIED_ACTIVITY    </span><br><span class="line"><span class="comment">#eg </span></span><br><span class="line">adb shell am start -n me.huaqianlee.example/.MainActivity  </span><br><span class="line">adb shell am start -n me.huaqianlee.example/me.huaqianlee.example.MainActivity</span><br><span class="line"></span><br><span class="line">adb shell screencap -p | perl -pe <span class="string">'s/\x0D\x0A/\x0A/g'</span> &gt; screen.png <span class="comment">#屏幕截图, 并使用perl命令保存截图</span></span><br><span class="line"></span><br><span class="line">adb shell input keyevent <span class="number">82</span> <span class="comment">#解锁屏幕</span></span><br></pre></td></tr></table></figure></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去<a href="http://developer.android.com/tools/help/adb.html" target="_blank" rel="external">http]]>
+    <![CDATA[<p>　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去<a href="http://developer.android.com/tools/help/adb.html">http://developer.android.com/tools/help/adb.html</a>学习了一下,今天准备按照自己的理解加以修改总结并整理出一篇博文。</p>
+<h2 id="概览">概览</h2><p>　　adb是Android Debug Bridge的简写，按字面意思理解就是在开发者和Android之间搭建的一个debug桥。adb是一个连接仿真实例或者Android设备的命令行工具，是一个客服端-服务器模式的程序，包括如下三部分：<br>　　1. 一个运行在开发用的Android手机或者仿真器上面的client，我们可以通过adb命令调用client。其他像ADT插件和DDMS也会创建client。<br>　<br>　　2. 一个运行在开发用的Android手机或者仿真器后台的server，这个server负责管理本设备上运行的client和daemon(守护进程)。<br>　<br>　　3. 一个在每个仿真器或者Android设备后台运行的daemon。</p>
+<blockquote>
+<p>adb tool 可以再<sdk>/platform-tools/中找到<br>]]>
+    
     </summary>
     
       <category term="Tools" scheme="http://huaqianlee.me/tags/Tools/"/>
