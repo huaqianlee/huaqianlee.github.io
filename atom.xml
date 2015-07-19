@@ -158,11 +158,11 @@
     <link href="http://huaqianlee.me/2015/07/18/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/"/>
     <id>http://huaqianlee.me/2015/07/18/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/</id>
     <published>2015-07-18T07:43:04.000Z</published>
-    <updated>2015-07-19T07:39:11.372Z</updated>
+    <updated>2015-07-19T16:28:49.934Z</updated>
     <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/18/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a><br>　　<a href="http://huaqianlee.me/2015/07/18/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/" target="_blank" rel="external">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" target="_blank" rel="external">怎么抓取Android日志文件</a></p>
 <p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：<a href="http://huaqianlee.me/2015/07/18/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
 <blockquote>
-<p>新版Android中log_kernel已改为log_system</p>
+<p>此图与4.0以上的系统有些差异,新版Android增加了log_system</p>
 </blockquote>
 <a id="more"></a>
 <h2 id="Java日志接口">Java日志接口</h2><p>　　此接口一般应用于编写APP时。</p>
@@ -188,7 +188,7 @@
     <![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/18/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">Android日志系统详解</a><br>　　<a href="http://huaqianlee.me/2015/07/18/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
 <p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：<a href="http://huaqianlee.me/2015/07/18/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
 <blockquote>
-<p>新版Android中log_kernel已改为log_system</p>
+<p>此图与4.0以上的系统有些差异,新版Android增加了log_system</p>
 </blockquote>]]>
     
     </summary>
