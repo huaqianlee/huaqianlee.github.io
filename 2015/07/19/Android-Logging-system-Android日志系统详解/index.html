@@ -118,21 +118,21 @@
 <li>一个单独浏览log信息的程序（logcat）</li>
 <li>能够查看和过滤来自主机的log信息（通过Android Studio 或者 DDMS）</li>
 </ul>
-<p>其在kernel中为系统的不同部分提供了四个不同log缓存区，可以通过/dev/log查看这些不同的设备节点，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dev/<span class="built_in">log</span>/mian ： 主应用程序<span class="built_in">log</span>，除了下两个外，其他用户空间<span class="built_in">log</span>将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/events ： 系统事件信息，二进制<span class="built_in">log</span>信息将写入此节点，需要程序解析</span><br><span class="line">/dev/<span class="built_in">log</span>/radio ： 射频通话相关信息，tag 为<span class="string">"HTC_RIL"</span> <span class="string">"RILJ"</span> <span class="string">"RILC"</span> <span class="string">"RILD"</span> <span class="string">"RIL"</span> <span class="string">"AT"</span> <span class="string">"GSM"</span> <span class="string">"STK"</span>的<span class="built_in">log</span>信息将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/system ： 低等级系统信息和debugging</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>用户空间log： main、radio、events；内核空间log：system</p>
-</blockquote>
+<p>其在kernel中为系统的不同部分提供了四个不同log缓存区，可以通过/dev/log查看这些不同的设备节点，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dev/<span class="built_in">log</span>/mian ： 主应用程序<span class="built_in">log</span>，除了下三个外，其他用户空间<span class="built_in">log</span>将写入此节点，包括System.out.print及System.erro.print等</span><br><span class="line">/dev/<span class="built_in">log</span>/events ： 系统事件信息，二进制<span class="built_in">log</span>信息将写入此节点，需要程序解析</span><br><span class="line">/dev/<span class="built_in">log</span>/radio ： 射频通话相关信息，tag 为<span class="string">"HTC_RIL"</span> <span class="string">"RILJ"</span> <span class="string">"RILC"</span> <span class="string">"RILD"</span> <span class="string">"RIL"</span> <span class="string">"AT"</span> <span class="string">"GSM"</span> <span class="string">"STK"</span>的<span class="built_in">log</span>信息将写入此节点</span><br><span class="line">/dev/<span class="built_in">log</span>/system ： 低等级系统信息和debugging,为了防止mian缓存区溢出,而从中分离出来</span><br></pre></td></tr></table></figure></p>
 <p>log中的每条信息主要由四部分组成，如下：</p>
 <ul>
-<li>表明来自system还是app的标签(tag)</li>
+<li>Tag</li>
 <li>时间戳</li>
 <li>log信息level(或者event的优先级)</li>
 <li>log信息</li>
 </ul>
 <h2 id="Android_logger">Android logger</h2><p>　　logging的kernel driver部分被称作”logger”，其为系统日志提供支持，代码路径: kernel/drivers/staging/android/logger.c，此文件对4种logging缓存区加以支持。</p>
-<h3 id="驱动">驱动</h3><p>　　Log的读写是通过正常Linux文件读写方式完成的，write path被很好的优化过，所以能很快的open()、write()及close()，这样就避免了logging在系统中有太多的开销，影响速度。</p>
-<h5 id="Reading">Reading</h5><p>　　在用户空间，一个正常的read操作通常读取从log读取一个条目，每read一次返回一个log条目或者阻塞等待下一个log条目。设备可以打开非阻塞模式。每一个read请求应该至少请求LOGGER_ENTRY_MAX_LEN (4096)长度的数据。</p>
-<h4 id="Writing">Writing</h4><p>　　当系统写数据到log时，driver将为每一个log条目保存pid（进程ID），tgid（线程组ID），timestamp（时间戳），这些信息将出现在用户空间的level，tag和message中。</p>
+<h3 id="驱动">驱动</h3><p>　　Log的读写是通过正常Linux文件读写方式完成的，write path被很好的优化过，所以能很快的open()、write()及close()，这样就避免了logging在系统中有太多的开销，影响速度。
+　</p>
+<h5 id="Reading">Reading</h5><p>　　在用户空间，一个正常的read操作通常读取从log读取一个条目，每read一次返回一个log条目或者阻塞等待下一个log条目。设备可以打开非阻塞模式。每一个read请求应该至少请求LOGGER_ENTRY_MAX_LEN (4096)长度的数据。
+　</p>
+<h4 id="Writing">Writing</h4><p>　　当系统写数据到log时，driver将为每一个log条目保存pid（进程ID），tgid（线程组ID），timestamp（时间戳），这些信息将出现在用户空间的level，tag和message中。
+　</p>
 <h4 id="Ioctl">Ioctl</h4><p>　　Ioctl函数支持如下cmd：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- LOGGER_GET_LOG_BUF_SIZE ： <span class="built_in">log</span>条目缓存区的大小</span><br><span class="line">- LOGGER_GET_LOG_LEN ： <span class="built_in">log</span>数据的长度</span><br><span class="line">- LOGGER_GET_NEXT_ENTRY_LEN： 下一<span class="built_in">log</span>条目的大小</span><br><span class="line">- LOGGER_FLUSH_LOG ： 清除<span class="built_in">log</span>数据</span><br><span class="line">- LOGGER_GET_VERSION ： 获得logger版本</span><br><span class="line">- LOGGER_GET_VERSION ： 设置logger版本</span><br></pre></td></tr></table></figure>
 <h3 id="设备节点">设备节点</h3><p>　　当一个用户空间执行的程序用合适的主设备号和次设备号打开设备节点后，设备节点就处于活动状态，这些设备节点如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@msm8916_32:/ <span class="comment"># ls -al dev/log</span></span><br><span class="line">ls -al dev/<span class="built_in">log</span></span><br><span class="line">crw-rw-rw- root     <span class="built_in">log</span>       <span class="number">10</span>,  <span class="number">61</span> <span class="number">1970</span>-<span class="number">01</span>-<span class="number">09</span> <span class="number">02</span>:<span class="number">14</span> events</span><br><span class="line">crw-rw-rw- root     <span class="built_in">log</span>       <span class="number">10</span>,  <span class="number">62</span> <span class="number">1970</span>-<span class="number">01</span>-<span class="number">09</span> <span class="number">02</span>:<span class="number">14</span> main</span><br><span class="line">crw-rw-rw- root     <span class="built_in">log</span>       <span class="number">10</span>,  <span class="number">60</span> <span class="number">1970</span>-<span class="number">01</span>-<span class="number">09</span> <span class="number">02</span>:<span class="number">14</span> radio</span><br><span class="line">crw-rw-rw- root     <span class="built_in">log</span>       <span class="number">10</span>,  <span class="number">59</span> <span class="number">1970</span>-<span class="number">01</span>-<span class="number">09</span> <span class="number">02</span>:<span class="number">14</span> system</span><br></pre></td></tr></table></figure></p>
@@ -293,10 +293,6 @@
 			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
 		  
 		
-		  
-		
-		  
-		
 		</ul>
 </div>
 
@@ -327,11 +323,15 @@
 			
 		
 			
-				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
 			
 		
 			
@@ -339,7 +339,7 @@
 			
 		
 			
-				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
 			
 		
 			
@@ -348,14 +348,6 @@
 		
 			
 				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
-			
-		
-			
-		
 			
 		
 		</ul>

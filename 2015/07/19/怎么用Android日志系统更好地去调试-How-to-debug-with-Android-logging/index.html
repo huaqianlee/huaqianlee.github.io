@@ -12,7 +12,7 @@
 
     
     <meta name="description" content="Android日志系统详解　　How to debug with Android logging　　怎么抓取Android日志文件
-　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：Android日志系统详解。其系统架构如下：　　　
+　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：Android日志系统详解。其系统架构如下：　　　
 
 新版Android">
 <meta property="og:type" content="article">
@@ -20,14 +20,14 @@
 <meta property="og:url" content="http://huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/index.html">
 <meta property="og:site_name" content="Andy.Lee's blog">
 <meta property="og:description" content="Android日志系统详解　　How to debug with Android logging　　怎么抓取Android日志文件
-　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：Android日志系统详解。其系统架构如下：　　　
+　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：Android日志系统详解。其系统架构如下：　　　
 
 新版Android">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to debug with Android logging">
 <meta name="twitter:description" content="Android日志系统详解　　How to debug with Android logging　　怎么抓取Android日志文件
-　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：Android日志系统详解。其系统架构如下：　　　
+　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：Android日志系统详解。其系统架构如下：　　　
 
 新版Android">
 <meta name="twitter:creator" content="@Andylee_sarah">
@@ -113,18 +113,20 @@
 	<div class="article-content">
 		
 		<p>　　<a href="http://huaqianlee.me/2015/07/19/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a><br>　　<a href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/" target="_blank" rel="external">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" target="_blank" rel="external">怎么抓取Android日志文件</a></p>
-<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个本地C应用在log库，在kernel中有四个设备节点，详细见：<a href="http://huaqianlee.me/2015/07/19/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
+<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：<a href="http://huaqianlee.me/2015/07/19/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
 <blockquote>
 <p>新版Android中log_kernel已改为log_system</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="Java应用Logging接口">Java应用Logging接口</h2><h3 id="Logging类">Logging类</h3><p>类名：android.util.Log，主要方法如下：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Log</span>.v();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">d</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">i</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">w</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">e</span>();</span><br><span class="line"><span class="keyword">Log</span>.a();</span><br></pre></td></tr></table></figure></p>
+<h2 id="Java日志接口">Java日志接口</h2><p>　　此接口一般应用于编写APP时。</p>
+<h3 id="Logging类">Logging类</h3><p>类名：android.util.Log，路径：frameworks/base/core/java/android/util/Log.java。主要方法如下：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Log</span>.v();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">d</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">i</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">w</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">e</span>();</span><br><span class="line"><span class="keyword">Log</span>.a();</span><br></pre></td></tr></table></figure></p>
 <p>Log信息显示等级从高到底分别为：ERROR，WARN，INFO，DEBUG，VERBOSE。VERBOSE除了开发期间，是不应该被编译进APP的，DEBUG应该编译但在runtime被忽略，ERROR，WARN和INFO logs则一直被保留。更加详细的内容见 ：<a href="http://developer.android.com/reference/android/util/Log.html" target="_blank" rel="external">Log.html</a>。</p>
 <blockquote>
 <p>一个好的习惯是在自己的类中定义一个TAG常量，如：private static final String TAG = “MyActivity”;然后通过Log.i(TAG，”I am “+name);　</p>
 </blockquote>
 <h3 id="Demo">Demo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package me.huaqianlee.demo;</span><br><span class="line">import android.app.Activity;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line">import android.util.Log; </span><br><span class="line"></span><br><span class="line">private static final String TAG = <span class="string">"MyActivity"</span>;</span><br><span class="line"></span><br><span class="line">public class Demo extends Activity &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">        TextView tv = new TextView(this);</span><br><span class="line">        tv.setText(<span class="string">"Hello, I am andy lee!"</span>);</span><br><span class="line">        <span class="built_in">set</span>ContentView(tv);</span><br><span class="line"></span><br><span class="line">        Log.i(TAG, <span class="string">"this is a log.i message"</span>);</span><br><span class="line">        Log.v(TAG, <span class="string">"this  is a log.v message"</span>);</span><br><span class="line">        Log.d(TAG, <span class="string">"this  is a log.d message"</span>);</span><br><span class="line">        Log.w(TAG, <span class="string">"this  is a log.w message"</span>);</span><br><span class="line">        Log.e(TAG, <span class="string">"this  is a log.e message"</span>);</span><br><span class="line">        Log.a(TAG, <span class="string">"this  is a log.a message"</span>);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="本地C/C++应用Logging接口">本地C/C++应用Logging接口</h2><h3 id="Logging代码">Logging代码</h3><p>　　Log信息的等级同上，关键代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;cutils/log.h&gt; //路径：system/core/include/cutils/log.h</span></span><br><span class="line">/*公共日志宏*/</span><br><span class="line">ALOGV </span><br><span class="line">ALOGD </span><br><span class="line">ALOGI </span><br><span class="line">ALOGW </span><br><span class="line">ALOGE</span><br><span class="line"></span><br><span class="line">/*条件日志宏*/</span><br><span class="line">ALOGV_IF </span><br><span class="line">ALOGD_IF  </span><br><span class="line">ALOGI_IF  </span><br><span class="line">ALOGW_IF  </span><br><span class="line">ALOGE_IF </span><br><span class="line"></span><br><span class="line">// 在system/core/include/<span class="built_in">log</span>/log.h(被cutils/log.h包含)中定义如下：</span><br><span class="line"><span class="comment">#define CONDITION(cond)     (__builtin_expect((cond)!=0, 0))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ifndef ALOGV_IF</span></span><br><span class="line"><span class="comment">#if LOG_NDEBUG</span></span><br><span class="line"><span class="comment">#define ALOGV_IF(cond, ...)   ((void)0)</span></span><br><span class="line"><span class="comment">#else</span></span><br><span class="line"><span class="comment">#define ALOGV_IF(cond, ...) \</span></span><br><span class="line">    ( (CONDITION(cond)) \</span><br><span class="line">    ? ((void)ALOG(LOG_VERBOSE, LOG_TAG, __VA_ARGS__)) \</span><br><span class="line">    : (void)<span class="number">0</span> )</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="C/C++日志接口">C/C++日志接口</h2><p>　　此接口一般应用于JNI和HAL层。</p>
+<h3 id="Logging代码">Logging代码</h3><p>　　Log信息的等级同上，关键代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;cutils/log.h&gt; //路径：system/core/include/cutils/log.h</span></span><br><span class="line">/*公共日志宏*/</span><br><span class="line">ALOGV </span><br><span class="line">ALOGD </span><br><span class="line">ALOGI </span><br><span class="line">ALOGW </span><br><span class="line">ALOGE</span><br><span class="line"></span><br><span class="line">/*条件日志宏*/</span><br><span class="line">ALOGV_IF </span><br><span class="line">ALOGD_IF  </span><br><span class="line">ALOGI_IF  </span><br><span class="line">ALOGW_IF  </span><br><span class="line">ALOGE_IF </span><br><span class="line"></span><br><span class="line">// 在system/core/include/<span class="built_in">log</span>/log.h(被cutils/log.h包含)中定义如下：</span><br><span class="line"><span class="comment">#define CONDITION(cond)     (__builtin_expect((cond)!=0, 0))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ifndef ALOGV_IF</span></span><br><span class="line"><span class="comment">#if LOG_NDEBUG</span></span><br><span class="line"><span class="comment">#define ALOGV_IF(cond, ...)   ((void)0)</span></span><br><span class="line"><span class="comment">#else</span></span><br><span class="line"><span class="comment">#define ALOGV_IF(cond, ...) \</span></span><br><span class="line">    ( (CONDITION(cond)) \</span><br><span class="line">    ? ((void)ALOG(LOG_VERBOSE, LOG_TAG, __VA_ARGS__)) \</span><br><span class="line">    : (void)<span class="number">0</span> )</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <ol>
 <li>应该首先在c文件中定义LOG_TAG。</li>
@@ -271,10 +273,6 @@
 			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
 		  
 		
-		  
-		
-		  
-		
 		</ul>
 </div>
 
@@ -305,11 +303,15 @@
 			
 		
 			
-				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
 			
 		
 			
@@ -317,7 +319,7 @@
 			
 		
 			
-				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
 			
 		
 			
@@ -326,14 +328,6 @@
 		
 			
 				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
-			
-		
-			
-		
 			
 		
 		</ul>
