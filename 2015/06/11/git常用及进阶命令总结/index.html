@@ -122,7 +122,7 @@
 <h3 id="远程仓库管理">远程仓库管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git remote  <span class="comment">#查看远程库的信息</span></span><br><span class="line">git remote –v  <span class="comment">#查看远程库的详细信息</span></span><br><span class="line">git remote show origin           <span class="comment"># 查看远程服务器仓库状态</span></span><br><span class="line">git remote add origin git@github:robbin/robbin_site.git         <span class="comment"># 添加远程仓库地址</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin git@github.com:robbin/robbin_site.git <span class="comment"># 设置远程仓库地址(用于修改远程仓库地址)</span></span><br><span class="line">git remote rm &lt;repository&gt;       <span class="comment"># 删除远程仓库</span></span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/AndyLee-Github/cartboon.git   <span class="comment">#从远程仓库中克隆</span></span><br><span class="line">git <span class="built_in">clone</span> --bare robbin_site robbin_site.git  <span class="comment"># 用带版本的项目创建纯版本仓库</span></span><br><span class="line">scp -r my_project.git git@git.csdn.net:~      <span class="comment"># 将纯仓库上传到服务器上</span></span><br><span class="line"></span><br><span class="line">mkdir robbin_site.git + <span class="built_in">cd</span> robbin_site.git + git --bare init <span class="comment"># 在服务器创建纯仓库</span></span><br><span class="line">git remote add origin git@github.com:robbin/robbin_site.git    <span class="comment"># 设置远程仓库地址</span></span><br><span class="line">git push -u origin master                                      <span class="comment"># 客户端首次提交</span></span><br><span class="line">git push -u origin develop  <span class="comment"># 首次将本地develop分支提交到远程develop分支，并且track</span></span><br><span class="line">git remote <span class="built_in">set</span>-head origin master   <span class="comment"># 设置远程仓库的HEAD指向master分支</span></span><br></pre></td></tr></table></figure>
 <h3 id="命令设置跟踪远程库和本地库">命令设置跟踪远程库和本地库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream master origin/master</span><br><span class="line">git branch --set-upstream develop origin/develop</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>目前先这么多，后续再补充更高级的命令， 也可参考：<a href="http://www.imooc.com/article/1089" target="_blank" rel="external">git进阶</a>。</p>
+<p>目前先这么多，后续再补充更高级的命令， 也可参考：<a href="http://www.imooc.com/article/1089" target="_blank" rel="external">git进阶</a>，<a href="https://github.com/xirong/my-git" target="_blank" rel="external">git资料整理</a>。</p>
 </blockquote>
   
 	</div>
@@ -234,7 +234,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>11</sup></a></li>
+			<li><a href="/categories/Android/" title="Android">Android<sup>12</sup></a></li>
 		  
 		
 		  
@@ -262,7 +262,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Android/译文/" title="译文">译文<sup>1</sup></a></li>
+			<li><a href="/categories/Android/译文/" title="译文">译文<sup>2</sup></a></li>
 		  
 		
 		</ul>
@@ -275,7 +275,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Tools/" title="Tools">Tools<sup>4</sup></a></li>
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>5</sup></a></li>
 			
 		
 			
