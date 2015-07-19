@@ -1,0 +1,646 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>xml文件约束与解析 | Andy.Lee&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Andy.Lee">
+    
+
+    
+    <meta name="description" content="在XML技术里，可以编写一个文档来约束一个XML文档的书写规范，这称之为XML约束,常用的约束技术:　1.  XML DTD　2.  XML Schema
+DTDDTD格式DTD(Document Type Definition)，全称为文档类型定义。 DTD文件应使用UTF-8或Unicode。格式如下:
+　
+外部文件　
+
+#PCDATA:放置字符数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xml文件约束与解析">
+<meta property="og:url" content="http://huaqianlee.me/2015/01/19/xml文件约束与解析/index.html">
+<meta property="og:site_name" content="Andy.Lee's blog">
+<meta property="og:description" content="在XML技术里，可以编写一个文档来约束一个XML文档的书写规范，这称之为XML约束,常用的约束技术:　1.  XML DTD　2.  XML Schema
+DTDDTD格式DTD(Document Type Definition)，全称为文档类型定义。 DTD文件应使用UTF-8或Unicode。格式如下:
+　
+外部文件　
+
+#PCDATA:放置字符数据">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blogdtd.png">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blogsaxdom.png">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blogsax.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="xml文件约束与解析">
+<meta name="twitter:description" content="在XML技术里，可以编写一个文档来约束一个XML文档的书写规范，这称之为XML约束,常用的约束技术:　1.  XML DTD　2.  XML Schema
+DTDDTD格式DTD(Document Type Definition)，全称为文档类型定义。 DTD文件应使用UTF-8或Unicode。格式如下:
+　
+外部文件　
+
+#PCDATA:放置字符数据">
+<meta name="twitter:creator" content="@Andylee_sarah">
+<link rel="publisher" href="107850537041795428182">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Andy.Lee&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Andy.Lee&#39;s blog" title="Andy.Lee&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Andy.Lee&#39;s blog">Andy.Lee&#39;s blog</a></h1>
+				<h2 class="blog-motto">Good good study, day day up !</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/categories">Categories</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:huaqianlee.me">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+<!--<a href="https://github.com/AndyLee-Github"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>-->
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/19/xml文件约束与解析/" title="xml文件约束与解析" itemprop="url">xml文件约束与解析</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-19T15:12:35.000Z" itemprop="datePublished"> 发表于 Jan 19 2015</time>
+    
+  </p>
+  
+</header>
+	<div class="article-content">
+		
+		<p>在XML技术里，可以编写一个文档来约束一个XML文档的书写规范，这称之为XML约束,常用的约束技术:<br>　1.  XML DTD<br>　2.  XML Schema</p>
+<h1 id="DTD">DTD</h1><h2 id="DTD格式">DTD格式</h2><p>DTD(Document Type Definition)，全称为文档类型定义。 DTD文件应使用UTF-8或Unicode。格式如下:
+　</p>
+<h3 id="外部文件">外部文件</h3><p>　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogdtd.png" alt=""></p>
+<blockquote>
+<p>#PCDATA:放置字符数据　</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="内部编写方式">内部编写方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> standalone=<span class="string">"yes"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE 书架 [</span><br><span class="line">  &lt;!ELEMENT 书架 (书+)&gt; // 如果写EMPTY - 空元素，不能有子标签  ANY - 任何子标签</span><br><span class="line">  &lt;!ELEMENT 书 (书名,作者,售价)&gt;</span><br><span class="line">  &lt;!ELEMENT 书名 (<span class="comment">#PCDATA)&gt;</span></span><br><span class="line">  &lt;!ELEMENT 作者 (<span class="comment">#PCDATA)&gt;</span></span><br><span class="line">  &lt;!ELEMENT 售价 (<span class="comment">#PCDATA)&gt;</span></span><br><span class="line">]&gt;</span><br><span class="line">&lt;书架&gt;</span><br><span class="line">  &lt;书&gt;</span><br><span class="line">  &lt;书名&gt;Java就业培训教程&lt;/书名&gt;</span><br><span class="line">  &lt;作者&gt;张孝祥&lt;/作者&gt;</span><br><span class="line">  &lt;售价&gt;<span class="number">39.00</span>元&lt;/售价&gt;</span><br><span class="line">  &lt;/书&gt;</span><br><span class="line">      ...</span><br><span class="line">&lt;/书架&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="编程验证DTD">编程验证DTD</h2><p>编写方式如下：<br>外部文件方式：validate.html<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		var xmldoc = new ActiveXObject(<span class="string">"Microsoft.XMLDOM"</span>);  // 创建XML文档解析对象 IE5以上内置 Microsoft.XMLDOM 解析工具</span><br><span class="line">		xmldoc.validateOnParse=<span class="literal">true</span>; // 开启XML校验</span><br><span class="line">		xmldoc.load(<span class="string">"catalog.xml"</span>);  // 装载XML文件</span><br><span class="line"></span><br><span class="line">                /*打印错误信息*/</span><br><span class="line">		document.write(<span class="string">"错误的原因："</span> + xmldoc.parseError.reason + <span class="string">"&lt;br/&gt;"</span>);</span><br><span class="line">		document.write(<span class="string">"错误的行号："</span> + xmldoc.parseError.line + <span class="string">"&lt;br/&gt;"</span>);</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">	&lt;body&gt;</span><br><span class="line"></span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="引用DTD约束">引用DTD约束</h2><p>XML中使用DOCTYPE声明语句来指明所遵循的DTD文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE 文档根结点 SYSTEM <span class="string">"DTD文件的URL"</span>&gt; // 引用本地DTD文件</span><br><span class="line">&lt;!DOCTYPE 文档根结点 PUBLIC <span class="string">"DTD名称"</span> <span class="string">"DTD文件的URL"</span>&gt; // 引用公共文件（比如某网站的DTD文件）</span><br></pre></td></tr></table></figure></p>
+<h2 id="DTD约束语法">DTD约束语法</h2><h3 id="元素定义">元素定义</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">格式：&lt;!ELEMENT 元素名称 元素类型&gt;</span><br><span class="line">如为元素内容：则需要使用()括起来，如</span><br><span class="line">&lt;!ELEMENT 书架 (书名，作者，售价)&gt;</span><br><span class="line">&lt;!ELEMENT 书名 (<span class="comment">#PCDATA)&gt;</span></span><br><span class="line">如为元素类型，则直接书写，DTD规范定义了如下几种类型：</span><br><span class="line">EMPTY：用于定义空元素，例如&lt;br/&gt; &lt;hr/&gt;</span><br><span class="line">ANY：表示元素内容为任意类型</span><br></pre></td></tr></table></figure>
+<h3 id="元素组成">元素组成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT MYFILE (TITLE,AUTHOR,EMAIL)&gt;  // 内容与此什么顺序一致</span><br><span class="line">&lt;!ELEMENT MYFILE (TITLE|AUTHOR|EMAIL)&gt; // 只能出现其中一个</span><br><span class="line">&lt;!ELEMENT MYFILE (TITLE|AUTHOR|EMAIL)&gt;* //出现一个或者多个</span><br><span class="line"> +: 一次或多次 (书+)</span><br><span class="line">  ?: <span class="number">0</span>次或一次 (书?)</span><br><span class="line">  *: <span class="number">0</span>次或多次  (书*)</span><br><span class="line">           eg： </span><br><span class="line">                &lt;!ELEMENT MYFILE ((TITLE*, AUTHOR?, EMAIL)* | COMMENT)&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="属性定义">属性定义</h3><h4 id="属性定义方式">属性定义方式</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">属性格式：</span><br><span class="line">&lt;!ATTLIST 元素名</span><br><span class="line">  属性名<span class="number">1</span> 属性值类型 设置说明</span><br><span class="line">  属性名<span class="number">2</span> 属性值类型 设置说明</span><br><span class="line">  ……</span><br><span class="line">  &gt;</span><br><span class="line">属性说明：</span><br><span class="line"><span class="comment">#REQUIRED：必须设置该属性</span></span><br><span class="line"><span class="comment">#IMPLIED：可以设置也可以不设置</span></span><br><span class="line"><span class="comment">#FIXED：说明该属性的取值固定为一个值，在 XML 文件中不能为该属性设置其它值。但需要为该属性提供这个值</span></span><br><span class="line">直接使用默认值：在 XML 中可以设置该值也可以不设置该属性值。若没设置则使用默认值。  </span><br><span class="line">eg：</span><br><span class="line">       &lt;!ATTLIST 页面作者</span><br><span class="line">姓名 CDATA <span class="comment">#IMPLIED</span></span><br><span class="line">年龄 CDATA <span class="comment">#IMPLIED</span></span><br><span class="line">联系信息 CDATA <span class="comment">#REQUIRED</span></span><br><span class="line">网站职务 CDATA <span class="comment">#FIXED "页面作者"</span></span><br><span class="line">个人爱好 CDATA <span class="string">"上网"</span> // 默认值：上网</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="常用属性值类型">常用属性值类型</h4><ol>
+<li>CDATA 文本字符串</li>
+<li>ENUMERATED 枚举型<br>eg:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version = <span class="string">"1.0"</span> encoding=<span class="string">"GB2312"</span> standalone=<span class="string">"yes"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE 购物篮 [</span><br><span class="line">  &lt;!ELEMENT 肉 EMPTY&gt;</span><br><span class="line">  &lt;!ATTLIST 肉 品种 ( 鸡肉 | 牛肉 | 猪肉 | 鱼肉 ) <span class="string">"鸡肉"</span>&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;购物篮&gt;</span><br><span class="line">  &lt;肉 品种=<span class="string">"鱼肉"</span>/&gt;</span><br><span class="line">  &lt;肉 品种=<span class="string">"牛肉"</span>/&gt;</span><br><span class="line">  &lt;肉/&gt;</span><br><span class="line">&lt;/购物篮&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="ID">ID</h4><p>ID只能由字母或者下划线开头.eg:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version = <span class="string">"1.0"</span> encoding=<span class="string">"GB2312"</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE 联系人列表[</span><br><span class="line">  &lt;!ELEMENT 联系人列表 ANY&gt;</span><br><span class="line">  &lt;!ELEMENT 联系人(姓名,EMAIL)&gt;</span><br><span class="line">  &lt;!ELEMENT 姓名(<span class="comment">#PCDATA)&gt;</span></span><br><span class="line">  &lt;!ELEMENT EMAIL(<span class="comment">#PCDATA)&gt;</span></span><br><span class="line">  &lt;!ATTLIST 联系人 编号 ID <span class="comment">#REQUIRED&gt;</span></span><br><span class="line">]&gt;</span><br><span class="line">&lt;联系人列表&gt;</span><br><span class="line">  &lt;联系人 编号=<span class="string">"a1"</span>&gt;</span><br><span class="line">  &lt;姓名&gt;张三&lt;/姓名&gt;</span><br><span class="line">  &lt;EMAIL&gt;zhang@it315.org&lt;/EMAIL&gt;</span><br><span class="line">          &lt;/联系人&gt;</span><br><span class="line"> &lt;联系人 编号=<span class="string">"a2"</span>&gt;</span><br><span class="line">  &lt;姓名&gt;李四&lt;/姓名&gt;</span><br><span class="line">  &lt;EMAIL&gt;li@it315.org&lt;/EMAIL&gt;</span><br><span class="line">  &lt;/联系人&gt;</span><br><span class="line">&lt;/联系人列表&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="实体定义">实体定义</h4><p>在DTD文件中,&lt;!ENTITY …&gt;语句用于定义一个实体(相当于一个变量).</p>
+<h5 id="引用实体">引用实体</h5><p>引用实体主要在XML文件中使用,格式如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#&lt;!ENTITY 实体名称 “实体内容” &gt;</span></span><br><span class="line"><span class="comment">#eg:</span></span><br><span class="line">&lt;!ENTITY copyright “I am a programmer<span class="string">"&gt;</span><br><span class="line">……</span><br><span class="line">&amp;copyright;//XML中以此形式引用</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="参数实体">参数实体</h5><p>参数实体主要为DTD文件自己使用,格式如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % 实体名称 <span class="string">"实体内容"</span> &gt;</span><br><span class="line"><span class="comment">#eg1:</span></span><br><span class="line">&lt;!ENTITY % TAG_NAMES <span class="string">"姓名 | EMAIL | 电话 | 地址"</span>&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!ELEMENT 个人信息 (%TAG_NAMES; | 生日)&gt;</span><br><span class="line">&lt;!ELEMENT 客户信息 (%TAG_NAMES; | 公司名)&gt;</span><br><span class="line"><span class="comment">#eg2:</span></span><br><span class="line">&lt;!ENTITY % common.attributes   </span><br><span class="line"> <span class="string">" id ID #IMPLIED   </span><br><span class="line">   account CDATA #REQUIRED "</span> &gt;</span><br><span class="line">...</span><br><span class="line">&lt;!ATTLIST purchaseOrder %common.attributes;&gt;</span><br><span class="line">&lt;!ATTLIST item %common.attributes;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>　</p>
+<h2 id="xml编程">xml编程</h2><p>　<br>XML CRUD - create read update delete。JAXP包，J2SE的一部分，包含xml解析器对象。</p>
+<h3 id="XML解析方式">XML解析方式</h3><p>XML解析方式分为两种：DOM（w3c推荐） 和 SAX(只能做查询)。两种区别如下：<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogsaxdom.png" alt="dif"></p>
+<h3 id="使用JAXP包进行DOM解析">使用JAXP包进行DOM解析</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line">public class Demo &#123;</span><br><span class="line"></span><br><span class="line">	/**使用jaxp操作xml文档</span><br><span class="line">	 * @param args</span><br><span class="line">	 * @throws ParserConfigurationException </span><br><span class="line">	 * @throws IOException </span><br><span class="line">	 * @throws SAXException </span><br><span class="line">	 */</span><br><span class="line">	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException &#123;</span><br><span class="line">		</span><br><span class="line">		//<span class="number">1</span>.获取DOM解析器的工厂</span><br><span class="line">		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span><br><span class="line">		</span><br><span class="line">		//<span class="number">2</span>.得到DOM解析器对象</span><br><span class="line">		DocumentBuilder builder = factory.newDocumentBuilder();</span><br><span class="line">		</span><br><span class="line">		//<span class="number">3</span>.解析xml文档，得到代表文档的document</span><br><span class="line">		Document document = builder.parse(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line"></span><br><span class="line">		//<span class="number">4</span>.遍历所有节点</span><br><span class="line">		list(document);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//得到售价结点的值</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="built_in">read</span>() throws Exception&#123;</span><br><span class="line">		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span><br><span class="line">		DocumentBuilder builder = factory.newDocumentBuilder();</span><br><span class="line">		Document document = builder.parse(new File(<span class="string">"src/book.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		NodeList list = document.getElementsByTagName(<span class="string">"售价"</span>);  </span><br><span class="line">		Node price = list.item(<span class="number">0</span>);</span><br><span class="line">		</span><br><span class="line">		String value = price.getTextContent();</span><br><span class="line">		System.out.println(value);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//修改结点的值:&lt;售价&gt;<span class="number">39.00</span>元&lt;/售价&gt;改为<span class="number">109</span></span><br><span class="line">	@Test</span><br><span class="line">	public  void update() throws Exception&#123;</span><br><span class="line">		</span><br><span class="line">		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span><br><span class="line">		DocumentBuilder  builder = factory.newDocumentBuilder();</span><br><span class="line">		Document document = builder.parse(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Node price = document.getElementsByTagName(<span class="string">"售价"</span>).item(<span class="number">0</span>);</span><br><span class="line">		price.setTextContent(<span class="string">"109"</span>);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		//把内存中的document写到xml文档</span><br><span class="line">		TransformerFactory tf = TransformerFactory.newInstance();</span><br><span class="line">		//得到转换器</span><br><span class="line">		Transformer ts = tf.newTransformer();</span><br><span class="line">		ts.transform(new DOMSource(document), new StreamResult(new File(<span class="string">"src/book1.xml"</span>)));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	//向指定节点中增加孩子节点（售价节点）</span><br><span class="line">	@Test</span><br><span class="line">	public void add() throws Exception&#123;</span><br><span class="line">		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span><br><span class="line">		DocumentBuilder  builder = factory.newDocumentBuilder();</span><br><span class="line">		Document document = builder.parse(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		//创建需要增加的节点</span><br><span class="line">		Node price = document.createElement(<span class="string">"售价"</span>);</span><br><span class="line">		price.setTextContent(<span class="string">"59元"</span>);</span><br><span class="line">		</span><br><span class="line">		//得到需要增加的节点的父亲</span><br><span class="line">		Node parent = document.getElementsByTagName(<span class="string">"书"</span>).item(<span class="number">0</span>);</span><br><span class="line">		</span><br><span class="line">		//把需要增加的节点挂到父结点上</span><br><span class="line">		parent.appendChild(price);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		TransformerFactory tf = TransformerFactory.newInstance();</span><br><span class="line">		Transformer ts = tf.newTransformer();</span><br><span class="line">		ts.transform(new DOMSource(document), new StreamResult(new File(<span class="string">"src/book1.xml"</span>)));</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//向指定位置上插入售价节点</span><br><span class="line">	@Test</span><br><span class="line">	public void add2() throws Exception&#123;</span><br><span class="line">		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span><br><span class="line">		DocumentBuilder  builder = factory.newDocumentBuilder();</span><br><span class="line">		Document document = builder.parse(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Node node = document.createElement(<span class="string">"售价"</span>);</span><br><span class="line">		node.setTextContent(<span class="string">"39元"</span>);</span><br><span class="line">		</span><br><span class="line">		Node parent = document.getElementsByTagName(<span class="string">"书"</span>).item(<span class="number">0</span>);</span><br><span class="line">		parent.insertBefore(node, document.getElementsByTagName(<span class="string">"书名"</span>).item(<span class="number">0</span>));</span><br><span class="line">		</span><br><span class="line">		TransformerFactory tf = TransformerFactory.newInstance();</span><br><span class="line">		Transformer ts = tf.newTransformer();</span><br><span class="line">		ts.transform(new DOMSource(document), new StreamResult(new File(<span class="string">"src/book1.xml"</span>)));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//删除xml文档的售价结点</span><br><span class="line">	@Test</span><br><span class="line">	public void delete() throws Exception&#123;</span><br><span class="line">		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span><br><span class="line">		DocumentBuilder  builder = factory.newDocumentBuilder();</span><br><span class="line">		Document document = builder.parse(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Node node = document.getElementsByTagName(<span class="string">"售价"</span>).item(<span class="number">2</span>);</span><br><span class="line">		node.getParentNode().removeChild(node);</span><br><span class="line">		</span><br><span class="line">		TransformerFactory tf = TransformerFactory.newInstance();</span><br><span class="line">		Transformer ts = tf.newTransformer();</span><br><span class="line">		ts.transform(new DOMSource(document), new StreamResult(new File(<span class="string">"src/book1.xml"</span>)));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//操作xml文档属性</span><br><span class="line">	@Test</span><br><span class="line">	public void updateAttribute() throws Exception&#123;</span><br><span class="line">		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span><br><span class="line">		DocumentBuilder  builder = factory.newDocumentBuilder();</span><br><span class="line">		Document document = builder.parse(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		//操作xml文档的元素时，一般都把元素当作node对象，但是程序员如果发现node不好使时，就应把node强转成相应类型</span><br><span class="line">		Node node  = document.getElementsByTagName(<span class="string">"书"</span>).item(<span class="number">0</span>);</span><br><span class="line">		Element book = null;</span><br><span class="line">		<span class="keyword">if</span>(node.getNodeType()==Node.ELEMENT_NODE)&#123;  //在作结点转换之前，最好先判断结点类型</span><br><span class="line">			book  = (Element)node;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		book.setAttribute(<span class="string">"name"</span>, <span class="string">"yyyyyyy"</span>);</span><br><span class="line">		book.setAttribute(<span class="string">"password"</span>, <span class="string">"123"</span>);</span><br><span class="line">		book.removeAttribute(<span class="string">"password"</span>);</span><br><span class="line">		</span><br><span class="line">		TransformerFactory tf = TransformerFactory.newInstance();</span><br><span class="line">		Transformer ts = tf.newTransformer();</span><br><span class="line">		ts.transform(new DOMSource(document), new StreamResult(new File(<span class="string">"src/book1.xml"</span>)));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//遍历</span><br><span class="line">	public static void list(Node node)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(node.getNodeType()==Node.ELEMENT_NODE)&#123;</span><br><span class="line">			System.out.println(node.getNodeName());</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		NodeList list = node.getChildNodes();</span><br><span class="line">		<span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;list.getLength();i++)&#123;</span><br><span class="line">			Node child = list.item(i);</span><br><span class="line">			list(child);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="SAX解析">SAX解析</h3><p> 　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogsax.jpg" alt="sax"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#常用方法： startElement（） endElement（） characters（）；</span></span><br><span class="line">public class Demo1 &#123;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 *sax方式解析book1.xml文件</span><br><span class="line">	 * @throws SAXException </span><br><span class="line">	 * @throws ParserConfigurationException </span><br><span class="line">	 * @throws IOException </span><br><span class="line">	 */</span><br><span class="line">	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException &#123;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		//<span class="number">1</span>.创建sax工厂</span><br><span class="line">		SAXParserFactory factory = SAXParserFactory.newInstance();</span><br><span class="line">		</span><br><span class="line">		//<span class="number">2</span>.用工厂创建解析器</span><br><span class="line">		SAXParser sp = factory.newSAXParser();</span><br><span class="line">		</span><br><span class="line">		//<span class="number">3</span>.利用解析器得到reader</span><br><span class="line">		XMLReader reader = sp.getXMLReader();</span><br><span class="line">		</span><br><span class="line">		//<span class="number">4</span>.在解析xml文档之前，设置好事件处理器,事件处理器为程序员设计来对解析xml进行处理</span><br><span class="line">		reader.setContentHandler(new MyContentHandler2()); </span><br><span class="line">		</span><br><span class="line">		//<span class="number">5</span>.利用reader读取 xml文档</span><br><span class="line">		reader.parse(<span class="string">"src/book1.xml"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//得到xml文档内容的事件处理器，实现接口</span><br><span class="line">class MyContentHandler implements ContentHandler&#123;</span><br><span class="line"></span><br><span class="line">	public void startElement(String uri, String <span class="built_in">local</span>Name, String name,	Attributes atts) throws SAXException &#123;</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">"当前解析到了:"</span> + name + <span class="string">",这个标签是开始标签"</span>);</span><br><span class="line">		<span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;atts.getLength();i++)&#123;</span><br><span class="line">			String attname = atts.getQName(i);</span><br><span class="line">			String attvalue = atts.getValue(i);</span><br><span class="line">			</span><br><span class="line">			System.out.println(attname + <span class="string">"="</span> + attvalue);</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void endElement(String uri, String <span class="built_in">local</span>Name, String name) throws SAXException &#123;</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">"当前解析到了:"</span> + name + <span class="string">",这个标签是结束标签"</span>);	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void characters(char[] ch, int start, int length)	throws SAXException &#123;</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">"当前解析到了内容："</span> + new String(ch,start,length));</span><br><span class="line">	&#125;</span><br><span class="line">	....	 // 实现接口其他方法</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//用于获取第一个售价节点的值：&lt;售价&gt;<span class="number">109</span>&lt;/售价&gt; ,用继承的方式实现事件处理器，不用对接口每个方法进行实现</span><br><span class="line">class MyContentHandler2 extends DefaultHandler&#123;</span><br><span class="line"></span><br><span class="line">	private boolean isOk = <span class="literal">false</span>;</span><br><span class="line">	private int index = <span class="number">1</span>;</span><br><span class="line">	@Override</span><br><span class="line">	public void characters(char[] ch, int start, int length)	throws SAXException &#123;</span><br><span class="line">		<span class="keyword">if</span>(isOk==<span class="literal">true</span> &amp;&amp; index==<span class="number">1</span>)&#123;</span><br><span class="line">			System.out.println(new String(ch,start,length));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void startElement(String uri, String <span class="built_in">local</span>Name, String name,	Attributes attributes) throws SAXException &#123;</span><br><span class="line">		<span class="keyword">if</span>(name.equals(<span class="string">"售价"</span>))&#123;</span><br><span class="line">			isOk = <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void endElement(String uri, String <span class="built_in">local</span>Name, String name)</span><br><span class="line">			throws SAXException &#123;</span><br><span class="line">		<span class="keyword">if</span>(name.equals(<span class="string">"售价"</span>))&#123;</span><br><span class="line">			isOk = <span class="literal">false</span>;</span><br><span class="line">			index++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Dom4j解析">Dom4j解析</h2><p>DOM4j中，获得Document对象的方式有三种：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.读取XML文件,获得document对象            </span></span><br><span class="line">SAXReader reader = new SAXReader();</span><br><span class="line">Document   document = reader.read(new File(<span class="string">"input.xml"</span>));</span><br><span class="line"><span class="comment">#2.解析XML形式的文本,得到document对象.</span></span><br><span class="line">String text = <span class="string">"&lt;members&gt;&lt;/members&gt;"</span>;</span><br><span class="line">Document document = DocumentHelper.parseText(text);</span><br><span class="line"><span class="comment">#3.主动创建document对象.</span></span><br><span class="line">Document document = DocumentHelper.createDocument();            //创建根节点</span><br><span class="line">Element root = document.addElement(<span class="string">"members"</span>);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意dom4j库及docs。参考<a href="http://zvon.org/xxl/XPathTutorial/General/examples.html" target="_blank" rel="external">XPath Tutorial</a>　</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">public class Demo1 &#123;</span><br><span class="line">	//读取xml文档数据：&lt;书名&gt;Java就业培训教程&lt;/书名&gt;</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="built_in">read</span>() throws Exception&#123;</span><br><span class="line">		</span><br><span class="line">		SAXReader reader = new SAXReader();</span><br><span class="line">		Document document = reader.read(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Element root = document.getRootElement();</span><br><span class="line">		Element bookname = root.element(<span class="string">"书"</span>).element(<span class="string">"书名"</span>);</span><br><span class="line">		System.out.println(bookname.getText());</span><br><span class="line">	&#125;</span><br><span class="line">	//&lt;书 name=<span class="string">"yyyyyyy"</span>&gt;</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="built_in">read</span>Attr() throws Exception&#123;</span><br><span class="line">		</span><br><span class="line">		SAXReader reader = new SAXReader();</span><br><span class="line">		Document document = reader.read(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Element root = document.getRootElement();</span><br><span class="line">		String value = root.element(<span class="string">"书"</span>).attributeValue(<span class="string">"name"</span>);</span><br><span class="line">		System.out.println(value);</span><br><span class="line">	&#125;</span><br><span class="line">	//向xml文档中添加&lt;售价&gt;<span class="number">19</span>元&lt;/售价&gt;</span><br><span class="line">	@Test</span><br><span class="line">	public void add() throws Exception&#123;</span><br><span class="line">		SAXReader reader = new SAXReader();</span><br><span class="line">		Document document = reader.read(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Element price = DocumentHelper.createElement(<span class="string">"售价"</span>);</span><br><span class="line">		price.setText(<span class="string">"19元"</span>);</span><br><span class="line">		</span><br><span class="line">		document.getRootElement().element(<span class="string">"书"</span>).add(price);</span><br><span class="line">		</span><br><span class="line">                // 将修改从内存中存入xml</span><br><span class="line">		OutputFormat format = OutputFormat.createPrettyPrint();</span><br><span class="line">		format.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">		</span><br><span class="line">		XMLWriter writer = new XMLWriter(new FileOutputStream(<span class="string">"src/book1.xml"</span>),format);</span><br><span class="line">		writer.write(document);  //utf-<span class="number">8</span></span><br><span class="line">		writer.close();</span><br><span class="line">	&#125;</span><br><span class="line">	//修改：&lt;售价&gt;<span class="number">109</span>&lt;/售价&gt;  为<span class="number">209</span></span><br><span class="line">	@Test</span><br><span class="line">	public void update() throws Exception&#123;</span><br><span class="line">		SAXReader reader = new SAXReader();</span><br><span class="line">		Document document = reader.read(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Element price = (Element) document.getRootElement().element(<span class="string">"书"</span>).elements(<span class="string">"售价"</span>).get(<span class="number">1</span>);</span><br><span class="line">		price.setText(<span class="string">"209元"</span>);</span><br><span class="line">		</span><br><span class="line">		OutputFormat format = OutputFormat.createPrettyPrint();</span><br><span class="line">		format.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">		</span><br><span class="line">		XMLWriter writer = new XMLWriter(new FileOutputStream(<span class="string">"src/book1.xml"</span>),format);</span><br><span class="line">		writer.write(document);  //utf-<span class="number">8</span></span><br><span class="line">		writer.close();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	//删除：&lt;售价&gt;<span class="number">109</span>&lt;/售价&gt;</span><br><span class="line">	@Test</span><br><span class="line">	public void delete() throws Exception&#123;</span><br><span class="line">		SAXReader reader = new SAXReader();</span><br><span class="line">		Document document = reader.read(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Element price = (Element) document.getRootElement().element(<span class="string">"书"</span>).elements(<span class="string">"售价"</span>).get(<span class="number">0</span>);</span><br><span class="line">		price.getParent().remove(price);</span><br><span class="line">		</span><br><span class="line">		OutputFormat format = OutputFormat.createPrettyPrint();</span><br><span class="line">		format.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">		</span><br><span class="line">		XMLWriter writer = new XMLWriter(new FileOutputStream(<span class="string">"src/book1.xml"</span>),format);</span><br><span class="line">		writer.write(document);  //utf-<span class="number">8</span></span><br><span class="line">		writer.close();</span><br><span class="line">	&#125;</span><br><span class="line">	//向指定位置增加售价结点</span><br><span class="line">	@Test</span><br><span class="line">	public void add2() throws Exception&#123;</span><br><span class="line">		SAXReader reader = new SAXReader();</span><br><span class="line">		Document document = reader.read(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Element price = DocumentHelper.createElement(<span class="string">"售价"</span>);</span><br><span class="line">		price.setText(<span class="string">"19元"</span>);</span><br><span class="line">		</span><br><span class="line">		List list = document.getRootElement().element(<span class="string">"书"</span>).elements();</span><br><span class="line">		list.add(<span class="number">1</span>, price);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		OutputFormat format = OutputFormat.createPrettyPrint();</span><br><span class="line">		format.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">		</span><br><span class="line">		XMLWriter writer = new XMLWriter(new FileOutputStream(<span class="string">"src/book1.xml"</span>),format);</span><br><span class="line">		writer.write(document);  //utf-<span class="number">8</span></span><br><span class="line">		writer.close();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">        //XPATH 编写</span><br><span class="line">	@Test</span><br><span class="line">	public void findWithXpath() throws Exception&#123;</span><br><span class="line">		SAXReader reader = new SAXReader();</span><br><span class="line">		Document document = reader.read(new File(<span class="string">"src/book1.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Element e = (Element) document.selectNodes(<span class="string">"//书名"</span>).get(<span class="number">1</span>); // search 书名node 并获得第一个</span><br><span class="line">		System.out.println(e.getText());</span><br><span class="line">	&#125;</span><br><span class="line">	@Test</span><br><span class="line">	public void findUser() throws Exception&#123;</span><br><span class="line">		String username = <span class="string">"aaa"</span>;</span><br><span class="line">		String password = <span class="string">"1233"</span>;</span><br><span class="line">		</span><br><span class="line">		SAXReader reader = new SAXReader();</span><br><span class="line">		Document document = reader.read(new File(<span class="string">"src/users.xml"</span>));</span><br><span class="line">		</span><br><span class="line">		Element e = (Element) document.selectSingleNode(<span class="string">"//user[@username='"</span>+username+<span class="string">"' and @password='"</span>+password+<span class="string">"']"</span>); //search 匹配的用户名和密码 node</span><br><span class="line">		<span class="keyword">if</span>(e!=null)&#123;</span><br><span class="line">			System.out.println(<span class="string">"用户登陆成功！！"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"用户名和密码不正确！！"</span>);</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="XML_schema">XML schema</h2><p>xml schema 也是一种定义和描述xml结构与内容的模式语言，其出现是为了克服DTD的局限性。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">//File:book.xsd</span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt; </span><br><span class="line">//必须以 schema 开始和结束</span><br><span class="line">&lt;xs:schema xmlns:xs=<span class="string">"http://www.w3.org/2001/XMLSchema"</span>        // 声明xs出处</span><br><span class="line">			      targetNamespace=<span class="string">"http://www. itcast.cn"</span>	   // 声明指定一个名称空间 http://www. itcast.cn， 将xsd中所有节点绑定到此空间，然后xml就可以根据此URL（名称空间）告知解析器  </span><br><span class="line">                              elementFormDefault=<span class="string">"qualified"</span>&gt; elementFormDefault指定schema属性都属于targetNamespace指定的名称空间</span><br><span class="line">	&lt;xs:element name=<span class="string">'书架'</span> &gt; </span><br><span class="line">		&lt;xs:complexType&gt;</span><br><span class="line">			&lt;xs:sequence maxOccurs=<span class="string">'unbounded'</span> &gt;</span><br><span class="line">				&lt;xs:element name=<span class="string">'书'</span> &gt;</span><br><span class="line">					&lt;xs:complexType&gt;</span><br><span class="line">						&lt;xs:sequence&gt;</span><br><span class="line">							&lt;xs:element name=<span class="string">'书名'</span> <span class="built_in">type</span>=<span class="string">'xs:string'</span> /&gt;</span><br><span class="line">							&lt;xs:element name=<span class="string">'作者'</span> <span class="built_in">type</span>=<span class="string">'xs:string'</span> /&gt;</span><br><span class="line">							&lt;xs:element name=<span class="string">'售价'</span> <span class="built_in">type</span>=<span class="string">'xs:string'</span> /&gt;</span><br><span class="line">						&lt;/xs:sequence&gt;</span><br><span class="line">					&lt;/xs:complexType&gt;</span><br><span class="line">				&lt;/xs:element&gt;</span><br><span class="line">			&lt;/xs:sequence&gt;</span><br><span class="line">		&lt;/xs:complexType&gt;</span><br><span class="line">	&lt;/xs:element&gt;</span><br><span class="line">&lt;/xs:schema&gt;</span><br><span class="line"></span><br><span class="line">//File: book.xml</span><br><span class="line"><span class="comment">#a. 入门案例</span></span><br><span class="line"> &lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;itcast:书架 xmlns:itcast=<span class="string">"http://www.itcast.cn"</span>    //声明指定上xsd文件中定义的名称空间</span><br><span class="line">		    xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> // 指定下面schemaLocation属性出处</span><br><span class="line">		    xsi:schemaLocation=“http://www.itcast.cn book.xsd<span class="string">"&gt; // 指定名称空间的schema</span><br><span class="line"></span><br><span class="line">	&lt;itcast:书&gt;</span><br><span class="line">		&lt;itcast:书名&gt;JavaScript网页开发&lt;/itcast:书名&gt;</span><br><span class="line">		&lt;itcast:作者&gt;张孝祥&lt;/itcast:作者&gt;</span><br><span class="line">		&lt;itcast:售价&gt;28.00元&lt;/itcast:售价&gt;</span><br><span class="line">	&lt;/itcast:书&gt;</span><br><span class="line">&lt;/itcast:书架&gt;</span><br><span class="line">    b. 使用默认命名空间  </span><br><span class="line">	&lt;书架 xmlns="</span>http://www.itcast.cn<span class="string">"</span><br><span class="line">		xmlns:xsi="</span>http://www.w3.org/<span class="number">2001</span>/XMLSchema-instance<span class="string">"</span><br><span class="line">		xsi:schemaLocation=“http://www.itcast.cn book.xsd"</span>&gt;</span><br><span class="line">		&lt;书&gt;</span><br><span class="line">		&lt;书名&gt;JavaScript网页开发&lt;/书名&gt;</span><br><span class="line">		&lt;作者&gt;张孝祥&lt;/作者&gt;</span><br><span class="line">		&lt;售价&gt;<span class="number">28.00</span>元&lt;/售价&gt;</span><br><span class="line">		&lt;/书&gt;</span><br><span class="line">	&lt;书架&gt;</span><br><span class="line"><span class="comment">#c. 使用多个命名空间</span></span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;书架 xmlns=<span class="string">"http://www.it315.org/xmlbook/schema"</span> </span><br><span class="line">	xmlns:demo=<span class="string">"http://www.it315.org/demo/schema"</span></span><br><span class="line">	xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">	xsi:schemaLocation=<span class="string">"http://www.it315.org/xmlbook/schema 	http://www.it315.org/xmlbook.xsd //命名空间1</span><br><span class="line">	http://www.it315.org/demo/schema http://www.it315.org/demo.xsd"</span>&gt; //命名空间<span class="number">2</span></span><br><span class="line">	&lt;书&gt;</span><br><span class="line">		&lt;书名&gt;JavaScript网页开发&lt;/书名&gt;</span><br><span class="line">		&lt;作者&gt;张孝祥&lt;/作者&gt;</span><br><span class="line">		&lt;售价 demo:币种=”人民币”&gt;<span class="number">28.00</span>元&lt;/售价&gt;</span><br><span class="line">	&lt;/书&gt;</span><br><span class="line">&lt;/书架&gt;</span><br><span class="line"><span class="comment">#d. 不使用名称空间</span></span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;书架 xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">	xsi:noNamespaceSchemaLocation=<span class="string">"xmlbook.xsd"</span>&gt;</span><br><span class="line">	&lt;书&gt;</span><br><span class="line">		&lt;书名&gt;JavaScript网页开发&lt;/书名&gt;</span><br><span class="line">		&lt;作者&gt;张孝祥&lt;/作者&gt;</span><br><span class="line">		&lt;售价&gt;<span class="number">28.00</span>元&lt;/售价&gt;</span><br><span class="line">	&lt;/书&gt;</span><br><span class="line">&lt;/书架&gt;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/01/19/xml文件约束与解析/" >huaqianlee.me/2015/01/19/xml文件约束与解析/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Javaweb/">Javaweb</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/xml/">xml</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/20/JUnit-test的用法/" title="JUnit-test的用法">
+  <strong>上一篇：</strong><br/>
+  <span>
+  JUnit-test的用法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/18/xml基础/"  title="xml基础">
+ <strong>下一篇：</strong><br/> 
+ <span>xml基础
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/01/19/xml文件约束与解析/" data-title="xml文件约束与解析" data-url="http://huaqianlee.me/2015/01/19/xml文件约束与解析/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Javaweb/" title="Javaweb">Javaweb<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Android/译文/" title="译文">译文<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/编译/" title="编译">编译<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Log/" title="Log">Log<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/文件IO/" title="文件IO">文件IO<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/xml/" title="xml">xml<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/调试/" title="调试">调试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.daimajia.com/" target="_blank" title="代码家">代码家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.stormzhang.com/" target="_blank" title="stormzhang">stormzhang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Andy Lau in Hongkong. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/huaqianlee" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/AndyLee-Github" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4511267/huaqian-lee" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/Andylee_sarah" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/huaqianlee" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:huaqianlee@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/AndyLee-Github/customtheme" target="_blank" title="Andy Lee">Andy Lee</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Andy.Lee">Andy.Lee</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"AndyLee"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'AndyLee';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-63838023-1', 'huaqianlee.me');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5ab1107031547fb5411cd06ed47f1348## e.g. e6d1f421bbc9962127a50488f9ed37d1 your baidu tongji site code' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
