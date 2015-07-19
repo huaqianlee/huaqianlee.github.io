@@ -17,7 +17,7 @@
 新版Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to debug with Android logging">
-<meta property="og:url" content="http://huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/index.html">
+<meta property="og:url" content="http://huaqianlee.me/2015/07/18/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/index.html">
 <meta property="og:site_name" content="Andy.Lee's blog">
 <meta property="og:description" content="Android日志系统详解　　How to debug with Android logging　　怎么抓取Android日志文件
 　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：Android日志系统详解。其系统架构如下：　　　
@@ -96,7 +96,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/" title="How to debug with Android logging" itemprop="url">How to debug with Android logging</a>
+      <a href="/2015/07/18/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/" title="How to debug with Android logging" itemprop="url">How to debug with Android logging</a>
   </h1>
 
   
@@ -105,15 +105,15 @@
 		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-19T07:43:04.000Z" itemprop="datePublished"> 发表于 Jul 19 2015</time>
+    <time datetime="2015-07-18T07:43:04.000Z" itemprop="datePublished"> 发表于 Jul 18 2015</time>
     
   </p>
   
 </header>
 	<div class="article-content">
 		
-		<p>　　<a href="http://huaqianlee.me/2015/07/19/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a><br>　　<a href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/" target="_blank" rel="external">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" target="_blank" rel="external">怎么抓取Android日志文件</a></p>
-<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：<a href="http://huaqianlee.me/2015/07/19/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
+		<p>　　<a href="http://huaqianlee.me/2015/07/18/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a><br>　　<a href="http://huaqianlee.me/2015/07/18/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/" target="_blank" rel="external">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" target="_blank" rel="external">怎么抓取Android日志文件</a></p>
+<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：<a href="http://huaqianlee.me/2015/07/18/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
 <blockquote>
 <p>新版Android中log_kernel已改为log_system</p>
 </blockquote>
@@ -144,7 +144,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/">Andy Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/" >huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/07/18/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/" >huaqianlee.me/2015/07/18/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/ </a>
 
 </div>
 <div class="article-catetags">
@@ -212,7 +212,7 @@
 
 
 <div class="next">
-<a href="/2015/07/19/Android-Logging-system-Android日志系统详解/"  title="Android日志系统(logging system)详解">
+<a href="/2015/07/18/Android-Logging-system-Android日志系统详解/"  title="Android日志系统(logging system)详解">
  <strong>下一篇：</strong><br/> 
  <span>Android日志系统(logging system)详解
 </span>
@@ -223,7 +223,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/" data-title="How to debug with Android logging" data-url="http://huaqianlee.me/2015/07/19/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/"></div>
+	<div class="ds-thread" data-thread-key="2015/07/18/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/" data-title="How to debug with Android logging" data-url="http://huaqianlee.me/2015/07/18/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/"></div>
 </section>
 
 
