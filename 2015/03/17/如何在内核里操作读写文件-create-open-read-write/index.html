@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>如何在内核里操作文件(create/open/read/write) | Andy.Lee&#39;s blog</title>
+    <title>如何在内核里操作文件(create/open/read/write) | Andy.Lee&#39;s Plus</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Andy.Lee">
@@ -16,7 +16,7 @@ Includes1234#include &amp;lt;linux/fs.h&amp;gt;#include &amp;lt;asm/segment.h&am
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在内核里操作文件(create/open/read/write)">
 <meta property="og:url" content="http://huaqianlee.me/2015/03/17/如何在内核里操作读写文件-create-open-read-write/index.html">
-<meta property="og:site_name" content="Andy.Lee's blog">
+<meta property="og:site_name" content="Andy.Lee's Plus">
 <meta property="og:description" content="因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：
 Includes1234#include &amp;lt;linux/fs.h&amp;gt;#include &amp;lt;asm/segment.h&amp;gt;#include &amp;lt;asm/uaccess.h&amp;gt;#include &amp;lt">
 <meta name="twitter:card" content="summary">
@@ -27,7 +27,7 @@ Includes1234#include &amp;lt;linux/fs.h&amp;gt;#include &amp;lt;asm/segment.h&am
 <link rel="publisher" href="107850537041795428182">
 
     
-    <link rel="alternative" href="/atom.xml" title="Andy.Lee&#39;s blog" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Andy.Lee&#39;s Plus" type="application/atom+xml">
     
     
     <link rel="icon" href="/img/favicon.ico">
@@ -45,11 +45,11 @@ Includes1234#include &amp;lt;linux/fs.h&amp;gt;#include &amp;lt;asm/segment.h&am
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="Andy.Lee&#39;s blog" title="Andy.Lee&#39;s blog"/></a>
+				<a href="/"><img src="/img/logo.png" alt="Andy.Lee&#39;s Plus" title="Andy.Lee&#39;s Plus"/></a>
 			</div>
 			
 			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Andy.Lee&#39;s blog">Andy.Lee&#39;s blog</a></h1>
+				<h1 class="site-name"><a href="/" title="Andy.Lee&#39;s Plus">Andy.Lee&#39;s Plus</a></h1>
 				<h2 class="blog-motto">Good good study, day day up !</h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
