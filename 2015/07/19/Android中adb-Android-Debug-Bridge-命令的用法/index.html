@@ -139,8 +139,8 @@
 <h3 id="查询仿真器或者设备">查询仿真器或者设备</h3><p>　　在执行adb命令前,我们可以通过命令去查看仿真器或设备的连接清单，命令如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure></p>
 <p>　　执行这个命令后，adb将打印每个实例的状态信息：</p>
 <ul>
-<li>Serial number ：adb通过仿真器或设备的console端口号创建的一个独一无二的字符串，格式为<type>-<consoleport>如：emulator-5554
-　</consoleport></type></li>
+<li>Serial number ：adb通过仿真器或设备的console端口号创建的一个独一无二的字符串，格式为“type-consolePort”，如：emulator-5554
+　</li>
 <li>State ： 实例的连接状态，如下：　<ul>
 <li>offline ：未连接或没回应</li>
 <li>device ：实例连接到adb server，不过并不意味着Android完全启动可操作的，因为文件系统启动过程中，adb也可连接</li>
