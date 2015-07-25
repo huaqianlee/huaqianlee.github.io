@@ -1,0 +1,625 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Android源码bootable解析之bootloader LK(little kernel) | Andy.Lee Plus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Andy.Lee">
+    
+
+    
+    <meta name="description" content="记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。
+boot架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android源码bootable解析之bootloader LK(little kernel)">
+<meta property="og:url" content="http://huaqianlee.me/2015/07/25/Android源码bootable解析之LK-bootloader-little-kernel/index.html">
+<meta property="og:site_name" content="Andy.Lee Plus">
+<meta property="og:description" content="记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。
+boot架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android源码bootable解析之bootloader LK(little kernel)">
+<meta name="twitter:description" content="记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。
+boot架">
+<meta name="twitter:creator" content="@Andylee_sarah">
+<link rel="publisher" href="107850537041795428182">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Andy.Lee Plus" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/andylee.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/andylee.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Andy.Lee Plus" title="Andy.Lee Plus"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Andy.Lee Plus">Andy.Lee Plus</a></h1>
+				<h2 class="blog-motto">Good good study, day day up !</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/categories">Categories</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="huaqianlee.me" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 11011705640184761899## e.g. &quot;783281470518440642&quot;  for your baidu search id ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+<!--<a href="https://github.com/AndyLee-Github"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>-->
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/25/Android源码bootable解析之LK-bootloader-little-kernel/" title="Android源码bootable解析之bootloader LK(little kernel)" itemprop="url">Android源码bootable解析之bootloader LK(little kernel)</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-25T07:56:13.000Z" itemprop="datePublished"> 发表于 Jul 25 2015</time>
+    
+  </p>
+  
+</header>
+	<div class="article-content">
+		
+		<p>记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。</p>
+<h2 id="boot架构">boot架构</h2><a id="more"></a>
+<p>首先来了解一下bootable代码的目录结构，其下主要有三个子目录，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bootable</span></span><br><span class="line">-bootloader/LK</span><br><span class="line">   -app            <span class="comment">#功能实现，如 adb 命令</span></span><br><span class="line">   -arch           <span class="comment">#CPU架构</span></span><br><span class="line">   -dev            <span class="comment">#设备驱动</span></span><br><span class="line">   -include      <span class="comment">#头文件</span></span><br><span class="line">   -kernel        <span class="comment">#主文件，main.c</span></span><br><span class="line">   -lib             <span class="comment">#库文件</span></span><br><span class="line">   -platform    <span class="comment">#平台文件，如：msm8916</span></span><br><span class="line">   -projiect     <span class="comment">#mk文件</span></span><br><span class="line">   -make       <span class="comment">#mk文件</span></span><br><span class="line">   -scripts      <span class="comment">#脚本文件</span></span><br><span class="line">   -target        <span class="comment">#目标设备文件</span></span><br><span class="line">   AndroidBoot.mk</span><br><span class="line">   makefie</span><br><span class="line">-recovery <span class="comment">#后博文分析</span></span><br><span class="line">-diskinstaller <span class="comment">#后面博文分析</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="LK流程分析">LK流程分析</h2><p>在LK的链接文件ssystem-onesegment.ld 或  system-twosegment.ld （位于bootable/bootloadler/lk/arch/arm/，此文件用来指定代码的内存分布等）中，LK指定lk/arch/crt0.s中的_start函数为入口函数，crt.s主要初始化CPU，然后长跳转（bl）到lk/kernel/main.c中kmain函数，初始化lk系统，接着初始化boot，跳转到kernel。接下来按照此流程来分析一下。</p>
+<h3 id="kmain()">kmain()</h3><p>与 boot 启动初始化相关函数为 arch_early_init、  platform_early_init 、bootstrap2/bootstrap_nandwrite，这些函数比较重要,待会儿再详解,如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void kmain(void)</span><br><span class="line">&#123;</span><br><span class="line">	thread_init_early(); // 初始化化lk线程上下文</span><br><span class="line">	arch_early_init(); // 架构初始化，如关闭cache，使能mmu</span><br><span class="line">	platform_early_init(); // 平台早期初始化</span><br><span class="line">	target_early_init(); //目标设备早期初始化</span><br><span class="line">	bs_<span class="built_in">set</span>_timestamp(BS_BL_START);</span><br><span class="line">	call_constructors(); //静态构造函数初始化</span><br><span class="line">	heap_init(); // 堆初始化</span><br><span class="line">	thread_init(); // 初始化线程</span><br><span class="line">	dpc_init();  //lk系统控制器初始化</span><br><span class="line">	timer_init(); //kernel时钟初始化</span><br><span class="line"></span><br><span class="line"><span class="comment">#if (!ENABLE_NANDWRITE)</span></span><br><span class="line">	thread_resume(thread_create(<span class="string">"bootstrap2"</span>, &amp;bootstrap2, NULL, DEFAULT_PRIORITY, DEFAULT_STACK_SIZE)); // 创建一个线程初始化系统</span><br><span class="line">	<span class="built_in">exit</span>_critical_section(); //使能中断</span><br><span class="line">	thread_become_idle(); //本线程切换为idle线程</span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">        bootstrap_nandwrite(); </span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="arch_early_init()">arch_early_init()</h3><p>因为高通平台用的arm架构,所以文件路径为:\bootable\bootloader\lk\arch\arm\arch.c.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">void arch_early_init(void)</span><br><span class="line">&#123;</span><br><span class="line">	arch_<span class="built_in">disable</span>_cache(UCACHE); //关闭cache</span><br><span class="line">	<span class="built_in">set</span>_vector_base(MEMBASE); // 设置异常向量基地址</span><br><span class="line">	arm_mmu_init(); //初始化mmu</span><br><span class="line">	arch_<span class="built_in">enable</span>_cache(UCACHE); //打开cache</span><br><span class="line"></span><br><span class="line">	/* <span class="built_in">enable</span> cp10 and cp11 */</span><br><span class="line">	__asm__ volatile(<span class="string">"mrc	p15, 0, %0, c1, c0, 2"</span> : <span class="string">"=r"</span> (val));</span><br><span class="line">	val |= (<span class="number">3</span>&lt;&lt;<span class="number">22</span>)|(<span class="number">3</span>&lt;&lt;<span class="number">20</span>);</span><br><span class="line">	__asm__ volatile(<span class="string">"mcr	p15, 0, %0, c1, c0, 2"</span> :: <span class="string">"r"</span> (val));</span><br><span class="line">	/* <span class="built_in">set</span> <span class="built_in">enable</span> bit <span class="keyword">in</span> fpexc(中断相关寄存器) */</span><br><span class="line">	__asm__ volatile(<span class="string">"mrc  p10, 7, %0, c8, c0, 0"</span> : <span class="string">"=r"</span> (val));</span><br><span class="line">	val |= (<span class="number">1</span>&lt;&lt;<span class="number">30</span>);</span><br><span class="line">	__asm__ volatile(<span class="string">"mcr  p10, 7, %0, c8, c0, 0"</span> :: <span class="string">"r"</span> (val));</span><br><span class="line">	/* <span class="built_in">enable</span> the cycle count register */</span><br><span class="line">	__asm__ volatile(<span class="string">"mrc	p15, 0, %0, c9, c12, 0"</span> : <span class="string">"=r"</span> (en));</span><br><span class="line">	en &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">3</span>); /* cycle count every cycle */</span><br><span class="line">	en |= <span class="number">1</span>; /* <span class="built_in">enable</span> all performance counters */</span><br><span class="line">	__asm__ volatile(<span class="string">"mcr	p15, 0, %0, c9, c12, 0"</span> :: <span class="string">"r"</span> (en));</span><br><span class="line"></span><br><span class="line">	/* <span class="built_in">enable</span> cycle counter */</span><br><span class="line">	en = (<span class="number">1</span>&lt;&lt;<span class="number">31</span>);</span><br><span class="line">	__asm__ volatile(<span class="string">"mcr	p15, 0, %0, c9, c12, 1"</span> :: <span class="string">"r"</span> (en));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="platform_early_init">platform_early_init</h3><p>每个平台的初始化不一样,我使用的msm8916,路径为:\bootable\bootloader\lk\platform\msm8916\platform.c,如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void platform_early_init(void)</span><br><span class="line">&#123;</span><br><span class="line">	board_init(); //主板初始化</span><br><span class="line">	platform_clock_init(); //时钟初始化</span><br><span class="line">	qgic_init();</span><br><span class="line">	qtimer_init(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="bootstrap2">bootstrap2</h3><p>此函数由kmain中创建的线程调用，路径为:bootable\bootloader\lk\kernel\main.c。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">static int bootstrap2(void *arg)</span><br><span class="line">&#123;</span><br><span class="line">	arch_init(); //架构初始化</span><br><span class="line">	bio_init();</span><br><span class="line">	fs_init();</span><br><span class="line">	platform_init(); //平台初始化, 主要初始化系统时钟,超频等</span><br><span class="line">	target_init(); //目标设备初始化,主要初始化Flash,整合分区表等</span><br><span class="line">	apps_init(); // 应用功能初始化,调用aboot_init,加载kernel等</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="aboot_init">aboot_init</h3><p>此函数由上apps_init函数调用，路径: bootable\bootloader\lk\app\aboot\aboot.c.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">/* Setup page size information <span class="keyword">for</span> nv storage */</span><br><span class="line">	<span class="keyword">if</span> (target_is_emmc_boot())</span><br><span class="line">	&#123;</span><br><span class="line">		page_size = mmc_page_size();</span><br><span class="line">		page_mask = page_size - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		page_size = flash_page_size();</span><br><span class="line">		page_mask = page_size - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">read</span>_device_info(&amp;device); //读取设备信息</span><br><span class="line">	target_display_init(device.display_panel); // splash屏初始化</span><br><span class="line">    target_serialno((unsigned char *) sn_buf); //设置串口号</span><br><span class="line">	memset(display_panel_buf, <span class="string">'\0'</span>, MAX_PANEL_BUF_SIZE); //初始化显存</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (is_user_force_reset()) // 检查关机原因,如果强制重启则正常启动</span><br><span class="line">		goto normal_boot;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (keys_get_state(KEY_VOLUMEUP) &amp;&amp; keys_get_state(KEY_VOLUMEDOWN)) // 如果按下音量上下键</span><br><span class="line">	&#123;</span><br><span class="line">		reboot_device(DLOAD); //重启进入紧急下载	</span><br><span class="line">		<span class="keyword">if</span> (!pm8x41_ponpon_pwrkey()) &#123;//如果按下power键和音量键,进入fastboot模式,这很可能为自定义,Android源码没有</span><br><span class="line">		boot_into_fastboot = <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">    /*检查重启模式,并进入相应模式*/</span><br><span class="line">	reboot_mode = check_reboot_mode();</span><br><span class="line">	hard_reboot_mode = check_hard_reboot_mode();</span><br><span class="line">	<span class="keyword">if</span> (reboot_mode == RECOVERY_MODE ||</span><br><span class="line">		hard_reboot_mode == RECOVERY_HARD_RESET_MODE) &#123;</span><br><span class="line">		boot_into_recovery = <span class="number">1</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reboot_mode == FASTBOOT_MODE ||</span><br><span class="line">		hard_reboot_mode == FASTBOOT_HARD_RESET_MODE) &#123;</span><br><span class="line">		boot_into_fastboot = <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reboot_mode == ALARM_BOOT ||</span><br><span class="line">		hard_reboot_mode == RTC_HARD_RESET_MODE) &#123;</span><br><span class="line">		boot_reason_alarm = <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">normal_boot:</span><br><span class="line">	<span class="keyword">if</span> (!boot_into_fastboot)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (target_is_emmc_boot())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(emmc_recovery_init()) //emmc_recovery初始化</span><br><span class="line">			<span class="built_in">set</span>_tamper_fuse_cmd();</span><br><span class="line">			<span class="built_in">set</span>_tamper_flag(device.is_tampered);</span><br><span class="line">			boot_linux_from_mmc();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">		&#123;</span><br><span class="line">			recovery_init();  // recovery模式初始化</span><br><span class="line">			<span class="built_in">set</span>_tamper_flag(device.is_tampered);</span><br><span class="line">       &#125;</span><br><span class="line">		boot_linux_from_flash(); //从Flash中加载启动内核</span><br><span class="line">	&#125;</span><br><span class="line">	/*不应该执行到这儿,只有没能正常启动时才会执行到这*/</span><br><span class="line">	aboot_fastboot_register_commands(); // 注册fastboot命令,</span><br><span class="line">	partition_dump(); //dump(即保存)分区表调试信息</span><br><span class="line">	fastboot_init(target_get_scratch_address(), target_get_max_flash_size()); //初始化并进入fastboot</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="boot_linux_from_flash">boot_linux_from_flash</h3><p>路径: bootable\bootloader\lk\app\aboot\aboot.c。此函数实现内核的加载，boot镜像boot.img由如下几部分构成：kernel头、kernel、ramdisk(虚拟磁盘)、second stage（可以没有）。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (target_is_emmc_boot()) &#123;  // 如果目标设备是emmc boot(内嵌boot)</span><br><span class="line">		hdr = (struct boot_img_hdr *)EMMC_BOOT_IMG_HEADER_ADDR; // 获取emmc boot镜像首地址</span><br><span class="line">		goto <span class="built_in">continue</span>_boot; // 继续启动</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ptable = flash_get_ptable(); // 获取分区表</span><br><span class="line">	<span class="keyword">if</span>(!boot_into_recovery) //非recovery模式</span><br><span class="line">	&#123;</span><br><span class="line">	    ptn = ptable_find(ptable, <span class="string">"boot"</span>); //获取boot分区</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">	    ptn = ptable_find(ptable, <span class="string">"recovery"</span>); // 获取recovery分区</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (flash_<span class="built_in">read</span>(ptn, offset, buf, page_size)) //获取boot镜像</span><br><span class="line">	<span class="keyword">if</span> (memcmp(hdr-&gt;magic, BOOT_MAGIC, BOOT_MAGIC_SIZE)) //校验boot头</span><br><span class="line">	<span class="keyword">if</span> (hdr-&gt;page_size != page_size) //校验boot页大小</span><br><span class="line"></span><br><span class="line">	/*</span><br><span class="line">	 * Update the kernel/ramdisk/tags address <span class="keyword">if</span> the boot image header</span><br><span class="line">	 * has default values, these default values come from mkbootimg when</span><br><span class="line">	 * the boot image is flashed using fastboot flash:raw</span><br><span class="line">	 */</span><br><span class="line">	update_ker_tags_rdisk_addr(hdr); //读取boot image头，如有默认值则更新kernel、ramdisk、tag地址</span><br><span class="line"></span><br><span class="line">	/* Get virtual addresses since the hdr saves physical addresses. */</span><br><span class="line">	/* 根据物理地址获取虚拟地址 */</span><br><span class="line">	hdr-&gt;kernel_addr = VA((addr_t)(hdr-&gt;kernel_addr));</span><br><span class="line">	hdr-&gt;ramdisk_addr = VA((addr_t)(hdr-&gt;ramdisk_addr));</span><br><span class="line">	hdr-&gt;tags_addr = VA((addr_t)(hdr-&gt;tags_addr));</span><br><span class="line"></span><br><span class="line">	kernel_actual  = ROUND_TO_PAGE(hdr-&gt;kernel_size,  page_mask); //获取kernel实际地址</span><br><span class="line">	ramdisk_actual = ROUND_TO_PAGE(hdr-&gt;ramdisk_size, page_mask); // 获取ramdisk实际地址</span><br><span class="line"></span><br><span class="line">	/* Check <span class="keyword">if</span> the addresses <span class="keyword">in</span> the header are valid. */</span><br><span class="line">	/* 检查镜像头中的地址有效性*/</span><br><span class="line">	<span class="keyword">if</span> (check_aboot_addr_range_overlap(hdr-&gt;kernel_addr, kernel_actual) ||</span><br><span class="line">		check_aboot_addr_range_overlap(hdr-&gt;ramdisk_addr, ramdisk_actual))</span><br><span class="line"><span class="comment">#ifndef DEVICE_TREE // 设备树,即dts\dtsi文件</span></span><br><span class="line">		<span class="keyword">if</span> (check_aboot_addr_range_overlap(hdr-&gt;tags_addr, MAX_TAGS_SIZE)) //检查设备树地址是否与aboot地址重合</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line"></span><br><span class="line">	/* Authenticate Kernel */</span><br><span class="line">	/* 鉴定内核 */</span><br><span class="line">	<span class="keyword">if</span>(target_use_signed_kernel() &amp;&amp; (!device.is_unlocked)) //如果用签名kernel并且设备未被锁</span><br><span class="line">	&#123;</span><br><span class="line">		image_addr = (unsigned char *)target_get_scratch_address();</span><br><span class="line">		offset = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#if DEVICE_TREE</span></span><br><span class="line">		dt_actual = ROUND_TO_PAGE(hdr-&gt;dt_size, page_mask);</span><br><span class="line">		imagesize_actual = (page_size + kernel_actual + ramdisk_actual + dt_actual);//获取镜像实际地址</span><br><span class="line">		<span class="keyword">if</span> (check_aboot_addr_range_overlap(hdr-&gt;tags_addr, hdr-&gt;dt_size)) //检查设备树地址是否与aboot地址重合</span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">		imagesize_actual = (page_size + kernel_actual + ramdisk_actual);</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">		bs_<span class="built_in">set</span>_timestamp(BS_KERNEL_LOAD_START); // 开始加载boot镜像</span><br><span class="line"></span><br><span class="line">		/* Read image without signature */</span><br><span class="line">		/* 读取没有签名的镜像*/</span><br><span class="line">		<span class="keyword">if</span> (flash_<span class="built_in">read</span>(ptn, offset, (void *)image_addr, imagesize_actual))</span><br><span class="line">		bs_<span class="built_in">set</span>_timestamp(BS_KERNEL_LOAD_DONE); //boot镜像加载完成</span><br><span class="line"></span><br><span class="line">		offset = imagesize_actual;</span><br><span class="line">		/* Read signature */</span><br><span class="line">		/* 获取boot镜像签名 */</span><br><span class="line">		<span class="keyword">if</span> (flash_<span class="built_in">read</span>(ptn, offset, (void *)(image_addr + offset), page_size))</span><br><span class="line">		verify_signed_bootimg(image_addr, imagesize_actual);</span><br><span class="line"></span><br><span class="line">		/* Move kernel and ramdisk to correct address */</span><br><span class="line">		/* 移动kernel和ramdisk到正确地址*/</span><br><span class="line">		memmove((void*) hdr-&gt;kernel_addr, (char *)(image_addr + page_size), hdr-&gt;kernel_size);</span><br><span class="line">		memmove((void*) hdr-&gt;ramdisk_addr, (char *)(image_addr + page_size + kernel_actual), hdr-&gt;ramdisk_size);</span><br><span class="line"><span class="comment">#if DEVICE_TREE</span></span><br><span class="line">		/* Validate and Read device device tree <span class="keyword">in</span> the <span class="string">"tags_add */</span><br><span class="line">		/* 校验并获取设备树*/</span><br><span class="line">		if (check_aboot_addr_range_overlap(hdr-&gt;tags_addr, dt_entry.size))</span><br><span class="line">		memmove((void*) hdr-&gt;tags_addr, (char *)(image_addr + page_size + kernel_actual + ramdisk_actual), hdr-&gt;dt_size);</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">		/* Make sure everything from scratch address is read before next step!*/</span><br><span class="line">		if(device.is_tampered)</span><br><span class="line">		&#123;</span><br><span class="line">			write_device_info_flash(&amp;device);</span><br><span class="line">		&#125;</span><br><span class="line">#if USE_PCOM_SECBOOT</span><br><span class="line">		set_tamper_flag(device.is_tampered);</span><br><span class="line">#endif</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		offset = page_size;</span><br><span class="line"></span><br><span class="line">		kernel_actual = ROUND_TO_PAGE(hdr-&gt;kernel_size, page_mask);</span><br><span class="line">		ramdisk_actual = ROUND_TO_PAGE(hdr-&gt;ramdisk_size, page_mask);</span><br><span class="line">		second_actual = ROUND_TO_PAGE(hdr-&gt;second_size, page_mask);</span><br><span class="line"></span><br><span class="line">		bs_set_timestamp(BS_KERNEL_LOAD_START); // 开始加载boot镜像</span><br><span class="line"></span><br><span class="line">		if (flash_read(ptn, offset, (void *)hdr-&gt;kernel_addr, kernel_actual)) // 获取boot镜像</span><br><span class="line">		offset += kernel_actual;</span><br><span class="line">		if (flash_read(ptn, offset, (void *)hdr-&gt;ramdisk_addr, ramdisk_actual)) //获取ramdisk镜像</span><br><span class="line">		offset += ramdisk_actual;</span><br><span class="line">		bs_set_timestamp(BS_KERNEL_LOAD_DONE); // 结束加载</span><br><span class="line"></span><br><span class="line">		if(hdr-&gt;second_size != 0) &#123;</span><br><span class="line">			offset += second_actual;</span><br><span class="line">			/* Second image loading not implemented. */</span><br><span class="line">			ASSERT(0); //跳过第二镜像</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">#if DEVICE_TREE</span><br><span class="line">		if(hdr-&gt;dt_size != 0) &#123; // 如果设备文件存在</span><br><span class="line"></span><br><span class="line">			/* Read the device tree table into buffer */			</span><br><span class="line">			if(flash_read(ptn, offset, (void *) dt_buf, page_size))  // 读取设备树分区</span><br><span class="line">			table = (struct dt_table*) dt_buf;</span><br><span class="line"></span><br><span class="line">			if (dev_tree_validate(table, hdr-&gt;page_size, &amp;dt_hdr_size) != 0) //校验设备树分区</span><br><span class="line"></span><br><span class="line">			table = (struct dt_table*) memalign(CACHE_LINE, dt_hdr_size); // 获取内存地址</span><br><span class="line"></span><br><span class="line">			/* Read the entire device tree table into buffer */</span><br><span class="line">			if(flash_read(ptn, offset, (void *)table, dt_hdr_size)) // 读取设备树分区</span><br><span class="line"></span><br><span class="line">			/* Find index of device tree within device tree table */</span><br><span class="line">			if(dev_tree_get_entry_info(table, &amp;dt_entry) != 0) //获取设备树地址</span><br><span class="line"></span><br><span class="line">			/* Validate and Read device device tree in the "</span>tags_add */</span><br><span class="line">			<span class="keyword">if</span> (check_aboot_addr_range_overlap(hdr-&gt;tags_addr, dt_entry.size)) // 校验设备树地址是否与aboot地址重合</span><br><span class="line"></span><br><span class="line">			/* Read device device tree <span class="keyword">in</span> the <span class="string">"tags_add */</span><br><span class="line">			if(flash_read(ptn, offset + dt_entry.offset, (void *)hdr-&gt;tags_addr, dt_entry.size)) // 获取设备树</span><br><span class="line">		&#125;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">continue_boot:</span><br><span class="line"></span><br><span class="line">	/* TODO: create/pass atags to kernel */</span><br><span class="line"></span><br><span class="line">	boot_linux((void *)hdr-&gt;kernel_addr, (void *)hdr-&gt;tags_addr,</span><br><span class="line">		   (const char *)hdr-&gt;cmdline, board_machtype(),</span><br><span class="line">		   (void *)hdr-&gt;ramdisk_addr, hdr-&gt;ramdisk_size); //启动内核</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>因为时间有限,并没有详细去跟代码。很多细节都是大概扫了一下函数内容或者根据注释得出结果，如有错误,欢迎指出,共同学习,共同进步。</p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/07/25/Android源码bootable解析之LK-bootloader-little-kernel/" >huaqianlee.me/2015/07/25/Android源码bootable解析之LK-bootloader-little-kernel/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/源码分析/">源码分析</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/07/25/Android源码bootable解析之recovery/" title="Android源码bootable解析之recovery">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Android源码bootable解析之recovery</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/07/19/Android中adb-Android-Debug-Bridge-命令的用法/"  title="Android中adb(Android Debug Bridge)命令的用法">
+ <strong>下一篇：</strong><br/> 
+ <span>Android中adb(Android Debug Bridge)命令的用法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/07/25/Android源码bootable解析之LK-bootloader-little-kernel/" data-title="Android源码bootable解析之bootloader LK(little kernel)" data-url="http://huaqianlee.me/2015/07/25/Android源码bootable解析之LK-bootloader-little-kernel/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>13</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Javaweb/" title="Javaweb">Javaweb<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Android/译文/" title="译文">译文<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/编译/" title="编译">编译<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Log/" title="Log">Log<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/文件IO/" title="文件IO">文件IO<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/xml/" title="xml">xml<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/调试/" title="调试">调试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://huaqianlee.me/" target="_blank" title="AndyLee Plus">AndyLee Plus</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://fpgadeveloper.wang/" target="_blank" title="FPGA开发者网">FPGA开发者网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.daimajia.com/" target="_blank" title="代码家">代码家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.stormzhang.com/" target="_blank" title="stormzhang">stormzhang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark">Jark</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Andy Lau in Hongkong. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/huaqianlee" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/AndyLee-Github" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4511267/huaqian-lee" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/Andylee_sarah" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/huaqianlee" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:huaqianlee@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/AndyLee-Github/customtheme" target="_blank" title="Andy Lee">Andy Lee</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Andy.Lee">Andy.Lee</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"AndyLee"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'AndyLee';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-63838023-1', 'huaqianlee.me');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5ab1107031547fb5411cd06ed47f1348## e.g. e6d1f421bbc9962127a50488f9ed37d1 your baidu tongji site code' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
