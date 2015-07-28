@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-07-25T08:46:36.079Z</updated>
+  <updated>2015-07-28T17:07:30.886Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -15,27 +15,14 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Android源码bootable解析之recovery]]></title>
-    <link href="http://huaqianlee.me/2015/07/25/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8Brecovery/"/>
-    <id>http://huaqianlee.me/2015/07/25/Android源码bootable解析之recovery/</id>
-    <published>2015-07-25T08:46:36.000Z</published>
-    <updated>2015-07-25T08:46:36.079Z</updated>
-    <content type="html"></content>
-    <summary type="html">
-    
-    </summary>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[Android源码bootable解析之bootloader LK(little kernel)]]></title>
     <link href="http://huaqianlee.me/2015/07/25/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/"/>
     <id>http://huaqianlee.me/2015/07/25/Android源码bootable解析之LK-bootloader-little-kernel/</id>
     <published>2015-07-25T07:56:13.000Z</published>
-    <updated>2015-07-25T15:08:04.465Z</updated>
+    <updated>2015-07-28T17:07:30.886Z</updated>
     <content type="html"><![CDATA[<p>记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。</p>
 <h2 id="boot架构">boot架构</h2><a id="more"></a>
-<p>首先来了解一下bootable代码的目录结构，其下主要有三个子目录，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bootable</span></span><br><span class="line">-bootloader/LK</span><br><span class="line">   -app            <span class="comment">#功能实现，如 adb 命令</span></span><br><span class="line">   -arch           <span class="comment">#CPU架构</span></span><br><span class="line">   -dev            <span class="comment">#设备驱动</span></span><br><span class="line">   -include      <span class="comment">#头文件</span></span><br><span class="line">   -kernel        <span class="comment">#主文件，main.c</span></span><br><span class="line">   -lib             <span class="comment">#库文件</span></span><br><span class="line">   -platform    <span class="comment">#平台文件，如：msm8916</span></span><br><span class="line">   -projiect     <span class="comment">#mk文件</span></span><br><span class="line">   -make       <span class="comment">#mk文件</span></span><br><span class="line">   -scripts      <span class="comment">#脚本文件</span></span><br><span class="line">   -target        <span class="comment">#目标设备文件</span></span><br><span class="line">   AndroidBoot.mk</span><br><span class="line">   makefie</span><br><span class="line">-recovery <span class="comment">#后博文分析</span></span><br><span class="line">-diskinstaller <span class="comment">#后面博文分析</span></span><br></pre></td></tr></table></figure></p>
+<p>首先来了解一下bootable代码的目录结构，其下主要有三个子目录，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bootable</span></span><br><span class="line">-bootloader/LK</span><br><span class="line">   -app            <span class="comment">#功能实现，如 adb 命令</span></span><br><span class="line">   -arch           <span class="comment">#CPU架构</span></span><br><span class="line">   -dev            <span class="comment">#设备驱动</span></span><br><span class="line">   -include      <span class="comment">#头文件</span></span><br><span class="line">   -kernel        <span class="comment">#主文件，main.c</span></span><br><span class="line">   -lib             <span class="comment">#库文件</span></span><br><span class="line">   -platform    <span class="comment">#平台文件，如：msm8916</span></span><br><span class="line">   -projiect     <span class="comment">#mk文件</span></span><br><span class="line">   -make       <span class="comment">#mk文件</span></span><br><span class="line">   -scripts      <span class="comment">#脚本文件</span></span><br><span class="line">   -target        <span class="comment">#目标设备文件</span></span><br><span class="line">   AndroidBoot.mk</span><br><span class="line">   makefie</span><br><span class="line">-recovery <span class="comment">#由lk启动，主要用来更新主系统（即我们平时使用的Android系统）</span></span><br><span class="line">-diskinstaller <span class="comment">#打包镜像</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="LK流程分析">LK流程分析</h2><p>在LK的链接文件ssystem-onesegment.ld 或  system-twosegment.ld （位于bootable/bootloadler/lk/arch/arm/，此文件用来指定代码的内存分布等）中，LK指定lk/arch/crt0.s中的_start函数为入口函数，crt.s主要初始化CPU，然后长跳转（bl）到lk/kernel/main.c中kmain函数，初始化lk系统，接着初始化boot，跳转到kernel。接下来按照此流程来分析一下。</p>
 <h3 id="kmain()">kmain()</h3><p>与 boot 启动初始化相关函数为 arch_early_init、  platform_early_init 、bootstrap2/bootstrap_nandwrite，这些函数比较重要,待会儿再详解,如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void kmain(void)</span><br><span class="line">&#123;</span><br><span class="line">	thread_init_early(); // 初始化化lk线程上下文</span><br><span class="line">	arch_early_init(); // 架构初始化，如关闭cache，使能mmu</span><br><span class="line">	platform_early_init(); // 平台早期初始化</span><br><span class="line">	target_early_init(); //目标设备早期初始化</span><br><span class="line">	bs_<span class="built_in">set</span>_timestamp(BS_BL_START);</span><br><span class="line">	call_constructors(); //静态构造函数初始化</span><br><span class="line">	heap_init(); // 堆初始化</span><br><span class="line">	thread_init(); // 初始化线程</span><br><span class="line">	dpc_init();  //lk系统控制器初始化</span><br><span class="line">	timer_init(); //kernel时钟初始化</span><br><span class="line"></span><br><span class="line"><span class="comment">#if (!ENABLE_NANDWRITE)</span></span><br><span class="line">	thread_resume(thread_create(<span class="string">"bootstrap2"</span>, &amp;bootstrap2, NULL, DEFAULT_PRIORITY, DEFAULT_STACK_SIZE)); // 创建一个线程初始化系统</span><br><span class="line">	<span class="built_in">exit</span>_critical_section(); //使能中断</span><br><span class="line">	thread_become_idle(); //本线程切换为idle线程</span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">        bootstrap_nandwrite(); </span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="arch_early_init()">arch_early_init()</h3><p>因为高通平台用的arm架构,所以文件路径为:\bootable\bootloader\lk\arch\arm\arch.c.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">void arch_early_init(void)</span><br><span class="line">&#123;</span><br><span class="line">	arch_<span class="built_in">disable</span>_cache(UCACHE); //关闭cache</span><br><span class="line">	<span class="built_in">set</span>_vector_base(MEMBASE); // 设置异常向量基地址</span><br><span class="line">	arm_mmu_init(); //初始化mmu</span><br><span class="line">	arch_<span class="built_in">enable</span>_cache(UCACHE); //打开cache</span><br><span class="line"></span><br><span class="line">	/* <span class="built_in">enable</span> cp10 and cp11 */</span><br><span class="line">	__asm__ volatile(<span class="string">"mrc	p15, 0, %0, c1, c0, 2"</span> : <span class="string">"=r"</span> (val));</span><br><span class="line">	val |= (<span class="number">3</span>&lt;&lt;<span class="number">22</span>)|(<span class="number">3</span>&lt;&lt;<span class="number">20</span>);</span><br><span class="line">	__asm__ volatile(<span class="string">"mcr	p15, 0, %0, c1, c0, 2"</span> :: <span class="string">"r"</span> (val));</span><br><span class="line">	/* <span class="built_in">set</span> <span class="built_in">enable</span> bit <span class="keyword">in</span> fpexc(中断相关寄存器) */</span><br><span class="line">	__asm__ volatile(<span class="string">"mrc  p10, 7, %0, c8, c0, 0"</span> : <span class="string">"=r"</span> (val));</span><br><span class="line">	val |= (<span class="number">1</span>&lt;&lt;<span class="number">30</span>);</span><br><span class="line">	__asm__ volatile(<span class="string">"mcr  p10, 7, %0, c8, c0, 0"</span> :: <span class="string">"r"</span> (val));</span><br><span class="line">	/* <span class="built_in">enable</span> the cycle count register */</span><br><span class="line">	__asm__ volatile(<span class="string">"mrc	p15, 0, %0, c9, c12, 0"</span> : <span class="string">"=r"</span> (en));</span><br><span class="line">	en &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">3</span>); /* cycle count every cycle */</span><br><span class="line">	en |= <span class="number">1</span>; /* <span class="built_in">enable</span> all performance counters */</span><br><span class="line">	__asm__ volatile(<span class="string">"mcr	p15, 0, %0, c9, c12, 0"</span> :: <span class="string">"r"</span> (en));</span><br><span class="line"></span><br><span class="line">	/* <span class="built_in">enable</span> cycle counter */</span><br><span class="line">	en = (<span class="number">1</span>&lt;&lt;<span class="number">31</span>);</span><br><span class="line">	__asm__ volatile(<span class="string">"mcr	p15, 0, %0, c9, c12, 1"</span> :: <span class="string">"r"</span> (en));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -46,6 +33,8 @@
 <blockquote>
 <p>因为时间有限,并没有详细去跟代码。很多细节都是大概扫了一下函数内容或者根据注释得出结果，如有错误,欢迎指出,共同学习,共同进步。</p>
 </blockquote>
+<h1 id="附">附</h1><p>boot.img的头格式定义在：bootable\bootloader\lk\app\nandwrite\bootimg.h。如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> boot_img_hdr</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> magic[BOOT_MAGIC_SIZE];</span><br><span class="line">    <span class="keyword">unsigned</span> kernel_size;  <span class="comment">/* size in bytes */</span></span><br><span class="line">    <span class="keyword">unsigned</span> kernel_addr;  <span class="comment">/* physical load addr */</span></span><br><span class="line">    <span class="keyword">unsigned</span> ramdisk_size; <span class="comment">/* size in bytes */</span></span><br><span class="line">    <span class="keyword">unsigned</span> ramdisk_addr; <span class="comment">/* physical load addr */</span></span><br><span class="line">    <span class="keyword">unsigned</span> second_size;  <span class="comment">/* size in bytes */</span></span><br><span class="line">    <span class="keyword">unsigned</span> second_addr;  <span class="comment">/* physical load addr */</span></span><br><span class="line">    <span class="keyword">unsigned</span> tags_addr;    <span class="comment">/* physical addr for kernel tags */</span></span><br><span class="line">    <span class="keyword">unsigned</span> page_size;    <span class="comment">/* flash page size we assume */</span></span><br><span class="line">    <span class="keyword">unsigned</span> unused[<span class="number">2</span>];    <span class="comment">/* future expansion: should be 0 */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> name[BOOT_NAME_SIZE]; <span class="comment">/* asciiz product name */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> cmdline[BOOT_ARGS_SIZE];</span><br><span class="line">    <span class="keyword">unsigned</span> id[<span class="number">8</span>]; <span class="comment">/* timestamp / checksum / sha1 / etc */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>当我们将编译生成的boot.img用文本编辑软件打开后，能看到boot_im_hdr格式定义的头，如下：<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogboot_img.png" alt="boot.img"></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。</p>
@@ -314,117 +303,6 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Android编译过程详解之三]]></title>
-    <link href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/"/>
-    <id>http://huaqianlee.me/2015/07/12/Android编译过程详解之三/</id>
-    <published>2015-07-12T08:43:04.000Z</published>
-    <updated>2015-07-17T14:18:18.139Z</updated>
-    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
-<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
-<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
-<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
-<thead>
-<tr>
-<th>常量</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PRODUCT_NAME</td>
-<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
-</tr>
-<tr>
-<td>PRODUCT_MODEL</td>
-<td>产品的型号，这也是最终用户将看到的</td>
-</tr>
-<tr>
-<td>PRODUCT_LOCALES</td>
-<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGES</td>
-<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
-</tr>
-<tr>
-<td>PRODUCT_DEVICE</td>
-<td>该产品的工业设计的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_MANUFACTURER</td>
-<td>制造商的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_BRAND</td>
-<td>该产品专门定义的商标（如果有的话）</td>
-</tr>
-<tr>
-<td>PRODUCT_PROPERTY_OVERRIDES</td>
-<td>对于商品属性的定义</td>
-</tr>
-<tr>
-<td>PRODUCT_COPY_FILES</td>
-<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
-</tr>
-<tr>
-<td>PRODUCT_OTA_PUBLIC_KEYS</td>
-<td>对于该产品的 OTA 公开 key 的列表</td>
-</tr>
-<tr>
-<td>PRODUCT_POLICY</td>
-<td>产品使用的策略</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGE_OVERLAYS</td>
-<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
-</tr>
-<tr>
-<td>PRODUCT_CONTRIBUTORS_FILE</td>
-<td>HTML 文件，其中包含项目的贡献者</td>
-</tr>
-<tr>
-<td>PRODUCT_TAGS</td>
-<td>该产品的标签，以空格分格</td>
-</tr>
-</tbody>
-</table>
-<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
-<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
-<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
-　　　</p>
-<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>]]>
-    
-    </summary>
-    
-      <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
-    
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[Android编译过程详解之二]]></title>
     <link href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/"/>
     <id>http://huaqianlee.me/2015/07/12/Android编译过程详解之二/</id>
@@ -619,6 +497,117 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <li>/out/target/common/：该目录下包含了针对设备的共通的编译产物，主要是 Java 应用代码和 Java 库。</li>
 <li>/out/target/product/<product_name>/：包含了针对特定设备的编译结果以及平台相关的 C/C++ 库和二进制文件。其中，<product_name>是具体目标设备的名称。</li>
 <li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。]]>
+    
+    </summary>
+    
+      <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
+    
+      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android编译过程详解之三]]></title>
+    <link href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/"/>
+    <id>http://huaqianlee.me/2015/07/12/Android编译过程详解之三/</id>
+    <published>2015-07-12T08:43:04.000Z</published>
+    <updated>2015-07-17T14:18:18.139Z</updated>
+    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
+<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
+<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
+<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
+<thead>
+<tr>
+<th>常量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRODUCT_NAME</td>
+<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
+</tr>
+<tr>
+<td>PRODUCT_MODEL</td>
+<td>产品的型号，这也是最终用户将看到的</td>
+</tr>
+<tr>
+<td>PRODUCT_LOCALES</td>
+<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGES</td>
+<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
+</tr>
+<tr>
+<td>PRODUCT_DEVICE</td>
+<td>该产品的工业设计的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_MANUFACTURER</td>
+<td>制造商的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_BRAND</td>
+<td>该产品专门定义的商标（如果有的话）</td>
+</tr>
+<tr>
+<td>PRODUCT_PROPERTY_OVERRIDES</td>
+<td>对于商品属性的定义</td>
+</tr>
+<tr>
+<td>PRODUCT_COPY_FILES</td>
+<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
+</tr>
+<tr>
+<td>PRODUCT_OTA_PUBLIC_KEYS</td>
+<td>对于该产品的 OTA 公开 key 的列表</td>
+</tr>
+<tr>
+<td>PRODUCT_POLICY</td>
+<td>产品使用的策略</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGE_OVERLAYS</td>
+<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
+</tr>
+<tr>
+<td>PRODUCT_CONTRIBUTORS_FILE</td>
+<td>HTML 文件，其中包含项目的贡献者</td>
+</tr>
+<tr>
+<td>PRODUCT_TAGS</td>
+<td>该产品的标签，以空格分格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
+<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
+<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
+　　　</p>
+<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>]]>
     
     </summary>
     
@@ -1146,7 +1135,7 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     <link href="http://huaqianlee.me/2015/05/27/%E9%87%8D%E6%96%B0%E8%B5%B7%E8%88%AA/"/>
     <id>http://huaqianlee.me/2015/05/27/重新起航/</id>
     <published>2015-05-27T14:23:58.000Z</published>
-    <updated>2015-07-25T16:02:36.093Z</updated>
+    <updated>2015-07-26T16:38:30.466Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>不要过多去关注自己学了多少，还有多久能达到自己的目标；而应该关注自己的学习过程和努力程度。每周至少原创一篇技术blog。家里学习以英语为top priority，琐碎时间以英语阅读为top priority。</p>
 </blockquote>
@@ -1792,7 +1781,7 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <p>已delay, 重新压缩时间学习</p>
 </blockquote>
 <p>　</p>
-<h4 id="深入理解Linux内核">深入理解Linux内核</h4><p><em>2015/5/30~2015/6/28</em></p>
+<h4 id="深入理解Linux内核">深入理解Linux内核</h4><p><em>2015/7/27~2015/8/16</em></p>
 <table>
 <thead>
 <tr>
@@ -1977,9 +1966,6 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>决定delay下去, 有时间再学</p>
-</blockquote>
 <p>　</p>
 <h4 id="Effective_Java">Effective Java</h4><p><em>2015/9/1~2015/10/1</em></p>
 <table>
@@ -2007,8 +1993,11 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 </tr>
 </tbody>
 </table>
-<p>　</p>
+<blockquote>
+<p>由于时间实在难以支配, 为了不影响效率,决定关于Java的学习和code先delay下去,后期有时间再提上日程.
+　</p>
 <h2 id="Android学习">Android学习</h2><p>　　Android不用说，绝对是接下来几年的大趋势，自己又对Android超感兴趣，所以Android的学习是今年接下来日子的重中之重。我要从最底层到APP完全了解，所以要走的路很长。</p>
+</blockquote>
 <h3 id="Android学习监控">Android学习监控</h3><table>
 <thead>
 <tr>
@@ -2189,7 +2178,7 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <p>just for english</p>
 </blockquote>
 <p>　</p>
-<h4 id="Android源码分析">Android源码分析</h4><p><em>2015/7/26~2015/10/31</em></p>
+<h4 id="Android源码分析">Android源码分析</h4><p><em>2015/7/27~2015/10/31</em></p>
 <table>
 <thead>
 <tr>
@@ -2206,9 +2195,9 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <tbody>
 <tr>
 <td style="text-align:center">第一周</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
+<td style="text-align:center">c2</td>
+<td style="text-align:center">c3</td>
+<td style="text-align:center">c4</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
@@ -2301,19 +2290,13 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <td style="text-align:center">40m</td>
 </tr>
 <tr>
-<td style="text-align:center">22:40/23:20</td>
-<td style="text-align:center">Java</td>
-<td style="text-align:center">Java</td>
-<td style="text-align:center">40m</td>
-</tr>
-<tr>
-<td style="text-align:center">23:20/00:50</td>
+<td style="text-align:center">22:40/00:40</td>
 <td style="text-align:center">Linux/Android</td>
 <td style="text-align:center">Linux/Android</td>
-<td style="text-align:center">1h30m</td>
+<td style="text-align:center">2h</td>
 </tr>
 <tr>
-<td style="text-align:center">00:50/01:10</td>
+<td style="text-align:center">00:40/01:00</td>
 <td style="text-align:center">自控力+冥想</td>
 <td style="text-align:center">自控力+冥想</td>
 <td style="text-align:center">20m</td>
@@ -2321,7 +2304,7 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 </tbody>
 </table>
 <blockquote>
-<p>学习情况改变,则调整每日监控　</p>
+<p>学习情况改变,则调整每日监控, 英语+Android - the most important opinion　</p>
 </blockquote>
 <p>　　不仅仅需要按照上面计划来完成，学无止境，还需要不断的阅读,不断的练习。</p>
 <p>　　从大四实习以来，做单片机、做FPGA、做Linux，一路曲折到现在进入Android驱动行业，并且通过自己业余时间的不断折腾，自己总算知道自己想做什么，喜欢做什么。只是现在因为工作的原因，时间并不充裕，所以这条路显得更加长更加艰难。有时候，我也在想我有必要学这么多东西吗，可是人生不是就在于折腾吗，自己既然喜欢这些东西，为什么不折腾下去，让生命更有意义呢？</p>
@@ -2520,6 +2503,45 @@ eg:
       <category term="xml" scheme="http://huaqianlee.me/tags/xml/"/>
     
       <category term="Javaweb" scheme="http://huaqianlee.me/categories/Javaweb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Linux常用快捷键及命令总结]]></title>
+    <link href="http://huaqianlee.me/2014/12/21/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
+    <id>http://huaqianlee.me/2014/12/21/Linux常用快捷键及命令总结/</id>
+    <published>2014-12-21T12:10:01.000Z</published>
+    <updated>2015-07-26T07:31:36.715Z</updated>
+    <content type="html"><![CDATA[<p>　　或许我是一个geek范的人，又或许是想显得很有逼格， whatever， 反正我就喜欢Linux的命令行，喜欢黑黑的geek风，这样完全体现出了技术的酷炫。现将一些自己觉得很有用能让自己显得很牛的装X快捷键和指令总结如下，其中有一部分相当有用，使用后逼格瞬间提升，不信看文章最后的后记。</p>
+<h2 id="Shell终端常用快捷键">Shell终端常用快捷键</h2><p>　　当进行命令行操作时，使用快捷键将极大提高工作效率，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + U – 剪切光标前的内容</span><br><span class="line">Ctrl + K – 剪切光标至行末的内容</span><br><span class="line">Ctrl + Y – 粘贴</span><br><span class="line">Ctrl + E – 移动光标到行末</span><br><span class="line">Ctrl + A – 移动光标到行首</span><br><span class="line">ALT + F – 跳向下一个空格</span><br><span class="line">ALT + B – 跳回上一个空格</span><br><span class="line">ALT + Backspace – 删除前一个单词</span><br><span class="line">Ctrl + W – 剪切光标前一个单词</span><br><span class="line">Ctrl + Insert – 复制</span><br><span class="line">Shift + Insert – 粘贴</span><br><span class="line"><span class="comment"># 下面两个命令的用法，如： 在shell终端输入vi main.c进入vi界面后，想切换到命令行，可以通过Ctrl+Z</span></span><br><span class="line">Ctrl + Z – 暂停应用程序</span><br><span class="line"><span class="built_in">fg</span> – 重新将程序唤到前台</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="常用Shell命令">常用Shell命令</h2><p>　　使用Linux，最酷炫的就是命令行操作，所以熟悉命令是必须，现将常用的Shell命令总结如下：</p>
+<h3 id="硬件相关命令">硬件相关命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">lscpu                   <span class="comment">#查看的是cpu信息.</span></span><br><span class="line">cat /proc/cpuinfo       <span class="comment">#查看CPU信息详细信息</span></span><br><span class="line">free -m                 <span class="comment">#概要查看内存情况，单位MB  -g GB</span></span><br><span class="line">cat /proc/meminfo       <span class="comment">#查看内存详细信息</span></span><br><span class="line">lsblk                   <span class="comment">#查看硬盘和分区分布</span></span><br><span class="line">df -h                   <span class="comment">#查看各分区使用情况</span></span><br><span class="line">cat /proc/partitions    <span class="comment">#查看硬盘和分区</span></span><br><span class="line">mount | column -t       <span class="comment">#查看挂接的分区状态</span></span><br><span class="line">lspci | grep -i <span class="string">'eth'</span>   <span class="comment">#查看网卡硬件信息</span></span><br><span class="line">ifconfig <span class="operator">-a</span>             <span class="comment">#查看系统的所有网络接口</span></span><br><span class="line">ethtool eth0            <span class="comment">#如果要查看某个网络接口的详细信息，例如eth0的详细参数和指标</span></span><br></pre></td></tr></table></figure>
+<h3 id="系统相关命令">系统相关命令</h3><hr>
+<h4 id="通用命令">通用命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cmd --help              <span class="comment">#查看命令详细信息</span></span><br><span class="line">man cmd                 <span class="comment">#显示命令手册</span></span><br><span class="line">whatis cmd              <span class="comment">#查看命令简述</span></span><br><span class="line"><span class="built_in">exit</span>                    <span class="comment">#退出终端</span></span><br><span class="line">ping &lt;remote host address&gt; <span class="comment">#ping网络状态</span></span><br><span class="line">who                     <span class="comment">#查看当前登陆用户名</span></span><br><span class="line">su/sudo                 <span class="comment">#获取管理员权限</span></span><br><span class="line">su user                 <span class="comment">#切换用户</span></span><br><span class="line">uname                   <span class="comment">#显示系统重要信息</span></span><br><span class="line">shutdown -r             <span class="comment">#关键并重启</span></span><br></pre></td></tr></table></figure>
+<h4 id="内核相关命令">内核相关命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uname <span class="operator">-a</span>                <span class="comment">#查看版本当前操作系统内核信息）</span></span><br><span class="line">cat /proc/version       <span class="comment">#查看当前操作系统版本信息</span></span><br><span class="line">cat /etc/issue          <span class="comment">#查看版本当前操作系统发行版信息</span></span><br><span class="line">cat /etc/redhat-release <span class="comment">#同上</span></span><br><span class="line">cat /etc/SuSE-release   <span class="comment">#suse系统下才可使用</span></span><br><span class="line">lsb_release <span class="operator">-a</span>          <span class="comment">#用来查看linux兼容性的发行版信息</span></span><br><span class="line">lsmod                   <span class="comment">#列出加载的内核模块</span></span><br></pre></td></tr></table></figure>
+<h4 id="网络常用命令">网络常用命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ifconfig                <span class="comment">#查看所有网络接口的属性</span></span><br><span class="line">iptables -L             <span class="comment">#查看防火墙设置</span></span><br><span class="line">service iptables status <span class="comment">#查看防火墙状态</span></span><br><span class="line">service iptables stop   <span class="comment">#关闭防火墙</span></span><br><span class="line">route -n                <span class="comment">#查看路由表</span></span><br><span class="line">netstat -lntp           <span class="comment">#查看所有监听端口</span></span><br><span class="line">netstat -antp           <span class="comment">#查看所有已经建立的连接</span></span><br><span class="line">netstat <span class="operator">-s</span>              <span class="comment">#查看网络统计信息进程</span></span><br><span class="line">netstat -at             <span class="comment">#列出所有tcp端口</span></span><br><span class="line">netstat -au             <span class="comment">#列出所有udp端口</span></span><br><span class="line">netstat <span class="operator">-lt</span>             <span class="comment">#只列出所有监听tcp端口</span></span><br></pre></td></tr></table></figure>
+<h4 id="管理常用命令">管理常用命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">top                     <span class="comment">#查看系统所有进程的详细信息，比如CPU、内存等,信息很多！</span></span><br><span class="line">df -lh                  <span class="comment">#查看硬盘大小及使用率</span></span><br><span class="line">mount                   <span class="comment">#挂接远程目录、NFS、本地共享目录到linux下</span></span><br><span class="line">hostname                <span class="comment">#查看/修改计算机名</span></span><br><span class="line">w                       <span class="comment">#查看活动用户</span></span><br><span class="line">id                      <span class="comment">#查看指定用户信息</span></span><br><span class="line">last                    <span class="comment">#查看用户登录日志</span></span><br><span class="line">cut <span class="operator">-d</span>: <span class="operator">-f</span>1 /etc/passwd <span class="comment">#查看系统所有用户</span></span><br><span class="line">cut <span class="operator">-d</span>: <span class="operator">-f</span>1 /etc/group  <span class="comment">#查看系统所有组</span></span><br><span class="line">crontab <span class="operator">-l</span>              <span class="comment">#查看当前用户的计划任务服务</span></span><br><span class="line">chkconfig –list         <span class="comment">#列出所有系统服务</span></span><br><span class="line">chkconfig –list | grep on <span class="comment">#列出所有启动的系统服务程序</span></span><br><span class="line">rpm -qa                 <span class="comment">#查看所有安装的软件包</span></span><br><span class="line">uptime                  <span class="comment">#查看系统运行时间、用户数、负载    </span></span><br><span class="line">/sbin/chkconfig --list  <span class="comment">#查看系统自动启动列表</span></span><br><span class="line">/sbin/chkconfig　–add　mysql <span class="comment">#把MySQL添加到系统的启动服务组里面</span></span><br></pre></td></tr></table></figure>
+<h4 id="文件操作常用命令">文件操作常用命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ranger               <span class="comment">#文件浏览系统，需要先安装ranger，超级方便，用了就知道</span></span><br><span class="line">ls -lht                 <span class="comment">#列出一个文件夹下所有文件及大小、访问权限</span></span><br><span class="line">du -sh &lt;dir&gt;            <span class="comment">#查看指定目录的大小 </span></span><br><span class="line">du -lh &lt;dir&gt;            <span class="comment">#查看指定目录及各文件的大小 </span></span><br><span class="line">ln <span class="operator">-s</span>                   <span class="comment">#建立软链接</span></span><br><span class="line">ls -lh                  <span class="comment">#以M为单位显示文件大小，去掉h，则单位为k</span></span><br><span class="line">du -skh  file        <span class="comment">#以M为单位显示文件大小 </span></span><br><span class="line">rmdir &lt;dir&gt;          <span class="comment">#删除目录</span></span><br><span class="line">rm file              <span class="comment">#删除文件</span></span><br><span class="line">rm -r &lt;dir&gt;          <span class="comment">#递归删除整个目录</span></span><br><span class="line">cp (-r) <span class="built_in">source</span> dest  <span class="comment">#负责文件或文件夹</span></span><br><span class="line">mv <span class="built_in">source</span> dest       <span class="comment">#移动或重命名文件文件夹</span></span><br><span class="line">cat file             <span class="comment">#查看file内容</span></span><br><span class="line">tail (-n N) file     <span class="comment">#查看文件末尾10行(N行)</span></span><br><span class="line">less file            <span class="comment">#分页查看文件, Ctrl+F 向前翻页   Ctrl+B 向后翻页</span></span><br><span class="line">grep [option] <span class="string">"string"</span> file <span class="comment">#查找字符串 ,-i  不区分大小写</span></span><br><span class="line">find &lt;dir&gt; -name file <span class="comment">#查找文件,-iname 不区分大小写</span></span><br></pre></td></tr></table></figure>
+<h4 id="进程相关命令">进程相关命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">htop                      <span class="comment">#在终端以列表形式查看进程，需要安装htop，比ps好看好用太多了</span></span><br><span class="line">pstree -p pid           <span class="comment">#查看一个进程下的所有线程</span></span><br><span class="line">pstree  <span class="operator">-a</span>              <span class="comment">#显示所有进程的所有详细信息，遇到相同的进程名可以压缩显示。</span></span><br><span class="line">ps -ef                  <span class="comment">#查看所有进程</span></span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span> pid             <span class="comment">#杀死进程</span></span><br><span class="line"><span class="built_in">kill</span> all <span class="built_in">test</span>           <span class="comment">#杀死进程</span></span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span> `pgrep <span class="built_in">test</span>`    <span class="comment">#杀死进程</span></span><br><span class="line">./test.sh &amp;             <span class="comment">#使程序在后台运行</span></span><br><span class="line">nohup ./test.sh &amp;       <span class="comment">#使程序在后台运行</span></span><br></pre></td></tr></table></figure>
+<h4 id="压缩解压缩">压缩解压缩</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">gzip file1.txt file2.txt  <span class="comment">#压缩文件 </span></span><br><span class="line">gzip <span class="operator">-d</span> file1.txt <span class="comment">#提取文件</span></span><br><span class="line">zip -r dir.zip dir file  <span class="comment">#将目录dir、文件file等压缩到zip包,</span></span><br><span class="line">zip -re dir.zip dir file <span class="comment">#创建zip包，且加密</span></span><br><span class="line">unzip dir.zip            <span class="comment">#解压</span></span><br><span class="line">unzip <span class="operator">-l</span> dir.zip         <span class="comment">#查看压缩包类容</span></span><br><span class="line">tar -zcvf dir.tar.gz dir file    <span class="comment">#将目录dir、文件file等压缩到tar包</span></span><br><span class="line">tar -xvf dir.tar.gz       <span class="comment">#解压</span></span><br><span class="line">tar -tvf dir.tar.gz          <span class="comment">#查看压缩文件</span></span><br></pre></td></tr></table></figure>
+<h4 id="screen命令">screen命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#screen命令，screen命令运行的服务不受shell终端影响，即使shell终端关闭仍存在</span></span><br><span class="line">screen -S <span class="built_in">test</span>          <span class="comment">#创建一个名字为test的screen</span></span><br><span class="line">screen -r <span class="built_in">test</span>          <span class="comment">#打开名字为test的screen</span></span><br><span class="line">screen -r pid           <span class="comment">#打开进程号为pid的screen</span></span><br><span class="line">screen -ls              <span class="comment">#列出所有的screen</span></span><br><span class="line">ctrl + a,d              <span class="comment">#当在一个screen时，退出screen</span></span><br><span class="line">ctrl + a,n              <span class="comment">#当在一个screen时，切换到下一个窗口</span></span><br><span class="line">ctrl + a,c              <span class="comment">#当在一个screen时，创建一个新的窗口</span></span><br></pre></td></tr></table></figure>
+<h4 id="远程拷贝">远程拷贝</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp <span class="built_in">local</span>_file remote_username@remote_ip:remote_dir    <span class="comment">#拷贝本地文件到远程机器上</span></span><br><span class="line">scp -r <span class="built_in">local</span>_dir remote_username@remote_ip:remote_dir  <span class="comment">#拷贝本地整个目录到远程机器上</span></span><br></pre></td></tr></table></figure>
+<h3 id="软件包安装">软件包安装</h3><p>　　如下为Ubuntu下的是命令，如果账户没有root权限的话，需要在前面添加sudo以获取root权限。其实不知道命令的话，只需要输入软件名，终端将会打印出下载安装的命令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apt-get install package     <span class="comment">#安装</span></span><br><span class="line">apt-get update package      <span class="comment">#更新</span></span><br><span class="line">apt-get remove package      <span class="comment">#删除    </span></span><br><span class="line">apt-cache search package    <span class="comment">#搜索软件包</span></span><br><span class="line">dpkg -i package.deb         <span class="comment">#安装deb包</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="后记">后记</h2><p>　　为了让大家相信使用了这些命令或快捷键确实会逼格提升，专门贴图两张，哈哈。。。</p>
+<h3 id="图一_执行htop（进程管理）">图一 执行htop（进程管理）</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/bloghtop.png" alt="htop"></p>
+<h3 id="图二_执行ranger_（文件浏览）">图二 执行ranger （文件浏览）</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogranger.png" alt="ranger"></p>
+<p>　　有很多命令引用自<a href="http://www.xprogrammer.com/1799.html" target="_blank" rel="external">Linux常用的shell命令</a>，感谢此文作者.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>　　或许我是一个geek范的人，又或许是想显得很有逼格， whatever， 反正我就喜欢Linux的命令行，喜欢黑黑的geek风，这样完全体现出了技术的酷炫。现将一些自己觉得很有用能让自己显得很牛的装X快捷键和指令总结如下，其中有一部分相当有用，使用后逼格瞬间提升，不信看文章最后的后记。</p>
+<h2 id="Shell终端常用快捷键">Shell终端常用快捷键</h2><p>　　当进行命令行操作时，使用快捷键将极大提高工作效率，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + U – 剪切光标前的内容</span><br><span class="line">Ctrl + K – 剪切光标至行末的内容</span><br><span class="line">Ctrl + Y – 粘贴</span><br><span class="line">Ctrl + E – 移动光标到行末</span><br><span class="line">Ctrl + A – 移动光标到行首</span><br><span class="line">ALT + F – 跳向下一个空格</span><br><span class="line">ALT + B – 跳回上一个空格</span><br><span class="line">ALT + Backspace – 删除前一个单词</span><br><span class="line">Ctrl + W – 剪切光标前一个单词</span><br><span class="line">Ctrl + Insert – 复制</span><br><span class="line">Shift + Insert – 粘贴</span><br><span class="line"><span class="comment"># 下面两个命令的用法，如： 在shell终端输入vi main.c进入vi界面后，想切换到命令行，可以通过Ctrl+Z</span></span><br><span class="line">Ctrl + Z – 暂停应用程序</span><br><span class="line"><span class="built_in">fg</span> – 重新将程序唤到前台</span><br></pre></td></tr></table></figure></p>]]>
+    
+    </summary>
+    
+      <category term="shell" scheme="http://huaqianlee.me/tags/shell/"/>
+    
+      <category term="Linux" scheme="http://huaqianlee.me/categories/Linux/"/>
     
   </entry>
   
