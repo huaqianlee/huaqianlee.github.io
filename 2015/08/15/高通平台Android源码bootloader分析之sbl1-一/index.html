@@ -1,0 +1,659 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>高通平台Android源码bootloader分析之sbl1(一) | Andy.Lee Plus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Andy.Lee">
+    
+
+    
+    <meta name="description" content="高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot loader）的代码需要动一下，ap侧就APPSBL代码需要动（对此部分不了解，可参照：bootable源码解析），其他的都是高通搞好了的，甚至有些我们看不到代码。今天就要分析一下开机前几秒钟起着关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高通平台Android源码bootloader分析之sbl1(一)">
+<meta property="og:url" content="http://huaqianlee.me/2015/08/15/高通平台Android源码bootloader分析之sbl1-一/index.html">
+<meta property="og:site_name" content="Andy.Lee Plus">
+<meta property="og:description" content="高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot loader）的代码需要动一下，ap侧就APPSBL代码需要动（对此部分不了解，可参照：bootable源码解析），其他的都是高通搞好了的，甚至有些我们看不到代码。今天就要分析一下开机前几秒钟起着关">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blogRPM.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高通平台Android源码bootloader分析之sbl1(一)">
+<meta name="twitter:description" content="高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot loader）的代码需要动一下，ap侧就APPSBL代码需要动（对此部分不了解，可参照：bootable源码解析），其他的都是高通搞好了的，甚至有些我们看不到代码。今天就要分析一下开机前几秒钟起着关">
+<meta name="twitter:creator" content="@Andylee_sarah">
+<link rel="publisher" href="107850537041795428182">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Andy.Lee Plus" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/andylee.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/andylee.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Andy.Lee Plus" title="Andy.Lee Plus"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Andy.Lee Plus">Andy.Lee Plus</a></h1>
+				<h2 class="blog-motto">Good good study, day day up !</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/categories">Categories</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="huaqianlee.me" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 11011705640184761899## e.g. &quot;783281470518440642&quot;  for your baidu search id ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+<!--<a href="https://github.com/AndyLee-Github"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>-->
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/15/高通平台Android源码bootloader分析之sbl1-一/" title="高通平台Android源码bootloader分析之sbl1(一)" itemprop="url">高通平台Android源码bootloader分析之sbl1(一)</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-15T12:44:33.000Z" itemprop="datePublished"> 发表于 Aug 15 2015</time>
+    
+  </p>
+  
+</header>
+	<div class="article-content">
+		
+		<p>高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot loader）的代码需要动一下，ap侧就APPSBL代码需要动（对此部分不了解，可参照：<a href="http://huaqianlee.me/2015/07/25/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" target="_blank" rel="external">bootable源码解析</a>），其他的都是高通搞好了的，甚至有些我们看不到代码。今天就要分析一下开机前几秒钟起着关键作用的sbl1， 这套代码在modem侧的boot_images\中。</p>
+<h2 id="启动流程">启动流程</h2><p>首先来看一下高通的bootloader流程框图，主要由ap、RPM及modem三部分构成，由于我工作主要涉及到ap侧，所以对RPM和modem侧代码不了解，以后有空时间的话到可以研究一下，好了，不闲扯，框图如下：<br><a id="more"></a><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot arch"><br>由上图可知，系统启动流程主要由以下几步组成：</p>
+<ol>
+<li><p>系统上电或重启。</p>
+</li>
+<li><p>在Cortex-a53芯片中，ap侧的PBL执行，从boot device中加载并校验sbl1镜像到TCM，然后跳转到sbl1中继续执行.</p>
+</li>
+<li><p>sbl1初始化ddr，从boot device中加载校验QSEE镜像和QHEE镜像到DDR，QSEE执行并设置一个安全的环境，QHEE为VMM设置、SMMU配置及xPU访问控制服务。</p>
+</li>
+<li><p>sbl1从boot device加载校验RPM固件镜像到code-RAM。</p>
+</li>
+<li><p>sbl1从启动设备加载校验HLOS APPSBL镜像到ddr。</p>
+</li>
+<li><p>sbl1跳转到QSEE-&gt;QHEE。</p>
+</li>
+<li><p>QHEE通知RPM侧跳转到RPM固件中并自己跳转到HLOS APPSBL中执行。RPM侧开始执行RPM固件。</p>
+</li>
+<li><p>QHEE跳转到HLOS APPSBL中初始化系统。</p>
+</li>
+<li><p>HLOS APPSBL加载和校验HLOS内核。</p>
+</li>
+<li><p>有内核来加载文件系统等完成整个Android系统的启动。</p>
+</li>
+</ol>
+<blockquote>
+<p>HLOS APPSBL即为ap侧的bootloader，见：<a href="http://huaqianlee.me/2015/07/25/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" target="_blank" rel="external">bootable源码解析</a></p>
+</blockquote>
+<p>　　<br>modem侧主要是射频网络相关的代码，我没有研究过也不了解，RPM侧的代码也没怎么研究，高通文档对其介绍如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogRPM.png" alt="RPM"></p>
+<h2 id="sbl1流程分析">sbl1流程分析</h2><p>接下来我就来完整跟一下sbl1的代码，总结出关键流程，此部分代码皆在modem侧。我平时主要会涉及的几个重要文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">boot_images\core\boot\secboot3\hw\msm8916\sbl1\sbl1_hw.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\framework\src\pm_init.c</span><br><span class="line">boot_images\core\boot\secboot3\hw\msm8909\sbl1\sbl1_config.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\app\chg\src\pm_app_chg_alg.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\drivers\smb\src\pm_smb.c // 如果带smb135x芯片</span><br></pre></td></tr></table></figure></p>
+<p>首先从其入口文件sbl1.s开始，如下：</p>
+<h3 id="sbl1入口：_sbl1-s">sbl1入口： sbl1.s</h3><p>此部分代码路径在：boot_images/core/boot/secboot3/hw/msm8916/sbl1/sbl1.s，此文件引导处理器，主要有实现如下操作：</p>
+<ul>
+<li>设置硬件，继续boot进程。</li>
+<li>初始化ddr。</li>
+<li>加载Trust_Zone操作系统。</li>
+<li>加载RPM固件。</li>
+<li>加载APPSBL然后继续boot进程。</li>
+</ul>
+<p>关键源码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/*&#24341;&#20837;c&#20989;&#25968;&#65292;&#20027;&#35201;&#20026;&#24322;&#24120;&#23454;&#29616;&#20989;&#25968;&#65292;&#21450;&#19968;&#20010;&#20851;&#38190;&#20989;&#25968;sbl1_main_ctl*/&#10;; Import the external symbols that are referenced in this module.&#10;IMPORT |Image$$SBL1_SVC_STACK$$ZI$$Limit|&#10;IMPORT |Image$$SBL1_UND_STACK$$ZI$$Limit|&#10;IMPORT |Image$$SBL1_ABT_STACK$$ZI$$Limit|&#10;IMPORT boot_undefined_instruction_c_handler&#10;IMPORT boot_swi_c_handler&#10;IMPORT boot_prefetch_abort_c_handler&#10;IMPORT boot_data_abort_c_handler&#10;IMPORT boot_reserved_c_handler&#10;IMPORT boot_irq_c_handler&#10;IMPORT boot_fiq_c_handler&#10;IMPORT boot_nested_exception_c_handler&#10;IMPORT sbl1_main_ctl #&#20027;&#35201;&#20851;&#27880;&#27492;&#20989;&#25968;&#10;IMPORT boot_crash_dump_regs_ptr&#10;...&#10;# &#20851;&#20110;&#20013;&#26029;&#21521;&#37327;&#37197;&#32622;&#31561;&#27719;&#32534;&#35821;&#21477;&#65292;&#23601;&#27809;&#26377;&#21435;&#35814;&#32454;&#30475;&#20102;&#65292;&#25105;&#20204;&#19968;&#33324;&#20063;&#19981;&#20250;&#28041;&#21450;&#21040;&#36825;&#20040;&#24213;&#23618;&#30340;&#19996;&#35199;</span><br></pre></td></tr></table></figure></p>
+<h3 id="sbl1_main_ctl">sbl1_main_ctl</h3><p>此函数位于boot_images\core\boot\secboot3\hw\mdm9x45\sbl1\sbl1_mc.c，主要完成初始化RAM等工作， 注此函数决不return。部分关键源码如下，我加汉字解释的是我认为我们应该关注的部分：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Calculate the SBL start time for use during boot logger initialization. */</span></span><br><span class="line">sbl_start_time = CALCULATE_TIMESTAMP(HWIO_IN(TIMETICK_CLK));</span><br><span class="line">boot_clock_debug_init();</span><br><span class="line"><span class="comment">/* Enter debug mode if debug cookie is set */</span></span><br><span class="line">sbl1_debug_mode_enter();  </span><br><span class="line"><span class="comment">/* Initialize the stack protection canary */</span></span><br><span class="line">boot_init_stack_chk_canary();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Initialize boot shared imem */</span></span><br><span class="line">boot_shared_imem_init(&amp;bl_shared_data);</span><br><span class="line"><span class="comment">/*初始化RAM*/</span></span><br><span class="line">boot_ram_init(&amp;sbl1_ram_init_data);</span><br><span class="line"><span class="comment">/*初始化log系统，即串口驱动*/</span></span><br><span class="line">sbl1_boot_logger_init(&amp;boot_log_data, pbl_shared);</span><br><span class="line"><span class="comment">/*检索PBL传递过来的数据*/</span> </span><br><span class="line">sbl1_retrieve_shared_info_from_pbl(pbl_shared); </span><br><span class="line"><span class="comment">/* Initialize the QSEE interface */</span></span><br><span class="line">sbl1_init_sbl_qsee_interface(&amp;bl_shared_data,&amp;sbl_verified_info);</span><br><span class="line"><span class="comment">/* Initialize SBL memory map. Initializing early because drivers could be located in RPM Code RAM. */</span></span><br><span class="line">sbl1_populate_initial_mem_map(&amp;bl_shared_data);</span><br><span class="line"><span class="comment">/*初始化DAL*/</span></span><br><span class="line">boot_DALSYS_InitMod(NULL); </span><br><span class="line"><span class="comment">/*配置PMIC芯片，以便我们能通过PS_HOLD复位*/</span></span><br><span class="line">sbl1_hw_init();</span><br><span class="line"><span class="comment">/*执行sbl1的目标依赖进程*/</span></span><br><span class="line">boot_config_process_bl(&amp;bl_shared_data, SBL1_IMG, sbl1_config_table);</span><br></pre></td></tr></table></figure></p>
+<h3 id="sbl1_config_table">sbl1_config_table</h3><p>sbl1_config_table为一个结构体数组，里面存储了加载QSEE、RPM、APPSBL等镜像所需要的配置参数及执行函数，位于boot_images\core\boot\secboot3\hw\msm8909\sbl1\sbl1_config.c。其关键代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">boot_configuration_table_entry sbl1_config_table[] = </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/* SBL1 -&gt; QSEE */</span></span><br><span class="line">  &#123;</span><br><span class="line">    SBL1_IMG,                   <span class="comment">/* host_img_id */</span></span><br><span class="line">    CONFIG_IMG_QC,              <span class="comment">/* host_img_type */</span></span><br><span class="line">    GEN_IMG,                    <span class="comment">/* target_img_id */</span></span><br><span class="line">    CONFIG_IMG_ELF,             <span class="comment">/* target_img_type */</span></span><br><span class="line">    ...</span><br><span class="line">    load_qsee_pre_procs,        <span class="comment">/* pre_procs */</span> </span><br><span class="line">    load_qsee_post_procs,       <span class="comment">/* post_procs */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* SBL1 -&gt; QHEE */</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">/* SBL1 -&gt; RPM */</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">/* SBL1 -&gt; APPSBL （即lk部分） */</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h3 id="load_qsee_pre_procs">load_qsee_pre_procs</h3><p>load_qsee_pre_procs为一个函数结构体数组，在QSEE加载之前执行。源码注释写得很清楚并且容易理解，我就不多此一举去翻译了，关键源码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Save reset register logs */</span></span><br><span class="line">boot_save_reset_register_log,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Initialize the flash device */</span></span><br><span class="line">boot_flash_init,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Copy the configure data table from eeprom */</span></span><br><span class="line">boot_config_data_table_init,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Store platform id */</span></span><br><span class="line">sbl1_hw_platform_pre_ddr,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Configure ddr parameters based on eeprom CDT table data. */</span></span><br><span class="line">sbl1_ddr_set_params,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Initialize DDR */</span></span><br><span class="line">(boot_procedure_func_type)sbl1_ddr_init,</span><br><span class="line"></span><br><span class="line"><span class="comment">/*----------------------------------------------------------------------</span><br><span class="line"> Run deviceprogrammer if compiling the deviceprogrammer_ddr image.</span><br><span class="line">----------------------------------------------------------------------*/</span></span><br><span class="line">boot_deviceprogrammer_ddr_main,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Initialize SBL1 DDR ZI region, relocate boot log to DDR */</span>   </span><br><span class="line">sbl1_post_ddr_init,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 此函数挺重要，我能改到的东西基本上都基于它，所有的PMIC API都是在此函数调用boot_pm_dirver_init()之后再被调用*/</span></span><br><span class="line">sbl1_hw_init_secondary, </span><br><span class="line"> </span><br><span class="line"><span class="comment">/* DDR training */</span></span><br><span class="line">(boot_procedure_func_type)sbl1_wait_for_ddr_training,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Initialize SBL1 DDR ZI region, relocate page table to DDR */</span></span><br><span class="line">sbl1_post_ddr_training_init, </span><br><span class="line"></span><br><span class="line"><span class="comment">/* Zero out QSEE and QHEE region if needed.  This MUST be done before</span><br><span class="line">   boot_dload_dump_security_regions executes for security reasons. */</span></span><br><span class="line">sbl1_cleanse_security_regions,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Backup QSEE and QHEE region for ramdumps taken after SBL has executed */</span></span><br><span class="line">boot_dload_dump_security_regions,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Check to see if DLOAD mode needs to be entered */</span></span><br><span class="line">boot_dload_check,</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Last entry in the table. */</span></span><br><span class="line">NULL</span><br></pre></td></tr></table></figure></p>
+<h3 id="load_qsee_post_procs">load_qsee_post_procs</h3><p>load_qsee_post_procs同样也为一个函数结构体数组，其在加载QSEE之后执行。关键源码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/* Enable the secure watchdog</span><br><span class="line">     This is done after boot_dload_check that way if we are in the final stage</span><br><span class="line">     of an abnormal reset boot_dload_check will finalize the stage. */</span></span><br><span class="line">  boot_secure_watchdog_init,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Load SEC partition if it exists.  This must be done after QSEE is</span><br><span class="line">     loaded as the partition is loaded into a QSEE buffer. */</span></span><br><span class="line">  sbl1_load_sec_partition,  </span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Set the memory barrier pointer to shared memory */</span></span><br><span class="line">  boot_cache_set_memory_barrier,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*----------------------------------------------------------------------</span><br><span class="line">   Put SMEM in debug state such that smem_alloc() calls will return NULL. </span><br><span class="line">   The state is changed back to normal once smem_boot_init() is called.</span><br><span class="line">   This call has to be made after setting the memory barrier.</span><br><span class="line">  ----------------------------------------------------------------------*/</span></span><br><span class="line">  boot_smem_debug_init,  </span><br><span class="line">    </span><br><span class="line">  <span class="comment">/* Initialize shared memory after dload to preserve logs */</span></span><br><span class="line">  boot_smem_init,</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">if</span> !defined(FEATURE_RUMI_BOOT)</span></span><br><span class="line">  <span class="comment">/* Stub out for rumi build. pmic api  pm_get_power_on_status gets </span><br><span class="line">     called from below api to get power on reason */</span> </span><br><span class="line">  <span class="comment">/*----------------------------------------------------------------------</span><br><span class="line">   Store Power on Status in SMEM. </span><br><span class="line">   Needs to be done after PMIC and SMEM initialization</span><br><span class="line">  ----------------------------------------------------------------------*/</span></span><br><span class="line">  boot_smem_store_pon_status,</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span>  </span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/*----------------------------------------------------------------------</span><br><span class="line">   Store the platform id to smem</span><br><span class="line">  ----------------------------------------------------------------------*/</span></span><br><span class="line">  sbl1_hw_platform_smem,</span><br><span class="line">   </span><br><span class="line">  <span class="comment">/*----------------------------------------------------------------------</span><br><span class="line">   Get shared data out of the flash device module</span><br><span class="line">  ----------------------------------------------------------------------*/</span></span><br><span class="line">  boot_share_flash_data,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/*----------------------------------------------------------------------</span><br><span class="line">   populate the ram partition table</span><br><span class="line">  ----------------------------------------------------------------------*/</span></span><br><span class="line">  boot_populate_ram_partition_table,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*----------------------------------------------------------------------</span><br><span class="line">   Initialize GPIO for low power configuration</span><br><span class="line">  ----------------------------------------------------------------------*/</span></span><br><span class="line">  sbl1_tlmm_init,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/*-----------------------------------------------------------------------</span><br><span class="line">   Calls efs cookie handling api to perform efs backup/restore</span><br><span class="line">  -----------------------------------------------------------------------*/</span>  </span><br><span class="line">  sbl1_efs_handle_cookies,</span><br><span class="line">    </span><br><span class="line">  <span class="comment">/*-----------------------------------------------------------------------</span><br><span class="line">   APT Security Test</span><br><span class="line">   ----------------------------------------------------------------------*/</span></span><br><span class="line">  (boot_procedure_func_type)boot_apt_test,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Last entry in the table. */</span></span><br><span class="line">  NULL</span><br></pre></td></tr></table></figure></p>
+<h3 id="pm_chg_charger_detect_state">pm_chg_charger_detect_state</h3><p>pm_chg_charger_detect_state函数是启动工程中非常重要的一个函数，它将监测电池的状态，然后决定启动过程，调用关系和解析如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sbl1_hw_init_secondary</span><br><span class="line"> -&gt;boot_pm_dirver_init </span><br><span class="line">  -&gt;pm_driver_init <span class="comment">#初始化PMIC驱动</span></span><br><span class="line">   -&gt;pm_driver_post_init</span><br><span class="line">    -&gt;pm_chg_sbl_charging_state_entry</span><br><span class="line">     -&gt;pm_chg_battery_and_debug_board_detect_state</span><br><span class="line">      -&gt;pm_chg_charger_detect_state <span class="comment">#监测电池状态，电池正常则启动，weak则死循环，充电知道电池正常</span></span><br><span class="line">       -&gt;pm_chg_<span class="built_in">enable</span>_usb_charging</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/08/15/高通平台Android源码bootloader分析之sbl1-一/" >huaqianlee.me/2015/08/15/高通平台Android源码bootloader分析之sbl1-一/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Qualcomm/">Qualcomm</a><a href="/tags/源码分析/">源码分析</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/08/15/高通平台Android源码bootloader分析之sbl1-二/" title="高通平台Android源码bootloader分析之sbl1(二)">
+  <strong>上一篇：</strong><br/>
+  <span>
+  高通平台Android源码bootloader分析之sbl1(二)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/07/25/Android源码bootable解析之LK-bootloader-little-kernel/"  title="Android源码bootable解析之bootloader LK(little kernel)">
+ <strong>下一篇：</strong><br/> 
+ <span>Android源码bootable解析之bootloader LK(little kernel)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/15/高通平台Android源码bootloader分析之sbl1-一/" data-title="高通平台Android源码bootloader分析之sbl1(一)" data-url="http://huaqianlee.me/2015/08/15/高通平台Android源码bootloader分析之sbl1-一/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>15</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Javaweb/" title="Javaweb">Javaweb<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Android/译文/" title="译文">译文<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/编译/" title="编译">编译<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Log/" title="Log">Log<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/文件IO/" title="文件IO">文件IO<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/xml/" title="xml">xml<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/调试/" title="调试">调试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://huaqianlee.me/" target="_blank" title="AndyLee Plus">AndyLee Plus</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://fpgadeveloper.wang/" target="_blank" title="FPGA开发者网">FPGA开发者网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.daimajia.com/" target="_blank" title="代码家">代码家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.stormzhang.com/" target="_blank" title="stormzhang">stormzhang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark">Jark</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Andy Lau in Hongkong. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/huaqianlee" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/AndyLee-Github" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4511267/huaqian-lee" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/Andylee_sarah" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/huaqianlee" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:huaqianlee@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/AndyLee-Github/customtheme" target="_blank" title="Andy Lee">Andy Lee</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Andy.Lee">Andy.Lee</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"AndyLee"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'AndyLee';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-63838023-1', 'huaqianlee.me');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5ab1107031547fb5411cd06ed47f1348## e.g. e6d1f421bbc9962127a50488f9ed37d1 your baidu tongji site code' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

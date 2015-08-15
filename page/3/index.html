@@ -87,6 +87,176 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/01/18/xml基础/" title="xml基础" itemprop="url">xml基础</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-17T16:13:28.000Z" itemprop="datePublished"> 发表于 Jan 18 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>XML 是有w3c组织发布的一种可扩展标记语言(Extensible Markup Language)。</p>
+<h2 id="XML_的常见应用">XML 的常见应用</h2><p>XML常见的应用场景：
+　</p>
+<ol>
+<li>XML技术除用于保存有关系的数据之外，它还经常用作软件配置文件，以描述程序模块之间的关系。<br>2.在一个软件系统中，为提高系统的灵活性，它所启动的模块通常由其配置文件决定<br>　<br>例如一个软件在启动时，它需要启动Ａ、Ｂ两个模块，而A、Ｂ这两个模块在启动时，又分别需要A1、A2和B1、B2模块的支持，为了准确描述这种关系，此时使用ＸＭＬ文件最为合适不过。</li>
+</ol>
+<h2 id="XML的语法">XML的语法</h2><h3 id="文档的声明">文档的声明</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"GB2312"</span>  standalone=<span class="string">"yes"</span> ?&gt;</span><br><span class="line">    encoding - 文档的字符编码。（代码里面写什么格式，一般就将文档存为什么格式，一般通用“UTF-<span class="number">8</span>”）</span><br><span class="line">    standalone - 文档是否为独立的，有依赖</span><br><span class="line">```    </span><br><span class="line"><span class="comment">###元素</span></span><br><span class="line"></span><br><span class="line">元素指XML中的标签,可以嵌套,只有一个主标签,两种书写方式如下:</span><br><span class="line">•包含标签体：&lt;a&gt;www.itcast.cn&lt;/a&gt;</span><br><span class="line">•不含标签体的：&lt;a&gt;&lt;/a&gt;, 简写为：&lt;a/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">###属性</span></span><br><span class="line">属性值必须用<span class="string">""</span> 或<span class="string">''</span> 引起来,如:</span><br><span class="line">```bash</span><br><span class="line">&lt;input name=“text”&gt;</span><br><span class="line">也可以:(XML将空格也当做内容,不过现在浏览器都会执行处理,调用trim())</span><br><span class="line">&lt;input&gt;</span><br><span class="line">   &lt;name&gt;text&lt;/name&gt;</span><br><span class="line">&lt;/input&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="注释">注释</h3><p>&lt;!—注释—&gt;  // 注释语句必须写在XML声明语句后面</p>
+<h3 id="CDATA区">CDATA区</h3><p>CDATA(character data)区用于让解析引擎不对其进行处理,按照原始内容显示. </p>
+<pre><code class="bash">格式:&lt;![CDATA[ 内容 ]]&gt;
+eg:
+  &lt;![CDATA[
+      &lt;itcast&gt;
+          &lt;br/&gt;
+      &lt;/itcast&gt;
+  ]]&gt;
+</code></pre>
+<h3 id="转义字符">转义字符</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogxml.png" alt="escape">        </p>
+<h3 id="处理指令">处理指令</h3><p>处理指令，简称PI （processing instruction）。处理指令用来指挥解析引擎如何解析XML文档内容。例如，在XML文档中可以使用xml-stylesheet指令，通知XML解析引擎，应用css文件显示xml文档内容。<br>&lt;?xml-stylesheet type=”text/css” href=”1.css”?&gt;<br>处理指令必须以“&lt;?”作为开头，以“?&gt;”作为结尾，XML声明语句就是最常见的一种处理指令。 </p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/01/18/xml基础/" >huaqianlee.me/2015/01/18/xml基础/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Javaweb/">Javaweb</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/xml/">xml</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/01/18/xml基础/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/01/18/xml基础/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/12/21/Linux常用快捷键及命令总结/" title="Linux常用快捷键及命令总结" itemprop="url">Linux常用快捷键及命令总结</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2014-12-21T12:10:01.000Z" itemprop="datePublished"> 发表于 Dec 21 2014</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　或许我是一个geek范的人，又或许是想显得很有逼格， whatever， 反正我就喜欢Linux的命令行，喜欢黑黑的geek风，这样完全体现出了技术的酷炫。现将一些自己觉得很有用能让自己显得很牛的装X快捷键和指令总结如下，其中有一部分相当有用，使用后逼格瞬间提升，不信看文章最后的后记。</p>
+<h2 id="Shell终端常用快捷键">Shell终端常用快捷键</h2><p>　　当进行命令行操作时，使用快捷键将极大提高工作效率，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + U – 剪切光标前的内容</span><br><span class="line">Ctrl + K – 剪切光标至行末的内容</span><br><span class="line">Ctrl + Y – 粘贴</span><br><span class="line">Ctrl + E – 移动光标到行末</span><br><span class="line">Ctrl + A – 移动光标到行首</span><br><span class="line">ALT + F – 跳向下一个空格</span><br><span class="line">ALT + B – 跳回上一个空格</span><br><span class="line">ALT + Backspace – 删除前一个单词</span><br><span class="line">Ctrl + W – 剪切光标前一个单词</span><br><span class="line">Ctrl + Insert – 复制</span><br><span class="line">Shift + Insert – 粘贴</span><br><span class="line"><span class="comment"># 下面两个命令的用法，如： 在shell终端输入vi main.c进入vi界面后，想切换到命令行，可以通过Ctrl+Z</span></span><br><span class="line">Ctrl + Z – 暂停应用程序</span><br><span class="line"><span class="built_in">fg</span> – 重新将程序唤到前台</span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2014/12/21/Linux常用快捷键及命令总结/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2014/12/21/Linux常用快捷键及命令总结/" >huaqianlee.me/2014/12/21/Linux常用快捷键及命令总结/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/shell/">shell</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2014/12/21/Linux常用快捷键及命令总结/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/12/21/Linux常用快捷键及命令总结/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2014/11/17/Linux文件IO操作及网络架构/" title="Linux文件I/O操作及网络架构" itemprop="url">Linux文件I/O操作及网络架构</a>
   </h1>
 
@@ -490,7 +660,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>13</sup></a></li>
+			<li><a href="/categories/Android/" title="Android">Android<sup>15</sup></a></li>
 		  
 		
 		  
@@ -535,6 +705,14 @@
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>8</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Tools/" title="Tools">Tools<sup>5</sup></a></li>
 			
 		
@@ -547,6 +725,10 @@
 			
 		
 			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/文件IO/" title="文件IO">文件IO<sup>2</sup></a></li>
 			
 		
@@ -555,15 +737,11 @@
 			
 		
 			
-				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
 			
 		
 			
@@ -579,11 +757,7 @@
 			
 		
 			
-				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
 			
 		
 			
@@ -591,7 +765,7 @@
 			
 		
 			
-				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
 			
 		
 		</ul>
