@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-08-15T13:08:01.625Z</updated>
+  <updated>2015-08-15T13:11:51.579Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/"/>
     <id>http://huaqianlee.me/2015/08/15/高通平台Android源码bootloader分析之sbl1-二/</id>
     <published>2015-08-15T12:44:46.000Z</published>
-    <updated>2015-08-15T13:08:01.625Z</updated>
-    <content type="html"><![CDATA[<p><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(二)</a></p>
+    <updated>2015-08-15T13:11:51.579Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(二)</a></p>
 <p>在上一篇博文中主要描述了启动流程，及代码执行流程，并重点介绍了一下我重点关注的部分。这个sbl部分也算有点庞大，我们没有精力也没有必要去分析全部，所以接下来就来分析一下sbl1中另外几个需要格外关注的部分：</p>
 <ul>
 <li>CDT ：主要提供平台设备数据</li>
@@ -52,7 +52,7 @@
 <p>当我们在项目开发时就可以同cdt这些信息来配置不同项目，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------------</span><br><span class="line">  sbl1        platform subtype_id           boot_cdt_array.c</span><br><span class="line">-------------------------------------------------------------</span><br><span class="line">  lk              匹配dts                    dev_tree.c</span><br><span class="line">-------------------------------------------------------------</span><br><span class="line">  kernel     通过传入dts地址创建设备          setup.c</span><br><span class="line">-------------------------------------------------------------</span><br></pre></td></tr></table></figure></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/">高通平台Android源码bootloader分析之sbl1(二)</a></p>
+    <![CDATA[<p><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/">高通平台Android源码bootloader分析之sbl1(二)</a></p>
 <p>在上一篇博文中主要描述了启动流程，及代码执行流程，并重点介绍了一下我重点关注的部分。这个sbl部分也算有点庞大，我们没有精力也没有必要去分析全部，所以接下来就来分析一下sbl1中另外几个需要格外关注的部分：</p>
 <ul>
 <li>CDT ：主要提供平台设备数据</li>
@@ -77,8 +77,8 @@
     <link href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/"/>
     <id>http://huaqianlee.me/2015/08/15/高通平台Android源码bootloader分析之sbl1-一/</id>
     <published>2015-08-15T12:44:33.000Z</published>
-    <updated>2015-08-15T13:10:51.354Z</updated>
-    <content type="html"><![CDATA[<p><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(二)</a></p>
+    <updated>2015-08-15T13:11:46.153Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(二)</a></p>
 <p>高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot loader）的代码需要动一下，ap侧就APPSBL代码需要动（对此部分不了解，可参照：<a href="http://huaqianlee.me/2015/07/25/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" target="_blank" rel="external">bootable源码解析</a>），其他的都是高通搞好了的，甚至有些我们看不到代码。今天就要分析一下开机前几秒钟起着关键作用的sbl1， 这套代码在modem侧的boot_images\中。</p>
 <h2 id="启动流程">启动流程</h2><p>首先来看一下高通的bootloader流程框图，主要由ap、RPM及modem三部分构成，由于我工作主要涉及到ap侧，所以对RPM和modem侧代码不了解，以后有空时间的话到可以研究一下，框图如下：<br><a id="more"></a><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot arch"><br>由上图可知，系统启动流程主要由以下几步组成：</p>
 <ol>
@@ -125,7 +125,7 @@
 <h3 id="pm_chg_charger_detect_state">pm_chg_charger_detect_state</h3><p>pm_chg_charger_detect_state函数是启动工程中非常重要的一个函数，它将监测电池的状态，然后决定启动过程，调用关系和解析如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sbl1_hw_init_secondary</span><br><span class="line"> -&gt;boot_pm_dirver_init </span><br><span class="line">  -&gt;pm_driver_init <span class="comment">#初始化PMIC驱动</span></span><br><span class="line">   -&gt;pm_driver_post_init</span><br><span class="line">    -&gt;pm_chg_sbl_charging_state_entry</span><br><span class="line">     -&gt;pm_chg_battery_and_debug_board_detect_state</span><br><span class="line">      -&gt;pm_chg_charger_detect_state <span class="comment">#监测电池状态，电池正常则启动，weak则死循环，充电知道电池正常</span></span><br><span class="line">       -&gt;pm_chg_<span class="built_in">enable</span>_usb_charging</span><br></pre></td></tr></table></figure></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/">高通平台Android源码bootloader分析之sbl1(二)</a></p>
+    <![CDATA[<p><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.me/2015/08/15/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/">高通平台Android源码bootloader分析之sbl1(二)</a></p>
 <p>高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot loader）的代码需要动一下，ap侧就APPSBL代码需要动（对此部分不了解，可参照：<a href="http://huaqianlee.me/2015/07/25/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/">bootable源码解析</a>），其他的都是高通搞好了的，甚至有些我们看不到代码。今天就要分析一下开机前几秒钟起着关键作用的sbl1， 这套代码在modem侧的boot_images\中。</p>
 <h2 id="启动流程">启动流程</h2><p>首先来看一下高通的bootloader流程框图，主要由ap、RPM及modem三部分构成，由于我工作主要涉及到ap侧，所以对RPM和modem侧代码不了解，以后有空时间的话到可以研究一下，框图如下：<br>]]>
     
