@@ -112,13 +112,13 @@
 <ol>
 <li><p>系统上电或重启。</p>
 </li>
-<li><p>在Cortex-a53芯片中，ap侧的PBL执行，从boot device中加载并校验sbl1镜像到TCM，然后跳转到sbl1中继续执行.</p>
+<li><p>在Cortex-a53芯片中，ap侧的PBL执行，从boot device中加载sbl1镜像到TCM，并对镜像进行校验，然后跳转到sbl1中继续执行.</p>
 </li>
-<li><p>sbl1初始化ddr，从boot device中加载校验QSEE镜像和QHEE镜像到DDR，QSEE执行并设置一个安全的环境，QHEE为VMM设置、SMMU配置及xPU访问控制服务。</p>
+<li><p>sbl1初始化ddr，从boot device中加载QSEE镜像和QHEE镜像到DDR，并对镜像进行校验，QSEE执行并设置一个安全的环境，QHEE为VMM设置、SMMU配置及xPU访问控制服务。</p>
 </li>
-<li><p>sbl1从boot device加载校验RPM固件镜像到code-RAM。</p>
+<li><p>sbl1从boot device加载RPM固件镜像到code-RAM，并对镜像进行校验。</p>
 </li>
-<li><p>sbl1从启动设备加载校验HLOS APPSBL镜像到ddr。</p>
+<li><p>sbl1从启动设备加载HLOS APPSBL镜像到ddr，并对镜像进行校验。</p>
 </li>
 <li><p>sbl1跳转到QSEE-&gt;QHEE。</p>
 </li>
@@ -128,14 +128,14 @@
 </li>
 <li><p>HLOS APPSBL加载和校验HLOS内核。</p>
 </li>
-<li><p>有内核来加载文件系统等完成整个Android系统的启动。</p>
+<li><p>由内核来加载文件系统等完成整个Android系统的启动。</p>
 </li>
 </ol>
 <blockquote>
 <p>HLOS APPSBL即为ap侧的bootloader，见：<a href="http://huaqianlee.me/2015/07/25/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" target="_blank" rel="external">bootable源码解析</a></p>
 </blockquote>
 <p>　　<br>modem侧主要是射频网络相关的代码，我没有研究过也不了解，RPM侧的代码也没怎么研究，高通文档对其介绍如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogRPM.png" alt="RPM"></p>
-<h2 id="sbl1流程分析">sbl1流程分析</h2><p>接下来我就来完整跟一下sbl1的代码，总结出关键流程，此部分代码皆在modem侧。我平时主要会涉及的几个重要文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">boot_images\core\boot\secboot3\hw\msm8916\sbl1\sbl1_hw.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\framework\src\pm_init.c</span><br><span class="line">boot_images\core\boot\secboot3\hw\msm8909\sbl1\sbl1_config.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\app\chg\src\pm_app_chg_alg.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\drivers\smb\src\pm_smb.c // 如果带smb135x芯片</span><br></pre></td></tr></table></figure></p>
+<h2 id="sbl1流程分析">sbl1流程分析</h2><p>接下来我就来跟一下sbl1的代码，总结出关键流程，此部分代码皆在modem侧。我平时主要会涉及的几个重要文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">boot_images\core\boot\secboot3\hw\msm8916\sbl1\sbl1_hw.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\framework\src\pm_init.c</span><br><span class="line">boot_images\core\boot\secboot3\hw\msm8909\sbl1\sbl1_config.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\app\chg\src\pm_app_chg_alg.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\drivers\smb\src\pm_smb.c // 如果带smb135x芯片</span><br></pre></td></tr></table></figure></p>
 <p>首先从其入口文件sbl1.s开始，如下：</p>
 <h3 id="sbl1入口：_sbl1-s">sbl1入口： sbl1.s</h3><p>此部分代码路径在：boot_images/core/boot/secboot3/hw/msm8916/sbl1/sbl1.s，此文件引导处理器，主要有实现如下操作：</p>
 <ul>
