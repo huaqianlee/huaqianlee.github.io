@@ -103,7 +103,7 @@
 </header>
     <div class="article-content">
         
-        <p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，因为当初自学Linux时和在第一家公司做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的格式。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass“促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
+        <p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，当初自学Linux时和第一份job做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的文件。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass”促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
 <ul>
 <li>Device Tree组成及用法；</li>
 <li>DTS文件解析常用api介绍；</li>
@@ -129,13 +129,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Android/">Android</a>►<a class="article-category-link" href="/categories/Android/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Android/Linux/译文/">译文</a>
+  <a class="article-category-link" href="/categories/Android/">Android</a>►<a class="article-category-link" href="/categories/Android/译文/">译文</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Qualcomm/">Qualcomm</a><a href="/tags/源码分析/">源码分析</a>
+  <span></span> <a href="/tags/Qualcomm/">Qualcomm</a><a href="/tags/dts文件/">dts文件</a><a href="/tags/kernel/">kernel</a><a href="/tags/源码分析/">源码分析</a>
   </div>
 
 </div>
@@ -920,8 +920,6 @@
 		  
 		
 		  
-			<li><a href="/categories/Android/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-		  
 		
 		  
 			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
@@ -932,11 +930,9 @@
 		  
 		
 		  
-			<li><a href="/categories/Android/Linux/译文/" title="译文">译文<sup>1</sup></a></li>
-		  
 		
 		  
-			<li><a href="/categories/Android/译文/" title="译文">译文<sup>2</sup></a></li>
+			<li><a href="/categories/Android/译文/" title="译文">译文<sup>3</sup></a></li>
 		  
 		
 		</ul>
@@ -969,7 +965,7 @@
 			
 		
 			
-				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>3</sup></a></li>
 			
 		
 			
@@ -1001,11 +997,15 @@
 			
 		
 			
-				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+				<li><a href="/tags/dts文件/" title="dts文件">dts文件<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
 			
 		
 			
