@@ -110,9 +110,10 @@
 <li>CDT ：主要提供平台设备数据</li>
 <li>log system：log日志系统，当然没有kernel里面那么强大了</li>
 <li>download：代码下载烧写实现</li>
-<li>ramdump：异常信息dump<br>　<br>本篇博文就先来分析一下CDT， 其他部分后面再分析。</li>
+<li>ramdump：异常信息dump<br>　<br>本篇博文就先来分析一下CDT， 其他部分后面再分析。<a id="more"></a>
+<h2 id="CDT">CDT</h2>CDT主要提供Platform ID、ddr硬件配置等平台设备数据。很多module利用这些信息去减少依赖及执行动态初始化。CDT通常被厂家写入EEPROM中，如没有eeprom则会在编译bootloader时链入。<br>　<br>sbl中主要涉及到如下关键文件：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">boot_images\core\boot\secboot3\hw\msm8916\boot_cdt_array.c // config_data_table配置表定义</span><br><span class="line">boot_images\core\systemdrivers\platforminfo\src\PlatformInfo.c</span><br><span class="line">boot_images\core\boot\secboot3\scripts\cdt_generator.py</span><br><span class="line">boot_images\core\boot\secboot3\scripts\jedec_lpddr3_single_channel.xml</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h2 id="CDT">CDT</h2><p>CDT主要提供Platform ID、ddr硬件配置等平台设备数据。很多module利用这些信息去减少依赖及执行动态初始化。CDT通常被厂家写入EEPROM中，如没有eeprom则会在编译bootloader时链入。<br>　<br>sbl中主要涉及到如下关键文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">boot_images\core\boot\secboot3\hw\msm8916\boot_cdt_array.c // config_data_table配置表定义</span><br><span class="line">boot_images\core\systemdrivers\platforminfo\src\PlatformInfo.c</span><br><span class="line">boot_images\core\boot\secboot3\scripts\cdt_generator.py</span><br><span class="line">boot_images\core\boot\secboot3\scripts\jedec_lpddr3_single_channel.xml</span><br></pre></td></tr></table></figure></p>
 <h3 id="boot程序加载CDT">boot程序加载CDT</h3><p>对于CDT，boot程序主要有如下动作：</p>
 <ol>
 <li>sbl1校验eMMC的boot分区中的CDT分区，如果ok，则加载CDT镜像，如果不ok，则执行第2步；</li>
