@@ -87,6 +87,95 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/12/Android编译过程详解之二/" title="Android编译过程详解之二" itemprop="url">Android编译过程详解之二</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-12T08:43:04.000Z" itemprop="datePublished"> 发表于 Jul 12 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a><br>　<br>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　　./go.sh -j8 or make -j8／--jobs</span><br></pre></td></tr></table></figure></p>
+<p>参数“-j“ 和”—jobs ”指定了同时编译的线程数量，通常是编译主机 CPU 支持的并发线程总数的 1 倍或 2 倍（如：在一个 4 核，每个核支持两个线程的 CPU 上，可以使用 make -j8 或 make -j16）。在调用 make 命令时，如果没有指定任何目标，则将编译默认目标“droid”（下面详解），然后将会编译出完整的 Android 系统镜像。</p>
+<h2 id="build系统分类">build系统分类</h2><p>　　整个build系统的Make文件可以分为三类：</p>
+<ol>
+<li>build系统核心文件：定义整个build系统的框架，其他所有make文件都是在这个框架的基础上写出来的。</li>
+<li>产品的make文件：位于device目录，通常以公司名和产品名分为两级目录，如：\device\qcom\msm8916_32。</li>
+<li>模块的make文件：每个模块专用的make文件，kernel中统一名字为Makefile，其他为Android.mk。　</li>
+</ol>
+<h2 id="build结果">build结果</h2><p>所有的编译产物都将位于 /out 目录下，该目录下主要有以下几个子目录：</p>
+<ul>
+<li>/out/host/：该目录下包含了针对主机的 Android 开发工具的产物。即 SDK 中的各种工具，例如：emulator，adb，aapt 等。</li>
+<li>/out/target/common/：该目录下包含了针对设备的共通的编译产物，主要是 Java 应用代码和 Java 库。</li>
+<li>/out/target/product/<product_name>/：包含了针对特定设备的编译结果以及平台相关的 C/C++ 库和二进制文件。其中，<product_name>是具体目标设备的名称。</li>
+<li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/12/Android编译过程详解之二/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/07/12/Android编译过程详解之二/" >huaqianlee.me/2015/07/12/Android编译过程详解之二/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Qualcomm/">Qualcomm</a><a href="/tags/源码分析/">源码分析</a><a href="/tags/编译/">编译</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/12/Android编译过程详解之二/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/12/Android编译过程详解之二/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" title="About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析" itemprop="url">About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析</a>
   </h1>
 
@@ -784,84 +873,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/01/20/JUnit-test的用法/" title="JUnit-test的用法" itemprop="url">JUnit-test的用法</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2015-01-19T16:07:56.000Z" itemprop="datePublished"> 发表于 Jan 20 2015</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p>为了方便调试，不用每写一个类都需要写一个main方法对其测试，所以Java编写会经常用到JUnit测试。</p>
-<h3 id="新建一个JUnit-test测试包，如下图:">新建一个JUnit.test测试包，如下图:</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blognewjunit.png" alt="new"></p>
-<h3 id="JUnit测试">JUnit测试</h3><p>可以在原文件类的方法上面加上@Test作为JUnit测试单元运行，也可以新建JUnit文件测试，编写方法如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class PersonTest &#123;</span><br><span class="line"></span><br><span class="line">	@BeforeClass // 测试类加载之前运行</span><br><span class="line">	public static void <span class="built_in">set</span>UpBeforeClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"Before"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Before  // 每个测试方法运行前运行， 常用</span><br><span class="line">	public void <span class="built_in">set</span>Up() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"所有的测试方法运行之前运行！！"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test  // 注解，给程序看</span><br><span class="line">	public void <span class="function"><span class="title">testEat</span></span>()&#123;</span><br><span class="line">		</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.eat();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="function"><span class="title">testRun</span></span>()&#123;</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.run();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@After // 每个测试方法运行后运行 ，常用</span><br><span class="line">	public void tearDown() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"所有的测试方法运行之后运行！！"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    	@AfterClass //测试类加载之后运行</span><br><span class="line">	public static void tearDownAfterClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"After"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="运行JUnit">运行JUnit</h3><p>可以单独运行某个测试方法,也可以选中类,运行所以的测试方法,如下图:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogrunjunit.png" alt="run"></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/01/20/JUnit-test的用法/" >huaqianlee.me/2015/01/20/JUnit-test的用法/ </a>
-
-</div>
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Java/">Java</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/调试/">调试</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/01/20/JUnit-test的用法/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/01/20/JUnit-test的用法/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -880,7 +891,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>16</sup></a></li>
+			<li><a href="/categories/Android/" title="Android">Android<sup>17</sup></a></li>
 		  
 		
 		  
@@ -904,11 +915,19 @@
 		  
 		
 		  
+			<li><a href="/categories/Android/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Android/Linux/译文/" title="译文">译文<sup>1</sup></a></li>
 		  
 		
 		  
@@ -925,11 +944,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>10</sup></a></li>
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>11</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>9</sup></a></li>
+				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>10</sup></a></li>
 			
 		
 			

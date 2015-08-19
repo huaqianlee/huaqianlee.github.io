@@ -1,0 +1,703 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>高通平台Android源码分析之Linux内核设备树(DT - Device Tree) | Andy.Lee Plus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Andy.Lee">
+    
+
+    
+    <meta name="description" content="刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，因为当初自学Linux时和在第一家公司做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的格式。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass“促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高通平台Android源码分析之Linux内核设备树(DT - Device Tree)">
+<meta property="og:url" content="http://huaqianlee.me/2015/08/19/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/index.html">
+<meta property="og:site_name" content="Andy.Lee Plus">
+<meta property="og:description" content="刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，因为当初自学Linux时和在第一家公司做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的格式。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass“促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高通平台Android源码分析之Linux内核设备树(DT - Device Tree)">
+<meta name="twitter:description" content="刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，因为当初自学Linux时和在第一家公司做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的格式。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass“促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的">
+<meta name="twitter:creator" content="@Andylee_sarah">
+<link rel="publisher" href="107850537041795428182">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Andy.Lee Plus" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/andylee.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/andylee.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Andy.Lee Plus" title="Andy.Lee Plus"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Andy.Lee Plus">Andy.Lee Plus</a></h1>
+				<h2 class="blog-motto">Good good study, day day up !</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/categories">Categories</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="huaqianlee.me" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 11011705640184761899## e.g. &quot;783281470518440642&quot;  for your baidu search id ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+<!--<a href="https://github.com/AndyLee-Github"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>-->
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/19/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/" title="高通平台Android源码分析之Linux内核设备树(DT - Device Tree)" itemprop="url">高通平台Android源码分析之Linux内核设备树(DT - Device Tree)</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-19T14:11:46.000Z" itemprop="datePublished"> 发表于 Aug 19 2015</time>
+    
+  </p>
+  
+</header>
+	<div class="article-content">
+		
+		<p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，因为当初自学Linux时和在第一家公司做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的格式。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass“促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
+<ul>
+<li>Device Tree组成及用法；</li>
+<li>DTS文件解析常用api介绍；</li>
+<li>高通Android源码中dts文件；</li>
+</ul>
+<h2 id="Device_Tree组成及用法">Device Tree组成及用法</h2><p>Device Tree由一系列node（节点）和property（属性）组成，节点本身可包含更多的子节点。属性是成对出现的name-value键值对。在device tree中主要描述如下信息：</p>
+<ul>
+<li>CPU的数量及类别</li>
+<li>内存基地址和size</li>
+<li>总线和桥</li>
+<li>外设连接</li>
+<li>中断</li>
+<li>GPIO</li>
+<li>CLOCK</li>
+</ul>
+<p>Device Tree在内核的作用有点类似于描述出PCB上的CPU、内存、总线、设备及IRQ GPIO等组成的tree结构。然后经由bootloader传递给内核，内核再根据此设备树解析出需要的i2c、spi等设备，然后将内存、IRQ、GPIO等资源绑定到相应的设备。</p>
+<blockquote>
+<p>lk中通过tag传递到kernel，文件路径：bootable/bootloader/lk/app/aboot/aboot.c，由DEVICE_TREE宏开关控制</p>
+</blockquote>
+<h2 id="DTS(device_tree_source)">DTS(device tree source)</h2><p>.dts文件是一种ASCII文本格式的device tree描述文件，其结构明了，一次看到都能大概猜出其描述意图。在内核中arm部分，基本上上一个.dts文件对应一个arm的machine，一般位于kernel/arch/arm/boot/dts。由于一个soc可能对应多个machine，<br>所以一般讲多个machine通用的部分提炼为一个.dsti文件，有点类似于头文件的作用，引用方式也类似：#include “xxx.dtsi”，dtsi文件也可以相互引用。</p>
+<h3 id="dts中的基本元素">dts中的基本元素</h3><p>dts中的基本元素为节点和属性，节点可以包含属性和子节点，属性为name-value键值对，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ &#123;&#10;    node1 &#123;&#10;        a-string-property = &#34;A string&#34;; // &#20540;&#20026;&#23383;&#31526;&#20018;&#10;        a-string-list-property = &#34;first string&#34;, &#34;second string&#34;;// &#20540;&#20026;&#23383;&#31526;&#25968;&#32452;&#10;        a-byte-data-property = [0x01 0x23 0x34 0x56]; // &#20540;&#20026;&#20108;&#36827;&#21046;&#10;        child-node1 &#123;&#10;            first-child-property; &#10;            second-child-property = &#60;1&#62;; &#10;            a-string-property = &#34;Hello, world&#34;;&#10;        &#125;;&#10;        child-node2 &#123;&#10;        &#125;;&#10;    &#125;;&#10;    node2 &#123;&#10;        an-empty-property; // &#20540;&#20026;kog&#10;        /* each number (cell) is a uint32 */&#10;        a-cell-property = &#60;1 2 3 4&#62;;  // cells&#65288;&#30001;uint32&#32452;&#25104;&#65289;&#10;        child-node1 &#123;&#10;        &#125;;&#10;    &#125;;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>上述dt并没有什么真实用途，没有描述任何东西。不过展示了dt的结构：</p>
+<ul>
+<li>一个根节点：”/“；</li>
+<li>一对子节点：”node1”和”node2”；</li>
+<li>子节点的子节点：”child-node”；</li>
+<li>属性定义： 属性值可以为空、字符串、cells(整数组成)、数组及二进制等任意字节流；</li>
+</ul>
+<p>属性中常用的字节流如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 字符串，用双引号引用： </span></span><br><span class="line">string-property = <span class="string">"A string"</span>; </span><br><span class="line"><span class="comment">#cells，用尖括号引用分隔开的32bit无符号整数：</span></span><br><span class="line">cell-property = &lt;<span class="number">0</span>xbeef <span class="number">123</span> <span class="number">0</span>xabcd1234&gt;；</span><br><span class="line"><span class="comment"># 二进制数据，用方括号引用：</span></span><br><span class="line">binary-property = [<span class="number">0</span>x01 <span class="number">0</span>x23 <span class="number">0</span>x45 <span class="number">0</span>x67];</span><br><span class="line"><span class="comment"># 通过逗号链接不同数据：</span></span><br><span class="line">mixed-property = <span class="string">"a string"</span>, [<span class="number">0</span>x01 <span class="number">0</span>x23 <span class="number">0</span>x45 <span class="number">0</span>x67], &lt;<span class="number">0</span>x12345678&gt;;</span><br><span class="line"><span class="comment"># 通过逗号创建字符串数组：</span></span><br><span class="line">string-list = <span class="string">"red fish"</span>, <span class="string">"blue fish"</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Sample_Machine">Sample Machine</h3><p>理解设备树怎么被用的最好办法，就是做一遍，接下来就通过一步一步构建描述一个简单machine的device tree来理解设备树。假设machine的硬件配置如下：</p>
+<ul>
+<li>一个32bit的ARM CPU</li>
+<li>处理器的local bus的内存映射分布了串口、spi总线控制器、i2c控制器、中断控制器和外部总线桥</li>
+<li>256MB的SDRAM，基地址为0</li>
+<li>2个串口基地址为：0x101f1000 和 0x101f2000</li>
+<li>GPIO控制器，基地址为0x101f3000</li>
+<li>spi控制器，基地址为0x10170000,从属设备：<ul>
+<li>MMC slot with ss pin attached to GPIO #1 (不能很好理解其意思，所以就不胡乱翻译了)</li>
+</ul>
+</li>
+<li>External bus桥，从属设备：<ul>
+<li>smc smc91111 Ethernet设备，基地址为0x10100000</li>
+<li>i2c控制器，基地址为0x10160000，从属设备：<ul>
+<li>Maxim DS1338时钟芯片，从设备I2C地址 1101000(0x58)</li>
+</ul>
+</li>
+<li>64MB Nor flash,基地址为0x30000000</li>
+</ul>
+</li>
+</ul>
+<h4 id="初始化结构">初始化结构</h4><p>首先，为machine创建一个框架结构，一个有效设备树的最简单的结构，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ &#123;&#10;    compatible = &#34;acme,coyotes-revenge&#34;;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>compatible指定系统的名字，格式： compatible = “<manufacturer>,<model>“（制造商，型号）。它非常重要，用来精确指定设备，并通过包含manufacurer(制造商)名字来避免冲突。因为操作系统通过compatible的值来决定machine怎么运行，所以使用正确的值是非常重要的。<br>　<br>理论上来说，compatible是操作系统所有数据标示machine的唯一标示符，os将通过顶层compatible寻找相应的值。</model></manufacturer></p>
+<h4 id="CPUs">CPUs</h4><p>第二步，描述CPU的”cpus”节点，其包含每一个CPU描述信息的子节点，在这个例子中，CPU为一个双核的arm cortex A9处理器，所以其描述如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ &#123;&#10;    compatible = &#34;acme,coyotes-revenge&#34;;&#10;&#10;    cpus &#123;&#10;        cpu@0 &#123;&#10;            compatible = &#34;arm,cortex-a9&#34;; // &#26684;&#24335;&#21516;&#39030;&#23618;&#33410;&#28857;&#65292;&#60;manufacturer&#62;,&#60;model&#62;&#10;        &#125;;&#10;        cpu@1 &#123;&#10;            compatible = &#34;arm,cortex-a9&#34;;&#10;        &#125;;&#10;    &#125;;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="节点名">节点名</h4><p>每一个节点必须有一个节点名，格式： <name>[@<unit-address>]。</unit-address></name></p>
+<ul>
+<li><name>：为最长31个字符的ascii字符串，一般用其代表的设备类型命名，ie. 一个3com Ethernet adapter的节点名：ethernet，不用3com509。</name></li>
+<li>unit-address： 描述设备的地址，一般情况下，其提供访问设备的基地址，节点的reg property也用此参数，见下文。</li>
+</ul>
+<p>同层次兄弟节点的节点名必须是独一无二的，不过多个节点可以使用一样的通用name，只要地址不同就可以了。ie. serial@101f1000 &amp; serial@101f2000</p>
+<h4 id="Devices">Devices</h4><p>每一个device在系统中由一个设备树节点描述，所以接下来，第三步是为设备填充树的节点。不过，现在我为新节点创建一个空节点，直到我们知道地址范围和如何处理irqs请求之后再填写相应内容。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ &#123;&#10;    compatible = &#34;acme,coyotes-revenge&#34;;&#10;&#10;    cpus &#123;&#10;        cpu@0 &#123;&#10;            compatible = &#34;arm,cortex-a9&#34;;&#10;        &#125;;&#10;        cpu@1 &#123;&#10;            compatible = &#34;arm,cortex-a9&#34;;&#10;        &#125;;&#10;    &#125;;&#10;&#10;    serial@101F0000 &#123;&#10;        compatible = &#34;arm,pl011&#34;;&#10;    &#125;;&#10;&#10;    serial@101F2000 &#123;&#10;        compatible = &#34;arm,pl011&#34;;&#10;    &#125;;&#10;&#10;    gpio@101F3000 &#123;&#10;        compatible = &#34;arm,pl061&#34;;&#10;    &#125;;&#10;&#10;    interrupt-controller@10140000 &#123;&#10;        compatible = &#34;arm,pl190&#34;;&#10;    &#125;;&#10;&#10;    spi@10115000 &#123;&#10;        compatible = &#34;arm,pl022&#34;;&#10;    &#125;;&#10;&#10;    external-bus &#123;&#10;        ethernet@0,0 &#123;&#10;            compatible = &#34;smc,smc91c111&#34;;&#10;        &#125;;&#10;&#10;        i2c@1,0 &#123;&#10;            compatible = &#34;acme,a1234-i2c-bus&#34;;&#10;            rtc@58 &#123;&#10;                compatible = &#34;maxim,ds1338&#34;;&#10;            &#125;;&#10;        &#125;;&#10;&#10;        flash@2,0 &#123;&#10;            compatible = &#34;samsung,k8f1315ebm&#34;, &#34;cfi-flash&#34;;&#10;        &#125;;&#10;    &#125;;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在此tree中，在系统中为每一个device增加了节点，其层次结构反应了系统中的连接情况。ie. extern bus上的的设备憋创建为external bus节点的子节点，i2c设备被创建为i2c总线控制器的子节点。简单来说，tree中的层次结构代表了系统中的CPU视图。</p>
+<p>目前，这个tree是无效的，因为它设备之间的连接信息，接下来再添加这些信息。<br>在这个tree中有几点需要注意：</p>
+<ul>
+<li>每个设备节点都有一个compatible属性</li>
+<li>flash节点的compatible属性有两个字符串值。</li>
+<li>如前所述，节点名反映设备类型，而非详细型号。</li>
+</ul>
+<h5 id="compatible详解">compatible详解</h5><p>设备树中每个节点都需要有compatible属性，compatible属性决定每一个设备驱动绑定哪一个设备。如上所介绍，compatible是一个字符串序列，第一个字符串指定精确设备，第二字符串指定兼容设备。</p>
+<p> ie. Freescale MPC8349片上有一个根据国家半导体ns16550接口实现的串行设备，定义为：compatible = “fsl,mpc8349-uart”, “ns16550”. 第一个字符串指定精确设备，第二个指定国家半导体16550 uart兼容设备。</p>
+<blockquote>
+<p>ns16550没有制造商前缀（manufacturer）纯属历史原因，所有的compatible值应该带有制造商前缀。</p>
+</blockquote>
+<p>这种做法允许将存在的设备驱动绑定到一类更新的设备，并且仍然能识别到精确的设备。</p>
+<blockquote>
+<p>警告：不要使用通配符赋值，如：”fsl,mpc83xx-uart”等。为了兼容后续设备，一般会选择一个特定实现，如上的：”ns16550”。</p>
+</blockquote>
+<h4 id="设备寻址">设备寻址</h4><p>关于设备寻址，设备树中通过如下属性encode地址信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reg ：每个可寻址的设备有一个reg cells.</span><br><span class="line">格式：reg = &lt;address1 length1 [address2 length2] [address3 length3] ... &gt;</span><br><span class="line">// 因为地址和长度是变量，所以父节点中定义<span class="comment">#address-cells和#size-cells两个属性，声明每个域里会用到多少cells</span></span><br><span class="line"><span class="comment">#address-cells</span></span><br><span class="line"><span class="comment">#size-cells</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="CPU寻址">CPU寻址</h5><p>CPU节点寻址是寻址里面最简单的，每个CPU被一个独一无二的ID标记，没有size与CPU ids关联。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cpus &#123;&#10;    #address-cells = &#60;1&#62;;&#10;    #size-cells = &#60;0&#62;; // &#27492;&#20004;&#20010;&#23646;&#24615;&#34920;&#26126;&#23376;&#33410;&#28857;reg &#20540;&#20026;&#19968;&#20010;&#27809;&#26377;size&#30340;uint32&#22320;&#22336;&#10;    cpu@0 &#123;&#10;        compatible = &#34;arm,cortex-a9&#34;;&#10;        reg = &#60;0&#62;; // &#20540;&#19982;&#33410;&#28857;&#21517;&#30340;unit-address&#30456;&#21516;&#10;    &#125;;&#10;    cpu@1 &#123;&#10;        compatible = &#34;arm,cortex-a9&#34;;&#10;        reg = &#60;1&#62;; &#10;    &#125;;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果一个节点有reg属性，则节点名必须包含unit-address，并且取reg属性的第一个address值。</p>
+</blockquote>
+<h4 id="有内存映像地址的设备">有内存映像地址的设备</h4><p>有内存映像地址的设备定义如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ &#123;&#10;    #address-cells = &#60;1&#62;;&#10;    #size-cells = &#60;1&#62;;&#10;&#10;    ...&#10;&#10;    serial@101f0000 &#123;&#10;        compatible = &#34;arm,pl011&#34;;&#10;        reg = &#60;0x101f0000 0x1000 &#62;;&#10;    &#125;;&#10;&#10;    serial@101f2000 &#123;&#10;        compatible = &#34;arm,pl011&#34;;&#10;        reg = &#60;0x101f2000 0x1000 &#62;;&#10;    &#125;;&#10;&#10;    gpio@101f3000 &#123;&#10;        compatible = &#34;arm,pl061&#34;;&#10;        reg = &#60;0x101f3000 0x1000&#10;               0x101f4000 0x0010&#62;;&#10;    &#125;;&#10;&#10;    interrupt-controller@10140000 &#123;&#10;        compatible = &#34;arm,pl190&#34;;&#10;        reg = &#60;0x10140000 0x1000 &#62;;&#10;    &#125;;&#10;&#10;    spi@10115000 &#123;&#10;        compatible = &#34;arm,pl022&#34;;&#10;        reg = &#60;0x10115000 0x1000 &#62;;&#10;    &#125;;&#10;&#10;    ...&#10;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>此部分未完待续….</p>
+<h2 id="高通Android源码中dts文件">高通Android源码中dts文件</h2><h3 id="AndroidBoard-mk">AndroidBoard.mk</h3><p>Android编译过程（如想了解更多可参考：<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解</a>）中会解析到device\qcom\msm8916_32\AndroidBoard.mk，此文件中选择了kernel的默认配置文件，如下：<br><figure class="highlight mk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># device\qcom\msm8916_32\AndroidBoard.mk</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#----------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># Compile (L)ittle (K)ernel bootloader and the nandwrite utility</span></span><br><span class="line"><span class="comment">#----------------------------------------------------------------------</span></span><br><span class="line">ifneq ($(strip $(TARGET_NO_BOOTLOADER)),true)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compile</span></span><br><span class="line">include bootable/bootloader/lk/AndroidBoot.mk</span><br><span class="line"></span><br><span class="line">$(INSTALLED_BOOTLOADER_MODULE): $(TARGET_EMMC_BOOTLOADER) | $(ACP)</span><br><span class="line">	<span class="variable">$(transform-prebuilt-to-target)</span></span><br><span class="line">$(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_BOOTLOADER_MODULE)</span><br><span class="line"></span><br><span class="line">droidcore: $(INSTALLED_BOOTLOADER_MODULE)</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line"><span class="comment">#----------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># Compile Linux Kernel</span></span><br><span class="line"><span class="comment">#----------------------------------------------------------------------</span></span><br><span class="line">ifeq ($(KERNEL_DEFCONFIG),)</span><br><span class="line">    KERNEL_DEFCONFIG := msm8916_defconfig  //选择msm8916_defconfig文件为默认配置文件</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">include kernel/AndroidKernel.mk</span><br><span class="line"></span><br><span class="line">$(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)</span><br><span class="line">	<span class="variable">$(transform-prebuilt-to-target)</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="msm8916_defconfig">msm8916_defconfig</h3><p>此文件中主要是一些编译开关，包括dts文件的编译开关，如下：<br><figure class="highlight mk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kernel\arch\arm\configs\msm8916_defconfig</span></span><br><span class="line">...</span><br><span class="line"><span class="constant">CONFIG_ARCH_MSM</span>=y</span><br><span class="line"><span class="constant">CONFIG_ARCH_MSM8916</span>=y  // dts文件的编译开关，当然也在其他地方用到，如加载板级文件：obj-<span class="variable">$(CONFIG_ARCH_MSM8916)</span> += board-8916.o</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h3 id="Makefile">Makefile</h3><p>dts文件目录的mk文件决定需要加载哪些dts文件，这些文件最终打包到dt.img，再经由mkbootimg工具和其他镜像一起打包到boot.img。关键源码如下：<br><figure class="highlight mk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kernel\arch\arm\boot\dts\qcom\Makefile</span></span><br><span class="line">...</span><br><span class="line">// 我们的代码针对每一个项目新建了一个dts文件，然后通过此文件去include了相关dts文件，所以下面都被屏蔽掉了</span><br><span class="line">dtb-$(CONFIG_ARCH_MSM8916) += msm8916-qrd-skuh-$(OEM_PROJECT_NAME).dtb  </span><br><span class="line"><span class="comment">#msm8916-sim.dtb</span></span><br><span class="line"><span class="comment">#msm8916-rumi.dtb</span></span><br><span class="line"><span class="comment">#msm8916-cdp.dtb</span></span><br><span class="line"><span class="comment">#msm8916-cdp-smb1360.dtb</span></span><br><span class="line"><span class="comment">#msm8916-mtp.dtb</span></span><br><span class="line"><span class="comment">#msm8916-512mb-mtp.dtb</span></span><br><span class="line"><span class="comment">#msm8916-mtp-smb1360.dtb</span></span><br><span class="line"><span class="comment">#msm8916-512mb-mtp-smb1360.dtb</span></span><br><span class="line"><span class="comment">#msm8916-512mb-qrd-skui.dtb</span></span><br><span class="line"><span class="comment">#msm8916-qrd-skuh.dtb</span></span><br><span class="line"><span class="comment">#msm8916-qrd-skuhf.dtb</span></span><br><span class="line"><span class="comment">#msm8916-qrd-skui.dtb</span></span><br><span class="line"><span class="comment">#msm8916-512mb-qrd-skuh.dtb</span></span><br><span class="line"><span class="comment">#msm8939-sim.dtb</span></span><br><span class="line"><span class="comment">#msm8939-rumi.dtb</span></span><br><span class="line"><span class="comment">#msm8939-qrd-skuk.dtb</span></span><br><span class="line"><span class="comment">#msm8939-cdp.dtb</span></span><br><span class="line"><span class="comment">#msm8939-cdp-smb1360.dtb</span></span><br><span class="line"><span class="comment">#msm8939-mtp.dtb</span></span><br><span class="line"><span class="comment">#msm8939-mtp-smb1360.dtb</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h3 id="dts中的platform_info">dts中的platform info</h3><p>msm8916-cdp.dts文件中定义平台信息，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># kernel\arch\arm\boot\dts\qcom\msm8916-cdp.dts&#10;#include &#34;msm8916-cdp.dtsi&#34;&#10;#include &#34;msm8916-memory.dtsi&#34;&#10;&#10;/ &#123;&#10;&#9;model = &#34;Qualcomm Technologies, Inc. MSM 8916 CDP&#34;;&#10;&#9;compatible = &#34;qcom,msm8916-cdp&#34;, &#34;qcom,msm8916&#34;, &#34;qcom,cdp&#34;;&#10;&#9;qcom,board-id = &#60;1 0&#62;;&#10;&#125;;&#10;...</span><br></pre></td></tr></table></figure></p>
+<p>不过我们在每个项目的dts文件中重新定义了平台信息，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># kernel\arch\arm\boot\dts\qcom\msm8916-qrd-skuh-$(OEM_PROJECT_NAME).dts &#10;#include &#34;msm8916-qrd-skuh.dtsi&#34;&#10;#include &#34;msm8916-memory.dtsi&#34;&#10;&#10;/ &#123;&#10;&#9;model = &#34;Qualcomm Technologies, Inc. MSM 8916 QRD SKUH changcheng l783&#34;;&#10;&#9;compatible = &#34;qcom,msm8916-qrd-skuh&#34;, &#34;qcom,msm8916-qrd&#34;, &#34;qcom,msm8916&#34;, &#34;qcom,qrd&#34;;&#10;&#9;qcom,board-id = &#60;0x1000b 0&#62; , &#60;0x1000b 4&#62;;&#10;&#125;;&#10;...</span><br></pre></td></tr></table></figure></p>
+<h3 id="Reference">Reference</h3><p><a href="http://devicetree.org/Device_Tree_Usage" target="_blank" rel="external">http://devicetree.org/Device_Tree_Usage</a>  （很多内容译自此处）<br><a href="http://blog.csdn.net/21cnbao/article/details/8457546" target="_blank" rel="external">http://blog.csdn.net/21cnbao/article/details/8457546</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/08/19/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/" >huaqianlee.me/2015/08/19/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>►<a class="article-category-link" href="/categories/Android/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Android/Linux/译文/">译文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Qualcomm/">Qualcomm</a><a href="/tags/源码分析/">源码分析</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/18/高通平台Android源码bootloader分析之sbl1-三/"  title="高通平台Android源码bootloader分析之sbl1(三)">
+ <strong>上一篇：</strong><br/> 
+ <span>高通平台Android源码bootloader分析之sbl1(三)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/19/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/" data-title="高通平台Android源码分析之Linux内核设备树(DT - Device Tree)" data-url="http://huaqianlee.me/2015/08/19/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>17</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Javaweb/" title="Javaweb">Javaweb<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Android/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Android/Linux/译文/" title="译文">译文<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Android/译文/" title="译文">译文<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/编译/" title="编译">编译<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Log/" title="Log">Log<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/文件IO/" title="文件IO">文件IO<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/xml/" title="xml">xml<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/调试/" title="调试">调试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://huaqianlee.me/" target="_blank" title="AndyLee Plus">AndyLee Plus</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://fpgadeveloper.wang/" target="_blank" title="FPGA开发者网">FPGA开发者网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.daimajia.com/" target="_blank" title="代码家">代码家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.stormzhang.com/" target="_blank" title="stormzhang">stormzhang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark">Jark</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Andy Lau in Hongkong. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/huaqianlee" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/AndyLee-Github" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4511267/huaqian-lee" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/Andylee_sarah" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/huaqianlee" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:huaqianlee@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/AndyLee-Github/customtheme" target="_blank" title="Andy Lee">Andy Lee</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Andy.Lee">Andy.Lee</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"AndyLee"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'AndyLee';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-63838023-1', 'huaqianlee.me');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5ab1107031547fb5411cd06ed47f1348## e.g. e6d1f421bbc9962127a50488f9ed37d1 your baidu tongji site code' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

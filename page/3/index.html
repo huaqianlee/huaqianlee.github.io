@@ -87,6 +87,84 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/01/20/JUnit-test的用法/" title="JUnit-test的用法" itemprop="url">JUnit-test的用法</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-19T16:07:56.000Z" itemprop="datePublished"> 发表于 Jan 20 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>为了方便调试，不用每写一个类都需要写一个main方法对其测试，所以Java编写会经常用到JUnit测试。</p>
+<h3 id="新建一个JUnit-test测试包，如下图:">新建一个JUnit.test测试包，如下图:</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blognewjunit.png" alt="new"></p>
+<h3 id="JUnit测试">JUnit测试</h3><p>可以在原文件类的方法上面加上@Test作为JUnit测试单元运行，也可以新建JUnit文件测试，编写方法如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class PersonTest &#123;</span><br><span class="line"></span><br><span class="line">	@BeforeClass // 测试类加载之前运行</span><br><span class="line">	public static void <span class="built_in">set</span>UpBeforeClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"Before"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Before  // 每个测试方法运行前运行， 常用</span><br><span class="line">	public void <span class="built_in">set</span>Up() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"所有的测试方法运行之前运行！！"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test  // 注解，给程序看</span><br><span class="line">	public void <span class="function"><span class="title">testEat</span></span>()&#123;</span><br><span class="line">		</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.eat();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="function"><span class="title">testRun</span></span>()&#123;</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.run();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@After // 每个测试方法运行后运行 ，常用</span><br><span class="line">	public void tearDown() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"所有的测试方法运行之后运行！！"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    	@AfterClass //测试类加载之后运行</span><br><span class="line">	public static void tearDownAfterClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"After"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="运行JUnit">运行JUnit</h3><p>可以单独运行某个测试方法,也可以选中类,运行所以的测试方法,如下图:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogrunjunit.png" alt="run"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/01/20/JUnit-test的用法/" >huaqianlee.me/2015/01/20/JUnit-test的用法/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/调试/">调试</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/01/20/JUnit-test的用法/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/01/20/JUnit-test的用法/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/01/19/xml文件约束与解析/" title="xml文件约束与解析" itemprop="url">xml文件约束与解析</a>
   </h1>
 
@@ -742,7 +820,7 @@ eg:
 		<ul>
 		
 		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>16</sup></a></li>
+			<li><a href="/categories/Android/" title="Android">Android<sup>17</sup></a></li>
 		  
 		
 		  
@@ -766,11 +844,19 @@ eg:
 		  
 		
 		  
+			<li><a href="/categories/Android/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Android/Linux/译文/" title="译文">译文<sup>1</sup></a></li>
 		  
 		
 		  
@@ -787,11 +873,11 @@ eg:
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>10</sup></a></li>
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>11</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>9</sup></a></li>
+				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>10</sup></a></li>
 			
 		
 			
