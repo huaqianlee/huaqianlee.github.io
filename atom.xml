@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-08-19T15:09:57.997Z</updated>
+  <updated>2015-08-19T16:31:44.993Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://huaqianlee.me/2015/08/19/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BLinux%E5%86%85%E6%A0%B8%E8%AE%BE%E5%A4%87%E6%A0%91-DT-Device-Tree-dts%E6%96%87%E4%BB%B6/"/>
     <id>http://huaqianlee.me/2015/08/19/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/</id>
     <published>2015-08-19T14:11:46.000Z</published>
-    <updated>2015-08-19T15:09:57.997Z</updated>
-    <content type="html"><![CDATA[<p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，当初自学Linux时和第一份job做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的文件。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass”促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
+    <updated>2015-08-19T16:31:44.993Z</updated>
+    <content type="html"><![CDATA[<p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，当初自学Linux时和第一份job做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的文件。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass”而促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
 <ul>
 <li>Device Tree组成及用法；</li>
 <li>DTS文件解析常用api介绍；</li>
@@ -73,11 +73,14 @@
 </li>
 </ul>
 <h4 id="初始化结构">初始化结构</h4><p>首先，为machine创建一个框架结构，一个有效设备树的最简单的结构，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ &#123;&#10;    compatible = &#34;acme,coyotes-revenge&#34;;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>compatible指定系统的名字，格式：compatible = “\<manufacturer\>,\<model\>“（制造商，型号）。它非常重要，用来精确指定设备，并通过包含manufacurer(制造商)名字来避免冲突。因为操作系统通过compatible的值来决定machine怎么运行，所以使用正确的值是非常重要的。<br>　<br>理论上来说，compatible是操作系统所有数据标示machine的唯一标示符，os将通过顶层compatible寻找相应的值。</model\></manufacturer\></p>
+<p>compatible指定系统的名字，格式：compatible = “&lt; manufacturer&gt;,&lt; model&gt;”（制造商，型号）。它非常重要，用来精确指定设备，并通过包含manufacurer(制造商)名字来避免冲突。因为操作系统通过compatible的值来决定machine怎么运行，所以使用正确的值是非常重要的。<br>　<br>理论上来说，compatible是操作系统所有数据标示machine的唯一标示符，os将通过顶层compatible寻找相应的值。</p>
 <h4 id="CPUs">CPUs</h4><p>第二步，描述CPU的”cpus”节点，其包含每一个CPU描述信息的子节点，在这个例子中，CPU为一个双核的arm cortex A9处理器，所以其描述如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ &#123;&#10;    compatible = &#34;acme,coyotes-revenge&#34;;&#10;&#10;    cpus &#123;&#10;        cpu@0 &#123;&#10;            compatible = &#34;arm,cortex-a9&#34;; // &#26684;&#24335;&#21516;&#39030;&#23618;&#33410;&#28857;&#65292;&#60;manufacturer&#62;,&#60;model&#62;&#10;        &#125;;&#10;        cpu@1 &#123;&#10;            compatible = &#34;arm,cortex-a9&#34;;&#10;        &#125;;&#10;    &#125;;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
-<h4 id="节点名">节点名</h4><p>每一个节点必须有一个节点名，格式：<name>[@<unit-address>]。</unit-address></name></p>
+<h4 id="节点名">节点名</h4><p>每一个节点必须有一个节点名，格式：&lt; name&gt;[@&lt; unit-address&gt;]。</p>
+<blockquote>
+<p>由于自己搞这个hexo主题不够完善,尖括号不能按照markdown语法成功解析,发现只有左边尖括号后多加一个空格才能解析正确, 后续如果更新主题后此处显示异常,欢迎评论提示我,此文有多处使用尖括号的地方</p>
+</blockquote>
 <ul>
-<li>\<name\\> 为最长31个字符的ascii字符串，一般用其代表的设备类型命名，ie. 一个3com Ethernet adapter的节点名：ethernet，不用3com509。</name\\></li>
+<li>&lt; name&gt; 为最长31个字符的ascii字符串，一般用其代表的设备类型命名，ie. 一个3com Ethernet adapter的节点名：ethernet，不用3com509。</li>
 <li>unit-address  描述设备的地址，一般情况下，其提供访问设备的基地址，节点的reg property也用此参数，见下文。</li>
 </ul>
 <p>同层次兄弟节点的节点名必须是独一无二的，不过多个节点可以使用一样的通用name，只要地址不同就可以了。ie. serial@101f1000 &amp; serial@101f2000</p>
@@ -109,10 +112,10 @@
 <h3 id="Makefile">Makefile</h3><p>dts文件目录的mk文件决定需要加载哪些dts文件，这些文件最终打包到dt.img，再经由mkbootimg工具和其他镜像一起打包到boot.img。关键源码如下：<br><figure class="highlight mk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kernel\arch\arm\boot\dts\qcom\Makefile</span></span><br><span class="line">...</span><br><span class="line">// 我们的代码针对每一个项目新建了一个dts文件，然后通过此文件去include了相关dts文件，所以下面都被屏蔽掉了</span><br><span class="line">dtb-$(CONFIG_ARCH_MSM8916) += msm8916-qrd-skuh-$(OEM_PROJECT_NAME).dtb  </span><br><span class="line"><span class="comment">#msm8916-sim.dtb</span></span><br><span class="line"><span class="comment">#msm8916-rumi.dtb</span></span><br><span class="line"><span class="comment">#msm8916-cdp.dtb</span></span><br><span class="line"><span class="comment">#msm8916-cdp-smb1360.dtb</span></span><br><span class="line"><span class="comment">#msm8916-mtp.dtb</span></span><br><span class="line"><span class="comment">#msm8916-512mb-mtp.dtb</span></span><br><span class="line"><span class="comment">#msm8916-mtp-smb1360.dtb</span></span><br><span class="line"><span class="comment">#msm8916-512mb-mtp-smb1360.dtb</span></span><br><span class="line"><span class="comment">#msm8916-512mb-qrd-skui.dtb</span></span><br><span class="line"><span class="comment">#msm8916-qrd-skuh.dtb</span></span><br><span class="line"><span class="comment">#msm8916-qrd-skuhf.dtb</span></span><br><span class="line"><span class="comment">#msm8916-qrd-skui.dtb</span></span><br><span class="line"><span class="comment">#msm8916-512mb-qrd-skuh.dtb</span></span><br><span class="line"><span class="comment">#msm8939-sim.dtb</span></span><br><span class="line"><span class="comment">#msm8939-rumi.dtb</span></span><br><span class="line"><span class="comment">#msm8939-qrd-skuk.dtb</span></span><br><span class="line"><span class="comment">#msm8939-cdp.dtb</span></span><br><span class="line"><span class="comment">#msm8939-cdp-smb1360.dtb</span></span><br><span class="line"><span class="comment">#msm8939-mtp.dtb</span></span><br><span class="line"><span class="comment">#msm8939-mtp-smb1360.dtb</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
 <h3 id="dts中的platform_info">dts中的platform info</h3><p>msm8916-cdp.dts文件中定义平台信息，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># kernel\arch\arm\boot\dts\qcom\msm8916-cdp.dts&#10;#include &#34;msm8916-cdp.dtsi&#34;&#10;#include &#34;msm8916-memory.dtsi&#34;&#10;&#10;/ &#123;&#10;&#9;model = &#34;Qualcomm Technologies, Inc. MSM 8916 CDP&#34;;&#10;&#9;compatible = &#34;qcom,msm8916-cdp&#34;, &#34;qcom,msm8916&#34;, &#34;qcom,cdp&#34;;&#10;&#9;qcom,board-id = &#60;1 0&#62;;&#10;&#125;;&#10;...</span><br></pre></td></tr></table></figure></p>
 <p>不过我们在每个项目的dts文件中重新定义了平台信息，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># kernel\arch\arm\boot\dts\qcom\msm8916-qrd-skuh-$(OEM_PROJECT_NAME).dts &#10;#include &#34;msm8916-qrd-skuh.dtsi&#34;&#10;#include &#34;msm8916-memory.dtsi&#34;&#10;&#10;/ &#123;&#10;&#9;model = &#34;Qualcomm Technologies, Inc. MSM 8916 QRD SKUH changcheng l783&#34;;&#10;&#9;compatible = &#34;qcom,msm8916-qrd-skuh&#34;, &#34;qcom,msm8916-qrd&#34;, &#34;qcom,msm8916&#34;, &#34;qcom,qrd&#34;;&#10;&#9;qcom,board-id = &#60;0x1000b 0&#62; , &#60;0x1000b 4&#62;;&#10;&#125;;&#10;...</span><br></pre></td></tr></table></figure></p>
-<h3 id="Reference">Reference</h3><p><a href="http://devicetree.org/Device_Tree_Usage" target="_blank" rel="external">http://devicetree.org/Device_Tree_Usage</a>  （很多内容译自此处）<br><a href="http://blog.csdn.net/21cnbao/article/details/8457546" target="_blank" rel="external">http://blog.csdn.net/21cnbao/article/details/8457546</a></p>
+<h3 id="Reference">Reference</h3><p><a href="http://devicetree.org/Device_Tree_Usage" target="_blank" rel="external">http://devicetree.org/Device_Tree_Usage</a>  （很多内容译自此文）<br><a href="http://blog.csdn.net/21cnbao/article/details/8457546" target="_blank" rel="external">http://blog.csdn.net/21cnbao/article/details/8457546</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，当初自学Linux时和第一份job做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的文件。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass”促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
+    <![CDATA[<p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，当初自学Linux时和第一份job做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的文件。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass”而促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
 <ul>
 <li>Device Tree组成及用法；</li>
 <li>DTS文件解析常用api介绍；</li>

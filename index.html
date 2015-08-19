@@ -103,7 +103,7 @@
 </header>
     <div class="article-content">
         
-        <p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，当初自学Linux时和第一份job做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的文件。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass”促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
+        <p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，当初自学Linux时和第一份job做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的文件。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass”而促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
 <ul>
 <li>Device Tree组成及用法；</li>
 <li>DTS文件解析常用api介绍；</li>
