@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-08-21T15:24:16.160Z</updated>
+  <updated>2015-08-21T15:59:56.420Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://huaqianlee.me/2015/08/21/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/"/>
     <id>http://huaqianlee.me/2015/08/21/深入理解Linux启动过程/</id>
     <published>2015-08-21T13:23:41.000Z</published>
-    <updated>2015-08-21T15:24:16.160Z</updated>
+    <updated>2015-08-21T15:59:56.420Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p><strong>第一篇完全译文，因为自己对技术和英文的热爱，所以决定翻译此文，水平有限，所以肯定会有不恰当的地方，欢迎移驾至原地址：<a href="http://www.ibm.com/developerworks/linux/library/l-linuxboot/" target="_blank" rel="external">http://www.ibm.com/developerworks/linux/library/l-linuxboot/</a></strong><br>注：因为想写一篇博文来阐述并理清Android启动的完全过程，发现了这篇文章，觉得写得十分好，帮我解答了很多疑惑。</p>
 </blockquote>
@@ -95,9 +95,9 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://huaqianlee.me/categories/Linux/"/>
+      <category term="译文" scheme="http://huaqianlee.me/tags/%E8%AF%91%E6%96%87/"/>
     
-      <category term="译文" scheme="http://huaqianlee.me/categories/Linux/%E8%AF%91%E6%96%87/"/>
+      <category term="Linux" scheme="http://huaqianlee.me/categories/Linux/"/>
     
   </entry>
   
@@ -106,7 +106,7 @@
     <link href="http://huaqianlee.me/2015/08/19/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BLinux%E5%86%85%E6%A0%B8%E8%AE%BE%E5%A4%87%E6%A0%91-DT-Device-Tree-dts%E6%96%87%E4%BB%B6/"/>
     <id>http://huaqianlee.me/2015/08/19/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/</id>
     <published>2015-08-19T14:11:46.000Z</published>
-    <updated>2015-08-20T16:15:40.026Z</updated>
+    <updated>2015-08-21T15:59:50.287Z</updated>
     <content type="html"><![CDATA[<p>刚开始接触Android源码的时候，发现在kernel里面多了一种dts文件，因为当初自学Linux时和在第一家公司做物联网模型时都是用的比较老的内核，内核代码还比较混乱，没有采用dts这种方便简洁的格式。后面才知道这是因为Linus的一句”this whole arm thing is a fucking pain in ass“促进改革的，记得Linux早期代码里面板级细节都是在C文件中描述的，代码就显得十分臃肿和混乱。如此优化之后就显得简洁多了，并且也更易于学习、移植。<br>　<br>今天准备专门来分析一下内核设备树，主要按照如下三个方向来分析：</p>
 <ul>
 <li>Device Tree组成及用法；</li>
@@ -273,9 +273,9 @@
     
       <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
+      <category term="译文" scheme="http://huaqianlee.me/tags/%E8%AF%91%E6%96%87/"/>
     
-      <category term="译文" scheme="http://huaqianlee.me/categories/Android/%E8%AF%91%E6%96%87/"/>
+      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
     
   </entry>
   
@@ -503,7 +503,7 @@
     <link href="http://huaqianlee.me/2015/07/19/Android%E4%B8%ADadb-Android-Debug-Bridge-%E5%91%BD%E4%BB%A4%E7%9A%84%E7%94%A8%E6%B3%95/"/>
     <id>http://huaqianlee.me/2015/07/19/Android中adb-Android-Debug-Bridge-命令的用法/</id>
     <published>2015-07-19T11:29:58.000Z</published>
-    <updated>2015-07-20T15:27:33.853Z</updated>
+    <updated>2015-08-21T16:01:03.241Z</updated>
     <content type="html"><![CDATA[<p>　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去<a href="http://developer.android.com/tools/help/adb.html" target="_blank" rel="external">http://developer.android.com/tools/help/adb.html</a>学习了一下,今天准备按照自己的理解加以修改总结并整理出一篇博文。</p>
 <h2 id="概览">概览</h2><p>　　adb是Android Debug Bridge的简写，按字面意思理解就是在开发者和Android之间搭建的一个debug桥。adb是一个连接仿真实例或者Android设备的命令行工具，是一个客服端-服务器模式的程序，包括如下三部分：<br>　<br>　　1. 一个运行在开发用的Android手机或者仿真器上面的client，我们可以通过adb命令调用client。其他像ADT插件和DDMS也会创建client。<br>　<br>　　2. 一个运行在开发用的Android手机或者仿真器后台的server，这个server负责管理本设备上运行的client和daemon(守护进程)。<br>　<br>　　3. 一个在每个仿真器或者Android设备后台运行的daemon。</p>
 <blockquote>
@@ -601,9 +601,9 @@
     
       <category term="Tools" scheme="http://huaqianlee.me/tags/Tools/"/>
     
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
+      <category term="译文" scheme="http://huaqianlee.me/tags/%E8%AF%91%E6%96%87/"/>
     
-      <category term="译文" scheme="http://huaqianlee.me/categories/Android/%E8%AF%91%E6%96%87/"/>
+      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
     
   </entry>
   
@@ -688,7 +688,7 @@
     <link href="http://huaqianlee.me/2015/07/18/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/"/>
     <id>http://huaqianlee.me/2015/07/18/Android-Logging-system-Android日志系统详解/</id>
     <published>2015-07-18T05:43:04.000Z</published>
-    <updated>2015-07-19T07:46:29.672Z</updated>
+    <updated>2015-08-21T16:01:31.035Z</updated>
     <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/18/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a><br>　　<a href="http://huaqianlee.me/2015/07/18/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/" target="_blank" rel="external">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" target="_blank" rel="external">怎么抓取Android日志文件</a></p>
 <p>　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。</p>
 <h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br><a id="more"></a>　<br>Logging system由如下几部分组成：</p>
@@ -746,9 +746,9 @@
     
       <category term="Log" scheme="http://huaqianlee.me/tags/Log/"/>
     
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
+      <category term="译文" scheme="http://huaqianlee.me/tags/%E8%AF%91%E6%96%87/"/>
     
-      <category term="译文" scheme="http://huaqianlee.me/categories/Android/%E8%AF%91%E6%96%87/"/>
+      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
     
   </entry>
   
