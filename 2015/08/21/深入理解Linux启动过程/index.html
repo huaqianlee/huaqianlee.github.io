@@ -113,7 +113,7 @@
 		<blockquote>
 <p><strong>第一篇完全译文，因为自己对技术和英文的热爱，所以决定翻译此文，水平有限，所以肯定会有错误，欢迎移驾至原地址：<a href="http://www.ibm.com/developerworks/linux/library/l-linuxboot/" target="_blank" rel="external">http://www.ibm.com/developerworks/linux/library/l-linuxboot/</a></strong><br>注：因为想写一篇博文来阐述并理清Android启动的完全过程，发现了这篇文章，觉得写得十分好，帮我解答了很多疑惑。</p>
 </blockquote>
-<h2 id="引言">引言</h2><p>Linux系统的启动过程由很多阶段组成，但是无论你是启动标准的x86桌面还是启动嵌入式PowerPC目标，许多流程都是惊人的相似的。这篇文章从初始化引导程序到第一个用户空间应用程序探索Linux启动进程。顺着这个流程，你将知道很多和boot相关的topics，比如：the boot loaders，kernel decompression, the initial RAM disk, and other elements of Linux boot。<br><a id="more"></a><br>早期，引导计算机启动需要插入一条带有引导程序的纸带或者手动控制带有地址/数据/控制开关的面板加载启动程序。今天的计算机<br>装备了简化启动进程的工具，不过并不一定使这个过程变得简单了。</p>
+<h2 id="引言">引言</h2><p>Linux系统的启动过程由很多阶段组成，但是无论你是启动标准的x86桌面还是启动嵌入式PowerPC目标，许多流程都是惊人的相似的。这篇文章从初始化引导程序到第一个用户空间应用程序探索Linux启动进程。顺着这个流程，你将知道很多和boot相关的topics，比如：引导程序，内核解压, 初始RAM磁盘,以及其他Linux引导元素。<br><a id="more"></a><br>早期，引导计算机启动需要插入一条带有引导程序的纸带或者手动控制带有地址/数据/控制开关的面板加载启动程序。今天的计算机<br>装备了简化启动进程的工具，不过并不一定使这个过程变得简单了。</p>
 <p>我们先从Linux启动的顶层视图开始分析，以便你能有一个整体的认识。然后我们将回顾每一个分离的步骤。顺着这个流程的源码引用将帮助你浏览内核树结构，以便在以后深入分析。</p>
 <h2 id="概述">概述</h2><p>图一将为你展示两万英里的视图。</p>
 <p><strong>Figure 1. The 20,000-foot view of the Linux boot process</strong><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogfigure1.gif" alt="Figure 1"></p>
