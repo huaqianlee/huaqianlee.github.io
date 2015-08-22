@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-08-21T15:59:56.420Z</updated>
+  <updated>2015-08-22T16:02:35.317Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[深入理解Linux启动过程]]></title>
+    <title><![CDATA[深入理解Linux启动过程(译)]]></title>
     <link href="http://huaqianlee.me/2015/08/21/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/"/>
     <id>http://huaqianlee.me/2015/08/21/深入理解Linux启动过程/</id>
     <published>2015-08-21T13:23:41.000Z</published>
-    <updated>2015-08-21T15:59:56.420Z</updated>
+    <updated>2015-08-22T16:02:35.317Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p><strong>第一篇完全译文，因为自己对技术和英文的热爱，所以决定翻译此文，水平有限，所以肯定会有不恰当的地方，欢迎移驾至原地址：<a href="http://www.ibm.com/developerworks/linux/library/l-linuxboot/" target="_blank" rel="external">http://www.ibm.com/developerworks/linux/library/l-linuxboot/</a></strong><br>注：因为想写一篇博文来阐述并理清Android启动的完全过程，发现了这篇文章，觉得写得十分好，帮我解答了很多疑惑。</p>
 </blockquote>
