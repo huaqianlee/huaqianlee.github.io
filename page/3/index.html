@@ -87,6 +87,161 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/27/plan1/" title="重新起航+暴力学习计划" itemprop="url">重新起航+暴力学习计划</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-27T14:23:58.000Z" itemprop="datePublished"> 发表于 May 27 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p><strong>此文为杂记， 胡乱写之； 旨在提醒自己， 规划目标； 因自己的实际情况， 随时在胡乱修改，无几多参考性； 如不幸阅之， 敬请忽略。</strong>
+　</p>
+<blockquote>
+<p>不要过多去关注自己学了多少，还有多久能达到自己的目标；而应该关注自己的学习过程和努力程度。每周至少原创一篇技术blog。家里学习以英语为top priority，琐碎时间以英语阅读为top priority。</p>
+</blockquote>
+<p>　　几个月前，在网上看到了一篇<a href="http://www.cnblogs.com/jesse2013/p/how-to-learn-english.html">Jesse Liu写的学习英语的文章</a>，受到Jesse的启发，制定了学习计划和任务监控时间表，也按照计划执行了很长一段时间，可惜一个多月前生病后因为种种原因就落下了，后面虽然有断断续续地学习，但仍造成学习进度严重滞后了。</p>
+<p>　　按照计划来学习来工作很有帮助，能帮我克服懒惰等坏习惯，让自己每天知道应该干什么，养成好的学习习惯。所以今天重新拟定计划，然后按照计划来学习提升自己。就目前来看自己主要有英语\Linux\Android\Java四个大部分需要花几乎所有时间来学习。</p>
+<p>　　执行计划的最大阻碍是时间和身体，由于工作性质的原因，很多时候会加班。因此需要随时关注自己的计划，将琐碎时间完全利用起来，<strong>若什么时候未能完成当天的任务，就协调时间将其补起来</strong>，如此就好。男人就是得逼自己一把，才能知道自己有多优秀，何况自己已经27了，时间不等人,能让自己拼的时间已不多。</p>
+<p>　　所以，接下来就对自己接下来的学习工作做一个大的规划，很暴力的计划，详细计划就在为知笔记的每日代办中记录。</p>
+<blockquote>
+<p>注:计划中的内容并不都是全新学习，很多都是断断续续看过，所以对自己时间定得比较紧比较死，对其他人不完全具有参考性</p>
+</blockquote>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/05/27/plan1/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/05/27/plan1/" >huaqianlee.me/2015/05/27/plan1/ </a>
+
+</div>
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/27/plan1/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/27/plan1/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" title="如何在内核里操作文件(create/open/read/write)" itemprop="url">如何在内核里操作文件(create/open/read/write)</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-03-17T14:15:42.000Z" itemprop="datePublished"> 发表于 Mar 17 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：</p>
+<h2 id="Includes">Includes</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/fs.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/segment.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/uaccess.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/buffer_head.h&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Opening_a_file">Opening a file</h2>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" >huaqianlee.me/2015/03/17/如何在内核里操作读写文件-create-open-read-write/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/kernel/">kernel</a><a href="/tags/文件IO/">文件IO</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/03/17/如何在内核里操作读写文件-create-open-read-write/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/01/21/高通Android不带电量计的电量计算方式/" title="Android不带电量计的电量计算" itemprop="url">Android不带电量计的电量计算</a>
   </h1>
 
@@ -724,164 +879,9 @@ eg:
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2014/10/24/build-person-blog-with-hexo/" title="Build person blog with hexo and  github" itemprop="url">Build person blog with hexo and  github</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2014-10-23T17:12:15.000Z" itemprop="datePublished"> 发表于 Oct 24 2014</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p>　　基于Hexo和Github的个人博客构建，我参照<a href="http://ibruce.info/2013/11/22/hexo-your-blog/">hexo你的博客</a>、<a href="http://hexo.io/docs/">hexo官方文档</a>及<a href="https://help.github.com/articles/set-up-git/">github官方文档</a>完成了自己的个人blog。通过前段时间学习Android和这些天build自己的github、个人blog，关于学习新东西有一个新的体会，就是官方文档和帮助是最好的资料，虽然是英文的，但是看官方的源文档能提升自己的效率。</p>
-<p>现在写博客只需要几个简单的命令就能完成发布了．</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br><span class="line">$ hexo generat</span><br><span class="line">$ hexo deploy</span><br><span class="line">也可以直接简写为：</span><br><span class="line">$ hexo n <span class="string">"My New Post"</span></span><br><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2014/10/24/build-person-blog-with-hexo/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2014/10/24/build-person-blog-with-hexo/" >huaqianlee.me/2014/10/24/build-person-blog-with-hexo/ </a>
-
-</div>
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Tools/">Tools</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2014/10/24/build-person-blog-with-hexo/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/10/24/build-person-blog-with-hexo/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2014/10/20/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2014-10-19T17:12:15.000Z" itemprop="datePublished"> 发表于 Oct 20 2014</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2014/10/20/hello-world/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2014/10/20/hello-world/" >huaqianlee.me/2014/10/20/hello-world/ </a>
-
-</div>
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Tools/">Tools</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2014/10/20/hello-world/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/10/20/hello-world/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
   </nav>
 
 </div>
@@ -897,7 +897,7 @@ eg:
 		<ul>
 		
 		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>17</sup></a></li>
+			<li><a href="/categories/Android/" title="Android">Android<sup>18</sup></a></li>
 		  
 		
 		  
@@ -917,19 +917,11 @@ eg:
 		  
 		
 		  
-			<li><a href="/categories/Life/" title="Life">Life<sup>1</sup></a></li>
-		  
-		
-		  
 			<li><a href="/categories/Linux/" title="Linux">Linux<sup>4</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
-		  
-		
-		  
-		
 		  
 		
 		</ul>
@@ -942,11 +934,11 @@ eg:
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>11</sup></a></li>
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>10</sup></a></li>
+				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>11</sup></a></li>
 			
 		
 			
@@ -982,18 +974,6 @@ eg:
 			
 		
 			
-				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
 			
 		
@@ -1002,7 +982,15 @@ eg:
 			
 		
 			
-				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/调试/" title="调试">调试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
 			
 		
 			
@@ -1010,7 +998,15 @@ eg:
 			
 		
 			
-				<li><a href="/tags/调试/" title="调试">调试<sup>1</sup></a></li>
+				<li><a href="/tags/Plan/" title="Plan">Plan<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
 			
 		
 		</ul>

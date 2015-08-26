@@ -87,6 +87,84 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/18/Android-Logging-system-Android日志系统详解/" title="Android日志系统(logging system)详解" itemprop="url">Android日志系统(logging system)详解</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-18T05:43:04.000Z" itemprop="datePublished"> 发表于 Jul 18 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　<a href="http://huaqianlee.me/2015/07/18/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">Android日志系统详解</a><br>　　<a href="http://huaqianlee.me/2015/07/18/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.me/2015/07/19/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
+<p>　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。</p>
+<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/18/Android-Logging-system-Android日志系统详解/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/07/18/Android-Logging-system-Android日志系统详解/" >huaqianlee.me/2015/07/18/Android-Logging-system-Android日志系统详解/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Log/">Log</a><a href="/tags/译文/">译文</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/18/Android-Logging-system-Android日志系统详解/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/18/Android-Logging-system-Android日志系统详解/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/12/Android编译过程详解之三/" title="Android编译过程详解之三" itemprop="url">Android编译过程详解之三</a>
   </h1>
 
@@ -774,11 +852,11 @@
 </div>
 <div class="article-catetags">
 
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Life/">Life</a>
-</div>
 
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Plan/">Plan</a>
+  </div>
 
 </div>
 
@@ -803,87 +881,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" title="如何在内核里操作文件(create/open/read/write)" itemprop="url">如何在内核里操作文件(create/open/read/write)</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2015-03-17T14:15:42.000Z" itemprop="datePublished"> 发表于 Mar 17 2015</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p>　　因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：</p>
-<h2 id="Includes">Includes</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/fs.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/segment.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/uaccess.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/buffer_head.h&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Opening_a_file">Opening a file</h2>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" >huaqianlee.me/2015/03/17/如何在内核里操作读写文件-create-open-read-write/ </a>
-
-</div>
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/kernel/">kernel</a><a href="/tags/文件IO/">文件IO</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/03/17/如何在内核里操作读写文件-create-open-read-write/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 
 </div>
@@ -899,7 +899,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>17</sup></a></li>
+			<li><a href="/categories/Android/" title="Android">Android<sup>18</sup></a></li>
 		  
 		
 		  
@@ -919,19 +919,11 @@
 		  
 		
 		  
-			<li><a href="/categories/Life/" title="Life">Life<sup>1</sup></a></li>
-		  
-		
-		  
 			<li><a href="/categories/Linux/" title="Linux">Linux<sup>4</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
-		  
-		
-		  
-		
 		  
 		
 		</ul>
@@ -944,11 +936,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>11</sup></a></li>
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>10</sup></a></li>
+				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>11</sup></a></li>
 			
 		
 			
@@ -984,18 +976,6 @@
 			
 		
 			
-				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
 			
 		
@@ -1004,7 +984,15 @@
 			
 		
 			
-				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/调试/" title="调试">调试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
 			
 		
 			
@@ -1012,7 +1000,15 @@
 			
 		
 			
-				<li><a href="/tags/调试/" title="调试">调试<sup>1</sup></a></li>
+				<li><a href="/tags/Plan/" title="Plan">Plan<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
 			
 		
 		</ul>
