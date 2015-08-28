@@ -87,161 +87,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/27/plan1/" title="重新起航+暴力学习计划" itemprop="url">重新起航+暴力学习计划</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-27T14:23:58.000Z" itemprop="datePublished"> 发表于 May 27 2015</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p><strong>此文为杂记， 胡乱写之； 旨在提醒自己， 规划目标； 因自己的实际情况， 随时在胡乱修改，无几多参考性； 如不幸阅之， 敬请忽略。</strong>
-　</p>
-<blockquote>
-<p>不要过多去关注自己学了多少，还有多久能达到自己的目标；而应该关注自己的学习过程和努力程度。每周至少原创一篇技术blog。家里学习以英语为top priority，琐碎时间以英语阅读为top priority。</p>
-</blockquote>
-<p>　　几个月前，在网上看到了一篇<a href="http://www.cnblogs.com/jesse2013/p/how-to-learn-english.html">Jesse Liu写的学习英语的文章</a>，受到Jesse的启发，制定了学习计划和任务监控时间表，也按照计划执行了很长一段时间，可惜一个多月前生病后因为种种原因就落下了，后面虽然有断断续续地学习，但仍造成学习进度严重滞后了。</p>
-<p>　　按照计划来学习来工作很有帮助，能帮我克服懒惰等坏习惯，让自己每天知道应该干什么，养成好的学习习惯。所以今天重新拟定计划，然后按照计划来学习提升自己。就目前来看自己主要有英语\Linux\Android\Java四个大部分需要花几乎所有时间来学习。</p>
-<p>　　执行计划的最大阻碍是时间和身体，由于工作性质的原因，很多时候会加班。因此需要随时关注自己的计划，将琐碎时间完全利用起来，<strong>若什么时候未能完成当天的任务，就协调时间将其补起来</strong>，如此就好。男人就是得逼自己一把，才能知道自己有多优秀，何况自己已经27了，时间不等人,能让自己拼的时间已不多。</p>
-<p>　　所以，接下来就对自己接下来的学习工作做一个大的规划，很暴力的计划，详细计划就在为知笔记的每日代办中记录。</p>
-<blockquote>
-<p>注:计划中的内容并不都是全新学习，很多都是断断续续看过，所以对自己时间定得比较紧比较死，对其他人不完全具有参考性</p>
-</blockquote>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/05/27/plan1/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/05/27/plan1/" >huaqianlee.me/2015/05/27/plan1/ </a>
-
-</div>
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/27/plan1/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/27/plan1/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" title="如何在内核里操作文件(create/open/read/write)" itemprop="url">如何在内核里操作文件(create/open/read/write)</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2015-03-17T14:15:42.000Z" itemprop="datePublished"> 发表于 Mar 17 2015</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p>　　因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：</p>
-<h2 id="Includes">Includes</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/fs.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/segment.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/uaccess.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/buffer_head.h&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Opening_a_file">Opening a file</h2>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" >huaqianlee.me/2015/03/17/如何在内核里操作读写文件-create-open-read-write/ </a>
-
-</div>
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/kernel/">kernel</a><a href="/tags/文件IO/">文件IO</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/03/17/如何在内核里操作读写文件-create-open-read-write/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2015/01/21/高通Android不带电量计的电量计算方式/" title="Android不带电量计的电量计算" itemprop="url">Android不带电量计的电量计算</a>
   </h1>
 
@@ -572,6 +417,239 @@ eg:
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/01/01/plan2/" title="第二次暴力学习计划" itemprop="url">第二次暴力学习计划</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2014-12-31T16:00:02.000Z" itemprop="datePublished"> 发表于 Jan 1 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/01/01/plan2/" >huaqianlee.me/2015/01/01/plan2/ </a>
+
+</div>
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Plan/">Plan</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/01/01/plan2/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/01/01/plan2/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/01/重新起航/" title="重新起航+暴力学习计划" itemprop="url">重新起航+暴力学习计划</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2014-12-31T16:00:01.000Z" itemprop="datePublished"> 发表于 Jan 1 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p><strong>此文为杂记， 胡乱写之； 旨在提醒自己， 规划目标； 因自己的实际情况， 随时在胡乱修改，无几多参考性； 如不幸阅之， 敬请忽略。</strong>
+　</p>
+<blockquote>
+<p>不要过多去关注自己学了多少，还有多久能达到自己的目标；而应该关注自己的学习过程和努力程度。每周至少原创一篇技术blog。家里学习以英语为top priority，琐碎时间以英语阅读为top priority。</p>
+</blockquote>
+<p>　　几个月前，在网上看到了一篇<a href="http://www.cnblogs.com/jesse2013/p/how-to-learn-english.html">Jesse Liu写的学习英语的文章</a>，受到Jesse的启发，制定了学习计划和任务监控时间表，也按照计划执行了很长一段时间，可惜一个多月前生病后因为种种原因就落下了，后面虽然有断断续续地学习，但仍造成学习进度严重滞后了。</p>
+<p>　　按照计划来学习来工作很有帮助，能帮我克服懒惰等坏习惯，让自己每天知道应该干什么，养成好的学习习惯。所以今天重新拟定计划，然后按照计划来学习提升自己。就目前来看自己主要有英语\Linux\Android\Java四个大部分需要花几乎所有时间来学习。</p>
+<p>　　执行计划的最大阻碍是时间和身体，由于工作性质的原因，很多时候会加班。因此需要随时关注自己的计划，将琐碎时间完全利用起来，<strong>若什么时候未能完成当天的任务，就协调时间将其补起来</strong>，如此就好。男人就是得逼自己一把，才能知道自己有多优秀，何况自己已经27了，时间不等人,能让自己拼的时间已不多。</p>
+<p>　　所以，接下来就对自己接下来的学习工作做一个大的规划，很暴力的计划，详细计划就在为知笔记的每日代办中记录。</p>
+<blockquote>
+<p>注:计划中的内容并不都是全新学习，很多都是断断续续看过，所以对自己时间定得比较紧比较死，对其他人不完全具有参考性</p>
+</blockquote>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/01/重新起航/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/01/01/重新起航/" >huaqianlee.me/2015/01/01/重新起航/ </a>
+
+</div>
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Plan/">Plan</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/01/01/重新起航/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/01/01/重新起航/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/01/plan1/" title="重新起航+暴力学习计划" itemprop="url">重新起航+暴力学习计划</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2014-12-31T16:00:01.000Z" itemprop="datePublished"> 发表于 Jan 1 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p><strong>此文为杂记， 胡乱写之； 旨在提醒自己， 规划目标； 因自己的实际情况， 随时在胡乱修改，无几多参考性； 如不幸阅之， 敬请忽略。</strong>
+　</p>
+<blockquote>
+<p>不要过多去关注自己学了多少，还有多久能达到自己的目标；而应该关注自己的学习过程和努力程度。每周至少原创一篇技术blog。家里学习以英语为top priority，琐碎时间以英语阅读为top priority。</p>
+</blockquote>
+<p>　　几个月前，在网上看到了一篇<a href="http://www.cnblogs.com/jesse2013/p/how-to-learn-english.html">Jesse Liu写的学习英语的文章</a>，受到Jesse的启发，制定了学习计划和任务监控时间表，也按照计划执行了很长一段时间，可惜一个多月前生病后因为种种原因就落下了，后面虽然有断断续续地学习，但仍造成学习进度严重滞后了。</p>
+<p>　　按照计划来学习来工作很有帮助，能帮我克服懒惰等坏习惯，让自己每天知道应该干什么，养成好的学习习惯。所以今天重新拟定计划，然后按照计划来学习提升自己。就目前来看自己主要有英语\Linux\Android\Java四个大部分需要花几乎所有时间来学习。</p>
+<p>　　执行计划的最大阻碍是时间和身体，由于工作性质的原因，很多时候会加班。因此需要随时关注自己的计划，将琐碎时间完全利用起来，<strong>若什么时候未能完成当天的任务，就协调时间将其补起来</strong>，如此就好。男人就是得逼自己一把，才能知道自己有多优秀，何况自己已经27了，时间不等人,能让自己拼的时间已不多。</p>
+<p>　　所以，接下来就对自己接下来的学习工作做一个大的规划，很暴力的计划，详细计划就在为知笔记的每日代办中记录。</p>
+<blockquote>
+<p>注:计划中的内容并不都是全新学习，很多都是断断续续看过，所以对自己时间定得比较紧比较死，对其他人不完全具有参考性</p>
+</blockquote>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/01/plan1/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/01/01/plan1/" >huaqianlee.me/2015/01/01/plan1/ </a>
+
+</div>
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Plan/">Plan</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/01/01/plan1/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/01/01/plan1/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2014/12/21/Linux常用快捷键及命令总结/" title="Linux常用快捷键及命令总结" itemprop="url">Linux常用快捷键及命令总结</a>
   </h1>
 
@@ -796,89 +874,6 @@ eg:
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2014/10/27/The-document-convetions-for-Java/" title="The document convetions for Java" itemprop="url">The document convetions for Java</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2014-10-27T14:28:28.000Z" itemprop="datePublished"> 发表于 Oct 27 2014</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p>　　注释一直是编程最重要的部分之一,学习Java很长一段时间了,由于之前一直没有很正式的写过项目，所以一直也就没怎么认真的写过注释．因为注释又是如此的重要，所以今天对Java的注释规范加以总结，也促使自己以后写代码注意注释．</p>
-<h2 id="注释的地方">注释的地方</h2><ol>
-<li>每个源文件开头应该有一段注释,介绍代码的作者\时间等信息.</li>
-<li>当代码比较长,嵌套较深时,应该在某些花括号末尾注明花括号对应的起点.</li>
-<li>重要的属性需要添加注释,每个方法需要添加注释.</li>
-<li>典型的算法等需要特别注意的地方需要添加注释.</li>
-<li>有bug的地方需要加以注释,修改过的代码需要加修改标志注释.</li>
-</ol>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2014/10/27/The-document-convetions-for-Java/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2014/10/27/The-document-convetions-for-Java/" >huaqianlee.me/2014/10/27/The-document-convetions-for-Java/ </a>
-
-</div>
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Java/">Java</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Program-Kill/">Program Kill</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2014/10/27/The-document-convetions-for-Java/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/10/27/The-document-convetions-for-Java/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -954,6 +949,10 @@ eg:
 			
 		
 			
+				<li><a href="/tags/Plan/" title="Plan">Plan<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Log/" title="Log">Log<sup>3</sup></a></li>
 			
 		
@@ -971,10 +970,6 @@ eg:
 		
 			
 				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
 			
 		
 			
@@ -998,7 +993,7 @@ eg:
 			
 		
 			
-				<li><a href="/tags/Plan/" title="Plan">Plan<sup>1</sup></a></li>
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
 			
 		
 			
