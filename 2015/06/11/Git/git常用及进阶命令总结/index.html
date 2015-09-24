@@ -1,0 +1,641 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Git常用及进阶命令总结 | Andy.Lee Plus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Andy.Lee">
+    
+
+    
+    <meta name="description" content="Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　　　　言归正传，Git十分好用，应用也十分广泛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git常用及进阶命令总结">
+<meta property="og:url" content="http://huaqianlee.me/2015/06/11/Git/git常用及进阶命令总结/index.html">
+<meta property="og:site_name" content="Andy.Lee Plus">
+<meta property="og:description" content="Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　　　　言归正传，Git十分好用，应用也十分广泛">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git常用及进阶命令总结">
+<meta name="twitter:description" content="Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　　　　言归正传，Git十分好用，应用也十分广泛">
+<meta name="twitter:creator" content="@Andylee_sarah">
+<link rel="publisher" href="107850537041795428182">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Andy.Lee Plus" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/andylee.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/andylee.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Andy.Lee Plus" title="Andy.Lee Plus"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Andy.Lee Plus">Andy.Lee Plus</a></h1>
+				<h2 class="blog-motto">Good good study, day day up !</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/categories">Categories</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="huaqianlee.me" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 11011705640184761899## e.g. &quot;783281470518440642&quot;  for your baidu search id ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+<!--<a href="https://github.com/AndyLee-Github"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>-->
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/11/Git/git常用及进阶命令总结/" title="Git常用及进阶命令总结" itemprop="url">Git常用及进阶命令总结</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-11T14:10:41.000Z" itemprop="datePublished"> 发表于 Jun 11 2015</time>
+    
+  </p>
+  
+</header>
+	<div class="article-content">
+		
+		<p>　　Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　<br>　<br>　　言归正传，Git十分好用，应用也十分广泛,现在最好的代码托管网站Github就是基于git创建的，而且现在大多数公司及个人都在使用它进行代码管理，要熟练使用还是需要花一些苦功夫的，我现在也还只是会基本的应用，更深层次的使用还不熟悉。为了方便自己以后使用，将自己常用的一些命令加以总结，并Google了一些常用及进阶命令，一并列出，方便查询使用。</p>
+<a id="more"></a>
+<h2 id="Git配置">Git配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"huaqianlee"</span>   </span><br><span class="line">git config --global user.email <span class="string">"huaqianlee@gmail.com"</span> </span><br><span class="line">  </span><br><span class="line">git config --global color.ui <span class="literal">true</span></span><br><span class="line">git config --global alias.co checkout <span class="comment"># 配置别名，co 配为checkout 别名， 不过我没用</span></span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global core.editor <span class="string">"mate -w"</span>    <span class="comment"># 设置Editor使用textmate</span></span><br><span class="line">git config <span class="operator">-l</span>  <span class="comment"># 列举所有配置</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>用户的git配置文件~/.gitconfig</p>
+</blockquote>
+<h2 id="Git常用及进阶命令">Git常用及进阶命令</h2><h3 id="常用命令">常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">help</span>  <span class="comment">#查看帮助，命令忘记了就靠它</span></span><br><span class="line">git init    <span class="comment">#初始化话目录为git仓库</span></span><br><span class="line">git clean -fd  <span class="comment"># 删除无用目录及文件</span></span><br><span class="line">git clean <span class="operator">-f</span>X  <span class="comment"># 删除无用文件</span></span><br><span class="line">git clean <span class="comment"># 删除所有untracked文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加">添加</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add file   <span class="comment">#添加文件到暂存区</span></span><br><span class="line">git add .        <span class="comment">#将所有修改或者新加文件添加到暂存区</span></span><br></pre></td></tr></table></figure>
+<h3 id="删除">删除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm file         <span class="comment">#删除文件</span></span><br><span class="line">git rm &lt;file&gt; --cached  <span class="comment"># 从版本库中删除文件，但不删除文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销回退">撤销回退</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- xx  <span class="comment">#撤销xx文件修改</span></span><br><span class="line">git checkout .     <span class="comment">#撤销工作区修改</span></span><br><span class="line">git revert &lt;<span class="variable">$id</span>&gt;    <span class="comment"># 恢复某次提交的状态，恢复动作本身也创建了一次提交对象</span></span><br><span class="line">git revert HEAD     <span class="comment"># 恢复最后一次提交的状态</span></span><br><span class="line">git reset &lt;file&gt;    <span class="comment"># 从暂存区恢复某一文件</span></span><br><span class="line">git reset -- .      <span class="comment"># 从暂存区恢复所有文件</span></span><br><span class="line">git reset  –hard HEAD^/HEAD~  <span class="comment">#回退到上一版本</span></span><br><span class="line">git reset  –hard &lt;commit_id&gt;    <span class="comment">#回退到指定版本</span></span><br><span class="line">git reset HEAD file  <span class="comment">#取消add文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="提交">提交</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git commit  &lt;file&gt; <span class="comment">#提交单个文件</span></span><br><span class="line">git commit –m “description”   <span class="comment">#提交暂存区到服务器</span></span><br><span class="line">git commit <span class="operator">-a</span>           <span class="comment"># 等同执行git add、 git rm及git commit</span></span><br><span class="line">git commit -am <span class="string">"some comments"</span></span><br><span class="line">git commit --amend      <span class="comment"># 修改最后一次提交记录</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看状态记录">查看状态记录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git status        <span class="comment">#查看仓库状态</span></span><br><span class="line">git show (<span class="variable">$id</span>)  <span class="comment"># 显示某次提交的内容</span></span><br><span class="line">git <span class="built_in">log</span>   (file)       <span class="comment">#查看（文件）提交记录</span></span><br><span class="line">git <span class="built_in">log</span> -p &lt;file&gt;   <span class="comment"># 查看每次详细修改内容的diff</span></span><br><span class="line">git <span class="built_in">log</span> -p -<span class="number">2</span>       <span class="comment"># 查看最近两次详细修改内容的diff</span></span><br><span class="line">git <span class="built_in">log</span> --stat      <span class="comment"># 查看提交统计信息</span></span><br><span class="line">git reflog       <span class="comment">#查看历史版本号</span></span><br><span class="line">git <span class="built_in">log</span> -g <span class="comment">#同上，用'log'格式输出</span></span><br><span class="line">git <span class="built_in">log</span> -- grep <span class="string">"name"</span> <span class="comment"># 搜索包含name的log </span></span><br><span class="line">git <span class="built_in">log</span> record-ID  <span class="operator">-l</span> -p <span class="comment">#查看指定ID记录，-l:显示一行，-p:显示详细修改</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看差异">查看差异</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git diff &lt;file&gt;     <span class="comment"># 比较当前文件和暂存区文件差异</span></span><br><span class="line">git diff   <span class="comment">#比较所有文件</span></span><br><span class="line">git diff master..Andylee-Github/master <span class="comment">#比较本地和远端仓库</span></span><br><span class="line">git diff &lt;<span class="variable">$id1</span>&gt; &lt;<span class="variable">$id2</span>&gt;   <span class="comment"># 比较两次提交之间的差异</span></span><br><span class="line">git diff &lt;branch1&gt;..&lt;branch2&gt; <span class="comment">#比较分支</span></span><br><span class="line">git diff --staged   <span class="comment"># 比较暂存区和版本库差异</span></span><br><span class="line">git diff --cached   <span class="comment"># 比较暂存区和版本库差异</span></span><br><span class="line">git diff --stat     <span class="comment"># 仅仅比较统计信息</span></span><br></pre></td></tr></table></figure>
+<h3 id="本地分支管理">本地分支管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">git branch  <span class="comment">#查看本地分支</span></span><br><span class="line">git branch  -r    <span class="comment"># 查看远程分支</span></span><br><span class="line">git branch  <span class="operator">-a</span>     <span class="comment">#查看包括远程文件在内的所有分支 </span></span><br><span class="line">git branch   &lt;new_branch&gt; <span class="comment"># 创建新分支</span></span><br><span class="line">git branch   -v           <span class="comment"># 查看各个分支最后提交信息</span></span><br><span class="line">git branch   --merged     <span class="comment"># 查看已经被合并到当前分支的分支</span></span><br><span class="line">git branch   --no-merged  <span class="comment"># 查看尚未被合并到当前分支的分支</span></span><br><span class="line"></span><br><span class="line">git checkout &lt;branch&gt;  <span class="comment">#切换分支</span></span><br><span class="line">git checkout –b &lt;new_branch&gt;<span class="comment">#创建新分支，并切换到新分支</span></span><br><span class="line">git merge dev    <span class="comment">#在当前的分支上合并dev分支</span></span><br><span class="line">git checkout -b &lt;new_branch&gt; &lt;branch&gt;  <span class="comment"># 基于branch创建新的new_branch</span></span><br><span class="line">git checkout  <span class="variable">$id</span>          <span class="comment"># 把某次历史提交记录checkout出来，但无分支信息，切换到其他分支会自动删除</span></span><br><span class="line">git checkout  <span class="variable">$id</span> -b &lt;new_branch&gt;  <span class="comment"># 把某次历史提交记录checkout出来，创建成一个分支</span></span><br><span class="line"></span><br><span class="line">git branch<span class="operator">-d</span> &lt;branch&gt;  <span class="comment"># 删除分支</span></span><br><span class="line">git branch-D &lt;branch&gt;  <span class="comment"># 强制删除分支 (未被合并的分支被删除的时需要强制)</span></span><br><span class="line"></span><br><span class="line">git merge &lt;branch&gt;               <span class="comment"># 将branch分支合并到当前分支</span></span><br><span class="line">git merge origin/master --no-ff  <span class="comment"># 不要Fast-Foward合并，这样可以生成merge提交</span></span><br><span class="line">git rebase master &lt;branch&gt;       <span class="comment"># 将master rebase到branch，等同于：</span></span><br><span class="line"><span class="comment">#git checkout   &lt;branch&gt; + git rebase master + git checkout  master + git merge &lt;branch&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="补丁应用">补丁应用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git diff &gt; ../sync.patch         <span class="comment"># 生成补丁</span></span><br><span class="line">git apply ../sync.patch          <span class="comment"># 打补丁</span></span><br><span class="line">git apply --check ../sync.patch  <span class="comment"># 测试补丁能否成功</span></span><br></pre></td></tr></table></figure>
+<h3 id="暂存管理">暂存管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git stash  <span class="comment">#暂存当前工作，恢复现场后可继续工作</span></span><br><span class="line">git stash list  <span class="comment">#查看暂存文件列表</span></span><br><span class="line">git stash apply  <span class="comment">#恢复暂存内容，暂存区不删除</span></span><br><span class="line">git stash drop  <span class="comment">#删除暂存文件</span></span><br><span class="line">git stash pop  <span class="comment">#恢复并删除文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="远程分支管理">远程分支管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git pull                         <span class="comment"># 抓取远程仓库所有分支更新并合并到本地</span></span><br><span class="line">git pull --no-ff                 <span class="comment"># 抓取远程仓库所有分支更新并合并到本地，不要快进合并</span></span><br><span class="line">git fetch origin                 <span class="comment"># 抓取远程仓库更新，加下一条指令等同于git pull</span></span><br><span class="line">git merge origin/master          <span class="comment"># 将远程主分支合并到本地当前分支</span></span><br><span class="line">git checkout   --track origin/branch     <span class="comment"># 跟踪某个远程分支创建相应的本地分支</span></span><br><span class="line">git checkout   -b &lt;<span class="built_in">local</span>_branch&gt; origin/&lt;remote_branch&gt;  <span class="comment"># 基于远程分支创建本地分支，功能同上</span></span><br><span class="line"></span><br><span class="line">git push                         <span class="comment"># push所有分支</span></span><br><span class="line">git push origin branch   <span class="comment"># 将本地分支推到远程分支</span></span><br><span class="line">git push –u origin branch   <span class="comment">#推送本地分支到远程仓库，首次提交需要加-u </span></span><br><span class="line">git push origin &lt;<span class="built_in">local</span>_branch&gt;   <span class="comment"># 创建远程分支， origin是远程仓库名</span></span><br><span class="line">git push origin &lt;<span class="built_in">local</span>_branch&gt;:&lt;remote_branch&gt;  <span class="comment"># 创建远程分支</span></span><br><span class="line">git push origin :&lt;remote_branch&gt;  <span class="comment">#先删除本地分支(git br -d &lt;branch&gt;)，然后再push删除远程分支</span></span><br></pre></td></tr></table></figure>
+<h3 id="远程仓库管理">远程仓库管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git remote  <span class="comment">#查看远程库的信息</span></span><br><span class="line">git remote –v  <span class="comment">#查看远程库地址和名称</span></span><br><span class="line">git remote show origin           <span class="comment"># 查看远程服务器仓库状态</span></span><br><span class="line">git remote add origin git@github:robbin/robbin_site.git         <span class="comment"># 添加远程仓库地址</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin git@github.com:robbin/robbin_site.git <span class="comment"># 设置远程仓库地址(用于修改远程仓库地址)</span></span><br><span class="line">git remote rm &lt;repository&gt;       <span class="comment"># 删除远程仓库</span></span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/AndyLee-Github/cartboon.git   <span class="comment">#从远程仓库中克隆</span></span><br><span class="line">git <span class="built_in">clone</span> --bare robbin_site robbin_site.git  <span class="comment"># 用带版本的项目创建纯版本仓库</span></span><br><span class="line">scp -r my_project.git git@git.csdn.net:~      <span class="comment"># 将纯仓库上传到服务器上</span></span><br><span class="line"></span><br><span class="line">mkdir robbin_site.git + <span class="built_in">cd</span> robbin_site.git + git --bare init <span class="comment"># 在服务器创建纯仓库</span></span><br><span class="line">git remote add origin git@github.com:robbin/robbin_site.git    <span class="comment"># 设置远程仓库地址</span></span><br><span class="line">git push -u origin master                                      <span class="comment"># 客户端首次提交</span></span><br><span class="line">git push -u origin develop  <span class="comment"># 首次将本地develop分支提交到远程develop分支，并且track</span></span><br><span class="line">git remote <span class="built_in">set</span>-head origin master   <span class="comment"># 设置远程仓库的HEAD指向master分支</span></span><br></pre></td></tr></table></figure>
+<h3 id="命令设置跟踪远程库和本地库">命令设置跟踪远程库和本地库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream master origin/master</span><br><span class="line">git branch --set-upstream develop origin/develop</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>目前先这么多，后续再补充更高级的命令， 也可参考：<a href="http://www.imooc.com/article/1089" target="_blank" rel="external">git进阶</a>，<a href="https://github.com/xirong/my-git" target="_blank" rel="external">git资料整理</a>。</p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/06/11/Git/git常用及进阶命令总结/" >huaqianlee.me/2015/06/11/Git/git常用及进阶命令总结/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Git/">Git</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Tools/">Tools</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/07/11/Android/Android编译过程详解之一/" title="Android编译过程详解之一">
+  <strong>下一篇：</strong><br/>
+  <span>
+  Android编译过程详解之一</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/"  title="Android电池监控系统(BMS)之一电池系统架构">
+ <strong>上一篇：</strong><br/> 
+ <span>Android电池监控系统(BMS)之一电池系统架构
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/06/11/Git/git常用及进阶命令总结/" data-title="Git常用及进阶命令总结" data-url="http://huaqianlee.me/2015/06/11/Git/git常用及进阶命令总结/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>18</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Web/" title="Web">Web<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Qualcomm/" title="Qualcomm">Qualcomm<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/译文/" title="译文">译文<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/编译/" title="编译">编译<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Plan/" title="Plan">Plan<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Log/" title="Log">Log<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/kernel/" title="kernel">kernel<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/文件IO/" title="文件IO">文件IO<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/xml/" title="xml">xml<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电源管理/" title="电源管理">电源管理<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/dts文件/" title="dts文件">dts文件<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/调试/" title="调试">调试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Experience/" title="Experience">Experience<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Program-Kill/" title="Program Kill">Program Kill<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android-Studio/" title="Android Studio">Android Studio<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/网络/" title="网络">网络<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://huaqianlee.me/" target="_blank" title="AndyLee Plus">AndyLee Plus</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://fpgadeveloper.wang/" target="_blank" title="FPGA开发者网">FPGA开发者网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.daimajia.com/" target="_blank" title="代码家">代码家</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.stormzhang.com/" target="_blank" title="stormzhang">stormzhang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark">Jark</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Andy Lau in Hongkong. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/huaqianlee" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/AndyLee-Github" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/4511267/huaqian-lee" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/Andylee_sarah" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/huaqianlee" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/huaqianlee" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/107850537041795428182?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:huaqianlee@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/AndyLee-Github/customtheme" target="_blank" title="Andy Lee">Andy Lee</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Andy.Lee">Andy.Lee</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"AndyLee"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'AndyLee';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-63838023-1', 'huaqianlee.me');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5ab1107031547fb5411cd06ed47f1348## e.g. e6d1f421bbc9962127a50488f9ed37d1 your baidu tongji site code' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

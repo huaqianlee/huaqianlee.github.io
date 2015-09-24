@@ -87,7 +87,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/18/Android-Logging-system-Android日志系统详解/" title="Android日志系统(logging system)详解" itemprop="url">Android日志系统(logging system)详解</a>
+      <a href="/2015/07/18/Android/Android-Logging-system-Android日志系统详解/" title="Android日志系统(logging system)详解" itemprop="url">Android日志系统(logging system)详解</a>
   </h1>
 
   
@@ -110,7 +110,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2015/07/18/Android-Logging-system-Android日志系统详解/#more">Read More</a>
+            <a href="/2015/07/18/Android/Android-Logging-system-Android日志系统详解/#more">Read More</a>
           
        </p>
     </div>
@@ -120,7 +120,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/07/18/Android-Logging-system-Android日志系统详解/" >huaqianlee.me/2015/07/18/Android-Logging-system-Android日志系统详解/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/07/18/Android/Android-Logging-system-Android日志系统详解/" >huaqianlee.me/2015/07/18/Android/Android-Logging-system-Android日志系统详解/ </a>
 
 </div>
 <div class="article-catetags">
@@ -144,7 +144,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/07/18/Android-Logging-system-Android日志系统详解/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/18/Android-Logging-system-Android日志系统详解/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/07/18/Android/Android-Logging-system-Android日志系统详解/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/18/Android/Android-Logging-system-Android日志系统详解/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -165,92 +165,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/12/Android编译过程详解之三/" title="Android编译过程详解之三" itemprop="url">Android编译过程详解之三</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-12T08:43:04.000Z" itemprop="datePublished"> 发表于 Jul 12 2015</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/12/Android编译过程详解之三/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/07/12/Android编译过程详解之三/" >huaqianlee.me/2015/07/12/Android编译过程详解之三/ </a>
-
-</div>
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Android/">Android</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Qualcomm/">Qualcomm</a><a href="/tags/源码分析/">源码分析</a><a href="/tags/编译/">编译</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/07/12/Android编译过程详解之三/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/12/Android编译过程详解之三/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/12/Android编译过程详解之二/" title="Android编译过程详解之二" itemprop="url">Android编译过程详解之二</a>
+      <a href="/2015/07/12/Android/Android编译过程详解之二/" title="Android编译过程详解之二" itemprop="url">Android编译过程详解之二</a>
   </h1>
 
   
@@ -284,7 +199,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2015/07/12/Android编译过程详解之二/#more">Read More</a>
+            <a href="/2015/07/12/Android/Android编译过程详解之二/#more">Read More</a>
           
        </p>
     </div>
@@ -294,7 +209,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/07/12/Android编译过程详解之二/" >huaqianlee.me/2015/07/12/Android编译过程详解之二/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/07/12/Android/Android编译过程详解之二/" >huaqianlee.me/2015/07/12/Android/Android编译过程详解之二/ </a>
 
 </div>
 <div class="article-catetags">
@@ -318,7 +233,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/07/12/Android编译过程详解之二/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/12/Android编译过程详解之二/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/07/12/Android/Android编译过程详解之二/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/12/Android/Android编译过程详解之二/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -339,7 +254,92 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" title="About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析" itemprop="url">About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析</a>
+      <a href="/2015/07/12/Android/Android编译过程详解之三/" title="Android编译过程详解之三" itemprop="url">Android编译过程详解之三</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-12T08:43:04.000Z" itemprop="datePublished"> 发表于 Jul 12 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　<a href="http://huaqianlee.me/2015/07/11/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/12/Android/Android编译过程详解之三/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/07/12/Android/Android编译过程详解之三/" >huaqianlee.me/2015/07/12/Android/Android编译过程详解之三/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Qualcomm/">Qualcomm</a><a href="/tags/源码分析/">源码分析</a><a href="/tags/编译/">编译</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/12/Android/Android编译过程详解之三/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/12/Android/Android编译过程详解之三/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" title="About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析" itemprop="url">About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析</a>
   </h1>
 
   
@@ -362,7 +362,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/#more">Read More</a>
+            <a href="/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/#more">Read More</a>
           
        </p>
     </div>
@@ -372,7 +372,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" >huaqianlee.me/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" >huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/ </a>
 
 </div>
 <div class="article-catetags">
@@ -396,7 +396,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/12/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -417,7 +417,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/11/Android编译过程详解之一/" title="Android编译过程详解之一" itemprop="url">Android编译过程详解之一</a>
+      <a href="/2015/07/11/Android/Android编译过程详解之一/" title="Android编译过程详解之一" itemprop="url">Android编译过程详解之一</a>
   </h1>
 
   
@@ -441,7 +441,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2015/07/11/Android编译过程详解之一/#more">Read More</a>
+            <a href="/2015/07/11/Android/Android编译过程详解之一/#more">Read More</a>
           
        </p>
     </div>
@@ -451,7 +451,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/07/11/Android编译过程详解之一/" >huaqianlee.me/2015/07/11/Android编译过程详解之一/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/07/11/Android/Android编译过程详解之一/" >huaqianlee.me/2015/07/11/Android/Android编译过程详解之一/ </a>
 
 </div>
 <div class="article-catetags">
@@ -475,7 +475,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/07/11/Android编译过程详解之一/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/11/Android编译过程详解之一/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/07/11/Android/Android编译过程详解之一/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/11/Android/Android编译过程详解之一/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -496,7 +496,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/06/11/git常用及进阶命令总结/" title="Git常用及进阶命令总结" itemprop="url">Git常用及进阶命令总结</a>
+      <a href="/2015/06/11/Git/git常用及进阶命令总结/" title="Git常用及进阶命令总结" itemprop="url">Git常用及进阶命令总结</a>
   </h1>
 
   
@@ -517,7 +517,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2015/06/11/git常用及进阶命令总结/#more">Read More</a>
+            <a href="/2015/06/11/Git/git常用及进阶命令总结/#more">Read More</a>
           
        </p>
     </div>
@@ -527,7 +527,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/06/11/git常用及进阶命令总结/" >huaqianlee.me/2015/06/11/git常用及进阶命令总结/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/06/11/Git/git常用及进阶命令总结/" >huaqianlee.me/2015/06/11/Git/git常用及进阶命令总结/ </a>
 
 </div>
 <div class="article-catetags">
@@ -551,7 +551,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/06/11/git常用及进阶命令总结/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/11/git常用及进阶命令总结/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/06/11/Git/git常用及进阶命令总结/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/11/Git/git常用及进阶命令总结/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -572,7 +572,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/06/06/Android电池监控系统-BMS-之电池系统架构/" title="Android电池监控系统(BMS)之一电池系统架构" itemprop="url">Android电池监控系统(BMS)之一电池系统架构</a>
+      <a href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/" title="Android电池监控系统(BMS)之一电池系统架构" itemprop="url">Android电池监控系统(BMS)之一电池系统架构</a>
   </h1>
 
   
@@ -597,7 +597,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2015/06/06/Android电池监控系统-BMS-之电池系统架构/#more">Read More</a>
+            <a href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/#more">Read More</a>
           
        </p>
     </div>
@@ -607,7 +607,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/06/06/Android电池监控系统-BMS-之电池系统架构/" >huaqianlee.me/2015/06/06/Android电池监控系统-BMS-之电池系统架构/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/" >huaqianlee.me/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/ </a>
 
 </div>
 <div class="article-catetags">
@@ -631,7 +631,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/06/06/Android电池监控系统-BMS-之电池系统架构/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/06/Android电池监控系统-BMS-之电池系统架构/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -652,7 +652,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/30/Android电源管理架构/" title="Android 电源管理架构" itemprop="url">Android 电源管理架构</a>
+      <a href="/2015/05/30/Android/Android电源管理架构/" title="Android 电源管理架构" itemprop="url">Android 电源管理架构</a>
   </h1>
 
   
@@ -674,7 +674,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2015/05/30/Android电源管理架构/#more">Read More</a>
+            <a href="/2015/05/30/Android/Android电源管理架构/#more">Read More</a>
           
        </p>
     </div>
@@ -684,7 +684,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/05/30/Android电源管理架构/" >huaqianlee.me/2015/05/30/Android电源管理架构/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/05/30/Android/Android电源管理架构/" >huaqianlee.me/2015/05/30/Android/Android电源管理架构/ </a>
 
 </div>
 <div class="article-catetags">
@@ -708,7 +708,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/05/30/Android电源管理架构/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/30/Android电源管理架构/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/05/30/Android/Android电源管理架构/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/30/Android/Android电源管理架构/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -729,7 +729,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/29/Android-Stdudio-Linux-windows-mac常用快捷键/" title="Android Stdudio Linux/windows/mac常用快捷键" itemprop="url">Android Stdudio Linux/windows/mac常用快捷键</a>
+      <a href="/2015/05/29/Android/Android-Stdudio-Linux-windows-mac常用快捷键/" title="Android Stdudio Linux/windows/mac常用快捷键" itemprop="url">Android Stdudio Linux/windows/mac常用快捷键</a>
   </h1>
 
   
@@ -750,7 +750,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2015/05/29/Android-Stdudio-Linux-windows-mac常用快捷键/#more">Read More</a>
+            <a href="/2015/05/29/Android/Android-Stdudio-Linux-windows-mac常用快捷键/#more">Read More</a>
           
        </p>
     </div>
@@ -760,7 +760,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/05/29/Android-Stdudio-Linux-windows-mac常用快捷键/" >huaqianlee.me/2015/05/29/Android-Stdudio-Linux-windows-mac常用快捷键/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/05/29/Android/Android-Stdudio-Linux-windows-mac常用快捷键/" >huaqianlee.me/2015/05/29/Android/Android-Stdudio-Linux-windows-mac常用快捷键/ </a>
 
 </div>
 <div class="article-catetags">
@@ -784,7 +784,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/05/29/Android-Stdudio-Linux-windows-mac常用快捷键/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/29/Android-Stdudio-Linux-windows-mac常用快捷键/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/05/29/Android/Android-Stdudio-Linux-windows-mac常用快捷键/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/29/Android/Android-Stdudio-Linux-windows-mac常用快捷键/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -805,7 +805,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" title="如何在内核里操作文件(create/open/read/write)" itemprop="url">如何在内核里操作文件(create/open/read/write)</a>
+      <a href="/2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/" title="如何在内核里操作文件(create/open/read/write)" itemprop="url">如何在内核里操作文件(create/open/read/write)</a>
   </h1>
 
   
@@ -828,7 +828,7 @@
         
         <p class="article-more-link">
           
-            <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/#more">Read More</a>
+            <a href="/2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/#more">Read More</a>
           
        </p>
     </div>
@@ -838,7 +838,7 @@
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/" >huaqianlee.me/2015/03/17/如何在内核里操作读写文件-create-open-read-write/ </a>
+	欢迎转载，但请注明原地址: <a href="/2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/" >huaqianlee.me/2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/ </a>
 
 </div>
 <div class="article-catetags">
@@ -862,7 +862,7 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/03/17/如何在内核里操作读写文件-create-open-read-write/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/03/17/如何在内核里操作读写文件-create-open-read-write/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -911,8 +911,6 @@
 		  
 		
 		  
-			<li><a href="/categories/Javaweb/" title="Javaweb">Javaweb<sup>2</sup></a></li>
-		  
 		
 		  
 			<li><a href="/categories/Linux/" title="Linux">Linux<sup>4</sup></a></li>
@@ -920,6 +918,10 @@
 		
 		  
 			<li><a href="/categories/Thinking/" title="Thinking">Thinking<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Web/" title="Web">Web<sup>2</sup></a></li>
 		  
 		
 		</ul>
