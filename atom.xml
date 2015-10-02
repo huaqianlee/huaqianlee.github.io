@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-09-24T17:04:26.055Z</updated>
+  <updated>2015-10-02T16:57:33.737Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -13,6 +13,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[2015年的国庆]]></title>
+    <link href="http://huaqianlee.me/2015/10/02/Life/2015%E5%B9%B4%E5%9B%BD%E5%BA%86/"/>
+    <id>http://huaqianlee.me/2015/10/02/Life/2015年国庆/</id>
+    <published>2015-10-02T14:45:34.000Z</published>
+    <updated>2015-10-02T16:57:33.737Z</updated>
+    <content type="html"><![CDATA[<p>时间总是过得太快，不愿意等你哪怕一小会儿。 一眨眼2015年已过大半，而我虽然折腾出了一点成就，但仍是差得太远太远。</p>
+<h3 id="国庆、旅游和车">国庆、旅游和车</h3><p>因为我十分害怕人多的地方，所以一开始就没有打算在国庆出游。对于旅游，我觉得专门选一个时间请假去就好了。（主要是因为我现在不是一个人了，所以不可能死宅；对于我自己来说，两台笔记本加个大屏，再加一部台灯，就够了，好像显得太没追求了，呵呵。。。 ）</p>
+<p>虽然没有出游，因为朋友买车，也一起去车展看了看。很早以前自己就喜欢Land Rover、volvo和奥迪，这次去车展后尤其更对volvo情有独钟了，可惜自己现在还支付不起，也就只能在心里暂时喜欢着了。</p>
+<h3 id="工作、电脑和blog">工作、电脑和blog</h3><p>年初自己罗列了一个计划，前些时间也算按部就班的向自己的目标迈进。不过最近这些时间有些对不起自己了，懈怠了很多。</p>
+<p>因对自己薪资的十分不满意，再加上对现在的工作有了懈怠情绪，前段时间投了些简历，也拿到了几个offer， 其中一个也挺愿意去。不过，令我意外的是老大为了留下我许诺让我做我想做的事，并给了我意料外的信任，这样我也理所当然的留下来了。只是从我拿到offer，得到老大的许诺后，我这段时间懈怠了太多。（不知道是不是因为实现了初阶段目标所致）</p>
+<p>本来打算今年去香港购回Mac Pro，然后也好将我的小黑完全换成Ubuntu，只是因港澳通行证到期未续签而放弃。现阶段也就只有先用着windows了， 也试过直接换为Ubuntu来配置开发环境的，但是我的电脑某些硬件太新，还不能在Ubuntu找到合适的支持，不想再耗时间去做无谓的折腾，也就只能作罢。</p>
+<p>一直对于自己的blog有很多不满意的地方，但不愿意再去找别人的模板来修改了，希望自己从头设计一个自己喜欢的风格。现在自己水平不够，对于网页设计都不能算入门，只能等到以后了。只是对于有强迫症的我， 每次看到blog中字体和布局就会有些抓狂，不过我现在也无能为力！</p>
+<h3 id="接下来">接下来</h3><p>今天逛了一下我经常关注的几个大神的blog，更加清楚了自己的差距，还需要做的事。所以也有了这篇杂乱的文章，就算是对前些时间的总结，接下来应该重新规划一下了，开始向新的目标迈进。</p>
+<p>我不期望自己成为全栈工程师，但擅长于BSP、APP及网页编程是自己设定的底线，还有英语，所以我所有的计划都是围绕着这些东西展开的。</p>
+<p>接下来，我要做的是看更多书、写更多的APP、理解更多的源码、说更多的英语、写更多的blog。。。</p>
+<p>当然，还有最重要的一点，不要忘记锻炼身体。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/bloggym.jpg" alt="gym"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>时间总是过得太快，不愿意等你哪怕一小会儿。 一眨眼2015年已过大半，而我虽然折腾出了一点成就，但仍是差得太远太远。</p>
+<h3 id="国庆、旅游和车">国庆、旅游和车</h3><p>因为我十分害怕人多的地方，所以一开始就没有打算在国庆出游。对于旅游，我觉得专门选一个]]>
+    </summary>
+    
+      <category term="成长" scheme="http://huaqianlee.me/tags/%E6%88%90%E9%95%BF/"/>
+    
+      <category term="Life" scheme="http://huaqianlee.me/categories/Life/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[高通Android设备启动流程分析(从power-on上电到Home Lanucher启动)]]></title>
@@ -1098,121 +1127,6 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Android编译过程详解之三]]></title>
-    <link href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/"/>
-    <id>http://huaqianlee.me/2015/07/12/Android/Android编译过程详解之三/</id>
-    <published>2015-07-12T08:43:04.000Z</published>
-    <updated>2015-09-24T17:07:22.437Z</updated>
-    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
-<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
-<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
-<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
-<thead>
-<tr>
-<th>常量</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PRODUCT_NAME</td>
-<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
-</tr>
-<tr>
-<td>PRODUCT_MODEL</td>
-<td>产品的型号，这也是最终用户将看到的</td>
-</tr>
-<tr>
-<td>PRODUCT_LOCALES</td>
-<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGES</td>
-<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
-</tr>
-<tr>
-<td>PRODUCT_DEVICE</td>
-<td>该产品的工业设计的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_MANUFACTURER</td>
-<td>制造商的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_BRAND</td>
-<td>该产品专门定义的商标（如果有的话）</td>
-</tr>
-<tr>
-<td>PRODUCT_PROPERTY_OVERRIDES</td>
-<td>对于商品属性的定义</td>
-</tr>
-<tr>
-<td>PRODUCT_COPY_FILES</td>
-<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
-</tr>
-<tr>
-<td>PRODUCT_OTA_PUBLIC_KEYS</td>
-<td>对于该产品的 OTA 公开 key 的列表</td>
-</tr>
-<tr>
-<td>PRODUCT_POLICY</td>
-<td>产品使用的策略</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGE_OVERLAYS</td>
-<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
-</tr>
-<tr>
-<td>PRODUCT_CONTRIBUTORS_FILE</td>
-<td>HTML 文件，其中包含项目的贡献者</td>
-</tr>
-<tr>
-<td>PRODUCT_TAGS</td>
-<td>该产品的标签，以空格分格</td>
-</tr>
-</tbody>
-</table>
-<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
-<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
-<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
-　　　</p>
-<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>]]>
-    
-    </summary>
-    
-      <category term="Qualcomm" scheme="http://huaqianlee.me/tags/Qualcomm/"/>
-    
-      <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-      <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
-    
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[Android编译过程详解之二]]></title>
     <link href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/"/>
     <id>http://huaqianlee.me/2015/07/12/Android/Android编译过程详解之二/</id>
@@ -1407,6 +1321,121 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <li>/out/target/common/：该目录下包含了针对设备的共通的编译产物，主要是 Java 应用代码和 Java 库。</li>
 <li>/out/target/product/<product_name>/：包含了针对特定设备的编译结果以及平台相关的 C/C++ 库和二进制文件。其中，<product_name>是具体目标设备的名称。</li>
 <li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。]]>
+    
+    </summary>
+    
+      <category term="Qualcomm" scheme="http://huaqianlee.me/tags/Qualcomm/"/>
+    
+      <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    
+      <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
+    
+      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android编译过程详解之三]]></title>
+    <link href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/"/>
+    <id>http://huaqianlee.me/2015/07/12/Android/Android编译过程详解之三/</id>
+    <published>2015-07-12T08:43:04.000Z</published>
+    <updated>2015-09-24T17:07:22.437Z</updated>
+    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
+<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
+<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
+<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
+<thead>
+<tr>
+<th>常量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRODUCT_NAME</td>
+<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
+</tr>
+<tr>
+<td>PRODUCT_MODEL</td>
+<td>产品的型号，这也是最终用户将看到的</td>
+</tr>
+<tr>
+<td>PRODUCT_LOCALES</td>
+<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGES</td>
+<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
+</tr>
+<tr>
+<td>PRODUCT_DEVICE</td>
+<td>该产品的工业设计的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_MANUFACTURER</td>
+<td>制造商的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_BRAND</td>
+<td>该产品专门定义的商标（如果有的话）</td>
+</tr>
+<tr>
+<td>PRODUCT_PROPERTY_OVERRIDES</td>
+<td>对于商品属性的定义</td>
+</tr>
+<tr>
+<td>PRODUCT_COPY_FILES</td>
+<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
+</tr>
+<tr>
+<td>PRODUCT_OTA_PUBLIC_KEYS</td>
+<td>对于该产品的 OTA 公开 key 的列表</td>
+</tr>
+<tr>
+<td>PRODUCT_POLICY</td>
+<td>产品使用的策略</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGE_OVERLAYS</td>
+<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
+</tr>
+<tr>
+<td>PRODUCT_CONTRIBUTORS_FILE</td>
+<td>HTML 文件，其中包含项目的贡献者</td>
+</tr>
+<tr>
+<td>PRODUCT_TAGS</td>
+<td>该产品的标签，以空格分格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
+<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
+<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
+　　　</p>
+<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Andro%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>]]>
     
     </summary>
     
@@ -1997,36 +2026,6 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
       <category term="Tools" scheme="http://huaqianlee.me/tags/Tools/"/>
     
       <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[如何在内核里操作文件(create/open/read/write)]]></title>
-    <link href="http://huaqianlee.me/2015/03/17/Linux/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E9%87%8C%E6%93%8D%E4%BD%9C%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6-create-open-read-write/"/>
-    <id>http://huaqianlee.me/2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/</id>
-    <published>2015-03-17T14:15:42.000Z</published>
-    <updated>2015-07-17T14:52:06.230Z</updated>
-    <content type="html"><![CDATA[<p>　　因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：</p>
-<h2 id="Includes">Includes</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/fs.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/segment.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/uaccess.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/buffer_head.h&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Opening_a_file">Opening a file</h2><a id="more"></a>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> file* file_open(<span class="keyword">const</span> <span class="keyword">char</span>* path, <span class="keyword">int</span> flags, <span class="keyword">int</span> rights) &#123;</span><br><span class="line">    <span class="keyword">struct</span> file* filp = NULL;</span><br><span class="line">    mm_segment_t oldfs;</span><br><span class="line">    <span class="keyword">int</span> err = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/* 内核中进行系统调用（如文件操作）时，必须调用下面两句，对其进行保护，其作用是让内核能访问用户空间 */</span></span><br><span class="line">    oldfs = get_fs();  <span class="comment">// 备份当前进程地址空间</span></span><br><span class="line">    set_fs(get_ds()); <span class="comment">// 设置进程地址空间为虚拟地址空间上限，#define get_ds() (KERNEL_DS) ,</span></span><br><span class="line">    filp = filp_open(path, flags, rights); <span class="comment">// 调用文件打开函数</span></span><br><span class="line">    set_fs(oldfs); <span class="comment">//恢复进程地址空间</span></span><br><span class="line">    <span class="keyword">if</span>(IS_ERR(filp)) &#123;</span><br><span class="line">        err = PTR_ERR(filp);</span><br><span class="line">        <span class="keyword">return</span> NULL;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> filp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Close_a_file">Close a file</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">file_close</span><span class="params">(<span class="keyword">struct</span> file* file)</span> </span>&#123;</span><br><span class="line">    filp_close(file, NULL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Reading_from_a_file">Reading from a file</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">file_read</span><span class="params">(<span class="keyword">struct</span> file* file, <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> offset, <span class="keyword">unsigned</span> <span class="keyword">char</span>* data, <span class="keyword">unsigned</span> <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    mm_segment_t oldfs;</span><br><span class="line">    <span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">    oldfs = get_fs();</span><br><span class="line">    set_fs(get_ds());</span><br><span class="line"></span><br><span class="line">    ret = vfs_read(file, data, size, &amp;offset);  <span class="comment">// 读取文件，文件存在用户空间</span></span><br><span class="line"></span><br><span class="line">    set_fs(oldfs);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Writing_to_a_file">Writing to a file</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">file_write</span><span class="params">(<span class="keyword">struct</span> file* file, <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> offset, <span class="keyword">unsigned</span> <span class="keyword">char</span>* data, <span class="keyword">unsigned</span> <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    mm_segment_t oldfs;</span><br><span class="line">    <span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">    oldfs = get_fs();</span><br><span class="line">    set_fs(get_ds());</span><br><span class="line"></span><br><span class="line">    ret = vfs_write(file, data, size, &amp;offset); <span class="comment">// 写文件</span></span><br><span class="line"></span><br><span class="line">    set_fs(oldfs);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Syncing_changes_a_file">Syncing changes a file</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">file_sync</span><span class="params">(<span class="keyword">struct</span> file* file)</span> </span>&#123;</span><br><span class="line">    vfs_fsync(file, <span class="number">0</span>); <span class="comment">// 同步文件，确定文件写到硬盘</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>　　因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：</p>
-<h2 id="Includes">Includes</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/fs.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/segment.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/uaccess.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/buffer_head.h&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Opening_a_file">Opening a file</h2>]]>
-    
-    </summary>
-    
-      <category term="kernel" scheme="http://huaqianlee.me/tags/kernel/"/>
-    
-      <category term="文件IO" scheme="http://huaqianlee.me/tags/%E6%96%87%E4%BB%B6IO/"/>
-    
-      <category term="Linux" scheme="http://huaqianlee.me/categories/Linux/"/>
     
   </entry>
   
