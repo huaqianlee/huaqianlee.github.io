@@ -12,20 +12,17 @@
 
     
     <meta name="description" content="问题一: .gitignore无效，不能过滤某些文件或路径。现象:在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。
-原因：在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。
-解决：从版本库删除文件和目录，更新。git rm file">
+原因：在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git 常见问题集">
 <meta property="og:url" content="http://huaqianlee.me/2015/10/22/Git/git-experence/index.html">
 <meta property="og:site_name" content="Andy.Lee Plus">
 <meta property="og:description" content="问题一: .gitignore无效，不能过滤某些文件或路径。现象:在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。
-原因：在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。
-解决：从版本库删除文件和目录，更新。git rm file">
+原因：在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 常见问题集">
 <meta name="twitter:description" content="问题一: .gitignore无效，不能过滤某些文件或路径。现象:在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。
-原因：在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。
-解决：从版本库删除文件和目录，更新。git rm file">
+原因：在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。">
 <meta name="twitter:creator" content="@Andylee_sarah">
 <link rel="publisher" href="107850537041795428182">
 
@@ -108,8 +105,11 @@
 	<div class="article-content">
 		
 		<h2 id="问题一:_-gitignore无效，不能过滤某些文件或路径。">问题一: .gitignore无效，不能过滤某些文件或路径。</h2><p><strong>现象:</strong><br>在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。</p>
-<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。</p>
-<p><strong>解决：</strong><br>从版本库删除文件和目录，更新。<br>git rm files directories -r ，git commit。  </p>
+<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。<br><a id="more"></a></p>
+<p><strong>解决：</strong><br>从版本库删除文件和目录，更新。</p>
+<pre><code class="bash">git rm (--cached) files directories -r <span class="operator">-f</span>
+git commit
+</code></pre>
   
 	</div>
 		<footer class="article-footer clearfix">
