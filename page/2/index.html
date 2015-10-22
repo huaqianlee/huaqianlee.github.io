@@ -87,6 +87,86 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/" title="Android中adb(Android Debug Bridge)命令的用法" itemprop="url">Android中adb(Android Debug Bridge)命令的用法</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-19T11:29:58.000Z" itemprop="datePublished"> 发表于 Jul 19 2015</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <p>　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去<a href="http://developer.android.com/tools/help/adb.html">http://developer.android.com/tools/help/adb.html</a>学习了一下,今天准备按照自己的理解加以修改总结并整理出一篇博文。</p>
+<h2 id="概览">概览</h2><p>　　adb是Android Debug Bridge的简写，按字面意思理解就是在开发者和Android之间搭建的一个debug桥。adb是一个连接仿真实例或者Android设备的命令行工具，是一个客服端-服务器模式的程序，包括如下三部分：<br>　<br>　　1. 一个运行在开发用的Android手机或者仿真器上面的client，我们可以通过adb命令调用client。其他像ADT插件和DDMS也会创建client。<br>　<br>　　2. 一个运行在开发用的Android手机或者仿真器后台的server，这个server负责管理本设备上运行的client和daemon(守护进程)。<br>　<br>　　3. 一个在每个仿真器或者Android设备后台运行的daemon。</p>
+<blockquote>
+<p>adb tool 可以再<sdk>/platform-tools/中找到　</p>
+</blockquote>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/" >huaqianlee.me/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Tools/">Tools</a><a href="/tags/译文/">译文</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/19/Android/怎么抓取Android测试日志文件-How-to-get-android-log-file/" title="怎么抓取Android日志文件" itemprop="url">怎么抓取Android日志文件</a>
   </h1>
 
@@ -805,83 +885,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/30/Android/Android电源管理架构/" title="Android 电源管理架构" itemprop="url">Android 电源管理架构</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-30T08:04:45.000Z" itemprop="datePublished"> 发表于 May 30 2015</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
-<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/05/30/Android/Android电源管理架构/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/05/30/Android/Android电源管理架构/" >huaqianlee.me/2015/05/30/Android/Android电源管理架构/ </a>
-
-</div>
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Android/">Android</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Qualcomm/">Qualcomm</a><a href="/tags/源码分析/">源码分析</a><a href="/tags/电源管理/">电源管理</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/30/Android/Android电源管理架构/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/30/Android/Android电源管理架构/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -904,7 +907,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
@@ -949,7 +952,7 @@
 			
 		
 			
-				<li><a href="/tags/Tools/" title="Tools">Tools<sup>5</sup></a></li>
+				<li><a href="/tags/Tools/" title="Tools">Tools<sup>6</sup></a></li>
 			
 		
 			
