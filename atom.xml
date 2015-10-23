@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-10-22T05:03:38.933Z</updated>
+  <updated>2015-10-22T05:16:20.331Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -15,21 +15,26 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[git 常见问题集]]></title>
+    <title><![CDATA[Git 常见问题集]]></title>
     <link href="http://huaqianlee.me/2015/10/22/Git/git-experence/"/>
     <id>http://huaqianlee.me/2015/10/22/Git/git-experence/</id>
     <published>2015-10-22T04:49:10.000Z</published>
-    <updated>2015-10-22T05:03:38.933Z</updated>
-    <content type="html"><![CDATA[<h2 id="问题一:_-gitignore无效，不能过滤某些文件或路径。">问题一: .gitignore无效，不能过滤某些文件或路径。</h2><p><strong>现象:</strong><br>在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。</p>
-<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。<br><a id="more"></a></p>
+    <updated>2015-10-22T05:16:20.331Z</updated>
+    <content type="html"><![CDATA[<h2 id="问题一_-gitignore无效，不能过滤某些文件或路径。">问题一 .gitignore无效，不能过滤某些文件或路径。</h2><p><strong>现象:</strong><br>在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。</p>
+<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。</p>
 <p><strong>解决：</strong><br>从版本库删除文件和目录，更新。</p>
 <pre><code class="bash">git rm (--cached) files directories -r <span class="operator">-f</span>
 git commit
 </code></pre>
+<a id="more"></a>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="问题一:_-gitignore无效，不能过滤某些文件或路径。">问题一: .gitignore无效，不能过滤某些文件或路径。</h2><p><strong>现象:</strong><br>在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。</p>
-<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。<br>]]>
+    <![CDATA[<h2 id="问题一_-gitignore无效，不能过滤某些文件或路径。">问题一 .gitignore无效，不能过滤某些文件或路径。</h2><p><strong>现象:</strong><br>在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。</p>
+<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。</p>
+<p><strong>解决：</strong><br>从版本库删除文件和目录，更新。</p>
+<pre><code class="bash">git rm (--cached) files directories -r <span class="operator">-f</span>
+git commit
+</code></pre>]]>
     
     </summary>
     
