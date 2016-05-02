@@ -87,6 +87,88 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/05/02/Uav/uav-board-debugging/" title="无人机开发主板调试" itemprop="url">无人机开发主板调试</a>
+  </h1>
+
+  
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
+		
+  <p class="article-time">
+    <time datetime="2016-05-02T13:01:57.000Z" itemprop="datePublished"> 发表于 May 2 2016</time>
+    
+  </p>
+  
+</header>
+    <div class="article-content">
+        
+        <h2 id="问题一_：_新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16_-">问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .</h2><p>通过分析log， 发现死在boot_images\core\boot\secboot3\hw\msm8974\sbl1\sbl1_mc.c 中 sbl1_tlmm_init() —-&gt; boot_gpio_init()， 当我屏蔽此函数后， log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">Format: Log Type - Time(microsec) - Message </span><br><span class="line">Log <span class="built_in">type</span>: B - since boot(excluding boot rom). D - delta </span><br><span class="line">B - <span class="number">41663</span> - SBL1, Start </span><br><span class="line">B - <span class="number">46909</span> - scatterload_region &amp;&amp; ram_init, Start </span><br><span class="line">D - <span class="number">30</span> - scatterload_region &amp;&amp; ram_init, Delta </span><br><span class="line">B - <span class="number">63897</span> - pm_device_init, Start </span><br><span class="line">D - <span class="number">27297</span> - pm_device_init, Delta </span><br><span class="line">B - <span class="number">91317</span> - boot_flash_init, Start </span><br><span class="line">D - <span class="number">10919</span> - boot_flash_init, Delta </span><br><span class="line">B - <span class="number">102632</span> - boot_config_data_table_init, Start </span><br><span class="line">D - <span class="number">134932</span> - boot_config_data_table_init, Delta </span><br><span class="line">B - <span class="number">239150</span> - sbl1_ddr_<span class="built_in">set</span>_params, Start </span><br><span class="line">B - <span class="number">241773</span> - Pre_DDR_clock_init, Start </span><br><span class="line">D - <span class="number">274</span> - Pre_DDR_clock_init, Delta </span><br><span class="line">D - <span class="number">0</span> - sbl1_ddr_<span class="built_in">set</span>_params, Delta </span><br><span class="line">B - <span class="number">255773</span> - pm_driver_init, Start </span><br><span class="line">D - <span class="number">16134</span> - pm_driver_init, Delta </span><br><span class="line">B - <span class="number">271907</span> - clock_init, Start </span><br><span class="line">D - <span class="number">152</span> - clock_init, Delta </span><br><span class="line">B - <span class="number">274988</span> - Image Load, Start </span><br><span class="line">B - <span class="number">295209</span> - Tz Execution, Start </span><br><span class="line">D - <span class="number">193065</span> - Tz Execution, Delta </span><br><span class="line">B - <span class="number">496387</span> - Image Load, Start </span><br><span class="line">B - <span class="number">506361</span> - Signal PBL to Jump to RPM FW </span><br><span class="line">B - <span class="number">506605</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Start   </span><br><span class="line">B - <span class="number">540399</span> - <span class="number">1</span><span class="comment">######################################################### </span></span><br><span class="line">D - <span class="number">45323</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Delta </span><br><span class="line"><span class="comment">#不屏蔽boot_gpio_init()函数,则停在此处， boot_gpio_init()中</span></span><br><span class="line">B - <span class="number">558302</span> - <span class="number">11</span><span class="comment">#########################################################   </span></span><br><span class="line">B - <span class="number">685884</span> - Image Load, Start </span><br><span class="line">B - <span class="number">689391</span> - WDT Execution, Start </span><br><span class="line">D - <span class="number">213</span> - WDT Execution, Delta </span><br><span class="line">B - <span class="number">694790</span> - Image Load, Start </span><br><span class="line">B - <span class="number">707905</span> - sbl1_efs_handle_cookies, Start </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">继续跟代码一无所获。怀疑ddr配置，但仔细一想，用的相同的ddr，应该没问题，就没深究， 如若要修改对比ddr配置，参考如下方式：</span><br><span class="line">```bash</span><br><span class="line">ddr参数：</span><br><span class="line">boot_images\core\boot\secboot3\scripts\<span class="number">8974</span>_cdp_jedec_ddr_4_die_interleave_dal.xml   ---&gt; DDR 参数配置文件（对比ddr数据手册），</span><br><span class="line">编译：</span><br><span class="line">python cdt_generator.py <span class="number">8974</span>_cdp_jedec_ddr_4_die_interleave_dal.xml binfile.bin</span><br><span class="line">将生成boot_cdt_array.c和ddr.bin，boot_cdt_array.c替换boot_images\core\boot\secboot3\hw\msm8974\boot_cdt_array.c,然后重新make boot</span><br></pre></td></tr></table></figure></p>
+<p>后怀疑应该是更换emmc后分区导致，给userdata分太多空间，而emmc空间不够。<br>修改相关文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\boot_images\core\storage\tools\ptool\ptool.py <span class="comment">#  python script to create GPT partition table </span></span><br><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\common\build\partition.xml  <span class="comment"># partition table information </span></span><br><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\apps_proc\device\qcom\msm8974\BoardConfig.mk <span class="comment">#  file system image size for android </span></span><br><span class="line"></span><br><span class="line">解析partition.xml，生成相关文件：</span><br><span class="line">ptool.py -x partition.xml   <span class="comment"># 解析partition.xml， 生成partition.bin, rawprogram.xml等文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">apps_proc/oe-core下执行命令生成相应文件：</span><br><span class="line">./meta-qti/scripts/mkuserimage.sh </span><br><span class="line"></span><br><span class="line">common/build下执行如下打包命令 :</span><br><span class="line">python update_common_info.py</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如能正常启动：fastboot flash partition gpt_backup0.bin —&gt; You MUST flash the new partition table first so others should be flashed on new layout. 　　</p>
+</blockquote>
+<p>　</p>
+<p>于是，将userdata分区空间改小一半，终于看到了一丝胜利的曙光，不过虽然能进入linaro系统，但是仍然有问题，空间不够，串口log如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav_boot_small.png" alt="uav_boot_log_1"></p>
+<p>　　</p>
+<p>最后，将userdata相应加大，板子成功启动。串口log如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav_boot_ok.png" alt="uav_boot_log_2"></p>
+<p>　</p>
+<h2 id="附_USB调试信息打开">附 USB调试信息打开</h2><p>1 Dynamic UDC debug<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Echo ‘file dwc3-msm.c +p’ &gt; /d/dynamic_debug/control </span><br><span class="line">Echo ‘file dwc3_otg.c +p’ &gt; /d/dynamic_debug/control </span><br><span class="line">Echo ‘file phy-msm-qusb.c +p’ &gt; /d/dynamic_debug/control </span><br><span class="line">Echo ‘file phy-msm-qmp.c +p’ &gt; /d/dynamic_debug/control</span><br></pre></td></tr></table></figure></p>
+<p>2 Kernel UDC debug configurations </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># W:\uav\apq8074-le-1-0_ap_standard_oem\apps_proc\linux\drivers\usb\dwc3\Makefile</span></span><br><span class="line">CONFIG_USB_DWC3_DEBUG </span><br><span class="line">CONFIG_USB_DWC3_VERBOSE</span><br><span class="line"></span><br><span class="line"><span class="comment"># linux/drivers/usb/dwc3/dwc3_otg.c</span></span><br><span class="line">添加如下：</span><br><span class="line"> <span class="comment">#undef dev_dbg </span></span><br><span class="line"> <span class="comment">#define dev_dbg dev_info</span></span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+	
+<div>
+
+  	<span> </span>
+  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
+	欢迎转载，但请注明原地址: <a href="/2016/05/02/Uav/uav-board-debugging/" >huaqianlee.me/2016/05/02/Uav/uav-board-debugging/ </a>
+
+</div>
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Uav/">Uav</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/05/02/Uav/uav-board-debugging/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/05/02/Uav/uav-board-debugging/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/10/22/Git/git-experence/" title="Git 常见问题集" itemprop="url">Git 常见问题集</a>
   </h1>
 
@@ -795,86 +877,6 @@ git commit
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/" title="Android中adb(Android Debug Bridge)命令的用法" itemprop="url">Android中adb(Android Debug Bridge)命令的用法</a>
-  </h1>
-
-  
-  <p class="article-author">By
-       
-		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-19T11:29:58.000Z" itemprop="datePublished"> 发表于 Jul 19 2015</time>
-    
-  </p>
-  
-</header>
-    <div class="article-content">
-        
-        <p>　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去<a href="http://developer.android.com/tools/help/adb.html">http://developer.android.com/tools/help/adb.html</a>学习了一下,今天准备按照自己的理解加以修改总结并整理出一篇博文。</p>
-<h2 id="概览">概览</h2><p>　　adb是Android Debug Bridge的简写，按字面意思理解就是在开发者和Android之间搭建的一个debug桥。adb是一个连接仿真实例或者Android设备的命令行工具，是一个客服端-服务器模式的程序，包括如下三部分：<br>　<br>　　1. 一个运行在开发用的Android手机或者仿真器上面的client，我们可以通过adb命令调用client。其他像ADT插件和DDMS也会创建client。<br>　<br>　　2. 一个运行在开发用的Android手机或者仿真器后台的server，这个server负责管理本设备上运行的client和daemon(守护进程)。<br>　<br>　　3. 一个在每个仿真器或者Android设备后台运行的daemon。</p>
-<blockquote>
-<p>adb tool 可以再<sdk>/platform-tools/中找到　</p>
-</blockquote>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-	
-<div>
-
-  	<span> </span>
-  	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/" >huaqianlee.me/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/ </a>
-
-</div>
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Android/">Android</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Tools/">Tools</a><a href="/tags/译文/">译文</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -918,6 +920,10 @@ git commit
 		
 		  
 			<li><a href="/categories/Think/" title="Think">Think<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Uav/" title="Uav">Uav<sup>1</sup></a></li>
 		  
 		
 		  
@@ -986,7 +992,7 @@ git commit
 			
 		
 			
-				<li><a href="/tags/成长/" title="成长">成长<sup>1</sup></a></li>
+				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
 			
 		
 			
@@ -994,7 +1000,7 @@ git commit
 			
 		
 			
-				<li><a href="/tags/Bug/" title="Bug">Bug<sup>1</sup></a></li>
+				<li><a href="/tags/成长/" title="成长">成长<sup>1</sup></a></li>
 			
 		
 			

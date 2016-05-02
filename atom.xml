@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2015-10-22T05:16:20.331Z</updated>
+  <updated>2016-05-02T13:15:43.501Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -13,6 +13,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[无人机开发主板调试]]></title>
+    <link href="http://huaqianlee.me/2016/05/02/Uav/uav-board-debugging/"/>
+    <id>http://huaqianlee.me/2016/05/02/Uav/uav-board-debugging/</id>
+    <published>2016-05-02T13:01:57.000Z</published>
+    <updated>2016-05-02T13:15:43.501Z</updated>
+    <content type="html"><![CDATA[<h2 id="问题一_：_新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16_-">问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .</h2><p>通过分析log， 发现死在boot_images\core\boot\secboot3\hw\msm8974\sbl1\sbl1_mc.c 中 sbl1_tlmm_init() —-&gt; boot_gpio_init()， 当我屏蔽此函数后， log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">Format: Log Type - Time(microsec) - Message </span><br><span class="line">Log <span class="built_in">type</span>: B - since boot(excluding boot rom). D - delta </span><br><span class="line">B - <span class="number">41663</span> - SBL1, Start </span><br><span class="line">B - <span class="number">46909</span> - scatterload_region &amp;&amp; ram_init, Start </span><br><span class="line">D - <span class="number">30</span> - scatterload_region &amp;&amp; ram_init, Delta </span><br><span class="line">B - <span class="number">63897</span> - pm_device_init, Start </span><br><span class="line">D - <span class="number">27297</span> - pm_device_init, Delta </span><br><span class="line">B - <span class="number">91317</span> - boot_flash_init, Start </span><br><span class="line">D - <span class="number">10919</span> - boot_flash_init, Delta </span><br><span class="line">B - <span class="number">102632</span> - boot_config_data_table_init, Start </span><br><span class="line">D - <span class="number">134932</span> - boot_config_data_table_init, Delta </span><br><span class="line">B - <span class="number">239150</span> - sbl1_ddr_<span class="built_in">set</span>_params, Start </span><br><span class="line">B - <span class="number">241773</span> - Pre_DDR_clock_init, Start </span><br><span class="line">D - <span class="number">274</span> - Pre_DDR_clock_init, Delta </span><br><span class="line">D - <span class="number">0</span> - sbl1_ddr_<span class="built_in">set</span>_params, Delta </span><br><span class="line">B - <span class="number">255773</span> - pm_driver_init, Start </span><br><span class="line">D - <span class="number">16134</span> - pm_driver_init, Delta </span><br><span class="line">B - <span class="number">271907</span> - clock_init, Start </span><br><span class="line">D - <span class="number">152</span> - clock_init, Delta </span><br><span class="line">B - <span class="number">274988</span> - Image Load, Start </span><br><span class="line">B - <span class="number">295209</span> - Tz Execution, Start </span><br><span class="line">D - <span class="number">193065</span> - Tz Execution, Delta </span><br><span class="line">B - <span class="number">496387</span> - Image Load, Start </span><br><span class="line">B - <span class="number">506361</span> - Signal PBL to Jump to RPM FW </span><br><span class="line">B - <span class="number">506605</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Start   </span><br><span class="line">B - <span class="number">540399</span> - <span class="number">1</span><span class="comment">######################################################### </span></span><br><span class="line">D - <span class="number">45323</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Delta </span><br><span class="line"><span class="comment">#不屏蔽boot_gpio_init()函数,则停在此处， boot_gpio_init()中</span></span><br><span class="line">B - <span class="number">558302</span> - <span class="number">11</span><span class="comment">#########################################################   </span></span><br><span class="line">B - <span class="number">685884</span> - Image Load, Start </span><br><span class="line">B - <span class="number">689391</span> - WDT Execution, Start </span><br><span class="line">D - <span class="number">213</span> - WDT Execution, Delta </span><br><span class="line">B - <span class="number">694790</span> - Image Load, Start </span><br><span class="line">B - <span class="number">707905</span> - sbl1_efs_handle_cookies, Start </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">继续跟代码一无所获。怀疑ddr配置，但仔细一想，用的相同的ddr，应该没问题，就没深究， 如若要修改对比ddr配置，参考如下方式：</span><br><span class="line">```bash</span><br><span class="line">ddr参数：</span><br><span class="line">boot_images\core\boot\secboot3\scripts\<span class="number">8974</span>_cdp_jedec_ddr_4_die_interleave_dal.xml   ---&gt; DDR 参数配置文件（对比ddr数据手册），</span><br><span class="line">编译：</span><br><span class="line">python cdt_generator.py <span class="number">8974</span>_cdp_jedec_ddr_4_die_interleave_dal.xml binfile.bin</span><br><span class="line">将生成boot_cdt_array.c和ddr.bin，boot_cdt_array.c替换boot_images\core\boot\secboot3\hw\msm8974\boot_cdt_array.c,然后重新make boot</span><br></pre></td></tr></table></figure></p>
+<p>后怀疑应该是更换emmc后分区导致，给userdata分太多空间，而emmc空间不够。<br>修改相关文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\boot_images\core\storage\tools\ptool\ptool.py <span class="comment">#  python script to create GPT partition table </span></span><br><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\common\build\partition.xml  <span class="comment"># partition table information </span></span><br><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\apps_proc\device\qcom\msm8974\BoardConfig.mk <span class="comment">#  file system image size for android </span></span><br><span class="line"></span><br><span class="line">解析partition.xml，生成相关文件：</span><br><span class="line">ptool.py -x partition.xml   <span class="comment"># 解析partition.xml， 生成partition.bin, rawprogram.xml等文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">apps_proc/oe-core下执行命令生成相应文件：</span><br><span class="line">./meta-qti/scripts/mkuserimage.sh </span><br><span class="line"></span><br><span class="line">common/build下执行如下打包命令 :</span><br><span class="line">python update_common_info.py</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如能正常启动：fastboot flash partition gpt_backup0.bin —&gt; You MUST flash the new partition table first so others should be flashed on new layout. 　　</p>
+</blockquote>
+<p>　</p>
+<p>于是，将userdata分区空间改小一半，终于看到了一丝胜利的曙光，不过虽然能进入linaro系统，但是仍然有问题，空间不够，串口log如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav_boot_small.png" alt="uav_boot_log_1"></p>
+<p>　　</p>
+<p>最后，将userdata相应加大，板子成功启动。串口log如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav_boot_ok.png" alt="uav_boot_log_2"></p>
+<p>　</p>
+<h2 id="附_USB调试信息打开">附 USB调试信息打开</h2><p>1 Dynamic UDC debug<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Echo ‘file dwc3-msm.c +p’ &gt; /d/dynamic_debug/control </span><br><span class="line">Echo ‘file dwc3_otg.c +p’ &gt; /d/dynamic_debug/control </span><br><span class="line">Echo ‘file phy-msm-qusb.c +p’ &gt; /d/dynamic_debug/control </span><br><span class="line">Echo ‘file phy-msm-qmp.c +p’ &gt; /d/dynamic_debug/control</span><br></pre></td></tr></table></figure></p>
+<p>2 Kernel UDC debug configurations </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># W:\uav\apq8074-le-1-0_ap_standard_oem\apps_proc\linux\drivers\usb\dwc3\Makefile</span></span><br><span class="line">CONFIG_USB_DWC3_DEBUG </span><br><span class="line">CONFIG_USB_DWC3_VERBOSE</span><br><span class="line"></span><br><span class="line"><span class="comment"># linux/drivers/usb/dwc3/dwc3_otg.c</span></span><br><span class="line">添加如下：</span><br><span class="line"> <span class="comment">#undef dev_dbg </span></span><br><span class="line"> <span class="comment">#define dev_dbg dev_info</span></span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="问题一_：_新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16_-">问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .</h2><p>通过分析log， 发现死在boot_images\core\boot\s]]>
+    </summary>
+    
+      <category term="Uav" scheme="http://huaqianlee.me/categories/Uav/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Git 常见问题集]]></title>
@@ -49,7 +77,7 @@ git commit
     <link href="http://huaqianlee.me/2015/10/08/Life/2015%E5%B9%B410%E6%9C%887%E6%97%A5-%E5%B0%8F%E4%B8%91/"/>
     <id>http://huaqianlee.me/2015/10/08/Life/2015年10月7日-小丑/</id>
     <published>2015-10-07T16:42:16.000Z</published>
-    <updated>2016-02-01T07:46:26.546Z</updated>
+    <updated>2016-02-01T07:48:02.586Z</updated>
     <content type="html"><![CDATA[<p><strong>The Only Fair Is  Not Fair.</strong><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogemptychair.jpg" alt="em"></p>
 <p>前些天去看华仔的《解救吾先生》，当“吾先生”在将死之际清唱《小丑》时，我感动得眼泛泪光。</p>
 <p>在假期的最后一天感冒了，下午吃了感冒药，到晚上就开始梦游； 现在反而不想睡觉了，很多思绪涌入心中。想写篇博文，不知道该拟什么名字时，小丑又在我耳边响起。</p>
@@ -1162,6 +1190,121 @@ git commit
   </entry>
   
   <entry>
+    <title><![CDATA[Android编译过程详解之三]]></title>
+    <link href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/"/>
+    <id>http://huaqianlee.me/2015/07/12/Android/Android编译过程详解之三/</id>
+    <published>2015-07-12T08:43:04.000Z</published>
+    <updated>2015-10-27T06:39:45.041Z</updated>
+    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
+<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
+<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
+<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
+<thead>
+<tr>
+<th>常量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRODUCT_NAME</td>
+<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
+</tr>
+<tr>
+<td>PRODUCT_MODEL</td>
+<td>产品的型号，这也是最终用户将看到的</td>
+</tr>
+<tr>
+<td>PRODUCT_LOCALES</td>
+<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGES</td>
+<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
+</tr>
+<tr>
+<td>PRODUCT_DEVICE</td>
+<td>该产品的工业设计的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_MANUFACTURER</td>
+<td>制造商的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_BRAND</td>
+<td>该产品专门定义的商标（如果有的话）</td>
+</tr>
+<tr>
+<td>PRODUCT_PROPERTY_OVERRIDES</td>
+<td>对于商品属性的定义</td>
+</tr>
+<tr>
+<td>PRODUCT_COPY_FILES</td>
+<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
+</tr>
+<tr>
+<td>PRODUCT_OTA_PUBLIC_KEYS</td>
+<td>对于该产品的 OTA 公开 key 的列表</td>
+</tr>
+<tr>
+<td>PRODUCT_POLICY</td>
+<td>产品使用的策略</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGE_OVERLAYS</td>
+<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
+</tr>
+<tr>
+<td>PRODUCT_CONTRIBUTORS_FILE</td>
+<td>HTML 文件，其中包含项目的贡献者</td>
+</tr>
+<tr>
+<td>PRODUCT_TAGS</td>
+<td>该产品的标签，以空格分格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
+<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
+<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
+　　　</p>
+<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>]]>
+    
+    </summary>
+    
+      <category term="Qualcomm" scheme="http://huaqianlee.me/tags/Qualcomm/"/>
+    
+      <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    
+      <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
+    
+      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Android编译过程详解之二]]></title>
     <link href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/"/>
     <id>http://huaqianlee.me/2015/07/12/Android/Android编译过程详解之二/</id>
@@ -1356,121 +1499,6 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <li>/out/target/common/：该目录下包含了针对设备的共通的编译产物，主要是 Java 应用代码和 Java 库。</li>
 <li>/out/target/product/<product_name>/：包含了针对特定设备的编译结果以及平台相关的 C/C++ 库和二进制文件。其中，<product_name>是具体目标设备的名称。</li>
 <li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。]]>
-    
-    </summary>
-    
-      <category term="Qualcomm" scheme="http://huaqianlee.me/tags/Qualcomm/"/>
-    
-      <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-      <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
-    
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Android编译过程详解之三]]></title>
-    <link href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/"/>
-    <id>http://huaqianlee.me/2015/07/12/Android/Android编译过程详解之三/</id>
-    <published>2015-07-12T08:43:04.000Z</published>
-    <updated>2015-10-27T06:39:45.041Z</updated>
-    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
-<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
-<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
-<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
-<thead>
-<tr>
-<th>常量</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PRODUCT_NAME</td>
-<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
-</tr>
-<tr>
-<td>PRODUCT_MODEL</td>
-<td>产品的型号，这也是最终用户将看到的</td>
-</tr>
-<tr>
-<td>PRODUCT_LOCALES</td>
-<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGES</td>
-<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
-</tr>
-<tr>
-<td>PRODUCT_DEVICE</td>
-<td>该产品的工业设计的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_MANUFACTURER</td>
-<td>制造商的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_BRAND</td>
-<td>该产品专门定义的商标（如果有的话）</td>
-</tr>
-<tr>
-<td>PRODUCT_PROPERTY_OVERRIDES</td>
-<td>对于商品属性的定义</td>
-</tr>
-<tr>
-<td>PRODUCT_COPY_FILES</td>
-<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
-</tr>
-<tr>
-<td>PRODUCT_OTA_PUBLIC_KEYS</td>
-<td>对于该产品的 OTA 公开 key 的列表</td>
-</tr>
-<tr>
-<td>PRODUCT_POLICY</td>
-<td>产品使用的策略</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGE_OVERLAYS</td>
-<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
-</tr>
-<tr>
-<td>PRODUCT_CONTRIBUTORS_FILE</td>
-<td>HTML 文件，其中包含项目的贡献者</td>
-</tr>
-<tr>
-<td>PRODUCT_TAGS</td>
-<td>该产品的标签，以空格分格</td>
-</tr>
-</tbody>
-</table>
-<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
-<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
-<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
-　　　</p>
-<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>]]>
     
     </summary>
     
@@ -1719,46 +1747,6 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <h3 id="电池信息查看APP">电池信息查看APP</h3><p>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：<br>]]>
     
     </summary>
-    
-      <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-      <category term="电源管理" scheme="http://huaqianlee.me/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
-    
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Android 电源管理架构]]></title>
-    <link href="http://huaqianlee.me/2015/05/30/Android/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/"/>
-    <id>http://huaqianlee.me/2015/05/30/Android/Android电源管理架构/</id>
-    <published>2015-05-30T08:04:45.000Z</published>
-    <updated>2015-08-15T12:56:34.003Z</updated>
-    <content type="html"><![CDATA[<p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
-<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br><a id="more"></a></p>
-<h2 id="电源管理框图">电源管理框图</h2><p>　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图补上来。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg" alt="power"></p>
-<h2 id="主要文件及路径">主要文件及路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kernel\kernel\power\*</span><br><span class="line">   arch\arm\match-xxx\pm.c</span><br><span class="line">   driver\power\*</span><br><span class="line">   system\core\charger\charger.c   - 关机充电信息，显示充电<span class="built_in">log</span>等</span><br><span class="line">   上层文件太分散，待后期文件详解再一一列出</span><br></pre></td></tr></table></figure>
-<h2 id="Android结构">Android结构</h2><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(即三种低功耗状态)，使系统功耗降到最低。 电源管理架构分为四大部分： APP，Framework，Hal，Kernel。</p>
-<h3 id="应用层(APP)">应用层(APP)</h3><p>　　应用层主要指应用程序及其他使用电源管理的service。</p>
-<h3 id="架构层(Framework)">架构层(Framework)</h3><p>　　Framework层为APP提供API接口及协调电源的管理工作，主要包含：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PowerManager.java  // 提供给应用层调用</span><br><span class="line">PowerManagerService.java  // 核心文件</span><br><span class="line">com_android_server_PowerManagerService.cpp、</span><br><span class="line">Power.java  // 提供底层的函数接口,与JNI交互</span><br><span class="line">android_os_Power.cpp  //jni交互文件</span><br></pre></td></tr></table></figure></p>
-<p>　　这一层的功能相对比较复杂,比如系统状态的切换，背光的调节及开关，Wake Lock的申请和释放等等，但这一层跟硬件平台无关。</p>
-<h3 id="Hal层">Hal层</h3><p>　　Hal层为一个Power.c文件，该文件通过sysfs的方式与kernel进行通信。主要功能有申请wake_lock，释放wake_lock，设置屏幕状态等。所有对电源管理的调用应通过Android的PowerManager API来完成。</p>
-<h3 id="Kernel层">Kernel层</h3><p>　　Kernel层的电源管理方案实现主要包含三部分：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kernel\power\：实现了系统电源管理框架机制</span><br><span class="line">Arch\arm(or mips or powerpc)\mach-XXX\pm.c:实现对特定板的处理器电源管理</span><br><span class="line">drivers\power:是设备电源管理的基础框架，为驱动提供了电源管理接口. 实现了针对所有设备的sysfs操作函数.</span><br></pre></td></tr></table></figure></p>
-<p>　　android提供了三种低功耗状态：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">earlysuspend //让某些设备选择进入某种功耗较低的状态，如LCD灭掉</span><br><span class="line"><span class="built_in">suspend</span> // 除电源模块以外的外围模块和CPU均不工作，只有内存保持自刷新的一个工作状态</span><br><span class="line">hibernation// 所有内存镜像都被写入到磁盘中，然后系统关机，重启后系统将恢复到关机之前的状态</span><br></pre></td></tr></table></figure></p>
-<h2 id="">　</h2><p>　</p>
-<h3 id="电源管理机制">电源管理机制</h3><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(如上述三种低功耗状态),使系统功耗降到最低.
-　</p>
-<h4 id="实现流程">实现流程</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png" alt="framework">
-　</p>
-<h4 id="状态切换流程">状态切换流程</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png" alt="state"></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
-<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br>]]>
-    
-    </summary>
-    
-      <category term="Qualcomm" scheme="http://huaqianlee.me/tags/Qualcomm/"/>
     
       <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     
