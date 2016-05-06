@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2016-05-06T16:25:34.659Z</updated>
+  <updated>2016-05-06T16:26:10.598Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://huaqianlee.me/2016/05/07/Uav/mobile-and-uav-sensors/"/>
     <id>http://huaqianlee.me/2016/05/07/Uav/mobile-and-uav-sensors/</id>
     <published>2016-05-06T16:12:14.000Z</published>
-    <updated>2016-05-06T16:25:34.659Z</updated>
+    <updated>2016-05-06T16:26:10.598Z</updated>
     <content type="html"><![CDATA[<p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
 <blockquote>
 <p>资料皆是网上获取,不能完全保证准确性.</p>
@@ -29,7 +29,7 @@
 <h2 id="加速度传感器(Accelerometer)">加速度传感器(Accelerometer)</h2><p>加速度传感器是一种能够测量加速力的电子设备。加速力就是当物体在加速过程中作用在物体上的力，就好比地球引力，也就是重力。一般在手机被提到加速度感应器时，就是指重力感应器。<br>应用场景：微信摇一摇、甩动切歌等</p>
 <h2 id="距离传感器(Proximity/p-sensor)">距离传感器(Proximity/p-sensor)</h2><p>通过发射特别短的光脉冲，并测量此光脉冲从发射到被物体反射回来的时间，通过测时间来计算与物体之间的距离。<br>应用场景：通话时手机靠近脸部，屏幕背景灯熄灭，离开时背景灯点亮并解锁屏幕。</p>
 <h2 id="光线感应器(Light)">光线感应器(Light)</h2><p>对投光器受光器间之光线做遮蔽动作所获得的信号加以运用以完成各种自动化控制。<br>应用场景：自动调整屏幕亮度功能等</p>
-<h2 id="三轴陀螺仪(Gyroscope)">三轴陀螺仪(Gyroscope)</h2><p>同时测定6个方向的位置，移动轨迹，加速。单轴的只能测量一个方向的量，也就是一个系统需要三个陀螺仪，而3轴的一个就能替代三个单轴的。测量角速度，以判别物体的运动状态，也称为运动传感器。判断在哪去哪。<br>应用场景：目前主要应用在一些大型手机射击游戏中，如现代战争3、狂野飙车等。<br>如下是网上看到的一幅很形象图片：<br>单轴陀螺仪:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/a_tuoluoyi.gif" alt="single-Gyroscope"><br>三轴陀螺仪:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/tuoluoyi.gif" alt="three-Gyroscope"></p>
+<h2 id="三轴陀螺仪(Gyroscope)">三轴陀螺仪(Gyroscope)</h2><p>同时测定6个方向的位置，移动轨迹，加速。单轴的只能测量一个方向的量，也就是一个系统需要三个陀螺仪，而3轴的一个就能替代三个单轴的。测量角速度，以判别物体的运动状态，也称为运动传感器。判断在哪去哪。<br>应用场景：目前主要应用在一些大型手机射击游戏中，如现代战争3、狂野飙车等。<br>如下是网上看到的两幅很形象图片：<br>单轴陀螺仪:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/a_tuoluoyi.gif" alt="single-Gyroscope"><br>三轴陀螺仪:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/tuoluoyi.gif" alt="three-Gyroscope"></p>
 <h2 id="地磁/磁力计/电子罗盘(Magnetic/compass)">地磁/磁力计/电子罗盘(Magnetic/compass)</h2><p>工作原理：电子罗盘，也叫数字指南针，是利用地磁场来定北极的一种方法。。<br>应用场景：各种指南针以及导航软件、地图等</p>
 <h2 id="气压计_(Barometer)">气压计 (Barometer)</h2><p>气压传感器用于检测大气压强的仪器,实际应用当中气压传感器可作高度计，提示海拔高度，尤其适合登山、户外单车、滑雪以及其他户外运动中，您可以据此在地图上分析高度、寻找正确路径等。同时也用于GPS精确导航（航位推算，上下桥检测等），手机GPS海拔测量，室内室外导航，休闲、体育和医疗健康等监测，天气预报、垂直速度指示（上升/下沉速度），风扇功率控制、温度显示等。 </p>
 <h2 id="超声波/声呐(sonar)">超声波/声呐(sonar)</h2><p>应用场景：超声波测距,避障.</p>
