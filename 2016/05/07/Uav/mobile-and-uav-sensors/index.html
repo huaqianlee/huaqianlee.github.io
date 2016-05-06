@@ -4,31 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Git 常见问题集 | Andy.Lee&#39;s  Blog</title>
+    <title>手机无人机常用sensor介绍 | Andy.Lee&#39;s  Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Andy.Lee">
     
 
     
-    <meta name="description" content="问题一 .gitignore无效，不能过滤某些文件或路径。现象:在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。
-原因：在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。
-解决：从版本库删除文件和目录，更新。
-git rm (--c">
+    <meta name="description" content="一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.
+
+资料皆是网上获取,不能完全保证准确性.
+
+重力传感器(gravity/g-sensor)重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。应用场景：手机横竖屏幕切换、翻转静音、平衡球">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git 常见问题集">
-<meta property="og:url" content="http://huaqianlee.me/2015/10/22/Git/git-experence/index.html">
+<meta property="og:title" content="手机无人机常用sensor介绍">
+<meta property="og:url" content="http://huaqianlee.me/2016/05/07/Uav/mobile-and-uav-sensors/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="问题一 .gitignore无效，不能过滤某些文件或路径。现象:在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。
-原因：在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。
-解决：从版本库删除文件和目录，更新。
-git rm (--c">
+<meta property="og:description" content="一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.
+
+资料皆是网上获取,不能完全保证准确性.
+
+重力传感器(gravity/g-sensor)重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。应用场景：手机横竖屏幕切换、翻转静音、平衡球">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/tuoluoyi.gif">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git 常见问题集">
-<meta name="twitter:description" content="问题一 .gitignore无效，不能过滤某些文件或路径。现象:在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。
-原因：在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。
-解决：从版本库删除文件和目录，更新。
-git rm (--c">
+<meta name="twitter:title" content="手机无人机常用sensor介绍">
+<meta name="twitter:description" content="一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.
+
+资料皆是网上获取,不能完全保证准确性.
+
+重力传感器(gravity/g-sensor)重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。应用场景：手机横竖屏幕切换、翻转静音、平衡球">
 <meta name="twitter:creator" content="@Andylee_sarah">
 <link rel="publisher" href="107850537041795428182">
 
@@ -94,7 +98,7 @@ git rm (--c">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/10/22/Git/git-experence/" title="Git 常见问题集" itemprop="url">Git 常见问题集</a>
+      <a href="/2016/05/07/Uav/mobile-and-uav-sensors/" title="手机无人机常用sensor介绍" itemprop="url">手机无人机常用sensor介绍</a>
   </h1>
 
   
@@ -103,20 +107,28 @@ git rm (--c">
 		<a href="https://plus.google.com/107850537041795428182?rel=author" title="Andy.Lee" target="_blank" itemprop="author">Andy.Lee</a>
 		
   <p class="article-time">
-    <time datetime="2015-10-22T04:49:10.000Z" itemprop="datePublished"> 发表于 Oct 22 2015</time>
+    <time datetime="2016-05-06T16:12:14.000Z" itemprop="datePublished"> 发表于 May 7 2016</time>
     
   </p>
   
 </header>
 	<div class="article-content">
 		
-		<h2 id="问题一_-gitignore无效，不能过滤某些文件或路径。">问题一 .gitignore无效，不能过滤某些文件或路径。</h2><p><strong>现象:</strong><br>在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。</p>
-<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。</p>
-<p><strong>解决：</strong><br>从版本库删除文件和目录，更新。</p>
-<pre><code class="bash">git rm (--cached) files directories -r <span class="operator">-f</span>
-git commit
-</code></pre>
-<a id="more"></a>
+		<p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
+<blockquote>
+<p>资料皆是网上获取,不能完全保证准确性.</p>
+</blockquote>
+<h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>
+<h2 id="加速度传感器(Accelerometer)">加速度传感器(Accelerometer)</h2><p>加速度传感器是一种能够测量加速力的电子设备。加速力就是当物体在加速过程中作用在物体上的力，就好比地球引力，也就是重力。一般在手机被提到加速度感应器时，就是指重力感应器。<br>应用场景：微信摇一摇、甩动切歌等</p>
+<h2 id="距离传感器(Proximity/p-sensor)">距离传感器(Proximity/p-sensor)</h2><p>通过发射特别短的光脉冲，并测量此光脉冲从发射到被物体反射回来的时间，通过测时间来计算与物体之间的距离。<br>应用场景：通话时手机靠近脸部，屏幕背景灯熄灭，离开时背景灯点亮并解锁屏幕。</p>
+<h2 id="光线感应器(Light)">光线感应器(Light)</h2><p>对投光器受光器间之光线做遮蔽动作所获得的信号加以运用以完成各种自动化控制。<br>应用场景：自动调整屏幕亮度功能等</p>
+<h2 id="三轴陀螺仪(Gyroscope)">三轴陀螺仪(Gyroscope)</h2><p>同时测定6个方向的位置，移动轨迹，加速。单轴的只能测量一个方向的量，也就是一个系统需要三个陀螺仪，而3轴的一个就能替代三个单轴的。测量角速度，以判别物体的运动状态，也称为运动传感器。判断在哪去哪。<br>应用场景：目前主要应用在一些大型手机射击游戏中，如现代战争3、狂野飙车等。<br>如下是网上看到的一幅很形象图片：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/tuoluoyi.gif" alt="tuoluoyi"></p>
+<h2 id="地磁/磁力计/电子罗盘(Magnetic/compass)">地磁/磁力计/电子罗盘(Magnetic/compass)</h2><p>工作原理：电子罗盘，也叫数字指南针，是利用地磁场来定北极的一种方法。。<br>应用场景：各种指南针以及导航软件、地图等</p>
+<h2 id="气压计_(Barometer)">气压计 (Barometer)</h2><p>气压传感器用于检测大气压强的仪器,实际应用当中气压传感器可作高度计，提示海拔高度，尤其适合登山、户外单车、滑雪以及其他户外运动中，您可以据此在地图上分析高度、寻找正确路径等。同时也用于GPS精确导航（航位推算，上下桥检测等），手机GPS海拔测量，室内室外导航，休闲、体育和医疗健康等监测，天气预报、垂直速度指示（上升/下沉速度），风扇功率控制、温度显示等。 </p>
+<h2 id="超声波/声呐(sonar)">超声波/声呐(sonar)</h2><p>应用场景：超声波测距,避障.</p>
+<h2 id="光流（camera）">光流（camera）</h2><p>光流法是运动图像分析的重要方法,因为当物体在运动时，它在图像上对应点的亮度模式也在运动。这种图像亮度模式的表观运动（apparent motion）就是光流。光流表达了图像的变化，由于它包含了目标运动的信息，因此可被观察者用来确定目标的运动情况。从本质上说，光流就是你在这个运动着的世界里感觉到的明显的视觉运动。通过光流camera看到物体的相对运动速度是不一样的,通过不同目标的运动速度判断它们与我们的距离。</p>
+<h2 id="IMU">IMU</h2><p>同时包含陀螺仪、地磁、加速度计的传感器芯片，如mpu9x50。</p>
+<p>还有如热传感器、温度传感器、湿度传感器、紫外线传感器、压力传感器等</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -125,21 +137,16 @@ git commit
 
   	<span> </span>
   	本文为原创文章，出自<a href="/"> Andy.Lee's blog</a><br/>
-	欢迎转载，但请注明原地址: <a href="/2015/10/22/Git/git-experence/" >huaqianlee.me/2015/10/22/Git/git-experence/ </a>
+	欢迎转载，但请注明原地址: <a href="/2016/05/07/Uav/mobile-and-uav-sensors/" >huaqianlee.me/2016/05/07/Uav/mobile-and-uav-sensors/ </a>
 
 </div>
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Git/">Git</a>
+  <a class="article-category-link" href="/categories/Uav/">Uav</a>
 </div>
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Tools/">Tools</a>
-  </div>
 
 </div>
 
@@ -183,19 +190,11 @@ git commit
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/05/02/Uav/uav-board-debugging/" title="无人机开发主板调试">
-  <strong>下一篇：</strong><br/>
-  <span>
-  无人机开发主板调试</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/10/08/Life/2015年10月7日-小丑/"  title="2015年10月7日:小丑">
+<a href="/2016/05/07/Uav/Qualcomm-uav-blsp-port/"  title="高通无人机8074 BLSP接口说明">
  <strong>上一篇：</strong><br/> 
- <span>2015年10月7日:小丑
+ <span>高通无人机8074 BLSP接口说明
 </span>
 </a>
 </div>
@@ -204,7 +203,7 @@ git commit
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/10/22/Git/git-experence/" data-title="Git 常见问题集" data-url="http://huaqianlee.me/2015/10/22/Git/git-experence/"></div>
+	<div class="ds-thread" data-thread-key="2016/05/07/Uav/mobile-and-uav-sensors/" data-title="手机无人机常用sensor介绍" data-url="http://huaqianlee.me/2016/05/07/Uav/mobile-and-uav-sensors/"></div>
 </section>
 
 

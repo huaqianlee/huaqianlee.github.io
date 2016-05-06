@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2016-05-02T14:51:36.021Z</updated>
+  <updated>2016-05-06T16:14:34.345Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -13,6 +13,79 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[手机无人机常用sensor介绍]]></title>
+    <link href="http://huaqianlee.me/2016/05/07/Uav/mobile-and-uav-sensors/"/>
+    <id>http://huaqianlee.me/2016/05/07/Uav/mobile-and-uav-sensors/</id>
+    <published>2016-05-06T16:12:14.000Z</published>
+    <updated>2016-05-06T16:14:34.345Z</updated>
+    <content type="html"><![CDATA[<p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
+<blockquote>
+<p>资料皆是网上获取,不能完全保证准确性.</p>
+</blockquote>
+<h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>
+<h2 id="加速度传感器(Accelerometer)">加速度传感器(Accelerometer)</h2><p>加速度传感器是一种能够测量加速力的电子设备。加速力就是当物体在加速过程中作用在物体上的力，就好比地球引力，也就是重力。一般在手机被提到加速度感应器时，就是指重力感应器。<br>应用场景：微信摇一摇、甩动切歌等</p>
+<h2 id="距离传感器(Proximity/p-sensor)">距离传感器(Proximity/p-sensor)</h2><p>通过发射特别短的光脉冲，并测量此光脉冲从发射到被物体反射回来的时间，通过测时间来计算与物体之间的距离。<br>应用场景：通话时手机靠近脸部，屏幕背景灯熄灭，离开时背景灯点亮并解锁屏幕。</p>
+<h2 id="光线感应器(Light)">光线感应器(Light)</h2><p>对投光器受光器间之光线做遮蔽动作所获得的信号加以运用以完成各种自动化控制。<br>应用场景：自动调整屏幕亮度功能等</p>
+<h2 id="三轴陀螺仪(Gyroscope)">三轴陀螺仪(Gyroscope)</h2><p>同时测定6个方向的位置，移动轨迹，加速。单轴的只能测量一个方向的量，也就是一个系统需要三个陀螺仪，而3轴的一个就能替代三个单轴的。测量角速度，以判别物体的运动状态，也称为运动传感器。判断在哪去哪。<br>应用场景：目前主要应用在一些大型手机射击游戏中，如现代战争3、狂野飙车等。<br>如下是网上看到的一幅很形象图片：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/tuoluoyi.gif" alt="tuoluoyi"></p>
+<h2 id="地磁/磁力计/电子罗盘(Magnetic/compass)">地磁/磁力计/电子罗盘(Magnetic/compass)</h2><p>工作原理：电子罗盘，也叫数字指南针，是利用地磁场来定北极的一种方法。。<br>应用场景：各种指南针以及导航软件、地图等</p>
+<h2 id="气压计_(Barometer)">气压计 (Barometer)</h2><p>气压传感器用于检测大气压强的仪器,实际应用当中气压传感器可作高度计，提示海拔高度，尤其适合登山、户外单车、滑雪以及其他户外运动中，您可以据此在地图上分析高度、寻找正确路径等。同时也用于GPS精确导航（航位推算，上下桥检测等），手机GPS海拔测量，室内室外导航，休闲、体育和医疗健康等监测，天气预报、垂直速度指示（上升/下沉速度），风扇功率控制、温度显示等。 </p>
+<h2 id="超声波/声呐(sonar)">超声波/声呐(sonar)</h2><p>应用场景：超声波测距,避障.</p>
+<h2 id="光流（camera）">光流（camera）</h2><p>光流法是运动图像分析的重要方法,因为当物体在运动时，它在图像上对应点的亮度模式也在运动。这种图像亮度模式的表观运动（apparent motion）就是光流。光流表达了图像的变化，由于它包含了目标运动的信息，因此可被观察者用来确定目标的运动情况。从本质上说，光流就是你在这个运动着的世界里感觉到的明显的视觉运动。通过光流camera看到物体的相对运动速度是不一样的,通过不同目标的运动速度判断它们与我们的距离。</p>
+<h2 id="IMU">IMU</h2><p>同时包含陀螺仪、地磁、加速度计的传感器芯片，如mpu9x50。</p>
+<p>还有如热传感器、温度传感器、湿度传感器、紫外线传感器、压力传感器等</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
+<blockquote>
+<p>资料皆是网上获取,不能完全保证准确性.</p>
+</blockquote>
+<h2 id="重力传感器(gravity/g-se]]>
+    </summary>
+    
+      <category term="Uav" scheme="http://huaqianlee.me/categories/Uav/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[高通无人机8074 BLSP接口说明]]></title>
+    <link href="http://huaqianlee.me/2016/05/07/Uav/Qualcomm-uav-blsp-port/"/>
+    <id>http://huaqianlee.me/2016/05/07/Uav/Qualcomm-uav-blsp-port/</id>
+    <published>2016-05-06T16:11:58.000Z</published>
+    <updated>2016-05-06T16:14:27.146Z</updated>
+    <content type="html"><![CDATA[<h2 id="概述">概述</h2><p>BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/BLSP.png" alt="BLSP"></p>
+<blockquote>
+<ol>
+<li>BAM（Bus Access Manager）is used to move data to/from the peripheral buffers;  2.每个BLSP外设静态连接到一对BAM管道，BLSP支持BAM 和non-BAM-based 数据传输。</li>
+</ol>
+</blockquote>
+<p>每一个QUP可以被配置为I2C， SPI, UART, UIM接口等，如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blsp_pin.jpg" alt="blsp_pin"></p>
+<h2 id="自定义BLSP口，配置TZ">自定义BLSP口，配置TZ</h2><p>这些端口在aDSP和应用处理器之间共享。为了让BLSP端口独立使用，我们可以在TrustZone（TZ）中定义BLSP 端口的分配，没有权限的子系统访问BLSP 端口将导致系统崩溃。 高通默认已经做好了配置。在DspAL中， 提供了一组设备文件路径映射到硬件，无人机用到的相关口已经在TZ中配置好了，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SPI:  /dev/spi-[<span class="number">1</span>~<span class="number">12</span>]  对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的SPI设备</span><br><span class="line">I2C: /dev/iic-[<span class="number">1</span>-<span class="number">12</span>]      对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的I2C设备</span><br><span class="line">UART: /dev/tty-[<span class="number">1</span>-<span class="number">4</span>]</span><br><span class="line"><span class="comment"># UAV 8074 最多支持4个串口设备，每一个串口设备对应一个BAM设备，</span></span><br></pre></td></tr></table></figure></p>
+<p>如果要自定义新的端口，需按于如下方式配置：</p>
+<h3 id="计算APPS_BLSP值">计算APPS BLSP值</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/apps_blsp.jpg" alt="apps-BLSP"><br>根据倒数第二列（对应于BAM pipe）计算出结果如下：<br>APPS BLSP1 : 0x00C3000C   [ Format : 0x00 (Apps BLSP1 QUP) ( Apps BLSP1 UART) ]<br>APPS BLSP2 : 0x00F30F33   [ Format : 0x00 (Apps BLSP2 QUP) ( Apps BLSP2 UART) ]</p>
+<blockquote>
+<p>Apps列对应Y，则表明BLSPx配为Uart或QUP，下同。</p>
+</blockquote>
+<h3 id="计算ADSP_BLSP值">计算ADSP BLSP值</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/adsp_blsp.jpg" alt="adsp-BLSP"><br>ADSP BLSP1 = 0x0003FF00   [ Format : 0x00 (Adsp BLSP1 QUP) ( Adsp BLSP1 UART) ]<br>ADSP BLSP2 = 0x00FC00CC  [ Format : 0x00 (Adsp BLSP2 QUP) ( Adsp BLSP2 UART) ]</p>
+<h3 id="通过计算的值在TZ中配置">通过计算的值在TZ中配置</h3><p>路径：trustzone_images\core\hwengines\bam\8974\bamtgtcfgdata_tz.h</p>
+<p>BLSP1:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Replace the highlighted values with ADSP BLSP1 and APPS BLSP1</span><br><span class="line"> </span><br><span class="line">bam_sec_config_<span class="built_in">type</span> bam_tgt_blsp1_secconfig =</span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line"><span class="comment">#ifdef FEATURE_DRONE_CUSTOMIZATION_1 </span></span><br><span class="line"><span class="comment">#ifdef BAM_TZ_DISABLE_SPI</span></span><br><span class="line">        &#123;<span class="number">0</span>x00C3000C   , TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,       // APPS BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x0003FF00   , TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;, // ADSP BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x00000000, TZBSP_VMID_MSS, <span class="number">0</span>x0, TZBSP_VMID_MSS_BIT&#125;,</span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">        &#123;<span class="number">0</span>x00C3000C   , TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,       // APPS BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x0003FF00   , TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;, // ADSP BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x00000000, TZBSP_VMID_MSS, <span class="number">0</span>x0, TZBSP_VMID_MSS_BIT&#125;,</span><br><span class="line">        &#123;<span class="number">0</span>x00300000, TZBSP_VMID_TZ, <span class="number">0</span>x0, TZBSP_VMID_TZ_BIT&#125;</span><br><span class="line">      </span><br><span class="line"><span class="comment">#endif /*BAM_TZ_DISABLE_SPI*/</span></span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"> ```　</span><br><span class="line"> 　</span><br><span class="line">BLSP2:</span><br><span class="line">```bash </span><br><span class="line">bam_sec_config_<span class="built_in">type</span> bam_tgt_blsp2_secconfig =</span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line"><span class="comment">#ifdef FEATURE_DRONE_CUSTOMIZATION_1 </span></span><br><span class="line">        &#123;<span class="number">0</span>x00F30F33   , TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,       // APPS BLSP2</span><br><span class="line">        &#123;<span class="number">0</span>x00FC00CC  , TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;   // ADSP BLSP2</span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">        &#123;<span class="number">0</span>x003C0FFF, TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,</span><br><span class="line">        &#123;<span class="number">0</span>x00C3F000, TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="怎么工作">怎么工作</h2><p>在启动期间，aDSP将加载BLSP配置文件初始化串口设备。为了是能运行时配置，可在/usr/share/data/adsp/blsp.config中定义串口设备和BAM端口的映射，bam<em>对应于BLSP</em>。如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tty-<span class="number">1</span> bam-<span class="number">9</span></span><br><span class="line">tty-<span class="number">2</span> bam-<span class="number">6</span></span><br><span class="line">tty-<span class="number">3</span> bam-<span class="number">8</span></span><br><span class="line">tty-<span class="number">4</span> bam-<span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p>如果串口设备只用TX和RX，需要在最后一行加入 “[2-wire]”作为标示，否则默认为四线：TX，RX，CTS和RTS。</p>
+<blockquote>
+<ol>
+<li>串口根据需要配置，不一定所有都配置；2. 如果运行时指定路径文件不存在或者加载失败，如上所示的默认配置将被使用；3. /usr/share/data/adsp/blsp.config最好设置为只读模式。</li>
+</ol>
+</blockquote>
+<h2 id="Reference">Reference</h2><p>80-NA157-24  Low-Speed Peripherals Overview.pdf<br>80-NB849-1 Rev. J  APQ8074A PQ8074AB Device Specification.pdf<br>80-H9580-1-J_QUALCOMM SNAPDRAGON FLIGHT DEVELOPER GUIDE.pdf<br>80-NU767-1 G Linux BAM Low-Speed Peripherals Configuration and Debug Guide  .pdf</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="概述">概述</h2><p>BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Periph]]>
+    </summary>
+    
+      <category term="Uav" scheme="http://huaqianlee.me/categories/Uav/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[无人机开发主板调试]]></title>
@@ -1644,123 +1717,6 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
       <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     
       <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
-    
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Git常用及进阶命令总结]]></title>
-    <link href="http://huaqianlee.me/2015/06/11/Git/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
-    <id>http://huaqianlee.me/2015/06/11/Git/git常用及进阶命令总结/</id>
-    <published>2015-06-11T14:10:41.000Z</published>
-    <updated>2015-11-20T14:28:07.897Z</updated>
-    <content type="html"><![CDATA[<p>　　Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　<br>　<br>　　言归正传，Git十分好用，应用也十分广泛,现在最好的代码托管网站Github就是基于git创建的，而且现在大多数公司及个人都在使用它进行代码管理，要熟练使用还是需要花一些苦功夫的，我现在也还只是会基本的应用，更深层次的使用还不熟悉。为了方便自己以后使用，将自己常用的一些命令加以总结，并Google了一些常用及进阶命令，一并列出，方便查询使用。</p>
-<p><strong>最重要的命令: git <command> —help</strong></p>
-<a id="more"></a>
-<h2 id="Git配置">Git配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"huaqianlee"</span>   </span><br><span class="line">git config --global user.email <span class="string">"huaqianlee@gmail.com"</span> </span><br><span class="line">  </span><br><span class="line">git config --global color.ui <span class="literal">true</span></span><br><span class="line">git config --global alias.co checkout <span class="comment"># 配置别名，co 配为checkout 别名， 不过我没用</span></span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global core.editor <span class="string">"mate -w"</span>    <span class="comment"># 设置Editor使用textmate</span></span><br><span class="line">git config <span class="operator">-l</span>  <span class="comment"># 列举所有配置</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>用户的git配置文件~/.gitconfig</p>
-</blockquote>
-<h2 id="Git常用及进阶命令">Git常用及进阶命令</h2><h3 id="常用命令">常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">help</span>  <span class="comment">#查看帮助，命令忘记了就靠它</span></span><br><span class="line">git init    <span class="comment">#初始化话目录为git仓库</span></span><br><span class="line">git clean -fd  <span class="comment"># 删除无用目录及文件</span></span><br><span class="line">git clean <span class="operator">-f</span>X  <span class="comment"># 删除无用文件</span></span><br><span class="line">git clean <span class="comment"># 删除所有untracked文件</span></span><br></pre></td></tr></table></figure>
-<h3 id="添加">添加</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add file   <span class="comment">#添加文件到暂存区</span></span><br><span class="line">git add .        <span class="comment">#将所有修改或者新加文件添加到暂存区</span></span><br><span class="line">git add -A     <span class="comment"># 添加所有文件(除删除的文件,自动 git rm)</span></span><br></pre></td></tr></table></figure>
-<h3 id="删除">删除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm file         <span class="comment">#删除文件</span></span><br><span class="line">git rm &lt;file&gt; --cached  <span class="comment"># 从版本库中删除文件，但不删除文件</span></span><br></pre></td></tr></table></figure>
-<h3 id="撤销回退">撤销回退</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- xx  <span class="comment">#撤销xx文件修改</span></span><br><span class="line">git checkout .     <span class="comment">#撤销工作区修改</span></span><br><span class="line">git checkout <span class="variable">$&#123;commit&#125;</span> /path/to/file <span class="comment">#撤销指定文件到指定版本</span></span><br><span class="line">git revert &lt;<span class="variable">$id</span>&gt;    <span class="comment"># 恢复某次提交的状态，恢复动作本身也创建了一次提交对象</span></span><br><span class="line">git revert HEAD     <span class="comment"># 恢复最后一次提交的状态</span></span><br><span class="line">git reset &lt;file&gt;    <span class="comment"># 从暂存区恢复某一文件</span></span><br><span class="line">git reset -- .      <span class="comment"># 从暂存区恢复所有文件</span></span><br><span class="line">git reset  –hard HEAD^/HEAD~  <span class="comment">#回退到上一版本</span></span><br><span class="line">git reset  –hard &lt;commit_id&gt;    <span class="comment">#回退到指定版本</span></span><br><span class="line">git reset HEAD file  <span class="comment">#取消add文件</span></span><br></pre></td></tr></table></figure>
-<h3 id="提交">提交</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git commit  &lt;file&gt; <span class="comment">#提交单个文件</span></span><br><span class="line">git commit –m “description”   <span class="comment">#提交暂存区到服务器</span></span><br><span class="line">git commit <span class="operator">-a</span>           <span class="comment"># 等同执行git add、 git rm及git commit</span></span><br><span class="line">git commit -am <span class="string">"some comments"</span></span><br><span class="line">git commit --amend      <span class="comment"># 修改最后一次提交记录</span></span><br></pre></td></tr></table></figure>
-<h3 id="查看状态记录">查看状态记录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git status        <span class="comment">#查看仓库状态</span></span><br><span class="line">git show (<span class="variable">$id</span>)  <span class="comment"># 显示某次提交的内容</span></span><br><span class="line">git <span class="built_in">log</span>   (file)       <span class="comment">#查看（文件）提交记录</span></span><br><span class="line">git <span class="built_in">log</span> -p &lt;file&gt;   <span class="comment"># 查看每次详细修改内容的diff</span></span><br><span class="line">git <span class="built_in">log</span> -p -<span class="number">2</span>       <span class="comment"># 查看最近两次详细修改内容的diff</span></span><br><span class="line">git <span class="built_in">log</span> --stat      <span class="comment"># 查看提交统计信息</span></span><br><span class="line">git reflog       <span class="comment">#查看历史版本号</span></span><br><span class="line">git <span class="built_in">log</span> -g <span class="comment">#同上，用'log'格式输出</span></span><br><span class="line">git <span class="built_in">log</span> -- grep <span class="string">"name"</span> <span class="comment"># 搜索包含name的log </span></span><br><span class="line">git <span class="built_in">log</span> record-ID  <span class="operator">-l</span> -p <span class="comment">#查看指定ID记录，-l:显示一行，-p:显示详细修改</span></span><br></pre></td></tr></table></figure>
-<h3 id="查看差异">查看差异</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git diff &lt;file&gt;     <span class="comment"># 比较当前文件和暂存区文件差异</span></span><br><span class="line">git diff   <span class="comment">#比较所有文件</span></span><br><span class="line">git diff master..Andylee-Github/master <span class="comment">#比较本地和远端仓库</span></span><br><span class="line">git diff &lt;<span class="variable">$id1</span>&gt; &lt;<span class="variable">$id2</span>&gt;   <span class="comment"># 比较两次提交之间的差异</span></span><br><span class="line">git diff &lt;branch1&gt;..&lt;branch2&gt; <span class="comment">#比较分支</span></span><br><span class="line">git diff --staged   <span class="comment"># 比较暂存区和版本库差异</span></span><br><span class="line">git diff --cached   <span class="comment"># 比较暂存区和版本库差异</span></span><br><span class="line">git diff --stat     <span class="comment"># 仅仅比较统计信息</span></span><br></pre></td></tr></table></figure>
-<h3 id="本地分支管理">本地分支管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">git branch  <span class="comment">#查看本地分支</span></span><br><span class="line">git branch  -r    <span class="comment"># 查看远程分支</span></span><br><span class="line">git branch  <span class="operator">-a</span>     <span class="comment">#查看包括远程文件在内的所有分支 </span></span><br><span class="line">git branch   &lt;new_branch&gt; <span class="comment"># 创建新分支</span></span><br><span class="line">git branch   -v           <span class="comment"># 查看各个分支最后提交信息</span></span><br><span class="line">git branch   --merged     <span class="comment"># 查看已经被合并到当前分支的分支</span></span><br><span class="line">git branch   --no-merged  <span class="comment"># 查看尚未被合并到当前分支的分支</span></span><br><span class="line"></span><br><span class="line">git checkout &lt;branch&gt;  <span class="comment">#切换分支</span></span><br><span class="line">git checkout –b &lt;new_branch&gt;<span class="comment">#创建新分支，并切换到新分支</span></span><br><span class="line">git merge dev    <span class="comment">#在当前的分支上合并dev分支</span></span><br><span class="line">git checkout -b &lt;new_branch&gt; &lt;branch&gt;  <span class="comment"># 基于branch创建新的new_branch</span></span><br><span class="line">git checkout  <span class="variable">$id</span>          <span class="comment"># 把某次历史提交记录checkout出来，但无分支信息，切换到其他分支会自动删除</span></span><br><span class="line">git checkout  <span class="variable">$id</span> -b &lt;new_branch&gt;  <span class="comment"># 把某次历史提交记录checkout出来，创建成一个分支</span></span><br><span class="line"></span><br><span class="line">git branch<span class="operator">-d</span> &lt;branch&gt;  <span class="comment"># 删除分支</span></span><br><span class="line">git branch-D &lt;branch&gt;  <span class="comment"># 强制删除分支 (未被合并的分支被删除的时需要强制)</span></span><br><span class="line"></span><br><span class="line">git merge &lt;branch&gt;               <span class="comment"># 将branch分支合并到当前分支</span></span><br><span class="line">git merge origin/master --no-ff  <span class="comment"># 不要Fast-Foward合并，这样可以生成merge提交</span></span><br><span class="line">git rebase master &lt;branch&gt;       <span class="comment"># 将master rebase到branch，等同于：</span></span><br><span class="line"><span class="comment">#git checkout   &lt;branch&gt; + git rebase master + git checkout  master + git merge &lt;branch&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="补丁应用">补丁应用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git diff &gt; ../sync.patch         <span class="comment"># 生成补丁</span></span><br><span class="line">git apply ../sync.patch          <span class="comment"># 打补丁</span></span><br><span class="line">git apply --check ../sync.patch  <span class="comment"># 测试补丁能否成功</span></span><br></pre></td></tr></table></figure>
-<h3 id="暂存管理">暂存管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git stash  <span class="comment">#暂存当前工作，恢复现场后可继续工作</span></span><br><span class="line">git stash list  <span class="comment">#查看暂存文件列表</span></span><br><span class="line">git stash apply  <span class="comment">#恢复暂存内容，暂存区不删除</span></span><br><span class="line">git stash drop  <span class="comment">#删除暂存文件</span></span><br><span class="line">git stash pop  <span class="comment">#恢复并删除文件</span></span><br></pre></td></tr></table></figure>
-<h3 id="远程分支管理">远程分支管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git pull                         <span class="comment"># 抓取远程仓库所有分支更新并合并到本地</span></span><br><span class="line">git pull --no-ff                 <span class="comment"># 抓取远程仓库所有分支更新并合并到本地，不要快进合并</span></span><br><span class="line">git fetch origin                 <span class="comment"># 抓取远程仓库更新，加下一条指令等同于git pull</span></span><br><span class="line">git merge origin/master          <span class="comment"># 将远程主分支合并到本地当前分支</span></span><br><span class="line">git checkout   --track origin/branch     <span class="comment"># 跟踪某个远程分支创建相应的本地分支</span></span><br><span class="line">git checkout   -b &lt;<span class="built_in">local</span>_branch&gt; origin/&lt;remote_branch&gt;  <span class="comment"># 基于远程分支创建本地分支，功能同上</span></span><br><span class="line"></span><br><span class="line">git push                         <span class="comment"># push所有分支</span></span><br><span class="line">git push origin branch   <span class="comment"># 将本地分支推到远程分支</span></span><br><span class="line">git push –u origin branch   <span class="comment">#推送本地分支到远程仓库，首次提交需要加-u </span></span><br><span class="line">git push origin &lt;<span class="built_in">local</span>_branch&gt;   <span class="comment"># 创建远程分支， origin是远程仓库名</span></span><br><span class="line">git push origin &lt;<span class="built_in">local</span>_branch&gt;:&lt;remote_branch&gt;  <span class="comment"># 创建远程分支</span></span><br><span class="line">git push origin :&lt;remote_branch&gt;  <span class="comment">#先删除本地分支(git br -d &lt;branch&gt;)，然后再push删除远程分支</span></span><br></pre></td></tr></table></figure>
-<h3 id="远程仓库管理">远程仓库管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git remote  <span class="comment">#查看远程库的信息</span></span><br><span class="line">git remote –v  <span class="comment">#查看远程库地址和名称</span></span><br><span class="line">git remote show origin           <span class="comment"># 查看远程服务器仓库状态</span></span><br><span class="line">git remote add origin git@github:robbin/robbin_site.git         <span class="comment"># 添加远程仓库地址</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin git@github.com:robbin/robbin_site.git <span class="comment"># 设置远程仓库地址(用于修改远程仓库地址)</span></span><br><span class="line">git remote rm &lt;repository&gt;       <span class="comment"># 删除远程仓库</span></span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/AndyLee-Github/cartboon.git   <span class="comment">#从远程仓库中克隆</span></span><br><span class="line">git <span class="built_in">clone</span> --bare robbin_site robbin_site.git  <span class="comment"># 用带版本的项目创建纯版本仓库</span></span><br><span class="line">scp -r my_project.git git@git.csdn.net:~      <span class="comment"># 将纯仓库上传到服务器上</span></span><br><span class="line"></span><br><span class="line">mkdir robbin_site.git + <span class="built_in">cd</span> robbin_site.git + git --bare init <span class="comment"># 在服务器创建纯仓库</span></span><br><span class="line">git remote add origin git@github.com:robbin/robbin_site.git    <span class="comment"># 设置远程仓库地址</span></span><br><span class="line">git push -u origin master                                      <span class="comment"># 客户端首次提交</span></span><br><span class="line">git push -u origin develop  <span class="comment"># 首次将本地develop分支提交到远程develop分支，并且track</span></span><br><span class="line">git remote <span class="built_in">set</span>-head origin master   <span class="comment"># 设置远程仓库的HEAD指向master分支</span></span><br></pre></td></tr></table></figure>
-<h3 id="命令设置跟踪远程库和本地库">命令设置跟踪远程库和本地库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream master origin/master</span><br><span class="line">git branch --set-upstream develop origin/develop</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>目前先这么多，后续再补充更高级的命令， 也可参考：<a href="http://www.imooc.com/article/1089" target="_blank" rel="external">git进阶</a>，<a href="https://github.com/xirong/my-git" target="_blank" rel="external">git资料整理</a>。</p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>　　Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　<br>　<br>　　言归正传，Git十分好用，应用也十分广泛,现在最好的代码托管网站Github就是基于git创建的，而且现在大多数公司及个人都在使用它进行代码管理，要熟练使用还是需要花一些苦功夫的，我现在也还只是会基本的应用，更深层次的使用还不熟悉。为了方便自己以后使用，将自己常用的一些命令加以总结，并Google了一些常用及进阶命令，一并列出，方便查询使用。</p>
-<p><strong>最重要的命令: git <command> —help</strong></p>]]>
-    
-    </summary>
-    
-      <category term="Tools" scheme="http://huaqianlee.me/tags/Tools/"/>
-    
-      <category term="Git" scheme="http://huaqianlee.me/categories/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Android电池监控系统(BMS)之一电池系统架构]]></title>
-    <link href="http://huaqianlee.me/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
-    <id>http://huaqianlee.me/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/</id>
-    <published>2015-06-06T14:17:36.000Z</published>
-    <updated>2015-07-25T07:59:55.412Z</updated>
-    <content type="html"><![CDATA[<p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        huaqianlee@gmail.com</em></p>
-<p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。</p>
-<h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
-<p>自上而下，Android电池监控系统分为如下几个部分：</p>
-<h3 id="电池信息查看APP">电池信息查看APP</h3><p>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：<br><a id="more"></a>　<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/201566battery-info.png" alt="电池信息"></p>
-<p>　　代码主要路径：</p>
-<ul>
-<li>packages\apps\Settings\src\com\android\settings\BatteryOemInfo.java  //APP</li>
-<li>packages\apps\Dialer\src\com\android\dialer\SpecialCharSequenceMgr.java   // 命令 配置</li>
-</ul>
-<p>　　在手机 /sys/class/power_supply/bms/、/sys/class/power_supply/battery/文件夹中保存了电池的所有相关信息节点，这些节点是由Linux内核创建，待会儿驱动部分将讲到此内容。此APP比较简单，主要就是读取这些文件节点、接收电池信息广播（后面将讲到此广播由BatteryService.java中发出Intent.ACTION_BATTERY_CHANGED），电池信息包括充电设备等信息，然后将这些内容更新到UI界面加以显示，SpecialCharSequenceMgr.Java中主要实现通过判断拨号命令掉用此APP。</p>
-<h3 id="Java框架及本地框架">Java框架及本地框架</h3><p>　　此部分的核心文件是BatteryService.java，作为电池、充电相关的服务，其监听Uevent、读取sysfs 中的状态 、广播Intent.ACTION_BATTERY_CHANGED。此部分代码路径如下：</p>
-<p><strong>frameworks\base\services\java\com\android\server</strong></p>
-<ul>
-<li>frameworks\base\services\java\com\android\server\BatteryService.java   // 电池管理，开机充电led控制</li>
-<li>frameworks\base\services\java\com\android\server\am\BatteryStatsService.java // 影响电池的所有信息及操作，如：关机，屏幕亮度、wakelock、GPS等。</li>
-</ul>
-<p><strong>frameworks\base\core\java\android\os</strong></p>
-<ul>
-<li>frameworks\base\core\java\android\os\BatteryManager.java // 电池信息广播Intent（ACTION_BATTERY_CHANGED）用到的字符串和常量</li>
-<li>frameworks\base\core\java\android\os\BatteryStats.java  // 存取电池使用情况统计，包括wakelocks, processes, packages, and services等</li>
-<li><p>frameworks\base\core\java\android\os\BatteryProperties.java  // 打包电池信息读写代码，与下BatteryProperties.cpp同步</p>
-</li>
-<li><p>frameworks\base\core\java\com\android\internal\os\BatteryStatsImpl.java // 影响电池的所有信息及操作，时间以ms为单位</p>
-</li>
-<li>frameworks\base\core\java\com\android\internal\app\IBatteryStats.aidl    // .aidl为接口定义文件， 定义电池状态信息及相关操作方法。</li>
-</ul>
-<p><strong>frameworks\base\packages\SystemUI\src\com\android\systemui</strong></p>
-<ul>
-<li>frameworks\base\packages\SystemUI\src\com\android\systemui\BatteryMeterView.java // 创建系统广播接收器，接收电池信息广播，绘制电池状态图标</li>
-<li>frameworks\base\packages\SystemUI\src\com\android\systemui\statusbar\policy\BatteryController.java // 定义一个广播接收器并在构造器里注册接收电池信息广播，收到自己广播后回调修改pluged、level</li>
-<li>frameworks\base\packages\SystemUI\src\com\android\systemui\statusbar\policy\BatteryLevel.java // 定义电量百分比显示TextView类</li>
-<li>frameworks\base\packages\SystemUI\src\com\android\systemui\power\PowerUI.java // 创建系统广播接收器，接收电池信息广播，弹出低电警告等</li>
-</ul>
-<p><strong>frameworks\native\services</strong></p>
-<ul>
-<li>frameworks\native\services\sensorservice\BatteryService.cpp // 定义BatteryService.h中创建的BatteryService类的成员函数</li>
-<li>frameworks\native\services\batteryservice\BatteryProperties.cpp // 打包电池信息读写代码,与上BatteryProperties.java同步</li>
-<li>frameworks\native\services\batteryservice\IBatteryPropertiesListener.cpp // 监听电池信息  ，和下文件一起为BatteryService.java中的update(BatteryProperties)服务</li>
-<li>frameworks\native\services\batteryservice\IBatteryPropertiesRegistrar.cpp  // 注册电池监听</li>
-</ul>
-<p><strong>system\core\healthd</strong></p>
-<ul>
-<li>system\core\healthd\BatteryMonitor.cpp // 从/sys/class/power_supply中获取电池信息，并update BatteryProperties</li>
-<li>system\core\healthd\BatteryPropertiesRegistrar.cpp // 好像系统没有用到，暂时还不知道此文件的用处</li>
-<li>system\core\healthd\healthd.cpp // 监听底层上报事件，调用BatteryMonitor.cpp中的update</li>
-</ul>
-<p>// BatteryService.java<br>processValuesLocked   connect /dis/ led   广播<br>sendIntentLocked() 电池状态改变，广播</p>
-<p>mBatteryPropertiesRegistrar = IBatteryPropertiesRegistrar.Stub.asInterface(b); 注册<br>    BatteryService.this.update(props)<br>      update()<br>        processValuesLocked(); </p>
-<p> mBatteryPropertiesRegistrar.registerListener(mBatteryPropertiesListener);<br>frameworks\native\services\batteryservice\IBatteryPropertiesRegistrar.cpp<br>frameworks\native\services\batteryservice\IBatteryPropertiesListener.cpp</p>
-<p>　<br>未完待续….</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        huaqianlee@gmail.com</em></p>
-<p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。</p>
-<h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
-<p>自上而下，Android电池监控系统分为如下几个部分：</p>
-<h3 id="电池信息查看APP">电池信息查看APP</h3><p>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：<br>]]>
-    
-    </summary>
-    
-      <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-      <category term="电源管理" scheme="http://huaqianlee.me/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
     
       <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
     
