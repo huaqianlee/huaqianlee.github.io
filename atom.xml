@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2016-05-06T16:14:34.345Z</updated>
+  <updated>2016-05-06T16:15:23.539Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -19,12 +19,13 @@
     <link href="http://huaqianlee.me/2016/05/07/Uav/mobile-and-uav-sensors/"/>
     <id>http://huaqianlee.me/2016/05/07/Uav/mobile-and-uav-sensors/</id>
     <published>2016-05-06T16:12:14.000Z</published>
-    <updated>2016-05-06T16:14:34.345Z</updated>
+    <updated>2016-05-06T16:15:23.539Z</updated>
     <content type="html"><![CDATA[<p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
 <blockquote>
 <p>资料皆是网上获取,不能完全保证准确性.</p>
 </blockquote>
 <h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>
+<a id="more"></a>
 <h2 id="加速度传感器(Accelerometer)">加速度传感器(Accelerometer)</h2><p>加速度传感器是一种能够测量加速力的电子设备。加速力就是当物体在加速过程中作用在物体上的力，就好比地球引力，也就是重力。一般在手机被提到加速度感应器时，就是指重力感应器。<br>应用场景：微信摇一摇、甩动切歌等</p>
 <h2 id="距离传感器(Proximity/p-sensor)">距离传感器(Proximity/p-sensor)</h2><p>通过发射特别短的光脉冲，并测量此光脉冲从发射到被物体反射回来的时间，通过测时间来计算与物体之间的距离。<br>应用场景：通话时手机靠近脸部，屏幕背景灯熄灭，离开时背景灯点亮并解锁屏幕。</p>
 <h2 id="光线感应器(Light)">光线感应器(Light)</h2><p>对投光器受光器间之光线做遮蔽动作所获得的信号加以运用以完成各种自动化控制。<br>应用场景：自动调整屏幕亮度功能等</p>
@@ -41,7 +42,8 @@
 <blockquote>
 <p>资料皆是网上获取,不能完全保证准确性.</p>
 </blockquote>
-<h2 id="重力传感器(gravity/g-se]]>
+<h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>]]>
+    
     </summary>
     
       <category term="Uav" scheme="http://huaqianlee.me/categories/Uav/"/>
@@ -53,13 +55,14 @@
     <link href="http://huaqianlee.me/2016/05/07/Uav/Qualcomm-uav-blsp-port/"/>
     <id>http://huaqianlee.me/2016/05/07/Uav/Qualcomm-uav-blsp-port/</id>
     <published>2016-05-06T16:11:58.000Z</published>
-    <updated>2016-05-06T16:14:27.146Z</updated>
+    <updated>2016-05-06T16:15:34.201Z</updated>
     <content type="html"><![CDATA[<h2 id="概述">概述</h2><p>BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/BLSP.png" alt="BLSP"></p>
 <blockquote>
 <ol>
 <li>BAM（Bus Access Manager）is used to move data to/from the peripheral buffers;  2.每个BLSP外设静态连接到一对BAM管道，BLSP支持BAM 和non-BAM-based 数据传输。</li>
 </ol>
 </blockquote>
+<a id="more"></a>
 <p>每一个QUP可以被配置为I2C， SPI, UART, UIM接口等，如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blsp_pin.jpg" alt="blsp_pin"></p>
 <h2 id="自定义BLSP口，配置TZ">自定义BLSP口，配置TZ</h2><p>这些端口在aDSP和应用处理器之间共享。为了让BLSP端口独立使用，我们可以在TrustZone（TZ）中定义BLSP 端口的分配，没有权限的子系统访问BLSP 端口将导致系统崩溃。 高通默认已经做好了配置。在DspAL中， 提供了一组设备文件路径映射到硬件，无人机用到的相关口已经在TZ中配置好了，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SPI:  /dev/spi-[<span class="number">1</span>~<span class="number">12</span>]  对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的SPI设备</span><br><span class="line">I2C: /dev/iic-[<span class="number">1</span>-<span class="number">12</span>]      对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的I2C设备</span><br><span class="line">UART: /dev/tty-[<span class="number">1</span>-<span class="number">4</span>]</span><br><span class="line"><span class="comment"># UAV 8074 最多支持4个串口设备，每一个串口设备对应一个BAM设备，</span></span><br></pre></td></tr></table></figure></p>
 <p>如果要自定义新的端口，需按于如下方式配置：</p>
@@ -80,7 +83,13 @@
 <h2 id="Reference">Reference</h2><p>80-NA157-24  Low-Speed Peripherals Overview.pdf<br>80-NB849-1 Rev. J  APQ8074A PQ8074AB Device Specification.pdf<br>80-H9580-1-J_QUALCOMM SNAPDRAGON FLIGHT DEVELOPER GUIDE.pdf<br>80-NU767-1 G Linux BAM Low-Speed Peripherals Configuration and Debug Guide  .pdf</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="概述">概述</h2><p>BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Periph]]>
+    <![CDATA[<h2 id="概述">概述</h2><p>BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/BLSP.png" alt="BLSP"></p>
+<blockquote>
+<ol>
+<li>BAM（Bus Access Manager）is used to move data to/from the peripheral buffers;  2.每个BLSP外设静态连接到一对BAM管道，BLSP支持BAM 和non-BAM-based 数据传输。</li>
+</ol>
+</blockquote>]]>
+    
     </summary>
     
       <category term="Uav" scheme="http://huaqianlee.me/categories/Uav/"/>

@@ -120,6 +120,7 @@ BAM（Bus Access Manager）i">
 <li>BAM（Bus Access Manager）is used to move data to/from the peripheral buffers;  2.每个BLSP外设静态连接到一对BAM管道，BLSP支持BAM 和non-BAM-based 数据传输。</li>
 </ol>
 </blockquote>
+<a id="more"></a>
 <p>每一个QUP可以被配置为I2C， SPI, UART, UIM接口等，如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blsp_pin.jpg" alt="blsp_pin"></p>
 <h2 id="自定义BLSP口，配置TZ">自定义BLSP口，配置TZ</h2><p>这些端口在aDSP和应用处理器之间共享。为了让BLSP端口独立使用，我们可以在TrustZone（TZ）中定义BLSP 端口的分配，没有权限的子系统访问BLSP 端口将导致系统崩溃。 高通默认已经做好了配置。在DspAL中， 提供了一组设备文件路径映射到硬件，无人机用到的相关口已经在TZ中配置好了，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SPI:  /dev/spi-[<span class="number">1</span>~<span class="number">12</span>]  对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的SPI设备</span><br><span class="line">I2C: /dev/iic-[<span class="number">1</span>-<span class="number">12</span>]      对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的I2C设备</span><br><span class="line">UART: /dev/tty-[<span class="number">1</span>-<span class="number">4</span>]</span><br><span class="line"><span class="comment"># UAV 8074 最多支持4个串口设备，每一个串口设备对应一个BAM设备，</span></span><br></pre></td></tr></table></figure></p>
 <p>如果要自定义新的端口，需按于如下方式配置：</p>

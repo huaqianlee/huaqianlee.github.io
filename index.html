@@ -108,20 +108,11 @@
 <p>资料皆是网上获取,不能完全保证准确性.</p>
 </blockquote>
 <h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>
-<h2 id="加速度传感器(Accelerometer)">加速度传感器(Accelerometer)</h2><p>加速度传感器是一种能够测量加速力的电子设备。加速力就是当物体在加速过程中作用在物体上的力，就好比地球引力，也就是重力。一般在手机被提到加速度感应器时，就是指重力感应器。<br>应用场景：微信摇一摇、甩动切歌等</p>
-<h2 id="距离传感器(Proximity/p-sensor)">距离传感器(Proximity/p-sensor)</h2><p>通过发射特别短的光脉冲，并测量此光脉冲从发射到被物体反射回来的时间，通过测时间来计算与物体之间的距离。<br>应用场景：通话时手机靠近脸部，屏幕背景灯熄灭，离开时背景灯点亮并解锁屏幕。</p>
-<h2 id="光线感应器(Light)">光线感应器(Light)</h2><p>对投光器受光器间之光线做遮蔽动作所获得的信号加以运用以完成各种自动化控制。<br>应用场景：自动调整屏幕亮度功能等</p>
-<h2 id="三轴陀螺仪(Gyroscope)">三轴陀螺仪(Gyroscope)</h2><p>同时测定6个方向的位置，移动轨迹，加速。单轴的只能测量一个方向的量，也就是一个系统需要三个陀螺仪，而3轴的一个就能替代三个单轴的。测量角速度，以判别物体的运动状态，也称为运动传感器。判断在哪去哪。<br>应用场景：目前主要应用在一些大型手机射击游戏中，如现代战争3、狂野飙车等。<br>如下是网上看到的一幅很形象图片：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/tuoluoyi.gif" alt="tuoluoyi"></p>
-<h2 id="地磁/磁力计/电子罗盘(Magnetic/compass)">地磁/磁力计/电子罗盘(Magnetic/compass)</h2><p>工作原理：电子罗盘，也叫数字指南针，是利用地磁场来定北极的一种方法。。<br>应用场景：各种指南针以及导航软件、地图等</p>
-<h2 id="气压计_(Barometer)">气压计 (Barometer)</h2><p>气压传感器用于检测大气压强的仪器,实际应用当中气压传感器可作高度计，提示海拔高度，尤其适合登山、户外单车、滑雪以及其他户外运动中，您可以据此在地图上分析高度、寻找正确路径等。同时也用于GPS精确导航（航位推算，上下桥检测等），手机GPS海拔测量，室内室外导航，休闲、体育和医疗健康等监测，天气预报、垂直速度指示（上升/下沉速度），风扇功率控制、温度显示等。 </p>
-<h2 id="超声波/声呐(sonar)">超声波/声呐(sonar)</h2><p>应用场景：超声波测距,避障.</p>
-<h2 id="光流（camera）">光流（camera）</h2><p>光流法是运动图像分析的重要方法,因为当物体在运动时，它在图像上对应点的亮度模式也在运动。这种图像亮度模式的表观运动（apparent motion）就是光流。光流表达了图像的变化，由于它包含了目标运动的信息，因此可被观察者用来确定目标的运动情况。从本质上说，光流就是你在这个运动着的世界里感觉到的明显的视觉运动。通过光流camera看到物体的相对运动速度是不一样的,通过不同目标的运动速度判断它们与我们的距离。</p>
-<h2 id="IMU">IMU</h2><p>同时包含陀螺仪、地磁、加速度计的传感器芯片，如mpu9x50。</p>
-<p>还有如热传感器、温度传感器、湿度传感器、紫外线传感器、压力传感器等</p>
-
         
         
         <p class="article-more-link">
+          
+            <a href="/2016/05/07/Uav/mobile-and-uav-sensors/#more">Read More</a>
           
        </p>
     </div>
@@ -193,28 +184,11 @@
 <li>BAM（Bus Access Manager）is used to move data to/from the peripheral buffers;  2.每个BLSP外设静态连接到一对BAM管道，BLSP支持BAM 和non-BAM-based 数据传输。</li>
 </ol>
 </blockquote>
-<p>每一个QUP可以被配置为I2C， SPI, UART, UIM接口等，如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blsp_pin.jpg" alt="blsp_pin"></p>
-<h2 id="自定义BLSP口，配置TZ">自定义BLSP口，配置TZ</h2><p>这些端口在aDSP和应用处理器之间共享。为了让BLSP端口独立使用，我们可以在TrustZone（TZ）中定义BLSP 端口的分配，没有权限的子系统访问BLSP 端口将导致系统崩溃。 高通默认已经做好了配置。在DspAL中， 提供了一组设备文件路径映射到硬件，无人机用到的相关口已经在TZ中配置好了，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SPI:  /dev/spi-[<span class="number">1</span>~<span class="number">12</span>]  对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的SPI设备</span><br><span class="line">I2C: /dev/iic-[<span class="number">1</span>-<span class="number">12</span>]      对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的I2C设备</span><br><span class="line">UART: /dev/tty-[<span class="number">1</span>-<span class="number">4</span>]</span><br><span class="line"><span class="comment"># UAV 8074 最多支持4个串口设备，每一个串口设备对应一个BAM设备，</span></span><br></pre></td></tr></table></figure></p>
-<p>如果要自定义新的端口，需按于如下方式配置：</p>
-<h3 id="计算APPS_BLSP值">计算APPS BLSP值</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/apps_blsp.jpg" alt="apps-BLSP"><br>根据倒数第二列（对应于BAM pipe）计算出结果如下：<br>APPS BLSP1 : 0x00C3000C   [ Format : 0x00 (Apps BLSP1 QUP) ( Apps BLSP1 UART) ]<br>APPS BLSP2 : 0x00F30F33   [ Format : 0x00 (Apps BLSP2 QUP) ( Apps BLSP2 UART) ]</p>
-<blockquote>
-<p>Apps列对应Y，则表明BLSPx配为Uart或QUP，下同。</p>
-</blockquote>
-<h3 id="计算ADSP_BLSP值">计算ADSP BLSP值</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/adsp_blsp.jpg" alt="adsp-BLSP"><br>ADSP BLSP1 = 0x0003FF00   [ Format : 0x00 (Adsp BLSP1 QUP) ( Adsp BLSP1 UART) ]<br>ADSP BLSP2 = 0x00FC00CC  [ Format : 0x00 (Adsp BLSP2 QUP) ( Adsp BLSP2 UART) ]</p>
-<h3 id="通过计算的值在TZ中配置">通过计算的值在TZ中配置</h3><p>路径：trustzone_images\core\hwengines\bam\8974\bamtgtcfgdata_tz.h</p>
-<p>BLSP1:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Replace the highlighted values with ADSP BLSP1 and APPS BLSP1</span><br><span class="line"> </span><br><span class="line">bam_sec_config_<span class="built_in">type</span> bam_tgt_blsp1_secconfig =</span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line"><span class="comment">#ifdef FEATURE_DRONE_CUSTOMIZATION_1 </span></span><br><span class="line"><span class="comment">#ifdef BAM_TZ_DISABLE_SPI</span></span><br><span class="line">        &#123;<span class="number">0</span>x00C3000C   , TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,       // APPS BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x0003FF00   , TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;, // ADSP BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x00000000, TZBSP_VMID_MSS, <span class="number">0</span>x0, TZBSP_VMID_MSS_BIT&#125;,</span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">        &#123;<span class="number">0</span>x00C3000C   , TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,       // APPS BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x0003FF00   , TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;, // ADSP BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x00000000, TZBSP_VMID_MSS, <span class="number">0</span>x0, TZBSP_VMID_MSS_BIT&#125;,</span><br><span class="line">        &#123;<span class="number">0</span>x00300000, TZBSP_VMID_TZ, <span class="number">0</span>x0, TZBSP_VMID_TZ_BIT&#125;</span><br><span class="line">      </span><br><span class="line"><span class="comment">#endif /*BAM_TZ_DISABLE_SPI*/</span></span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"> ```　</span><br><span class="line"> 　</span><br><span class="line">BLSP2:</span><br><span class="line">```bash </span><br><span class="line">bam_sec_config_<span class="built_in">type</span> bam_tgt_blsp2_secconfig =</span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line"><span class="comment">#ifdef FEATURE_DRONE_CUSTOMIZATION_1 </span></span><br><span class="line">        &#123;<span class="number">0</span>x00F30F33   , TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,       // APPS BLSP2</span><br><span class="line">        &#123;<span class="number">0</span>x00FC00CC  , TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;   // ADSP BLSP2</span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">        &#123;<span class="number">0</span>x003C0FFF, TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,</span><br><span class="line">        &#123;<span class="number">0</span>x00C3F000, TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="怎么工作">怎么工作</h2><p>在启动期间，aDSP将加载BLSP配置文件初始化串口设备。为了是能运行时配置，可在/usr/share/data/adsp/blsp.config中定义串口设备和BAM端口的映射，bam<em>对应于BLSP</em>。如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tty-<span class="number">1</span> bam-<span class="number">9</span></span><br><span class="line">tty-<span class="number">2</span> bam-<span class="number">6</span></span><br><span class="line">tty-<span class="number">3</span> bam-<span class="number">8</span></span><br><span class="line">tty-<span class="number">4</span> bam-<span class="number">2</span></span><br></pre></td></tr></table></figure></p>
-<p>如果串口设备只用TX和RX，需要在最后一行加入 “[2-wire]”作为标示，否则默认为四线：TX，RX，CTS和RTS。</p>
-<blockquote>
-<ol>
-<li>串口根据需要配置，不一定所有都配置；2. 如果运行时指定路径文件不存在或者加载失败，如上所示的默认配置将被使用；3. /usr/share/data/adsp/blsp.config最好设置为只读模式。</li>
-</ol>
-</blockquote>
-<h2 id="Reference">Reference</h2><p>80-NA157-24  Low-Speed Peripherals Overview.pdf<br>80-NB849-1 Rev. J  APQ8074A PQ8074AB Device Specification.pdf<br>80-H9580-1-J_QUALCOMM SNAPDRAGON FLIGHT DEVELOPER GUIDE.pdf<br>80-NU767-1 G Linux BAM Low-Speed Peripherals Configuration and Debug Guide  .pdf</p>
-
         
         
         <p class="article-more-link">
+          
+            <a href="/2016/05/07/Uav/Qualcomm-uav-blsp-port/#more">Read More</a>
           
        </p>
     </div>
