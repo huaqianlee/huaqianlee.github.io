@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2016-07-07T15:39:26.309Z</updated>
+  <updated>2016-07-07T15:50:44.389Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -19,11 +19,12 @@
     <link href="http://huaqianlee.me/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/"/>
     <id>http://huaqianlee.me/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/</id>
     <published>2016-07-07T15:37:41.000Z</published>
-    <updated>2016-07-07T15:39:26.309Z</updated>
+    <updated>2016-07-07T15:50:44.389Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p><strong>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。笔记图片中的字很丑，将就将就</strong></p>
 </blockquote>
 <h2 id="VFE">VFE</h2><p>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/vfe.png" alt="VFE FLOW"></p>
+<a id="more"></a>
 <h3 id="MIPI">MIPI</h3><p>现在的camera基本都采用MIPI接口， MIPI以一种采用差分方式按位传输数据的接口。只有四条引脚（DN、DP，CN、CP）。</p>
 <h3 id="数据">数据</h3><p>根据自己的理解我大致将VFE根据数据格式分为四个部分：</p>
 <ul>
@@ -61,7 +62,8 @@
     <![CDATA[<blockquote>
 <p><strong>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。笔记图片中的字很丑，将就将就</strong></p>
 </blockquote>
-<h2 id="]]>
+<h2 id="VFE">VFE</h2><p>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/vfe.png" alt="VFE FLOW"></p>]]>
+    
     </summary>
     
       <category term="Uav" scheme="http://huaqianlee.me/categories/Uav/"/>
