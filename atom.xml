@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Good good study, day day up !]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://huaqianlee.me/"/>
-  <updated>2016-05-17T16:00:12.712Z</updated>
+  <updated>2016-07-07T15:39:26.309Z</updated>
   <id>http://huaqianlee.me/</id>
   
   <author>
@@ -13,6 +13,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[camera arch and tunning - rookie note]]></title>
+    <link href="http://huaqianlee.me/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/"/>
+    <id>http://huaqianlee.me/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/</id>
+    <published>2016-07-07T15:37:41.000Z</published>
+    <updated>2016-07-07T15:39:26.309Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p><strong>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。笔记图片中的字很丑，将就将就</strong></p>
+</blockquote>
+<h2 id="VFE">VFE</h2><p>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/vfe.png" alt="VFE FLOW"></p>
+<h3 id="MIPI">MIPI</h3><p>现在的camera基本都采用MIPI接口， MIPI以一种采用差分方式按位传输数据的接口。只有四条引脚（DN、DP，CN、CP）。</p>
+<h3 id="数据">数据</h3><p>根据自己的理解我大致将VFE根据数据格式分为四个部分：</p>
+<ul>
+<li>Raw RGB（也称为Bayer RGB）</li>
+<li>Sensor RGB</li>
+<li>Image RGB</li>
+<li>YUV</li>
+</ul>
+<h4 id="Raw_RGB">Raw RGB</h4><p>Raw RGB为原始数据，分为Qcom raw 和 mipi raw， 现在基本都使用mipi  raw，mipi raw数据1pixel为10bits的数据(1 chanel)，即将所有数据按位重新排列，图像的行列应该为4的倍数。如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/raw%20bits.png" alt="raw bits"></p>
+<h5 id="所有pixel图像数据构成按照如下规律排列（表格中为某种颜色的亮度值）：">所有pixel图像数据构成按照如下规律排列（表格中为某种颜色的亮度值）：</h5><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/rgb_all.jpg" alt="rgb_all"><br>GB： 指靠近B的G. 其余同理</p>
+<h5 id="Raw_RGB数据构成规则按照下表方式排列，对角线可以两两兑换-">Raw RGB数据构成规则按照下表方式排列，对角线可以两两兑换.</h5><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/rgb.png" alt="rgb"></p>
+<h4 id="Raw_RGB_有四种排列方式，如下：">Raw RGB 有四种排列方式，如下：</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/rgb_4.jpg" alt="rgb_4"></p>
+<h4 id="Sensor_RGB">Sensor RGB</h4><p>Sensor RGB为camera Sensor处理过的数据，即上流程图demosaic之后的数据，1 pixel 为 3 Chanel，现在基本都为888格式的 RGB 24bits数据。<br>Sensor RGB图像数据构成按如下排列：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/sensor_rgb.jpg" alt="sensor_rgb"></p>
+<h4 id="Image_RGB">Image RGB</h4><p>Image RGB是Sensor RGB通过color correction转变过来的，会按照三种不同光源强度乘以不同的矩阵得到不同的Image RGB，这三种光源强度为：<br>D65 - daylight color temp 为 6500k<br>TL  -   3800~4000k<br>A    -   2800k</p>
+<blockquote>
+<p>后两种记不清楚了， 简单搜索了一下，没有在网上找到准确的资源，先这样写着</p>
+</blockquote>
+<h4 id="YUV">YUV</h4><p>YUV，分为三个分量，“Y”表示明亮度（Luminance或Luma），也就是灰度值；而“U”和“V” 表示的则是色度（Chrominance或Chroma）。是与RGB类似的颜色编码方法，主要用于计算机端。由Image RGB通过gamma处理而来，如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/gamma_note.jpg" alt="gamma_note"></p>
+<h3 id="LSC">LSC</h3><p>LSC即为Lens  shading correction， 其主要就是修正边角较暗的地方，如下笔记：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/lsc_note.jpg" alt="lsc_note"></p>
+<h3 id="BLC">BLC</h3><p>BLC即为black level correction，主要处理暗电流，笔记如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/exposure_dc.jpg" alt="exposure_dc"></p>
+<h3 id="domain">domain</h3><p>domain分为spatial domain和frequency domain， 笔记如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/domain_note.jpg" alt="domain_note"></p>
+<h3 id="CPP">CPP</h3><p>VFE模块完成后则会进入CPP模块，cpp模块主要有如下两部分：</p>
+<ul>
+<li>WNR - wavelet noise reduction</li>
+<li>ASF -  Auto special Filter （-&gt; sharpness）<br>exposure index 和 gain index 是cpp模块的trigger condition</li>
+</ul>
+<p>附  图片一般会经过4层曝光处理，chromatix工具<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/exposure_note.jpg" alt="exposure_note"></p>
+<p>附 Chromatix Tool<br>driver_info.txt (等同于dts中的信息)， 通过chromatix产生tuning file（cpp项的 exposure index和gain index很可能源于此文件）</p>
+<h3 id="Driver">Driver</h3><p>驱动中图像处理，笔记如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/frame.png" alt="frame"></p>
+<p>现在的cmos基本都是使用rolling shutter， 方式如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/cmos_rolling_shutter.jpg" alt="cmos_rolling_shutter"></p>
+<h4 id="附_糊涂笔记">附 糊涂笔记</h4><p>VT clock —-&gt; banding  （50HZ/60HZ/AUTO/OFF —-&gt;app上的配置）<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/stripe.jpg" alt="stripe"></p>
+<h4 id="driver_info-txt">driver_info.txt</h4><p>Chromatix Tool会用到的一个Sensor info文件，内容与<root_dir>\mm-camera\mm-camera2\media-controller\modules\sensors\sensor_libs\imx214\imx214_lib.c 相关，<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. max frame rate  ---&#62; depends on sensor register and project&#10;2. min line count ---&#62; value = 1, depends on sensor property # 1 line * 1 pixel  clock * cloumnum = min exposure time&#10;3. max line count in max fps. # max line count = FL - offset&#10;4. max line count  ---&#62; FL * (maxfps/minfps) - offset&#10;5.raw image width&#10;6. raw image height &#10;7. bayer pattern&#10;8.bits per pixel&#10;9. packed or not ---&#62; 1: mipi; 0: others,depend on sensor&#10;10~13. crop ---&#62; crop&#25481;&#26080;&#25928;&#36793;&#65292;top&#12289;right&#12289;bottom&#12289;left.&#10;14~16 blacklevel ---&#62; &#21378;&#21830;&#21333;&#20301; 12bits  / 16(2&#30340;4&#27425;&#26041;) -&#62;8bit</span><br></pre></td></tr></table></figure></root_dir></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p><strong>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。笔记图片中的字很丑，将就将就</strong></p>
+</blockquote>
+<h2 id="]]>
+    </summary>
+    
+      <category term="Uav" scheme="http://huaqianlee.me/categories/Uav/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[手机无人机常用sensor介绍]]></title>
@@ -1284,121 +1338,6 @@ git commit
   </entry>
   
   <entry>
-    <title><![CDATA[Android编译过程详解之三]]></title>
-    <link href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/"/>
-    <id>http://huaqianlee.me/2015/07/12/Android/Android编译过程详解之三/</id>
-    <published>2015-07-12T08:43:04.000Z</published>
-    <updated>2015-10-27T06:39:45.041Z</updated>
-    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
-<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
-<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
-<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
-<thead>
-<tr>
-<th>常量</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PRODUCT_NAME</td>
-<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
-</tr>
-<tr>
-<td>PRODUCT_MODEL</td>
-<td>产品的型号，这也是最终用户将看到的</td>
-</tr>
-<tr>
-<td>PRODUCT_LOCALES</td>
-<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGES</td>
-<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
-</tr>
-<tr>
-<td>PRODUCT_DEVICE</td>
-<td>该产品的工业设计的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_MANUFACTURER</td>
-<td>制造商的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_BRAND</td>
-<td>该产品专门定义的商标（如果有的话）</td>
-</tr>
-<tr>
-<td>PRODUCT_PROPERTY_OVERRIDES</td>
-<td>对于商品属性的定义</td>
-</tr>
-<tr>
-<td>PRODUCT_COPY_FILES</td>
-<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
-</tr>
-<tr>
-<td>PRODUCT_OTA_PUBLIC_KEYS</td>
-<td>对于该产品的 OTA 公开 key 的列表</td>
-</tr>
-<tr>
-<td>PRODUCT_POLICY</td>
-<td>产品使用的策略</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGE_OVERLAYS</td>
-<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
-</tr>
-<tr>
-<td>PRODUCT_CONTRIBUTORS_FILE</td>
-<td>HTML 文件，其中包含项目的贡献者</td>
-</tr>
-<tr>
-<td>PRODUCT_TAGS</td>
-<td>该产品的标签，以空格分格</td>
-</tr>
-</tbody>
-</table>
-<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
-<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
-<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
-　　　</p>
-<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>]]>
-    
-    </summary>
-    
-      <category term="Qualcomm" scheme="http://huaqianlee.me/tags/Qualcomm/"/>
-    
-      <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-      <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
-    
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[Android编译过程详解之二]]></title>
     <link href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/"/>
     <id>http://huaqianlee.me/2015/07/12/Android/Android编译过程详解之二/</id>
@@ -1607,6 +1546,121 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
   </entry>
   
   <entry>
+    <title><![CDATA[Android编译过程详解之三]]></title>
+    <link href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/"/>
+    <id>http://huaqianlee.me/2015/07/12/Android/Android编译过程详解之三/</id>
+    <published>2015-07-12T08:43:04.000Z</published>
+    <updated>2015-10-27T06:39:45.041Z</updated>
+    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
+<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
+<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
+<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
+<thead>
+<tr>
+<th>常量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRODUCT_NAME</td>
+<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
+</tr>
+<tr>
+<td>PRODUCT_MODEL</td>
+<td>产品的型号，这也是最终用户将看到的</td>
+</tr>
+<tr>
+<td>PRODUCT_LOCALES</td>
+<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGES</td>
+<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
+</tr>
+<tr>
+<td>PRODUCT_DEVICE</td>
+<td>该产品的工业设计的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_MANUFACTURER</td>
+<td>制造商的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_BRAND</td>
+<td>该产品专门定义的商标（如果有的话）</td>
+</tr>
+<tr>
+<td>PRODUCT_PROPERTY_OVERRIDES</td>
+<td>对于商品属性的定义</td>
+</tr>
+<tr>
+<td>PRODUCT_COPY_FILES</td>
+<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
+</tr>
+<tr>
+<td>PRODUCT_OTA_PUBLIC_KEYS</td>
+<td>对于该产品的 OTA 公开 key 的列表</td>
+</tr>
+<tr>
+<td>PRODUCT_POLICY</td>
+<td>产品使用的策略</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGE_OVERLAYS</td>
+<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
+</tr>
+<tr>
+<td>PRODUCT_CONTRIBUTORS_FILE</td>
+<td>HTML 文件，其中包含项目的贡献者</td>
+</tr>
+<tr>
+<td>PRODUCT_TAGS</td>
+<td>该产品的标签，以空格分格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
+<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
+<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
+　　　</p>
+<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>]]>
+    
+    </summary>
+    
+      <category term="Qualcomm" scheme="http://huaqianlee.me/tags/Qualcomm/"/>
+    
+      <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    
+      <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
+    
+      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[About ActivityNotFoundException Unable to find explicit activity class && Android.mk解析]]></title>
     <link href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/"/>
     <id>http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk解析/</id>
@@ -1676,56 +1730,6 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
     </summary>
     
       <category term="Bug" scheme="http://huaqianlee.me/tags/Bug/"/>
-    
-      <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
-    
-      <category term="Android" scheme="http://huaqianlee.me/categories/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Android编译过程详解之一]]></title>
-    <link href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/"/>
-    <id>http://huaqianlee.me/2015/07/11/Android/Android编译过程详解之一/</id>
-    <published>2015-07-11T11:43:04.000Z</published>
-    <updated>2015-10-27T06:39:58.481Z</updated>
-    <content type="html"><![CDATA[<p><strong>　　Platform Information :<br>　　　System:    Ａndroid4.4.4<br>　　　Platform:  Qualcomm msm8916<br>　　　Author:     Andy Lee<br>　　　Email:        huaqianlee@gmail.com</strong></p>
-<p><strong>欢迎指出错误，共同学习，共同进步</strong></p>
-<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a><br>　<br>　　Google给出的编译环境和构建方法见：<a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a>，过程见：<a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a>，不过这是解释怎么编译一个通用的系统，没有详细描述细节，而且需要翻墙。接下来我就准备跟着高通平台的编译过程来详细了解一下。</p>
-<p>我平时的编译步骤如下：<br>　1. source setup.sh project-name debug/release　加载命令配置环境　<br>　2. ./go.sh  [target] or make  [target]　编译<br><a id="more"></a>　<br>接下来就按照步骤来详细分析一下流程：</p>
-<h2 id="source_setup-sh_project-name_debug">source setup.sh project-name debug</h2><p>　　setup.sh是自定义的一个脚本文件，用来配置环境变量，其主要内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/*配置用到的jdk、jre*/</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/workspace/bin/jdk1.<span class="number">6.0</span>_37</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre </span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib </span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$&#123;JRE_HOME&#125;</span>/bin:<span class="variable">$PATH</span> </span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> build/envsetup.sh // 官网的第一步，加载命令，待会儿再详细解释</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="operator">-d</span> /workspace/bin/eric-PAY4/links-<span class="number">8916</span> ];<span class="keyword">then</span></span><br><span class="line">    cp <span class="operator">-a</span> /workspace/bin/eric-PAY4/links-<span class="number">8916</span> links</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> <span class="operator">-lt</span> <span class="number">2</span> ];<span class="keyword">then</span> <span class="comment"># 如命令行参数输入错误，打印提示信息</span></span><br><span class="line">    <span class="built_in">echo</span> You can input like <span class="string">"source setup.sh s5_common [debug|release]"</span></span><br><span class="line">    <span class="built_in">return</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> product=<span class="variable">$1</span> var=<span class="variable">$2</span> //打印输入选择 project-name  debug/release</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$2</span> = <span class="string">"debug"</span> ];<span class="keyword">then</span>　// 根据参数选择编译项</span><br><span class="line">    choosecombo <span class="number">2</span> msm8916_32 <span class="number">3</span> <span class="variable">$1</span> </span><br><span class="line">    <span class="built_in">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$2</span> = <span class="string">"release"</span> ];<span class="keyword">then</span></span><br><span class="line">    choosecombo <span class="number">1</span> msm8916_32 <span class="number">1</span> <span class="variable">$1</span></span><br><span class="line">    <span class="built_in">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Your input is wrong please check again"</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="source_build/envsetup-sh">source build/envsetup.sh</h3><p>　　此命令是将envsetup.sh中的命令加载到环境变量，build位于Android源码路径根目录（本文提到所有路径都是以 Android 源码树作为背景的，“/”或顶层路径指的是源码树的根目录，与文件系统无关），主要命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- lunch:   指定编译项，即编译目标和编译类型（lunch &lt;product_name&gt;-&lt;build_variant&gt;）</span><br><span class="line">- tapas:   同choosecombo，设置编译参数（tapas [&lt;App1&gt; &lt;App2&gt; ...] [arm|x86|mips|armv5] [eng|userdebug|user]）</span><br><span class="line">- croot:   切换到根目录（Changes directory to the top of the tree.）</span><br><span class="line">- m:       从源码树根目录开始make（Makes from the top of the tree.）</span><br><span class="line">- mm:      编译当前目录下所有模块，但不包括依赖文件（Builds all of the modules <span class="keyword">in</span> the current directory, but not their dependencies.）</span><br><span class="line">- mmm:    编译指定目录下的所有模块，但不包括依赖文件（Builds all of the modules <span class="keyword">in</span> the supplied directories, but not their dependencies.）</span><br><span class="line">- mma:     编译当前目录下所有模块，包括依赖文件（Builds all of the modules <span class="keyword">in</span> the current directory, and their dependencies.）</span><br><span class="line">- mmma:    编译指定目录下的所有模块，包括依赖文件（Builds all of the modules <span class="keyword">in</span> the supplied directories, and their dependencies.）</span><br><span class="line">- cgrep:   在所有c/c++文件中查找（Greps on all <span class="built_in">local</span> C/C++ files.）</span><br><span class="line">- jgrep:   在所有java文件中查找（Greps on all <span class="built_in">local</span> Java files.）</span><br><span class="line">- resgrep: 在所有res/*.xml中查找（Greps on all <span class="built_in">local</span> res/*.xml files.）</span><br><span class="line">- godir:   跳转到包含某个文件的路径（Go to the directory containing a file.）</span><br><span class="line">- printconfig：显示当前Build的配置信息</span><br></pre></td></tr></table></figure></p>
-<p>　　完整命令和关键源码如下：(英文为源码注释，中文部分是原本没有，自己根据理解添加的注释)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> get_abs_build_var()   <span class="comment"># Get the value of a build variable as an absolute path.</span></span><br><span class="line"><span class="keyword">function</span> get_build_var()   <span class="comment"># Get the exact value of a build variable.</span></span><br><span class="line"><span class="keyword">function</span> check_product()  <span class="comment"># check to see if the supplied product is one we can build</span></span><br><span class="line"><span class="keyword">function</span> check_variant()  <span class="comment"># check to see if the supplied variant is valid (variant：user userdebug eng)</span></span><br><span class="line"><span class="keyword">function</span> setpaths()   <span class="comment"># sets ANDROID_BUILD_PATHS</span></span><br><span class="line"><span class="keyword">function</span> printconfig()   <span class="comment"># 打印配置</span></span><br><span class="line"><span class="keyword">function</span> <span class="built_in">set</span>_stuff_<span class="keyword">for</span>_environment()   <span class="comment"># 设置环境变量</span></span><br><span class="line"><span class="keyword">function</span> <span class="built_in">set</span>_sequence_number()     <span class="comment"># 设置序列号</span></span><br><span class="line"><span class="keyword">function</span> settitle()   <span class="comment"># 设置标题</span></span><br><span class="line"><span class="keyword">function</span> addcompletions()    <span class="comment"># 添加sdk/bash_completion中bash</span></span><br><span class="line"><span class="keyword">function</span> choosetype()    <span class="comment"># 选择type （debug/release）</span></span><br><span class="line"><span class="keyword">function</span> chooseoemprj()    <span class="comment"># 自定义，设置TARGET_PRODUCT，即project-name</span></span><br><span class="line"><span class="keyword">function</span> chooseproduct()    <span class="comment">#  官方自带的设置TARGET_PRODUCT</span></span><br><span class="line"><span class="keyword">function</span> choosevariant()    <span class="comment"># 设置variant (user userdebug eng)</span></span><br><span class="line"><span class="keyword">function</span> choosecombo()    <span class="comment"># 设置并打印编译参数（choosetype、chooseproduct、choosevariant、chooseoemprj、set_stuff_for_environment）</span></span><br><span class="line"><span class="keyword">function</span> add_lunch_combo()    <span class="comment"># 添加lunch项，多次调用，用来添加Android编译选项</span></span><br><span class="line"><span class="keyword">function</span> <span class="built_in">print</span>_lunch_menu()    <span class="comment"># 打印lunch列表</span></span><br><span class="line"><span class="keyword">function</span> lunch()    <span class="comment"># 配置lunch</span></span><br><span class="line"><span class="keyword">function</span> _lunch()      <span class="comment"># Tab completion for lunch.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Configures the build to build unbundled apps.</span></span><br><span class="line"><span class="comment"># Run tapas with one ore more app names (from LOCAL_PACKAGE_NAME)</span></span><br><span class="line"><span class="keyword">function</span> tapas()     <span class="comment"># 同choosecombo</span></span><br><span class="line"><span class="keyword">function</span> gettop    <span class="comment"># 获取顶层路径</span></span><br><span class="line"><span class="keyword">function</span> m()    <span class="comment"># 从顶层树开始编译</span></span><br><span class="line"><span class="keyword">function</span> findmakefile()    <span class="comment"># 找到Makefile （Android.mk）</span></span><br><span class="line"><span class="keyword">function</span> mm()    <span class="comment"># 从当前路径开始编译，不加依赖</span></span><br><span class="line"><span class="keyword">function</span> mmm()     <span class="comment"># 从指定路径开始编译，不加依赖</span></span><br><span class="line"><span class="keyword">function</span> mma()    <span class="comment"># 从当前路径看是编译，包括依赖</span></span><br><span class="line"><span class="keyword">function</span> mmma()     <span class="comment"># 从指定路径开始编译，包括依赖</span></span><br><span class="line"><span class="keyword">function</span> croot()      <span class="comment"># 切换到顶层路径</span></span><br><span class="line"><span class="keyword">function</span> cproj()     <span class="comment"># 没看懂，切换到某一路径</span></span><br><span class="line"><span class="keyword">function</span> qpid()    <span class="comment"># 输出进程号和名字 （simplified version of ps; output in the form &lt;pid&gt; &lt;procname&gt;）</span></span><br><span class="line"><span class="keyword">function</span> pid()     <span class="comment"># 输出进程号和名字 </span></span><br><span class="line"><span class="keyword">function</span> systemstack()    <span class="comment"># systemstack - dump the current stack trace of all threads in the system process to the usual ANR traces file</span></span><br><span class="line"><span class="keyword">function</span> stacks()</span><br><span class="line"><span class="keyword">function</span> gdbwrapper()</span><br><span class="line"><span class="keyword">function</span> gdbclient()</span><br><span class="line"><span class="keyword">function</span> sgrep()     <span class="comment"># 查找c/h/cpp/S/java/xml/sh/mk文件</span></span><br><span class="line"><span class="keyword">function</span> gettargetarch    <span class="comment"># 获取TARGET_ARCH</span></span><br><span class="line"><span class="keyword">function</span> jgrep()    <span class="comment"># 查找java文件</span></span><br><span class="line"><span class="keyword">function</span> cgrep()    <span class="comment"># 查找c/c++文件</span></span><br><span class="line"><span class="keyword">function</span> resgrep()    <span class="comment"># 查找xml文件</span></span><br><span class="line"><span class="keyword">function</span> mangrep()     <span class="comment"># 查找out目录中AndroidManifest.xml文件</span></span><br><span class="line"><span class="keyword">function</span> sepgrep()    <span class="comment"># 查找out目录中sepolicy</span></span><br><span class="line"><span class="keyword">function</span> treegrep()                                </span><br><span class="line"><span class="keyword">function</span> mgrep()</span><br><span class="line"><span class="keyword">function</span> getprebuilt    <span class="comment"># 获取ANDROID_PREBUILTS（编译工具）</span></span><br><span class="line"><span class="keyword">function</span> tracedmdump()</span><br><span class="line"><span class="keyword">function</span> runhat()     <span class="comment"># communicate with a running device or emulator, set up necessary state, and run the hat command.</span></span><br><span class="line"><span class="keyword">function</span> getbugreports()</span><br><span class="line"><span class="keyword">function</span> getsdcardpath()</span><br><span class="line"><span class="keyword">function</span> getscreenshotpath()</span><br><span class="line"><span class="keyword">function</span> getlastscreenshot()</span><br><span class="line"><span class="keyword">function</span> startviewserver()</span><br><span class="line"><span class="keyword">function</span> stopviewserver()</span><br><span class="line"><span class="keyword">function</span> isviewserverstarted()</span><br><span class="line"><span class="keyword">function</span> key_home()</span><br><span class="line"><span class="keyword">function</span> key_back()</span><br><span class="line"><span class="keyword">function</span> key_menu()</span><br><span class="line"><span class="keyword">function</span> smoketest()</span><br><span class="line"><span class="keyword">function</span> runtest()    <span class="comment"># simple shortcut to the runtest command</span></span><br><span class="line"><span class="keyword">function</span> godir ()    <span class="comment"># 跳到指定目录</span></span><br><span class="line"><span class="keyword">function</span> <span class="built_in">set</span>_java_home()    <span class="comment"># Force JAVA_HOME to point to java 1.6 if it isn't already set</span></span><br><span class="line"><span class="keyword">function</span> pez     <span class="comment"># Print colored exit condition</span></span><br><span class="line"></span><br><span class="line">关键源码：</span><br><span class="line"><span class="comment"># Clear this variable.  It will be built up again when the vendorsetup.sh files are included at the end of this file.</span></span><br><span class="line"><span class="built_in">unset</span> LUNCH_MENU_CHOICES</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">add_lunch_combo</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">local</span> new_combo=<span class="variable">$1</span>   <span class="comment"># 获取add_lunch_combo被调用时的参数</span></span><br><span class="line">    <span class="built_in">local</span> c</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> <span class="variable">$&#123;LUNCH_MENU_CHOICES[@]&#125;</span> ; <span class="keyword">do</span>   <span class="comment">#遍历LUNCH_MENU_CHOICES，第一次调用时为空</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="string">"<span class="variable">$new_combo</span>"</span> = <span class="string">"<span class="variable">$c</span>"</span> ] ; <span class="keyword">then</span>    <span class="comment"># 如果参数存在，则返回</span></span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span> <span class="comment"># 如果参数不存在，则添加</span></span><br><span class="line">    LUNCH_MENU_CHOICES=(<span class="variable">$&#123;LUNCH_MENU_CHOICES[@]&#125;</span> <span class="variable">$new_combo</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># add the default one here  # 系统自动添加的默认编译项</span></span><br><span class="line">add_lunch_combo aosp_arm-eng  <span class="comment"># 调用add_lunch_combo()，传入参数</span></span><br><span class="line">add_lunch_combo aosp_x86-eng</span><br><span class="line">add_lunch_combo aosp_mips-eng</span><br><span class="line">add_lunch_combo vbox_x86-eng</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这段代码十分重要，主要在device目录查找vendorsetup.sh并加载，此文件主要添加自定义编译项，如：add_lunch_combo msm8916_32-userdebug </span></span><br><span class="line"><span class="comment"># Execute the contents of any vendorsetup.sh files we can find.</span></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> `<span class="built_in">test</span> <span class="operator">-d</span> device &amp;&amp; find device -maxdepth <span class="number">4</span> -name <span class="string">'vendorsetup.sh'</span> <span class="number">2</span>&gt; /dev/null` \</span><br><span class="line">         `<span class="built_in">test</span> <span class="operator">-d</span> vendor &amp;&amp; find vendor -maxdepth <span class="number">4</span> -name <span class="string">'vendorsetup.sh'</span> <span class="number">2</span>&gt; /dev/null`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"including <span class="variable">$f</span>"</span></span><br><span class="line">    . <span class="variable">$f</span>  <span class="comment"># 执行找到的脚本</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">unset</span> f</span><br><span class="line"></span><br><span class="line">addcompletions  调用 addcompletions()</span><br></pre></td></tr></table></figure></p>
-<p>因此可知，envsetup.sh主要有如下作用：<br>　1. 加载编译时需要的相应命令，如：help，lunch ，m，mm等。<br>　2. 添加系统默认编译项。<br>　3. 查找vendorsetup.sh文件，加载自定义编译项。</p>
-<blockquote>
-<p>注：有些Android版本中vendorsetup.sh文件在vendor目录　</p>
-</blockquote>
-<p>　　如要添加自己的产品，需要在device目录下新建一个自己公司名，新建一个vendorsetup.sh，加入自己的编译项。了解了这一条指令，再来看一下执行结果，将会更有体会，因为我所有命令都写到开始的setup.sh文件中了，所以不用想官方那样多步配置编译，如下：<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/20150711MakeAndroid.png" alt="Make"></p>
-<h2 id="lunch">lunch</h2><p>　　lunch是在envsetup.sh中定义的一个命令，让用户选择编译项，用来定义product和编译过程中用到的全局变量。关于编译项，前面只是列出，并未详解，如msm8916_32-userdebug，msm8916_32为产品名，userdebug为编译类型，详细如下：</p>
-<ul>
-<li><p>eng: 工程机，</p>
-</li>
-<li><p>user:最终用户机</p>
-</li>
-<li><p>userdebug:调试测试机</p>
-</li>
-<li><p>tests:测试机 。</p>
-</li>
-</ul>
-<p>　　在build\core\main.mk中有说明，Android源码中，每一个目标目录都有一个Android.mk，此文件中LOCAL_MODULE_TAGS就是来指定当前目标编译到哪个分类或者要不要编译。配置好后，可以通过lunch xxx 重选编译项，如：lunch msm8916_32-userdebug。</p>
-<p>ok，接下来分析一下lunch function：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">lunch</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">local</span> answer</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> ] ; <span class="keyword">then</span> <span class="comment"># lunch 后带参数</span></span><br><span class="line">        answer=<span class="variable">$1</span>   </span><br><span class="line">    <span class="keyword">else</span>  <span class="comment"># lunch后若不带参数，则打印所以target_product and variant 供用户选择</span></span><br><span class="line">        <span class="built_in">print</span>_lunch_menu</span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">"Which would you like? [aosp_arm-eng] "</span></span><br><span class="line">        <span class="built_in">read</span> answer</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> selection=</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$answer</span>"</span> ]</span><br><span class="line">    <span class="keyword">then</span>  </span><br><span class="line">        selection=aosp_arm-eng <span class="comment"># 如果用户在菜单中没有选择，直接回车，则为系统缺省的aosp_arm-eng</span></span><br><span class="line">    <span class="keyword">elif</span> (<span class="built_in">echo</span> -n <span class="variable">$answer</span> | grep -q <span class="operator">-e</span> <span class="string">"^[0-9][0-9]*$"</span>) </span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$answer</span> -le <span class="variable">$&#123;#LUNCH_MENU_CHOICES[@]&#125;</span> ] <span class="comment"># 如果answer是选择菜单的数字，则获取该数字对应的字符串</span></span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">            selection=<span class="variable">$&#123;LUNCH_MENU_CHOICES[$(($answer-1))]&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">elif</span> (<span class="built_in">echo</span> -n <span class="variable">$answer</span> | grep -q <span class="operator">-e</span> <span class="string">"^[^\-][^\-]*-[^\-][^\-]*$"</span>)  <span class="comment"># 如果 answer字符串匹配 *-*模式(*的开头不能为-)</span></span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        selection=<span class="variable">$answer</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$selection</span>"</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Invalid lunch combo: <span class="variable">$answer</span>"</span></span><br><span class="line">        <span class="built_in">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">export</span> TARGET_BUILD_APPS=</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> product=$(<span class="built_in">echo</span> -n <span class="variable">$selection</span> | sed <span class="operator">-e</span> <span class="string">"s/-.*$//"</span>)  <span class="comment"># 将 product-variant模式中的product分离出来</span></span><br><span class="line">    check_product <span class="variable">$product</span>  <span class="comment"># 检查，调用关系 check_product()-&gt;get_build_var()-&gt;build/core/config.mk</span></span><br><span class="line">    <span class="keyword">if</span> [ $? <span class="operator">-ne</span> <span class="number">0</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"** Don't have a product spec for: '<span class="variable">$product</span>'"</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"** Do you have the right repo manifest?"</span></span><br><span class="line">        product=</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> variant=$(<span class="built_in">echo</span> -n <span class="variable">$selection</span> | sed <span class="operator">-e</span> <span class="string">"s/^[^\-]*-//"</span>) <span class="comment"># 将 product-variant模式中的variant分离出来</span></span><br><span class="line">    check_variant <span class="variable">$variant</span> <span class="comment"># 检查，看看是否在 (user userdebug eng) 范围内</span></span><br><span class="line">    <span class="keyword">if</span> [ $? <span class="operator">-ne</span> <span class="number">0</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"** Invalid variant: '<span class="variable">$variant</span>'"</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"** Must be one of <span class="variable">$&#123;VARIANT_CHOICES[@]&#125;</span>"</span></span><br><span class="line">        variant=</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$product</span>"</span> -o -z <span class="string">"<span class="variable">$variant</span>"</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span></span><br><span class="line">        <span class="built_in">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#  导出环境变量，这很重要，因为后面的编译系统都依赖于这里定义的几个变量</span></span><br><span class="line">    <span class="built_in">export</span> TARGET_PRODUCT=<span class="variable">$product</span></span><br><span class="line">    <span class="built_in">export</span> TARGET_BUILD_VARIANT=<span class="variable">$variant</span></span><br><span class="line">    <span class="built_in">export</span> TARGET_BUILD_TYPE=release</span><br><span class="line"></span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">set</span>_stuff_<span class="keyword">for</span>_environment  <span class="comment"># 设置环境变量， 在shell输入set可查看</span></span><br><span class="line">    printconfig <span class="comment"># 打印部分变量，调用关系printconfig()-&gt;get_build_var()-&gt;build/core/config.mk-&gt;build/core/envsetup.mk</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Tab completion for lunch.</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">_lunch</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">local</span> cur prev opts</span><br><span class="line">    COMPREPLY=()</span><br><span class="line">    cur=<span class="string">"<span class="variable">$&#123;COMP_WORDS[COMP_CWORD]&#125;</span>"</span></span><br><span class="line">    prev=<span class="string">"<span class="variable">$&#123;COMP_WORDS[COMP_CWORD-1]&#125;</span>"</span></span><br><span class="line"></span><br><span class="line">    COMPREPLY=( $(compgen -W <span class="string">"<span class="variable">$&#123;LUNCH_MENU_CHOICES[*]&#125;</span>"</span> -- <span class="variable">$&#123;cur&#125;</span>) )</span><br><span class="line">    <span class="built_in">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong>　　Platform Information :<br>　　　System:    Ａndroid4.4.4<br>　　　Platform:  Qualcomm msm8916<br>　　　Author:     Andy Lee<br>　　　Email:        huaqianlee@gmail.com</strong></p>
-<p><strong>欢迎指出错误，共同学习，共同进步</strong></p>
-<p>　　<a href="http://huaqianlee.me/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.me/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a><br>　<br>　　Google给出的编译环境和构建方法见：<a href="http://source.android.com/source/initializing.html">http://source.android.com/source/initializing.html</a>，过程见：<a href="http://source.android.com/source/building.html">http://source.android.com/source/building.html</a>，不过这是解释怎么编译一个通用的系统，没有详细描述细节，而且需要翻墙。接下来我就准备跟着高通平台的编译过程来详细了解一下。</p>
-<p>我平时的编译步骤如下：<br>　1. source setup.sh project-name debug/release　加载命令配置环境　<br>　2. ./go.sh  [target] or make  [target]　编译<br>]]>
-    
-    </summary>
-    
-      <category term="Qualcomm" scheme="http://huaqianlee.me/tags/Qualcomm/"/>
-    
-      <category term="源码分析" scheme="http://huaqianlee.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     
       <category term="编译" scheme="http://huaqianlee.me/tags/%E7%BC%96%E8%AF%91/"/>
     
