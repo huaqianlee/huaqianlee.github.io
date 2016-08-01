@@ -381,6 +381,9 @@ git rm (--c">
 git commit
 </code></pre>
 <a id="more"></a>
+<h2 id="问题二_已经添加文件或路径,_提示untracked">问题二  已经添加文件或路径, 提示untracked</h2><p><strong>现象：</strong><br>已经将某文件夹添加到暂存区, git status 仍提示: modified: next (modified content, untracked content)</p>
+<p><strong>原因：</strong><br>此文件夹中有.git , git将其识别为submodule.</p>
+<p><strong>解决：</strong><br>删除文件夹中.git.</p>
 
       
     </div>
@@ -635,7 +638,7 @@ git commit
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题一_-gitignore无效，不能过滤某些文件或路径。"><span class="nav-number">1.</span> <span class="nav-text">问题一 .gitignore无效，不能过滤某些文件或路径。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题一_-gitignore无效，不能过滤某些文件或路径。"><span class="nav-number">1.</span> <span class="nav-text">问题一 .gitignore无效，不能过滤某些文件或路径。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题二_已经添加文件或路径,_提示untracked"><span class="nav-number">2.</span> <span class="nav-text">问题二  已经添加文件或路径, 提示untracked</span></a></li></ol></div>
             
           </div>
         </section>
