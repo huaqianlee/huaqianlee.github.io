@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2016-07-31T15:25:15.025Z</updated>
+  <updated>2016-08-04T14:46:55.699Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <link href="http://huaqianlee.github.io/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/"/>
     <id>http://huaqianlee.github.io/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/</id>
     <published>2016-07-07T15:37:41.000Z</published>
-    <updated>2016-07-31T15:25:15.025Z</updated>
+    <updated>2016-08-04T14:46:55.699Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。笔记图片中的字很丑，将就将就</p>
+<p>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就</p>
 </blockquote>
 <h2 id="VFE">VFE</h2><p>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/vfe.png" alt="VFE FLOW"></p>
 <a id="more"></a>
@@ -64,7 +64,7 @@
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。笔记图片中的字很丑，将就将就&lt;/p&gt;
+&lt;p&gt;菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;VFE&quot;&gt;VFE&lt;/h2&gt;&lt;p&gt;VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：&lt;br&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/vfe.png&quot; alt=&quot;VFE FLOW&quot;&gt;&lt;/p&gt;
     
@@ -78,55 +78,19 @@
   </entry>
   
   <entry>
-    <title>手机无人机常用sensor介绍</title>
-    <link href="http://huaqianlee.github.io/2016/05/07/Uav/mobile-and-uav-sensors/"/>
-    <id>http://huaqianlee.github.io/2016/05/07/Uav/mobile-and-uav-sensors/</id>
-    <published>2016-05-06T16:12:14.000Z</published>
-    <updated>2016-05-17T16:00:12.712Z</updated>
-    
-    <content type="html"><![CDATA[<p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
-<blockquote>
-<p>资料皆是网上获取,不能完全保证准确性.</p>
-</blockquote>
-<h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>
-<a id="more"></a>
-<h2 id="加速度传感器(Accelerometer)">加速度传感器(Accelerometer)</h2><p>加速度传感器是一种能够测量加速力的电子设备。加速力就是当物体在加速过程中作用在物体上的力，就好比地球引力，也就是重力。一般在手机被提到加速度感应器时，就是指重力感应器。<br>应用场景：微信摇一摇、甩动切歌等, 无人机中用于确定位置和无人机飞行姿态.</p>
-<h2 id="距离传感器(Proximity/p-sensor)">距离传感器(Proximity/p-sensor)</h2><p>通过发射特别短的光脉冲，并测量此光脉冲从发射到被物体反射回来的时间，通过测时间来计算与物体之间的距离。<br>应用场景：通话时手机靠近脸部，屏幕背景灯熄灭，离开时背景灯点亮并解锁屏幕。</p>
-<h2 id="光线感应器(Light)">光线感应器(Light)</h2><p>对投光器受光器间之光线做遮蔽动作所获得的信号加以运用以完成各种自动化控制。<br>应用场景：自动调整屏幕亮度功能等</p>
-<h2 id="三轴陀螺仪(Gyroscope)">三轴陀螺仪(Gyroscope)</h2><p>同时测定6个方向的位置，移动轨迹，加速。单轴的只能测量一个方向的量，也就是一个系统需要三个陀螺仪，而3轴的一个就能替代三个单轴的。测量角速度，以判别物体的运动状态，也称为运动传感器。判断在哪去哪。<br>应用场景：目前主要应用在一些大型手机射击游戏中，如狂野飙车等,用于辅助GPS定位。<br>如下是网上看到的两幅很形象图片：<br>单轴陀螺仪:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/a_tuoluoyi.gif" alt="single-axis"><br>三轴陀螺仪:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/tuoluoyi.gif" alt="three-axis"></p>
-<h2 id="地磁/磁力计/电子罗盘(Magnetic/compass)">地磁/磁力计/电子罗盘(Magnetic/compass)</h2><p>工作原理：电子罗盘，也叫数字指南针，是利用地磁场来定北极的一种方法。。<br>应用场景：各种指南针以及导航软件、地图等,在无人机，电子罗盘提供关键性的惯性导航和方向定位系统的信息。</p>
-<h2 id="气压计_(Barometer)">气压计 (Barometer)</h2><p>气压传感器用于检测大气压强的仪器,实际应用当中气压传感器可作高度计，提示海拔高度，尤其适合登山、户外单车、滑雪以及其他户外运动中，您可以据此在地图上分析高度、寻找正确路径等。同时也用于GPS精确导航（航位推算，上下桥检测等），手机GPS海拔测量，室内室外导航，休闲、体育和医疗健康等监测，天气预报、垂直速度指示（上升/下沉速度），风扇功率控制、温度显示等。 </p>
-<h2 id="超声波/声呐(sonar)">超声波/声呐(sonar)</h2><p>应用场景：超声波测距,避障.</p>
-<h2 id="光流（camera）">光流（camera）</h2><p>光流法是运动图像分析的重要方法,因为当物体在运动时，它在图像上对应点的亮度模式也在运动。这种图像亮度模式的表观运动（apparent motion）就是光流。光流表达了图像的变化，由于它包含了目标运动的信息，因此可被观察者用来确定目标的运动情况。从本质上说，光流就是你在这个运动着的世界里感觉到的明显的视觉运动。通过光流camera看到物体的相对运动速度是不一样的,通过不同目标的运动速度判断它们与我们的距离。</p>
-<h2 id="惯性测量单元(IMU)">惯性测量单元(IMU)</h2><p>同时包含陀螺仪、地磁、加速度计的传感器芯片，如mpu9x50。<br>惯性测量单元结合GPS是维持方向和飞行路径的关键。随着无人机智能化的发展，方向和路径控制是重要的空中交通管理规则。惯性测量单元采用的多轴磁传感器，在本质上都是精准度极高的小型指南针，通过感知方向将数据传输至中央处理器，从而指示方向和速度。</p>
-<h2 id="倾角传感器">倾角传感器</h2><p>倾角传感器，集成了陀螺仪和加速度计为飞行控制系统提供保持水平飞行的数据。这类传感器和陀螺仪， 结合加速度计，能够测量到细微的运动变化，使得倾角传感器能够应用于移动程序，如汽车或无人驾驶飞机的陀螺仪补偿。</p>
-<p>还有如热传感器、温度传感器、湿度传感器、紫外线传感器、压力传感器等</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;资料皆是网上获取,不能完全保证准确性.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;重力传感器(gravity/g-sensor)&quot;&gt;重力传感器(gravity/g-sensor)&lt;/h2&gt;&lt;p&gt;重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。&lt;br&gt;应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Uav" scheme="http://huaqianlee.github.io/categories/Uav/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>高通px4代码阅读笔记</title>
-    <link href="http://huaqianlee.github.io/2016/05/04/Uav/qualcomm-px4-code-reading-note/"/>
-    <id>http://huaqianlee.github.io/2016/05/04/Uav/qualcomm-px4-code-reading-note/</id>
-    <published>2016-05-04T13:45:25.000Z</published>
-    <updated>2016-08-04T13:52:56.462Z</updated>
+    <link href="http://huaqianlee.github.io/2016/05/11/Uav/qualcomm-px4-code-reading-note/"/>
+    <id>http://huaqianlee.github.io/2016/05/11/Uav/qualcomm-px4-code-reading-note/</id>
+    <published>2016-05-11T13:45:25.000Z</published>
+    <updated>2016-08-04T14:43:39.867Z</updated>
     
     <content type="html"><![CDATA[<p><strong>像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。</strong></p>
 <p>代码地址：<a href="https://github.com/ATLFlight/Firmware" target="_blank" rel="external">ATLFlight/Firmware</a><br>参考文档：<a href="http://dev.px4.io/tutorial-hello-sky.html?q=" target="_blank" rel="external">px4 devguide</a></p>
+<blockquote>
+<blockquote>
+<p>由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.</p>
+</blockquote>
+</blockquote>
 <p>============================================================================================================</p>
 <h2 id="关键路径及文件">关键路径及文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\mavlink   //  信息数据处理</span><br><span class="line">mavlink_main.cpp</span><br><span class="line">mavlink_receiver.cpp</span><br><span class="line"></span><br><span class="line">FastRPC   --  aDSP 与 apps 之间远程调用</span><br><span class="line"><span class="number">1</span>. 共享内存（不包括L1/L2缓存）</span><br><span class="line"><span class="number">2</span>. aDSP中能支持有限的物理映射</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules\muorb\</span><br><span class="line">adsp </span><br><span class="line">Krait</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\posix-configs\eagle\flight    // config 文件</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules  // 功能模块</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\makefiles\ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp   // 遥控器</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\device\vdev.cpp   <span class="comment"># Virtual character device base class.</span></span><br><span class="line">mavilink、uorb 继承于此类</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -172,6 +136,11 @@
     
       &lt;p&gt;&lt;strong&gt;像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;代码地址：&lt;a href=&quot;https://github.com/ATLFlight/Firmware&quot;&gt;ATLFlight/Firmware&lt;/a&gt;&lt;br&gt;参考文档：&lt;a href=&quot;http://dev.px4.io/tutorial-hello-sky.html?q=&quot;&gt;px4 devguide&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;============================================================================================================&lt;/p&gt;
 &lt;h2 id=&quot;关键路径及文件&quot;&gt;关键路径及文件&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;W:\uav\Firmware\src\modules\mavlink   //  信息数据处理&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mavlink_main.cpp&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mavlink_receiver.cpp&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;FastRPC   --  aDSP 与 apps 之间远程调用&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;. 共享内存（不包括L1/L2缓存）&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;. aDSP中能支持有限的物理映射&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;W:\uav\Firmware\src\modules\muorb\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;adsp &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Krait&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;W:\uav\Firmware\posix-configs\eagle\flight    // config 文件&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;W:\uav\Firmware\src\modules  // 功能模块&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;W:\uav\Firmware\makefiles\ &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp   // 遥控器&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;W:\uav\Firmware\src\drivers\device\vdev.cpp   &lt;span class=&quot;comment&quot;&gt;# Virtual character device base class.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mavilink、uorb 继承于此类&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
@@ -183,6 +152,47 @@
       <category term="PX4" scheme="http://huaqianlee.github.io/tags/PX4/"/>
     
       <category term="源码分析" scheme="http://huaqianlee.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>手机无人机常用sensor介绍</title>
+    <link href="http://huaqianlee.github.io/2016/05/07/Uav/mobile-and-uav-sensors/"/>
+    <id>http://huaqianlee.github.io/2016/05/07/Uav/mobile-and-uav-sensors/</id>
+    <published>2016-05-06T16:12:14.000Z</published>
+    <updated>2016-05-17T16:00:12.712Z</updated>
+    
+    <content type="html"><![CDATA[<p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
+<blockquote>
+<p>资料皆是网上获取,不能完全保证准确性.</p>
+</blockquote>
+<h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>
+<a id="more"></a>
+<h2 id="加速度传感器(Accelerometer)">加速度传感器(Accelerometer)</h2><p>加速度传感器是一种能够测量加速力的电子设备。加速力就是当物体在加速过程中作用在物体上的力，就好比地球引力，也就是重力。一般在手机被提到加速度感应器时，就是指重力感应器。<br>应用场景：微信摇一摇、甩动切歌等, 无人机中用于确定位置和无人机飞行姿态.</p>
+<h2 id="距离传感器(Proximity/p-sensor)">距离传感器(Proximity/p-sensor)</h2><p>通过发射特别短的光脉冲，并测量此光脉冲从发射到被物体反射回来的时间，通过测时间来计算与物体之间的距离。<br>应用场景：通话时手机靠近脸部，屏幕背景灯熄灭，离开时背景灯点亮并解锁屏幕。</p>
+<h2 id="光线感应器(Light)">光线感应器(Light)</h2><p>对投光器受光器间之光线做遮蔽动作所获得的信号加以运用以完成各种自动化控制。<br>应用场景：自动调整屏幕亮度功能等</p>
+<h2 id="三轴陀螺仪(Gyroscope)">三轴陀螺仪(Gyroscope)</h2><p>同时测定6个方向的位置，移动轨迹，加速。单轴的只能测量一个方向的量，也就是一个系统需要三个陀螺仪，而3轴的一个就能替代三个单轴的。测量角速度，以判别物体的运动状态，也称为运动传感器。判断在哪去哪。<br>应用场景：目前主要应用在一些大型手机射击游戏中，如狂野飙车等,用于辅助GPS定位。<br>如下是网上看到的两幅很形象图片：<br>单轴陀螺仪:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/a_tuoluoyi.gif" alt="single-axis"><br>三轴陀螺仪:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/tuoluoyi.gif" alt="three-axis"></p>
+<h2 id="地磁/磁力计/电子罗盘(Magnetic/compass)">地磁/磁力计/电子罗盘(Magnetic/compass)</h2><p>工作原理：电子罗盘，也叫数字指南针，是利用地磁场来定北极的一种方法。。<br>应用场景：各种指南针以及导航软件、地图等,在无人机，电子罗盘提供关键性的惯性导航和方向定位系统的信息。</p>
+<h2 id="气压计_(Barometer)">气压计 (Barometer)</h2><p>气压传感器用于检测大气压强的仪器,实际应用当中气压传感器可作高度计，提示海拔高度，尤其适合登山、户外单车、滑雪以及其他户外运动中，您可以据此在地图上分析高度、寻找正确路径等。同时也用于GPS精确导航（航位推算，上下桥检测等），手机GPS海拔测量，室内室外导航，休闲、体育和医疗健康等监测，天气预报、垂直速度指示（上升/下沉速度），风扇功率控制、温度显示等。 </p>
+<h2 id="超声波/声呐(sonar)">超声波/声呐(sonar)</h2><p>应用场景：超声波测距,避障.</p>
+<h2 id="光流（camera）">光流（camera）</h2><p>光流法是运动图像分析的重要方法,因为当物体在运动时，它在图像上对应点的亮度模式也在运动。这种图像亮度模式的表观运动（apparent motion）就是光流。光流表达了图像的变化，由于它包含了目标运动的信息，因此可被观察者用来确定目标的运动情况。从本质上说，光流就是你在这个运动着的世界里感觉到的明显的视觉运动。通过光流camera看到物体的相对运动速度是不一样的,通过不同目标的运动速度判断它们与我们的距离。</p>
+<h2 id="惯性测量单元(IMU)">惯性测量单元(IMU)</h2><p>同时包含陀螺仪、地磁、加速度计的传感器芯片，如mpu9x50。<br>惯性测量单元结合GPS是维持方向和飞行路径的关键。随着无人机智能化的发展，方向和路径控制是重要的空中交通管理规则。惯性测量单元采用的多轴磁传感器，在本质上都是精准度极高的小型指南针，通过感知方向将数据传输至中央处理器，从而指示方向和速度。</p>
+<h2 id="倾角传感器">倾角传感器</h2><p>倾角传感器，集成了陀螺仪和加速度计为飞行控制系统提供保持水平飞行的数据。这类传感器和陀螺仪， 结合加速度计，能够测量到细微的运动变化，使得倾角传感器能够应用于移动程序，如汽车或无人驾驶飞机的陀螺仪补偿。</p>
+<p>还有如热传感器、温度传感器、湿度传感器、紫外线传感器、压力传感器等</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;资料皆是网上获取,不能完全保证准确性.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;重力传感器(gravity/g-sensor)&quot;&gt;重力传感器(gravity/g-sensor)&lt;/h2&gt;&lt;p&gt;重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。&lt;br&gt;应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Uav" scheme="http://huaqianlee.github.io/categories/Uav/"/>
+    
     
   </entry>
   
@@ -282,11 +292,11 @@
   </entry>
   
   <entry>
-    <title>linux系统使用问题集.md</title>
+    <title>linux系统使用问题集</title>
     <link href="http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/"/>
     <id>http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/</id>
     <published>2016-01-04T13:40:23.000Z</published>
-    <updated>2016-08-04T13:53:06.820Z</updated>
+    <updated>2016-08-04T14:47:01.506Z</updated>
     
     <content type="html"><![CDATA[<h2 id="问题一_ubuntu_密码正确进不了系统">问题一 ubuntu 密码正确进不了系统</h2><p><strong>现象：</strong><br>即使密码输入正确也不能进入系统。<br><strong>原因：</strong><br>设置环境变量时出错，影响到系统。<br><strong>解决：</strong><br>开机时按住shift 进入 recovery 模式，选第二个恢复模式，12.04的界面是fsck和root选项在同一页，先选fsck解除写限制（按下fsck后等几秒即可），再选root，vi /etc/profile， vi /etc/environment 恢复下环境变量，再重新登录。</p>
 <a id="more"></a>

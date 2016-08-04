@@ -88,19 +88,34 @@
 
 <meta name="description" content="像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。
 代码地址：ATLFlight/Firmware参考文档：px4 devguide
-================================================================================================">
+
+
+由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.
+
+
+============================================================">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高通px4代码阅读笔记">
-<meta property="og:url" content="http://huaqianlee.github.io/2016/05/04/Uav/qualcomm-px4-code-reading-note/index.html">
+<meta property="og:url" content="http://huaqianlee.github.io/2016/05/11/Uav/qualcomm-px4-code-reading-note/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。
 代码地址：ATLFlight/Firmware参考文档：px4 devguide
-================================================================================================">
+
+
+由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.
+
+
+============================================================">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高通px4代码阅读笔记">
 <meta name="twitter:description" content="像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。
 代码地址：ATLFlight/Firmware参考文档：px4 devguide
-================================================================================================">
+
+
+由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.
+
+
+============================================================">
 
 
 
@@ -121,7 +136,7 @@
 
 
 
-  <link rel="canonical" href="http://huaqianlee.github.io/2016/05/04/Uav/qualcomm-px4-code-reading-note/"/>
+  <link rel="canonical" href="http://huaqianlee.github.io/2016/05/11/Uav/qualcomm-px4-code-reading-note/"/>
 
   <title> 高通px4代码阅读笔记 | Andy.Lee's  Blog </title>
 </head>
@@ -317,8 +332,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-05-04T21:45:25+08:00" content="May 4 2016">
-              May 4 2016
+            <time itemprop="dateCreated" datetime="2016-05-11T21:45:25+08:00" content="May 11 2016">
+              May 11 2016
             </time>
           </span>
 
@@ -347,8 +362,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/04/Uav/qualcomm-px4-code-reading-note/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/04/Uav/qualcomm-px4-code-reading-note/" itemprop="commentsCount"></span>
+                <a href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/11/Uav/qualcomm-px4-code-reading-note/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -373,6 +388,11 @@
       
         <p><strong>像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。</strong></p>
 <p>代码地址：<a href="https://github.com/ATLFlight/Firmware" target="_blank" rel="external">ATLFlight/Firmware</a><br>参考文档：<a href="http://dev.px4.io/tutorial-hello-sky.html?q=" target="_blank" rel="external">px4 devguide</a></p>
+<blockquote>
+<blockquote>
+<p>由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.</p>
+</blockquote>
+</blockquote>
 <p>============================================================================================================</p>
 <h2 id="关键路径及文件">关键路径及文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\mavlink   //  信息数据处理</span><br><span class="line">mavlink_main.cpp</span><br><span class="line">mavlink_receiver.cpp</span><br><span class="line"></span><br><span class="line">FastRPC   --  aDSP 与 apps 之间远程调用</span><br><span class="line"><span class="number">1</span>. 共享内存（不包括L1/L2缓存）</span><br><span class="line"><span class="number">2</span>. aDSP中能支持有限的物理映射</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules\muorb\</span><br><span class="line">adsp </span><br><span class="line">Krait</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\posix-configs\eagle\flight    // config 文件</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules  // 功能模块</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\makefiles\ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp   // 遥控器</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\device\vdev.cpp   <span class="comment"># Virtual character device base class.</span></span><br><span class="line">mavilink、uorb 继承于此类</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -445,16 +465,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/27/Uav/Qualcomm-uav-blsp-port/" rel="next" title="高通无人机8074 BLSP接口说明">
-                <i class="fa fa-chevron-left"></i> 高通无人机8074 BLSP接口说明
+              <a href="/2016/05/07/Uav/mobile-and-uav-sensors/" rel="next" title="手机无人机常用sensor介绍">
+                <i class="fa fa-chevron-left"></i> 手机无人机常用sensor介绍
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/07/Uav/mobile-and-uav-sensors/" rel="prev" title="手机无人机常用sensor介绍">
-                手机无人机常用sensor介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/" rel="prev" title="camera架构与调试-菜鸟笔记">
+                camera架构与调试-菜鸟笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -504,8 +524,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/04/Uav/qualcomm-px4-code-reading-note/"
-           data-title="高通px4代码阅读笔记" data-url="http://huaqianlee.github.io/2016/05/04/Uav/qualcomm-px4-code-reading-note/">
+      <div class="ds-thread" data-thread-key="2016/05/11/Uav/qualcomm-px4-code-reading-note/"
+           data-title="高通px4代码阅读笔记" data-url="http://huaqianlee.github.io/2016/05/11/Uav/qualcomm-px4-code-reading-note/">
       </div>
     
   </div>
