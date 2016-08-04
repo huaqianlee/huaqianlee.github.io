@@ -1,0 +1,979 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PX4,源码分析," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Andy.Lee's  Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。
+代码地址：ATLFlight/Firmware参考文档：px4 devguide
+================================================================================================">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高通px4代码阅读笔记">
+<meta property="og:url" content="http://huaqianlee.github.io/2016/05/04/Uav/qualcomm-px4-code-reading-note/index.html">
+<meta property="og:site_name" content="Andy.Lee's  Blog">
+<meta property="og:description" content="像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。
+代码地址：ATLFlight/Firmware参考文档：px4 devguide
+================================================================================================">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高通px4代码阅读笔记">
+<meta name="twitter:description" content="像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。
+代码地址：ATLFlight/Firmware参考文档：px4 devguide
+================================================================================================">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 9418407,
+      author: 'Andy Lee(Author)'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://huaqianlee.github.io/2016/05/04/Uav/qualcomm-px4-code-reading-note/"/>
+
+  <title> 高通px4代码阅读笔记 | Andy.Lee's  Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-63838023-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5ab1107031547fb5411cd06ed47f1348";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Andy.Lee's  Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Good good study, day day up !</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                高通px4代码阅读笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-04T21:45:25+08:00" content="May 4 2016">
+              May 4 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/04/Uav/qualcomm-px4-code-reading-note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/04/Uav/qualcomm-px4-code-reading-note/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。</strong></p>
+<p>代码地址：<a href="https://github.com/ATLFlight/Firmware" target="_blank" rel="external">ATLFlight/Firmware</a><br>参考文档：<a href="http://dev.px4.io/tutorial-hello-sky.html?q=" target="_blank" rel="external">px4 devguide</a></p>
+<p>============================================================================================================</p>
+<h2 id="关键路径及文件">关键路径及文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\mavlink   //  信息数据处理</span><br><span class="line">mavlink_main.cpp</span><br><span class="line">mavlink_receiver.cpp</span><br><span class="line"></span><br><span class="line">FastRPC   --  aDSP 与 apps 之间远程调用</span><br><span class="line"><span class="number">1</span>. 共享内存（不包括L1/L2缓存）</span><br><span class="line"><span class="number">2</span>. aDSP中能支持有限的物理映射</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules\muorb\</span><br><span class="line">adsp </span><br><span class="line">Krait</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\posix-configs\eagle\flight    // config 文件</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules  // 功能模块</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\makefiles\ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp   // 遥控器</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\device\vdev.cpp   <span class="comment"># Virtual character device base class.</span></span><br><span class="line">mavilink、uorb 继承于此类</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="按执行调用（log）顺序阅读">按执行调用（log）顺序阅读</h2><p>============================================================================================================</p>
+<h3 id="APPS_Processor">APPS Processor</h3><p>执行指令： ./mainapp mainapp.config  - （main.cpp + W:\uav\Firmware\posix-configs\eagle\flight\mainapp-flight.config）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\platforms\posix\main.cpp </span><br><span class="line">int main(int argc, char **argv)</span><br><span class="line">    px4::init_once()</span><br><span class="line">        pthread_self()                  <span class="comment"># expand params table and copy own params to shared memory</span></span><br><span class="line">        init_own_params()           <span class="comment"># copy other proc params from shared memory</span></span><br><span class="line">    process_line(line)         <span class="comment"># 执行mainapp.config中的命令</span></span><br><span class="line">    getline(cin, mystr)       <span class="comment"># 定义shell， 并读取输入  “pxh&gt;”</span></span><br></pre></td></tr></table></figure></p>
+<p>执行时打印的log如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">px4muorbKraitWrapper.cpp &#65288;C:\Qualcomm\Hexagon_SDK\2.0\flight_controller\krait\inc\px4muorb_KraitRpcWrapper.hpp&#65289;&#10;&#10;W:\uav\apq8074-le-1-0_ap_standard_oem\apps_proc\oe-core\build\tmp-eglibc\work\cortexa8hf-vfp-neon-linux-gnueabi\adsprpc\1.0-r0\adsprpc-1.0\src&#10;fastrpc_apps_user.c&#10;listener_android.c&#10;rpcmem.c  &#65288;rpcmem_alloc &#20998;&#37197; ION memory&#65289;&#10;&#10;INFO  Shell id is 3069956096&#10;INFO  Starting shared memory param sync&#10;&#10;INFO  param loading done&#10;&#10;App name: mainapp&#10;pxh&#62;  &#65288;shell &#65311;&#65289;&#10;apq8074-le-1-0_ap_standard_oem/apps_proc/oe-core/build/tmp-eglibc/work/cortexa8hf-vfp-neon-linux-gnueabi/adsprpc/1.0-r0/adsprpc-1.0/src/listener_android.c</span><br></pre></td></tr></table></figure></p>
+<p>mainapp.config的内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uorb start</span><br><span class="line">muorb start</span><br><span class="line">mavlink start -u <span class="number">14556</span></span><br><span class="line">sleep <span class="number">1</span></span><br><span class="line">mavlink stream -u <span class="number">14556</span> <span class="operator">-s</span> HIGHRES_IMU -r <span class="number">50</span></span><br><span class="line">mavlink stream -u <span class="number">14556</span> <span class="operator">-s</span> ATTITUDE -r <span class="number">50</span></span><br><span class="line">mavlink boot_complete</span><br></pre></td></tr></table></figure></p>
+<h3 id="ADSP">ADSP</h3><p>adsp端打印的log如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">symbol.c &#65288;&#38142;&#25509;ELF&#65288; Executable and Linkable Format&#65289; &#21644; object&#65289;&#10;reloc.c      // two c file maybe come from apps_proc&#10;W:\uav\Firmware\src\modules\muorb\adsp\px4muorb.cpp &#65288;px4muorb_orb_initialize&#65289;&#10;      - W:\uav\Firmware\src\platforms\qurt\px4_layer\main.cpp &#65288; dspal_entry&#65289;&#10;        W:\uav\Firmware\posix-configs\eagle\flight\px4-flight.config --&#62;&#65288;adb push&#65289; /usr/share/data/adsp/px4.config&#65288;linaro&#20013;&#25991;&#20214;&#65292; &#30001;px4-flight.config&#25913;&#21517;&#24471;&#26469;&#65289;  --&#62; &#8220;/dev/fs/px4.config&#8220;&#65288;W:\uav\Firmware\src\platforms\qurt\px4_layer\main.cpp &#20013;&#24341;&#29992;&#65289;&#10;&#10;W:\uav\Firmware\src\modules\uORB\uORBManager_posix.cpp  --&#62;&#21152;&#36733; DeviceNode</span><br></pre></td></tr></table></figure></p>
+<p>adsp端main.cp源码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#W:\uav\Firmware\src\platforms\qurt\px4_layer\main.cpp </span></span><br><span class="line">int dspal_main(int argc, char *argv[])</span><br><span class="line">    dspal_entry( int argc, char* argv[] )</span><br><span class="line">        px4::init_once()</span><br><span class="line">            init_own_params()</span><br><span class="line">            init_other_params()</span><br><span class="line">        process_commands(apps, get_commands())  <span class="comment"># 执行px4-flight.config中的命令</span></span><br><span class="line">            PARAM_DEFINE_INT32(MAV_TYPE,<span class="number">2</span>)  <span class="comment"># commander需要用到的parameter，由mavlink创建，因为mavilink没有运行在qurt，所以需要手动定义以便在commander中能够使用， "2" is for quadrotor（枚举值，四轴飞行器），MAV_TYPE - enum</span></span><br><span class="line">            run_cmd(apps, appargs)</span><br><span class="line">        void qurt_external_hook(void) __attribute__((weak))      <span class="comment">#start external function</span></span><br></pre></td></tr></table></figure></p>
+<p>adsp端配置文件如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># W:\uav\Firmware\posix-configs\eagle\flight\px4-flight.config</span></span><br><span class="line">uorb start</span><br><span class="line">param <span class="built_in">set</span> xx  xx</span><br><span class="line">commander start </span><br><span class="line"></span><br><span class="line">param <span class="built_in">set</span> RC_RECEIVER_TYPE <span class="number">1</span>    <span class="comment"># 为c中相关的地方提供参数， 类似于外部宏定义 ?</span></span><br><span class="line">/**</span><br><span class="line">**  _params_handles.rc_receiver_<span class="built_in">type</span>	=	param_find(<span class="string">"RC_RECEIVER_TYPE"</span>); <span class="comment"># W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp</span></span><br><span class="line">**  PARAM_DEFINE_INT32(RC_RECEIVER_TYPE, <span class="number">1</span>);  <span class="comment"># W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_params.c)</span></span><br><span class="line">**/</span><br><span class="line"></span><br><span class="line">rc_receiver start -D /dev/tty-<span class="number">1</span></span><br><span class="line"></span><br><span class="line">attitude_estimator_q start</span><br><span class="line">position_estimator_inav start</span><br><span class="line">mc_pos_control start</span><br><span class="line">mc_att_control start</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">param <span class="built_in">set</span> xx  xx</span><br><span class="line">sensors start</span><br><span class="line"></span><br><span class="line">param <span class="built_in">set</span> xx  xx</span><br><span class="line"></span><br><span class="line">mpu9x50 start -D /dev/spi-<span class="number">1</span>    ---&gt;  driver/mpu9x50 ---&gt; module/sensors ---&gt; ... ---&gt; drivers/uart_esc</span><br><span class="line">uart_esc start -D /dev/tty-<span class="number">2</span></span><br><span class="line">csr_gps start -D /dev/tty-<span class="number">3</span></span><br><span class="line">pressure start -D /dev/i2c-<span class="number">2</span></span><br><span class="line">list_devices</span><br><span class="line">list_files</span><br><span class="line">list_tasks</span><br><span class="line">list_topics</span><br></pre></td></tr></table></figure></p>
+<h3 id="uorb_&amp;_muorb">uorb &amp; muorb</h3><p>uorb&amp;muorb是负责数据传输的模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关键路径</span></span><br><span class="line">W:\uav\Firmware\src\modules\uORB\uORBCommon.hpp</span><br></pre></td></tr></table></figure></p>
+<h4 id="uorb_start">uorb start</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\uORB\uORBMain.cpp</span><br><span class="line">int uorb_main(int argc, char *argv[])</span><br><span class="line">    g_dev = new uORB::DeviceMaster(uORB::PUBSUB); </span><br><span class="line">        ...    (W:\uav\Firmware\src\modules\uORB\uORBDevices_posix.hpp)</span><br><span class="line">    g_dev-&gt;init()</span><br><span class="line">        VDev-&gt;init()              W:\uav\Firmware\src\drivers\device\vdev.cpp  , 父类</span><br><span class="line">            device-&gt;init()         W:\uav\Firmware\src\drivers\device\vdev.cpp, 父类</span><br><span class="line">            register_driver(_devname, (void *)this); <span class="comment"># 注册驱动</span></span><br></pre></td></tr></table></figure>
+<p>W:\uav\Firmware\src\modules\uORB\uORBDevices_posix.hpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class uORB::DeviceNode : public device::VDev</span><br><span class="line">&#123;</span><br><span class="line">virtual int   open(device::file_t *filp);</span><br><span class="line">virtual int   ioctl(device::file_t *filp, int cmd, unsigned long arg);</span><br><span class="line">...</span><br><span class="line">static ssize_t    publish(const orb_metadata *meta, orb_advert_t handle, const void *data);</span><br><span class="line">...</span><br><span class="line">int16_t process_add_subscription(int32_t rateInHz);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Master control device <span class="keyword">for</span> ObjDev.</span><br><span class="line"> *</span><br><span class="line"> * Used primarily to create new objects via the ORBIOCCREATE</span><br><span class="line"> * ioctl.</span><br><span class="line"> */</span><br><span class="line">class uORB::DeviceMaster : public device::VDev</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	DeviceMaster(Flavor f);</span><br><span class="line">	~DeviceMaster();</span><br><span class="line"></span><br><span class="line">	static uORB::DeviceNode *GetDeviceNode(const char *node_name);</span><br><span class="line"></span><br><span class="line">	virtual int   ioctl(device::file_t *filp, int cmd, unsigned long arg);</span><br><span class="line">private:</span><br><span class="line">	Flavor      _flavor;</span><br><span class="line">	static std::map&lt;std::string, uORB::DeviceNode *&gt; _node_map;  <span class="comment"># DeviceNode 集合 </span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>　</p>
+<h4 id="muorb_start">muorb start</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uORBDevices_posix.cpp  </span><br><span class="line">        ---&gt; W:\uav\Firmware\src\drivers\device\vdev_posix.cpp      </span><br><span class="line">                 uorb  px4_write() px4_<span class="built_in">read</span>() px4_ioctl() px4_poll() 等底层实现 ？</span><br></pre></td></tr></table></figure>
+<h5 id="Krait_muorb">Krait muorb</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int muorb_main(int argc, char *argv[]) (W:\uav\Firmware\src\modules\muorb\krait\muorb_main.cpp)</span><br><span class="line"><span class="string">"start"</span></span><br><span class="line">    uORB::Manager::get_instance()-&gt;<span class="built_in">set</span>_uorb_communicator(uORB::KraitFastRpcChannel::GetInstance()); <span class="comment"># register the fast rpc channel with UORB.</span></span><br><span class="line">        uORB::Manager *uORB::Manager::get_instance() (W:\uav\Firmware\src\modules\uORB\uORBDevices_posix.cpp)</span><br><span class="line">        static uORB::KraitFastRpcChannel *GetInstance(W:\uav\Firmware\src\modules\muorb\krait\uORBKraitFastRpcChannel.hpp) <span class="comment"># 获取uORB::KraitFastRpcChannel实例, invoke constructor</span></span><br><span class="line">    uORB::KraitFastRpcChannel::GetInstance()-&gt;Start(); <span class="comment"># start the KaitFastRPC channel thread.</span></span><br><span class="line">        void uORB::KraitFastRpcChannel::Start() (W:\uav\Firmware\src\modules\muorb\krait\uORBKraitFastRpcChannel.cpp)  <span class="comment"># start </span></span><br><span class="line"></span><br><span class="line"><span class="string">"stop"</span>  </span><br><span class="line">    void uORB::KraitFastRpcChannel::Stop()</span><br></pre></td></tr></table></figure>
+<h4 id="muorb通信">muorb通信</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">==========================================================================================================================</span><br><span class="line"> Krait muorb                                         (invoke)----&gt;                                             adsp muorb</span><br><span class="line">(uORBKraitFastRpcChannel.cpp)                                                                             (adsp\px4muorb.cpp)</span><br><span class="line">==========================================================================================================================</span><br></pre></td></tr></table></figure>
+<p>W:\uav\Firmware\src\modules\muorb\krait\uORBKraitFastRpcChannel.hpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">namespace uORB</span><br><span class="line">&#123;</span><br><span class="line">class KraitFastRpcChannel;</span><br><span class="line">&#125;</span><br><span class="line">class uORB::KraitFastRpcChannel : public uORBCommunicator::IChannel --&gt; private  constructor. </span><br><span class="line"></span><br><span class="line">static uORB::KraitFastRpcChannel *GetInstance (<span class="comment"># W:\uav\Firmware\src\modules\muorb\krait\uORBKraitFastRpcChannel.hpp)</span></span><br><span class="line">    uORB::KraitFastRpcChannel::KraitFastRpcChannel() (W:\uav\Firmware\src\modules\muorb\krait\uORBKraitFastRpcChannel.cpp) <span class="comment"># constructor begin</span></span><br><span class="line">        _KraitWrapper.Initialize();</span><br><span class="line">           int px4muorb_orb_initialize() （W:\uav\Firmware\src\modules\muorb\adsp\px4muorb.cpp） <span class="comment"># 调用adsp中initial</span></span><br><span class="line">                dspal_main(argc, argv); （W:\uav\Firmware\src\platforms\qurt\px4_layer\main.cpp）</span><br><span class="line">    int16_t uORB::KraitFastRpcChannel::add_subscription(const char *messageName, int32_t msgRateInHz)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h4 id="uorb通信">uorb通信</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">==========================================================================</span><br><span class="line">uorb      (invoke)----&gt;    krait muorb      (invoke)----&gt;     adsp muorb</span><br><span class="line">==========================================================================</span><br></pre></td></tr></table></figure>
+<h4 id="add_subscriber">add subscriber</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void uORB::DeviceNode::add_internal_subscriber() (W:\uav\Firmware\src\modules\uORB\uORBDevices_posix.cpp  <span class="comment"># 调用adsp 和 Krait中muorb中实现的 接口 ？)</span></span><br><span class="line">    int16_t uORB::KraitFastRpcChannel::add_subscription(const char *messageName, int32_t msgRateInHz) (W:\uav\Firmware\src\modules\muorb\krait\uORBKraitFastRpcChannel.cpp)</span><br><span class="line">        int px4muorb_add_subscriber(const char *name) (W:\uav\Firmware\src\modules\muorb\adsp\px4muorb.cpp)</span><br><span class="line">            uORB::FastRpcChannel::GetInstance(); // 获取adsp FastRpcChannel 实例， 构造方法 </span><br><span class="line">                uORB::FastRpcChannel::FastRpcChannel()</span><br><span class="line">                    初始化...</span><br><span class="line">                    _RemoteSubscribers.clear(); <span class="comment"># std::set&lt;std::string&gt; _RemoteSubscribers   远端订阅集？</span></span><br><span class="line">	    channel-&gt;AddRemoteSubscriber(name);</span><br><span class="line">                _RemoteSubscribers.insert(messageName); <span class="comment"># 插入一个message</span></span><br><span class="line">            uORBCommunicator::IChannelRxHandler *rxHandler  = channel-&gt;GetRxHandler();</span><br><span class="line">            rxHandler-&gt;process_add_subscription(name, <span class="number">0</span>);</span><br><span class="line">                virtual int16_t process_add_subscription(const char *messageName, int32_t msgRateInHz) = <span class="number">0</span>;   <span class="comment">#无源文件， 库</span></span><br></pre></td></tr></table></figure>
+<p>W:\uav\Firmware\src\modules\muorb\adsp\uORBFastRpcChannel.hpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">namespace uORB</span><br><span class="line">&#123;</span><br><span class="line">class FastRpcChannel;</span><br><span class="line">&#125;</span><br><span class="line">class uORB::FastRpcChannel : public uORBCommunicator::IChannel</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>W:\uav\Firmware\src\modules\uORB\uORBCommunicator.hpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Class passed to the communication link implement to provide callback <span class="keyword">for</span> received</span><br><span class="line"> * messages over a channel.</span><br><span class="line"> */</span><br><span class="line">class uORBCommunicator::IChannelRxHandler</span><br><span class="line"> 	virtual int16_t process_add_subscription(const char *messageName, int32_t msgRateInHz) = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>W:\uav\Firmware\src\modules\uORB\uORBDevices_posix.cpp  ( apps processor 数据交互 ？)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void uORB::DeviceNode::add_internal_subscriber()</span><br><span class="line">int16_t uORB::DeviceNode::process_add_subscription(int32_t rateInHz)</span><br><span class="line">    uORBCommunicator::IChannel *uORB::Manager::get_uorb_communicator(void) <span class="comment"># 获取 uORBCommunicator::IChannel</span></span><br><span class="line">        ch-&gt;send_message(_meta-&gt;o_name, _meta-&gt;o_size, _data);</span><br><span class="line"></span><br><span class="line">int uORB::DeviceNode::ioctl(device::file_t *filp, int cmd, unsigned long arg)</span><br><span class="line"><span class="built_in">read</span>()  </span><br><span class="line">write()</span><br><span class="line">int uORB::DeviceMaster::ioctl(device::file_t *filp, int cmd, unsigned long arg)  <span class="comment"># create new objects </span></span><br><span class="line">	switch (cmd) &#123;</span><br><span class="line">	<span class="keyword">case</span> ORBIOCADVERTISE: &#123;</span><br><span class="line">                /* construct the new node */</span><br><span class="line">		node = new uORB::DeviceNode(meta, objname, devpath, adv-&gt;priority);                </span><br><span class="line">		_node_map[std::string(nodepath)] = node; // add to the node map;.</span><br></pre></td></tr></table></figure></p>
+<p>W:\uav\Firmware\src\modules\uORB\uORBManager_posix.cpp （px4_ioctl）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int16_t uORB::Manager::process_add_subscription(const char *messageName, int32_t msgRateInHz)</span><br><span class="line"></span><br><span class="line">orb_advert_t uORB::Manager::orb_advertise_multi(const struct orb_metadata *meta, const void *data, int *instance,int priority)</span><br><span class="line">    int px4_ioctl(int fd, int cmd, unsigned long arg) (W:\uav\Firmware\src\drivers\device\vdev_posix.cpp)</span><br><span class="line">        dev-&gt;ioctl(filemap[fd], cmd, arg);</span><br><span class="line">            int VDev::ioctl(file_t *filep, int cmd, unsigned long arg)( W:\uav\Firmware\src\drivers\device\vdev.cpp)</span><br></pre></td></tr></table></figure></p>
+<p>W:\uav\Firmware\src\drivers\drv_orb_dev.h</p>
+<p>W:\uav\Firmware\src\drivers\device\vdev.cpp</p>
+<p> 编译后执行程序 打印路径变成<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\apps_proc\oe-core\build\tmp-eglibc\work\cortexa8hf-vfp-neon-linux-gnueabi\adsprpc\<span class="number">1.0</span>-r0\adsprpc-<span class="number">1.0</span>\src</span><br><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\apps_proc\adsprpc\src\listener_android.c</span><br><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\apps_proc\adsprpc\src\adsp_listener_stub.c</span><br><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\apps_proc\adsprpc\src\fastrpc_apps_user.c</span><br><span class="line">W:\uav\apq8074-le-<span class="number">1</span>-<span class="number">0</span>_ap_standard_oem\apps_proc\adsprpc\src\rpcmem.c</span><br></pre></td></tr></table></figure></p>
+<h3 id="数据传输流程">数据传输流程</h3><p>adsp —&gt; libmpu9x50.so-&gt;mpu9x50_main.cpp-&gt;orb<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\drivers\mpu9x50\mpu9x50_main.<span class="function">cpp</span><br><span class="line"><span class="keyword">int</span> <span class="title">mpu9x50_main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> <span class="params">(device = myoptarg=dev/spi-1 )</span></span><br><span class="line">    mpu9x50::<span class="title">start</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">task_main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span><br><span class="line">            ...    <span class="params">(libmpu9x50.so,  adsp 操作接口)</span></span><br><span class="line">            <span class="title">create_pubs</span><span class="params">()</span>    # 创建 uorb publications   </span><br><span class="line">                  _gyro_pub </span>= orb_advertise(ORB_ID(sensor_xxx), &amp;_xxx);     <span class="preprocessor"># 通知 公布主题	</span></span><br><span class="line">	    _params_sub = orb_subscribe(ORB_ID(parameter_update));     <span class="preprocessor"># 订阅 parameter_update topic</span></span><br><span class="line">	    <span class="keyword">while</span> (!_task_should_exit) &#123;</span><br><span class="line">mpu9x50_get_data(&amp;_data)</span><br><span class="line">parameter_update_poll(); <span class="preprocessor"># 轮询 parameter update (W:\uav\Firmware\src\modules\uORB\topics\parameter_update.h)</span></span><br><span class="line">publish_reports(); <span class="preprocessor"># 发布sensors主题</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="commander">commander</h3><p>飞行安全管理， 订阅相关主题， 用来检查飞行安全，并做相应处理，。。。。。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\commander\commander.cpp</span><br><span class="line">int commander_main(int argc, char *argv[])</span><br><span class="line">    int commander_thread_main(int argc, char *argv[])</span><br><span class="line">        ...      <span class="comment"># set parameters  -&gt; mavlink</span></span><br><span class="line">        <span class="comment"># 初始化vehicle_status_s (W:\uav\Firmware\src\modules\uORB\topics\vehicle_status.h)</span></span><br><span class="line">        main_states_str[vehicle_status_s::MAIN_STATE_MAX]; </span><br><span class="line">        arming_states_str[] / nav_states_str[]</span><br><span class="line">        ...</span><br><span class="line">        orb_advertise(ORB_ID(vehicle_status), &amp;status); <span class="comment"># 公布vehicle_status</span></span><br><span class="line">        orb_advertise(ORB_ID(vehicle_control_mode), &amp;control_mode);</span><br><span class="line">        orb_advertise(ORB_ID(actuator_armed), &amp;armed);</span><br><span class="line">        dm_<span class="built_in">read</span>(DM_KEY_MISSION_STATE, <span class="number">0</span>, &amp;mission, sizeof(mission_s)</span><br><span class="line">         orb_advertise(ORB_ID(offboard_mission), &amp;mission);</span><br><span class="line">         orb_publish(ORB_ID(offboard_mission), mission_pub, &amp;mission);</span><br><span class="line"></span><br><span class="line">        /* Start monitoring loop */</span><br><span class="line">        rc_calibration_check(mavlink_fd);   <span class="comment">#遥控器校准？</span></span><br><span class="line">        orb_subscribe(ORB_ID(safety))</span><br><span class="line">        orb_subscribe(ORB_ID(mission_result))</span><br><span class="line">        orb_subscribe(ORB_ID(geofence_result))</span><br><span class="line">        orb_subscribe(ORB_ID(manual_control_setpoint)) <span class="comment"># 订阅manual control data</span></span><br><span class="line">        orb_subscribe(ORB_ID(offboard_control_mode))</span><br><span class="line">        orb_subscribe(ORB_ID(vehicle_global_position)) <span class="comment">#订阅global position</span></span><br><span class="line">        orb_subscribe(ORB_ID(vehicle_<span class="built_in">local</span>_position))</span><br><span class="line">        orb_subscribe(ORB_ID(vehicle_land_detected))</span><br><span class="line"></span><br><span class="line">        orb_subscribe(ORB_ID(vehicle_gps_position))</span><br><span class="line">        orb_subscribe(ORB_ID(sensor_combined))</span><br><span class="line">        orb_subscribe(ORB_ID(differential_pressure))</span><br><span class="line">        orb_subscribe(ORB_ID(vehicle_<span class="built_in">command</span>))</span><br><span class="line">        orb_subscribe(ORB_ID(parameter_update))</span><br><span class="line">        orb_subscribe(ORB_ID(battery_status))</span><br><span class="line">        orb_subscribe(ORB_ID(subsystem_info))</span><br><span class="line">        orb_subscribe(ORB_ID(position_setpoint_triplet))</span><br><span class="line">        orb_subscribe(ORB_ID(system_power))</span><br><span class="line">        orb_subscribe(ORB_ID_VEHICLE_ATTITUDE_CONTROLS)</span><br><span class="line">        orb_subscribe(ORB_ID(vtol_vehicle_status))</span><br><span class="line"></span><br><span class="line">        param_get(_param_sys_<span class="built_in">type</span>, &amp;(status.system_<span class="built_in">type</span>)) <span class="comment"># update vehicle status(vehicle_status_s ) to find out vehicle type (required for preflight checks)</span></span><br><span class="line">        <span class="comment"># Run preflight check</span></span><br><span class="line">        </span><br><span class="line">        commander_boot_timestamp = hrt_absolute_time() <span class="comment"># 获取启动时间戳</span></span><br><span class="line"></span><br><span class="line">        pthread_create(&amp;commander_low_prio_thread, &amp;commander_low_prio_attr, commander_low_prio_loop, NULL);</span><br><span class="line">            px4_poll(&amp;fds[<span class="number">0</span>], (sizeof(fds) / sizeof(fds[<span class="number">0</span>])), <span class="number">1000</span>)</span><br><span class="line">            orb_copy(ORB_ID(vehicle_<span class="built_in">command</span>), cmd_sub, &amp;cmd)</span><br><span class="line">            <span class="comment"># handel command</span></span><br><span class="line">        <span class="keyword">while</span>()</span><br><span class="line">            更新 parameter</span><br><span class="line">            orb_check(param_changed_sub, &amp;updated)  <span class="comment"># 检查主题是否更新， 每次获取copy前执行， 或者执行poll()</span></span><br><span class="line">            orb_copy(ORB_ID(parameter_update), param_changed_sub, &amp;param_changed) <span class="comment"># 从订阅主题中获取更新数据存在param_changed</span></span><br><span class="line">            通过parameters获取值？</span><br><span class="line">            orb_copy(ORB_ID(manual_control_setpoint), sp_man_sub, &amp;sp_man) <span class="comment"># 获取订阅主题manual_control_setpoint 数据</span></span><br><span class="line">            orb_copy(ORB_ID(offboard_control_mode), offboard_control_mode_sub, &amp;offboard_control_mode)</span><br><span class="line"></span><br><span class="line">            orb_subscribe_multi(ORB_ID(telemetry_status), i)  <span class="comment">#  订阅多个不同来源的 telemetry_status主题（最多四个）   遥控器 ？</span></span><br><span class="line">            orb_copy(ORB_ID(telemetry_status), telemetry_subs[i], &amp;telemetry)</span><br><span class="line"></span><br><span class="line">            orb_copy(ORB_ID(sensor_combined), sensor_sub, &amp;sensors)</span><br><span class="line">            orb_copy(ORB_ID(differential_pressure), diff_pres_sub, &amp;diff_pres)</span><br><span class="line">            orb_copy(ORB_ID(system_power), system_power_sub, &amp;system_power)</span><br><span class="line">            orb_copy(ORB_ID(safety), safety_sub, &amp;safety)</span><br><span class="line">            orb_copy(ORB_ID(vtol_vehicle_status), vtol_vehicle_status_sub, &amp;vtol_status) <span class="comment"># 垂直起降</span></span><br><span class="line">            orb_copy(ORB_ID(vehicle_global_position), global_position_sub, &amp;gpos)</span><br><span class="line">            orb_copy(ORB_ID(vehicle_<span class="built_in">local</span>_position), <span class="built_in">local</span>_position_sub, &amp;<span class="built_in">local</span>_position)</span><br><span class="line">            orb_copy(ORB_ID(vehicle_land_detected), land_detector_sub, &amp;land_detector)</span><br><span class="line">            orb_copy(ORB_ID(battery_status), battery_sub, &amp;battery); <span class="comment"># 后面会根据电池状态做一些判断和处理</span></span><br><span class="line">	    orb_copy(ORB_ID_VEHICLE_ATTITUDE_CONTROLS, actuator_controls_sub, &amp;actuator_controls)</span><br><span class="line">            orb_copy(ORB_ID(subsystem_info), subsys_sub, &amp;info)</span><br><span class="line">            orb_copy(ORB_ID(position_setpoint_triplet), pos_sp_triplet_sub, &amp;pos_sp_triplet)</span><br><span class="line">            orb_copy(ORB_ID(vehicle_gps_position), gps_sub, &amp;gps_position)</span><br><span class="line">            orb_copy(ORB_ID(mission_result), mission_result_sub, &amp;mission_result)</span><br><span class="line">            orb_copy(ORB_ID(geofence_result), geofence_result_sub, &amp;geofence_result)</span><br><span class="line">            遥控器输入信号检查</span><br><span class="line"></span><br><span class="line">            <span class="built_in">set</span>_main_state_rc(&amp;status, &amp;sp_man)  <span class="comment"># manual_control_setpoint主题数据， MANUAL/ALTCTL/POSCTL 模式处理及反馈</span></span><br><span class="line"></span><br><span class="line">            orb_copy(ORB_ID(vehicle_<span class="built_in">command</span>), cmd_sub, &amp;cmd) <span class="comment"># 获取cmd    </span></span><br><span class="line">            handle_<span class="built_in">command</span>(&amp;status, &amp;safety, &amp;cmd, &amp;armed, &amp;_home, &amp;global_position, &amp;<span class="built_in">local</span>_position, &amp;home_pub)  <span class="comment"># 处理cmd</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># publish states (armed, control mode, vehicle status) at least with 5 Hz</span></span><br><span class="line">            <span class="built_in">set</span>_control_mode();</span><br><span class="line">            orb_publish(ORB_ID(vehicle_control_mode), control_mode_pub, &amp;control_mode);</span><br><span class="line">            orb_publish(ORB_ID(vehicle_status), status_pub, &amp;status);</span><br><span class="line">            orb_publish(ORB_ID(actuator_armed), armed_pub, &amp;armed);</span><br></pre></td></tr></table></figure></p>
+<p>W:\uav\Firmware\src\platforms\ros\nodes\commander\commander.cpp  （与上一commander.cpp 对应  ？）</p>
+<p>W:\uav\Firmware\src\drivers\px4io\px4io.cpp    </p>
+<h3 id="Mavlink">Mavlink</h3><p>int mavlink_main(int argc, char *argv[]) # W:\uav\Firmware\src\modules\mavlink\mavlink_main.cpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"start"</span></span><br><span class="line">    Mavlink::start(int argc, char *argv[])</span><br><span class="line">        px4_task_spawn_cmd( )</span><br><span class="line">            Mavlink::start_helper( )</span><br><span class="line">	        Mavlink::task_main(int argc, char *argv[])</span><br><span class="line">                    px4_getopt(argc, argv, <span class="string">"b:r:d:u:m:fpvwx"</span>, &amp;myoptind, &amp;myoptarg)  <span class="comment">#  "-u"  set udp</span></span><br><span class="line">                    px4_open(MAVLINK_LOG_DEVICE, <span class="number">0</span>) <span class="comment"># 创建设备节点， 发送log消息	</span></span><br><span class="line">                    MavlinkReceiver::receive_start(this)	  <span class="comment"># 创建 MavlinkReceiver线程</span></span><br><span class="line">                    MavlinkOrbSubscription *param_sub     <span class="comment"># Mavlink  Orb    Subscription 类  </span></span><br><span class="line">                    = add_orb_subscription(ORB_ID(parameter_update));</span><br><span class="line">                    add_orb_subscription(ORB_ID(vehicle_status))</span><br><span class="line">                    status_sub-&gt;update(&amp;status_time, &amp;status)  <span class="comment"># 调用MavlinkOrbSubscription 中update()， 获取比status_time新的数据</span></span><br><span class="line">                    根据mode添加默认数据流</span><br><span class="line">                    ...</span><br><span class="line">                    LL_APPEND(_mavlink_instances, this) <span class="comment"># 添加mavilink实例链表，初始化等？</span></span><br><span class="line">                    init_udp(); <span class="comment"># 如果为udp模式，初始化socket  , 后面也有初始化串口等操作</span></span><br><span class="line">                    <span class="keyword">while</span>( )</span><br><span class="line">                        <span class="keyword">if</span> (status_sub-&gt;update(&amp;status_time, &amp;status)) 			    			    <span class="built_in">set</span>_hil_enabled(status.hil_state == vehicle_status_s::HIL_STATE_ON)  <span class="comment"># switch HIL mode if required</span></span><br><span class="line">			    <span class="built_in">set</span>_manual_input_mode_generation(status.rc_input_mode == vehicle_status_s::RC_IN_MODE_GENERATED); <span class="comment"># 设置为手动输入生成模式，if true， 通过手动输入mavilink消息在系统总线生成RC_INPUT消息    </span></span><br><span class="line">                        check <span class="keyword">for</span> requested subscriptions</span><br><span class="line">                        configure_stream(_subscribe_to_stream, _subscribe_to_stream_rate)</span><br><span class="line">                        stream-&gt;update(t); <span class="comment"># 更新数据流</span></span><br><span class="line">                        通过其他uarts 或者FTP(File Transfer Protocol) worker 传输消息</span><br><span class="line">			message_buffer_get_ptr((void **)&amp;<span class="built_in">read</span>_ptr, &amp;is_part);</span><br><span class="line">                        ...</span><br><span class="line">                        <span class="comment"># 释放close所有设备消息</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">"stream"</span></span><br><span class="line">    Mavlink::stream_<span class="built_in">command</span>(int argc, char *argv[])</span><br><span class="line">        strcmp(argv[i], <span class="string">"-s"</span>)</span><br><span class="line">            stream_name = argv[i + <span class="number">1</span>];  <span class="comment"># 配置数据流名如： HIGHRES_IMU，ATTITUDE</span></span><br><span class="line">        strcmp(argv[i], <span class="string">"-r"</span>)</span><br><span class="line">            rate = strtod(argv[i + <span class="number">1</span>], nullptr);  <span class="comment"># 配置传输速率</span></span><br><span class="line">        strcmp(argv[i], <span class="string">"-u"</span>)</span><br><span class="line">            配置udp端口</span><br><span class="line">    </span><br><span class="line">        get_instance_<span class="keyword">for</span>_device(device_name);  <span class="comment"># "/dev/ttyS1" ， 与下二选一</span></span><br><span class="line">        get_instance_<span class="keyword">for</span>_network_port(network_port); <span class="comment"># 获取数据传输文件实例， 此为udp</span></span><br><span class="line">        inst-&gt;configure_stream_threadsafe(stream_name, rate) <span class="comment"># orb订阅在主线程中完成，set _subscribe_to_stream和 _subscribe_to_stream_rate在mavilink主循环中取值</span></span><br><span class="line">            _subscribe_to_stream_rate = rate;</span><br><span class="line">            _subscribe_to_stream = s;  <span class="comment"># stream_name</span></span><br><span class="line"></span><br><span class="line"><span class="string">"boot_complete"</span></span><br><span class="line">    <span class="function"><span class="title">set_boot_complete</span></span>() &#123; _boot_complete = <span class="literal">true</span>; &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Mavlink_Reiceiver">Mavlink Reiceiver</h3><p>MavlinkReceiver::receive_start(Mavlink *parent)  # W:\uav\Firmware\src\modules\mavlink\mavlink_receiver.cpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">*MavlinkReceiver::start_helper(void *context)</span><br><span class="line">MavlinkReceiver *rcv = new MavlinkReceiver((Mavlink *)context)</span><br><span class="line">rcv-&gt;receive_thread(NULL) <span class="comment"># 创建接收线程</span></span><br><span class="line">    <span class="keyword">if</span>从串口读取 ::<span class="built_in">read</span>(uart_fd, buf, sizeof(buf))    </span><br><span class="line">    <span class="keyword">if</span>从udp读取  recvfrom(_mavlink-&gt;get_socket_fd(), buf, sizeof(buf), <span class="number">0</span>, (struct sockaddr *)&amp;srcaddr, &amp;addrlen); </span><br><span class="line">    解析接收的数据  <span class="keyword">if</span> mavlink_parse_char(_mavlink-&gt;get_channel(), buf[i], &amp;msg, &amp;status)  成功</span><br><span class="line">    handle_message(&amp;msg) <span class="comment"># 处理通用信息和命令</span></span><br><span class="line">        handle_message_manual_control(msg); <span class="comment"># case MAVLINK_MSG_ID_MANUAL_CONTROL</span></span><br><span class="line">        mavlink_msg_manual_control_decode(msg, &amp;man); <span class="comment"># 解码手动控制信息到结构体man</span></span><br><span class="line">        处理转换手动控制信息</span><br><span class="line">        orb_advertise(ORB_ID(input_rc), &amp;rc) <span class="comment"># 公布input_rc主题（远程输入消息）</span></span><br><span class="line">        orb_publish(ORB_ID(input_rc), _rc_pub, &amp;rc); <span class="comment"># 发送主题  （sensors.cpp中订阅接收主题， 解析后再发布出去，传到下一级操作？）</span></span><br><span class="line"></span><br><span class="line">    _mavlink-&gt;handle_message(&amp;msg) <span class="comment"># 处理父对象包</span></span><br><span class="line"></span><br><span class="line">    _mavlink-&gt;count_rxbytes(nread) <span class="comment"># 接收信息计数</span></span><br></pre></td></tr></table></figure></p>
+<p>W:\uav\Firmware\src\modules\mavlink\mavlink_messages.cpp  # 各种数据流 stream 类定义。。。</p>
+<h3 id="uart_esc_start_-D_/dev/tty-2">uart_esc start -D /dev/tty-2</h3><p>int uart_esc_main(int argc, char *argv[])  # W:\uav\Firmware\src\drivers\px4_legacy_driver_wrapper\uart_esc\uart_esc_main.cpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">   uart_esc::start()-&gt;task_main(int argc, char *argv[])</span><br><span class="line">       parameters_init(); <span class="comment"># 电调参数初始化</span></span><br><span class="line">       esc = UartEsc::get_instance()  <span class="comment"># 获取电调实例， 实现在libuart.so</span></span><br><span class="line"> 	orb_subscribe(ORB_ID(actuator_controls_0));  <span class="comment"># 订阅主题</span></span><br><span class="line">orb_subscribe(ORB_ID(actuator_armed));</span><br><span class="line">orb_subscribe(ORB_ID(parameter_update));</span><br><span class="line">       initialize_mixer(MIXER_FILENAME) <span class="comment"># 设置mixer</span></span><br><span class="line">       <span class="keyword">while</span>( )</span><br><span class="line">           orb_copy(ORB_ID(actuator_controls_0), _controls_sub, &amp;_controls)</span><br><span class="line">           esc-&gt;send_rpms(motor_rpms, _outputs.noutputs)</span><br></pre></td></tr></table></figure></p>
+<h3 id="attitude_estimator_q_start_（主要接收sensor和vehicle_global_position主题，处理，_发布飞行姿态主题）">attitude_estimator_q start     （主要接收sensor和vehicle_global_position主题，处理， 发布飞行姿态主题）</h3><p>W:\uav\Firmware\src\modules\attitude_estimator_q\attitude_estimator_q_main.cpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">int attitude_estimator_q_main(int argc, char *argv[])</span><br><span class="line">    attitude_estimator_q::instance = new AttitudeEstimatorQ</span><br><span class="line">    AttitudeEstimatorQ::start() </span><br><span class="line">        AttitudeEstimatorQ::task_main() </span><br><span class="line"></span><br><span class="line">            orb_subscribe(ORB_ID(sensor_combined))</span><br><span class="line">            orb_subscribe(ORB_ID(parameter_update))</span><br><span class="line">            orb_subscribe(ORB_ID(vehicle_global_position))</span><br><span class="line"></span><br><span class="line">            update_parameters(<span class="literal">true</span>)</span><br><span class="line">            --&gt; AttitudeEstimatorQ::update_parameters(bool force)</span><br><span class="line">                orb_copy(ORB_ID(parameter_update), _params_sub, &amp;param_update)</span><br><span class="line">                param_get(_params_handles.w_acc, &amp;_w_accel)</span><br><span class="line">                ...</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (!_task_should_<span class="built_in">exit</span>)</span><br><span class="line">                px4_poll(fds, <span class="number">1</span>, <span class="number">1000</span>)      <span class="comment"># fds[0].fd = _sensors_sub , 监控订阅的sensors数据</span></span><br><span class="line">                orb_copy(ORB_ID(sensor_combined), _sensors_sub, &amp;sensors)    <span class="comment"># 获取订阅的sensors数据</span></span><br><span class="line">                orb_check(_global_pos_sub, &amp;gpos_updated)    <span class="comment"># 功能类似于px4_poll()</span></span><br><span class="line">                orb_copy(ORB_ID(vehicle_global_position), _global_pos_sub, &amp;_gpos)</span><br><span class="line"></span><br><span class="line">                struct vehicle_attitude_s att    <span class="comment"># 创建飞行姿态结构并赋值</span></span><br><span class="line">                att_pub = orb_advertise(ORB_ID(vehicle_attitude), &amp;att)   <span class="comment"># 公布飞行姿态主题</span></span><br><span class="line">                orb_publish(ORB_ID(vehicle_attitude), _att_pub, &amp;att)     <span class="comment"># 发布飞行姿态主题</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="position_estimator_inav_start_（订阅飞控等相关主题，接收到主题后，进行一些算法处理。_发布vehicle_local_position、vehicle_global_position主题）">position_estimator_inav start （订阅飞控等相关主题，接收到主题后，进行一些算法处理。 发布vehicle_local_position、vehicle_global_position主题）</h3><p> W:\uav\Firmware\src\modules\position_estimator_inav\position_estimator_inav_main.c<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">int position_estimator_inav_thread_main(int argc, char *argv[])</span><br><span class="line">    <span class="comment"># declare and safely initialize all structs</span></span><br><span class="line">    struct actuator_controls_s actuator</span><br><span class="line">    struct actuator_armed_s armed</span><br><span class="line">    struct sensor_combined_s sensor</span><br><span class="line">    struct vehicle_gps_position_s gps</span><br><span class="line">    struct home_position_s home</span><br><span class="line">    struct vehicle_attitude_s att</span><br><span class="line">    struct vehicle_<span class="built_in">local</span>_position_s <span class="built_in">local</span>_pos</span><br><span class="line">    struct optical_flow_s flow</span><br><span class="line">    struct vision_position_estimate_s vision</span><br><span class="line">    struct att_pos_mocap_s mocap</span><br><span class="line">    struct vehicle_global_position_s global_pos</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 订阅相关主题</span></span><br><span class="line">    orb_subscribe(ORB_ID(parameter_update));</span><br><span class="line">    orb_subscribe(ORB_ID_VEHICLE_ATTITUDE_CONTROLS);</span><br><span class="line">    orb_subscribe(ORB_ID(actuator_armed));    orb_subscribe(ORB_ID(sensor_combined));    orb_subscribe(ORB_ID(vehicle_attitude));    orb_subscribe(ORB_ID(optical_flow));</span><br><span class="line">    orb_subscribe(ORB_ID(vehicle_gps_position));    orb_subscribe(ORB_ID(vision_position_estimate));    orb_subscribe(ORB_ID(att_pos_mocap));</span><br><span class="line">    orb_subscribe(ORB_ID(home_position));</span><br><span class="line"></span><br><span class="line">    orb_advertise(ORB_ID(vehicle_<span class="built_in">local</span>_position), &amp;<span class="built_in">local</span>_pos)  <span class="comment"># 公布vehicle_local_position主题</span></span><br><span class="line">    inav_parameters_update(&amp;pos_inav_param_handles, &amp;params) <span class="comment"># 获取所有相关参数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">wait</span>_baro &amp;&amp; !thread_should_<span class="built_in">exit</span>)</span><br><span class="line">        px4_poll(fds_init, <span class="number">1</span>, <span class="number">1000</span>)               <span class="comment"># 监控sensor_combined主题</span></span><br><span class="line">        orb_copy(ORB_ID(sensor_combined), sensor_combined_sub, &amp;sensor)    <span class="comment"># 获取sensors数据</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!thread_should_<span class="built_in">exit</span>)</span><br><span class="line">        px4_poll(fds, <span class="number">1</span>, <span class="number">20</span>)             <span class="comment"># 监控vehicle_attitude主题</span></span><br><span class="line">        orb_copy(ORB_ID(vehicle_attitude), vehicle_attitude_sub, &amp;att)     <span class="comment"># 获取飞行姿态数据</span></span><br><span class="line">        orb_copy(ORB_ID(parameter_update), parameter_update_sub, &amp;update)</span><br><span class="line">        inav_parameters_update(&amp;pos_inav_param_handles, &amp;params)</span><br><span class="line">        orb_copy(ORB_ID_VEHICLE_ATTITUDE_CONTROLS, actuator_sub, &amp;actuator)  <span class="comment"># 获取actuator数据</span></span><br><span class="line">        orb_copy(ORB_ID(actuator_armed), armed_sub, &amp;armed)    <span class="comment"># 获取armed数据   </span></span><br><span class="line">        orb_copy(ORB_ID(sensor_combined), sensor_combined_sub, &amp;sensor) <span class="comment">#  获取sensors数据</span></span><br><span class="line">        acc[i] += PX4_R(att.R, i, j) * sensor.accelerometer_m_s2[j]  <span class="comment"># transform acceleration vector from body frame to NED frame</span></span><br><span class="line">        orb_copy(ORB_ID(optical_flow), optical_flow_sub, &amp;flow)  <span class="comment"># 获取光流数据        ...        orb_copy(ORB_ID(home_position), home_position_sub, &amp;home)   # 获取home position数据        orb_copy(ORB_ID(vision_position_estimate), vision_position_estimate_sub, &amp;vision)  # 获取vehicle vision position数据        orb_copy(ORB_ID(att_pos_mocap), att_pos_mocap_sub, &amp;mocap)  #  获取 vehicle mocap position数据</span></span><br><span class="line">        orb_copy(ORB_ID(vehicle_gps_position), vehicle_gps_position_sub, &amp;gps)  <span class="comment"># 获取vehicle GPS position 数据</span></span><br><span class="line"></span><br><span class="line">        orb_publish(ORB_ID(vehicle_<span class="built_in">local</span>_position), vehicle_<span class="built_in">local</span>_position_pub, &amp;<span class="built_in">local</span>_pos)   <span class="comment"># publish local position        orb_advertise(ORB_ID(vehicle_global_position), &amp;global_pos)        orb_publish(ORB_ID(vehicle_global_position), vehicle_global_position_pub, &amp;global_pos)</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="mc_att_control_start">mc_att_control  start</h3><p> W:\uav\Firmware\src\modules\mc_att_control\mc_att_control_main.cpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int mc_att_control_main(int argc, char *argv[])</span><br><span class="line">    mc_att_control::g_control = new MulticopterAttitudeControl</span><br><span class="line">    MulticopterAttitudeControl::start()</span><br><span class="line">        MulticopterAttitudeControl::task_main()</span><br><span class="line">	    orb_subscribe(ORB_ID(vehicle_attitude_setpoint));	    orb_subscribe(ORB_ID(vehicle_rates_setpoint));	    orb_subscribe(ORB_ID(vehicle_attitude));	    orb_subscribe(ORB_ID(vehicle_control_mode));	    orb_subscribe(ORB_ID(parameter_update));	    orb_subscribe(ORB_ID(manual_control_setpoint));	    orb_subscribe(ORB_ID(actuator_armed));	    orb_subscribe(ORB_ID(vehicle_status));</span><br><span class="line">	    orb_subscribe(ORB_ID(multirotor_motor_limits));</span><br><span class="line"></span><br><span class="line">            orb_copy(ORB_ID(vehicle_attitude), _v_att_sub, &amp;_v_att)  <span class="comment">#  获取飞行姿态主题</span></span><br><span class="line">            <span class="keyword">if</span> (_v_control_mode.flag_control_attitude_enabled)</span><br><span class="line">                orb_publish(_rates_sp_id, _v_rates_sp_pub, &amp;_v_rates_sp) <span class="comment">#  publish attitude rates setpoint</span></span><br><span class="line">            <span class="keyword">else</span> &#123; <span class="keyword">if</span> (_v_control_mode.flag_control_manual_enabled)</span><br><span class="line">                orb_publish(_rates_sp_id, _v_rates_sp_pub, &amp;_v_rates_sp)</span><br><span class="line">            orb_publish(_actuators_id, _actuators_0_pub, &amp;_actuators)</span><br><span class="line">            orb_publish(ORB_ID(mc_att_ctrl_status),_controller_status_pub, &amp;_controller_status)</span><br></pre></td></tr></table></figure></p>
+<h3 id="mc_pos_control_start">mc_pos_control start</h3><p> W:\uav\Firmware\src\modules\mc_pos_control\mc_pos_control_main.cpp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">int mc_pos_control_main(int argc, char *argv[])</span><br><span class="line">    pos_control::g_control = new MulticopterPositionControl;</span><br><span class="line">    MulticopterPositionControl::start()</span><br><span class="line">        MulticopterPositionControl::task_main()</span><br><span class="line">	    orb_subscribe(ORB_ID(vehicle_status));</span><br><span class="line">	    orb_subscribe(ORB_ID(vehicle_attitude));</span><br><span class="line">	    orb_subscribe(ORB_ID(vehicle_attitude_setpoint));</span><br><span class="line">	    orb_subscribe(ORB_ID(vehicle_control_mode));</span><br><span class="line">	    orb_subscribe(ORB_ID(parameter_update));</span><br><span class="line">	    orb_subscribe(ORB_ID(manual_control_setpoint));</span><br><span class="line">	    orb_subscribe(ORB_ID(actuator_armed));</span><br><span class="line">	    orb_subscribe(ORB_ID(vehicle_<span class="built_in">local</span>_position));</span><br><span class="line">	    orb_subscribe(ORB_ID(position_setpoint_triplet));</span><br><span class="line">	    orb_subscribe(ORB_ID(vehicle_<span class="built_in">local</span>_position_setpoint));</span><br><span class="line">	    orb_subscribe(ORB_ID(vehicle_global_velocity_setpoint));</span><br><span class="line"></span><br><span class="line">            poll_subscriptions()  <span class="comment"># check &amp; copy所有传感器数据， 初始化更新</span></span><br><span class="line">            --&gt; MulticopterPositionControl::poll_subscriptions()</span><br><span class="line">            <span class="keyword">while</span> (）</span><br><span class="line">                px4_poll(&amp;fds[<span class="number">0</span>], (sizeof(fds) / sizeof(fds[<span class="number">0</span>])), <span class="number">500</span>)   <span class="comment"># 监控vehicle_local_position主题</span></span><br><span class="line">                poll_subscriptions()   <span class="comment">#  check相关数据，if update， 获取数据</span></span><br><span class="line">                update_ref()   <span class="comment">#  position setpoint</span></span><br><span class="line">                <span class="comment"># select control source</span></span><br><span class="line">                control_manual(dt)</span><br><span class="line">                control_offboard(dt)</span><br><span class="line">                control_auto(dt)</span><br><span class="line">                <span class="keyword">if</span> (!_control_mode.flag_control_manual_enabled &amp;&amp;...)</span><br><span class="line">                    orb_publish(ORB_ID(vehicle_attitude_setpoint), _att_sp_pub, &amp;_att_sp) <span class="comment"># 发布vehicle_attitude_setpoint主题</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    orb_publish(ORB_ID(vehicle_global_velocity_setpoint), _global_vel_sp_pub, &amp;_global_vel_sp)  <span class="comment"># 发布 velocity setpoint主题</span></span><br><span class="line">                orb_publish(ORB_ID(vehicle_<span class="built_in">local</span>_position_setpoint), _<span class="built_in">local</span>_pos_sp_pub, &amp;_<span class="built_in">local</span>_pos_sp)   <span class="comment"># 发布vehicle_local_position_setpoint主题</span></span><br><span class="line">                generate attitude setpoint from manual controls</span><br><span class="line">                /* publish attitude setpoint</span><br><span class="line">		 * Do not publish <span class="keyword">if</span> offboard is enabled but position/velocity control is disabled,</span><br><span class="line">		 * <span class="keyword">in</span> this <span class="keyword">case</span> the attitude setpoint is published by the mavlink app</span><br><span class="line">		 */</span><br><span class="line">                orb_publish(ORB_ID(vehicle_attitude_setpoint), _att_sp_pub, &amp;_att_sp)  <span class="comment"># 发布vehicle_attitude_setpoint主题</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PX4/" rel="tag">#PX4</a>
+          
+            <a href="/tags/源码分析/" rel="tag">#源码分析</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/27/Uav/Qualcomm-uav-blsp-port/" rel="next" title="高通无人机8074 BLSP接口说明">
+                <i class="fa fa-chevron-left"></i> 高通无人机8074 BLSP接口说明
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/07/Uav/mobile-and-uav-sensors/" rel="prev" title="手机无人机常用sensor介绍">
+                手机无人机常用sensor介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/04/Uav/qualcomm-px4-code-reading-note/"
+           data-title="高通px4代码阅读笔记" data-url="http://huaqianlee.github.io/2016/05/04/Uav/qualcomm-px4-code-reading-note/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Andy.Lee" />
+          <p class="site-author-name" itemprop="name">Andy.Lee</p>
+          <p class="site-description motion-element" itemprop="description">Just need to enjoy life.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/huaqianlee" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/huaqianlee" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/huaqianlee" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://facebook.com/huaqianlee" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://plus.google.com/u/0/107850537041795428182" target="_blank" title="GooglePlus">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GooglePlus
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://huaqianlee.github.io/" title="Andy.Lee's Blog" target="_blank">Andy.Lee's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://fpgadeveloper.wang/" title="FPGA开发者网" target="_blank">FPGA开发者网</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键路径及文件"><span class="nav-number">1.</span> <span class="nav-text">关键路径及文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按执行调用（log）顺序阅读"><span class="nav-number">2.</span> <span class="nav-text">按执行调用（log）顺序阅读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#APPS_Processor"><span class="nav-number">2.1.</span> <span class="nav-text">APPS Processor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADSP"><span class="nav-number">2.2.</span> <span class="nav-text">ADSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uorb_&_muorb"><span class="nav-number">2.3.</span> <span class="nav-text">uorb & muorb</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#uorb_start"><span class="nav-number">2.3.1.</span> <span class="nav-text">uorb start</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#muorb_start"><span class="nav-number">2.3.2.</span> <span class="nav-text">muorb start</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Krait_muorb"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">Krait muorb</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#muorb通信"><span class="nav-number">2.3.3.</span> <span class="nav-text">muorb通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#uorb通信"><span class="nav-number">2.3.4.</span> <span class="nav-text">uorb通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add_subscriber"><span class="nav-number">2.3.5.</span> <span class="nav-text">add subscriber</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传输流程"><span class="nav-number">2.4.</span> <span class="nav-text">数据传输流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#commander"><span class="nav-number">2.5.</span> <span class="nav-text">commander</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mavlink"><span class="nav-number">2.6.</span> <span class="nav-text">Mavlink</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mavlink_Reiceiver"><span class="nav-number">2.7.</span> <span class="nav-text">Mavlink Reiceiver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uart_esc_start_-D_/dev/tty-2"><span class="nav-number">2.8.</span> <span class="nav-text">uart_esc start -D /dev/tty-2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attitude_estimator_q_start_（主要接收sensor和vehicle_global_position主题，处理，_发布飞行姿态主题）"><span class="nav-number">2.9.</span> <span class="nav-text">attitude_estimator_q start     （主要接收sensor和vehicle_global_position主题，处理， 发布飞行姿态主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#position_estimator_inav_start_（订阅飞控等相关主题，接收到主题后，进行一些算法处理。_发布vehicle_local_position、vehicle_global_position主题）"><span class="nav-number">2.10.</span> <span class="nav-text">position_estimator_inav start （订阅飞控等相关主题，接收到主题后，进行一些算法处理。 发布vehicle_local_position、vehicle_global_position主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mc_att_control_start"><span class="nav-number">2.11.</span> <span class="nav-text">mc_att_control  start</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mc_pos_control_start"><span class="nav-number">2.12.</span> <span class="nav-text">mc_pos_control start</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"andylee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
