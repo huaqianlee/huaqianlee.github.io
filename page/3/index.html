@@ -302,8 +302,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/12/Android/Android编译过程详解之二/" itemprop="url">
-                  Android编译过程详解之二
+                <a class="post-title-link" href="/2015/07/18/Android/Android-Logging-system-Android日志系统详解/" itemprop="url">
+                  Android日志系统(logging system)详解
                 </a>
               
             
@@ -316,8 +316,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-07-12T16:43:04+08:00" content="Jul 12 2015">
-              Jul 12 2015
+            <time itemprop="dateCreated" datetime="2015-07-18T13:43:04+08:00" content="Jul 18 2015">
+              Jul 18 2015
             </time>
           </span>
 
@@ -346,8 +346,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/12/Android/Android编译过程详解之二/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/12/Android/Android编译过程详解之二/" itemprop="commentsCount"></span>
+                <a href="/2015/07/18/Android/Android-Logging-system-Android日志系统详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/18/Android/Android-Logging-system-Android日志系统详解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -371,22 +371,11 @@
 
       
         
-          <p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a><br>　<br>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　　./go.sh -j8 or make -j8／--jobs</span><br></pre></td></tr></table></figure></p>
-<p>参数“-j“ 和”—jobs ”指定了同时编译的线程数量，通常是编译主机 CPU 支持的并发线程总数的 1 倍或 2 倍（如：在一个 4 核，每个核支持两个线程的 CPU 上，可以使用 make -j8 或 make -j16）。在调用 make 命令时，如果没有指定任何目标，则将编译默认目标“droid”（下面详解），然后将会编译出完整的 Android 系统镜像。</p>
-<h2 id="build系统分类">build系统分类</h2><p>　　整个build系统的Make文件可以分为三类：</p>
-<ol>
-<li>build系统核心文件：定义整个build系统的框架，其他所有make文件都是在这个框架的基础上写出来的。</li>
-<li>产品的make文件：位于device目录，通常以公司名和产品名分为两级目录，如：\device\qcom\msm8916_32。</li>
-<li>模块的make文件：每个模块专用的make文件，kernel中统一名字为Makefile，其他为Android.mk。　</li>
-</ol>
-<h2 id="build结果">build结果</h2><p>所有的编译产物都将位于 /out 目录下，该目录下主要有以下几个子目录：</p>
-<ul>
-<li>/out/host/：该目录下包含了针对主机的 Android 开发工具的产物。即 SDK 中的各种工具，例如：emulator，adb，aapt 等。</li>
-<li>/out/target/common/：该目录下包含了针对设备的共通的编译产物，主要是 Java 应用代码和 Java 库。</li>
-<li>/out/target/product/<product_name>/：包含了针对特定设备的编译结果以及平台相关的 C/C++ 库和二进制文件。其中，<product_name>是具体目标设备的名称。</li>
-<li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。
+          <p>　　<a href="http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">Android日志系统详解</a><br>　　<a href="http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
+<p>　　不管是做Android应用还是做Android中间层和底层，Logging系统都是必须要了解的；因为Android不像单片机程序UCOS那么简单,可以很方便的单步调试。所以，就准备用一篇blog来分析一下logging system。</p>
+<h2 id="概览">概览</h2><p>　　Android提供了一个灵活的logging系统，允许应用程序和系统组件等整个系统记录logging信息，它是独立于Linux Kernel的一个logging系统，kernel是通过”pr_info”、”printk”等存储，通过“dmesg”或“cat  /proc/kmsg”获取。不过，Android logging 系统也是将信息存在内核缓存区。其结构如下：　<br>　<br>　　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogAndroid-logging-system.png" alt="image by Tetsuyuki Kobabayshi"><br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/12/Android/Android编译过程详解之二/#more" rel="contents">
+            <a class="btn" href="/2015/07/18/Android/Android-Logging-system-Android日志系统详解/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -518,6 +507,141 @@
 <h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/12/Android/Android编译过程详解之三/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/12/Android/Android编译过程详解之二/" itemprop="url">
+                  Android编译过程详解之二
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-07-12T16:43:04+08:00" content="Jul 12 2015">
+              Jul 12 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/12/Android/Android编译过程详解之二/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/12/Android/Android编译过程详解之二/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a><br>　<br>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　　./go.sh -j8 or make -j8／--jobs</span><br></pre></td></tr></table></figure></p>
+<p>参数“-j“ 和”—jobs ”指定了同时编译的线程数量，通常是编译主机 CPU 支持的并发线程总数的 1 倍或 2 倍（如：在一个 4 核，每个核支持两个线程的 CPU 上，可以使用 make -j8 或 make -j16）。在调用 make 命令时，如果没有指定任何目标，则将编译默认目标“droid”（下面详解），然后将会编译出完整的 Android 系统镜像。</p>
+<h2 id="build系统分类">build系统分类</h2><p>　　整个build系统的Make文件可以分为三类：</p>
+<ol>
+<li>build系统核心文件：定义整个build系统的框架，其他所有make文件都是在这个框架的基础上写出来的。</li>
+<li>产品的make文件：位于device目录，通常以公司名和产品名分为两级目录，如：\device\qcom\msm8916_32。</li>
+<li>模块的make文件：每个模块专用的make文件，kernel中统一名字为Makefile，其他为Android.mk。　</li>
+</ol>
+<h2 id="build结果">build结果</h2><p>所有的编译产物都将位于 /out 目录下，该目录下主要有以下几个子目录：</p>
+<ul>
+<li>/out/host/：该目录下包含了针对主机的 Android 开发工具的产物。即 SDK 中的各种工具，例如：emulator，adb，aapt 等。</li>
+<li>/out/target/common/：该目录下包含了针对设备的共通的编译产物，主要是 Java 应用代码和 Java 库。</li>
+<li>/out/target/product/<product_name>/：包含了针对特定设备的编译结果以及平台相关的 C/C++ 库和二进制文件。其中，<product_name>是具体目标设备的名称。</li>
+<li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/12/Android/Android编译过程详解之二/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1414,129 +1538,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/21/Android/高通Android不带电量计的电量计算方式/" itemprop="url">
-                  Android不带电量计的电量计算
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-01-21T20:10:01+08:00" content="Jan 21 2015">
-              Jan 21 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/01/21/Android/高通Android不带电量计的电量计算方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/21/Android/高通Android不带电量计的电量计算方式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>　　一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。</p>
-<h2 id="SOC（state_of_charge_荷电状态_-_电量）">SOC（state of charge 荷电状态 - 电量）</h2><p>英文缩写:<br>FCC　　Full-charge capacity<br>RC 　　Remaining capacity (剩余电量)<br>CC 　　Coulumb counter<br>UUC　　Unusable capacity<br>RUC　　Remaining usable capacity<br>SoC　　State of charge<br>OCV　　Open circuit voltage<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/21/Android/高通Android不带电量计的电量计算方式/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1582,7 +1583,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">40</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
