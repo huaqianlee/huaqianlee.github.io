@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-03-21T11:55:25.645Z</updated>
+  <updated>2017-03-21T11:57:47.453Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -16,16 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>PX4 for Snapdragon Flight</title>
     <link href="http://huaqianlee.github.io/2017/03/21/Uav/PX4%20for%20Snapdragon%20Flight/"/>
     <id>http://huaqianlee.github.io/2017/03/21/Uav/PX4 for Snapdragon Flight/</id>
-    <published>2017-03-21T11:55:25.645Z</published>
-    <updated>2017-03-21T11:55:25.645Z</updated>
+    <published>2017-03-21T11:45:25.000Z</published>
+    <updated>2017-03-21T11:57:47.453Z</updated>
     
-    <content type="html"><![CDATA[<p>title: “PX4 for Snapdragon Flight”<br>date: 2017-03-21 19:45:25<br>categories: Uav<br>tags: </p>
-<ul>
-<li>PX4<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1>主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：</li>
-</ul>
+    <content type="html"><![CDATA[<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：</p>
 <p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases" target="_blank" rel="external">PX4编译和执行</a></p>
 <p><a href="https://dev.px4.io" target="_blank" rel="external">PX4开发手册</a></p>
 <p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/" target="_blank" rel="external">QGroundcontrol开发手册</a></p>
@@ -97,10 +94,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;title: “PX4 for Snapdragon Flight”&lt;br&gt;date: 2017-03-21 19:45:25&lt;br&gt;categories: Uav&lt;br&gt;tags: &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;PX4&lt;h1 id=&quot;快速驱动无人机升空&quot;&gt;快速驱动无人机升空&lt;/h1&gt;主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：&lt;/li&gt;
-&lt;/ul&gt;
+      &lt;h1 id=&quot;快速驱动无人机升空&quot;&gt;快速驱动无人机升空&lt;/h1&gt;&lt;p&gt;主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases&quot;&gt;PX4编译和执行&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://dev.px4.io&quot;&gt;PX4开发手册&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/&quot;&gt;QGroundcontrol开发手册&lt;/a&gt;&lt;/p&gt;
@@ -108,6 +102,10 @@
     
     </summary>
     
+      <category term="Uav" scheme="http://huaqianlee.github.io/categories/Uav/"/>
+    
+    
+      <category term="PX4" scheme="http://huaqianlee.github.io/tags/PX4/"/>
     
   </entry>
   
