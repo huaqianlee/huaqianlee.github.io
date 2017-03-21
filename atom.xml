@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-03-21T12:17:49.249Z</updated>
+  <updated>2017-03-21T12:19:55.235Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="http://huaqianlee.github.io/2017/03/21/Uav/PX4%20for%20Snapdragon%20Flight/"/>
     <id>http://huaqianlee.github.io/2017/03/21/Uav/PX4 for Snapdragon Flight/</id>
     <published>2017-03-21T11:45:25.000Z</published>
-    <updated>2017-03-21T12:17:49.249Z</updated>
+    <updated>2017-03-21T12:19:55.235Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙</p>
-<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：</p>
+<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙.</p>
 </blockquote>
+<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：</p>
 <p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases" target="_blank" rel="external">PX4编译和执行</a></p>
 <p><a href="https://dev.px4.io" target="_blank" rel="external">PX4开发手册</a></p>
 <p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/" target="_blank" rel="external">QGroundcontrol开发手册</a></p>
@@ -86,9 +86,9 @@
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙&lt;/p&gt;
-&lt;h1 id=&quot;快速驱动无人机升空&quot;&gt;快速驱动无人机升空&lt;/h1&gt;&lt;p&gt;主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：&lt;/p&gt;
+&lt;p&gt;公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙.&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h1 id=&quot;快速驱动无人机升空&quot;&gt;快速驱动无人机升空&lt;/h1&gt;&lt;p&gt;主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases&quot;&gt;PX4编译和执行&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://dev.px4.io&quot;&gt;PX4开发手册&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/&quot;&gt;QGroundcontrol开发手册&lt;/a&gt;&lt;/p&gt;
