@@ -86,20 +86,24 @@
 
 
 
-<meta name="description" content="快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：
+<meta name="description" content="公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙
+快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：
+
 PX4编译和执行
 PX4开发手册
 QGroundcontrol开发手册
-连接无人机首先PC通过WiFi连上无人机，通过xshell或者putty ssh远程登录无人机。">
+连接无人机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PX4 for Snapdragon Flight">
 <meta property="og:url" content="http://huaqianlee.github.io/2017/03/21/Uav/PX4 for Snapdragon Flight/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：
+<meta property="og:description" content="公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙
+快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：
+
 PX4编译和执行
 PX4开发手册
 QGroundcontrol开发手册
-连接无人机首先PC通过WiFi连上无人机，通过xshell或者putty ssh远程登录无人机。">
+连接无人机">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/start_qground.jpg">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/com_link1.jpg">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/com_link2.jpg">
@@ -115,11 +119,13 @@ QGroundcontrol开发手册
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/tool_qg.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PX4 for Snapdragon Flight">
-<meta name="twitter:description" content="快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：
+<meta name="twitter:description" content="公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙
+快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：
+
 PX4编译和执行
 PX4开发手册
 QGroundcontrol开发手册
-连接无人机首先PC通过WiFi连上无人机，通过xshell或者putty ssh远程登录无人机。">
+连接无人机">
 
 
 
@@ -390,7 +396,10 @@ QGroundcontrol开发手册
       
 
       
-        <h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：</p>
+        <blockquote>
+<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙</p>
+<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：</p>
+</blockquote>
 <p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases" target="_blank" rel="external">PX4编译和执行</a></p>
 <p><a href="https://dev.px4.io" target="_blank" rel="external">PX4开发手册</a></p>
 <p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/" target="_blank" rel="external">QGroundcontrol开发手册</a></p>
@@ -399,43 +408,31 @@ QGroundcontrol开发手册
 <h2 id="运行PX4">运行PX4</h2><p>执行命令./px4 mainapp.config ，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">root@linaro-developer:/home/linaro<span class="comment"># ./px4 mainapp.config </span></span><br><span class="line">sh: <span class="number">1</span>: cannot create /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor: Directory nonexistent</span><br><span class="line">commands file: mainapp.config</span><br><span class="line"></span><br><span class="line">______  __   __    ___ </span><br><span class="line">| ___ \ \ \ / /   /   |</span><br><span class="line">| |_/ /  \ V /   / /| |</span><br><span class="line">|  __/   /   \  / /_| |</span><br><span class="line">| |     / /^\ \ \___  |</span><br><span class="line">\_|     \/   \/     |_/</span><br><span class="line"></span><br><span class="line">px4 starting.</span><br><span class="line"></span><br><span class="line">INFO  [sdlog2] [blackbox] /root/<span class="built_in">log</span>/sess018</span><br><span class="line">INFO  [sdlog2] [blackbox] recording: <span class="built_in">log</span>001.px4<span class="built_in">log</span></span><br><span class="line">INFO  [dataman] Unkown restart, data manager file <span class="string">'/home/linaro/dataman'</span> size is <span class="number">47640</span> bytes</span><br><span class="line">INFO  [mavlink] mode: Normal, data rate: <span class="number">1000000</span> B/s on udp port <span class="number">14556</span> remote port <span class="number">14550</span></span><br><span class="line">Sleeping <span class="keyword">for</span> <span class="number">1</span> s; (<span class="number">1000000</span> us).</span><br><span class="line">pxh&gt; INFO  [mavlink] using network interface wlan0, IP: <span class="number">192.168</span>.<span class="number">1.1</span></span><br><span class="line">INFO  [mavlink] with broadcast IP: <span class="number">192.168</span>.<span class="number">1.255</span></span><br><span class="line"></span><br><span class="line">pxh&gt;</span><br></pre></td></tr></table></figure></p>
 <h2 id="运行QGroundcontrol">运行QGroundcontrol</h2><h3 id="启动QGroundcontrol">启动QGroundcontrol</h3><p>我们使用的Snapdragon板好像只能支持QGroundControl V2.7.1 （<a href="http://pan.baidu.com/s/1sl2fXhF" target="_blank" rel="external">QGroundControl-V2.7.1下载</a>），启动QGroundcontrol。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/start_qground.jpg" alt="lanuch"></p>
 <h3 id="连接无人机-1">连接无人机</h3><ol>
-<li>File &gt; Settings &gt; CommLinks</li>
+<li><p>File &gt; Settings &gt; CommLinks<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link1.jpg" alt=""></p>
+</li>
+<li><p>点击ADD 添加新的远端连接<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link2.jpg" alt=""></p>
+</li>
+<li><p>点击ADD 添加目标主机<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link3.jpg" alt=""></p>
+</li>
+<li><p>完成，如下<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link.jpg" alt=""></p>
+</li>
+<li><p>连接无人机，就在上一界面点击connect或者到主界面右上角点击connect连接<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/connect.jpg" alt=""></p>
+</li>
 </ol>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link1.jpg" alt=""></p>
-<ol>
-<li>点击ADD 添加新的远端连接</li>
-</ol>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link2.jpg" alt=""></p>
-<ol>
-<li>点击ADD 添加目标主机</li>
-</ol>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link3.jpg" alt=""></p>
-<ol>
-<li>完成，如下</li>
-</ol>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link.jpg" alt=""></p>
-<ol>
-<li>连接无人机，就在上一界面点击connect或者到主界面右上角点击connect连接</li>
-</ol>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/connect.jpg" alt=""></p>
 <h3 id="连接遥控器">连接遥控器</h3><ol>
-<li>File &gt; Settings &gt; Controllers</li>
+<li><p>File &gt; Settings &gt; Controllers<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/controller.jpg" alt=""></p>
+</li>
+<li><p>Enable controllers, 选择相应遥控器，设为Manual，并进行校准，如下<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/controller1.jpg" alt=""></p>
+</li>
 </ol>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/controller.jpg" alt=""></p>
-<ol>
-<li>Enable controllers, 选择相应遥控器，设为Manual，并进行校准，如下</li>
-</ol>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/controller1.jpg" alt=""></p>
 <h3 id="机身设置及校准">机身设置及校准</h3><p>进入setup界面，根据提示进行设置校准，完成后项目将显示绿色小圆点或者边框，我使用的板子POWER部分不能校准成功，如下：</p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/setup_ok.jpg" alt=""></p>
 <h3 id="控制起飞">控制起飞</h3><ol>
-<li>点击 ARM SYSTEM 起桨，可通过遥控器控制</li>
+<li><p>点击 ARM SYSTEM 起桨，可通过遥控器控制<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/fly.jpg" alt="take_off"></p>
+</li>
+<li><p>点击 DISARM SYSTEM 停桨<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/fly_end.png" alt="land"></p>
+</li>
 </ol>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/fly.jpg" alt="take_off"></p>
-<ol>
-<li>点击 DISARM SYSTEM 停桨</li>
-</ol>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/fly_end.png" alt="land"></p>
 <h3 id="分析">分析</h3><p>Analyze界面可以实时挂载mavilink数据包等信息</p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/analyze.jpg" alt="data"></p>
 <h3 id="打开自己想要的窗口">打开自己想要的窗口</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/tool_qg.jpg" alt="window"></p>
