@@ -86,24 +86,16 @@
 
 
 
-<meta name="description" content="公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙.
-
-快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：
-PX4编译和执行
-PX4开发手册
-QGroundcontrol开发手册
-连接无人">
+<meta name="description" content="公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. 
+ 　　
+快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: DroneControl)，准备好环境，有问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PX4 for Snapdragon Flight">
-<meta property="og:url" content="http://huaqianlee.github.io/2017/03/21/Uav/PX4 for Snapdragon Flight/index.html">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/03/21/Uav/PX4-for-Snapdragon-Flight/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙.
-
-快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：
-PX4编译和执行
-PX4开发手册
-QGroundcontrol开发手册
-连接无人">
+<meta property="og:description" content="公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. 
+ 　　
+快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: DroneControl)，准备好环境，有问题">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/start_qground.jpg">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/com_link1.jpg">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/com_link2.jpg">
@@ -119,13 +111,9 @@ QGroundcontrol开发手册
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/tool_qg.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PX4 for Snapdragon Flight">
-<meta name="twitter:description" content="公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙.
-
-快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：
-PX4编译和执行
-PX4开发手册
-QGroundcontrol开发手册
-连接无人">
+<meta name="twitter:description" content="公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. 
+ 　　
+快速驱动无人机升空主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: DroneControl)，准备好环境，有问题">
 
 
 
@@ -146,7 +134,7 @@ QGroundcontrol开发手册
 
 
 
-  <link rel="canonical" href="http://huaqianlee.github.io/2017/03/21/Uav/PX4 for Snapdragon Flight/"/>
+  <link rel="canonical" href="http://huaqianlee.github.io/2017/03/21/Uav/PX4-for-Snapdragon-Flight/"/>
 
   <title> PX4 for Snapdragon Flight | Andy.Lee's  Blog </title>
 </head>
@@ -372,8 +360,8 @@ QGroundcontrol开发手册
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/03/21/Uav/PX4 for Snapdragon Flight/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/21/Uav/PX4 for Snapdragon Flight/" itemprop="commentsCount"></span>
+                <a href="/2017/03/21/Uav/PX4-for-Snapdragon-Flight/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/21/Uav/PX4-for-Snapdragon-Flight/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -397,9 +385,10 @@ QGroundcontrol开发手册
 
       
         <blockquote>
-<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙.</p>
+<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. 
+ 　　</p>
+<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: <a href="https://github.com/ATLFlight/drone-controller" target="_blank" rel="external">DroneControl</a>)，准备好环境，有问题主要参考如下三个地址：</p>
 </blockquote>
-<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，目前手机APP+PX4的方式还未成功，准备好环境，有问题主要参考如下三个地址：</p>
 <p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases" target="_blank" rel="external">PX4编译和执行</a></p>
 <p><a href="https://dev.px4.io" target="_blank" rel="external">PX4开发手册</a></p>
 <p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/" target="_blank" rel="external">QGroundcontrol开发手册</a></p>
@@ -541,8 +530,8 @@ QGroundcontrol开发手册
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/21/Uav/PX4 for Snapdragon Flight/"
-           data-title="PX4 for Snapdragon Flight" data-url="http://huaqianlee.github.io/2017/03/21/Uav/PX4 for Snapdragon Flight/">
+      <div class="ds-thread" data-thread-key="2017/03/21/Uav/PX4-for-Snapdragon-Flight/"
+           data-title="PX4 for Snapdragon Flight" data-url="http://huaqianlee.github.io/2017/03/21/Uav/PX4-for-Snapdragon-Flight/">
       </div>
     
   </div>
