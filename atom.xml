@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-03-23T13:33:01.538Z</updated>
+  <updated>2017-03-25T15:08:52.793Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -16,17 +16,75 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>FirstCode learning note one</title>
+    <link href="http://huaqianlee.github.io/2017/03/24/Android/FirstCode-learning-note-one/"/>
+    <id>http://huaqianlee.github.io/2017/03/24/Android/FirstCode-learning-note-one/</id>
+    <published>2017-03-24T12:07:01.000Z</published>
+    <updated>2017-03-25T15:08:52.793Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过60%都没怎么看. 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从&lt;第一行代码&gt;第2版开始.</p>
+<p>前面一周多,利用公司和家里的业余时间学了第1~5章, 对这部分知识做了一个简单的思维导图.<br><img src="后续补上" alt="脑图1"></p>
+<a id="more"></a>
+<h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"></p>
+<ul>
+<li>.gradle &amp; .idea<br>Android Studio自动生成, 无需关心, 版本管理时,一般将其忽略(即.gitignore文件).</li>
+<li>app<br>项目代码、资源基本位于此路径。</li>
+<li>build<br>编译自动生成</li>
+<li>gradle<br>gradle wrapper配置文件.</li>
+<li>.gitignore<br>git版本管理忽略文件及路径的脚本</li>
+<li>build.gradle<br>项目全局的gradle构建脚本, 通常不需修改</li>
+<li>gradle.properties<br>全局gradle的配置文件,所配置属性影响项目中所有gradle编译脚本</li>
+<li>gradlew &amp; gradlew.bat<br>用以命令行界面执行gradle命令, gradlew用于Linux或Mac Os, gradlew.bat 用于windows.</li>
+<li>项目名.iml<br>iml文件是InteliJ IDEA项目(Android Studio基于其开发)自动生成的文件</li>
+<li>local.properties<br>指定本机Android SDK路径</li>
+<li>settings.gradle<br>指定项目中所有引入的模块</li>
+</ul>
+<h3 id="app目录">app目录</h3><ul>
+<li>build<br>编译自动生成</li>
+<li>libs<br>构建项目所需的库第三方.jar包</li>
+<li>androidTest<br>对项目进行一些自动化测试的Android Test测试用例</li>
+<li>java<br>所有Java代码的路径</li>
+<li>res<br>项目所使用的所有图片、布局、字符等资源路径</li>
+<li>AndroidManifest.xml<br>整个项目的配置文件，权限声明、四大组件注册</li>
+<li>test<br>Unit Test测试用例，项目自动化测试的另一种方式</li>
+<li>.gitignore<br>git版本管理忽略文件及路径的脚本</li>
+<li>app.iml<br>InteliJ IDEA文件</li>
+<li>build.gradle<br>app模块的gradle构建脚本</li>
+<li>proguard-rules.pro<br>指定项目代码的混淆规则</li>
+</ul>
+<h3 id="build-gradle">build.gradle</h3><p>最外层build.gradle<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// Top-level build file <span class="built_in">where</span> you can add configuration options common to all sub-projects/modules.</span><br><span class="line"></span><br><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()   <span class="comment"># 声明jcenter代码托管库</span></span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath <span class="string">'com.android.tools.build:gradle:2.3.0'</span>  <span class="comment"># 声明Android版本gradle</span></span><br><span class="line"></span><br><span class="line">        // NOTE: Do not place your application dependencies here; they belong</span><br><span class="line">        // <span class="keyword">in</span> the individual module build.gradle files</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task clean(<span class="built_in">type</span>: Delete) &#123;</span><br><span class="line">    delete rootProject.buildDir</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>app目录下的build.gradle<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span>  <span class="comment"># 声明application or library </span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion <span class="number">24</span></span><br><span class="line">    buildToolsVersion <span class="string">"25.0.0"</span></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">"me.huaqianlee.broadcastbestpractice"</span>  </span><br><span class="line">        minSdkVersion <span class="number">15</span></span><br><span class="line">        targetSdkVersion <span class="number">24</span></span><br><span class="line">        versionCode <span class="number">1</span>   <span class="comment"># 项目版本号</span></span><br><span class="line">        versionName <span class="string">"1.0"</span> <span class="comment"># 项目版本名</span></span><br><span class="line">        <span class="built_in">test</span>InstrumentationRunner <span class="string">"android.support.test.runner.AndroidJUnitRunner"</span></span><br><span class="line">    &#125;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled <span class="literal">false</span>   <span class="comment"># 指定是否混淆代码</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></span><br><span class="line">            <span class="comment"># xxx.txt Android SDK目录下项目通用混淆规则</span></span><br><span class="line">            <span class="comment"># xxx.pro 当前项目根目录下,编写特有混淆规则</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123; <span class="comment"># 指定当前项目的所有依赖关系(本地依赖\库依赖\远程依赖)</span></span><br><span class="line">    compile fileTree(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])  <span class="comment"># 本地依赖,libs下的所有.jar</span></span><br><span class="line">    androidTestCompile(<span class="string">'com.android.support.test.espresso:espresso-core:2.2.2'</span>, &#123;</span><br><span class="line">        exclude group: <span class="string">'com.android.support'</span>, module: <span class="string">'support-annotations'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment"># 远程依赖</span></span><br><span class="line">    compile <span class="string">'com.android.support:appcompat-v7:24.2.1'</span> </span><br><span class="line">    compile <span class="string">'com.android.support.constraint:constraint-layout:1.0.2'</span></span><br><span class="line">    <span class="built_in">test</span>Compile <span class="string">'junit:junit:4.12'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 库依赖: compile project(':xxx')</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过60%都没怎么看. 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从&amp;lt;第一行代码&amp;gt;第2版开始.&lt;/p&gt;
+&lt;p&gt;前面一周多,利用公司和家里的业余时间学了第1~5章, 对这部分知识做了一个简单的思维导图.&lt;br&gt;&lt;img src=&quot;后续补上&quot; alt=&quot;脑图1&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
+    
+    
+      <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
+    
+      <category term="学习笔记" scheme="http://huaqianlee.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>PX4 for Snapdragon Flight</title>
     <link href="http://huaqianlee.github.io/2017/03/21/Uav/PX4-for-Snapdragon-Flight/"/>
     <id>http://huaqianlee.github.io/2017/03/21/Uav/PX4-for-Snapdragon-Flight/</id>
     <published>2017-03-21T11:45:25.000Z</published>
-    <updated>2017-03-23T13:33:01.538Z</updated>
+    <updated>2017-03-23T15:39:22.587Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. 
- 　　</p>
-<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: <a href="https://github.com/ATLFlight/drone-controller" target="_blank" rel="external">DroneControl</a>)，准备好环境，有问题主要参考如下三个地址：</p>
+<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. </p>
 </blockquote>
+<p> 　　</p>
+<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: <a href="https://github.com/ATLFlight/drone-controller" target="_blank" rel="external">DroneControl</a>)，准备好环境，有问题主要参考如下三个地址：</p>
 <p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases" target="_blank" rel="external">PX4编译和执行</a></p>
 <p><a href="https://dev.px4.io" target="_blank" rel="external">PX4开发手册</a></p>
 <p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/" target="_blank" rel="external">QGroundcontrol开发手册</a></p>
@@ -87,10 +145,10 @@
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. 
- 　　&lt;/p&gt;
-&lt;h1 id=&quot;快速驱动无人机升空&quot;&gt;快速驱动无人机升空&lt;/h1&gt;&lt;p&gt;主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: &lt;a href=&quot;https://github.com/ATLFlight/drone-controller&quot;&gt;DroneControl&lt;/a&gt;)，准备好环境，有问题主要参考如下三个地址：&lt;/p&gt;
+&lt;p&gt;公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. &lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt; 　　&lt;/p&gt;
+&lt;h1 id=&quot;快速驱动无人机升空&quot;&gt;快速驱动无人机升空&lt;/h1&gt;&lt;p&gt;主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: &lt;a href=&quot;https://github.com/ATLFlight/drone-controller&quot;&gt;DroneControl&lt;/a&gt;)，准备好环境，有问题主要参考如下三个地址：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases&quot;&gt;PX4编译和执行&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://dev.px4.io&quot;&gt;PX4开发手册&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/&quot;&gt;QGroundcontrol开发手册&lt;/a&gt;&lt;/p&gt;
@@ -110,7 +168,7 @@
     <link href="http://huaqianlee.github.io/2017/03/17/Life/Ashamed/"/>
     <id>http://huaqianlee.github.io/2017/03/17/Life/Ashamed/</id>
     <published>2017-03-17T11:53:12.000Z</published>
-    <updated>2017-03-17T14:40:22.012Z</updated>
+    <updated>2017-03-22T12:51:34.859Z</updated>
     
     <content type="html"><![CDATA[<p>惭愧! 惭愧!</p>
 <p>  作为一个即将迈入三十的中年人, 又懈怠浪费了这么多时间. 工作不给力, 得好好准备准备换换环境了, 然后也差不多该回成都了.</p>
@@ -1496,56 +1554,6 @@ git commit
       &lt;p&gt;　　&lt;a href=&quot;http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/&quot;&gt;Android日志系统详解&lt;/a&gt;&lt;br&gt;　　&lt;a href=&quot;http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/&quot;&gt;How to debug with Android logging&lt;/a&gt;&lt;br&gt;　　&lt;a href=&quot;http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/&quot;&gt;怎么抓取Android日志文件&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;　　前两篇blog分别介绍了Android logging系统及编程时怎么应用，关于kernel中的log系统，前面只是大概提及了一下，下次再详细分析。相信大家都知道调试时需要打开USB调试模式，接下来就分析一下怎么抓取日志文件。&lt;/p&gt;
 &lt;h2 id=&quot;logcat命令详解&quot;&gt;logcat命令详解&lt;/h2&gt;&lt;p&gt;　　logcat是最常用的命令之一，其语法如下；&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
-    
-    
-      <category term="Log" scheme="http://huaqianlee.github.io/tags/Log/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>How to debug with Android logging</title>
-    <link href="http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/"/>
-    <id>http://huaqianlee.github.io/2015/07/18/Android/怎么用Android日志系统更好地去调试-How-to-debug-with-Android-logging/</id>
-    <published>2015-07-18T07:43:04.000Z</published>
-    <updated>2016-08-01T15:18:06.630Z</updated>
-    
-    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a><br>　　<a href="http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/" target="_blank" rel="external">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" target="_blank" rel="external">怎么抓取Android日志文件</a></p>
-<p>　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：<a href="http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a>。其系统架构如下：<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg" alt="image by simon"></p>
-<blockquote>
-<p>此图与4.0以上的系统有些差异,新版Android增加了log_system</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="Java日志接口">Java日志接口</h2><p>　　此接口一般应用于编写APP时。</p>
-<h3 id="Logging类">Logging类</h3><p>类名：android.util.Log，路径：frameworks/base/core/java/android/util/Log.java。主要方法如下：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Log</span>.v();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">d</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">i</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">w</span>();</span><br><span class="line"><span class="keyword">Log</span>.<span class="literal">e</span>();</span><br><span class="line"><span class="keyword">Log</span>.a();</span><br></pre></td></tr></table></figure></p>
-<p>Log信息显示等级从高到底分别为：ERROR，WARN，INFO，DEBUG，VERBOSE。VERBOSE除了开发期间，是不应该被编译进APP的，DEBUG应该编译但在runtime被忽略，ERROR，WARN和INFO logs则一直被保留。更加详细的内容见 ：<a href="http://developer.android.com/reference/android/util/Log.html" target="_blank" rel="external">Log.html</a>。</p>
-<blockquote>
-<p>一个好的习惯是在自己的类中定义一个TAG常量，如：private static final String TAG = “MyActivity”;然后通过Log.i(TAG，”I am “+name);　</p>
-</blockquote>
-<h3 id="Demo">Demo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package me.huaqianlee.demo;</span><br><span class="line">import android.app.Activity;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line">import android.util.Log; </span><br><span class="line"></span><br><span class="line">private static final String TAG = <span class="string">"MyActivity"</span>;</span><br><span class="line"></span><br><span class="line">public class Demo extends Activity &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">        TextView tv = new TextView(this);</span><br><span class="line">        tv.setText(<span class="string">"Hello, I am andy lee!"</span>);</span><br><span class="line">        <span class="built_in">set</span>ContentView(tv);</span><br><span class="line"></span><br><span class="line">        Log.i(TAG, <span class="string">"this is a log.i message"</span>);</span><br><span class="line">        Log.v(TAG, <span class="string">"this  is a log.v message"</span>);</span><br><span class="line">        Log.d(TAG, <span class="string">"this  is a log.d message"</span>);</span><br><span class="line">        Log.w(TAG, <span class="string">"this  is a log.w message"</span>);</span><br><span class="line">        Log.e(TAG, <span class="string">"this  is a log.e message"</span>);</span><br><span class="line">        Log.a(TAG, <span class="string">"this  is a log.a message"</span>);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="C/C++日志接口">C/C++日志接口</h2><p>　　此接口一般应用于JNI和HAL层。</p>
-<h3 id="Logging代码">Logging代码</h3><p>　　Log信息的等级同上，关键代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;cutils/log.h&gt; //路径：system/core/include/cutils/log.h</span></span><br><span class="line">/*公共日志宏*/</span><br><span class="line">ALOGV </span><br><span class="line">ALOGD </span><br><span class="line">ALOGI </span><br><span class="line">ALOGW </span><br><span class="line">ALOGE</span><br><span class="line"></span><br><span class="line">/*条件日志宏*/</span><br><span class="line">ALOGV_IF </span><br><span class="line">ALOGD_IF  </span><br><span class="line">ALOGI_IF  </span><br><span class="line">ALOGW_IF  </span><br><span class="line">ALOGE_IF </span><br><span class="line"></span><br><span class="line">// 在system/core/include/<span class="built_in">log</span>/log.h(被cutils/log.h包含)中定义如下：</span><br><span class="line"><span class="comment">#define CONDITION(cond)     (__builtin_expect((cond)!=0, 0))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ifndef ALOGV_IF</span></span><br><span class="line"><span class="comment">#if LOG_NDEBUG</span></span><br><span class="line"><span class="comment">#define ALOGV_IF(cond, ...)   ((void)0)</span></span><br><span class="line"><span class="comment">#else</span></span><br><span class="line"><span class="comment">#define ALOGV_IF(cond, ...) \</span></span><br><span class="line">    ( (CONDITION(cond)) \</span><br><span class="line">    ? ((void)ALOG(LOG_VERBOSE, LOG_TAG, __VA_ARGS__)) \</span><br><span class="line">    : (void)<span class="number">0</span> )</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<ol>
-<li>应该首先在c文件中定义LOG_TAG。</li>
-<li>在Android.mk中添加：LOCAL_SHARED_LIBRARIES := liblog libcutils</li>
-</ol>
-</blockquote>
-<h3 id="Demo-1">Demo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt; </span></span><br><span class="line"><span class="comment">#include &lt;cutils/log.h&gt; /* log header file*/</span></span><br><span class="line"><span class="comment">#include &lt;cutils/properties.h&gt;</span></span><br><span class="line"></span><br><span class="line">/* define <span class="built_in">log</span> tag */</span><br><span class="line"><span class="comment">#ifdef LOG_TAG</span></span><br><span class="line"><span class="comment">#undef LOG_TAG</span></span><br><span class="line"><span class="comment">#define LOG_TAG "app"</span></span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    ALOGV(<span class="string">"Verbose: _app"</span>);</span><br><span class="line">    ALOGD(<span class="string">"Debug: _app"</span>);</span><br><span class="line">    ALOGI(<span class="string">"Info: _app"</span>);</span><br><span class="line">    ALOGW(<span class="string">"Warn: _app"</span>);</span><br><span class="line">    ALOGE(<span class="string">"Error: _app"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"I am andy lee！\n"</span>);</span><br><span class="line">    <span class="built_in">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Android上的log格式">Android上的log格式</h2><p>　　　Log信息的格式及详解如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">tv_sec   tv_nsec     priority     pid    tid     tag     messageLen       Message</span><br><span class="line"></span><br><span class="line">tag: 标签</span><br><span class="line">tv_sec &amp; tv_nsec: 日志的时间戳</span><br><span class="line">pid: 打印日志的进程ID</span><br><span class="line">tid: 打印日志的线程ID</span><br><span class="line">Priority： 日志等级（或优先级），取值如下</span><br><span class="line">  V — Verbose (lowest priority)</span><br><span class="line">  D — Debug</span><br><span class="line">  I — Info</span><br><span class="line">  W — Warning</span><br><span class="line">  E — Error</span><br><span class="line">  A — Assert</span><br></pre></td></tr></table></figure></p>
-<h2 id="Reference">Reference</h2><p><a href="http://log4think.com/debug-android-logging/" target="_blank" rel="external">http://log4think.com/debug-android-logging/</a><br><a href="http://developer.android.com/reference/android/util/Log.html" target="_blank" rel="external">http://developer.android.com/reference/android/util/Log.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　　&lt;a href=&quot;http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/&quot;&gt;Android日志系统详解&lt;/a&gt;&lt;br&gt;　　&lt;a href=&quot;http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/&quot;&gt;How to debug with Android logging&lt;/a&gt;&lt;br&gt;　　&lt;a href=&quot;http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/&quot;&gt;怎么抓取Android日志文件&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;　　Android logging system为logging系统提供了一个Java类android.util.Log，也提供了一个c/c++的log库，在kernel中有四个设备节点，详细见：&lt;a href=&quot;http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/&quot;&gt;Android日志系统详解&lt;/a&gt;。其系统架构如下：&lt;br&gt;　　　&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/blogaplogd.jpg&quot; alt=&quot;image by simon&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;此图与4.0以上的系统有些差异,新版Android增加了log_system&lt;/p&gt;
-&lt;/blockquote&gt;
     
     </summary>
     
