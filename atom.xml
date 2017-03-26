@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-03-26T14:53:32.274Z</updated>
+  <updated>2017-03-26T23:43:49.408Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -16,17 +16,15 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>第一行代码学习笔记1</title>
-    <link href="http://huaqianlee.github.io/2017/03/24/Android/FirstCode-learning-note-one/"/>
-    <id>http://huaqianlee.github.io/2017/03/24/Android/FirstCode-learning-note-one/</id>
+    <title>第一行代码学习笔记之项目结构与活动</title>
+    <link href="http://huaqianlee.github.io/2017/03/24/Android/FirstCode-learning-note-project-structure-and-activity/"/>
+    <id>http://huaqianlee.github.io/2017/03/24/Android/FirstCode-learning-note-project-structure-and-activity/</id>
     <published>2017-03-24T12:07:01.000Z</published>
-    <updated>2017-03-26T14:53:32.274Z</updated>
+    <updated>2017-03-26T23:43:49.408Z</updated>
     
-    <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过60%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从&lt;第一行代码&gt;第2版开始。</p>
-<p>前面一周多,利用公司和家里的业余时间学了第1~5章, 对这部分知识做了一个简单的思维导图。<br><img src="后续补上" alt="脑图1"></p>
-<a id="more"></a>
+    <content type="html"><![CDATA[<p><a href="http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">第一行代码思维导图及学习笔记目录</a></p>
 <h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.</p>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"></p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"><br><a id="more"></a></p>
 <ul>
 <li>.gradle &amp; .idea<br>Android Studio自动生成, 无需关心, 版本管理时,一般将其忽略(即.gitignore文件).</li>
 <li>app<br>项目代码、资源基本位于此路径。</li>
@@ -70,8 +68,38 @@
     
     <summary type="html">
     
+      &lt;p&gt;&lt;a href=&quot;http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/&quot;&gt;第一行代码思维导图及学习笔记目录&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;第一个应用&quot;&gt;第一个应用&lt;/h1&gt;&lt;h2 id=&quot;项目结构&quot;&gt;项目结构&lt;/h2&gt;&lt;p&gt;很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png&quot; alt=&quot;项目结构&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
+    
+    
+      <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
+    
+      <category term="学习笔记" scheme="http://huaqianlee.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一行代码学习笔记之启程 </title>
+    <link href="http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/"/>
+    <id>http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/</id>
+    <published>2017-03-23T23:30:48.000Z</published>
+    <updated>2017-03-26T23:42:56.843Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过60%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从&lt;第一行代码&gt;第2版开始。</p>
+<p>第一行笔记思维导图如下:<br><img src="后续补上" alt="脑图1"></p>
+<a id="more"></a>
+<p>第一行代码学习笔记目录:<br><a href="http://huaqianlee.github.io/2017/03/24/Android/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码学习笔记之项目结构与活动</a></p>
+]]></content>
+    
+    <summary type="html">
+    
       &lt;p&gt;因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过60%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从&amp;lt;第一行代码&amp;gt;第2版开始。&lt;/p&gt;
-&lt;p&gt;前面一周多,利用公司和家里的业余时间学了第1~5章, 对这部分知识做了一个简单的思维导图。&lt;br&gt;&lt;img src=&quot;后续补上&quot; alt=&quot;脑图1&quot;&gt;&lt;/p&gt;
+&lt;p&gt;第一行笔记思维导图如下:&lt;br&gt;&lt;img src=&quot;后续补上&quot; alt=&quot;脑图1&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1536,40 +1564,6 @@ git commit
       <category term="Tools" scheme="http://huaqianlee.github.io/tags/Tools/"/>
     
       <category term="译文" scheme="http://huaqianlee.github.io/tags/%E8%AF%91%E6%96%87/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>怎么抓取Android日志文件</title>
-    <link href="http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/"/>
-    <id>http://huaqianlee.github.io/2015/07/19/Android/怎么抓取Android测试日志文件-How-to-get-android-log-file/</id>
-    <published>2015-07-19T03:43:04.000Z</published>
-    <updated>2016-08-01T15:18:06.626Z</updated>
-    
-    <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a><br>　　<a href="http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/" target="_blank" rel="external">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" target="_blank" rel="external">怎么抓取Android日志文件</a></p>
-<p>　　前两篇blog分别介绍了Android logging系统及编程时怎么应用，关于kernel中的log系统，前面只是大概提及了一下，下次再详细分析。相信大家都知道调试时需要打开USB调试模式，接下来就分析一下怎么抓取日志文件。</p>
-<h2 id="logcat命令详解">logcat命令详解</h2><p>　　logcat是最常用的命令之一，其语法如下；<br><a id="more"></a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">shell@android:/ $ logcat --help</span><br><span class="line">logcat --help</span><br><span class="line">Usage: logcat [options] [filterspecs]</span><br><span class="line">options include:</span><br><span class="line">  <span class="operator">-s</span>              Set default filter to silent.</span><br><span class="line">                  Like specifying filterspec <span class="string">'*:s'</span></span><br><span class="line">  <span class="operator">-f</span> &lt;filename&gt;   Log to file. Default to stdout</span><br><span class="line">  -r [&lt;kbytes&gt;]   Rotate <span class="built_in">log</span> every kbytes. (<span class="number">16</span> <span class="keyword">if</span> unspecified). Requires <span class="operator">-f</span></span><br><span class="line">  -n &lt;count&gt;      Sets max number of rotated logs to &lt;count&gt;, default <span class="number">4</span></span><br><span class="line">  -v &lt;format&gt;     Sets the <span class="built_in">log</span> <span class="built_in">print</span> format, <span class="built_in">where</span> &lt;format&gt; is one of:</span><br><span class="line"></span><br><span class="line">                  brief process tag thread raw time threadtime long</span><br><span class="line"></span><br><span class="line">  -c              clear (flush) the entire <span class="built_in">log</span> and <span class="built_in">exit</span></span><br><span class="line">  <span class="operator">-d</span>              dump the <span class="built_in">log</span> and <span class="keyword">then</span> <span class="built_in">exit</span> (don<span class="string">'t block)</span><br><span class="line">  -t &lt;count&gt;      print only the most recent &lt;count&gt; lines (implies -d)</span><br><span class="line">  -g              get the size of the log'</span>s ring buffer and <span class="built_in">exit</span></span><br><span class="line">  -b &lt;buffer&gt;     Request alternate ring buffer, <span class="string">'main'</span>, <span class="string">'system'</span>, <span class="string">'radio'</span></span><br><span class="line">                  or <span class="string">'events'</span>. Multiple -b parameters are allowed and the</span><br><span class="line">                  results are interleaved. The default is -b main -b system.</span><br><span class="line">  -B              output the <span class="built_in">log</span> <span class="keyword">in</span> binary</span><br><span class="line"></span><br><span class="line">filterspecs are a series of  &lt;tag&gt;[:priority]</span><br><span class="line"></span><br><span class="line"><span class="built_in">where</span> &lt;tag&gt; is a <span class="built_in">log</span> component tag (or * <span class="keyword">for</span> all) and priority is:</span><br><span class="line">  V    Verbose</span><br><span class="line">  D    Debug</span><br><span class="line">  I    Info</span><br><span class="line">  W    Warn</span><br><span class="line">  E    Error</span><br><span class="line">  A    Assert </span><br><span class="line"></span><br><span class="line"><span class="string">'*'</span> means <span class="string">'*:d'</span> and &lt;tag&gt; by itself means &lt;tag&gt;:v</span><br><span class="line"></span><br><span class="line">If not specified on the commandline, filterspec is <span class="built_in">set</span> from ANDROID_LOG_TAGS.</span><br><span class="line">If no filterspec is found, filter defaults to <span class="string">'*:I'</span></span><br><span class="line"></span><br><span class="line">If not specified with -v, format is <span class="built_in">set</span> from ANDROID_PRINTF_LOG</span><br><span class="line">or defaults to <span class="string">"brief"</span></span><br></pre></td></tr></table></figure></p>
-<p>部分重要参数详解如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[filterspecs]  以&lt;tag&gt;[:priority]序列形式显示指定priority及其以上，指定tag的日志，未指定tag的部分则按默认输出日志</span><br><span class="line"></span><br><span class="line">-b &lt;buffer&gt;</span><br><span class="line">    用于指定要操作的日志缓冲区:system,events,radio,main.系统默认的是system和main 。该选项可以出现多次，以指定多个日志缓冲区。例:</span><br><span class="line">  adb logcat -b system -b main -b events -b radio <span class="operator">-s</span> MyActivity:i</span><br><span class="line">     日志输出会指明当前查看的日志缓冲区如：</span><br><span class="line">     --------- beginning of /dev/<span class="built_in">log</span>/radio</span><br><span class="line">     --------- beginning of /dev/<span class="built_in">log</span>/events</span><br><span class="line">     --------- beginning of /dev/<span class="built_in">log</span>/system</span><br><span class="line">     --------- beginning of /dev/<span class="built_in">log</span>/main</span><br><span class="line"></span><br><span class="line">-v &lt;format&gt;  设置<span class="built_in">log</span>打印格式</span><br><span class="line">    brief — 显示prority/tag,产生日志的进程ID,和日志消息(默认格式)。</span><br><span class="line">    process — 显示priority,产生日志的进程ID,和日志消息</span><br><span class="line">    tag — 显示prority/tag,和消息</span><br><span class="line">    thread — 显示priority,线程ID和日志消息</span><br><span class="line">    raw — 只显示消息</span><br><span class="line">    time — 显示日期时间,priority/tag,产生日志的进程Id,和日志消息</span><br><span class="line">    long — 显示所有信息,日志消息另起一行显示,且每个日志间空一行</span><br></pre></td></tr></table></figure></p>
-<h2 id="log文件抓取方式">log文件抓取方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#实时打印</span></span><br><span class="line">logcat main <span class="comment"># APP日志</span></span><br><span class="line">logcat radio <span class="comment"># 射频通话部分日志</span></span><br><span class="line">logcat events <span class="comment"># 系统事件日志</span></span><br><span class="line">logcat system <span class="comment"># 系统日志</span></span><br><span class="line">tcpdump <span class="comment"># 网络通信方面log抓取</span></span><br><span class="line">QXDM  <span class="comment">#高通平台有,主要是Modem射频网络相关的log,同radio但更强大,没怎么接触,不熟悉</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#状态信息</span></span><br><span class="line">adb shell cat /proc/kmsg <span class="comment"># kernel日志,每cat一次清零</span></span><br><span class="line">adb shell dmesg <span class="comment"># kernel日志,开机信息.(var/log/demsg)</span></span><br><span class="line">adb shell dumpstate <span class="comment"># 系统状态信息,比较全面,如:内存,CPU,log缓存等。可以帮助我们确定是否有内存耗光之类的问题</span></span><br><span class="line">adb shell dumpsys <span class="comment"># 系统service相关信息</span></span><br><span class="line">adb bugreport <span class="comment"># 包括上面所有状态信息</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Shell，Linux，Dos都支持通过“adb shell logcat &gt; filename.txt”的形式将打印信息写入到文件　</p>
-</blockquote>
-<p>　　dumpstate会打印很多有用的信息,我们也可以执行单独命令打印想要的部分信息,如通过“/system/bin/top -n 1 -d 1 -m 30 -t”获取CPU信息，但我现在对这个用得还不多,不是很熟悉,就不多说了,贴部分内容以供参考.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Build: JZO54K</span><br><span class="line"></span><br><span class="line">Build fingerprint: <span class="string">'Xiaomi/mione_plus/mione_plus:4.1.2/JZO54K/4.12.5:user/release-keys'</span></span><br><span class="line"></span><br><span class="line">Bootloader: unknown</span><br><span class="line"></span><br><span class="line">Radio: msm</span><br><span class="line"></span><br><span class="line">Network: (unknown)</span><br><span class="line"></span><br><span class="line">Kernel: Linux version <span class="number">3.4</span>.<span class="number">0</span>-perf-g1ccebb5-<span class="number">00148</span>-g5f2009a (builder@taishan) (gcc version <span class="number">4.6</span>.x-google <span class="number">20120106</span> (prerelease) (GCC) ) <span class="comment">#1 SMP PREEMPT Fri Dec 27 16:52:36 CST 2013</span></span><br><span class="line"></span><br><span class="line">Command line: console=ttyHSL0,<span class="number">115200</span>,n8 androidboot.hardware=qcom kgsl.mmutype=gpummu vmalloc=<span class="number">400</span>M androidboot.emmc=<span class="literal">true</span> androidboot.serialno=d02b34a3 syspart=system1 androidboot.baseband=msm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">------ UPTIME (uptime) ------</span><br><span class="line"></span><br><span class="line">up time: <span class="number">05</span>:<span class="number">07</span>:<span class="number">48</span>, idle time: <span class="number">09</span>:<span class="number">38</span>:<span class="number">57</span>, sleep time: <span class="number">00</span>:<span class="number">10</span>:<span class="number">10</span></span><br><span class="line"></span><br><span class="line">[uptime: <span class="number">0.1</span>s elapsed]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">------ MEMORY INFO (/proc/meminfo) ------</span><br><span class="line"></span><br><span class="line">MemTotal:         <span class="number">508016</span> kB</span><br><span class="line"></span><br><span class="line">MemFree:           <span class="number">36688</span> kB</span><br><span class="line"></span><br><span class="line">Buffers:           <span class="number">12100</span> kB</span><br><span class="line"></span><br><span class="line">Cached:            <span class="number">84336</span> kB</span><br><span class="line"></span><br><span class="line">SwapCached:            <span class="number">0</span> kB</span><br><span class="line"></span><br><span class="line">Active:           <span class="number">327208</span> kB</span><br><span class="line"></span><br><span class="line">Inactive:          <span class="number">62316</span> kB</span><br><span class="line"></span><br><span class="line">Active(anon):     <span class="number">294644</span> kB</span><br></pre></td></tr></table></figure></p>
-<h2 id="后记">后记</h2><p>　　写这篇blog主要是因为前两篇有些内容没有表达出来，而在强迫症驱使下完成的。因为自己现在经验尚浅，可能有很多不完善和错误的地方，欢迎大家指出。另，如果想通过logcat直接打印kernel日志的话,可以参考<a href="http://blog.csdn.net/ryfjx6/article/details/7096018" target="_blank" rel="external">http://blog.csdn.net/ryfjx6/article/details/7096018</a>。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　　&lt;a href=&quot;http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/&quot;&gt;Android日志系统详解&lt;/a&gt;&lt;br&gt;　　&lt;a href=&quot;http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/&quot;&gt;How to debug with Android logging&lt;/a&gt;&lt;br&gt;　　&lt;a href=&quot;http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/&quot;&gt;怎么抓取Android日志文件&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;　　前两篇blog分别介绍了Android logging系统及编程时怎么应用，关于kernel中的log系统，前面只是大概提及了一下，下次再详细分析。相信大家都知道调试时需要打开USB调试模式，接下来就分析一下怎么抓取日志文件。&lt;/p&gt;
-&lt;h2 id=&quot;logcat命令详解&quot;&gt;logcat命令详解&lt;/h2&gt;&lt;p&gt;　　logcat是最常用的命令之一，其语法如下；&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
-    
-    
-      <category term="Log" scheme="http://huaqianlee.github.io/tags/Log/"/>
     
   </entry>
   
