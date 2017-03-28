@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-03-28T15:02:49.507Z</updated>
+  <updated>2017-03-28T15:17:16.314Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/"/>
     <id>http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/</id>
     <published>2017-03-24T12:07:01.000Z</published>
-    <updated>2017-03-28T15:02:49.507Z</updated>
+    <updated>2017-03-28T15:17:16.314Z</updated>
     
-    <content type="html"><![CDATA[<p>《第一行代码》第二版思维导图及所有学习笔记目录：<br><a href="http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">第一行代码思维导图及学习笔记目录</a></p>
+    <content type="html"><![CDATA[<p> <a href="http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
 <h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.</p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"><br><a id="more"></a></p>
 <ul>
@@ -87,7 +87,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;《第一行代码》第二版思维导图及所有学习笔记目录：&lt;br&gt;&lt;a href=&quot;http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/&quot;&gt;第一行代码思维导图及学习笔记目录&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt; &lt;a href=&quot;http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/&quot;&gt;《第一行代码》第2版思维导图及所有学习笔记目录&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;第一个应用&quot;&gt;第一个应用&lt;/h1&gt;&lt;h2 id=&quot;项目结构&quot;&gt;项目结构&lt;/h2&gt;&lt;p&gt;很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png&quot; alt=&quot;项目结构&quot;&gt;&lt;br&gt;
     

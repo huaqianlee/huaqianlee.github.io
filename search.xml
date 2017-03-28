@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[第一行代码学习笔记之项目结构与活动]]></title>
       <url>http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/</url>
-      <content type="html"><![CDATA[<p>《第一行代码》第二版思维导图及所有学习笔记目录：<br><a href="http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">第一行代码思维导图及学习笔记目录</a></p>
+      <content type="html"><![CDATA[<p> <a href="http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
 <h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.</p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"><br><a id="more"></a></p>
 <ul>
