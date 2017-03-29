@@ -4,13 +4,12 @@
   
     
     <entry>
-      <title><![CDATA[px4 imu-mpu9250 code structure]]></title>
+      <title><![CDATA[PX4之外设代码结构及流程-IMU]]></title>
       <url>http://huaqianlee.github.io/2017/03/29/Uav/px4-imu-mpu9250-code-structure/</url>
       <content type="html"><![CDATA[<p>最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。</p>
 <p>本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。</p>
 <h2 id="代码结构及流程">代码结构及流程</h2><p>最新代码库中，MPU9250的代码结构及流程如下：</p>
-<p> <img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/IMU_CODE_STR.png" alt="流程图"></p>
-<p> sensor.cpp文件比较重要，Sensor数据的应用都要在此文件中实现，其中的主要方法如下：</p>
+<p> <img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/IMU_CODE_STR.png" alt="流程图"><br><a id="more"></a><br> sensor.cpp文件比较重要，Sensor数据的应用都要在此文件中实现，其中的主要方法如下：</p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/sensorcpp.jpg" alt="Sensor方法"></p>
 <h2 id="附">附</h2><p>以前px4是可以直接通过外部的库访问外设，新版本保留了原代码架构，但不清楚是否应用，怎么应用，路径如下：</p>
 <pre><code class="bash">-&gt; src\platforms\qurt\<span class="built_in">fc</span>_addon\
