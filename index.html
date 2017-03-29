@@ -302,6 +302,136 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/29/Uav/px4-imu-mpu9250-code-structure/" itemprop="url">
+                  px4 imu-mpu9250 code structure
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-03-29T22:08:54+08:00" content="Mar 29 2017">
+              Mar 29 2017
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/29/Uav/px4-imu-mpu9250-code-structure/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Uav/px4-imu-mpu9250-code-structure/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。</p>
+<p>本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。</p>
+<h2 id="代码结构及流程">代码结构及流程</h2><p>最新代码库中，MPU9250的代码结构及流程如下：</p>
+<p> <img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/IMU_CODE_STR.png" alt="流程图"></p>
+<p> sensor.cpp文件比较重要，Sensor数据的应用都要在此文件中实现，其中的主要方法如下：</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/sensorcpp.jpg" alt="Sensor方法"></p>
+<h2 id="附">附</h2><p>以前px4是可以直接通过外部的库访问外设，新版本保留了原代码架构，但不清楚是否应用，怎么应用，路径如下：</p>
+<pre><code class="bash">-&gt; src\platforms\qurt\<span class="built_in">fc</span>_addon\
+-&gt; xxx_lib.so
+</code></pre>
+<h2 id="经验之谈">经验之谈</h2><p>通过search搜关键字搜出内容太多时， 通过px4.config、mainapp.config等文件来筛选源代码。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" itemprop="url">
                   第一行代码学习笔记之项目结构与活动
                 </a>
@@ -371,7 +501,7 @@
 
       
         
-          <p> <a href="http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+          <p> <a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
 <h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.</p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"><br>
           <div class="post-more-link text-center">
@@ -1410,128 +1540,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/04/Linux/linux-problem-set/" itemprop="url">
-                  linux系统使用问题集
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-01-04T21:40:23+08:00" content="Jan 4 2016">
-              Jan 4 2016
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/04/Linux/linux-problem-set/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/Linux/linux-problem-set/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="问题一_ubuntu_密码正确进不了系统">问题一 ubuntu 密码正确进不了系统</h2><p><strong>现象：</strong><br>即使密码输入正确也不能进入系统。<br><strong>原因：</strong><br>设置环境变量时出错，影响到系统。<br><strong>解决：</strong><br>开机时按住shift 进入 recovery 模式，选第二个恢复模式，12.04的界面是fsck和root选项在同一页，先选fsck解除写限制（按下fsck后等几秒即可），再选root，vi /etc/profile， vi /etc/environment 恢复下环境变量，再重新登录。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/04/Linux/linux-problem-set/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1577,7 +1585,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1594,7 +1602,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

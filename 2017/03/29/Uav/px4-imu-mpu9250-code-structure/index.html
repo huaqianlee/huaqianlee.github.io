@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="PX4," />
 
 
 
@@ -86,15 +86,29 @@
 
 
 
-<meta name="description" content="Just need to enjoy life.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Andy.Lee's  Blog">
-<meta property="og:url" content="http://huaqianlee.github.io/tags/电源管理/index.html">
+<meta name="description" content="最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。
+本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。
+代码结构及流程最新代码库中，MPU9250的代码结构及流程如下：
+ 
+ sensor.cpp文件比较重要，Sensor数据的应用都要在此文件中实现，其中的主要方法如下：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="px4 imu-mpu9250 code structure">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/03/29/Uav/px4-imu-mpu9250-code-structure/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="Just need to enjoy life.">
+<meta property="og:description" content="最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。
+本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。
+代码结构及流程最新代码库中，MPU9250的代码结构及流程如下：
+ 
+ sensor.cpp文件比较重要，Sensor数据的应用都要在此文件中实现，其中的主要方法如下：">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/IMU_CODE_STR.png">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/sensorcpp.jpg">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Andy.Lee's  Blog">
-<meta name="twitter:description" content="Just need to enjoy life.">
+<meta name="twitter:title" content="px4 imu-mpu9250 code structure">
+<meta name="twitter:description" content="最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。
+本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。
+代码结构及流程最新代码库中，MPU9250的代码结构及流程如下：
+ 
+ sensor.cpp文件比较重要，Sensor数据的应用都要在此文件中实现，其中的主要方法如下：">
 
 
 
@@ -115,9 +129,9 @@
 
 
 
-  <link rel="canonical" href="http://huaqianlee.github.io/tags/电源管理/"/>
+  <link rel="canonical" href="http://huaqianlee.github.io/2017/03/29/Uav/px4-imu-mpu9250-code-structure/"/>
 
-  <title> Tag: 电源管理 | Andy.Lee's  Blog </title>
+  <title> px4 imu-mpu9250 code structure | Andy.Lee's  Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -157,7 +171,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,74 +292,181 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        电源管理
-        <small>Tag</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/" itemprop="url">
-              
-                <span itemprop="name">Android电池监控系统(BMS)之一电池系统架构</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-06-06T22:17:36+08:00"
-              content="Jun 6 2015" >
-          06-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/05/30/Android/Android电源管理架构/" itemprop="url">
-              
-                <span itemprop="name">Android 电源管理架构</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-05-30T16:04:45+08:00"
-              content="May 30 2015" >
-          05-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                px4 imu-mpu9250 code structure
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-03-29T22:08:54+08:00" content="Mar 29 2017">
+              Mar 29 2017
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/29/Uav/px4-imu-mpu9250-code-structure/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Uav/px4-imu-mpu9250-code-structure/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。</p>
+<p>本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。</p>
+<h2 id="代码结构及流程">代码结构及流程</h2><p>最新代码库中，MPU9250的代码结构及流程如下：</p>
+<p> <img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/IMU_CODE_STR.png" alt="流程图"></p>
+<p> sensor.cpp文件比较重要，Sensor数据的应用都要在此文件中实现，其中的主要方法如下：</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/sensorcpp.jpg" alt="Sensor方法"></p>
+<h2 id="附">附</h2><p>以前px4是可以直接通过外部的库访问外设，新版本保留了原代码架构，但不清楚是否应用，怎么应用，路径如下：</p>
+<pre><code class="bash">-&gt; src\platforms\qurt\<span class="built_in">fc</span>_addon\
+-&gt; xxx_lib.so
+</code></pre>
+<h2 id="经验之谈">经验之谈</h2><p>通过search搜关键字搜出内容太多时， 通过px4.config、mainapp.config等文件来筛选源代码。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PX4/" rel="tag">#PX4</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" rel="next" title="第一行代码学习笔记之项目结构与活动">
+                <i class="fa fa-chevron-left"></i> 第一行代码学习笔记之项目结构与活动
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -353,6 +474,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/29/Uav/px4-imu-mpu9250-code-structure/"
+           data-title="px4 imu-mpu9250 code structure" data-url="http://huaqianlee.github.io/2017/03/29/Uav/px4-imu-mpu9250-code-structure/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -372,8 +501,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -496,6 +634,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码结构及流程"><span class="nav-number">1.</span> <span class="nav-text">代码结构及流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附"><span class="nav-number">2.</span> <span class="nav-text">附</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经验之谈"><span class="nav-number">3.</span> <span class="nav-text">经验之谈</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -598,6 +747,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

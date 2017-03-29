@@ -4,9 +4,26 @@
   
     
     <entry>
+      <title><![CDATA[px4 imu-mpu9250 code structure]]></title>
+      <url>http://huaqianlee.github.io/2017/03/29/Uav/px4-imu-mpu9250-code-structure/</url>
+      <content type="html"><![CDATA[<p>最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。</p>
+<p>本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。</p>
+<h2 id="代码结构及流程">代码结构及流程</h2><p>最新代码库中，MPU9250的代码结构及流程如下：</p>
+<p> <img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/IMU_CODE_STR.png" alt="流程图"></p>
+<p> sensor.cpp文件比较重要，Sensor数据的应用都要在此文件中实现，其中的主要方法如下：</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/sensorcpp.jpg" alt="Sensor方法"></p>
+<h2 id="附">附</h2><p>以前px4是可以直接通过外部的库访问外设，新版本保留了原代码架构，但不清楚是否应用，怎么应用，路径如下：</p>
+<pre><code class="bash">-&gt; src\platforms\qurt\<span class="built_in">fc</span>_addon\
+-&gt; xxx_lib.so
+</code></pre>
+<h2 id="经验之谈">经验之谈</h2><p>通过search搜关键字搜出内容太多时， 通过px4.config、mainapp.config等文件来筛选源代码。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[第一行代码学习笔记之项目结构与活动]]></title>
       <url>http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/</url>
-      <content type="html"><![CDATA[<p> <a href="http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+      <content type="html"><![CDATA[<p> <a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
 <h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.</p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"><br><a id="more"></a></p>
 <ul>
@@ -76,7 +93,7 @@
       <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过60%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。</p>
 <p>《第一行代码》思维导图如下:<br><img src="后续补上" alt="脑图1"></p>
 <a id="more"></a>
-<p>《第一行代码》学习笔记目录:<br><a href="http://huaqianlee.github.io/2017/03/24/Android/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码学习笔记之项目结构与活动</a></p>
+<p>《第一行代码》学习笔记目录:<br><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码学习笔记之项目结构与活动</a></p>
 ]]></content>
     </entry>
     

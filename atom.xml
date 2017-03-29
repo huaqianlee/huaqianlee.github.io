@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-03-28T15:17:16.314Z</updated>
+  <updated>2017-03-29T14:12:22.330Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -16,13 +16,48 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>px4 imu-mpu9250 code structure</title>
+    <link href="http://huaqianlee.github.io/2017/03/29/Uav/px4-imu-mpu9250-code-structure/"/>
+    <id>http://huaqianlee.github.io/2017/03/29/Uav/px4-imu-mpu9250-code-structure/</id>
+    <published>2017-03-29T14:08:54.000Z</published>
+    <updated>2017-03-29T14:12:22.330Z</updated>
+    
+    <content type="html"><![CDATA[<p>最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。</p>
+<p>本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。</p>
+<h2 id="代码结构及流程">代码结构及流程</h2><p>最新代码库中，MPU9250的代码结构及流程如下：</p>
+<p> <img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/IMU_CODE_STR.png" alt="流程图"></p>
+<p> sensor.cpp文件比较重要，Sensor数据的应用都要在此文件中实现，其中的主要方法如下：</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/sensorcpp.jpg" alt="Sensor方法"></p>
+<h2 id="附">附</h2><p>以前px4是可以直接通过外部的库访问外设，新版本保留了原代码架构，但不清楚是否应用，怎么应用，路径如下：</p>
+<pre><code class="bash">-&gt; src\platforms\qurt\<span class="built_in">fc</span>_addon\
+-&gt; xxx_lib.so
+</code></pre>
+<h2 id="经验之谈">经验之谈</h2><p>通过search搜关键字搜出内容太多时， 通过px4.config、mainapp.config等文件来筛选源代码。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。&lt;/p&gt;
+&lt;p&gt;本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。&lt;/p&gt;
+&lt;h2 id=&quot;代码结
+    
+    </summary>
+    
+      <category term="Uav" scheme="http://huaqianlee.github.io/categories/Uav/"/>
+    
+    
+      <category term="PX4" scheme="http://huaqianlee.github.io/tags/PX4/"/>
+    
+  </entry>
+  
+  <entry>
     <title>第一行代码学习笔记之项目结构与活动</title>
     <link href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/"/>
     <id>http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/</id>
     <published>2017-03-24T12:07:01.000Z</published>
-    <updated>2017-03-28T15:17:16.314Z</updated>
+    <updated>2017-03-29T14:12:00.914Z</updated>
     
-    <content type="html"><![CDATA[<p> <a href="http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+    <content type="html"><![CDATA[<p> <a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
 <h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.</p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"><br><a id="more"></a></p>
 <ul>
@@ -87,7 +122,7 @@
     
     <summary type="html">
     
-      &lt;p&gt; &lt;a href=&quot;http://huaqianlee.github.io/2017/03/24/Android/The-departure-of-FirstCode-learning-notes/&quot;&gt;《第一行代码》第2版思维导图及所有学习笔记目录&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt; &lt;a href=&quot;http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/&quot;&gt;《第一行代码》第2版思维导图及所有学习笔记目录&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;第一个应用&quot;&gt;第一个应用&lt;/h1&gt;&lt;h2 id=&quot;项目结构&quot;&gt;项目结构&lt;/h2&gt;&lt;p&gt;很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png&quot; alt=&quot;项目结构&quot;&gt;&lt;br&gt;
     
@@ -107,12 +142,12 @@
     <link href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/"/>
     <id>http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/</id>
     <published>2017-03-23T23:30:48.000Z</published>
-    <updated>2017-03-28T14:26:39.764Z</updated>
+    <updated>2017-03-29T14:12:17.633Z</updated>
     
     <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过60%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。</p>
 <p>《第一行代码》思维导图如下:<br><img src="后续补上" alt="脑图1"></p>
 <a id="more"></a>
-<p>《第一行代码》学习笔记目录:<br><a href="http://huaqianlee.github.io/2017/03/24/Android/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码学习笔记之项目结构与活动</a></p>
+<p>《第一行代码》学习笔记目录:<br><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码学习笔记之项目结构与活动</a></p>
 ]]></content>
     
     <summary type="html">
@@ -1470,119 +1505,6 @@ git commit
       <category term="Qualcomm" scheme="http://huaqianlee.github.io/tags/Qualcomm/"/>
     
       <category term="源码分析" scheme="http://huaqianlee.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android中adb(Android Debug Bridge)命令的用法</title>
-    <link href="http://huaqianlee.github.io/2015/07/19/Android/Android%E4%B8%ADadb-Android-Debug-Bridge-%E5%91%BD%E4%BB%A4%E7%9A%84%E7%94%A8%E6%B3%95/"/>
-    <id>http://huaqianlee.github.io/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/</id>
-    <published>2015-07-19T11:29:58.000Z</published>
-    <updated>2015-08-21T16:01:03.241Z</updated>
-    
-    <content type="html"><![CDATA[<p>　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去<a href="http://developer.android.com/tools/help/adb.html" target="_blank" rel="external">http://developer.android.com/tools/help/adb.html</a>学习了一下,今天准备按照自己的理解加以修改总结并整理出一篇博文。</p>
-<h2 id="概览">概览</h2><p>　　adb是Android Debug Bridge的简写，按字面意思理解就是在开发者和Android之间搭建的一个debug桥。adb是一个连接仿真实例或者Android设备的命令行工具，是一个客服端-服务器模式的程序，包括如下三部分：<br>　<br>　　1. 一个运行在开发用的Android手机或者仿真器上面的client，我们可以通过adb命令调用client。其他像ADT插件和DDMS也会创建client。<br>　<br>　　2. 一个运行在开发用的Android手机或者仿真器后台的server，这个server负责管理本设备上运行的client和daemon(守护进程)。<br>　<br>　　3. 一个在每个仿真器或者Android设备后台运行的daemon。</p>
-<blockquote>
-<p>adb tool 可以再<sdk>/platform-tools/中找到　</sdk></p>
-</blockquote>
-<a id="more"></a>
-<h2 id="adb工具的构成关系">adb工具的构成关系</h2><p>　　当启动adb client时，client会检查是否有server在运行，若无则启动一个server进程。server进程启动后，会绑定到TCP端口号为5037的端口，然后监听从adb clients发送来的命令（所有adb clients 使用同一端口5037与server通信）。然后，server通过扫描手机或仿真器用到的5555到5585之间的奇数端口号，在所有运行的实例之间建立连接。server在发现adb daemon的地方为那个端口建立连接。每个仿真器或者设备需给console连接提供一个偶数端口号，为adb连接提供一个奇数端口号。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Emulator <span class="number">1</span>, console: <span class="number">5554</span></span><br><span class="line">Emulator <span class="number">1</span>, adb: <span class="number">5555</span></span><br><span class="line">Emulator <span class="number">2</span>, console: <span class="number">5556</span></span><br><span class="line">Emulator <span class="number">2</span>, adb: <span class="number">5557</span></span><br><span class="line">and so on...</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>当server为所有仿真器创建了连接后,我们可以通过adb 命令进入这些实例,而且可以从任何client(或者script脚本)控制所有的仿真器.　</p>
-</blockquote>
-<h2 id="adb调试">adb调试</h2><p>　　首先需要同USB将电脑和设备相连,然后在开发者模式中打开USB debugging。4.2以上的系统默认都是隐藏了开发者模式，所以需要去到<strong>Setting&gt;About phone&gt;</strong>菜单下点击<strong>Build number</strong>七次以显示开发者模式,然后到开发者模式菜单下打开USB debugging。</p>
-<h2 id="语法">语法</h2><p>　　我们能通过设备的命令行(shell终端)或者script脚本发出adb命令。用法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb [<span class="operator">-d</span>|<span class="operator">-e</span>|<span class="operator">-s</span> &lt;serialNumber&gt;] &lt;<span class="built_in">command</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>如果仅仅一个仿真器或设备被连接,这adb命令将自己发送本机.如果有多个的话,需要用-d -s 或 -e来指明目标设备.　</p>
-</blockquote>
-<h2 id="adb命令详解">adb命令详解</h2><p>　</p>
-<h4 id="目标设备">目标设备</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">-d</span>      <span class="comment">#指向连接的USB设备,如果USB设备超过一个则返回错误</span></span><br><span class="line"><span class="operator">-e</span>      <span class="comment">#指向运行的仿真器,如果超过一个仿真器则返回错误</span></span><br><span class="line"><span class="operator">-s</span>&lt;serialNumber&gt;  <span class="comment">#指向指定的仿真器或设备,如emulator-5556,详见下查询仿真器或设备</span></span><br></pre></td></tr></table></figure>
-<p>　</p>
-<h4 id="通用">通用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">devices   <span class="comment">#打印所有连接的仿真器或设备,见下查询仿真器或设备</span></span><br><span class="line"><span class="built_in">help</span>    <span class="comment"># 打印所有adb命令</span></span><br><span class="line">version   <span class="comment">#打印adb工具的版本号</span></span><br></pre></td></tr></table></figure>
-<p>　</p>
-<h4 id="调试">调试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logcat [option] [filter-specs]    <span class="comment">#打印log</span></span><br><span class="line">bugreport      <span class="comment">#打印dumpsys,dumpstate及logcat日志</span></span><br><span class="line">jdwp       <span class="comment">#打印设备上的可用JDWP进程,可通过jdwp:&lt;pid&gt;连接指定JDWP进程,如:</span></span><br><span class="line">                adb forward tcp:<span class="number">8000</span> jdwp:<span class="number">472</span></span><br><span class="line">                jdb -attach localhost:<span class="number">8000</span>|</span><br></pre></td></tr></table></figure>
-<p>　</p>
-<h4 id="数据">数据</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">install &lt;apk&gt;          <span class="comment">#安装apk到仿真器或设备</span></span><br><span class="line">pull &lt;remote&gt; &lt;<span class="built_in">local</span>&gt;   <span class="comment">#拷贝指定文件到PC</span></span><br><span class="line">push &lt;<span class="built_in">local</span>&gt; &lt;remote&gt;   <span class="comment">#拷贝指定文件到设备</span></span><br></pre></td></tr></table></figure>
-<p>　</p>
-<h4 id="端口和网络">端口和网络</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">forward &lt;<span class="built_in">local</span>&gt; &lt;remote&gt;    <span class="comment">#指定socket连接的PC端口号,仿真器或设备端口号,如下:</span></span><br><span class="line">                                tcp:&lt;portnum&gt;</span><br><span class="line">                                <span class="built_in">local</span>:&lt;UNIX domain socket name&gt;</span><br><span class="line">                                dev:&lt;character device name&gt;</span><br><span class="line">                                jdwp:&lt;pid&gt;</span><br><span class="line">ppp &lt;tty&gt; [parm]...  <span class="comment">#通过USB运行PPP,不应该无故打开PPP连接</span></span><br></pre></td></tr></table></figure>
-<p>　</p>
-<h4 id="脚本语言">脚本语言</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">get-serialno   <span class="comment">#打印adb实体序列号,见下查询仿真器或设备</span></span><br><span class="line">get-state    <span class="comment">#打印仿真器或设备adb状态</span></span><br><span class="line"><span class="built_in">wait</span>-for-device     <span class="comment">#阻塞程序直到设备online</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#可以在后面添加其他命令,这样等设备以上线就执行,如下</span></span><br><span class="line">adb <span class="built_in">wait</span>-for-device shell getprop <span class="comment"># 一连上就getprop</span></span><br><span class="line">adb <span class="built_in">wait</span>-for-device install &lt;app&gt;.apk <span class="comment">#一连上就安装app</span></span><br></pre></td></tr></table></figure>
-<p>　</p>
-<h4 id="Server">Server</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-server  <span class="comment">#检查是否有server运行,若无,则启动</span></span><br><span class="line"><span class="built_in">kill</span>-server   <span class="comment">#终止server进程</span></span><br></pre></td></tr></table></figure>
-<p>　</p>
-<h4 id="Shell">Shell</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shell <span class="comment">#为仿真器或者设备打开一个远程shell终端,exit退出</span></span><br><span class="line">shell [shellCommand] <span class="comment">#打开一个远程终端,执行某指令后退出</span></span><br></pre></td></tr></table></figure>
-<h3 id="查询仿真器或者设备">查询仿真器或者设备</h3><p>　　在执行adb命令前,我们可以通过命令去查看仿真器或设备的连接清单，命令如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure></p>
-<p>　　执行这个命令后，adb将打印每个实例的状态信息：</p>
-<ul>
-<li>Serial number ：adb通过仿真器或设备的console端口号创建的一个独一无二的字符串，格式为“type-consolePort”，如：emulator-5554
-　</li>
-<li>State ： 实例的连接状态，如下：　<ul>
-<li>offline ：未连接或没回应</li>
-<li>device ：实例连接到adb server，不过并不意味着Android完全启动可操作的，因为文件系统启动过程中，adb也可连接</li>
-<li>no device ：未连接</li>
-</ul>
-</li>
-</ul>
-<p>　每个实例的输出如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[serialNumber] [state]</span><br><span class="line"></span><br><span class="line"><span class="comment">#eg</span></span><br><span class="line">adb devices</span><br><span class="line">List of devices attached</span><br><span class="line">emulator-<span class="number">5554</span>  device</span><br><span class="line">emulator-<span class="number">5556</span>  device</span><br><span class="line">emulator-<span class="number">5558</span>  device</span><br></pre></td></tr></table></figure></p>
-<h3 id="发送命令到指定仿真器或设备">发送命令到指定仿真器或设备</h3><p>　　如果有多个仿真器或者设备同时运行，我们必须通过指定一个目标，否则将报错。我们可以通过-s来指定，用法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="operator">-s</span> &lt;serialNumber&gt; &lt;<span class="built_in">command</span>&gt;  <span class="comment">#serialNumber可以用adb devices查看</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#eg</span></span><br><span class="line">adb <span class="operator">-s</span> emulator-<span class="number">5556</span> install helloWorld.apk</span><br></pre></td></tr></table></figure></p>
-<p>　　如果有多个实例有效，只有一个仿真器，我们可以通过-e来指定仿真器。反之，若只有一个Android 设备，我们可以同-d来指定。</p>
-<h3 id="安装app">安装app</h3><p>　　adb工具提供了从pc拷贝apk并安装到指定仿真器或设备的命令，不过必须指定.apk文件的路径，如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb install &lt;path_to_apk&gt;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>Android studio/Eclipse也是通过adb安装apk的，不过其ADT插件已经封装了这个过程</p>
-</blockquote>
-<h3 id="端口转发">端口转发</h3><p>　　我们可以用forward命令设置任意端口为forwarding端口，转发指定主机端口到仿真器或设备上的一个不同端口。也能设置转发到抽象的UNIX域sockets，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb forward tcp:<span class="number">6100</span> tcp:<span class="number">7100</span> <span class="comment">#设置主机端口6100转发到目标端口7100</span></span><br><span class="line"></span><br><span class="line">adb forward tcp:<span class="number">6100</span> <span class="built_in">local</span>:logd</span><br></pre></td></tr></table></figure></p>
-<h3 id="导入导出文件">导入导出文件</h3><p> 　　我们可以通过pull命令从仿真器或设备导出任意路径的文件，通过push导入文件到仿真器或设备的任意路径，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#remote 仿真器或设备文件路径 local PC文件路径</span></span><br><span class="line">adb pull &lt;remote&gt; &lt;<span class="built_in">local</span>&gt; <span class="comment">#导出文件</span></span><br><span class="line">adb push &lt;<span class="built_in">local</span>&gt; &lt;remote&gt; <span class="comment">#导入文件</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="通过无线使用adb">通过无线使用adb</h2><p>　　虽然我们通常连接USB来使用adb，但是我们也能通过WiFi来使用。</p>
-<ol>
-<li>让Android设备与PC处于同一WiFi网络环境，不过并不是所有的接入点都能成功，我们需要防火墙配置正确来支持adb。
-　</li>
-<li>通过USB连接设备与PC。
-　</li>
-<li><p>确定PC上adb运行在USB模式</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ adb usb</span><br><span class="line">restarting <span class="keyword">in</span> USB mode</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过USB连接到设备</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ adb devices</span><br><span class="line">List of devices attached</span><br><span class="line"><span class="comment">######## device</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启PC adb,运行在tcpip模式</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ adb tcpip <span class="number">5555</span></span><br><span class="line">restarting <span class="keyword">in</span> TCP mode port: <span class="number">5555</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>找到Android设备的ip地址, Settings -&gt; About tablet -&gt; Status -&gt; IP address。
-　</p>
-</li>
-<li><p>连接设备</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ adb connect <span class="comment">#.#.#.#</span></span><br><span class="line">connected to <span class="comment">#.#.#.#:5555</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>移除USB线，确认设备连接</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ adb devices</span><br><span class="line">List of devices attached</span><br><span class="line"><span class="comment">#.#.#.#:5555 device</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>如果连接丢失：</p>
-<ol>
-<li>确认PC机与Android设备是否处于同一WiFi网络环境。</li>
-<li>通过adb connect重现连接。</li>
-<li>重启adb host<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="built_in">kill</span>-server</span><br><span class="line">adb start-server</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="其他命令">其他命令</h2><p>　　虽然官方文档已经介绍得挺详细了，但还是有一些命令没介绍到，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">adb uninstall &lt;package name&gt; <span class="comment">#卸载指定app，参数为包名</span></span><br><span class="line">adb uninstall -k &lt;package name&gt;   <span class="comment">#卸载指定app，保留配置文件和缓存</span></span><br><span class="line">adb shell dumpsys activity <span class="comment">#列出activity栈(back stack)和任务(task)及其他组件信息和进程信息</span></span><br><span class="line">adb shell dumpsys packages <span class="comment">#(若出错，则dumpsy)列出一些系统信息和所有应用的信息。包括Features，Activity Resolver Table等。</span></span><br><span class="line">adb shell pm list permissions <span class="comment">#列出目标实例的所有权限</span></span><br><span class="line">adb shell pm list packages  <span class="comment">#列出目标设备上安装的所有app包名</span></span><br><span class="line">adb shell pm list features  <span class="comment">#列出目标设备上的所有feature</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用adb命令启动一个Activity</span></span><br><span class="line">adb shell am start PACKAGE_NAME/ACTIVITY_IN_PACKAGE  </span><br><span class="line">adb shell am start PACKAGE_NAME/FULLY_QUALIFIED_ACTIVITY    </span><br><span class="line"><span class="comment">#eg </span></span><br><span class="line">adb shell am start -n me.huaqianlee.example/.MainActivity  </span><br><span class="line">adb shell am start -n me.huaqianlee.example/me.huaqianlee.example.MainActivity</span><br><span class="line"></span><br><span class="line">adb shell screencap -p | perl -pe <span class="string">'s/\x0D\x0A/\x0A/g'</span> &gt; screen.png <span class="comment">#屏幕截图, 并使用perl命令保存截图</span></span><br><span class="line"></span><br><span class="line">adb shell input keyevent <span class="number">82</span> <span class="comment">#解锁屏幕</span></span><br></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去&lt;a href=&quot;http://developer.android.com/tools/help/adb.html&quot;&gt;http://developer.android.com/tools/help/adb.html&lt;/a&gt;学习了一下,今天准备按照自己的理解加以修改总结并整理出一篇博文。&lt;/p&gt;
-&lt;h2 id=&quot;概览&quot;&gt;概览&lt;/h2&gt;&lt;p&gt;　　adb是Android Debug Bridge的简写，按字面意思理解就是在开发者和Android之间搭建的一个debug桥。adb是一个连接仿真实例或者Android设备的命令行工具，是一个客服端-服务器模式的程序，包括如下三部分：&lt;br&gt;　&lt;br&gt;　　1. 一个运行在开发用的Android手机或者仿真器上面的client，我们可以通过adb命令调用client。其他像ADT插件和DDMS也会创建client。&lt;br&gt;　&lt;br&gt;　　2. 一个运行在开发用的Android手机或者仿真器后台的server，这个server负责管理本设备上运行的client和daemon(守护进程)。&lt;br&gt;　&lt;br&gt;　　3. 一个在每个仿真器或者Android设备后台运行的daemon。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;adb tool 可以再&lt;sdk&gt;/platform-tools/中找到　&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
-    
-    
-      <category term="Tools" scheme="http://huaqianlee.github.io/tags/Tools/"/>
-    
-      <category term="译文" scheme="http://huaqianlee.github.io/tags/%E8%AF%91%E6%96%87/"/>
     
   </entry>
   
