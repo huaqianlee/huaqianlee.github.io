@@ -55,10 +55,10 @@
     <link href="http://huaqianlee.github.io/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/"/>
     <id>http://huaqianlee.github.io/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/</id>
     <published>2017-03-24T14:28:51.000Z</published>
-    <updated>2017-04-11T14:46:40.587Z</updated>
+    <updated>2017-04-11T23:07:30.372Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://pan.baidu.com/s/1kVgED6n" target="_blank" rel="external">Linux内核完全注释PDF下载</a></p>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/add_change.png" alt=""><br><a id="more"></a><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/addr_resolution.png" alt=""></p>
+<p>如下图所示，80x86从逻辑地址到物理地址变换使用分段和分页两种机制。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/add_change.png" alt=""><br><a id="more"></a><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/addr_resolution.png" alt=""></p>
 <p>如果没有开启分页机制，则处理器会直接将线性地址映射到物理地址。分段机制用来完成虚拟（逻辑）地址到线性地址的转换，分页主要用来将线性地址（很多时候比物理地址大，让应用编程不用受内存空间限制）转换到物理地址。段描述符等会存于硬盘等存储介质，物理地址由其决定获得。</p>
 <p>分段机制、分页机制应用如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/vir_addr_map.png" alt=""></p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/line_phy.png" alt=""><br>每个页面固定 4KB大小，并且对齐于4K地址边界。因此 x86 4GB被划分为2^20（1M）个页面。<br>Linux0.11中 把每个进程最大可用虚拟内存空间定义为64MB，因此每个进程的逻辑地址加上 任务号*64MB（Linux0.11中算出来范围约为8G，最大任务数126，但人工定义为64个即4G），即可转换为线性空间中的地址。<br>每个进程代码在逻辑空间分布如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/progress_add.png" alt=""></p>
@@ -67,7 +67,7 @@
     <summary type="html">
     
       &lt;p&gt;&lt;a href=&quot;http://pan.baidu.com/s/1kVgED6n&quot;&gt;Linux内核完全注释PDF下载&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/linux/book/add_change.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+&lt;p&gt;如下图所示，80x86从逻辑地址到物理地址变换使用分段和分页两种机制。&lt;br&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/linux/book/add_change.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
     
     </summary>
     
@@ -79,23 +79,21 @@
   </entry>
   
   <entry>
-    <title>关于我所买的这些书籍</title>
+    <title>所买的书</title>
     <link href="http://huaqianlee.github.io/2017/03/24/Life/About-my-books-and-my-plan/"/>
     <id>http://huaqianlee.github.io/2017/03/24/Life/About-my-books-and-my-plan/</id>
     <published>2017-03-24T13:47:41.000Z</published>
-    <updated>2017-04-11T15:00:09.016Z</updated>
+    <updated>2017-04-11T23:09:16.416Z</updated>
     
-    <content type="html"><![CDATA[<p><strong>书架一脚</strong></p>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/mybooks.jpg" alt="myBooks"></p>
-<p>之前买了很多书籍，有很多Linux、Android、Java、英语等学习相关的书籍，也有理财、管理、自传、英文原著等不少书籍，搬家时我的书籍都会是一项大工程，但是所有书籍呢，即使看过的也舍不得送人，总是当着一种财产保留在这。这些时间现有工作让我没有激情感到惶恐，突然感慨到这些知识不能就这么遗烂在角落里，里面很多书还没有看过，也有看过的值得再读一遍的好书。<br><a id="more"></a></p>
-<p>自己离自己的目标还相差甚远，所以前一段时间计划了一下，准备将没看过的书看了，看过的经典再学习一遍，并且做好笔记做好总结。后续将自己的笔记和总结也整理了发布到博客上面，也算是一个激励。</p>
+    <content type="html"><![CDATA[<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/mybooks.jpg" alt="myBooks"><br><strong>书架一脚</strong></p>
+<a id="more"></a>
+<p>之前买了很多书，有很多Linux、Android、Java、英语等学习相关的书，也有理财、管理、自传、英文原著等不少书，搬家时我的书都会是一项大工程，但是这些书呢，挺多还没怎么看过，即使看过的也舍不得送人，总是当着一种财产保留在这。这些时间现有工作让我没有激情感到惶恐，突然感慨到这些知识不能就这么遗烂在角落里。</p>
+<p>自己离自己的目标还相差甚远，所以前一段时间计划了一下，准备将没看过的书看了，看过的好书再学习一遍，并且对某些学习做好笔记做好总结。后续将自己的笔记和总结也整理了发布到博客上面，也算是一个激励。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;strong&gt;书架一脚&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/mybooks.jpg&quot; alt=&quot;myBooks&quot;&gt;&lt;/p&gt;
-&lt;p&gt;之前买了很多书籍，有很多Linux、Android、Java、英语等学习相关的书籍，也有理财、管理、自传、英文原著等不少书籍，搬家时我的书籍都会是一项大工程，但是所有书籍呢，即使看过的也舍不得送人，总是当着一种财产保留在这。这些时间现有工作让我没有激情感到惶恐，突然感慨到这些知识不能就这么遗烂在角落里，里面很多书还没有看过，也有看过的值得再读一遍的好书。&lt;br&gt;
+      &lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/mybooks.jpg&quot; alt=&quot;myBooks&quot;&gt;&lt;br&gt;&lt;strong&gt;书架一脚&lt;/strong&gt;&lt;/p&gt;
     
     </summary>
     
