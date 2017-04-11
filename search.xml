@@ -20,11 +20,22 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Linux内核完全注释之80x86内存管理]]></title>
+      <url>http://huaqianlee.github.io/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/</url>
+      <content type="html"><![CDATA[<p><a href="http://pan.baidu.com/s/1kVgED6n" target="_blank" rel="external">Linux内核完全注释PDF下载</a></p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/add_change.png" alt=""><br><a id="more"></a><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/addr_resolution.png" alt=""></p>
+<p>如果没有开启分页机制，则处理器会直接将线性地址映射到物理地址。分段机制用来完成虚拟（逻辑）地址到线性地址的转换，分页主要用来将线性地址（很多时候比物理地址大，让应用编程不用受内存空间限制）转换到物理地址。段描述符等会存于硬盘等存储介质，物理地址由其决定获得。</p>
+<p>分段机制、分页机制应用如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/vir_addr_map.png" alt=""></p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/line_phy.png" alt=""><br>每个页面固定 4KB大小，并且对齐于4K地址边界。因此 x86 4GB被划分为2^20（1M）个页面。<br>Linux0.11中 把每个进程最大可用虚拟内存空间定义为64MB，因此每个进程的逻辑地址加上 任务号*64MB（Linux0.11中算出来范围约为8G，最大任务数126，但人工定义为64个即4G），即可转换为线性空间中的地址。<br>每个进程代码在逻辑空间分布如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/linux/book/progress_add.png" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[第一行代码学习笔记之项目结构与活动]]></title>
       <url>http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/</url>
       <content type="html"><![CDATA[<p> <a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.</p>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"><br><a id="more"></a></p>
+<h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.<br><a id="more"></a></p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/prj_struct.png" alt="项目结构"></p>
 <ul>
 <li>.gradle &amp; .idea<br>Android Studio自动生成, 无需关心, 版本管理时,一般将其忽略(即.gitignore文件).</li>
 <li>app<br>项目代码、资源基本位于此路径。</li>
@@ -89,7 +100,7 @@
     <entry>
       <title><![CDATA[第一行代码学习笔记之启程 ]]></title>
       <url>http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/</url>
-      <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过60%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。</p>
+      <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过50%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。</p>
 <p>《第一行代码》思维导图如下:<br><img src="后续补上" alt="脑图1"></p>
 <a id="more"></a>
 <p>《第一行代码》学习笔记目录:<br><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码学习笔记之项目结构与活动</a></p>
@@ -168,6 +179,16 @@
 <p>  作为一个即将迈入三十的中年人, 又懈怠浪费了这么多时间. 工作不给力, 得好好准备准备换换环境了, 然后也差不多该回成都了.</p>
 <p>  博客\CODING需要更积极些.</p>
 <p>加油!加油!  </p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[关于我所买的这些书籍]]></title>
+      <url>http://huaqianlee.github.io/2017/02/24/Life/About-my-books-and-my-plan/</url>
+      <content type="html"><![CDATA[<p><strong>书架一脚</strong></p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/mybooks.jpg" alt="myBooks"></p>
+<p>之前买了很多书籍，有很多Linux、Android、Java、英语等学习相关的书籍，也有理财、管理、自传、英文原著等不少书籍，搬家时我的书籍都会是一项大工程，但是所有书籍呢，即使看过的也舍不得送人，总是当着一种财产保留在这。这些时间现有工作让我没有激情感到惶恐，突然感慨到这些知识不能就这么遗烂在角落里，里面很多书还没有看过，也有看过的值得再读一遍的好书。<br><a id="more"></a></p>
+<p>自己离自己的目标还相差甚远，所以前一段时间计划了一下，准备将没看过的书看了，看过的经典再学习一边，并且做好笔记做好总结。后续将自己的笔记和总结也整理了发布到博客上面，也算是一个激励。</p>
 ]]></content>
     </entry>
     
