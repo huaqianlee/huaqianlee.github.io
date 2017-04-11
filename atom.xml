@@ -51,6 +51,94 @@
   </entry>
   
   <entry>
+    <title>PX4 for Snapdragon Flight</title>
+    <link href="http://huaqianlee.github.io/2017/03/25/Uav/PX4-for-Snapdragon-Flight/"/>
+    <id>http://huaqianlee.github.io/2017/03/25/Uav/PX4-for-Snapdragon-Flight/</id>
+    <published>2017-03-25T11:45:25.000Z</published>
+    <updated>2017-04-11T23:17:20.519Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. </p>
+</blockquote>
+<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: <a href="https://github.com/ATLFlight/drone-controller" target="_blank" rel="external">DroneControl</a>)，准备好环境，有问题主要参考如下三个地址：</p>
+<p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases" target="_blank" rel="external">PX4编译和执行</a></p>
+<p><a href="https://dev.px4.io" target="_blank" rel="external">PX4开发手册</a></p>
+<p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/" target="_blank" rel="external">QGroundcontrol开发手册</a></p>
+<h2 id="连接无人机">连接无人机</h2><p>首先PC通过WiFi连上无人机，通过xshell或者putty ssh远程登录无人机。</p>
+<a id="more"></a>
+<h2 id="运行PX4">运行PX4</h2><p>执行命令./px4 mainapp.config ，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">root@linaro-developer:/home/linaro<span class="comment"># ./px4 mainapp.config </span></span><br><span class="line">sh: <span class="number">1</span>: cannot create /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor: Directory nonexistent</span><br><span class="line">commands file: mainapp.config</span><br><span class="line"></span><br><span class="line">______  __   __    ___ </span><br><span class="line">| ___ \ \ \ / /   /   |</span><br><span class="line">| |_/ /  \ V /   / /| |</span><br><span class="line">|  __/   /   \  / /_| |</span><br><span class="line">| |     / /^\ \ \___  |</span><br><span class="line">\_|     \/   \/     |_/</span><br><span class="line"></span><br><span class="line">px4 starting.</span><br><span class="line"></span><br><span class="line">INFO  [sdlog2] [blackbox] /root/<span class="built_in">log</span>/sess018</span><br><span class="line">INFO  [sdlog2] [blackbox] recording: <span class="built_in">log</span>001.px4<span class="built_in">log</span></span><br><span class="line">INFO  [dataman] Unkown restart, data manager file <span class="string">'/home/linaro/dataman'</span> size is <span class="number">47640</span> bytes</span><br><span class="line">INFO  [mavlink] mode: Normal, data rate: <span class="number">1000000</span> B/s on udp port <span class="number">14556</span> remote port <span class="number">14550</span></span><br><span class="line">Sleeping <span class="keyword">for</span> <span class="number">1</span> s; (<span class="number">1000000</span> us).</span><br><span class="line">pxh&gt; INFO  [mavlink] using network interface wlan0, IP: <span class="number">192.168</span>.<span class="number">1.1</span></span><br><span class="line">INFO  [mavlink] with broadcast IP: <span class="number">192.168</span>.<span class="number">1.255</span></span><br><span class="line"></span><br><span class="line">pxh&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="运行QGroundcontrol">运行QGroundcontrol</h2><h3 id="启动QGroundcontrol">启动QGroundcontrol</h3><p>我们使用的Snapdragon板好像只能支持QGroundControl V2.7.1 （<a href="http://pan.baidu.com/s/1sl2fXhF" target="_blank" rel="external">QGroundControl-V2.7.1下载</a>），启动QGroundcontrol。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/start_qground.jpg" alt="lanuch"></p>
+<h3 id="连接无人机-1">连接无人机</h3><ol>
+<li><p>File &gt; Settings &gt; CommLinks<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link1.jpg" alt=""></p>
+</li>
+<li><p>点击ADD 添加新的远端连接<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link2.jpg" alt=""></p>
+</li>
+<li><p>点击ADD 添加目标主机<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link3.jpg" alt=""></p>
+</li>
+<li><p>完成，如下<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link.jpg" alt=""></p>
+</li>
+<li><p>连接无人机，就在上一界面点击connect或者到主界面右上角点击connect连接<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/connect.jpg" alt=""></p>
+</li>
+</ol>
+<h3 id="连接遥控器">连接遥控器</h3><ol>
+<li><p>File &gt; Settings &gt; Controllers<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/controller.jpg" alt=""></p>
+</li>
+<li><p>Enable controllers, 选择相应遥控器，设为Manual，并进行校准，如下<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/controller1.jpg" alt=""></p>
+</li>
+</ol>
+<h3 id="机身设置及校准">机身设置及校准</h3><p>进入setup界面，根据提示进行设置校准，完成后项目将显示绿色小圆点或者边框，我使用的板子POWER部分不能校准成功，如下：</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/setup_ok.jpg" alt=""></p>
+<h3 id="控制起飞">控制起飞</h3><ol>
+<li><p>点击 ARM SYSTEM 起桨，可通过遥控器控制<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/fly.jpg" alt="take_off"></p>
+</li>
+<li><p>点击 DISARM SYSTEM 停桨<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/fly_end.png" alt="land"></p>
+</li>
+</ol>
+<h3 id="分析">分析</h3><p>Analyze界面可以实时挂载mavilink数据包等信息</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/analyze.jpg" alt="data"></p>
+<h3 id="打开自己想要的窗口">打开自己想要的窗口</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/tool_qg.jpg" alt="window"></p>
+<h1 id="快速支持MPU6500">快速支持MPU6500</h1><p>PX4代码默认支持mpu9250，如若想直接支持行空所使用的mpu6500,可对MPU9250.hpp文件做如下修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 路径：Firmware\src\lib\DriverFramework\drivers\mpu9250\MPU9250.hpp</span></span><br><span class="line"><span class="comment">#define MPU_WHOAMI_9250			0x70 //0x71   modified by lihuaqian</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>不过这样修改的话需要自己重新移植地磁驱动</p>
+</blockquote>
+<p>如若出现温度异常，需要临时修改可以测试的话，可以做如下类似修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//<span class="keyword">if</span> (fabsf(temp_c - _last_temp_c) &gt; <span class="number">2.0</span>f) &#123;</span><br><span class="line"><span class="keyword">if</span> (fabsf(temp_c - _last_temp_c) &gt; <span class="number">30.0</span>f) &#123; //modified by lihuaqian <span class="keyword">for</span> debug</span><br></pre></td></tr></table></figure></p>
+<h1 id="测试马达">测试马达</h1><h2 id="修改CODE">修改CODE</h2><p>PX4代码中有测试马达的代码，不过需要做如下小小修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#路径： Firmware\src\examples\hwtest\hwtest.c</span></span><br><span class="line">...</span><br><span class="line">actuators.timestamp = hrt_absolute_time();</span><br><span class="line">+ orb_publish(ORB_ID(actuator_armed), arm_pub_ptr, &amp;arm); //added by lihuaqian</span><br><span class="line">orb_publish(ORB_ID(actuator_controls_0), actuator_pub_ptr, &amp;actuators);</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注：同路径下的CMakeLists.txt，添加模块和执行命令</p>
+</blockquote>
+<h2 id="修改CMAKE文件">修改CMAKE文件</h2><p>需要做如下修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Firmware\cmake\configs\posix_eagle_legacy_driver_default.cmake</span></span><br><span class="line">...</span><br><span class="line">platforms/posix/work_queue</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># added start by lihuaqian</span></span><br><span class="line">examples/px4_simple_app</span><br><span class="line">examples/hwtest  // 添加马达测试module</span><br><span class="line">)</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">#Firmware\cmake\configs\qurt_eagle_legacy_driver_default.cmake</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># FC_ADDON drivers</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">platforms/qurt/<span class="built_in">fc</span>_addon/rc_receiver</span><br><span class="line">platforms/qurt/<span class="built_in">fc</span>_addon/uart_esc // 若没有，需加上</span><br></pre></td></tr></table></figure></p>
+<h2 id="运行马达测试程序">运行马达测试程序</h2><p>首先运行px4，然后输入ex_hwtest，则测试程序开始循环控制马达工作，如下：<br><figure class="highlight ruleslanguage"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">pxh&gt; ex_hwtest</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] DO NOT FORGET <span class="keyword">TO</span> STOP THE DEFAULT CONTROL APPS!</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] (run &lt;commander stop&gt;,)</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] (    &lt;mc_att_control stop&gt; and)</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] (    &lt;fw_att_control stop&gt; to do so)</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] usage: http:<span class="comment">//px4.io/dev/examples/write_output</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] Actuator armed</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">0</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">1</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">2</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">3</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">4</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">5</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">6</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>通过输入“help”， 可以查看支持哪些命令。</p>
+</blockquote>
+<h1 id="附">附</h1><p>参考路径：</p>
+<p><a href="https://github.com/ATLFlight" target="_blank" rel="external">PX4 Github</a></p>
+<p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases" target="_blank" rel="external">PX4编译和执行</a></p>
+<p><a href="https://dev.px4.io" target="_blank" rel="external">PX4开发手册</a></p>
+<p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/" target="_blank" rel="external">QGroundcontrol开发手册</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;快速驱动无人机升空&quot;&gt;快速驱动无人机升空&lt;/h1&gt;&lt;p&gt;主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: &lt;a href=&quot;https://github.com/ATLFlight/drone-controller&quot;&gt;DroneControl&lt;/a&gt;)，准备好环境，有问题主要参考如下三个地址：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases&quot;&gt;PX4编译和执行&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://dev.px4.io&quot;&gt;PX4开发手册&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/&quot;&gt;QGroundcontrol开发手册&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;连接无人机&quot;&gt;连接无人机&lt;/h2&gt;&lt;p&gt;首先PC通过WiFi连上无人机，通过xshell或者putty ssh远程登录无人机。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Uav" scheme="http://huaqianlee.github.io/categories/Uav/"/>
+    
+    
+      <category term="PX4" scheme="http://huaqianlee.github.io/tags/PX4/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux内核完全注释之80x86内存管理</title>
     <link href="http://huaqianlee.github.io/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/"/>
     <id>http://huaqianlee.github.io/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/</id>
@@ -216,94 +304,6 @@
       <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
     
       <category term="FirstCode" scheme="http://huaqianlee.github.io/tags/FirstCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PX4 for Snapdragon Flight</title>
-    <link href="http://huaqianlee.github.io/2017/03/21/Uav/PX4-for-Snapdragon-Flight/"/>
-    <id>http://huaqianlee.github.io/2017/03/21/Uav/PX4-for-Snapdragon-Flight/</id>
-    <published>2017-03-21T11:45:25.000Z</published>
-    <updated>2017-03-25T15:16:13.488Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. </p>
-</blockquote>
-<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: <a href="https://github.com/ATLFlight/drone-controller" target="_blank" rel="external">DroneControl</a>)，准备好环境，有问题主要参考如下三个地址：</p>
-<p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases" target="_blank" rel="external">PX4编译和执行</a></p>
-<p><a href="https://dev.px4.io" target="_blank" rel="external">PX4开发手册</a></p>
-<p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/" target="_blank" rel="external">QGroundcontrol开发手册</a></p>
-<h2 id="连接无人机">连接无人机</h2><p>首先PC通过WiFi连上无人机，通过xshell或者putty ssh远程登录无人机。</p>
-<a id="more"></a>
-<h2 id="运行PX4">运行PX4</h2><p>执行命令./px4 mainapp.config ，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">root@linaro-developer:/home/linaro<span class="comment"># ./px4 mainapp.config </span></span><br><span class="line">sh: <span class="number">1</span>: cannot create /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor: Directory nonexistent</span><br><span class="line">commands file: mainapp.config</span><br><span class="line"></span><br><span class="line">______  __   __    ___ </span><br><span class="line">| ___ \ \ \ / /   /   |</span><br><span class="line">| |_/ /  \ V /   / /| |</span><br><span class="line">|  __/   /   \  / /_| |</span><br><span class="line">| |     / /^\ \ \___  |</span><br><span class="line">\_|     \/   \/     |_/</span><br><span class="line"></span><br><span class="line">px4 starting.</span><br><span class="line"></span><br><span class="line">INFO  [sdlog2] [blackbox] /root/<span class="built_in">log</span>/sess018</span><br><span class="line">INFO  [sdlog2] [blackbox] recording: <span class="built_in">log</span>001.px4<span class="built_in">log</span></span><br><span class="line">INFO  [dataman] Unkown restart, data manager file <span class="string">'/home/linaro/dataman'</span> size is <span class="number">47640</span> bytes</span><br><span class="line">INFO  [mavlink] mode: Normal, data rate: <span class="number">1000000</span> B/s on udp port <span class="number">14556</span> remote port <span class="number">14550</span></span><br><span class="line">Sleeping <span class="keyword">for</span> <span class="number">1</span> s; (<span class="number">1000000</span> us).</span><br><span class="line">pxh&gt; INFO  [mavlink] using network interface wlan0, IP: <span class="number">192.168</span>.<span class="number">1.1</span></span><br><span class="line">INFO  [mavlink] with broadcast IP: <span class="number">192.168</span>.<span class="number">1.255</span></span><br><span class="line"></span><br><span class="line">pxh&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="运行QGroundcontrol">运行QGroundcontrol</h2><h3 id="启动QGroundcontrol">启动QGroundcontrol</h3><p>我们使用的Snapdragon板好像只能支持QGroundControl V2.7.1 （<a href="http://pan.baidu.com/s/1sl2fXhF" target="_blank" rel="external">QGroundControl-V2.7.1下载</a>），启动QGroundcontrol。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/start_qground.jpg" alt="lanuch"></p>
-<h3 id="连接无人机-1">连接无人机</h3><ol>
-<li><p>File &gt; Settings &gt; CommLinks<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link1.jpg" alt=""></p>
-</li>
-<li><p>点击ADD 添加新的远端连接<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link2.jpg" alt=""></p>
-</li>
-<li><p>点击ADD 添加目标主机<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link3.jpg" alt=""></p>
-</li>
-<li><p>完成，如下<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/com_link.jpg" alt=""></p>
-</li>
-<li><p>连接无人机，就在上一界面点击connect或者到主界面右上角点击connect连接<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/connect.jpg" alt=""></p>
-</li>
-</ol>
-<h3 id="连接遥控器">连接遥控器</h3><ol>
-<li><p>File &gt; Settings &gt; Controllers<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/controller.jpg" alt=""></p>
-</li>
-<li><p>Enable controllers, 选择相应遥控器，设为Manual，并进行校准，如下<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/controller1.jpg" alt=""></p>
-</li>
-</ol>
-<h3 id="机身设置及校准">机身设置及校准</h3><p>进入setup界面，根据提示进行设置校准，完成后项目将显示绿色小圆点或者边框，我使用的板子POWER部分不能校准成功，如下：</p>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/setup_ok.jpg" alt=""></p>
-<h3 id="控制起飞">控制起飞</h3><ol>
-<li><p>点击 ARM SYSTEM 起桨，可通过遥控器控制<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/fly.jpg" alt="take_off"></p>
-</li>
-<li><p>点击 DISARM SYSTEM 停桨<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/fly_end.png" alt="land"></p>
-</li>
-</ol>
-<h3 id="分析">分析</h3><p>Analyze界面可以实时挂载mavilink数据包等信息</p>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/analyze.jpg" alt="data"></p>
-<h3 id="打开自己想要的窗口">打开自己想要的窗口</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/tool_qg.jpg" alt="window"></p>
-<h1 id="快速支持MPU6500">快速支持MPU6500</h1><p>PX4代码默认支持mpu9250，如若想直接支持行空所使用的mpu6500,可对MPU9250.hpp文件做如下修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 路径：Firmware\src\lib\DriverFramework\drivers\mpu9250\MPU9250.hpp</span></span><br><span class="line"><span class="comment">#define MPU_WHOAMI_9250			0x70 //0x71   modified by lihuaqian</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>不过这样修改的话需要自己重新移植地磁驱动</p>
-</blockquote>
-<p>如若出现温度异常，需要临时修改可以测试的话，可以做如下类似修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//<span class="keyword">if</span> (fabsf(temp_c - _last_temp_c) &gt; <span class="number">2.0</span>f) &#123;</span><br><span class="line"><span class="keyword">if</span> (fabsf(temp_c - _last_temp_c) &gt; <span class="number">30.0</span>f) &#123; //modified by lihuaqian <span class="keyword">for</span> debug</span><br></pre></td></tr></table></figure></p>
-<h1 id="测试马达">测试马达</h1><h2 id="修改CODE">修改CODE</h2><p>PX4代码中有测试马达的代码，不过需要做如下小小修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#路径： Firmware\src\examples\hwtest\hwtest.c</span></span><br><span class="line">...</span><br><span class="line">actuators.timestamp = hrt_absolute_time();</span><br><span class="line">+ orb_publish(ORB_ID(actuator_armed), arm_pub_ptr, &amp;arm); //added by lihuaqian</span><br><span class="line">orb_publish(ORB_ID(actuator_controls_0), actuator_pub_ptr, &amp;actuators);</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注：同路径下的CMakeLists.txt，添加模块和执行命令</p>
-</blockquote>
-<h2 id="修改CMAKE文件">修改CMAKE文件</h2><p>需要做如下修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Firmware\cmake\configs\posix_eagle_legacy_driver_default.cmake</span></span><br><span class="line">...</span><br><span class="line">platforms/posix/work_queue</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># added start by lihuaqian</span></span><br><span class="line">examples/px4_simple_app</span><br><span class="line">examples/hwtest  // 添加马达测试module</span><br><span class="line">)</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">#Firmware\cmake\configs\qurt_eagle_legacy_driver_default.cmake</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># FC_ADDON drivers</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">platforms/qurt/<span class="built_in">fc</span>_addon/rc_receiver</span><br><span class="line">platforms/qurt/<span class="built_in">fc</span>_addon/uart_esc // 若没有，需加上</span><br></pre></td></tr></table></figure></p>
-<h2 id="运行马达测试程序">运行马达测试程序</h2><p>首先运行px4，然后输入ex_hwtest，则测试程序开始循环控制马达工作，如下：<br><figure class="highlight ruleslanguage"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">pxh&gt; ex_hwtest</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] DO NOT FORGET <span class="keyword">TO</span> STOP THE DEFAULT CONTROL APPS!</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] (run &lt;commander stop&gt;,)</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] (    &lt;mc_att_control stop&gt; and)</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] (    &lt;fw_att_control stop&gt; to do so)</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] usage: http:<span class="comment">//px4.io/dev/examples/write_output</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] Actuator armed</span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">0</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">1</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">2</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">3</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">4</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">5</span></span><br><span class="line"><span class="keyword">WARN</span>  [ex_hwtest] count <span class="number">6</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>通过输入“help”， 可以查看支持哪些命令。</p>
-</blockquote>
-<h1 id="附">附</h1><p>参考路径：</p>
-<p><a href="https://github.com/ATLFlight" target="_blank" rel="external">PX4 Github</a></p>
-<p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases" target="_blank" rel="external">PX4编译和执行</a></p>
-<p><a href="https://dev.px4.io" target="_blank" rel="external">PX4开发手册</a></p>
-<p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/" target="_blank" rel="external">QGroundcontrol开发手册</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;快速驱动无人机升空&quot;&gt;快速驱动无人机升空&lt;/h1&gt;&lt;p&gt;主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: &lt;a href=&quot;https://github.com/ATLFlight/drone-controller&quot;&gt;DroneControl&lt;/a&gt;)，准备好环境，有问题主要参考如下三个地址：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases&quot;&gt;PX4编译和执行&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://dev.px4.io&quot;&gt;PX4开发手册&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/&quot;&gt;QGroundcontrol开发手册&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;连接无人机&quot;&gt;连接无人机&lt;/h2&gt;&lt;p&gt;首先PC通过WiFi连上无人机，通过xshell或者putty ssh远程登录无人机。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Uav" scheme="http://huaqianlee.github.io/categories/Uav/"/>
-    
-    
-      <category term="PX4" scheme="http://huaqianlee.github.io/tags/PX4/"/>
     
   </entry>
   
