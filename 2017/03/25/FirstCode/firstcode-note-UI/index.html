@@ -1,0 +1,968 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="App,FirstCode," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Andy.Lee's  Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+本部分思维导图如下：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一行代码学习笔记之UI">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/03/25/FirstCode/firstcode-note-UI/index.html">
+<meta property="og:site_name" content="Andy.Lee's  Blog">
+<meta property="og:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+本部分思维导图如下：">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/UI.png">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/layout_tool.jpg">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/view_extends_struc.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第一行代码学习笔记之UI">
+<meta name="twitter:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+本部分思维导图如下：">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 9418407,
+      author: 'Andy Lee(Author)'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://huaqianlee.github.io/2017/03/25/FirstCode/firstcode-note-UI/"/>
+
+  <title> 第一行代码学习笔记之UI | Andy.Lee's  Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-63838023-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5ab1107031547fb5411cd06ed47f1348";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Andy.Lee's  Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Good good study, day day up !</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第一行代码学习笔记之UI
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-03-25T08:34:40+08:00" content="Mar 25 2017">
+              Mar 25 2017
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/25/FirstCode/firstcode-note-UI/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/25/FirstCode/firstcode-note-UI/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<p>本部分思维导图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/UI.png" alt="UI"><br><a id="more"></a></p>
+<h2 id="常用控件">常用控件</h2><p>如下总结一些常用的参数配置或者方法，某些参数可能对于其它控件也适用。</p>
+<h3 id="TextView">TextView</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">android:gravity - 指定文字对齐方式，用指定控件内容的位置。</span><br><span class="line">android:layout_gravity -  指定控件相对于父布局的位置。</span><br></pre></td></tr></table></figure>
+<h3 id="Button">Button</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:textAllCaps=<span class="string">"false"</span> - 禁用Button字母自动大写转换</span><br></pre></td></tr></table></figure>
+<h3 id="EditText">EditText</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">android:hint=<span class="string">""</span>    <span class="comment"># 提示内容</span></span><br><span class="line">android:maxLines=<span class="string">""</span> <span class="comment"># 输入框拉伸最大行数</span></span><br></pre></td></tr></table></figure>
+<h3 id="ImageView">ImageView</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">android:src=<span class="string">""</span>  <span class="comment"># 参数配置图片资源</span></span><br><span class="line">imageView.setImageResource()  <span class="comment"># 动态设置图片资源</span></span><br></pre></td></tr></table></figure>
+<h3 id="ProgressBar">ProgressBar</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参数</span></span><br><span class="line">android:visibility=<span class="string">""</span>  <span class="comment"># 控件可见设置，不设的都默认可见</span></span><br><span class="line">android:max=<span class="string">""</span>  <span class="comment">#进度条最大值</span></span><br><span class="line">style=<span class="string">"?android:attr/progressBarStyleHorizontal"</span> <span class="comment"># 设置为水平进度条，默认是圆形进度条</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法</span></span><br><span class="line">progressBar.getvisibility()  <span class="comment"># 获取可见状态</span></span><br><span class="line">progressBar.setVisibility(View.VISIBLE/View.GONE) <span class="comment"># 动态设置可见状态</span></span><br><span class="line">progressBar.getProgress(); <span class="comment"># 获取进度</span></span><br><span class="line">progressBar.setProgress(int); <span class="comment"># 设置进度</span></span><br></pre></td></tr></table></figure>
+<h3 id="AlertDialog">AlertDialog</h3><p>在当前界面弹出一个对话框，置于所有界面之上，能屏蔽其他控件的交互能力。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 弹出一个确认框</span><br><span class="line">AlertDialog.Builder dialog = <span class="keyword">new</span> AlertDialog.Builder(MainActivity.<span class="keyword">this</span>);</span><br><span class="line">dialog.setTile(<span class="string">""</span>);</span><br><span class="line">dialog.setMessage(<span class="string">""</span>);</span><br><span class="line">dialog.setCancelable(<span class="keyword">false</span>); # 不可通过Back键取消</span><br><span class="line">dialog.setPositiveButton(<span class="string">"OK"</span>,<span class="keyword">new</span> DialogInterface.onClickListener()&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;&#125;;</span><br><span class="line">&#125;);</span><br><span class="line">dialog.setNegativeButton(<span class="string">"Cancel"</span>,<span class="keyword">new</span> DialogInterface.onClickListener()&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;&#125;;</span><br><span class="line">&#125;);</span><br><span class="line">dialog.show();</span><br></pre></td></tr></table></figure></p>
+<h3 id="ProgressDialog">ProgressDialog</h3><p>与AlertDialog类似，不过多一个进度条。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ProgressDialog dialog = <span class="keyword">new</span> ProgressDialog(MainActivity.<span class="keyword">this</span>);</span><br><span class="line">dialog.setTitle(<span class="string">""</span>);</span><br><span class="line">dialog.setMessage(<span class="string">""</span>);</span><br><span class="line">dialog.setCancelable(<span class="keyword">true</span>);  # 可通过Back键取消</span><br><span class="line"># 如若传入<span class="keyword">false</span>，则需要再加载完成后调用ProgressDialog的dismiss()方法关闭对话框，否则对话框会一直存在</span><br><span class="line">dialog.show();</span><br></pre></td></tr></table></figure></p>
+<h2 id="4种基本布局">4种基本布局</h2><p>布局与控件嵌套结构如下：</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/layout_tool.jpg" alt="布局与控件"></p>
+<h3 id="线性布局">线性布局</h3><p>只有LinearLayout支持 android:layout_weight属性，指定了此属性后控件大小即由其来决定，举个简单例子：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># widget1   </span></span><br><span class="line">android:layout_width = <span class="string">"0dp"</span></span><br><span class="line">android:layout_weight = <span class="number">1</span>   <span class="comment"># 此控件占用1/3空间</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#widget2</span></span><br><span class="line">android:layout_width = <span class="string">"0dp"</span></span><br><span class="line">android:layout_weight = <span class="number">2</span>  <span class="comment"># 此控件占用2/3空间</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="百分比布局">百分比布局</h3><blockquote>
+<p>前不久好像看到文章讲此布局被弃用了</p>
+</blockquote>
+<p>此布局要使用需先引入依赖库，然后直接指定百分比。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/build.gradle</span></span><br><span class="line">compile  <span class="string">'com.android.support:percent:24.2.1'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#  xxx.xml</span></span><br><span class="line">&lt;android.support.percent.PercentFrameLayout</span><br><span class="line">xmlns:app=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line"></span><br><span class="line">app:layout_widthPercent=<span class="string">"50%"</span>  <span class="comment"># 指定宽度为布局的50%</span></span><br><span class="line">app:layout_heightPercent=<span class="string">"50%"</span> <span class="comment"># 指定高度为布局的50%</span></span><br></pre></td></tr></table></figure></p>
+<p>还存在PercentRelativeLayout，除了可以如上使用百分比布局外，继承了RelativeLayout的属性。</p>
+<h2 id="自定义控件">自定义控件</h2><p>所有控件和布局都是直接或间接继承自View，如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/view_extends_struc.png" alt=""></p>
+<h3 id="引入布局">引入布局</h3><p>自定义标题栏控件，针对自定义控件新建一布局文件title.xml。然后在主布局文件中引入title.xml。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;include layout=<span class="string">"@layout/title"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="创建自定义控件">创建自定义控件</h3><p>针对布局实现控件响应类。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class TitleLayout extends LinearLayout &#123;</span><br><span class="line">    public TitleLayout(Context context, AttributeSet attrs)&#123;</span><br><span class="line">        super(context,attrs);</span><br><span class="line">        LayoutInflater.from(context).inflate(R.layout.title,this);</span><br><span class="line">        // 通过LayoutInflater.from(context)构建LayoutInflater对象，然后inflate()动态加载布局文件    </span><br><span class="line">        // 参数：布局ID， 父布局</span><br><span class="line">        ... //实现控件响应功能</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>除了通过include引入布局外，亦可以在布局文件中直接添加控件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.lee.TitleLayout</span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="ListView">ListView</h2><h3 id="简单用法">简单用法</h3><p>适配ListView，将数据通过适配器传递给ListView。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示字符串</span></span><br><span class="line">ArrayAdapter &lt;String&gt; adapter = new ArraAdapter&lt;String&gt;(MainActivity.this, android.R.layout.simple_list_item_1, String[]);</span><br><span class="line">listView.setAdapter(adapter);</span><br></pre></td></tr></table></figure></p>
+<h3 id="定制ListView">定制ListView</h3><p>定制一个水果名+图片的ListView。<br>首先定义一个实体类，作为ListView适配器的适配类型。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fruit</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> imageId;  <span class="comment">// 图片ID，R.drawable.xx</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Fruit</span><span class="params">(String name, <span class="keyword">int</span> imageId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.imageId = imageId;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getImageId</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> imageId;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后需要为ListView的子项指定一个布局fruit_item.xml。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;LinearLayout ....&gt;</span><br><span class="line">    &lt;ImageView ..../&gt;</span><br><span class="line">    &lt;TextView ..../&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure></p>
+<p>接下来需要继承ArrayAdapter创建一个自定义适配器FruitAdapter。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FruitAdapter</span> <span class="keyword">extends</span> <span class="title">ArrayAdapter</span>&lt;<span class="title">Fruit</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> resourceId; <span class="comment">// 子项布局的ID</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FruitAdapter</span><span class="params">(Context context, <span class="keyword">int</span> Id, List&lt;Fruit&gt; objects)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(...);</span><br><span class="line">        resourceId = Id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*getView()在每个子项滚入屏幕时被调用*/</span></span><br><span class="line">    <span class="annotation">@override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">        Fruit fruit = getItem(position); <span class="comment">// 获取当前子项Fruit实例</span></span><br><span class="line">        View view = LayoutInflater.from(getContext).inflate(resourceId, parent, <span class="keyword">false</span>);</span><br><span class="line">        ImageView fruitImage = view.findViewById(...);</span><br><span class="line">        TextView fruitName = View.findViewById(...);</span><br><span class="line">        fruitImage.setImgageResource(fruit.getImageId()；</span><br><span class="line">        fruitName.setText(Fruit.getName();</span><br><span class="line">        <span class="keyword">return</span> view;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>关于inflate()方法，第三个参数false表示只让在父布局中声明的layout属性生效，但不为这个View添加父布局，因View有了父布局后，就不能添加到ListView中了。<br>适配ListView，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> List&lt;Fruit&gt; fruitList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	onCreate() &#123;</span><br><span class="line">		...</span><br><span class="line">		initFruits();</span><br><span class="line">		FruitAdapter adapter = <span class="keyword">new</span> FruitAdapter(MainActivity.<span class="keyword">this</span>,R.layout.fruit_item.xml,fruitList);</span><br><span class="line">		listView.setAdapter(adapter);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	initFruits() &#123;</span><br><span class="line">		Fruit apple = <span class="keyword">new</span> Fruit(<span class="string">"Apple"</span>, R.drawble.apple_pic);</span><br><span class="line">		fruitList.add(apple);</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="提升ListView的效率">提升ListView的效率</h3><p>目前getView()时，每次加载子项都会重新加载布局，这样给了一个提升效率的方式。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">if</span>(convertView == <span class="keyword">null</span>) &#123;</span><br><span class="line">		view = LayoutInflater.from(getContext()).inflate(resourceId,parent,<span class="keyword">false</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		view = convertView;</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不过目前getView每次都要同findViewById()获取硬件实例，所以可以通过ViewHolder优化。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">if</span>(convertView == <span class="keyword">null</span>) &#123;</span><br><span class="line">		view = LayoutInflater.from(getContext()).inflate(resourceId,parent,<span class="keyword">false</span>);</span><br><span class="line">		viewHolder = <span class="keyword">new</span> ViewHolder();</span><br><span class="line">		viewHolder.fruitImage = view.findViewById(...);</span><br><span class="line">		viewHolder.fruitName = view.findViewById(...);</span><br><span class="line">		view.setTag(viewHolder); <span class="comment">// viewHolder存储于view中</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		view = convertView;</span><br><span class="line">		viewHolder = (ViewHolder)view.getTag();</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Class ViewHolder &#123;</span><br><span class="line">	ImageView fruitImage;</span><br><span class="line">    TextView fruitName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="ListView的点击事件">ListView的点击事件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">listView.setOnItemClickListener(<span class="keyword">new</span> AdapterView.onItemClickListener) &#123;</span><br><span class="line">	onItemClick(AdapterView&lt;?&gt; parent, View view , <span class="keyword">int</span> position, <span class="keyword">long</span> id) &#123;</span><br><span class="line">		Fruit fruit = fruitList.get(position);</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="RecyclerView">RecyclerView</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/App/" rel="tag">#App</a>
+          
+            <a href="/tags/FirstCode/" rel="tag">#FirstCode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/" rel="next" title="Linux内核完全注释之80x86内存管理">
+                <i class="fa fa-chevron-left"></i> Linux内核完全注释之80x86内存管理
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/25/Uav/PX4-for-Snapdragon-Flight/" rel="prev" title="PX4 for Snapdragon Flight">
+                PX4 for Snapdragon Flight <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/25/FirstCode/firstcode-note-UI/"
+           data-title="第一行代码学习笔记之UI" data-url="http://huaqianlee.github.io/2017/03/25/FirstCode/firstcode-note-UI/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Andy.Lee" />
+          <p class="site-author-name" itemprop="name">Andy.Lee</p>
+          <p class="site-description motion-element" itemprop="description">Just need to enjoy life.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/huaqianlee" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/huaqianlee" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/huaqianlee" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://facebook.com/huaqianlee" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://plus.google.com/u/0/107850537041795428182" target="_blank" title="GooglePlus">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GooglePlus
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://huaqianlee.github.io/" title="Andy.Lee's Blog" target="_blank">Andy.Lee's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://fpgadeveloper.wang/" title="FPGA开发者网" target="_blank">FPGA开发者网</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用控件"><span class="nav-number">1.</span> <span class="nav-text">常用控件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TextView"><span class="nav-number">1.1.</span> <span class="nav-text">TextView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Button"><span class="nav-number">1.2.</span> <span class="nav-text">Button</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EditText"><span class="nav-number">1.3.</span> <span class="nav-text">EditText</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ImageView"><span class="nav-number">1.4.</span> <span class="nav-text">ImageView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ProgressBar"><span class="nav-number">1.5.</span> <span class="nav-text">ProgressBar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AlertDialog"><span class="nav-number">1.6.</span> <span class="nav-text">AlertDialog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ProgressDialog"><span class="nav-number">1.7.</span> <span class="nav-text">ProgressDialog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4种基本布局"><span class="nav-number">2.</span> <span class="nav-text">4种基本布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性布局"><span class="nav-number">2.1.</span> <span class="nav-text">线性布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百分比布局"><span class="nav-number">2.2.</span> <span class="nav-text">百分比布局</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义控件"><span class="nav-number">3.</span> <span class="nav-text">自定义控件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入布局"><span class="nav-number">3.1.</span> <span class="nav-text">引入布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建自定义控件"><span class="nav-number">3.2.</span> <span class="nav-text">创建自定义控件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView"><span class="nav-number">4.</span> <span class="nav-text">ListView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单用法"><span class="nav-number">4.1.</span> <span class="nav-text">简单用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定制ListView"><span class="nav-number">4.2.</span> <span class="nav-text">定制ListView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提升ListView的效率"><span class="nav-number">4.3.</span> <span class="nav-text">提升ListView的效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView的点击事件"><span class="nav-number">4.4.</span> <span class="nav-text">ListView的点击事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RecyclerView"><span class="nav-number">5.</span> <span class="nav-text">RecyclerView</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"andylee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
