@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-05-03T13:43:55.310Z</updated>
+  <updated>2017-05-03T15:04:19.229Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -16,11 +16,43 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>FirstCode Content Provider</title>
+    <link href="http://huaqianlee.github.io/2017/05/03/FirstCode/FirstCode-Content-Provider/"/>
+    <id>http://huaqianlee.github.io/2017/05/03/FirstCode/FirstCode-Content-Provider/</id>
+    <published>2017-05-03T13:51:23.000Z</published>
+    <updated>2017-05-03T15:04:19.229Z</updated>
+    
+    <content type="html"><![CDATA[<p>内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。</p>
+<h2 id="运行时权限">运行时权限</h2><h3 id="Android权限机制">Android权限机制</h3><p>为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一个9组24个权限。</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/android_permission.jpg" alt="Android danger permission"></p>
+<p>权限详情参考：<a href="http://developer.android.com/reference/android/Manifest.permission.html" target="_blank" rel="external">http://developer.android.com/reference/android/Manifest.permission.html</a>。</p>
+<h3 id="程序运行时申请权限">程序运行时申请权限</h3><p>以CALL_PHONE为例来说明。定义触发打电话的逻辑：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_CALL);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"tel:10086"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>在AndroidMainifest.xml中声明权限：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.CALL_PHONE"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这样声明的APP运行在6.0及以上的版本则会报错，要求在使用危险权限是都必须进行运行时权限处理。所以就得对触发打电话的逻辑进行修改：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 申请权限，处理打电话逻辑 &#123;</span><br><span class="line">	<span class="keyword">if</span>(ContextCompat.checkSelfPermission(MainActivity.<span class="keyword">this</span>, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">	    ActivityCompat.requestPermissions(MainActivity.<span class="keyword">this</span>, <span class="keyword">new</span> String[]&#123;Manifest.permission.CALL_PHONE&#125;,<span class="number">1</span>); <span class="comment">// 申请授权</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	    call(); <span class="comment">// 已授权，CALL</span></span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_CALL);</span><br><span class="line">        intent.setData(Uri.parse(<span class="string">"tel:911"</span>));</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SecurityException e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRequestPermissionsResult</span><span class="params">(<span class="keyword">int</span> requestCode, @NonNull String[] permissions, @NonNull <span class="keyword">int</span>[] grantResults)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//super.onRequestPermissionsResult(requestCode, permissions, grantResults);</span></span><br><span class="line">    <span class="keyword">switch</span> (requestCode) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> (grantResults.length &gt; <span class="number">0</span> &amp;&amp; grantResults[<span class="number">0</span>] == PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">                call();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                Toast.makeText(<span class="keyword">this</span>, <span class="string">"You denied the permission!"</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。&lt;/p&gt;
+&lt;h2 id=&quot;运行时权限&quot;&gt;运行时权限&lt;/h2&gt;&lt;h3 id=&quot;Android权限机制&quot;&gt;Android权限机制&lt;/h3&gt;&lt;p&gt;为了安全，Android6.0后引入了新特
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="http://huaqianlee.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
+    
+      <category term="FirstCode" scheme="http://huaqianlee.github.io/tags/FirstCode/"/>
+    
+  </entry>
+  
+  <entry>
     <title>第一行代码学习笔记之数据存储</title>
     <link href="http://huaqianlee.github.io/2017/04/29/FirstCode/FirstCode-data-storage/"/>
     <id>http://huaqianlee.github.io/2017/04/29/FirstCode/FirstCode-data-storage/</id>
     <published>2017-04-29T10:35:49.000Z</published>
-    <updated>2017-05-03T13:43:55.310Z</updated>
+    <updated>2017-05-03T13:52:28.019Z</updated>
     
     <content type="html"><![CDATA[<h2 id="文件存储">文件存储</h2><h3 id="数据存到文件">数据存到文件</h3><p>Context类提供了一个openFileOutput()方法，可以用于文件存储，此方法有两个参数：</p>
 <ul>
@@ -93,6 +125,12 @@
     
     </summary>
     
+      <category term="学习笔记" scheme="http://huaqianlee.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
+    
+      <category term="FirstCode" scheme="http://huaqianlee.github.io/tags/FirstCode/"/>
     
   </entry>
   
@@ -1256,97 +1294,6 @@ git commit
       <category term="Qualcomm" scheme="http://huaqianlee.github.io/tags/Qualcomm/"/>
     
       <category term="源码分析" scheme="http://huaqianlee.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深入理解Linux启动过程(译)</title>
-    <link href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/"/>
-    <id>http://huaqianlee.github.io/2015/08/21/Linux/深入理解Linux启动过程/</id>
-    <published>2015-08-21T13:23:41.000Z</published>
-    <updated>2015-08-22T16:02:35.317Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p><strong>第一篇完全译文，因为自己对技术和英文的热爱，所以决定翻译此文，水平有限，所以肯定会有不恰当的地方，欢迎移驾至原地址：<a href="http://www.ibm.com/developerworks/linux/library/l-linuxboot/" target="_blank" rel="external">http://www.ibm.com/developerworks/linux/library/l-linuxboot/</a></strong><br>注：因为想写一篇博文来阐述并理清Android启动的完全过程，发现了这篇文章，觉得写得十分好，帮我解答了很多疑惑。</p>
-</blockquote>
-<h2 id="引言">引言</h2><p>Linux系统的启动过程由很多阶段组成，但是无论你是启动标准的x86桌面还是启动嵌入式PowerPC目标，许多流程都是惊人的相似的。这篇文章从初始化引导程序到第一个用户空间应用程序探索Linux启动进程。顺着这个流程，你将知道很多和启动相关的主题，比如：引导程序，内核解压, 初始RAM磁盘,以及其他Linux引导元素。<br><a id="more"></a><br>早期，引导计算机启动需要插入一条带有引导程序的纸带或者手动控制带有地址/数据/控制开关的面板加载启动程序。今天的计算机<br>装备了简化启动进程的工具，不过并不一定使这个过程变得简单了。</p>
-<p>我们先从Linux启动的顶层视图开始分析，以便你能有一个整体的认识。然后我们将回顾每一个分离的步骤。顺着这个流程的源码引用将帮助你浏览内核树结构，以便在以后深入分析。</p>
-<h2 id="概述">概述</h2><p>图一将为你展示两万英里的视图。</p>
-<p><strong>Figure 1. The 20,000-foot view of the Linux boot process</strong><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogfigure1.gif" alt="Figure 1"></p>
-<p>当系统第一次启动或重启时，处理器将执行一个已知地方的代码。对应个人电脑，这个地方是存在主板上内存内的BIOS；对于嵌入式系统中的cpu，将会加载引导区去启动flash/ROM中已知地址的程序。无论怎样，结果是相同的。个人电脑提供了很多灵和性，BIOS必须觉得哪些设备是候补准备启动，稍后再详细讲。</p>
-<p>当一个启动设备被发现，第一阶段引导程序被加载到RAM并执行。这一部分引导程序最大为512字节（1单位扇区大小），他的作用是去加载第二阶段引导程序。</p>
-<p>当第二阶段引导程序被加载进RAM并执行，启动界面将被显示，并且Linux和可选的初始磁盘（临时文件系统）被加载进内存。当镜像被加载以后，控制权从第二阶段引导程序传递到内核镜像，内核镜像先自解压和初始化。在这一步，第二阶段引导程序将检查系统硬件，枚举硬件设备，挂载主设备，加载必须的内核模块。当这些完成时，用户空间的第一个程序(init)开始执行，这样就开始顶层系统初始化开始了。</p>
-<p>上面这些是Linux启动的一个外壳，接下来我们开始更深层次的探索启动进程的细节。</p>
-<h2 id="系统启动">系统启动</h2><p>系统启动依赖于引导Linux的硬件。在嵌入式平台，系统在启动或重启时会用到引导程序环境变量，比如：包括u-boot，redboot及lucent公司的MicroMonitor。嵌入式平台通常附带一个引导监视器。这些程序位于目标硬件的flash内存中一个特别的区域，为Linux内核镜像加载到flash内存提供方法，并在随后执行Linux内核。除了存储和启动Linux镜像外，引导监视器还会执行一些系统测试及硬件初始化。在一个嵌入式目标，引导监视器通常存在于第一步及第二步引导程序。</p>
-<p>对于个人计算机，Linux从0xffff0地址的BIOS开始启动。BIOS的第一步是上电自检（POST）。上电自检的工作是检查硬件。BIOS的第二步是枚举和初始化本地设备。</p>
-<p>鉴于BIOS的不同用途，BIOS主要由两部分组成：上电自检代码和运行服务。在上电自检完成后，上电自检代码从内存被清除，但是运行服务被保留并且对目标操作系统仍然有效。</p>
-<p>要引导一个操作系统，BIOS运行时会按照CMOS的设置定义的顺序来搜索处于活动状态并且可以引导的设备。引导设备可以为软盘，CD-ROM，硬盘的分区，网络上的设备以及U盘。</p>
-<p>Linux一般从MBR包含初级引导程序的硬盘启动。MBR是一个512字节的扇区，位于硬盘的第一扇区（0道0柱1扇区）。在MBR被加载到RAM中后，由BIOS去控制它。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">提取MBR（主引导记录）</span><br><span class="line"></span><br><span class="line">可以通过如下命令查看你的MBR：</span><br><span class="line"><span class="comment"># dd if=/dev/hda of=mbr.bin bs=512 count=1</span></span><br><span class="line"><span class="comment"># od -xa mbr.bin</span></span><br><span class="line"></span><br><span class="line">dd命令：需要root权限，从/dev/hda（第一个集成驱动电路或IDE驱动器）中读取<span class="number">512</span>字节内容并写到mbr.bin文件。</span><br><span class="line">od命令：以hex和ASCII格式打印二进制文件</span><br></pre></td></tr></table></figure></p>
-<h2 id="第一阶段引导程序">第一阶段引导程序</h2><p>初级引导程序位于512字节的MBR镜像，MBR镜像由一个小型分区表和代码组成（见Figure 2）。前446字节是初级引导程序代码，包括执行代码和错误信息。接下来的64字节是一个分区表，包含4个16字节的分区记录。MBR最后的两字节定义了一个magic数字（0xaa55）。这个magic数字用来校验检查MBR。</p>
-<p><strong>Figure 2. Anatomy of the MBR</strong><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogfigure2.gif" alt="Figure 2"></p>
-<p>初级引导程序主要就是找到并且加载第二阶段引导程序。其通过分区表寻找一个活动的分区。在找到一个活动的分区表后，其将扫描剩余的分区确定它们不是活动的。当这些被确定后，活动分区的启动启动记录将从设备加载到RAM并且执行。</p>
-<h2 id="第二阶段引导程序">第二阶段引导程序</h2><p>第二阶段引导程序其实叫着内核引导程序更加合适。因为其任务就是加载Linux内核和可选的初始磁盘。</p>
-<p>在x86环境中，第一阶段和第二阶段引导程序结合一起叫着Linux引导程序（LILO）或者 GRand Unified Bootloader（GRUB）。因为LILO有一些在GRUB中已经被纠正的缺点，所有我们就分析GRUB。（如果想了解更多关于GRUB，LILO和相关主题的信息，请看文章最后的Resources）</p>
-<p>GRUB最伟大的是其包含已知的所有Linux文件系统。GRUB不像LILO一样使用裸扇区，而能从ext2和ext3文件系统中加载Linux内核。它通过将两阶段的引导程序转换为三阶段的引导程序来实现此功能。第一阶段（MBR）启动能识别Linux内核镜像中包含的特殊文件系统的第1.5阶段引导程序。比如reiserfs_stage1_5（从Reiser日志文件系统加载） 或者 e2fs_stage1_5（从ext2或者ext3文件系统加载）。当第1.5阶段引导程序被加载并运行后，第2阶段引导程序就能被加载了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CRUB阶段引导程序</span><br><span class="line"></span><br><span class="line">/boot/grup路径包括第<span class="number">1</span>阶段，第<span class="number">1.5</span>阶段，以及第<span class="number">2</span>阶段引导程序，以及一些交替引导程序（如：CR-ROMs 使用iso9660_stage_1_5）</span><br></pre></td></tr></table></figure>
-<p>随着第二阶段被加载，CRUB会根据需求显示一个可用的内核列表（定义在/etc/grub.con，以及/etc/grub/menu.lst和/etc/grub.conf的软连接）。你可以选中一个内核，并且可以用附加的内核参数改进它。另外，你还能通过shell终端命令行的方式手动控制整个启动过程。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">GRUB中手动启动</span><br><span class="line"></span><br><span class="line">通过grub命令行，你可以用initrd镜像启动一个指定的内核，如下：</span><br><span class="line">grub&gt; kernel /bzImage-<span class="number">2.6</span>.<span class="number">14.2</span></span><br><span class="line">  [Linux-bzImage, setup=<span class="number">0</span>x1400, size=<span class="number">0</span>x29672e]</span><br><span class="line"></span><br><span class="line">grub&gt; initrd /initrd-<span class="number">2.6</span>.<span class="number">14.2</span>.img</span><br><span class="line">  [Linux-initrd @ <span class="number">0</span>x5f13000, <span class="number">0</span>xcc199 bytes]</span><br><span class="line"></span><br><span class="line">grub&gt; boot</span><br><span class="line"></span><br><span class="line">Uncompressing Linux... Ok, booting the kernel.</span><br><span class="line"></span><br><span class="line">如果你不知道需要启动的内核名字，只需要敲一个斜杠（<span class="string">"/"</span>）并按Tab键。GRUB将显示内核镜像和initrd镜像列表。</span><br></pre></td></tr></table></figure>
-<p>第二阶段引导程序被加载进内存后，将查询文件系统，加载默认内核镜像和initrd镜像到内存。当所有镜像准备好后，将从第二阶段跳转到内核镜像。</p>
-<h2 id="内核">内核</h2><p>随着内核镜像加载到内存并且从第二阶段引导程序获得控制权，内核阶段开始了。内核镜像不是一个可以执行的内核，而是一个被压缩的内核镜像。通常是用zlib工具压缩的一个zImage（被压缩的镜像，小于512kb）或者一个bzImage（大的压缩镜像，大于512kb）。在内核镜像的头部有一个小型程序routine，其做少量的硬件设置，然后自解压内核镜像并放到高端内存。如果存在初始磁盘镜像（initrd），routine将拷贝initrd以供稍后安装使用。然后routine将调用内核开始内核启动。</p>
-<p>当bzImage（i1386的镜像）被调用，将从汇编程序“./arch/i386/boot/head.S”的start入口开始（见Figure 3）。这段程序做些基本的硬件设置然后调用“./arch/i386/boot/compressed/head.S”中的startup_32。startup_32设置一些基本的环境（如堆栈等），并且清除BBS（Block Started by Symbol - 以符号启始的区块）。然后调用一个c函数decompress_kernel（位于./arch/i386/boot/compressed/misc.c）解压内核镜像。当内核被解压到内存后，将调用另一个位于“./arch/i386/kernel/head.S”的startup_32函数。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">decompress_kernel 输出</span><br><span class="line"></span><br><span class="line">decompress_kernel函数执行时，通常会看到如下解压内核信息：</span><br><span class="line"></span><br><span class="line">Uncompressing Linux... Ok, booting the kernel.</span><br></pre></td></tr></table></figure>
-<p>在这个新的startup_32函数（也叫清除程序或者进程0）中，会对页表进行初始化，并启用内存分页功能。然后会为任何可选的浮点单元（FPU）检测 CPU 的类型，并将其存储起来供以后使用。然后调用 start_kernel 函数（在 init/main.c 中），它会将您带入与体系结构无关的 Linux 内核部分。从本质上讲，这才是Linux内核的主要功能。</p>
-<p><strong>Figure 3. Major functions flow for the Linux kernel i386 boot</strong><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blogfigure3.gif" alt="Figure 3"></p>
-<p>调用start_kernel函数之后，会调用一系列初始化函数来设置中断，执行进一步的内存配置，并加载初始RAM磁盘。最后将掉用kernel_thread（在arch/i386/kernel/process.c中）启动一个init函数，init函数是用户控件的第一个进程。最后，空闲进程将会开始执行并且进程调度器将获得控制权（当cpu调用cpu_idle后）。通过启用中断，抢占式的调度器就可以周期性地接管控制权，从而提供多任务处理能力。</p>
-<p>在内核引导过程中，初始 RAM 磁盘（initrd）是由第 2 阶段引导程序加载到内存中的，它会被复制到 RAM 中并挂载到系统上。这个 initrd作为 RAM 中的临时根文件系统使用，并允许内核在没有挂载任何物理磁盘的情况下完整地实现引导。由于与外围设备进行交互所需要的模块可是 initrd 的一部分，因此内核可以非常小，但是仍然支持大量可能的硬件配置。在内核启动后，就可以正式装备根文件系统了（通过 pivot_root），此时会将 initrd 根文件系统卸载掉，并挂载真正的根文件系统。</p>
-<p>initrd 函数让我们可以创建一个小型的 Linux 内核，其中包括作为可加载模块编译的驱动程序。这些可加载的模块为内核提供了访问磁盘和磁盘上的文件系统的方法，并为其他硬件提供了驱动程序。由于根文件系统是磁盘上的一个文件系统，因此 initrd 函数会提供一种启动方法来获得对磁盘的访问，并挂载真正的根文件系统。在没有硬盘的嵌入式目标中，initrd 可以是最终的根文件系统，或者也可以通过网络文件系统（NFS）来挂载最终的根文件系统。</p>
-<h2 id="init进程">init进程</h2><p>在内核被启动并初始化后，内核启动第一个用户空间应用程序。这是调用的第一个使用标准 C 库编译的程序。在此进程之前，还没有执行任何标准的 C 应用程序。</p>
-<p>在桌面 Linux 系统上，启动的第一个程序通常是 /sbin/init。不过完全没必要这样，很少有嵌入式系统会需要使用 init 所提供的丰富初始化功能（通过 /etc/inittab 配置的）。很多情况下，我们可以直接调用一个简单的 shell 脚本来启动必需的嵌入式应用程序。</p>
-<h2 id="总结">总结</h2><p>与 Linux 本身非常类似，Linux 的引导过程也非常灵活，可以支持众多的处理器和硬件平台。最初，为加载引导程序提供了一种简单的方法，不用任何花架子就可以引导 Linux。LILO 引导程序对引导能力进行了扩展，但是它却缺少文件系统的识别能力。最新一代的引导程序，例如 GRUB，允许 Linux 从多种文件系统（如从 Minix 到 Reiser）上进行引导。</p>
-<h2 id="Resource">Resource</h2><blockquote>
-<p>这部分就不翻译了，安心当一个大自然的搬运工，不过将所有链接都做上去了的。</p>
-</blockquote>
-<p><strong>Learn</strong></p>
-<ul>
-<li><a href="http://mirror.href.com/thestarman/asm/mbr/MBR_in_detail.htm" target="_blank" rel="external">Boot Records Revealed</a> is a great resource on MBRs and the various boot loaders. This resource not only disassembles MBRs, but also discusses GRUB, LILO, and the various Windows? boot loaders.</li>
-<li>Check out the <a href="http://www.rwc.uc.edu/koehler/comath/42.html" target="_blank" rel="external">Disk Geometry</a> page to understand disks and their geometries. You’ll find an interesting summary of disk attributes.</li>
-<li>A <a href="http://en.wikipedia.org/wiki/LiveCD" target="_blank" rel="external">live CD</a> is an operating system that’s bootable from a CD or DVD without needing a hard drive.</li>
-<li><a href="http://www.ibm.com/developerworks/linux/library/l-bootload.html" target="_blank" rel="external">“Boot loader showdown: Getting to know LILO and GRUB”</a> (developerWorks, August 2005) gives you a detailed look at the LILO and GRUB boot loaders.</li>
-<li>In the <a href="http://www.ibm.com/developerworks/linux/lpi/101.html?S_TACT=105AGX03&amp;S_CMP=art" target="_blank" rel="external">Linux Professional Institute (LPI) exam prep</a> series of developerWorks tutorials, get a comprehensive introduction to booting a Linux system and many other fundamental Linux tasks while you prepare for system administrator certification.</li>
-<li><a href="http://www.freshmeat.net/projects/lilo/" target="_blank" rel="external">LILO</a> was the precursor to GRUB, but you can still find it booting Linux.</li>
-<li>The <a href="http://www.netadmintools.com/html/mkinitrd.man.html" target="_blank" rel="external">mkintrd</a> command is used to create an initial RAM disk image. This command is useful for building an initial root file system for boot configuration that allows preloading of block devices needed to access the real root file system.</li>
-<li>At the <a href="http://debianlinux.net/linux.html" target="_blank" rel="external">Debian Linux Kernel Project</a>, find more information on the Linux kernel, boot, and embedded development.</li>
-<li>In the <a href="http://www.ibm.com/developerworks/linux/" target="_blank" rel="external">developerWorks Linux zone</a>, find more resources for Linux developers.</li>
-<li>Stay current with <a href="http://www.ibm.com/developerworks/offers/techbriefings/?S_TACT=105AGX03&amp;S_CMP=art" target="_blank" rel="external">developerWorks technical events and Webcasts</a>.</li>
-</ul>
-<p><strong>Get products and technologies</strong></p>
-<ul>
-<li>The <a href="http://www.linuxdevices.com/articles/AT8516113114.html" target="_blank" rel="external">MicroMonitor</a> provides a boot environment for a variety of small target devices. You can use this monitor to boot Linux in an embedded environment. It has ports for ARM, XScale, MIPS, PowerPC, Coldfire, and Hitachi’s Super-H.</li>
-<li><a href="http://www.gnu.org/software/grub/" target="_blank" rel="external">GNU GRUB</a> is a boot shell filled with options and flexibility.</li>
-<li><a href="http://www.linuxbios.org/index.php/Main_Page" target="_blank" rel="external">LinuxBIOS</a> is a BIOS replacement. Not only does it boot Linux, LinuxBIOS, itself, is a compressed Linux kernel.</li>
-<li><a href="http://www.openbios.org/" target="_blank" rel="external">OpenBIOS</a> is another portable BIOS project that operates on a variety of architectures such as x86, Alpha, and AMD64.</li>
-<li>At <a href="http://www.kernel.org/" target="_blank" rel="external">kernel.org</a>, grab the latest kernel tree.</li>
-<li>With <a href="http://www.ibm.com/developerworks/downloads/?S_TACT=105AGX03&amp;S_CMP=art" target="_blank" rel="external">IBM trial software</a>, available for download directly from developerWorks, build your next development project on Linux.</li>
-</ul>
-<p><strong>Discuss</strong></p>
-<ul>
-<li>Check out <a href="http://www.ibm.com/developerworks/blogs/" target="_blank" rel="external">developerWorks blogs</a> and get involved in the <a href="http://www.ibm.com/developerworks/community" target="_blank" rel="external">developerWorks community</a>.</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;第一篇完全译文，因为自己对技术和英文的热爱，所以决定翻译此文，水平有限，所以肯定会有不恰当的地方，欢迎移驾至原地址：&lt;a href=&quot;http://www.ibm.com/developerworks/linux/library/l-linuxboot/&quot;&gt;http://www.ibm.com/developerworks/linux/library/l-linuxboot/&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;注：因为想写一篇博文来阐述并理清Android启动的完全过程，发现了这篇文章，觉得写得十分好，帮我解答了很多疑惑。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;引言&quot;&gt;引言&lt;/h2&gt;&lt;p&gt;Linux系统的启动过程由很多阶段组成，但是无论你是启动标准的x86桌面还是启动嵌入式PowerPC目标，许多流程都是惊人的相似的。这篇文章从初始化引导程序到第一个用户空间应用程序探索Linux启动进程。顺着这个流程，你将知道很多和启动相关的主题，比如：引导程序，内核解压, 初始RAM磁盘,以及其他Linux引导元素。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://huaqianlee.github.io/categories/Linux/"/>
-    
-    
-      <category term="译文" scheme="http://huaqianlee.github.io/tags/%E8%AF%91%E6%96%87/"/>
     
   </entry>
   
