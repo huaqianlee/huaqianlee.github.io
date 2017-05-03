@@ -87,24 +87,18 @@
 
 
 <meta name="description" content="内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
-运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一个9组24个权限。
-
-权限详情参考：http://developer.android.com/reference/android">
+运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一个9组24个权限。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FirstCode Content Provider">
 <meta property="og:url" content="http://huaqianlee.github.io/2017/05/03/FirstCode/FirstCode-Content-Provider/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
-运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一个9组24个权限。
-
-权限详情参考：http://developer.android.com/reference/android">
+运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一个9组24个权限。">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/android_permission.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FirstCode Content Provider">
 <meta name="twitter:description" content="内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
-运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一个9组24个权限。
-
-权限详情参考：http://developer.android.com/reference/android">
+运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一个9组24个权限。">
 
 
 
@@ -376,7 +370,7 @@
 
       
         <p>内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。</p>
-<h2 id="运行时权限">运行时权限</h2><h3 id="Android权限机制">Android权限机制</h3><p>为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一个9组24个权限。</p>
+<h2 id="运行时权限">运行时权限</h2><h3 id="Android权限机制">Android权限机制</h3><p>为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一个9组24个权限。<br><a id="more"></a></p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/android_permission.jpg" alt="Android danger permission"></p>
 <p>权限详情参考：<a href="http://developer.android.com/reference/android/Manifest.permission.html" target="_blank" rel="external">http://developer.android.com/reference/android/Manifest.permission.html</a>。</p>
 <h3 id="程序运行时申请权限">程序运行时申请权限</h3><p>以CALL_PHONE为例来说明。定义触发打电话的逻辑：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_CALL);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"tel:10086"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
