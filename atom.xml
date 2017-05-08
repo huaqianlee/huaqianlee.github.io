@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-05-06T16:06:27.789Z</updated>
+  <updated>2017-05-08T11:59:03.397Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>美式音标与英式音标</title>
+    <link href="http://huaqianlee.github.io/2017/05/08/English/Americal-and-english-phonetic/"/>
+    <id>http://huaqianlee.github.io/2017/05/08/English/Americal-and-english-phonetic/</id>
+    <published>2017-05-08T11:06:31.000Z</published>
+    <updated>2017-05-08T11:59:03.397Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于自己现在自学的是美音，以前学生时都是学的国际音标，有很多不同，查单词的时候时不时就会被音标搞困惑，因此自己搜索整理了一下美式音标(K.k音标)以及与英式音标的区别。主要区别在于元音，辅音一样。</p>
+<h2 id="美式音标">美式音标</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/english/America_ph.png" alt="美式音标"><br><a id="more"></a></p>
+<h2 id="美式音标与英式音标的区别">美式音标与英式音标的区别</h2><p>两种音标有很大的区别容易混淆，需要注意。如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/english/yuying_dif.jpg" alt="元音"></p>
+<p>辅音是一样的，也在此列出：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/english/fuying_dif.jpg" alt="辅音"></p>
+<blockquote>
+<p>国际音标还有如下四个音标：[tr] [dr] [ts] [dz]</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于自己现在自学的是美音，以前学生时都是学的国际音标，有很多不同，查单词的时候时不时就会被音标搞困惑，因此自己搜索整理了一下美式音标(K.k音标)以及与英式音标的区别。主要区别在于元音，辅音一样。&lt;/p&gt;
+&lt;h2 id=&quot;美式音标&quot;&gt;美式音标&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/english/America_ph.png&quot; alt=&quot;美式音标&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="English" scheme="http://huaqianlee.github.io/categories/English/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>第一行代码学习笔记之服务</title>
@@ -938,43 +966,6 @@
     
       <category term="Linux" scheme="http://huaqianlee.github.io/categories/Linux/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Git 常见问题集</title>
-    <link href="http://huaqianlee.github.io/2015/10/22/Git/git-experence/"/>
-    <id>http://huaqianlee.github.io/2015/10/22/Git/git-experence/</id>
-    <published>2015-10-22T04:49:10.000Z</published>
-    <updated>2016-08-01T16:13:29.568Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="问题一_-gitignore无效，不能过滤某些文件或路径。">问题一 .gitignore无效，不能过滤某些文件或路径。</h2><p><strong>现象:</strong><br>在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。</p>
-<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。</p>
-<p><strong>解决：</strong><br>从版本库删除文件和目录，更新。</p>
-<pre><code class="bash">git rm (--cached) files directories -r <span class="operator">-f</span>
-git commit
-</code></pre>
-<a id="more"></a>
-<h2 id="问题二_已经添加文件或路径,_提示untracked">问题二  已经添加文件或路径, 提示untracked</h2><p><strong>现象：</strong><br>已经将某文件夹添加到暂存区, git status 仍提示: modified: next (modified content, untracked content)</p>
-<p><strong>原因：</strong><br>此文件夹中有.git , git将其识别为submodule.</p>
-<p><strong>解决：</strong><br>删除文件夹中.git.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;问题一_-gitignore无效，不能过滤某些文件或路径。&quot;&gt;问题一 .gitignore无效，不能过滤某些文件或路径。&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;现象:&lt;/strong&gt;&lt;br&gt;在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;原因：&lt;/strong&gt;&lt;br&gt;在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt;&lt;br&gt;从版本库删除文件和目录，更新。&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;git rm (--cached) files directories -r &lt;span class=&quot;operator&quot;&gt;-f&lt;/span&gt;
-git commit
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="Git" scheme="http://huaqianlee.github.io/categories/Git/"/>
-    
-    
-      <category term="Tools" scheme="http://huaqianlee.github.io/tags/Tools/"/>
     
   </entry>
   
