@@ -302,6 +302,128 @@
             
               
                 
+                <a class="post-title-link" href="/2016/01/04/Linux/linux-problem-set/" itemprop="url">
+                  linux系统使用问题集
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-01-04T21:40:23+08:00" content="Jan 4 2016">
+              Jan 4 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/04/Linux/linux-problem-set/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/Linux/linux-problem-set/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="问题一_ubuntu_密码正确进不了系统">问题一 ubuntu 密码正确进不了系统</h2><p><strong>现象：</strong><br>即使密码输入正确也不能进入系统。<br><strong>原因：</strong><br>设置环境变量时出错，影响到系统。<br><strong>解决：</strong><br>开机时按住shift 进入 recovery 模式，选第二个恢复模式，12.04的界面是fsck和root选项在同一页，先选fsck解除写限制（按下fsck后等几秒即可），再选root，vi /etc/profile， vi /etc/environment 恢复下环境变量，再重新登录。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/04/Linux/linux-problem-set/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/10/22/Git/git-experence/" itemprop="url">
                   Git 常见问题集
                 </a>
@@ -1407,132 +1529,6 @@ git commit
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/" itemprop="url">
-                  Android中adb(Android Debug Bridge)命令的用法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-07-19T19:29:58+08:00" content="Jul 19 2015">
-              Jul 19 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去<a href="http://developer.android.com/tools/help/adb.html">http://developer.android.com/tools/help/adb.html</a>学习了一下,今天准备按照自己的理解加以修改总结并整理出一篇博文。</p>
-<h2 id="概览">概览</h2><p>　　adb是Android Debug Bridge的简写，按字面意思理解就是在开发者和Android之间搭建的一个debug桥。adb是一个连接仿真实例或者Android设备的命令行工具，是一个客服端-服务器模式的程序，包括如下三部分：<br>　<br>　　1. 一个运行在开发用的Android手机或者仿真器上面的client，我们可以通过adb命令调用client。其他像ADT插件和DDMS也会创建client。<br>　<br>　　2. 一个运行在开发用的Android手机或者仿真器后台的server，这个server负责管理本设备上运行的client和daemon(守护进程)。<br>　<br>　　3. 一个在每个仿真器或者Android设备后台运行的daemon。</p>
-<blockquote>
-<p>adb tool 可以再<sdk>/platform-tools/中找到　</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1578,7 +1574,7 @@ git commit
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
