@@ -88,12 +88,12 @@
 
 <meta name="description" content="WebViewWebView控件使用十分简单：12345678910# 布局&amp;lt;WebView /&amp;gt;# 应用webView.getSettings().setJavaScriptEnabled(true); // 设置浏览器属性，支持JavaScript脚本webView.setWebViewClient(new WebViewClient());//目标网页在当前WebView中显示，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FirstCode Network">
+<meta property="og:title" content="第一行代码之网络">
 <meta property="og:url" content="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="WebViewWebView控件使用十分简单：12345678910# 布局&amp;lt;WebView /&amp;gt;# 应用webView.getSettings().setJavaScriptEnabled(true); // 设置浏览器属性，支持JavaScript脚本webView.setWebViewClient(new WebViewClient());//目标网页在当前WebView中显示，">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FirstCode Network">
+<meta name="twitter:title" content="第一行代码之网络">
 <meta name="twitter:description" content="WebViewWebView控件使用十分简单：12345678910# 布局&amp;lt;WebView /&amp;gt;# 应用webView.getSettings().setJavaScriptEnabled(true); // 设置浏览器属性，支持JavaScript脚本webView.setWebViewClient(new WebViewClient());//目标网页在当前WebView中显示，">
 
 
@@ -117,7 +117,7 @@
 
   <link rel="canonical" href="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/"/>
 
-  <title> FirstCode Network | Andy.Lee's  Blog </title>
+  <title> 第一行代码之网络 | Andy.Lee's  Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -299,7 +299,7 @@
             
             
               
-                FirstCode Network
+                第一行代码之网络
               
             
           </h1>
@@ -375,14 +375,14 @@
 <p>提交数据：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conneciton.setRequestMethod(<span class="string">"POST"</span>);</span><br><span class="line">DataOutputStream out = <span class="keyword">new</span> DataOutputStream(connection.getOutputStream());</span><br><span class="line">out.writeBytes(<span class="string">"username=admin&amp;password=123456"</span>);</span><br><span class="line"><span class="comment">//数据之间用“&amp;”隔开</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p><a href="https://github.com/huaqianlee/AndroidDemo/tree/master/FirstCode/chapter9/NetworkTest" target="_blank" rel="external">HTTP的一个示例</a></p>
-<h3 id="OkHttp">OkHttp</h3><p>OkHttp项目地址：<a href="https://github.com/square/okhttp" target="_blank" rel="external">https://github.com/square/okhttp</a>。</p>
 </blockquote>
+<h3 id="OkHttp">OkHttp</h3><p>OkHttp项目地址：<a href="https://github.com/square/okhttp" target="_blank" rel="external">https://github.com/square/okhttp</a>。</p>
 <p>下载：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Gradle: app/build.gradle</span><br><span class="line">compile 'com.squareup.okhttp3:okhttp:3.7.0'</span><br></pre></td></tr></table></figure></p>
 <p>用法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 创建实例</span><br><span class="line">OKHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line"></span><br><span class="line"># 创建Request对象,build()之前可以定制Request对象</span><br><span class="line">Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">    .url(<span class="string">"http://huaqianlee.github.io"</span>)</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line"># 创建Call对象,response为服务器返回的数据</span><br><span class="line">Response response  = client.newCall(request).execute();</span><br><span class="line"></span><br><span class="line"># 获取具体内容</span><br><span class="line">String responseData = response.body().string();</span><br><span class="line"></span><br><span class="line"># 如果发齐POST请求，需先构建Body对象存储提交的参数</span><br><span class="line">RequestBody requestBOdy = <span class="keyword">new</span> FormBody.Builder()</span><br><span class="line">    .add(<span class="string">"username"</span>,<span class="string">"admin"</span>)</span><br><span class="line">    .add(<span class="string">"password"</span>,<span class="string">"123456"</span>)</span><br><span class="line">    .build();</span><br><span class="line">    </span><br><span class="line"># 创建Request对象</span><br><span class="line">Request request = <span class="keyword">new</span> Request.Builder()</span><br><span class="line">    .url(<span class="string">"http://huaqianlee.github.io"</span>)</span><br><span class="line">    .post(requestBody)</span><br><span class="line">    .build();</span><br><span class="line"># 其余就和上面一样了</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p><a href="https://github.com/huaqianlee/AndroidDemo/tree/master/FirstCode/chapter9/NetworkTest" target="_blank" rel="external">OkHttp的一个示例(其实与Http同一demo)</a></p>
 </blockquote>
-
+<h2 id="解析XML格式数据">解析XML格式数据</h2>
       
     </div>
 
@@ -422,6 +422,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/10/FirstCode/FirstCode-Material-Design/" rel="prev" title="第一行代码之Material Design">
+                第一行代码之Material Design <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -471,7 +475,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/05/09/FirstCode/FirstCode-Network/"
-           data-title="FirstCode Network" data-url="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/">
+           data-title="第一行代码之网络" data-url="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/">
       </div>
     
   </div>
@@ -516,7 +520,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -634,7 +638,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView"><span class="nav-number">1.</span> <span class="nav-text">WebView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议"><span class="nav-number">2.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpURLConnection"><span class="nav-number">2.1.</span> <span class="nav-text">HttpURLConnection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OkHttp"><span class="nav-number">2.2.</span> <span class="nav-text">OkHttp</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView"><span class="nav-number">1.</span> <span class="nav-text">WebView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议"><span class="nav-number">2.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpURLConnection"><span class="nav-number">2.1.</span> <span class="nav-text">HttpURLConnection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OkHttp"><span class="nav-number">2.2.</span> <span class="nav-text">OkHttp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析XML格式数据"><span class="nav-number">3.</span> <span class="nav-text">解析XML格式数据</span></a></li></ol></div>
             
           </div>
         </section>
