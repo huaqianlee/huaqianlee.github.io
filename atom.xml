@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-05-10T13:32:30.140Z</updated>
+  <updated>2017-05-10T13:35:30.811Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,10 +20,11 @@
     <link href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/"/>
     <id>http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/</id>
     <published>2017-05-10T13:31:27.000Z</published>
-    <updated>2017-05-10T13:32:30.140Z</updated>
+    <updated>2017-05-10T13:35:30.811Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Toolbar控件">Toolbar控件</h2><h3 id="主题定义">主题定义</h3><p>对应于ActionBar，由于ActionBar被限定于活动顶部，不能实现一些Material Design效果，因此已不推荐使用了。</p>
 <p>ActionBar来自项目指定的主题显示，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># AndroidManifest.xml</span><br><span class="line">android:theme="@style/AppTheme"</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>主题的定义：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># res/values/styles.xml</span><br><span class="line"><span class="tag">&lt;<span class="title">resources</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Base application theme. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"AppTheme"</span> <span class="attribute">parent</span> = "<span class="attribute">Theme.AppCompat.Light.DarkActionBar</span>"&gt;</span><span class="css"> # 定义指定父主题</span><br><span class="line">    &lt;!<span class="tag">--</span> <span class="tag">Customize</span> <span class="tag">your</span> <span class="tag">theme</span> <span class="tag">here</span>. <span class="tag">--</span>&gt;</span><br><span class="line">    &lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">colorPrimary</span>"&gt;<span class="at_rule">@<span class="keyword">color/colorPrimary&lt;/item&gt;</span></span><br><span class="line">    &lt;item name=<span class="string">"colorPrimaryDark"</span>&gt;@color/colorPrimaryDark&lt;/item&gt;</span><br><span class="line">    &lt;item name=<span class="string">"colorAccent"</span>&gt;@color/colorAccent&lt;/item&gt;</span><br><span class="line">&lt;/resources&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>父主题Theme.AppCompat.Light.DarkActionBar自带了ActionBar，使用Toolbar则需要将父主题替换，主要有如下两种可选主题：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Theme.AppCompat.Light.NoActionBar : 淡色主题，主题颜色设为淡色，陪衬颜色设为深色</span><br><span class="line">Theme.AppCompat.NoActionBar: 深色主题，界面主题颜色设为深色，陪衬颜色设为淡色</span><br></pre></td></tr></table></figure></p>
 <p>为了使用Toolbar修改主题定义：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">resources</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Base application theme. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"AppTheme"</span> <span class="attribute">parent</span> = "<span class="attribute">Theme.AppCompat.Light.NoActionBar</span>"&gt;</span><span class="css"> # 定义指定父主题</span><br><span class="line">    &lt;!<span class="tag">--</span> <span class="tag">Customize</span> <span class="tag">your</span> <span class="tag">theme</span> <span class="tag">here</span>. <span class="tag">--</span>&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/<span class="tag">resources</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -61,7 +62,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;Toolbar控件&quot;&gt;Toolbar控件&lt;/h2&gt;&lt;h3 id=&quot;主题定义&quot;&gt;主题定义&lt;/h3&gt;&lt;p&gt;对应于ActionBar，由于ActionBar被限定于活动顶部，不能实现一些Material Design效果，因此已不推荐使用了。&lt;/p&gt;
-&lt;p&gt;Action
+&lt;p&gt;ActionBar来自项目指定的主题显示，如下：&lt;br&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;# AndroidManifest.xml&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;android:theme=&quot;@style/AppTheme&quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
     
