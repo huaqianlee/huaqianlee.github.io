@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-05-13T11:10:05.449Z</updated>
+  <updated>2017-05-13T11:15:21.386Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/"/>
     <id>http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/</id>
     <published>2017-05-13T11:09:08.000Z</published>
-    <updated>2017-05-13T11:10:05.449Z</updated>
+    <updated>2017-05-13T11:15:21.386Z</updated>
     
     <content type="html"><![CDATA[<h2 id="全局获取Context">全局获取Context</h2><p>新建一个自己Application，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context context;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        context = getApplicationContext();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> context;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -42,6 +42,12 @@
     
     </summary>
     
+      <category term="学习笔记" scheme="http://huaqianlee.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
+    
+      <category term="FirstCode" scheme="http://huaqianlee.github.io/tags/FirstCode/"/>
     
   </entry>
   
@@ -190,11 +196,14 @@
     <link href="http://huaqianlee.github.io/2017/05/08/English/Americal-and-english-phonetic/"/>
     <id>http://huaqianlee.github.io/2017/05/08/English/Americal-and-english-phonetic/</id>
     <published>2017-05-08T11:06:31.000Z</published>
-    <updated>2017-05-08T12:05:34.392Z</updated>
+    <updated>2017-05-14T01:29:51.501Z</updated>
     
     <content type="html"><![CDATA[<p>由于自己现在自学的是美音，与学生时代学的国际音标有很大不同，查单词的时候时不时就会被音标搞困惑。因此特意搜索整理了一份美式音标表(K.k音标)以及与英式音标的区别。</p>
-<h2 id="美式音标">美式音标</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/english/America_ph.png" alt="美式音标"><br><a id="more"></a></p>
+<h2 id="美式音标">美式音标</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/english/America_ph.png" alt="美式音标"></p>
+<blockquote>
+<p><strong>[m] [n] [ŋ] [l] [r] - 母音前母音后发言不同</strong><br><a id="more"></a></p>
 <h2 id="美式音标与英式音标的区别">美式音标与英式音标的区别</h2><p>两种音标有很大的区别容易混淆，需要注意。如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/english/yuying_dif.jpg" alt="元音"></p>
+</blockquote>
 <p>辅音没什么区别，也在此列出：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/english/fuying_dif.jpg" alt="辅音"></p>
 <blockquote>
 <p>国际音标还有如下四个音标：[tr] [dr] [ts] [dz]</p>
@@ -204,7 +213,9 @@
     <summary type="html">
     
       &lt;p&gt;由于自己现在自学的是美音，与学生时代学的国际音标有很大不同，查单词的时候时不时就会被音标搞困惑。因此特意搜索整理了一份美式音标表(K.k音标)以及与英式音标的区别。&lt;/p&gt;
-&lt;h2 id=&quot;美式音标&quot;&gt;美式音标&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/english/America_ph.png&quot; alt=&quot;美式音标&quot;&gt;&lt;br&gt;
+&lt;h2 id=&quot;美式音标&quot;&gt;美式音标&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/english/America_ph.png&quot; alt=&quot;美式音标&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;[m] [n] [ŋ] [l] [r] - 母音前母音后发言不同&lt;/strong&gt;&lt;br&gt;
     
     </summary>
     
