@@ -164,11 +164,11 @@
   </entry>
   
   <entry>
-    <title>FirstCode Fragment</title>
+    <title>第一行代码之碎片</title>
     <link href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/"/>
     <id>http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/</id>
     <published>2017-05-10T04:24:05.000Z</published>
-    <updated>2017-05-16T15:17:14.502Z</updated>
+    <updated>2017-05-16T15:28:26.357Z</updated>
     
     <content type="html"><![CDATA[<h2 id="碎片的使用">碎片的使用</h2><h3 id="碎片的简单用法">碎片的简单用法</h3><p>新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">LinearLayout...</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">Button...</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
