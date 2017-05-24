@@ -302,6 +302,131 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/29/Uav/px4-imu-mpu9250-code-structure/" itemprop="url">
+                  PX4之外设代码结构及流程-IMU
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-03-29T22:08:54+08:00" content="Mar 29 2017">
+              Mar 29 2017
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/29/Uav/px4-imu-mpu9250-code-structure/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Uav/px4-imu-mpu9250-code-structure/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。</p>
+<p>本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。</p>
+<h2 id="代码结构及流程">代码结构及流程</h2><p>最新代码库中，MPU9250的代码结构及流程如下：</p>
+<p> <img src="http://7xjdax.com1.z0.glb.clouddn.com/uav/px4/IMU_CODE_STR.png" alt="流程图"><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/29/Uav/px4-imu-mpu9250-code-structure/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/" itemprop="url">
                   第一行代码之广播机制
                 </a>
@@ -1395,134 +1520,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/" itemprop="url">
-                  高通px4代码阅读笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-05-11T21:45:25+08:00" content="May 11 2016">
-              May 11 2016
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Uav/" itemprop="url" rel="index">
-                    <span itemprop="name">Uav</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/11/Uav/qualcomm-px4-code-reading-note/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。</strong></p>
-<p>代码地址：<a href="https://github.com/ATLFlight/Firmware">ATLFlight/Firmware</a><br>参考文档：<a href="http://dev.px4.io/tutorial-hello-sky.html?q=">px4 devguide</a></p>
-<blockquote>
-<p>由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.</p>
-</blockquote>
-<p>============================================================================================================</p>
-<h2 id="关键路径及文件">关键路径及文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\mavlink   //  信息数据处理</span><br><span class="line">mavlink_main.cpp</span><br><span class="line">mavlink_receiver.cpp</span><br><span class="line"></span><br><span class="line">FastRPC   --  aDSP 与 apps 之间远程调用</span><br><span class="line"><span class="number">1</span>. 共享内存（不包括L1/L2缓存）</span><br><span class="line"><span class="number">2</span>. aDSP中能支持有限的物理映射</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules\muorb\</span><br><span class="line">adsp </span><br><span class="line">Krait</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\posix-configs\eagle\flight    // config 文件</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules  // 功能模块</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\makefiles\ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp   // 遥控器</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\device\vdev.cpp   <span class="comment"># Virtual character device base class.</span></span><br><span class="line">mavilink、uorb 继承于此类</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1568,7 +1565,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
