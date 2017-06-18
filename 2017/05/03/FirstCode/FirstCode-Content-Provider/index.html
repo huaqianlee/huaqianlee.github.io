@@ -86,18 +86,21 @@
 
 
 
-<meta name="description" content="内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
+<meta name="description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
 运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一共有9组24个权限。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一行代码之跨程序共享数据-内容提供器">
 <meta property="og:url" content="http://huaqianlee.github.io/2017/05/03/FirstCode/FirstCode-Content-Provider/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
+<meta property="og:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
 运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一共有9组24个权限。">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/android_permission.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一行代码之跨程序共享数据-内容提供器">
-<meta name="twitter:description" content="内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
+<meta name="twitter:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
 运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一共有9组24个权限。">
 
 
@@ -369,7 +372,8 @@
       
 
       
-        <p>内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。</p>
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<p>内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。</p>
 <h2 id="运行时权限">运行时权限</h2><h3 id="Android权限机制">Android权限机制</h3><p>为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一共有9组24个权限。<br><a id="more"></a></p>
 <p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/android_permission.jpg" alt="Android danger permission"></p>
 <p>权限详情参考：<a href="http://developer.android.com/reference/android/Manifest.permission.html" target="_blank" rel="external">官网权限介绍</a>。</p>
@@ -379,7 +383,44 @@
 <h2 id="访问其他程序中数据">访问其他程序中数据</h2><h3 id="ContentResolver基本用法">ContentResolver基本用法</h3><p>ContentResolver类的实例可以通过Context的getContentResolver()获取。其提供了一系列方法用CRUD操作。ContentResolver中的增删改查方法接收一个Uri参数，其唯一标识符有两部分组成：authority和path。为了避免冲突一般用authority用包名，path对应用程序中的表进行区分。如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># content://authority/path</span></span><br><span class="line">content://com.example.app.provider/table1</span><br><span class="line">content://com.example.app.provider/table2</span><br></pre></td></tr></table></figure></p>
 <p>解析：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uri uri = Uri.parse(<span class="string">"content://authority/path"</span>)</span><br></pre></td></tr></table></figure></p>
 <p>查询：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#查询</span><br><span class="line">Cursor cursor = getContentResolver().query(uri,projection,selecton,selectionArgs,sortOrder);</span><br></pre></td></tr></table></figure></p>
-<p>ContentResolver的查询方法参数解释如下：<br>|参数|对应SQL部分|描述|<br>|:——:|:—:|—|<br>|uri|from table_name|指定查询某应用程序下一张表|<br>|projection|select column1,column2|指定查询的列名|<br>|selection|where column=value|指定where条件|<br>|selectionArgs|-|为where重占位符提供值|<br>|orderBy|order by column1,column2|指定查询结果排序方式<br>获取到Cursor对象后，就能方便取出数据了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(cursor=!<span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span>(cursor.moveToNext()) &#123;</span><br><span class="line">        String column1 = cursor.getString(cursor.getColumnIndex(<span class="string">"column1"</span>));</span><br><span class="line">        <span class="keyword">int</span> column2 = cursor.geteInt(...);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ContentResolver的查询方法参数解释如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">对应SQL部分</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">uri</td>
+<td style="text-align:center">from table_name</td>
+<td style="text-align:center">指定查询某应用程序下一张表</td>
+</tr>
+<tr>
+<td style="text-align:center">projection</td>
+<td style="text-align:center">select column1,column2</td>
+<td style="text-align:center">指定查询的列名</td>
+</tr>
+<tr>
+<td style="text-align:center">selection</td>
+<td style="text-align:center">where column=value</td>
+<td style="text-align:center">指定where条件</td>
+</tr>
+<tr>
+<td style="text-align:center">selectionArgs</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">为where重占位符提供值</td>
+</tr>
+<tr>
+<td style="text-align:center">orderBy</td>
+<td style="text-align:center">order by column1,column2</td>
+<td style="text-align:center">指定查询结果排序方式</td>
+</tr>
+</tbody>
+</table>
+<p>获取到Cursor对象后，就能方便取出数据了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(cursor=!<span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span>(cursor.moveToNext()) &#123;</span><br><span class="line">        String column1 = cursor.getString(cursor.getColumnIndex(<span class="string">"column1"</span>));</span><br><span class="line">        <span class="keyword">int</span> column2 = cursor.geteInt(...);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>增改删：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 增加</span><br><span class="line">ContentValues value = newContentValues();</span><br><span class="line">values.put(<span class="string">"column1"</span>,<span class="string">"text"</span>);</span><br><span class="line">values.put(<span class="string">"column2"</span>,<span class="number">1</span>);</span><br><span class="line">getContentResolver().insert(uri, values);</span><br><span class="line"></span><br><span class="line">#更新</span><br><span class="line">values.put(<span class="string">"column1"</span>,<span class="string">""</span>);</span><br><span class="line">getContentResolver().update(uri, values,<span class="string">"column1 = ? and column2 = ?"</span>,<span class="keyword">new</span> String [] &#123;<span class="string">"text"</span>, <span class="string">"1"</span>&#125;);</span><br><span class="line"></span><br><span class="line">#删除</span><br><span class="line"></span><br><span class="line">getContentResolver().delete(uri, <span class="string">"column2 = ?"</span>,<span class="keyword">new</span> String [] &#123;<span class="string">"1"</span>&#125;);</span><br></pre></td></tr></table></figure></p>
 <h3 id="读取系统联系人">读取系统联系人</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 判断权限</span><br><span class="line"><span class="keyword">if</span>(ContextCompat.checkSelfPermission(<span class="keyword">this</span>, Manifest.permission.READ_CONTACTS）!= PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">    ActivityCompat.requestPermisssions(<span class="keyword">this</span>,<span class="keyword">new</span> String []&#123;Mainest.permission.READ_CONTACTS&#125;,<span class="number">1</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    readContacts();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onRequestPermissionsResult&#123;</span><br><span class="line">    <span class="keyword">switch</span>(requestCode) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">         <span class="keyword">if</span> (grantResults.length &gt; <span class="number">0</span> &amp;&amp; grantResults[<span class="number">0</span>] == PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">             readContacts();</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;&#125;</span><br><span class="line">         <span class="keyword">default</span>:</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># 读取共享数据</span><br><span class="line">Cursor cursor = getContentResolver().qurey(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br><span class="line"><span class="keyword">if</span> (cursor != <span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">while</span> (cursor.moveToNext()) &#123;</span><br><span class="line">        String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));</span><br><span class="line">        String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));</span><br><span class="line">        contactLists.add(name+<span class="string">"\n"</span>+number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后需要加上读取联系人权限，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.READ_CONTACTS"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>

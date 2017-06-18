@@ -494,7 +494,8 @@
 
       
         
-          <h2 id="全局获取Context">全局获取Context</h2><p>新建一个自己Application，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context context;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        context = getApplicationContext();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> context;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="全局获取Context">全局获取Context</h2><p>新建一个自己Application，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context context;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        context = getApplicationContext();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> context;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/05/13/FirstCode/FirstCode-advanced-skills/#more" rel="contents">
               Read more &raquo;
@@ -616,7 +617,8 @@
 
       
         
-          <h2 id="Toolbar控件">Toolbar控件</h2><h3 id="主题定义">主题定义</h3><p>对应于ActionBar，由于ActionBar被限定于活动顶部，不能实现一些Material Design效果，因此已不推荐使用了。</p>
+          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="Toolbar控件">Toolbar控件</h2><h3 id="主题定义">主题定义</h3><p>对应于ActionBar，由于ActionBar被限定于活动顶部，不能实现一些Material Design效果，因此已不推荐使用了。</p>
 <p>ActionBar来自项目指定的主题定义的显示，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># AndroidManifest.xml</span><br><span class="line">android:theme="@style/AppTheme"</span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/05/10/FirstCode/FirstCode-Material-Design/#more" rel="contents">
@@ -739,7 +741,8 @@
 
       
         
-          <h2 id="碎片的使用">碎片的使用</h2><h3 id="碎片的简单用法">碎片的简单用法</h3><p>新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">LinearLayout...</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">Button...</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="碎片的使用">碎片的使用</h2><h3 id="碎片的简单用法">碎片的简单用法</h3><p>新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">LinearLayout...</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">Button...</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/05/10/FirstCode/FirstCode-Fragment/#more" rel="contents">
               Read more &raquo;
@@ -861,7 +864,8 @@
 
       
         
-          <h2 id="WebView">WebView</h2><p>WebView控件使用十分简单：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 布局</span><br><span class="line">&lt;WebView /&gt;</span><br><span class="line"></span><br><span class="line"># 应用</span><br><span class="line">webView.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>); <span class="comment">// 设置浏览器属性，支持JavaScript脚本</span></span><br><span class="line">webView.setWebViewClient(<span class="keyword">new</span> WebViewClient());<span class="comment">//目标网页在当前WebView中显示，而不打开系统浏览器</span></span><br><span class="line">webView.loadUrl(<span class="string">"http://huaqianlee.github.io"</span>);</span><br><span class="line"></span><br><span class="line"># 权限</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="WebView">WebView</h2><p>WebView控件使用十分简单：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 布局</span><br><span class="line">&lt;WebView /&gt;</span><br><span class="line"></span><br><span class="line"># 应用</span><br><span class="line">webView.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>); <span class="comment">// 设置浏览器属性，支持JavaScript脚本</span></span><br><span class="line">webView.setWebViewClient(<span class="keyword">new</span> WebViewClient());<span class="comment">//目标网页在当前WebView中显示，而不打开系统浏览器</span></span><br><span class="line">webView.loadUrl(<span class="string">"http://huaqianlee.github.io"</span>);</span><br><span class="line"></span><br><span class="line"># 权限</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/05/09/FirstCode/FirstCode-Network/#more" rel="contents">
               Read more &raquo;
@@ -1109,7 +1113,8 @@
 
       
         
-          <h2 id="多线程编程">多线程编程</h2><h3 id="线程基本用法">线程基本用法</h3><p>方式一：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> MyThread().start();</span><br></pre></td></tr></table></figure></p>
+          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="多线程编程">多线程编程</h2><h3 id="线程基本用法">线程基本用法</h3><p>方式一：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> MyThread().start();</span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/05/06/FirstCode/FirstCode-Service/#more" rel="contents">
               Read more &raquo;
@@ -1231,7 +1236,8 @@
 
       
         
-          <h2 id="使用通知">使用通知</h2><h3 id="通知基本用法">通知基本用法</h3><p>获取通知:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);</span><br></pre></td></tr></table></figure></p>
+          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="使用通知">使用通知</h2><h3 id="通知基本用法">通知基本用法</h3><p>获取通知:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);</span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/05/06/FirstCode/FirstCode-media/#more" rel="contents">
               Read more &raquo;
@@ -1353,7 +1359,8 @@
 
       
         
-          <p>内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。</p>
+          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<p>内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。</p>
 <h2 id="运行时权限">运行时权限</h2><h3 id="Android权限机制">Android权限机制</h3><p>为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一共有9组24个权限。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/05/03/FirstCode/FirstCode-Content-Provider/#more" rel="contents">
@@ -1476,7 +1483,8 @@
 
       
         
-          <h2 id="文件存储">文件存储</h2><h3 id="数据存到文件">数据存到文件</h3><p>Context类提供了一个openFileOutput()方法，可以用于文件存储，此方法有两个参数：</p>
+          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="文件存储">文件存储</h2><h3 id="数据存到文件">数据存到文件</h3><p>Context类提供了一个openFileOutput()方法，可以用于文件存储，此方法有两个参数：</p>
 <ul>
 <li>arg1 - 文件名，不包括路径，全默认存储于/data/data/<packagename>/files/</li>
 <li>arg2 - 文件操作模式， MODE_PRIVATE（覆盖式）和 MODE_APPEND（追加式）

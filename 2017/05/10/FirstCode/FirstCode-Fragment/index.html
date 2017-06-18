@@ -86,16 +86,19 @@
 
 
 
-<meta name="description" content="碎片的使用碎片的简单用法新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：123&amp;lt;LinearLayout...&amp;gt;	&amp;lt;Button.../&amp;gt;&amp;lt;/LinearLayout&amp;gt;">
+<meta name="description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+碎片的使用碎片的简单用法新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：123&amp;lt;LinearLayout...&amp;gt;	&amp;lt;Button.../&amp;gt;&amp;lt;/LinearLayout&amp;gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一行代码之碎片">
 <meta property="og:url" content="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="碎片的使用碎片的简单用法新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：123&amp;lt;LinearLayout...&amp;gt;	&amp;lt;Button.../&amp;gt;&amp;lt;/LinearLayout&amp;gt;">
+<meta property="og:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+碎片的使用碎片的简单用法新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：123&amp;lt;LinearLayout...&amp;gt;	&amp;lt;Button.../&amp;gt;&amp;lt;/LinearLayout&amp;gt;">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/fragment_lifecycle.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一行代码之碎片">
-<meta name="twitter:description" content="碎片的使用碎片的简单用法新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：123&amp;lt;LinearLayout...&amp;gt;	&amp;lt;Button.../&amp;gt;&amp;lt;/LinearLayout&amp;gt;">
+<meta name="twitter:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+碎片的使用碎片的简单用法新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：123&amp;lt;LinearLayout...&amp;gt;	&amp;lt;Button.../&amp;gt;&amp;lt;/LinearLayout&amp;gt;">
 
 
 
@@ -366,7 +369,8 @@
       
 
       
-        <h2 id="碎片的使用">碎片的使用</h2><h3 id="碎片的简单用法">碎片的简单用法</h3><p>新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">LinearLayout...</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">Button...</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="碎片的使用">碎片的使用</h2><h3 id="碎片的简单用法">碎片的简单用法</h3><p>新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">LinearLayout...</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">Button...</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>新建右侧碎片布局：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">LinearLayout...</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">TextView...</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>新建LeftFragment类，继承于Fragment（选择来自support-v4库的类，做到向下兼容）。如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">leftFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">	onCreateView() &#123;</span><br><span class="line">		View view = inflater.inflate(R.layout.left_fragment, container, <span class="keyword">false</span>);</span><br><span class="line">		<span class="keyword">return</span> view;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>

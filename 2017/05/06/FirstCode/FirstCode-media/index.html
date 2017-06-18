@@ -86,15 +86,18 @@
 
 
 
-<meta name="description" content="使用通知通知基本用法获取通知:1NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);">
+<meta name="description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+使用通知通知基本用法获取通知:1NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一行代码之手机多媒体">
 <meta property="og:url" content="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-media/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="使用通知通知基本用法获取通知:1NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);">
+<meta property="og:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+使用通知通知基本用法获取通知:1NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一行代码之手机多媒体">
-<meta name="twitter:description" content="使用通知通知基本用法获取通知:1NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);">
+<meta name="twitter:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
+使用通知通知基本用法获取通知:1NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);">
 
 
 
@@ -365,7 +368,8 @@
       
 
       
-        <h2 id="使用通知">使用通知</h2><h3 id="通知基本用法">通知基本用法</h3><p>获取通知:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);</span><br></pre></td></tr></table></figure></p>
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="使用通知">使用通知</h2><h3 id="通知基本用法">通知基本用法</h3><p>获取通知:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>构建Notification对象：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Notification notification = <span class="keyword">new</span> NotificationCompat.Builder(context)</span><br><span class="line">.setContentTitle(..)</span><br><span class="line">.setContentText(..)</span><br><span class="line">...</span><br><span class="line">.build();</span><br></pre></td></tr></table></figure></p>
 <p>显示通知：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">manager.notify(<span class="number">1</span>, notification);</span><br></pre></td></tr></table></figure></p>
