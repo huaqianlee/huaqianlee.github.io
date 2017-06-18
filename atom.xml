@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-05-24T00:28:54.582Z</updated>
+  <updated>2017-05-24T00:30:29.734Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huaqianlee.github.io/2017/05/23/Kotlin/Kotlin-HElloWorld/"/>
     <id>http://huaqianlee.github.io/2017/05/23/Kotlin/Kotlin-HElloWorld/</id>
     <published>2017-05-23T00:09:56.000Z</published>
-    <updated>2017-05-24T00:28:54.582Z</updated>
+    <updated>2017-05-24T00:30:29.734Z</updated>
     
     <content type="html"><![CDATA[<p>最近工作业余时间一直在自学Android，Google I/O 2017 惊闻Kotlin成为Google支持的官方语言，当然得紧跟“中央”的脚步，开始程序入门必备之HelloWord，殊不知这个HelloWord充满了曲折。</p>
 <h2 id="了解Kotlin">了解Kotlin</h2><p>知道了Kotlin之后就开始在网上搜集相关资料，发现了如下个人觉得比较好的资料：<br><a href="https://kotlinlang.org/docs/tutorials/kotlin-android.html" target="_blank" rel="external">Getting started with Android and Kotlin</a><br><a href="https://github.com/JetBrains/kotlin" target="_blank" rel="external">kotlin项目</a><br><a href="https://github.com/JetBrains/kotlin-examples" target="_blank" rel="external">kotlin配置及与java的互操作</a><br><a href="https://github.com/Kotlin/kotlin-koans" target="_blank" rel="external">kotlin语法练习</a><br><a href="doc/kotlin-docs.pdf">Kotlin1.1手册</a><br><a href="http://tanfujun.com/kotlin-web-site-cn/docs/reference/" target="_blank" rel="external">kotlin中文网</a><br><a href="https://kotlinlang.org/" target="_blank" rel="external">kotlin官网</a><br><a href="https://github.com/huanglizhuo/kotlin-in-chinese" target="_blank" rel="external">中文kotlin项目</a><br><a id="more"></a></p>
@@ -46,9 +46,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 依赖包路徑，可以通过ExternalLibraries-&gt;&lt;PackegName&gt;-&gt;Library Properties查看</span></span><br><span class="line">/home/lee/.gradle/caches/modules-<span class="number">2</span>/files-<span class="number">2.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gradle路徑</span></span><br><span class="line">/home/lee/.gradle/wrapper/dists</span><br><span class="line"></span><br><span class="line"><span class="comment"># gradle下载路径</span></span><br><span class="line">http://services.gradle.org/distributions/</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>图形界面查看和添加依赖</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看</span></span><br><span class="line">Project Structure-&gt;app-&gt;Dependencies</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加, 这样添加后会自动在build.gradle中添加语句</span></span><br><span class="line">Project Structure-&gt;app-&gt;Dependencies-&gt;+-&gt;Library/Jar/Module Dependency</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看</span></span><br><span class="line">Project Structure-&gt;app-&gt;Dependencies</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加, 这样添加后会自动在build.gradle中添加语句</span></span><br><span class="line">Project Structure-&gt;app-&gt;Dependencies-&gt;+-&gt;Library/Jar/Module Dependency</span><br></pre></td></tr></table></figure>
 <p>看log耐心一些，做一些分析尝试，再加上Google会找到原因的。</p>
 ]]></content>
     
@@ -966,12 +966,12 @@
     <link href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/"/>
     <id>http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/</id>
     <published>2017-03-23T23:30:48.000Z</published>
-    <updated>2017-05-10T13:29:13.258Z</updated>
+    <updated>2017-06-18T01:28:58.965Z</updated>
     
     <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过50%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。</p>
 <p>《第一行代码》思维导图如下:<br><img src="后续补上" alt="脑图1"></p>
 <a id="more"></a>
-<p>《第一行代码》学习笔记目录:<br><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码之项目结构与活动</a></p>
+<p>《第一行代码》学习笔记目录:<br><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码之项目结构与活动</a><br><a href="http://huaqianlee.github.io/2017/03/25/FirstCode/firstcode-note-UI/" target="_blank" rel="external">第一行代码之UI</a><br><a href="http://huaqianlee.github.io/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/" target="_blank" rel="external">第一行代码之广播机制</a><br><a href="http://huaqianlee.github.io/2017/04/29/FirstCode/FirstCode-data-storage/" target="_blank" rel="external">第一行代码之数据存储</a><br><a href="http://huaqianlee.github.io/2017/05/03/FirstCode/FirstCode-Content-Provider/" target="_blank" rel="external">第一行代码之跨程序共享数据-内容提供器</a><br><a href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-media/" target="_blank" rel="external">第一行代码之手机多媒体</a><br><a href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-Service/" target="_blank" rel="external">第一行代码之服务</a><br><a href="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/" target="_blank" rel="external">第一行代码之网络</a><br><a href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/" target="_blank" rel="external">第一行代码之碎片</a><br><a href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/" target="_blank" rel="external">第一行代码之Material Design</a><br><a href="http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/" target="_blank" rel="external">第一行代码之高级技巧</a></p>
 ]]></content>
     
     <summary type="html">
