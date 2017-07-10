@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-05-24T00:30:29.734Z</updated>
+  <updated>2017-07-10T11:58:57.926Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Bye Idea， Hi Coban！</title>
+    <link href="http://huaqianlee.github.io/2017/07/10/Life/Bye-Idea%EF%BC%8C-Hi-Coban%EF%BC%81/"/>
+    <id>http://huaqianlee.github.io/2017/07/10/Life/Bye-Idea，-Hi-Coban！/</id>
+    <published>2017-07-10T11:46:44.000Z</published>
+    <updated>2017-07-10T11:58:57.926Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/life/idea-coban.png" alt="idea_coban"></p>
+<p>最终还是离开了IDEA，加入了一家新公司，公司不大，但是工作内容吸引我。之前在IDEA时就总是觉得在方案公司一直做底层学不到新的东西， 并且工作内容也变得乏味了些， 这次到这家公司就是因为来是负责车载产品的系统，会有很多Framework和JNI的工作，对我有十分大的吸引力！</p>
+<a id="more"></a>
+<p> 过来上班有一周了，发现工作期间可能会有一些空闲的时间，但是公司加密很厉害，一些自学的方式就不再适用了（譬如，之前自己计划的写一些APP，提升一下android开发技能），今下午思考了一下，准备曲线救国，有空时间的时候就分析一些写的好的开源源码和Android的系统源码，然后输出一些博客。</p>
+<p> 新的一个开始， 加油吧！多积累些知识经验，为回成都做好储备。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/life/idea-coban.png&quot; alt=&quot;idea_coban&quot;&gt;&lt;/p&gt;
+&lt;p&gt;最终还是离开了IDEA，加入了一家新公司，公司不大，但是工作内容吸引我。之前在IDEA时就总是觉得在方案公司一直做底层学不到新的东西， 并且工作内容也变得乏味了些， 这次到这家公司就是因为来是负责车载产品的系统，会有很多Framework和JNI的工作，对我有十分大的吸引力！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://huaqianlee.github.io/categories/Life/"/>
+    
+    
+      <category term="成长" scheme="http://huaqianlee.github.io/tags/%E6%88%90%E9%95%BF/"/>
+    
+  </entry>
   
   <entry>
     <title>Android Kotlin之曲折HelloWord</title>
@@ -129,7 +157,7 @@
     <link href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/"/>
     <id>http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/</id>
     <published>2017-05-10T13:31:27.000Z</published>
-    <updated>2017-06-18T01:37:17.530Z</updated>
+    <updated>2017-06-18T10:46:33.727Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
 <h2 id="Toolbar控件">Toolbar控件</h2><h3 id="主题定义">主题定义</h3><p>对应于ActionBar，由于ActionBar被限定于活动顶部，不能实现一些Material Design效果，因此已不推荐使用了。</p>
@@ -197,6 +225,7 @@
 <p>接下来需要将状态栏指定撑透明，但是android:statusBarColor属性是API21开始支持的（即Android5.0）。先为5.0以上新建一个values-21/styles.xml，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"FruitActivityTheme"</span> <span class="attribute">parent</span>=<span class="value">"AppTheme"</span>&gt;</span><span class="css"></span><br><span class="line">        &lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="rule"><span class="attribute">android</span>:<span class="value">statusBarColor<span class="string">"&gt;@android:color/transparent&lt;/item&gt;</span><br><span class="line">    </span></span></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">resources</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>为了支持5.0以前，对values/styles.xml进行修改，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"FruitActivityTheme"</span> <span class="attribute">parent</span>=<span class="value">"AppTheme"</span>&gt;</span><span class="css"></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"># 因为5.0以前不能指定状态栏颜色，所以留空即可了。</span><br></pre></td></tr></table></figure></p>
 <p>最后让activity调用此主题，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># AndroidManifest.xml</span><br><span class="line">&lt;activity</span><br><span class="line">    ...</span><br><span class="line">    android:theme="@style/FruitActivityTheme"</span><br><span class="line">&lt;/activiy&gt;</span><br></pre></td></tr></table></figure></p>
+<p>android5.0以上的版本还有一种融合及透明状态栏的方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 参考coolweather融合必应图片，及头布局间隔设置</span><br><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">21</span>) &#123;</span><br><span class="line">    View decorView = getWindow().getDecorView();</span><br><span class="line">    decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</span><br><span class="line">    getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>效果图如下：</p>
 <p><img src="" alt="待补充"></p>
 <h2 id="示例源码">示例源码</h2><p>整个Material Design示例源码的地址如下：</p>
@@ -225,7 +254,7 @@
     <link href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/"/>
     <id>http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/</id>
     <published>2017-05-10T04:24:05.000Z</published>
-    <updated>2017-06-18T10:12:49.308Z</updated>
+    <updated>2017-06-18T10:13:33.451Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
 <h2 id="碎片的使用">碎片的使用</h2><h3 id="碎片的简单用法">碎片的简单用法</h3><p>新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">LinearLayout...</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">Button...</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -1136,68 +1165,6 @@
     
     
       <category term="成长" scheme="http://huaqianlee.github.io/tags/%E6%88%90%E9%95%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>camera架构与调试-菜鸟笔记</title>
-    <link href="http://huaqianlee.github.io/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/"/>
-    <id>http://huaqianlee.github.io/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/</id>
-    <published>2016-07-07T15:37:41.000Z</published>
-    <updated>2016-08-04T14:46:55.699Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就</p>
-</blockquote>
-<h2 id="VFE">VFE</h2><p>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/vfe.png" alt="VFE FLOW"></p>
-<a id="more"></a>
-<h3 id="MIPI">MIPI</h3><p>现在的camera基本都采用MIPI接口， MIPI以一种采用差分方式按位传输数据的接口。只有四条引脚（DN、DP，CN、CP）。</p>
-<h3 id="数据">数据</h3><p>根据自己的理解我大致将VFE根据数据格式分为四个部分：</p>
-<ul>
-<li>Raw RGB（也称为Bayer RGB）</li>
-<li>Sensor RGB</li>
-<li>Image RGB</li>
-<li>YUV</li>
-</ul>
-<h4 id="Raw_RGB">Raw RGB</h4><p>Raw RGB为原始数据，分为Qcom raw 和 mipi raw， 现在基本都使用mipi  raw，mipi raw数据1pixel为10bits的数据(1 chanel)，即将所有数据按位重新排列，图像的行列应该为4的倍数。如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/raw%20bits.png" alt="raw bits"></p>
-<h5 id="所有pixel图像数据构成按照如下规律排列（表格中为某种颜色的亮度值）：">所有pixel图像数据构成按照如下规律排列（表格中为某种颜色的亮度值）：</h5><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/rgb_all.jpg" alt="rgb_all"><br>GB： 指靠近B的G. 其余同理</p>
-<h5 id="Raw_RGB数据构成规则按照下表方式排列，对角线可以两两兑换-">Raw RGB数据构成规则按照下表方式排列，对角线可以两两兑换.</h5><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/rgb.png" alt="rgb"></p>
-<h4 id="Raw_RGB_有四种排列方式，如下：">Raw RGB 有四种排列方式，如下：</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/rgb_4.jpg" alt="rgb_4"></p>
-<h4 id="Sensor_RGB">Sensor RGB</h4><p>Sensor RGB为camera Sensor处理过的数据，即上流程图demosaic之后的数据，1 pixel 为 3 Chanel，现在基本都为888格式的 RGB 24bits数据。<br>Sensor RGB图像数据构成按如下排列：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/sensor_rgb.jpg" alt="sensor_rgb"></p>
-<h4 id="Image_RGB">Image RGB</h4><p>Image RGB是Sensor RGB通过color correction转变过来的，会按照三种不同光源强度乘以不同的矩阵得到不同的Image RGB，这三种光源强度为：<br>D65 - daylight color temp 为 6500k<br>TL  -   3800~4000k<br>A    -   2800k</p>
-<blockquote>
-<p>后两种记不清楚了， 简单搜索了一下，没有在网上找到准确的资源，先这样写着</p>
-</blockquote>
-<h4 id="YUV">YUV</h4><p>YUV，分为三个分量，“Y”表示明亮度（Luminance或Luma），也就是灰度值；而“U”和“V” 表示的则是色度（Chrominance或Chroma）。是与RGB类似的颜色编码方法，主要用于计算机端。由Image RGB通过gamma处理而来，如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/gamma_note.jpg" alt="gamma_note"></p>
-<h3 id="LSC">LSC</h3><p>LSC即为Lens  shading correction， 其主要就是修正边角较暗的地方，如下笔记：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/lsc_note.jpg" alt="lsc_note"></p>
-<h3 id="BLC">BLC</h3><p>BLC即为black level correction，主要处理暗电流，笔记如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/exposure_dc.jpg" alt="exposure_dc"></p>
-<h3 id="domain">domain</h3><p>domain分为spatial domain和frequency domain， 笔记如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/domain_note.jpg" alt="domain_note"></p>
-<h3 id="CPP">CPP</h3><p>VFE模块完成后则会进入CPP模块，cpp模块主要有如下两部分：</p>
-<ul>
-<li>WNR - wavelet noise reduction</li>
-<li>ASF -  Auto special Filter （-&gt; sharpness）<br>exposure index 和 gain index 是cpp模块的trigger condition</li>
-</ul>
-<p>附  图片一般会经过4层曝光处理，chromatix工具<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/exposure_note.jpg" alt="exposure_note"></p>
-<p>附 Chromatix Tool<br>driver_info.txt (等同于dts中的信息)， 通过chromatix产生tuning file（cpp项的 exposure index和gain index很可能源于此文件）</p>
-<h3 id="Driver">Driver</h3><p>驱动中图像处理，笔记如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/frame.png" alt="frame"></p>
-<p>现在的cmos基本都是使用rolling shutter， 方式如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/cmos_rolling_shutter.jpg" alt="cmos_rolling_shutter"></p>
-<h4 id="附_糊涂笔记">附 糊涂笔记</h4><p>VT clock —-&gt; banding  （50HZ/60HZ/AUTO/OFF —-&gt;app上的配置）<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/stripe.jpg" alt="stripe"></p>
-<h4 id="driver_info-txt">driver_info.txt</h4><p>Chromatix Tool会用到的一个Sensor info文件，内容与<root_dir>\mm-camera\mm-camera2\media-controller\modules\sensors\sensor_libs\imx214\imx214_lib.c 相关，<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. max frame rate  ---&#62; depends on sensor register and project&#10;2. min line count ---&#62; value = 1, depends on sensor property # 1 line * 1 pixel  clock * cloumnum = min exposure time&#10;3. max line count in max fps. # max line count = FL - offset&#10;4. max line count  ---&#62; FL * (maxfps/minfps) - offset&#10;5.raw image width&#10;6. raw image height&#10;7. bayer pattern&#10;8.bits per pixel&#10;9. packed or not ---&#62; 1: mipi; 0: others,depend on sensor&#10;10~13. crop ---&#62; crop&#25481;&#26080;&#25928;&#36793;&#65292;top&#12289;right&#12289;bottom&#12289;left.&#10;14~16 blacklevel ---&#62; &#21378;&#21830;&#21333;&#20301; 12bits  / 16(2&#30340;4&#27425;&#26041;) -&#62;8bit</span><br></pre></td></tr></table></figure></root_dir></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;VFE&quot;&gt;VFE&lt;/h2&gt;&lt;p&gt;VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：&lt;br&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/vfe.png&quot; alt=&quot;VFE FLOW&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Uav" scheme="http://huaqianlee.github.io/categories/Uav/"/>
-    
-    
-      <category term="Qualcomm" scheme="http://huaqianlee.github.io/tags/Qualcomm/"/>
     
   </entry>
   
