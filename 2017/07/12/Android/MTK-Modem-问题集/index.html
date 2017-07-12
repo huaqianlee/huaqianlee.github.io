@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Qualcomm,源码分析," />
+  <meta name="keywords" content="MTK," />
 
 
 
@@ -86,22 +86,18 @@
 
 
 
-<meta name="description" content="一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。
-SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge capacityRC 　　Remaining capacity (剩余电量)CC 　　Coulumb">
+<meta name="description" content="最近开始做MTK相关的工作，在第一步编译Modem时就遇到了挺多问题。特在此文整理和Modem相关的问题。
+编译相关问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android不带电量计的电量计算">
-<meta property="og:url" content="http://huaqianlee.github.io/2015/01/21/Android/高通Android不带电量计的电量计算方式/index.html">
+<meta property="og:title" content="MTK Modem 问题集">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-问题集/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。
-SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge capacityRC 　　Remaining capacity (剩余电量)CC 　　Coulumb">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式1.png">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式2.png">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式3.png">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式4.png">
+<meta property="og:description" content="最近开始做MTK相关的工作，在第一步编译Modem时就遇到了挺多问题。特在此文整理和Modem相关的问题。
+编译相关问题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android不带电量计的电量计算">
-<meta name="twitter:description" content="一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。
-SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge capacityRC 　　Remaining capacity (剩余电量)CC 　　Coulumb">
+<meta name="twitter:title" content="MTK Modem 问题集">
+<meta name="twitter:description" content="最近开始做MTK相关的工作，在第一步编译Modem时就遇到了挺多问题。特在此文整理和Modem相关的问题。
+编译相关问题">
 
 
 
@@ -122,9 +118,9 @@ SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge 
 
 
 
-  <link rel="canonical" href="http://huaqianlee.github.io/2015/01/21/Android/高通Android不带电量计的电量计算方式/"/>
+  <link rel="canonical" href="http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-问题集/"/>
 
-  <title> Android不带电量计的电量计算 | Andy.Lee's  Blog </title>
+  <title> MTK Modem 问题集 | Andy.Lee's  Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -306,7 +302,7 @@ SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge 
             
             
               
-                Android不带电量计的电量计算
+                MTK Modem 问题集
               
             
           </h1>
@@ -318,8 +314,8 @@ SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge 
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-01-21T20:10:01+08:00" content="Jan 21 2015">
-              Jan 21 2015
+            <time itemprop="dateCreated" datetime="2017-07-12T23:01:42+08:00" content="Jul 12 2017">
+              Jul 12 2017
             </time>
           </span>
 
@@ -348,8 +344,8 @@ SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge 
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/01/21/Android/高通Android不带电量计的电量计算方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/21/Android/高通Android不带电量计的电量计算方式/" itemprop="commentsCount"></span>
+                <a href="/2017/07/12/Android/MTK-Modem-问题集/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/12/Android/MTK-Modem-问题集/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -372,17 +368,14 @@ SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge 
       
 
       
-        <p>　　一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。</p>
-<h2 id="SOC（state_of_charge_荷电状态_-_电量）">SOC（state of charge 荷电状态 - 电量）</h2><p>英文缩写:<br>FCC　　Full-charge capacity<br>RC 　　Remaining capacity (剩余电量)<br>CC 　　Coulumb counter<br>UUC　　Unusable capacity<br>RUC　　Remaining usable capacity<br>SoC　　State of charge<br>OCV　　Open circuit voltage<br><a id="more"></a><br>SOC=(RC-CC-UUC)/(FCC-UUC)<br>RUC=RC-CC-UUC</p>
-<h2 id="电池电量决定因素">电池电量决定因素</h2><p>　　电池电量百分比主要有电池dtsi文件中百分比参数计算而得，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">	qcom,pc-temp-ocv-lut &#123;</span><br><span class="line">		qcom,lut-col-legend = &lt;(-<span class="number">10</span>) <span class="number">0</span> <span class="number">25</span> <span class="number">50</span>&gt;;  // Temperature      lut-data（电池OCV ）的column</span><br><span class="line">		qcom,lut-row-legend =  &lt;<span class="number">100</span> <span class="number">89</span> <span class="number">78</span>&gt;,     // Capacity Percent        row</span><br><span class="line">				&lt;<span class="number">67</span> <span class="number">56</span> <span class="number">45</span>&gt;,</span><br><span class="line">				&lt;<span class="number">34</span> <span class="number">23</span> <span class="number">14</span>&gt;,</span><br><span class="line">				&lt;<span class="number">8</span> <span class="number">4</span> <span class="number">0</span>&gt;;</span><br><span class="line">...				</span><br><span class="line">		qcom,lut-data = </span><br><span class="line">		&lt;<span class="number">4290</span>	<span class="number">4285</span>	<span class="number">4327</span>	<span class="number">4328</span>&gt;,</span><br><span class="line">		&lt;<span class="number">4151</span>	<span class="number">4162</span>	<span class="number">4193</span>	<span class="number">4208</span>&gt;,</span><br><span class="line">		&lt;<span class="number">4064</span>	<span class="number">4072</span>	<span class="number">4080</span>	<span class="number">4016</span>&gt;,</span><br><span class="line">		&lt;<span class="number">3928</span>	<span class="number">3943</span>	<span class="number">3963</span>	<span class="number">3980</span>&gt;,</span><br><span class="line">		&lt;<span class="number">3874</span>	<span class="number">3881</span>	<span class="number">3881</span>	<span class="number">3894</span>&gt;,</span><br><span class="line">		&lt;<span class="number">3809</span>	<span class="number">3834</span>	<span class="number">3823</span>	<span class="number">3820</span>&gt;,</span><br><span class="line"></span><br><span class="line">		&lt;<span class="number">3768</span>	<span class="number">3785</span>	<span class="number">3793</span>	<span class="number">3792</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3733</span>	<span class="number">3756</span>	<span class="number">3784</span>	<span class="number">3785</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3701</span>	<span class="number">3723</span>	<span class="number">3762</span>	<span class="number">3761</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3624</span>	<span class="number">3643</span>	<span class="number">3739</span>	<span class="number">3738</span>&gt;, </span><br><span class="line">		&lt;<span class="number">3614</span>	<span class="number">3623</span>	<span class="number">3689</span>	<span class="number">3688</span>&gt;, 	</span><br><span class="line">		&lt;<span class="number">3510</span>	<span class="number">3499</span>	<span class="number">3455</span>	<span class="number">3458</span>&gt;; </span><br><span class="line">	</span><br><span class="line">	&#125;;</span><br></pre></td></tr></table></figure></p>
-<h2 id="关键结构">关键结构</h2><h3 id="dts_table_structure：">dts table structure：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * struct pc_temp_ocv_lut -</span><br><span class="line"> * @rows:	number of percent charge entries should be &lt;= PC_TEMP_ROWS</span><br><span class="line"> * @cols:	number of temperature entries should be &lt;= PC_TEMP_COLS</span><br><span class="line"> * @temp:	the temperatures at <span class="built_in">which</span> ocv data is available <span class="keyword">in</span> the table</span><br><span class="line"> *		The temperatures must be <span class="keyword">in</span> increasing order from <span class="number">0</span> to rows.</span><br><span class="line"> * @percent:	the percent charge at <span class="built_in">which</span> ocv data is available <span class="keyword">in</span> the table</span><br><span class="line"> *		The  percentcharge must be <span class="keyword">in</span> decreasing order from <span class="number">0</span> to cols.</span><br><span class="line"> * @ocv:	the open circuit voltage</span><br><span class="line"> */</span><br><span class="line">struct pc_temp_ocv_lut &#123;</span><br><span class="line">	int rows;</span><br><span class="line">	int cols;</span><br><span class="line">	int temp[PC_TEMP_COLS];</span><br><span class="line">	int percent[PC_TEMP_ROWS];</span><br><span class="line">	int ocv[PC_TEMP_ROWS][PC_TEMP_COLS];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="calculate_percentcharge_function">calculate percentcharge  function</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int linear_interpolate(int y0, int x0, int y1, int x1, int x)</span><br><span class="line">	<span class="keyword">if</span> (y0 == y1 || x == x0)	<span class="built_in">return</span> y0;</span><br><span class="line">	<span class="keyword">if</span> (x1 == x0 || x == x1)	<span class="built_in">return</span> y1;</span><br><span class="line">	<span class="built_in">return</span> y0 + ((y1 - y0) * (x - x0) / (x1 - x0));</span><br></pre></td></tr></table></figure>
-<h2 id="驱动分析">驱动分析</h2><h3 id="关键函数：">关键函数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// File:  qpnp-vm-bms.c</span><br><span class="line">    lookup_soc_ocv(struct qpnp_bms_chip *chip, int ocv_uv, int batt_temp)、</span><br><span class="line">soc_ocv = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, ocv_uv / <span class="number">1000</span>);  //calculate the  capacity percent</span><br><span class="line">soc_cutoff = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, chip-&gt;dt.cfg_v_cutoff_uv / <span class="number">1000</span>);</span><br><span class="line">soc_final = DIV_ROUND_CLOSEST(<span class="number">100</span> * (soc_ocv - soc_cutoff),(<span class="number">100</span> - soc_cutoff));</span><br><span class="line">      DIV_ROUND_CLOSEST(x,y)    ---&gt;    (x-<span class="number">1</span>&gt;<span class="number">0</span>) || (y-<span class="number">1</span>&gt;<span class="number">0</span>) || x&gt;<span class="number">0</span>  ? (x+y/<span class="number">2</span>)/y : (x-y/<span class="number">2</span>)/y</span><br><span class="line"><span class="keyword">if</span> (!is_battery_charging(chip) &amp;&amp; chip-&gt;current_now &gt; <span class="number">0</span>) // 没有充电 重新计算电量</span><br><span class="line">        iavg_ma = calculate_uuc_iavg(chip);</span><br><span class="line">        fcc = interpolate_fcc(chip-&gt;batt_data-&gt;fcc_temp_lut,batt_temp);</span><br><span class="line">        acc = interpolate_acc(chip-&gt;batt_data-&gt;ibat_acc_lut,	batt_temp, iavg_ma);</span><br><span class="line">    both call ：</span><br><span class="line">linear_interpolate(int y0, int x0, int y1, int x1, int x)</span><br><span class="line">        soc_uuc = ((fcc - acc) * <span class="number">100</span>) / fcc;</span><br><span class="line">	soc_uuc = adjust_uuc(chip, soc_uuc);</span><br><span class="line">	soc_acc = DIV_ROUND_CLOSEST(<span class="number">100</span> * (soc_ocv - soc_uuc),(<span class="number">100</span> - soc_uuc));</span><br><span class="line">        soc_final = soc_acc;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        ... // charging - reset all the counters</span><br><span class="line">soc_final = bound_soc(soc_final) // 最终电量</span><br></pre></td></tr></table></figure>
-<h3 id="百分比计算函数：">百分比计算函数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, ocv_uv / <span class="number">1000</span>);  //calculate the  capacity percent</span><br><span class="line"><span class="keyword">if</span> (batt_temp == pc_temp_ocv-&gt;temp[j] * DEGC_SCALE) &#123;  /* found an exact match <span class="keyword">for</span> temp <span class="keyword">in</span> the table */</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; rows; i++)    // i: rows- Capacity Percent  j: columns-Temperature</span><br><span class="line">                   ...</span><br><span class="line">	    pc = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;percent[i - <span class="number">1</span>],pc_temp_ocv-&gt;ocv[i - <span class="number">1</span>][j],ocv); // calculate 不匹配dts表格的percentcharge </span><br><span class="line">                   转换为公式见下公式一;                                </span><br><span class="line"></span><br><span class="line">  /* batt_temp is within temperature <span class="keyword">for</span> column j-<span class="number">1</span> and j */</span><br><span class="line"> is_between(pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j], ocv)   // caculate temp1 percentcharge</span><br><span class="line">        pcj = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;percent[i + <span class="number">1</span>],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j],	ocv);</span><br><span class="line">                  转换为公式见下公式二;                         </span><br><span class="line">           is_between(pc_temp_ocv-&gt;ocv[i][j-<span class="number">1</span>],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j-<span class="number">1</span>], ocv)) // caculate temp2 percentcharge</span><br><span class="line">	    pcj_minus_one = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j-<span class="number">1</span>],pc_temp_ocv-&gt;percent[i + <span class="number">1</span>],pc_temp_ocv-&gt;ocv[i+<span class="number">1</span>][j-<span class="number">1</span>],ocv);</span><br><span class="line">                   转换为公式见下公式三;                       </span><br><span class="line">          <span class="keyword">if</span> (pcj &amp;&amp; pcj_minus_one) // temp1 and temp2 都存在，calculate percentcharge </span><br><span class="line">                   pc = linear_interpolate(pcj_minus_one,pc_temp_ocv-&gt;temp[j-<span class="number">1</span>] * DEGC_SCALE,	pcj,pc_temp_ocv-&gt;temp[j] * DEGC_SCALE,batt_temp);</span><br><span class="line">                   转换为公式见下公式四;                      </span><br><span class="line">           否则：<span class="built_in">return</span> pcj 、pcj_minus_one、其他临界值</span><br></pre></td></tr></table></figure>
-<h3 id="公式一">公式一</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式1.png" alt="公式一"></p>
-<h3 id="公式二">公式二</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式2.png" alt="公式二"></p>
-<h3 id="公式三">公式三</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式3.png" alt="公式三"></p>
-<h3 id="公式四">公式四</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog电量计算公式4.png" alt="公式四"></p>
+        <p>最近开始做MTK相关的工作，在第一步编译Modem时就遇到了挺多问题。特在此文整理和Modem相关的问题。</p>
+<h1 id="编译相关问题">编译相关问题</h1><a id="more"></a>
+<h2 id="编译权限问题">编译权限问题</h2><p>编译时提示如下权限问题：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">*******************************************</span><br><span class="line">* [OS]                : Linux</span><br><span class="line">* [PERL]              : v5.<span class="number">10.1</span> or v5.<span class="number">14.2</span></span><br><span class="line">* [MAKE]              : GNU Make v3.<span class="number">81</span></span><br><span class="line">* [SHELL]             : GNU bash v4.<span class="number">1.5</span></span><br><span class="line">* [GCC-ARM-NONE-EABI] : v4.<span class="number">6.2</span> or above</span><br><span class="line">* [NATIVE GCC(UBUNTU)]: v4.<span class="number">5</span> or above</span><br><span class="line"></span><br><span class="line">*******************************************</span><br><span class="line"> Start checking current Build Environment  </span><br><span class="line">*******************************************</span><br><span class="line">* [PERL]              : v5.<span class="number">14.2</span>            [OK] !!!</span><br><span class="line">* [MAKE]              : GNU Make v3.<span class="number">81</span>     [OK] !!!</span><br><span class="line">* [SHELL]             : GNU bash v4.<span class="number">2.25</span>    [HIGHER THAN RECOMMENDED] !!!</span><br><span class="line">sh: <span class="number">1</span>: tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-gcc: Permission denied</span><br><span class="line">* [GCC-ARM-NONE-EABI] : [UNKNOWN VERSION] !!!</span><br><span class="line">* [NATIVE GCC(UBUNTU)]: gcc (Ubuntu/Linaro <span class="number">4.6</span>.<span class="number">3</span>-<span class="number">1</span>ubuntu5) <span class="number">4.6</span>.<span class="number">3</span>  [OK] !!!</span><br><span class="line"></span><br><span class="line">current Build Env. is not recommendation </span><br><span class="line">To avoid unexpected errors , please install the recommended Tool Chain.</span><br><span class="line">*******************************************</span><br><span class="line">  Build Environment is NOT RECOMMENDED!</span><br><span class="line">*******************************************</span><br><span class="line"></span><br><span class="line">makefile check is <span class="keyword">done</span></span><br><span class="line">/bin/bash: tools/init/strcmpex_linux.exe: Permission denied</span><br><span class="line">make: *** [getoptions] Error <span class="number">126</span></span><br></pre></td></tr></table></figure></p>
+<p>这种问题很好解决， 通过chmod对其提供执行权限即可。</p>
+<h2 id="不能定位数据库问题">不能定位数据库问题</h2><p>提示不能定位原始codegen 数据库，错误log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ERROR] Cannot determine the original codegen database: BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P1 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P10 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P11 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P12 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P13 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P14 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P15 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P16 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P17 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P18 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P19 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P2 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P20 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P21 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P3 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P4 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P5 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P6 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P7 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P8 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P9</span><br><span class="line">make[<span class="number">1</span>]: *** [build/ZECHIN6737T_65_M0/LWG_DSDS_COTSX/bin/dep/codegen_dep/cgen_cfg_Modem.det] Error <span class="number">2</span></span><br><span class="line">make: *** [cgen] Error <span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p>此问题是因为[mt6735m_all_modem\mtk_rel\ZECHIN6737T_65_M0\LTG_DSDS\dhl\database]路径下面太多的数据库文件，只需要将多余的删除掉即可。</p>
+<h2 id="编译工具链问题">编译工具链问题</h2><p>提示某些工具不能找到，log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lnosys</span><br><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lm</span><br><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lc</span><br><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lgcc</span><br></pre></td></tr></table></figure></p>
+<p>此问题是因为代码里面的gcc工具链有问题，需要重新安装正确的工具链，由于十分不好找，所以我上传了百度云：<a href="http://pan.baidu.com/s/1pLblCkN" target="_blank" rel="external">GCC地址</a>。</p>
 
       
     </div>
@@ -405,9 +398,7 @@ SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge 
       
         <div class="post-tags">
           
-            <a href="/tags/Qualcomm/" rel="tag">#Qualcomm</a>
-          
-            <a href="/tags/源码分析/" rel="tag">#源码分析</a>
+            <a href="/tags/MTK/" rel="tag">#MTK</a>
           
         </div>
       
@@ -416,17 +407,13 @@ SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge 
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/01/20/Java/JUnit-test的用法/" rel="next" title="JUnit-test的用法">
-                <i class="fa fa-chevron-left"></i> JUnit-test的用法
+              <a href="/2017/07/11/Android/实现真正意义上的第一个APP之启程/" rel="next" title="实现真正意义上的第一个APP之启程">
+                <i class="fa fa-chevron-left"></i> 实现真正意义上的第一个APP之启程
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/" rel="prev" title="如何在内核里操作文件(create/open/read/write)">
-                如何在内核里操作文件(create/open/read/write) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,8 +462,8 @@ SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge 
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/01/21/Android/高通Android不带电量计的电量计算方式/"
-           data-title="Android不带电量计的电量计算" data-url="http://huaqianlee.github.io/2015/01/21/Android/高通Android不带电量计的电量计算方式/">
+      <div class="ds-thread" data-thread-key="2017/07/12/Android/MTK-Modem-问题集/"
+           data-title="MTK Modem 问题集" data-url="http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-问题集/">
       </div>
     
   </div>
@@ -639,7 +626,7 @@ SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge 
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SOC（state_of_charge_荷电状态_-_电量）"><span class="nav-number">1.</span> <span class="nav-text">SOC（state of charge 荷电状态 - 电量）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电池电量决定因素"><span class="nav-number">2.</span> <span class="nav-text">电池电量决定因素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键结构"><span class="nav-number">3.</span> <span class="nav-text">关键结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dts_table_structure："><span class="nav-number">3.1.</span> <span class="nav-text">dts table structure：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#calculate_percentcharge_function"><span class="nav-number">4.</span> <span class="nav-text">calculate percentcharge  function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#驱动分析"><span class="nav-number">5.</span> <span class="nav-text">驱动分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键函数："><span class="nav-number">5.1.</span> <span class="nav-text">关键函数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百分比计算函数："><span class="nav-number">5.2.</span> <span class="nav-text">百分比计算函数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公式一"><span class="nav-number">5.3.</span> <span class="nav-text">公式一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公式二"><span class="nav-number">5.4.</span> <span class="nav-text">公式二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公式三"><span class="nav-number">5.5.</span> <span class="nav-text">公式三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公式四"><span class="nav-number">5.6.</span> <span class="nav-text">公式四</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编译相关问题"><span class="nav-number">1.</span> <span class="nav-text">编译相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编译权限问题"><span class="nav-number">1.1.</span> <span class="nav-text">编译权限问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不能定位数据库问题"><span class="nav-number">1.2.</span> <span class="nav-text">不能定位数据库问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译工具链问题"><span class="nav-number">1.3.</span> <span class="nav-text">编译工具链问题</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-07-11T13:25:04.928Z</updated>
+  <updated>2017-07-12T15:02:54.498Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MTK Modem 问题集</title>
+    <link href="http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-%E9%97%AE%E9%A2%98%E9%9B%86/"/>
+    <id>http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-问题集/</id>
+    <published>2017-07-12T15:01:42.000Z</published>
+    <updated>2017-07-12T15:02:54.498Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近开始做MTK相关的工作，在第一步编译Modem时就遇到了挺多问题。特在此文整理和Modem相关的问题。</p>
+<h1 id="编译相关问题">编译相关问题</h1><a id="more"></a>
+<h2 id="编译权限问题">编译权限问题</h2><p>编译时提示如下权限问题：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">*******************************************</span><br><span class="line">* [OS]                : Linux</span><br><span class="line">* [PERL]              : v5.<span class="number">10.1</span> or v5.<span class="number">14.2</span></span><br><span class="line">* [MAKE]              : GNU Make v3.<span class="number">81</span></span><br><span class="line">* [SHELL]             : GNU bash v4.<span class="number">1.5</span></span><br><span class="line">* [GCC-ARM-NONE-EABI] : v4.<span class="number">6.2</span> or above</span><br><span class="line">* [NATIVE GCC(UBUNTU)]: v4.<span class="number">5</span> or above</span><br><span class="line"></span><br><span class="line">*******************************************</span><br><span class="line"> Start checking current Build Environment  </span><br><span class="line">*******************************************</span><br><span class="line">* [PERL]              : v5.<span class="number">14.2</span>            [OK] !!!</span><br><span class="line">* [MAKE]              : GNU Make v3.<span class="number">81</span>     [OK] !!!</span><br><span class="line">* [SHELL]             : GNU bash v4.<span class="number">2.25</span>    [HIGHER THAN RECOMMENDED] !!!</span><br><span class="line">sh: <span class="number">1</span>: tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-gcc: Permission denied</span><br><span class="line">* [GCC-ARM-NONE-EABI] : [UNKNOWN VERSION] !!!</span><br><span class="line">* [NATIVE GCC(UBUNTU)]: gcc (Ubuntu/Linaro <span class="number">4.6</span>.<span class="number">3</span>-<span class="number">1</span>ubuntu5) <span class="number">4.6</span>.<span class="number">3</span>  [OK] !!!</span><br><span class="line"></span><br><span class="line">current Build Env. is not recommendation </span><br><span class="line">To avoid unexpected errors , please install the recommended Tool Chain.</span><br><span class="line">*******************************************</span><br><span class="line">  Build Environment is NOT RECOMMENDED!</span><br><span class="line">*******************************************</span><br><span class="line"></span><br><span class="line">makefile check is <span class="keyword">done</span></span><br><span class="line">/bin/bash: tools/init/strcmpex_linux.exe: Permission denied</span><br><span class="line">make: *** [getoptions] Error <span class="number">126</span></span><br></pre></td></tr></table></figure></p>
+<p>这种问题很好解决， 通过chmod对其提供执行权限即可。</p>
+<h2 id="不能定位数据库问题">不能定位数据库问题</h2><p>提示不能定位原始codegen 数据库，错误log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ERROR] Cannot determine the original codegen database: BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P1 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P10 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P11 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P12 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P13 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P14 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P15 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P16 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P17 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P18 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P19 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P2 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P20 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P21 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P3 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P4 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P5 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P6 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P7 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P8 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P9</span><br><span class="line">make[<span class="number">1</span>]: *** [build/ZECHIN6737T_65_M0/LWG_DSDS_COTSX/bin/dep/codegen_dep/cgen_cfg_Modem.det] Error <span class="number">2</span></span><br><span class="line">make: *** [cgen] Error <span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p>此问题是因为[mt6735m_all_modem\mtk_rel\ZECHIN6737T_65_M0\LTG_DSDS\dhl\database]路径下面太多的数据库文件，只需要将多余的删除掉即可。</p>
+<h2 id="编译工具链问题">编译工具链问题</h2><p>提示某些工具不能找到，log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lnosys</span><br><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lm</span><br><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lc</span><br><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lgcc</span><br></pre></td></tr></table></figure></p>
+<p>此问题是因为代码里面的gcc工具链有问题，需要重新安装正确的工具链，由于十分不好找，所以我上传了百度云：<a href="http://pan.baidu.com/s/1pLblCkN" target="_blank" rel="external">GCC地址</a>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近开始做MTK相关的工作，在第一步编译Modem时就遇到了挺多问题。特在此文整理和Modem相关的问题。&lt;/p&gt;
+&lt;h1 id=&quot;编译相关问题&quot;&gt;编译相关问题&lt;/h1&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
+    
+    
+      <category term="MTK" scheme="http://huaqianlee.github.io/tags/MTK/"/>
+    
+  </entry>
   
   <entry>
     <title>实现真正意义上的第一个APP之启程</title>
@@ -1128,46 +1159,6 @@
     
       &lt;p&gt; &lt;a href=&quot;http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/&quot;&gt;《第一行代码》第2版思维导图及所有学习笔记目录&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;第一个应用&quot;&gt;第一个应用&lt;/h1&gt;&lt;h2 id=&quot;项目结构&quot;&gt;项目结构&lt;/h2&gt;&lt;p&gt;很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.&lt;br&gt;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="http://huaqianlee.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
-    
-      <category term="FirstCode" scheme="http://huaqianlee.github.io/tags/FirstCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第一行代码之启程 </title>
-    <link href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/"/>
-    <id>http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/</id>
-    <published>2017-03-23T23:30:48.000Z</published>
-    <updated>2017-06-18T07:18:20.477Z</updated>
-    
-    <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过50%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。</p>
-<p>《第一行代码》思维导图如下:<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81.png" alt="脑图1"></p>
-<a id="more"></a>
-<p>《第一行代码》学习笔记目录:</p>
-<p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码之项目结构与活动</a></p>
-<p><a href="http://huaqianlee.github.io/2017/03/25/FirstCode/firstcode-note-UI/" target="_blank" rel="external">第一行代码之UI</a></p>
-<p><a href="http://huaqianlee.github.io/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/" target="_blank" rel="external">第一行代码之广播机制</a></p>
-<p><a href="http://huaqianlee.github.io/2017/04/29/FirstCode/FirstCode-data-storage/" target="_blank" rel="external">第一行代码之数据存储</a></p>
-<p><a href="http://huaqianlee.github.io/2017/05/03/FirstCode/FirstCode-Content-Provider/" target="_blank" rel="external">第一行代码之跨程序共享数据-内容提供器</a></p>
-<p><a href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-media/" target="_blank" rel="external">第一行代码之手机多媒体</a></p>
-<p><a href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-Service/" target="_blank" rel="external">第一行代码之服务</a></p>
-<p><a href="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/" target="_blank" rel="external">第一行代码之网络</a></p>
-<p><a href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/" target="_blank" rel="external">第一行代码之碎片</a></p>
-<p><a href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/" target="_blank" rel="external">第一行代码之Material Design</a></p>
-<p><a href="http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/" target="_blank" rel="external">第一行代码之高级技巧</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过50%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。&lt;/p&gt;
-&lt;p&gt;《第一行代码》思维导图如下:&lt;br&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/image/firstcode/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81.png&quot; alt=&quot;脑图1&quot;&gt;&lt;/p&gt;
     
     </summary>
     
