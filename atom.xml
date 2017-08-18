@@ -47,11 +47,11 @@
   </entry>
   
   <entry>
-    <title>hides navigation in drawerlayou</title>
+    <title>按返回键只关闭DrawerLayout侧边栏不退出Activity的解决方案</title>
     <link href="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/"/>
     <id>http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/</id>
     <published>2017-08-18T14:44:17.000Z</published>
-    <updated>2017-08-18T14:47:35.938Z</updated>
+    <updated>2017-08-18T14:57:59.429Z</updated>
     
     <content type="html"><![CDATA[<p>今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。</p>
 <p>只需要在Activity中重写onBackPressed()即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private DrawerLayout mlayout; </span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void <span class="function"><span class="title">onBackPressed</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (mlayout.isDrawerOpen(findViewById(R.id.nav_left_layout)))</span><br><span class="line">        mlayout.closeDrawers();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        super.onBackPressed();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># R.id.nav_left_layout为侧边栏显示部分顶层Layout</span></span><br></pre></td></tr></table></figure></p>
@@ -72,11 +72,11 @@
   </entry>
   
   <entry>
-    <title>RecyclerView选中效果的实现</title>
+    <title>RecyclerView Item选中效果及点击事件的实现</title>
     <link href="http://huaqianlee.github.io/2017/08/17/Android/the-selected-effect-of-recyclerview-item/"/>
     <id>http://huaqianlee.github.io/2017/08/17/Android/the-selected-effect-of-recyclerview-item/</id>
     <published>2017-08-17T11:46:41.000Z</published>
-    <updated>2017-08-18T14:39:34.627Z</updated>
+    <updated>2017-08-18T14:59:32.134Z</updated>
     
     <content type="html"><![CDATA[<p>最近需要对RecyclerView的Item实现选中效果和Item点击事件，尝试了两种方式。</p>
 <h1 id="受限的简易实现方案">受限的简易实现方案</h1><h2 id="布局文件">布局文件</h2><p>首先在Item的布局文件中加入如下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">android:clickable=<span class="string">"true"</span></span><br><span class="line">android:focusableInTouchMode=<span class="string">"true"</span></span><br><span class="line">android:focusable=<span class="string">"true"</span></span><br><span class="line">android:background=<span class="string">"@drawable/selector_item_selected"</span></span><br></pre></td></tr></table></figure></p>
