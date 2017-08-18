@@ -4,15 +4,44 @@
   
     
     <entry>
+      <title><![CDATA[通过RecyclerView Item侧边导航栏动态加载布局]]></title>
+      <url>http://huaqianlee.github.io/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/</url>
+      <content type="html"><![CDATA[<h2 id="准备布局文件">准备布局文件</h2><p>布局一：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">android.support.constraint.ConstraintLayout</span></span><br><span class="line">        <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">        <span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span></span><br><span class="line">        <span class="attribute">xmlns:app</span>=<span class="value">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">tools:context</span>=<span class="value">"me.huaqianlee.forme.ToDoFragment"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="title">TextView</span> <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span> <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">              <span class="attribute">android:layout_marginTop</span>=<span class="value">"50dp"</span></span><br><span class="line">              <span class="attribute">android:textSize</span>=<span class="value">"15sp"</span></span><br><span class="line">    <span class="attribute">android:text</span>=<span class="value">"This is Todo main view layout!"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>布局二：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">android.support.constraint.ConstraintLayout</span></span><br><span class="line">        <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">        <span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span></span><br><span class="line">        <span class="attribute">xmlns:app</span>=<span class="value">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">tools:context</span>=<span class="value">"me.huaqianlee.forme.ToDoFragment"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="title">ImageView</span> <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span> <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">               <span class="attribute">android:scaleType</span>=<span class="value">"fitCenter"</span></span><br><span class="line">    <span class="attribute">android:src</span>=<span class="value">"@drawable/lee"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="准备Fragment，加载布局">准备Fragment，加载布局</h2><p>布局一：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DateEventFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="annotation">@Nullable</span></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.fragment_date_event, container, <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>布局二：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToDoFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="annotation">@Nullable</span></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.fragment_todo, container, <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="实现切换布局方法">实现切换布局方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * 切换主界面视图工具类</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainViewSwitch</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">switchMainView</span><span class="params">(BaseActivity activity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (SelectedNavItem.getSlectedNavItem()) &#123;</span><br><span class="line">            <span class="keyword">case</span> SelectedNavItem.TODO:</span><br><span class="line">                replaceFragment(<span class="keyword">new</span> ToDoFragment(),activity);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> SelectedNavItem.DATEEVENT:</span><br><span class="line">                replaceFragment(<span class="keyword">new</span> DateEventFragment(), activity);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">replaceFragment</span><span class="params">(Fragment fragment, BaseActivity activity)</span> </span>&#123;</span><br><span class="line">        FragmentManager fragmentManager = activity.getSupportFragmentManager();</span><br><span class="line">        FragmentTransaction transaction = fragmentManager.beginTransaction();</span><br><span class="line">        transaction.replace(R.id.main_view_layout, fragment);</span><br><span class="line">        transaction.commit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="切换布局">切换布局</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">adapter.setOnItemClickListener(<span class="keyword">new</span> NavFuncAdapter.OnItemClickListener() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(View view, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> MainViewSwitch().switchMainView(MainActivity.<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这篇博文只是一个简单粗糙的总结， RecyclerView点击事件的实现可以查看博客：<a href="">RecyclerView选中效果、Item点击事件的实现</a>。</p>
+<h2 id="源码地址">源码地址</h2><p><a href="https://github.com/huaqianlee/ForMe" target="_blank" rel="external">ForMe</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[hides navigation in drawerlayou]]></title>
+      <url>http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/</url>
+      <content type="html"><![CDATA[<p>今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。</p>
+<p>只需要在Activity中重写onBackPressed()即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private DrawerLayout mlayout; </span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void <span class="function"><span class="title">onBackPressed</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (mlayout.isDrawerOpen(findViewById(R.id.nav_left_layout)))</span><br><span class="line">        mlayout.closeDrawers();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        super.onBackPressed();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># R.id.nav_left_layout为侧边栏显示部分顶层Layout</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[RecyclerView选中效果的实现]]></title>
       <url>http://huaqianlee.github.io/2017/08/17/Android/the-selected-effect-of-recyclerview-item/</url>
-      <content type="html"><![CDATA[<p>最近需要对RecyclerView的Item实现选中效果，找到了一种简单的实现方式。</p>
-<h2 id="布局文件">布局文件</h2><p>首先在Item的布局文件中加入如下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">android:clickable=<span class="string">"true"</span></span><br><span class="line">android:focusableInTouchMode=<span class="string">"true"</span></span><br><span class="line">android:focusable=<span class="string">"true"</span></span><br><span class="line">android:background=<span class="string">"@drawable/selector_item_selected"</span></span><br></pre></td></tr></table></figure></p>
+      <content type="html"><![CDATA[<p>最近需要对RecyclerView的Item实现选中效果和Item点击事件，尝试了两种方式。</p>
+<h1 id="受限的简易实现方案">受限的简易实现方案</h1><h2 id="布局文件">布局文件</h2><p>首先在Item的布局文件中加入如下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">android:clickable=<span class="string">"true"</span></span><br><span class="line">android:focusableInTouchMode=<span class="string">"true"</span></span><br><span class="line">android:focusable=<span class="string">"true"</span></span><br><span class="line">android:background=<span class="string">"@drawable/selector_item_selected"</span></span><br></pre></td></tr></table></figure></p>
 <p>完成selector_item_selected.xml：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;selector xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span><br><span class="line">    &lt;item android:state_focused=<span class="string">"true"</span> android:drawable=<span class="string">"@drawable/select"</span>/&gt;</span><br><span class="line">    &lt;item android:state_focused=<span class="string">"false"</span> android:drawable=<span class="string">"@drawable/un_select"</span>/&gt;</span><br><span class="line">&lt;/selector&gt;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>实现select和unselect资源（也可以直接找两张图片）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># unselect.xml</span></span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;shape xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span> &gt;</span><br><span class="line">    &lt;gradient</span><br><span class="line">            android:startColor=<span class="string">"#FFF"</span></span><br><span class="line">            android:endColor=<span class="string">"#FFF"</span></span><br><span class="line">            android:centerColor=<span class="string">"#FFF"</span></span><br><span class="line">    /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/shape&gt;</span><br><span class="line"><span class="comment"># select.xml</span></span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;shape xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span> &gt;</span><br><span class="line">    &lt;gradient</span><br><span class="line">            android:startColor=<span class="string">"@color/colorPrimary"</span></span><br><span class="line">            android:endColor=<span class="string">"@color/colorPrimary"</span></span><br><span class="line">            android:centerColor=<span class="string">"@color/colorPrimary"</span></span><br><span class="line">    /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="代码">代码</h2><p>只需要onBindViewHolder方法中添加如下代码即可：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="keyword">final</span> ViewHolder holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    holder.itemView.setSelected(position == SelectedNavItem.getSlectedNavItem()); <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="效果">效果</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/nav_select1.jpg" alt="效果1"><br><img src="http://7xjdax.com1.z0.glb.clouddn.com/nav_select2.jpg" alt="效果2"></p>
+<h2 id="代码">代码</h2><p>只需要onBindViewHolder方法中添加如下代码即可：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="keyword">final</span> ViewHolder holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    holder.itemView.setSelected(position == SelectedNavItem.getSlectedNavItem()); </span><br><span class="line">    <span class="comment">/*item点击事件的一种实现方式*/</span></span><br><span class="line">    holder.itemView.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    holder.cardView.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="更实用的实现方案">更实用的实现方案</h1><p>上面的方案有挺多局限性， 这个方案主要通过注册按键事件来实现。</p>
+<h2 id="布局">布局</h2><p>删掉上一种方案加入属性：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">android:clickable=<span class="string">"true"</span></span><br><span class="line">android:focusableInTouchMode=<span class="string">"true"</span></span><br><span class="line">android:focusable=<span class="string">"true"</span></span><br><span class="line">android:background=<span class="string">"@drawable/selector_item_selected"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="代码-1">代码</h2><p>在adpter中定义可在其他地方使用的OnItemClickListener接口，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> OnItemClickListener onItemClickListener = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*暴露给外部的方法*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOnItemClickListener</span><span class="params">(OnItemClickListener listener)</span> </span>&#123;</span><br><span class="line">    onItemClickListener = listener;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnItemClickListener</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(View view, <span class="keyword">int</span> position)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实现选中效果，然后为每个itemview添加并注册点击事件，并将点击事件传给外面的调用者，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="keyword">final</span> ViewHolder holder, <span class="keyword">final</span> <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*设置选中状态*/</span></span><br><span class="line">    <span class="keyword">if</span> (position == SelectedNavItem.getSlectedNavItem()) &#123;</span><br><span class="line">        holder.itemView.setBackground(mContext.getResources().getDrawable(R.drawable.selected));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        holder.itemView.setBackground(mContext.getResources().getDrawable(R.drawable.un_select));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    holder.itemView.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            onItemClickListener.onItemClick(holder.itemView, position);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Activity中的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">adapter.setOnItemClickListener(<span class="keyword">new</span> NavFuncAdapter.OnItemClickListener() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(View view, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        SelectedNavItem.setSlectedNavItem(position);<span class="comment">//自定义的方法，告诉adpter被点击item</span></span><br><span class="line">        adapter.notifyDataSetChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h1 id="源码地址">源码地址</h1><p><a href="https://github.com/huaqianlee/ForMe" target="_blank" rel="external">ForMe</a></p>
+<h1 id="效果">效果</h1><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog/forme/select_item_effct.gif" alt="nav_item_selected"></p>
 ]]></content>
     </entry>
     
@@ -245,7 +274,7 @@
 <p>最后让activity调用此主题，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># AndroidManifest.xml</span><br><span class="line">&lt;activity</span><br><span class="line">    ...</span><br><span class="line">    android:theme="@style/FruitActivityTheme"</span><br><span class="line">&lt;/activiy&gt;</span><br></pre></td></tr></table></figure></p>
 <p>android5.0以上的版本还有一种融合及透明状态栏的方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 参考coolweather融合必应图片，及头布局间隔设置</span><br><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">21</span>) &#123;</span><br><span class="line">    View decorView = getWindow().getDecorView();</span><br><span class="line">    decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</span><br><span class="line">    getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>效果图如下：</p>
-<p><img src="" alt="待补充"></p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/fruit_effct.gif" alt="fruit_effect"></p>
 <h2 id="示例源码">示例源码</h2><p>整个Material Design示例源码的地址如下：</p>
 <p><a href="https://github.com/huaqianlee/AndroidDemo/tree/master/FirstCode/chapter12" target="_blank" rel="external">Material Design示例源码</a>。</p>
 ]]></content>
@@ -1974,6 +2003,96 @@ git commit
     </entry>
     
     <entry>
+      <title><![CDATA[Android编译过程详解之三]]></title>
+      <url>http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/</url>
+      <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
+<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
+<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
+<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
+<thead>
+<tr>
+<th>常量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRODUCT_NAME</td>
+<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
+</tr>
+<tr>
+<td>PRODUCT_MODEL</td>
+<td>产品的型号，这也是最终用户将看到的</td>
+</tr>
+<tr>
+<td>PRODUCT_LOCALES</td>
+<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGES</td>
+<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
+</tr>
+<tr>
+<td>PRODUCT_DEVICE</td>
+<td>该产品的工业设计的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_MANUFACTURER</td>
+<td>制造商的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_BRAND</td>
+<td>该产品专门定义的商标（如果有的话）</td>
+</tr>
+<tr>
+<td>PRODUCT_PROPERTY_OVERRIDES</td>
+<td>对于商品属性的定义</td>
+</tr>
+<tr>
+<td>PRODUCT_COPY_FILES</td>
+<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
+</tr>
+<tr>
+<td>PRODUCT_OTA_PUBLIC_KEYS</td>
+<td>对于该产品的 OTA 公开 key 的列表</td>
+</tr>
+<tr>
+<td>PRODUCT_POLICY</td>
+<td>产品使用的策略</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGE_OVERLAYS</td>
+<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
+</tr>
+<tr>
+<td>PRODUCT_CONTRIBUTORS_FILE</td>
+<td>HTML 文件，其中包含项目的贡献者</td>
+</tr>
+<tr>
+<td>PRODUCT_TAGS</td>
+<td>该产品的标签，以空格分格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
+<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
+<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
+　　　</p>
+<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Android编译过程详解之二]]></title>
       <url>http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/</url>
       <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a><br>　<br>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　　./go.sh -j8 or make -j8／--jobs</span><br></pre></td></tr></table></figure></p>
@@ -2149,96 +2268,6 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <blockquote>
 <p>模块mk文件详见Android.mk解析：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/#more" target="_blank" rel="external">Android.mk解析</a></p>
 </blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Android编译过程详解之三]]></title>
-      <url>http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/</url>
-      <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
-<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
-<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
-<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
-<thead>
-<tr>
-<th>常量</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PRODUCT_NAME</td>
-<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
-</tr>
-<tr>
-<td>PRODUCT_MODEL</td>
-<td>产品的型号，这也是最终用户将看到的</td>
-</tr>
-<tr>
-<td>PRODUCT_LOCALES</td>
-<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGES</td>
-<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
-</tr>
-<tr>
-<td>PRODUCT_DEVICE</td>
-<td>该产品的工业设计的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_MANUFACTURER</td>
-<td>制造商的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_BRAND</td>
-<td>该产品专门定义的商标（如果有的话）</td>
-</tr>
-<tr>
-<td>PRODUCT_PROPERTY_OVERRIDES</td>
-<td>对于商品属性的定义</td>
-</tr>
-<tr>
-<td>PRODUCT_COPY_FILES</td>
-<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
-</tr>
-<tr>
-<td>PRODUCT_OTA_PUBLIC_KEYS</td>
-<td>对于该产品的 OTA 公开 key 的列表</td>
-</tr>
-<tr>
-<td>PRODUCT_POLICY</td>
-<td>产品使用的策略</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGE_OVERLAYS</td>
-<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
-</tr>
-<tr>
-<td>PRODUCT_CONTRIBUTORS_FILE</td>
-<td>HTML 文件，其中包含项目的贡献者</td>
-</tr>
-<tr>
-<td>PRODUCT_TAGS</td>
-<td>该产品的标签，以空格分格</td>
-</tr>
-</tbody>
-</table>
-<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
-<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
-<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
-　　　</p>
-<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
 ]]></content>
     </entry>
     

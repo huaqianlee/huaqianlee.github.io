@@ -100,6 +100,7 @@ ActionBar来自项目指定的主题定义的显示，如下：12# AndroidManife
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/toolbar_xiaoguo.jpg">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/firtcode/navigationview_ex.jpg">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/coorlayout.jpg">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/fruit_effct.gif">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一行代码之Material Design">
 <meta name="twitter:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
@@ -443,7 +444,7 @@ ActionBar来自项目指定的主题定义的显示，如下：12# AndroidManife
 <p>最后让activity调用此主题，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># AndroidManifest.xml</span><br><span class="line">&lt;activity</span><br><span class="line">    ...</span><br><span class="line">    android:theme="@style/FruitActivityTheme"</span><br><span class="line">&lt;/activiy&gt;</span><br></pre></td></tr></table></figure></p>
 <p>android5.0以上的版本还有一种融合及透明状态栏的方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 参考coolweather融合必应图片，及头布局间隔设置</span><br><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">21</span>) &#123;</span><br><span class="line">    View decorView = getWindow().getDecorView();</span><br><span class="line">    decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</span><br><span class="line">    getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>效果图如下：</p>
-<p><img src="" alt="待补充"></p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/fruit_effct.gif" alt="fruit_effect"></p>
 <h2 id="示例源码">示例源码</h2><p>整个Material Design示例源码的地址如下：</p>
 <p><a href="https://github.com/huaqianlee/AndroidDemo/tree/master/FirstCode/chapter12" target="_blank" rel="external">Material Design示例源码</a>。</p>
 
@@ -584,7 +585,7 @@ ActionBar来自项目指定的主题定义的显示，如下：12# AndroidManife
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">65</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

@@ -302,6 +302,253 @@
             
               
                 
+                <a class="post-title-link" href="/2015/08/15/Android/高通平台Android源码bootloader分析之sbl1-一/" itemprop="url">
+                  高通平台Android源码bootloader分析之sbl1(一)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-08-15T20:44:33+08:00" content="Aug 15 2015">
+              Aug 15 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/15/Android/高通平台Android源码bootloader分析之sbl1-一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/15/Android/高通平台Android源码bootloader分析之sbl1-一/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/">高通平台Android源码bootloader分析之sbl1(二)</a><br><a href="http://huaqianlee.github.io/2015/08/18/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%89/">高通平台Android源码bootloader分析之sbl1(三)</a></p>
+<p>高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot loader）的代码需要动一下，ap侧就APPSBL代码需要动（对此部分不了解，可参照：<a href="http://huaqianlee.github.io/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/">bootable源码解析</a>），其他的都是高通搞好了的，甚至有些我们看不到代码。今天就要分析一下开机前几秒钟起着关键作用的sbl1， 这套代码在modem侧的boot_images\中。</p>
+<h2 id="启动流程">启动流程</h2><p>首先来看一下高通的bootloader流程框图，主要由ap、RPM及modem三部分构成，由于我工作主要涉及到ap侧，所以对RPM和modem侧代码不了解，以后有空时间的话到可以研究一下，框图如下：<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/15/Android/高通平台Android源码bootloader分析之sbl1-一/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/25/Android/Android源码bootable解析之LK-bootloader-little-kernel/" itemprop="url">
+                  Android源码bootable解析之bootloader LK(little kernel)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-07-25T15:56:13+08:00" content="Jul 25 2015">
+              Jul 25 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/25/Android/Android源码bootable解析之LK-bootloader-little-kernel/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/25/Android/Android源码bootable解析之LK-bootloader-little-kernel/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。</p>
+<h2 id="boot架构">boot架构</h2>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/25/Android/Android源码bootable解析之LK-bootloader-little-kernel/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/07/19/Android/Android中adb-Android-Debug-Bridge-命令的用法/" itemprop="url">
                   Android中adb(Android Debug Bridge)命令的用法
                 </a>
@@ -802,6 +1049,137 @@
             
               
                 
+                <a class="post-title-link" href="/2015/07/12/Android/Android编译过程详解之三/" itemprop="url">
+                  Android编译过程详解之三
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-07-12T16:43:04+08:00" content="Jul 12 2015">
+              Jul 12 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/12/Android/Android编译过程详解之三/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/12/Android/Android编译过程详解之三/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/12/Android/Android编译过程详解之三/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/07/12/Android/Android编译过程详解之二/" itemprop="url">
                   Android编译过程详解之二
                 </a>
@@ -887,137 +1265,6 @@
 <li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/12/Android/Android编译过程详解之二/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/12/Android/Android编译过程详解之三/" itemprop="url">
-                  Android编译过程详解之三
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-07-12T16:43:04+08:00" content="Jul 12 2015">
-              Jul 12 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/12/Android/Android编译过程详解之三/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/12/Android/Android编译过程详解之三/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/12/Android/Android编译过程详解之三/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1296,255 +1543,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/11/Git/git常用及进阶命令总结/" itemprop="url">
-                  Git常用及进阶命令总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-06-11T22:10:41+08:00" content="Jun 11 2015">
-              Jun 11 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/06/11/Git/git常用及进阶命令总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/11/Git/git常用及进阶命令总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>　　Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　<br>　<br>　　言归正传，Git十分好用，应用也十分广泛,现在最好的代码托管网站Github就是基于git创建的，而且现在大多数公司及个人都在使用它进行代码管理，要熟练使用还是需要花一些苦功夫的，我现在也还只是会基本的应用，更深层次的使用还不熟悉。为了方便自己以后使用，将自己常用的一些命令加以总结，并Google了一些常用及进阶命令，一并列出，方便查询使用。</p>
-<p><strong>最重要的命令: git <command> —help</strong></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/11/Git/git常用及进阶命令总结/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/" itemprop="url">
-                  Android电池监控系统(BMS)之一电池系统架构
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-06-06T22:17:36+08:00" content="Jun 6 2015">
-              Jun 6 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        huaqianlee@gmail.com</em></p>
-<p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。</p>
-<h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
-<p>自上而下，Android电池监控系统分为如下几个部分：</p>
-<h3 id="电池信息查看APP">电池信息查看APP</h3><p>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1590,7 +1588,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">65</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

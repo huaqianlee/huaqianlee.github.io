@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="App," />
 
 
 
@@ -86,28 +86,18 @@
 
 
 
-<meta name="description" content="概述BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：
-
-
-BAM（Bus Access Manager）i">
+<meta name="description" content="今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。
+只需要在Activity中重写onBackPressed()即可：1234567891011private DrawerLayout mlayout; @Overridepublic void onBackPressed() &amp;#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高通无人机8074 BLSP接口说明">
-<meta property="og:url" content="http://huaqianlee.github.io/2016/04/27/Uav/Qualcomm-uav-blsp-port/index.html">
+<meta property="og:title" content="hides navigation in drawerlayou">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="概述BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：
-
-
-BAM（Bus Access Manager）i">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/BLSP.png">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blsp_pin.jpg">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/apps_blsp.jpg">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/adsp_blsp.jpg">
+<meta property="og:description" content="今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。
+只需要在Activity中重写onBackPressed()即可：1234567891011private DrawerLayout mlayout; @Overridepublic void onBackPressed() &amp;#123;">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="高通无人机8074 BLSP接口说明">
-<meta name="twitter:description" content="概述BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：
-
-
-BAM（Bus Access Manager）i">
+<meta name="twitter:title" content="hides navigation in drawerlayou">
+<meta name="twitter:description" content="今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。
+只需要在Activity中重写onBackPressed()即可：1234567891011private DrawerLayout mlayout; @Overridepublic void onBackPressed() &amp;#123;">
 
 
 
@@ -128,9 +118,9 @@ BAM（Bus Access Manager）i">
 
 
 
-  <link rel="canonical" href="http://huaqianlee.github.io/2016/04/27/Uav/Qualcomm-uav-blsp-port/"/>
+  <link rel="canonical" href="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/"/>
 
-  <title> 高通无人机8074 BLSP接口说明 | Andy.Lee's  Blog </title>
+  <title> hides navigation in drawerlayou | Andy.Lee's  Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -312,7 +302,7 @@ BAM（Bus Access Manager）i">
             
             
               
-                高通无人机8074 BLSP接口说明
+                hides navigation in drawerlayou
               
             
           </h1>
@@ -324,8 +314,8 @@ BAM（Bus Access Manager）i">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-27T00:11:58+08:00" content="Apr 27 2016">
-              Apr 27 2016
+            <time itemprop="dateCreated" datetime="2017-08-18T22:44:17+08:00" content="Aug 18 2017">
+              Aug 18 2017
             </time>
           </span>
 
@@ -338,8 +328,8 @@ BAM（Bus Access Manager）i">
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Uav/" itemprop="url" rel="index">
-                    <span itemprop="name">Uav</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -354,8 +344,8 @@ BAM（Bus Access Manager）i">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/27/Uav/Qualcomm-uav-blsp-port/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/27/Uav/Qualcomm-uav-blsp-port/" itemprop="commentsCount"></span>
+                <a href="/2017/08/18/Android/hides-navigation-in-drawerlayou/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/18/Android/hides-navigation-in-drawerlayou/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -378,32 +368,8 @@ BAM（Bus Access Manager）i">
       
 
       
-        <h2 id="概述">概述</h2><p>BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/BLSP.png" alt="BLSP"></p>
-<blockquote>
-<ol>
-<li>BAM（Bus Access Manager）is used to move data to/from the peripheral buffers;  2.每个BLSP外设静态连接到一对BAM管道，BLSP支持BAM 和non-BAM-based 数据传输。</li>
-</ol>
-</blockquote>
-<a id="more"></a>
-<p>每一个QUP可以被配置为I2C， SPI, UART, UIM接口等，如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/blsp_pin.jpg" alt="blsp_pin"></p>
-<h2 id="自定义BLSP口，配置TZ">自定义BLSP口，配置TZ</h2><p>这些端口在aDSP和应用处理器之间共享。为了让BLSP端口独立使用，我们可以在TrustZone（TZ）中定义BLSP 端口的分配，没有权限的子系统访问BLSP 端口将导致系统崩溃。 高通默认已经做好了配置。在DspAL中， 提供了一组设备文件路径映射到硬件，无人机用到的相关口已经在TZ中配置好了，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SPI:  /dev/spi-[<span class="number">1</span>~<span class="number">12</span>]  对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的SPI设备</span><br><span class="line">I2C: /dev/iic-[<span class="number">1</span>-<span class="number">12</span>]      对应于   BLSP[<span class="number">1</span>~<span class="number">12</span>]上的I2C设备</span><br><span class="line">UART: /dev/tty-[<span class="number">1</span>-<span class="number">4</span>]</span><br><span class="line"><span class="comment"># UAV 8074 最多支持4个串口设备，每一个串口设备对应一个BAM设备，</span></span><br></pre></td></tr></table></figure></p>
-<p>如果要自定义新的端口，需按于如下方式配置：</p>
-<h3 id="计算APPS_BLSP值">计算APPS BLSP值</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/apps_blsp.jpg" alt="apps-BLSP"><br>根据倒数第二列（对应于BAM pipe）计算出结果如下：<br>APPS BLSP1 : 0x00C3000C   [ Format : 0x00 (Apps BLSP1 QUP) ( Apps BLSP1 UART) ]<br>APPS BLSP2 : 0x00F30F33   [ Format : 0x00 (Apps BLSP2 QUP) ( Apps BLSP2 UART) ]</p>
-<blockquote>
-<p>Apps列对应Y，则表明BLSPx配为Uart或QUP，下同。</p>
-</blockquote>
-<h3 id="计算ADSP_BLSP值">计算ADSP BLSP值</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/adsp_blsp.jpg" alt="adsp-BLSP"><br>ADSP BLSP1 = 0x0003FF00   [ Format : 0x00 (Adsp BLSP1 QUP) ( Adsp BLSP1 UART) ]<br>ADSP BLSP2 = 0x00FC00CC  [ Format : 0x00 (Adsp BLSP2 QUP) ( Adsp BLSP2 UART) ]</p>
-<h3 id="通过计算的值在TZ中配置">通过计算的值在TZ中配置</h3><p>路径：trustzone_images\core\hwengines\bam\8974\bamtgtcfgdata_tz.h</p>
-<p>BLSP1:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Replace the highlighted values with ADSP BLSP1 and APPS BLSP1</span><br><span class="line"> </span><br><span class="line">bam_sec_config_<span class="built_in">type</span> bam_tgt_blsp1_secconfig =</span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line"><span class="comment">#ifdef FEATURE_DRONE_CUSTOMIZATION_1 </span></span><br><span class="line"><span class="comment">#ifdef BAM_TZ_DISABLE_SPI</span></span><br><span class="line">        &#123;<span class="number">0</span>x00C3000C   , TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,       // APPS BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x0003FF00   , TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;, // ADSP BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x00000000, TZBSP_VMID_MSS, <span class="number">0</span>x0, TZBSP_VMID_MSS_BIT&#125;,</span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">        &#123;<span class="number">0</span>x00C3000C   , TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,       // APPS BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x0003FF00   , TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;, // ADSP BLSP1</span><br><span class="line">        &#123;<span class="number">0</span>x00000000, TZBSP_VMID_MSS, <span class="number">0</span>x0, TZBSP_VMID_MSS_BIT&#125;,</span><br><span class="line">        &#123;<span class="number">0</span>x00300000, TZBSP_VMID_TZ, <span class="number">0</span>x0, TZBSP_VMID_TZ_BIT&#125;</span><br><span class="line">      </span><br><span class="line"><span class="comment">#endif /*BAM_TZ_DISABLE_SPI*/</span></span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>BLSP2:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bam_sec_config_<span class="built_in">type</span> bam_tgt_blsp2_secconfig =</span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line"><span class="comment">#ifdef FEATURE_DRONE_CUSTOMIZATION_1 </span></span><br><span class="line">        &#123;<span class="number">0</span>x00F30F33   , TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,       // APPS BLSP2</span><br><span class="line">        &#123;<span class="number">0</span>x00FC00CC  , TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;   // ADSP BLSP2</span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">        &#123;<span class="number">0</span>x003C0FFF, TZBSP_VMID_AP, <span class="number">0</span>x0, TZBSP_VMID_AP_BIT&#125;,</span><br><span class="line">        &#123;<span class="number">0</span>x00C3F000, TZBSP_VMID_LPASS, <span class="number">0</span>x0, TZBSP_VMID_LPASS_BIT&#125;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="怎么工作">怎么工作</h2><p>在启动期间，aDSP将加载BLSP配置文件初始化串口设备。为了是能运行时配置，可在/usr/share/data/adsp/blsp.config中定义串口设备和BAM端口的映射，bam<em>对应于BLSP</em>。如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tty-<span class="number">1</span> bam-<span class="number">9</span></span><br><span class="line">tty-<span class="number">2</span> bam-<span class="number">6</span></span><br><span class="line">tty-<span class="number">3</span> bam-<span class="number">8</span></span><br><span class="line">tty-<span class="number">4</span> bam-<span class="number">2</span></span><br></pre></td></tr></table></figure></p>
-<p>如果串口设备只用TX和RX，需要在最后一行加入 “[2-wire]”作为标示，否则默认为四线：TX，RX，CTS和RTS。</p>
-<blockquote>
-<ol>
-<li>串口根据需要配置，不一定所有都配置；2. 如果运行时指定路径文件不存在或者加载失败，如上所示的默认配置将被使用；3. /usr/share/data/adsp/blsp.config最好设置为只读模式。</li>
-</ol>
-</blockquote>
-<h2 id="Reference">Reference</h2><p>80-NA157-24  Low-Speed Peripherals Overview.pdf<br>80-NB849-1 Rev. J  APQ8074A PQ8074AB Device Specification.pdf<br>80-H9580-1-J_QUALCOMM SNAPDRAGON FLIGHT DEVELOPER GUIDE.pdf<br>80-NU767-1 G Linux BAM Low-Speed Peripherals Configuration and Debug Guide  .pdf</p>
+        <p>今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。</p>
+<p>只需要在Activity中重写onBackPressed()即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private DrawerLayout mlayout; </span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void <span class="function"><span class="title">onBackPressed</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (mlayout.isDrawerOpen(findViewById(R.id.nav_left_layout)))</span><br><span class="line">        mlayout.closeDrawers();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        super.onBackPressed();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># R.id.nav_left_layout为侧边栏显示部分顶层Layout</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -424,21 +390,27 @@ BAM（Bus Access Manager）i">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/App/" rel="tag">#App</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/02/Uav/uav-board-debugging/" rel="next" title="无人机开发主板调试">
-                <i class="fa fa-chevron-left"></i> 无人机开发主板调试
+              <a href="/2017/08/17/Android/the-selected-effect-of-recyclerview-item/" rel="next" title="RecyclerView选中效果的实现">
+                <i class="fa fa-chevron-left"></i> RecyclerView选中效果的实现
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/07/Uav/mobile-and-uav-sensors/" rel="prev" title="手机无人机常用sensor介绍">
-                手机无人机常用sensor介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/" rel="prev" title="通过RecyclerView Item侧边导航栏动态加载布局">
+                通过RecyclerView Item侧边导航栏动态加载布局 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -488,8 +460,8 @@ BAM（Bus Access Manager）i">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/27/Uav/Qualcomm-uav-blsp-port/"
-           data-title="高通无人机8074 BLSP接口说明" data-url="http://huaqianlee.github.io/2016/04/27/Uav/Qualcomm-uav-blsp-port/">
+      <div class="ds-thread" data-thread-key="2017/08/18/Android/hides-navigation-in-drawerlayou/"
+           data-title="hides navigation in drawerlayou" data-url="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/">
       </div>
     
   </div>
@@ -652,7 +624,7 @@ BAM（Bus Access Manager）i">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义BLSP口，配置TZ"><span class="nav-number">2.</span> <span class="nav-text">自定义BLSP口，配置TZ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算APPS_BLSP值"><span class="nav-number">2.1.</span> <span class="nav-text">计算APPS BLSP值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算ADSP_BLSP值"><span class="nav-number">2.2.</span> <span class="nav-text">计算ADSP BLSP值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过计算的值在TZ中配置"><span class="nav-number">2.3.</span> <span class="nav-text">通过计算的值在TZ中配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么工作"><span class="nav-number">3.</span> <span class="nav-text">怎么工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
             
           </div>
         </section>
