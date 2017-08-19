@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-08-19T05:09:50.453Z</updated>
+  <updated>2017-08-19T05:15:01.825Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huaqianlee.github.io/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/"/>
     <id>http://huaqianlee.github.io/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/</id>
     <published>2017-08-18T14:45:08.000Z</published>
-    <updated>2017-08-19T05:09:50.453Z</updated>
+    <updated>2017-08-19T05:15:01.825Z</updated>
     
     <content type="html"><![CDATA[<h2 id="准备布局文件">准备布局文件</h2><p>布局一：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">android.support.constraint.ConstraintLayout</span></span><br><span class="line">        <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">        <span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span></span><br><span class="line">        <span class="attribute">xmlns:app</span>=<span class="value">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">tools:context</span>=<span class="value">"me.huaqianlee.forme.ToDoFragment"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="title">TextView</span> <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span> <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">              <span class="attribute">android:layout_marginTop</span>=<span class="value">"50dp"</span></span><br><span class="line">              <span class="attribute">android:textSize</span>=<span class="value">"15sp"</span></span><br><span class="line">    <span class="attribute">android:text</span>=<span class="value">"This is Todo main view layout!"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -31,7 +31,7 @@
 <h2 id="切换布局">切换布局</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">adapter.setOnItemClickListener(<span class="keyword">new</span> NavFuncAdapter.OnItemClickListener() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(View view, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> MainViewSwitch().switchMainView(MainActivity.<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>这篇博文只是一个简单粗糙的总结， RecyclerView点击事件的实现可以查看博客：<a href="">RecyclerView选中效果、Item点击事件的实现</a>。</p>
 <h2 id="源码地址">源码地址</h2><p><a href="https://github.com/huaqianlee/ForMe" target="_blank" rel="external">ForMe</a></p>
-<h2 id="效果">效果</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/dynamic_layout.gif" alt="effect"></p>
+<h2 id="效果">效果</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog/app/dynamic_layout_effect.gif" alt="effect"></p>
 ]]></content>
     
     <summary type="html">
