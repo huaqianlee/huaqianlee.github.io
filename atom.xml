@@ -285,7 +285,7 @@
     <link href="http://huaqianlee.github.io/2017/05/23/Kotlin/Kotlin-HElloWorld/"/>
     <id>http://huaqianlee.github.io/2017/05/23/Kotlin/Kotlin-HElloWorld/</id>
     <published>2017-05-23T00:09:56.000Z</published>
-    <updated>2017-08-19T04:49:29.542Z</updated>
+    <updated>2017-08-20T14:27:30.905Z</updated>
     
     <content type="html"><![CDATA[<p>最近工作业余时间一直在自学Android，Google I/O 2017 惊闻Kotlin成为Google支持的官方语言，当然得紧跟“中央”的脚步，开始程序入门必备之HelloWord，殊不知这个HelloWord充满了曲折。</p>
 <h2 id="了解Kotlin">了解Kotlin</h2><p>知道了Kotlin之后就开始在网上搜集相关资料，发现了如下个人觉得比较好的资料：<br><a href="https://kotlinlang.org/docs/tutorials/kotlin-android.html" target="_blank" rel="external">Getting started with Android and Kotlin</a><br><a href="https://github.com/JetBrains/kotlin" target="_blank" rel="external">kotlin项目</a><br><a href="https://github.com/JetBrains/kotlin-examples" target="_blank" rel="external">kotlin配置及与java的互操作</a><br><a href="https://github.com/Kotlin/kotlin-koans" target="_blank" rel="external">kotlin语法练习</a><br><a href="doc/kotlin-docs.pdf">Kotlin1.1手册</a><br><a href="http://tanfujun.com/kotlin-web-site-cn/docs/reference/" target="_blank" rel="external">kotlin中文网</a><br><a href="https://kotlinlang.org/" target="_blank" rel="external">kotlin官网</a><br><a href="https://github.com/huanglizhuo/kotlin-in-chinese" target="_blank" rel="external">中文kotlin项目</a><br><a id="more"></a></p>
@@ -325,8 +325,6 @@
     </summary>
     
       <category term="Kotlin" scheme="http://huaqianlee.github.io/categories/Kotlin/"/>
-    
-      <category term="Android" scheme="http://huaqianlee.github.io/categories/Kotlin/Android/"/>
     
     
       <category term="Android Studio" scheme="http://huaqianlee.github.io/tags/Android-Studio/"/>
