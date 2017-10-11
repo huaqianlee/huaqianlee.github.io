@@ -4,25 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Four years]]></title>
-      <url>http://huaqianlee.github.io/2017/09/19/Life/four-years/</url>
-      <content type="html"><![CDATA[<p>……</p>
-<a id="more"></a>
-<p>亲爱的领导老婆大人，</p>
-<p>我不浪漫，而且除了长得帅点，现在勉强能赚点钱外，满身都是缺点。</p>
-<p>但我爱你，爱到了血液里！</p>
-<p>老婆大人你是我最信任的人，所以我把以前害怕隐藏得很深的毛病全暴露在了你的面前，可能现在离你刚爱上我时形象已经一落千丈了（[无奈]，[允悲] - 这是两个表情）。感谢老婆大人。</p>
-<p>然后，希望老婆大人能继续包容我， 监督我，促进我进步。</p>
-<p>老婆，我爱你。 我们继续一起进步，一起变得越来越幸福，一起走到白头！</p>
-<p>在这四周年之际，我用我的心和血做了这么一个电子礼物，喜欢老婆大人喜欢。</p>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com//life/ForYou.jpg" alt="ForYou"></p>
-<blockquote>
-<p>等以后回家了， 我们去打印一张大大的海报贴在家里</p>
-</blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[通过自定义侧边导航栏的RecyclerView动态加载布局]]></title>
       <url>http://huaqianlee.github.io/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/</url>
       <content type="html"><![CDATA[<h2 id="准备布局文件">准备布局文件</h2><p>布局一：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">android.support.constraint.ConstraintLayout</span></span><br><span class="line">        <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">        <span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span></span><br><span class="line">        <span class="attribute">xmlns:app</span>=<span class="value">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">tools:context</span>=<span class="value">"me.huaqianlee.forme.ToDoFragment"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="title">TextView</span> <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span> <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">              <span class="attribute">android:layout_marginTop</span>=<span class="value">"50dp"</span></span><br><span class="line">              <span class="attribute">android:textSize</span>=<span class="value">"15sp"</span></span><br><span class="line">    <span class="attribute">android:text</span>=<span class="value">"This is Todo main view layout!"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -3046,6 +3027,26 @@ eg:
 <p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Four years]]></title>
+      <url>http://huaqianlee.github.io/2013/09/19/Life/four-years/</url>
+      <content type="html"><![CDATA[<p>  ……</p>
+<a id="more"></a>
+<p>亲爱的领导老婆大人，</p>
+<p>我不浪漫，而且除了长得帅点，现在勉强能赚点钱外，满身都是缺点。</p>
+<p>但我爱你，爱到了血液里！</p>
+<p>老婆大人你是我最信任的人，所以我把以前害怕隐藏得很深的毛病全暴露在了你的面前，可能现在离你刚爱上我时形象已经一落千丈了（[无奈]，[允悲] - 这是两个表情）。感谢老婆大人。</p>
+<p>然后，希望老婆大人能继续包容我， 监督我，促进我进步。</p>
+<p>老婆，我爱你。 我们继续一起进步，一起变得越来越幸福，一起走到白头！</p>
+<p>在这四周年之际，我用我的心和血做了这么一个电子礼物，喜欢老婆大人喜欢。</p>
+<p><img src="http://7xjdax.com1.z0.glb.clouddn.com//life/ForYou.jpg" alt="ForYou"></p>
+<blockquote>
+<p>等以后回家了， 我们去打印一张大大的海报贴在家里</p>
+</blockquote>
+<p>— 写于 2017-09-19</p>
 ]]></content>
     </entry>
     

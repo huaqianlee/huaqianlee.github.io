@@ -302,129 +302,6 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/" itemprop="url">
-                  第一行代码之广播机制
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-25T21:06:00+08:00" content="Mar 25 2017">
-              Mar 25 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h2 id="广播机制">广播机制</h2><h3 id="标准广播">标准广播</h3><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/firstcode/normal_broadcasts.png" alt="normal_broadcast"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2017/03/25/Uav/PX4-for-Snapdragon-Flight/" itemprop="url">
                   PX4 for Snapdragon Flight
                 </a>
@@ -1494,6 +1371,132 @@
 <h2 id="关键路径及文件">关键路径及文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\mavlink   //  信息数据处理</span><br><span class="line">mavlink_main.cpp</span><br><span class="line">mavlink_receiver.cpp</span><br><span class="line"></span><br><span class="line">FastRPC   --  aDSP 与 apps 之间远程调用</span><br><span class="line"><span class="number">1</span>. 共享内存（不包括L1/L2缓存）</span><br><span class="line"><span class="number">2</span>. aDSP中能支持有限的物理映射</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules\muorb\</span><br><span class="line">adsp </span><br><span class="line">Krait</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\posix-configs\eagle\flight    // config 文件</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules  // 功能模块</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\makefiles\ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp   // 遥控器</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\device\vdev.cpp   <span class="comment"># Virtual character device base class.</span></span><br><span class="line">mavilink、uorb 继承于此类</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/07/Uav/mobile-and-uav-sensors/" itemprop="url">
+                  手机无人机常用sensor介绍
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-07T00:12:14+08:00" content="May 7 2016">
+              May 7 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/07/Uav/mobile-and-uav-sensors/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/07/Uav/mobile-and-uav-sensors/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
+<blockquote>
+<p>资料皆是网上获取,不能完全保证准确性.</p>
+</blockquote>
+<h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/07/Uav/mobile-and-uav-sensors/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
