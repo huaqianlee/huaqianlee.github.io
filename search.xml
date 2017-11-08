@@ -57,9 +57,29 @@
     </entry>
     
     <entry>
-      <title><![CDATA[MDB/ICP protocol]]></title>
+      <title><![CDATA[纸币器和MDB协议]]></title>
       <url>http://huaqianlee.github.io/2017/11/08/Other/MDB-ICP-protocol/</url>
-      <content type="html"></content>
+      <content type="html"><![CDATA[<h2 id="MDB协议">MDB协议</h2><h3 id="简介">简介</h3><p>MDB/ICP协议为一个主从接口的串口通信标准的协议， 规定波特率为9600bps，总线有唯一主机（vending machine controller, VMC）和最多32个从机外设，每个外设设有唯一的地址和命令，且由主机初始化。</p>
+<p>电源上电、总线复位或外设收到一个复位命令，所对应的外设都被禁止。在顺序初始化外设期间，VMC通过外设的应答来选择被外设所支持的特征。</p>
+<blockquote>
+<p>协议推荐所以主控制器VMC和外设都需支持所有低等级标准</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="通信格式">通信格式</h3><h4 id="字节格式">字节格式</h4><p>一个字节定义为11位：1个起始位+8个数据位+1个模式位+1个停止位。</p>
+<ul>
+<li>VMC发送数据到外设：模式位 = 1 表示为地址字节， = 0 表示为数据字节</li>
+<li>外设发送数据到VMC：模式位 = 1 表示所有字节发送完成</li>
+</ul>
+<h4 id="块格式">块格式</h4><h5 id="主到从">主到从</h5><p>主控制器VMC发送给从机的数据格式：1个地址字节+n个数据字节+1个校验和节（最大不超过36个字节）。地址字节由 高5位外设地址+低三位外设命令组成。</p>
+<p>主控制器响应外设时发送 ：ACK（应答）、NAK（不应答）、RET（重发）。5ms超时不响应相当于NAK。如从机5ms无响应，VMC应重发相同或不同命令， 知道从机响应或达到最大响应时间（硬币器2S、纸币器5S）。在此期间VMC应该同时访问其他外设。</p>
+<p><strong>主控器VMC可以通过拉低发送线100ms以上对总线进行复位。</strong></p>
+<h4 id="从到主">从到主</h4><p>从机发送到主控制器的数据格式：1数据块+1字节校验和（最大不超过36字节）。</p>
+<p>从机外设响应主控制器发送数据时，主控制器VMC在5ms无响应时间内必须响应ACK、NAK或RET。否则外设需要重发数据或者在下一次会话时附加上数据。</p>
+<h4 id="校验和">校验和</h4><p>校验和为所有地址及数据字节的累加和（不包含校验和字节）。</p>
+<h4 id="总线复位">总线复位</h4><p>主控器VMC可以通过上拉激活发送线100ms以上对所有外设进行复位，复位后外设处于上电复位状态。</p>
+<h4 id="一些标准">一些标准</h4><p>响应码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ACK - <span class="number">00</span>H   RET - AAH   NAK -  FFH</span><br></pre></td></tr></table></figure></p>
+<p>外设地址：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Address             Definition  </span><br><span class="line">-------------------------------------------------</span><br><span class="line"><span class="number">00000</span>xxxB    (<span class="number">00</span>H)  Reserved <span class="keyword">for</span> VMC </span><br><span class="line"><span class="number">00001</span>xxxB    (<span class="number">08</span>H)  Changer  </span><br><span class="line"><span class="number">00010</span>xxxB    (<span class="number">10</span>H)  Cashless Device <span class="comment">#1  </span></span><br><span class="line"><span class="number">00011</span>xxxB    (<span class="number">18</span>H)  Communications Gateway </span><br><span class="line"><span class="number">00100</span>xxxB    (<span class="number">20</span>H)  Display  </span><br><span class="line"><span class="number">00101</span>xxxB    (<span class="number">28</span>H)  Energy Management System </span><br><span class="line"><span class="number">00110</span>xxxB    (<span class="number">30</span>H)  Bill Validator  </span><br><span class="line"><span class="number">00111</span>xxxB    (<span class="number">38</span>H)  Reserved <span class="keyword">for</span> Future Standard Peripheral</span><br><span class="line"><span class="number">01000</span>xxxB    (<span class="number">40</span>H)  Universal Satellite Device <span class="comment">#1 </span></span><br><span class="line"><span class="number">01001</span>xxxB    (<span class="number">48</span>H)  Universal Satellite Device <span class="comment">#2 </span></span><br><span class="line"><span class="number">01010</span>xxxB    (<span class="number">50</span>H)  Universal Satellite Device <span class="comment">#3 </span></span><br><span class="line"><span class="number">01011</span>xxxB    (<span class="number">58</span>H)  Coin Hopper or Tube - Dispenser </span><br><span class="line"><span class="number">01100</span>xxxB    (<span class="number">60</span>H)  Cashless Device <span class="comment">#2</span></span><br><span class="line"><span class="number">01101</span>xxxB    (<span class="number">68</span>H)  Reserved <span class="keyword">for</span> Future Standard Peripherals</span><br><span class="line">...</span><br><span class="line"><span class="number">11011</span>xxxB    (D8H)  Reserved <span class="keyword">for</span> Future Standard Peripherals</span><br><span class="line"><span class="number">11100</span>xxxB    (E0H)  Experimental Peripheral <span class="comment">#1</span></span><br><span class="line"><span class="number">11101</span>xxxB    (E8H)  Experimental Peripheral <span class="comment">#2 </span></span><br><span class="line"><span class="number">11110</span>xxxB    (F0H)  Vending Machine Specific Peripheral <span class="comment">#1 </span></span><br><span class="line"><span class="number">11111</span>xxxB    (F8H)  Vending Machine Specific Peripheral <span class="comment">#2</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
     </entry>
     
     <entry>
