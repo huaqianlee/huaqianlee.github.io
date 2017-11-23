@@ -88,19 +88,19 @@
 
 <meta name="description" content="一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。
 
-一、 前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平">
+前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 A">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 系统源码分析综述：整理总结源码分析的所有博客">
 <meta property="og:url" content="http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。
 
-一、 前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平">
+前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 A">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 系统源码分析综述：整理总结源码分析的所有博客">
 <meta name="twitter:description" content="一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。
 
-一、 前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平">
+前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 A">
 
 
 
@@ -374,10 +374,10 @@
         <blockquote>
 <p>一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。</p>
 </blockquote>
-<h1 id="一、_前言">一、 前言</h1><p>之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。</p>
+<h1 id="前言">前言</h1><p>之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。</p>
 <p>以前看代码，喜欢按照调用流程一步步的完整跟下来，这样比较费时间，尤其觉得对于驱动部分不是很必要，所以这次就准备主要专注于关键文件和关键函数，以及软件框架。<br><a id="more"></a></p>
-<h1 id="二、Android架构">二、Android架构</h1><h1 id="三、源码分析">三、源码分析</h1><p>准备从三个方向来分析源码，一是从工作相关的方向，将所有外设，从最底层到最上层；二是针对某些模块的代码进行分析；三是根据系统源码架构和结构一层一层分析原理。</p>
-<h2 id="3-1_外设方向">3.1 外设方向</h2><table>
+<h1 id="Android架构">Android架构</h1><h1 id="源码分析">源码分析</h1><p>准备从三个方向来分析源码，一是从工作相关的方向，将所有外设，从最底层到最上层；二是针对某些模块的代码进行分析；三是根据系统源码架构和结构一层一层分析原理。</p>
+<h2 id="外设方向">外设方向</h2><table>
 <thead>
 <tr>
 <th>文章名</th>
@@ -385,6 +385,14 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/" target="_blank" rel="external">Android(Linux) 输入子系统解析</a></td>
+<td>从 HW 到 Framework 分析输入子系统</td>
+</tr>
+<tr>
+<td><a href="http://huaqianlee.github.io/2017/11/21/Android/BMS-of-Android-Power-Management/" target="_blank" rel="external">Android 电源管理之电池管理系统(BMS)</a></td>
+<td>从 HW 到 APP 分析 BMS 系统  </td>
+</tr>
 <tr>
 <td><a href="http://huaqianlee.github.io/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/" target="_blank" rel="external">Android不带电量计的电量计算</a></td>
 <td>高通不带库仑计电池电量算法</td>
@@ -399,7 +407,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="3-2_代码模块方向">3.2 代码模块方向</h2><h3 id="3-2-0_系统方向">3.2.0 系统方向</h3><table>
+<h2 id="代码模块方向">代码模块方向</h2><h3 id="系统方向">系统方向</h3><table>
 <thead>
 <tr>
 <th>文章名</th>
@@ -413,7 +421,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="3-2-1_BootLoader部分">3.2.1 BootLoader部分</h3><table>
+<h3 id="BootLoader部分">BootLoader部分</h3><table>
 <thead>
 <tr>
 <th>文章名</th>
@@ -439,7 +447,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="3-2-2_Kernel部分">3.2.2 Kernel部分</h3><table>
+<h3 id="Kernel部分">Kernel部分</h3><table>
 <thead>
 <tr>
 <th>文章名</th>
@@ -447,6 +455,10 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/" target="_blank" rel="external">Android(Linux) 输入子系统解析</a></td>
+<td>从 HW 到 Framework 分析输入子系统</td>
+</tr>
 <tr>
 <td><a href="http://huaqianlee.github.io/2015/08/19/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BLinux%E5%86%85%E6%A0%B8%E8%AE%BE%E5%A4%87%E6%A0%91-DT-Device-Tree-dts%E6%96%87%E4%BB%B6/" target="_blank" rel="external">Linux内核设备树(DT - Device Tree)</a></td>
 <td>基于高通平台分析设备树</td>
@@ -457,7 +469,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="3-2-3_日志系统">3.2.3 日志系统</h3><table>
+<h3 id="日志系统">日志系统</h3><table>
 <thead>
 <tr>
 <th>文章名</th>
@@ -471,7 +483,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="3-2-4_编译系统">3.2.4 编译系统</h3><table>
+<h3 id="编译系统">编译系统</h3><table>
 <thead>
 <tr>
 <th>文章名</th>
@@ -497,7 +509,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="3-3_架构原理方向">3.3 架构原理方向</h2>
+<h2 id="架构原理方向">架构原理方向</h2>
       
     </div>
 
@@ -532,8 +544,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/23/Android/Android-Linux-input-system-analysis/" rel="next" title="Android_Linux input system analysis">
-                <i class="fa fa-chevron-left"></i> Android_Linux input system analysis
+              <a href="/2017/11/23/Android/Android-Linux-input-system-analysis/" rel="next" title="Android(Linux) 输入子系统解析">
+                <i class="fa fa-chevron-left"></i> Android(Linux) 输入子系统解析
               </a>
             
           </div>
@@ -751,7 +763,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、_前言"><span class="nav-number">1.</span> <span class="nav-text">一、 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Android架构"><span class="nav-number">2.</span> <span class="nav-text">二、Android架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、源码分析"><span class="nav-number">3.</span> <span class="nav-text">三、源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1_外设方向"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 外设方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2_代码模块方向"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 代码模块方向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-0_系统方向"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.0 系统方向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1_BootLoader部分"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.1 BootLoader部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2_Kernel部分"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.2 Kernel部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3_日志系统"><span class="nav-number">3.2.4.</span> <span class="nav-text">3.2.3 日志系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4_编译系统"><span class="nav-number">3.2.5.</span> <span class="nav-text">3.2.4 编译系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3_架构原理方向"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 架构原理方向</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android架构"><span class="nav-number">2.</span> <span class="nav-text">Android架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码分析"><span class="nav-number">3.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#外设方向"><span class="nav-number">3.1.</span> <span class="nav-text">外设方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码模块方向"><span class="nav-number">3.2.</span> <span class="nav-text">代码模块方向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统方向"><span class="nav-number">3.2.1.</span> <span class="nav-text">系统方向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BootLoader部分"><span class="nav-number">3.2.2.</span> <span class="nav-text">BootLoader部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel部分"><span class="nav-number">3.2.3.</span> <span class="nav-text">Kernel部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志系统"><span class="nav-number">3.2.4.</span> <span class="nav-text">日志系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译系统"><span class="nav-number">3.2.5.</span> <span class="nav-text">编译系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构原理方向"><span class="nav-number">3.3.</span> <span class="nav-text">架构原理方向</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
