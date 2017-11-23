@@ -428,6 +428,133 @@
             
               
                 
+                <a class="post-title-link" href="/2017/11/23/Android/Android-Linux-input-system-analysis/" itemprop="url">
+                  Android_Linux input system analysis
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-11-23T22:42:04+08:00" content="Nov 23 2017">
+              Nov 23 2017
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/23/Android/Android-Linux-input-system-analysis/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/23/Android/Android-Linux-input-system-analysis/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2017/11/21/Android/A-summary-of-Android-source-analysis/">Android 系统源码分析综述</a></p>
+<h1 id="前言">前言</h1><p>Android/Linux 输入设备总类繁杂，常见的有按键、键盘、触摸屏、鼠标、摇杆等，之前其驱动都是采用字符设备、misc 设备处理的，但是如此多的设备就导致驱动混乱，所以 Linux 引入了输入子系统在字符设备等上抽象出一层来统一输入设备的驱动。本文就基于 MTK Android 7.0 源码来分析一下输入子系统。</p>
+<h1 id="输入子系统架构">输入子系统架构</h1><p>输入子系统的系统架构如下图所示：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/mtk/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png" alt="input_system_arch"></p>
+<blockquote>
+<p>Framework 层以上只是简单跟了一下源码，没有深入查看</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/11/23/Android/Android-Linux-input-system-analysis/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/11/21/Android/BMS-of-Android-Power-Management/" itemprop="url">
                   Android 电源管理之电池管理系统(BMS)
                 </a>
@@ -1410,129 +1537,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/" itemprop="url">
-                  基于DrawerLayout打造卡片式Navigation
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-08-17T19:46:16+08:00" content="Aug 17 2017">
-              Aug 17 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/17/Android/the-card-navigation-base-on-drawerlayout/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>前段时间开始了利用空闲时间做一个练习APP <a href="https://github.com/huaqianlee/ForMe">ForMe</a>。根据设计APP需要通过左边导航栏切换主界面功能，自己平时在使用Google的NewsTab，觉得很不错，就准备参考其界面来设计。</p>
-<p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog/app/newstab_view.jpg" alt="newsTab"></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1578,7 +1582,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-count">73</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
