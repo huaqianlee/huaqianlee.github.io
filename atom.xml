@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-11-23T14:55:10.745Z</updated>
+  <updated>2017-11-24T13:54:38.219Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/"/>
     <id>http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/</id>
     <published>2020-11-21T13:55:43.000Z</published>
-    <updated>2017-11-23T14:55:10.745Z</updated>
+    <updated>2017-11-24T13:54:38.219Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。</p>
@@ -188,9 +188,9 @@
     <link href="http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/"/>
     <id>http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/</id>
     <published>2017-11-23T14:42:04.000Z</published>
-    <updated>2017-11-23T15:09:44.367Z</updated>
+    <updated>2017-11-24T13:54:59.152Z</updated>
     
-    <content type="html"><![CDATA[<p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2017/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
+    <content type="html"><![CDATA[<p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
 <h1 id="前言">前言</h1><p>Android/Linux 输入设备总类繁杂，常见的有按键、键盘、触摸屏、鼠标、摇杆等，之前其驱动都是采用字符设备、misc 设备处理的，但是如此多的设备就导致驱动混乱，所以 Linux 引入了输入子系统在字符设备等上抽象出一层来统一输入设备的驱动。本文就基于 MTK Android 7.0 源码来分析一下输入子系统。</p>
 <h1 id="输入子系统架构">输入子系统架构</h1><p>输入子系统的系统架构如下图所示：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/mtk/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png" alt="input_system_arch"></p>
 <blockquote>
@@ -250,7 +250,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;Android 源码分析系列综述博文： &lt;a href=&quot;http://huaqianlee.github.io/2017/11/21/Android/A-summary-of-Android-source-analysis/&quot;&gt;Android 系统源码分析综述&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Android 源码分析系列综述博文： &lt;a href=&quot;http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/&quot;&gt;Android 系统源码分析综述&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;前言&quot;&gt;前言&lt;/h1&gt;&lt;p&gt;Android/Linux 输入设备总类繁杂，常见的有按键、键盘、触摸屏、鼠标、摇杆等，之前其驱动都是采用字符设备、misc 设备处理的，但是如此多的设备就导致驱动混乱，所以 Linux 引入了输入子系统在字符设备等上抽象出一层来统一输入设备的驱动。本文就基于 MTK Android 7.0 源码来分析一下输入子系统。&lt;/p&gt;
 &lt;h1 id=&quot;输入子系统架构&quot;&gt;输入子系统架构&lt;/h1&gt;&lt;p&gt;输入子系统的系统架构如下图所示：&lt;br&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/android/mtk/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png&quot; alt=&quot;input_system_arch&quot;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -273,10 +273,12 @@
     <link href="http://huaqianlee.github.io/2017/11/21/Android/BMS-of-Android-Power-Management/"/>
     <id>http://huaqianlee.github.io/2017/11/21/Android/BMS-of-Android-Power-Management/</id>
     <published>2017-11-21T13:56:28.000Z</published>
-    <updated>2017-11-23T15:10:36.175Z</updated>
+    <updated>2017-11-24T13:54:49.605Z</updated>
     
-    <content type="html"><![CDATA[<p><em>Platform information： MTK6797（X20）+ Android 7.0</em></p>
-<p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2017/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
+    <content type="html"><![CDATA[<blockquote>
+<p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
+</blockquote>
+<p><em>Platform information： MTK6797（X20）+ Android 7.0</em></p>
 <p>之前做高通的时候，对高通此部分做过粗略的分析，不过当时胡乱做的些笔记，只简单整理了几篇博客，感兴趣可以参考如下路径：</p>
 <p><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(一)</a></p>
 <p><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(二)</a></p>
@@ -326,8 +328,10 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;Platform information： MTK6797（X20）+ Android 7.0&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Android 源码分析系列综述博文： &lt;a href=&quot;http://huaqianlee.github.io/2017/11/21/Android/A-summary-of-Android-source-analysis/&quot;&gt;Android 系统源码分析综述&lt;/a&gt;&lt;/p&gt;
+      &lt;blockquote&gt;
+&lt;p&gt;Android 源码分析系列综述博文： &lt;a href=&quot;http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/&quot;&gt;Android 系统源码分析综述&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;Platform information： MTK6797（X20）+ Android 7.0&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;之前做高通的时候，对高通此部分做过粗略的分析，不过当时胡乱做的些笔记，只简单整理了几篇博客，感兴趣可以参考如下路径：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/&quot;&gt;高通平台Android源码bootloader分析之sbl1(一)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/&quot;&gt;高通平台Android源码bootloader分析之sbl1(二)&lt;/a&gt;&lt;/p&gt;
