@@ -87,12 +87,14 @@
 
 
 <meta name="description" content="File :  qpnp-linear-charger.cacc: alam charger current (not sure, think so now)
+
 QPNP Linear Charger Blocks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高通 linear charger 驱动分析">
 <meta property="og:url" content="http://huaqianlee.github.io/2015/06/24/Android/linear-charger-driver/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="File :  qpnp-linear-charger.cacc: alam charger current (not sure, think so now)
+
 QPNP Linear Charger Blocks">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/qcom/linearcharger1.jpg">
 <meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/qcom/linearcharger2.jpg">
@@ -100,6 +102,7 @@ QPNP Linear Charger Blocks">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高通 linear charger 驱动分析">
 <meta name="twitter:description" content="File :  qpnp-linear-charger.cacc: alam charger current (not sure, think so now)
+
 QPNP Linear Charger Blocks">
 
 
@@ -373,8 +376,8 @@ QPNP Linear Charger Blocks">
       
         <blockquote>
 <p>File :  qpnp-linear-charger.c<br>acc: alam charger current (not sure, think so now)</p>
-<h2 id="QPNP_Linear_Charger_Blocks">QPNP Linear Charger Blocks</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/qcom/linearcharger1.jpg" alt="lcb">        </p>
 </blockquote>
+<h2 id="QPNP_Linear_Charger_Blocks">QPNP Linear Charger Blocks</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/qcom/linearcharger1.jpg" alt="lcb">        </p>
 <a id="more"></a>
 <h2 id="LBC_Initialization_Flowchart">LBC Initialization Flowchart</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/qcom/linearcharger2.jpg" alt="lbc"><br>lbc - linear Battery charger  (not sure)</p>
 <h2 id="架构分析">架构分析</h2><h3 id="几个主要的结构体">几个主要的结构体</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">          /*This is the client/device handle returned when a SPMI device  is registered with a controller. */</span><br><span class="line">struct spmi_device &#123;</span><br><span class="line">	struct device		dev;                       // 设备结构体,在内核中用来描述每一个结构体</span><br><span class="line">	const char		*name;                  // 此设备在驱动中的名字</span><br><span class="line">	struct spmi_controller	*ctrl;      // 管理挂接此spmi设备的SMPI控制者</span><br><span class="line">	struct spmi_resource	res;                // SMPI resource <span class="keyword">for</span> 主节点</span><br><span class="line">	struct spmi_resource	*dev_node; // array of SPMI resources when used with spmi-dev-container</span><br><span class="line">	u32			num_dev_node;         // 设备节点的数量</span><br><span class="line">	u8			sid;                               // 从设备ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct qpnp_lbc_chip &#123;    // device information</span><br><span class="line">	struct device			*dev;</span><br><span class="line">	struct spmi_device		*spmi;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line">struct power_supply &#123;</span><br><span class="line">	const char *name;</span><br><span class="line">	enum power_supply_<span class="built_in">type</span> <span class="built_in">type</span>;</span><br><span class="line">	enum power_supply_property *properties;</span><br><span class="line">	...</span><br><span class="line">        int (*get_property)(...)</span><br><span class="line">        int (*<span class="built_in">set</span>_property)(...)</span><br><span class="line">        ...       /* private */      struct device *dev;</span><br><span class="line">      ...</span><br><span class="line">&#125;</span><br><span class="line">/* Resources are tree-like, allowing nesting etc.. */(资源树,允许嵌套)</span><br><span class="line">struct resource &#123;</span><br><span class="line">	resource_size_t start;</span><br><span class="line">	resource_size_t end;</span><br><span class="line">	const char *name;</span><br><span class="line">	unsigned long flags;</span><br><span class="line">	struct resource *parent, *sibling, *child;</span><br><span class="line">&#125;;</span><br><span class="line">struct spmi_resource &#123; //spmi_resource <span class="keyword">for</span> one device_node</span><br><span class="line">	struct resource		*resource;</span><br><span class="line">	u32			num_resources;</span><br><span class="line">	struct device_node	*of_node;</span><br><span class="line">	const char		*label;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
