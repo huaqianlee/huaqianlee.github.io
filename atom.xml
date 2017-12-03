@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2017-11-29T14:46:51.191Z</updated>
+  <updated>2017-12-03T13:48:24.782Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/"/>
     <id>http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/</id>
     <published>2100-11-21T13:55:43.000Z</published>
-    <updated>2017-11-29T14:46:51.191Z</updated>
+    <updated>2017-12-03T13:48:24.782Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。</p>
@@ -39,6 +39,10 @@
 <tr>
 <td><a href="http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/" target="_blank" rel="external">Android(Linux) 输入子系统解析</a></td>
 <td>从 HW 到 Framework 分析输入子系统</td>
+</tr>
+<tr>
+<td><a href="http://huaqianlee.github.io/2017/12/03/Android/Android-Linux-i2c-driver-arch/" target="_blank" rel="external">Android/Linux  I2C 驱动架构分析</a></td>
+<td>I2C驱动架构分析</td>
 </tr>
 <tr>
 <td><a href="http://huaqianlee.github.io/2017/11/21/Android/BMS-of-Android-Power-Management/" target="_blank" rel="external">Android 电源管理之电池管理系统(BMS)</a></td>
