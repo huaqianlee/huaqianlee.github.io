@@ -1,0 +1,965 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MTK,源码分析," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Andy.Lee's  Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言分析传感器源码的时候，发现对 I2C 的驱动也有些忘记了，所以就再分析一下并形成这篇博文。
+驱动架构I2C 驱动架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android/Linux  I2C 驱动架构分析">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/12/03/Android/Android-Linux-i2c-driver-arch/index.html">
+<meta property="og:site_name" content="Andy.Lee's  Blog">
+<meta property="og:description" content="前言分析传感器源码的时候，发现对 I2C 的驱动也有些忘记了，所以就再分析一下并形成这篇博文。
+驱动架构I2C 驱动架构">
+<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/android/mtk/i2c_arch.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android/Linux  I2C 驱动架构分析">
+<meta name="twitter:description" content="前言分析传感器源码的时候，发现对 I2C 的驱动也有些忘记了，所以就再分析一下并形成这篇博文。
+驱动架构I2C 驱动架构">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 9418407,
+      author: 'Andy Lee(Author)'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://huaqianlee.github.io/2017/12/03/Android/Android-Linux-i2c-driver-arch/"/>
+
+  <title> Android/Linux  I2C 驱动架构分析 | Andy.Lee's  Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-63838023-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5ab1107031547fb5411cd06ed47f1348";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Andy.Lee's  Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Good good study, day day up !</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android/Linux  I2C 驱动架构分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-12-03T21:37:07+08:00" content="Dec 3 2017">
+              Dec 3 2017
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/12/03/Android/Android-Linux-i2c-driver-arch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/03/Android/Android-Linux-i2c-driver-arch/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言">前言</h1><p>分析传感器源码的时候，发现对 I2C 的驱动也有些忘记了，所以就再分析一下并形成这篇博文。</p>
+<h1 id="驱动架构">驱动架构</h1><h2 id="I2C_驱动架构">I2C 驱动架构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/mtk/i2c_arch.jpg" alt="i2c-arch"><br><a id="more"></a></p>
+<h1 id="源码分析">源码分析</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c</span></span><br></pre></td></tr></table></figure>
+<h2 id="重要的结构体">重要的结构体</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\include\linux\i2c.h</span></span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 适配器，即挂接在 i2c 总线上的 i2c 控制器</span><br><span class="line"> * i2c_adapter is the structure used to identify a physical i2c bus along</span><br><span class="line"> * with the access algorithms necessary to access it.</span><br><span class="line"> */</span><br><span class="line">struct i2c_adapter &#123;</span><br><span class="line">	struct module *owner;</span><br><span class="line">	unsigned int class;		  /* classes to allow probing <span class="keyword">for</span> */</span><br><span class="line">	const struct i2c_algorithm *algo; /* the algorithm to access the bus */</span><br><span class="line">	struct device dev;		/* the adapter device */</span><br><span class="line">	....</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 设备驱动</span><br><span class="line"> */</span><br><span class="line">struct i2c_driver &#123;</span><br><span class="line">	unsigned int class;</span><br><span class="line"></span><br><span class="line">	/* Standard driver model interfaces */</span><br><span class="line">	int (*probe)(struct i2c_client *, const struct i2c_device_id *); // 匹配 i2c 设备（i2c_client）</span><br><span class="line">	int (*remove)(struct i2c_client *);</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">	struct device_driver driver;   </span><br><span class="line">	const struct i2c_device_id *id_table; // 此设备驱动服务的设备 ID</span><br><span class="line"></span><br><span class="line">	int (*detect)(struct i2c_client *, struct i2c_board_info *);</span><br><span class="line">	const unsigned short *address_list; // 此设备驱动支持的设备地址</span><br><span class="line">	struct list_head clients;  // 挂接此设备驱动匹配成功 i2c_client</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 设备</span><br><span class="line"> */</span><br><span class="line">struct i2c_client &#123;</span><br><span class="line">	unsigned short flags;		/* div., see below		*/</span><br><span class="line">	unsigned short addr;		/* chip address - NOTE: <span class="number">7</span>bit	*/</span><br><span class="line">					/* addresses are stored <span class="keyword">in</span> the	*/</span><br><span class="line">					/* _LOWER_ <span class="number">7</span> bits		*/</span><br><span class="line">	char name[I2C_NAME_SIZE];</span><br><span class="line">	struct i2c_adapter *adapter;	/* the adapter we sit on	*/</span><br><span class="line">	struct device dev;		/* the device structure		*/</span><br><span class="line">	int irq;			/* irq issued by device		*/</span><br><span class="line">	struct list_head detected;</span><br><span class="line"><span class="comment">#ifdef CONFIG_MTK_I2C_EXTENSION</span></span><br><span class="line">	__u32 timing;			/* parameters of timings		*/</span><br><span class="line">	__u32 ext_flag;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 描述 i2c 设备信息</span><br><span class="line"> */</span><br><span class="line">struct i2c_board_info &#123;</span><br><span class="line">	char		<span class="built_in">type</span>[I2C_NAME_SIZE];</span><br><span class="line">	unsigned short	flags;</span><br><span class="line">	unsigned short	addr;</span><br><span class="line">	void		*platform_data;</span><br><span class="line">	struct dev_archdata	*archdata;</span><br><span class="line">	struct device_node *of_node;</span><br><span class="line">	struct acpi_dev_node acpi_node;</span><br><span class="line">	int		irq;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># alps\kernel-3.18\include\uapi\linux\i2c.h</span></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 数据包</span><br><span class="line"> */</span><br><span class="line">struct i2c_msg &#123;</span><br><span class="line">	__u16 addr;	     /* slave address */</span><br><span class="line">	__u16 flags;</span><br><span class="line"><span class="comment">#define I2C_M_TEN		0x0010	/* this is a ten bit chip address */</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">#define I2C_M_RECV_LEN		0x0400	/* length will be first received byte */</span></span><br><span class="line">	__u16 len;		/* msg length				*/</span><br><span class="line">	__u8 *buf;		/* pointer to msg data			*/</span><br><span class="line"><span class="comment">#ifdef CONFIG_MTK_I2C_EXTENSION</span></span><br><span class="line">	__u32 timing;	/* parameters of timings		*/</span><br><span class="line">	__u32 ext_flag;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+</blockquote>
+<h2 id="关键路径">关键路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\mt6797.dtsi</span></span><br><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\aeon6797_6m_n.dts</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c</span></span><br><span class="line">i2c-core.c：i2c核心层，设备驱动和总线驱动的桥梁</span><br><span class="line">i2c-dev.c：通用 i2c 设备驱动</span><br><span class="line">busses：开源的 adapter </span><br><span class="line">algos：i2c 通信算法</span><br><span class="line"></span><br><span class="line"><span class="comment"># alps\kernel-3.18\include\linux\i2c.h</span></span><br><span class="line"><span class="comment"># alps\kernel-3.18\include\uapi\linux\i2c.h</span></span><br></pre></td></tr></table></figure>
+<h2 id="总线驱动层">总线驱动层</h2><p>总线驱动层主要实现外设驱动部分，初始化硬件（i2c控制器）和提供操作硬件的方法，与 i2c-dev 相对应，其负责的部分通俗点讲就是：知道怎么发数据，但不知道发什么数据。<br>其关键流程如下：</p>
+<ol>
+<li>获取资源</li>
+<li>注册中断、使能时钟等初始化工作</li>
+<li>构建 i2c_adapter</li>
+<li>设置 i2c_adapter</li>
+<li>注册 i2c_adapter<blockquote>
+<p>这部分源码就不在此文分析了，感兴趣的朋友可以参考外设系列</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="核心层（i2c-core）">核心层（i2c-core）</h2><p>构建一个 i2c 总线结构体,并且提供匹配方法和驱动用的结构体 ，如总线驱动层和设备驱动层的注册、注销等方法。此部分存在两个匹配过程：</p>
+<ol>
+<li>i2c 总线下的设备（i2c_client）与设备驱动（i2c_driver）之间的匹配。</li>
+<li>i2c控制器（i2c_adapter）与设备之间的匹配。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c\i2c-core.c</span></span><br><span class="line">struct bus_<span class="built_in">type</span> i2c_bus_<span class="built_in">type</span> = &#123;</span><br><span class="line">	.name		= <span class="string">"i2c"</span>,  // 总线名</span><br><span class="line">	.match		= i2c_device_match, // 匹配设备（i2c_client）与设备驱动（i2c_driver）</span><br><span class="line">	.probe		= i2c_device_probe,  // 注册挂载 i2c</span><br><span class="line">	.remove		= i2c_device_remove,</span><br><span class="line">	.shutdown	= i2c_device_shutdown,</span><br><span class="line">	.pm		= &amp;i2c_device_pm_ops,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> __init i2c_init() // init 函数</span><br><span class="line">    <span class="comment"># kernel-3.18/drivers/base/bus.c</span></span><br><span class="line">    bus_register(&amp;i2c_bus_<span class="built_in">type</span>) // 注册i2c总线  <span class="string">"/sys/bus/i2c"</span></span><br><span class="line">    i2c_add_driver(&amp;dummy_driver) // // 注册 i2c 驱动创建“/sys/bus/i2c/driver/dummy” </span><br><span class="line">        i2c_register_driver() // 注册 i2c 驱动</span><br><span class="line">            driver_register(&amp;driver-&gt;driver); // 注册设备驱动，创建上面的“dummy”设备文件</span><br><span class="line">            INIT_LIST_HEAD(&amp;driver-&gt;clients)</span><br><span class="line">        </span><br><span class="line">i2c_device_probe()</span><br><span class="line">    i2c_verify_client(dev) // 获取 i2c_client</span><br><span class="line">    to_i2c_driver(dev-&gt;driver) // 获取 i2c_driver</span><br><span class="line">    driver-&gt;probe(client, i2c_match_id(driver-&gt;id_table,client)) // 调用设备驱动层 probe，查询外设（client）对应的 id</span><br><span class="line">        </span><br><span class="line">i2c_device_match()</span><br><span class="line">	client = i2c_verify_client(dev)// 通过 dev 获取 i2c_client</span><br><span class="line">	of_driver_match_device(dev, drv) // 通过 of 方式匹配</span><br><span class="line">	acpi_driver_match_device(dev, drv) // acpi 方式匹配</span><br><span class="line">	/* <span class="keyword">if</span> 上述两种方式皆未成功 */	</span><br><span class="line">	driver = to_i2c_driver(drv); //通过 drv 获取 i2c_driver</span><br><span class="line">	i2c_match_id(driver-&gt;id_table, client) // 通过查询 id_table 匹配</span><br><span class="line"></span><br><span class="line">i2c_master_send() // 发送一个 i2c 数据包</span><br><span class="line">    // 构建 i2c_msg</span><br><span class="line">    i2c_transfer()</span><br><span class="line">        __i2c_transfer()  // 发送数据包到总线驱动层</span><br><span class="line">i2c_master_recv()        </span><br><span class="line"></span><br><span class="line">/* 通过动态获取|指定 bus number 注册 i2c 控制器 */</span><br><span class="line">i2c_add_adapter()|i2c_add_numbered_adapter() </span><br><span class="line">    i2c_register_adapter(adapter)</span><br><span class="line">    	dev_<span class="built_in">set</span>_name(&amp;adap-&gt;dev, <span class="string">"i2c-%d"</span>, adap-&gt;nr); // 设置 adapter 名字 “i2c-%d”</span><br><span class="line">	    adap-&gt;dev.bus = &amp;i2c_bus_<span class="built_in">type</span>;</span><br><span class="line">	    adap-&gt;dev.type = &amp;i2c_adapter_<span class="built_in">type</span>;</span><br><span class="line">	    /*</span><br><span class="line">	     * 注册设备,  默认创建的设备文件是: /sys/devices/i2c-%d </span><br><span class="line">	     * 若注册 adapter 时指定了父设备，则为：/sys/devices/platform/xxx/i2c-%d </span><br><span class="line">	     */</span><br><span class="line">	    device_register(&amp;adap-&gt;dev);</span><br><span class="line">	    /*</span><br><span class="line">	     * 扫描 __i2c_board_list 匹配 adapter 与 i2c 次设备信息，匹配成功则创建 i2c 设备 （i2c_client）</span><br><span class="line">	     */</span><br><span class="line">	    i2c_scan_static_board_info() </span><br><span class="line">	        i2c_new_device() // 注册 i2c 设备</span><br><span class="line">	            i2c_dev_<span class="built_in">set</span>_name(adap, client) //  设置次设备名<span class="string">" %d-%04x"</span></span><br><span class="line">	            device_register(&amp;client-&gt;dev) //  注册次设备<span class="string">"/sys/devices/platform/xxx/i2c-%d/%d-%04x“ </span><br><span class="line"> </span><br><span class="line"># alps\kernel-3.18\include\linux\i2c.h</span><br><span class="line">i2c_add_driver(driver) </span><br><span class="line">    i2c_register_driver(THIS_MODULE, driver)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>注：主设备表示特定的驱动程序；次设备表示使用该设备的设备  </p>
+</blockquote>
+<h2 id="设备驱动层（i2c-dev）">设备驱动层（i2c-dev）</h2><p>设备驱动层主要是封装主机 i2c 的基本操作，给上层提供接口，与总线驱动层相对应，其：知道发什么数据，但不知道怎么发。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c\i2c-dev.c （也可以是其他设备驱动文件，如：ov9650.c等。）</span></span><br><span class="line">static const struct file_operations i2cdev_fops = &#123;</span><br><span class="line">	.owner		= THIS_MODULE,</span><br><span class="line">	.llseek		= no_llseek,</span><br><span class="line">	.read		= i2cdev_<span class="built_in">read</span>,</span><br><span class="line">	.write		= i2cdev_write,</span><br><span class="line">	.unlocked_ioctl	= i2cdev_ioctl,</span><br><span class="line">	.open		= i2cdev_open,</span><br><span class="line">	.release	= i2cdev_release,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">i2cdev_<span class="built_in">read</span>()</span><br><span class="line">    i2c_master_recv()</span><br><span class="line">    copy_to_user()</span><br><span class="line">i2cdev_write()</span><br><span class="line">    memdup_user()  // 分配内核空间，用户态到内核态的拷贝</span><br><span class="line">        copy_from_user()</span><br><span class="line">    i2c_master_send()</span><br><span class="line">...</span><br><span class="line">i2cdev_open()</span><br><span class="line">    i2c_dev_get_by_minor()</span><br><span class="line">    i2c_get_adapter()</span><br><span class="line">    // 设置 i2c client</span><br><span class="line"></span><br><span class="line">i2c_dev_init()</span><br><span class="line">    register_chrdev(I2C_MAJOR, <span class="string">"i2c"</span>, &amp;i2cdev_fops)</span><br><span class="line">    i2cdev_attach_adapter() // 绑定存在的 i2c 控制器（adapter）</span><br><span class="line">        adap = to_i2c_adapter(dev);</span><br><span class="line">	    i2c_dev = get_free_i2c_dev(adap);</span><br><span class="line">	    /* register this i2c device with the driver core */</span><br><span class="line">	    i2c_dev-&gt;dev = device_create(...<span class="string">"i2c-%d"</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="用户空间">用户空间</h1><p>这里只看一种通用的通过 JNI 操作 i2c 设备的方案，i2c-dev 提供的接口通过 JNI 给 APP 使用，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jni</span></span><br><span class="line">extern <span class="string">"C"</span> &#123;</span><br><span class="line">JNIEXPORT jint JNICALL Java_xxxxxx_xxx_I2c_open()</span><br><span class="line">JNIEXPORT jint JNICALL Java_xxxxxx_xxx_I2c_<span class="built_in">read</span>()</span><br><span class="line">JNIEXPORT jint JNICALL Java_xxxxxx_xxx_I2c_write()</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># app</span></span><br><span class="line">I2c.open(“/dev/i2c-x”)</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">public static class I2c &#123;  </span><br><span class="line">        ...</span><br><span class="line">        public native int open(); </span><br><span class="line">        public native int <span class="built_in">read</span>(); </span><br><span class="line">        public native int write();  </span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MTK/" rel="tag">#MTK</a>
+          
+            <a href="/tags/源码分析/" rel="tag">#源码分析</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/23/Android/Android-Linux-input-system-analysis/" rel="next" title="Android(Linux) 输入子系统解析">
+                <i class="fa fa-chevron-left"></i> Android(Linux) 输入子系统解析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2100/11/21/Android/A-summary-of-Android-source-analysis/" rel="prev" title="【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客">
+                【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/12/03/Android/Android-Linux-i2c-driver-arch/"
+           data-title="Android/Linux  I2C 驱动架构分析" data-url="http://huaqianlee.github.io/2017/12/03/Android/Android-Linux-i2c-driver-arch/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Andy.Lee" />
+          <p class="site-author-name" itemprop="name">Andy.Lee</p>
+          <p class="site-description motion-element" itemprop="description">Just need to enjoy life.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/huaqianlee" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/huaqianlee" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/huaqianlee" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://facebook.com/huaqianlee" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://plus.google.com/u/0/107850537041795428182" target="_blank" title="GooglePlus">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GooglePlus
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://huaqianlee.github.io/" title="Andy.Lee's Blog" target="_blank">Andy.Lee's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://fpgadeveloper.wang/" title="FPGA开发者网" target="_blank">FPGA开发者网</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#驱动架构"><span class="nav-number">2.</span> <span class="nav-text">驱动架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I2C_驱动架构"><span class="nav-number">2.1.</span> <span class="nav-text">I2C 驱动架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码分析"><span class="nav-number">3.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重要的结构体"><span class="nav-number">3.1.</span> <span class="nav-text">重要的结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键路径"><span class="nav-number">3.2.</span> <span class="nav-text">关键路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总线驱动层"><span class="nav-number">3.3.</span> <span class="nav-text">总线驱动层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心层（i2c-core）"><span class="nav-number">3.4.</span> <span class="nav-text">核心层（i2c-core）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备驱动层（i2c-dev）"><span class="nav-number">3.5.</span> <span class="nav-text">设备驱动层（i2c-dev）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户空间"><span class="nav-number">4.</span> <span class="nav-text">用户空间</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"andylee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

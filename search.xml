@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客]]></title>
-      <url>http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/</url>
+      <url>http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/</url>
       <content type="html"><![CDATA[<blockquote>
 <p>一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。</p>
 </blockquote>
@@ -177,6 +177,41 @@
 </tbody>
 </table>
 <h2 id="架构原理方向">架构原理方向</h2>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android/Linux  I2C 驱动架构分析]]></title>
+      <url>http://huaqianlee.github.io/2017/12/03/Android/Android-Linux-i2c-driver-arch/</url>
+      <content type="html"><![CDATA[<h1 id="前言">前言</h1><p>分析传感器源码的时候，发现对 I2C 的驱动也有些忘记了，所以就再分析一下并形成这篇博文。</p>
+<h1 id="驱动架构">驱动架构</h1><h2 id="I2C_驱动架构">I2C 驱动架构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/mtk/i2c_arch.jpg" alt="i2c-arch"><br><a id="more"></a></p>
+<h1 id="源码分析">源码分析</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c</span></span><br></pre></td></tr></table></figure>
+<h2 id="重要的结构体">重要的结构体</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\include\linux\i2c.h</span></span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 适配器，即挂接在 i2c 总线上的 i2c 控制器</span><br><span class="line"> * i2c_adapter is the structure used to identify a physical i2c bus along</span><br><span class="line"> * with the access algorithms necessary to access it.</span><br><span class="line"> */</span><br><span class="line">struct i2c_adapter &#123;</span><br><span class="line">	struct module *owner;</span><br><span class="line">	unsigned int class;		  /* classes to allow probing <span class="keyword">for</span> */</span><br><span class="line">	const struct i2c_algorithm *algo; /* the algorithm to access the bus */</span><br><span class="line">	struct device dev;		/* the adapter device */</span><br><span class="line">	....</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 设备驱动</span><br><span class="line"> */</span><br><span class="line">struct i2c_driver &#123;</span><br><span class="line">	unsigned int class;</span><br><span class="line"></span><br><span class="line">	/* Standard driver model interfaces */</span><br><span class="line">	int (*probe)(struct i2c_client *, const struct i2c_device_id *); // 匹配 i2c 设备（i2c_client）</span><br><span class="line">	int (*remove)(struct i2c_client *);</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">	struct device_driver driver;   </span><br><span class="line">	const struct i2c_device_id *id_table; // 此设备驱动服务的设备 ID</span><br><span class="line"></span><br><span class="line">	int (*detect)(struct i2c_client *, struct i2c_board_info *);</span><br><span class="line">	const unsigned short *address_list; // 此设备驱动支持的设备地址</span><br><span class="line">	struct list_head clients;  // 挂接此设备驱动匹配成功 i2c_client</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 设备</span><br><span class="line"> */</span><br><span class="line">struct i2c_client &#123;</span><br><span class="line">	unsigned short flags;		/* div., see below		*/</span><br><span class="line">	unsigned short addr;		/* chip address - NOTE: <span class="number">7</span>bit	*/</span><br><span class="line">					/* addresses are stored <span class="keyword">in</span> the	*/</span><br><span class="line">					/* _LOWER_ <span class="number">7</span> bits		*/</span><br><span class="line">	char name[I2C_NAME_SIZE];</span><br><span class="line">	struct i2c_adapter *adapter;	/* the adapter we sit on	*/</span><br><span class="line">	struct device dev;		/* the device structure		*/</span><br><span class="line">	int irq;			/* irq issued by device		*/</span><br><span class="line">	struct list_head detected;</span><br><span class="line"><span class="comment">#ifdef CONFIG_MTK_I2C_EXTENSION</span></span><br><span class="line">	__u32 timing;			/* parameters of timings		*/</span><br><span class="line">	__u32 ext_flag;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 描述 i2c 设备信息</span><br><span class="line"> */</span><br><span class="line">struct i2c_board_info &#123;</span><br><span class="line">	char		<span class="built_in">type</span>[I2C_NAME_SIZE];</span><br><span class="line">	unsigned short	flags;</span><br><span class="line">	unsigned short	addr;</span><br><span class="line">	void		*platform_data;</span><br><span class="line">	struct dev_archdata	*archdata;</span><br><span class="line">	struct device_node *of_node;</span><br><span class="line">	struct acpi_dev_node acpi_node;</span><br><span class="line">	int		irq;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># alps\kernel-3.18\include\uapi\linux\i2c.h</span></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 数据包</span><br><span class="line"> */</span><br><span class="line">struct i2c_msg &#123;</span><br><span class="line">	__u16 addr;	     /* slave address */</span><br><span class="line">	__u16 flags;</span><br><span class="line"><span class="comment">#define I2C_M_TEN		0x0010	/* this is a ten bit chip address */</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">#define I2C_M_RECV_LEN		0x0400	/* length will be first received byte */</span></span><br><span class="line">	__u16 len;		/* msg length				*/</span><br><span class="line">	__u8 *buf;		/* pointer to msg data			*/</span><br><span class="line"><span class="comment">#ifdef CONFIG_MTK_I2C_EXTENSION</span></span><br><span class="line">	__u32 timing;	/* parameters of timings		*/</span><br><span class="line">	__u32 ext_flag;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+</blockquote>
+<h2 id="关键路径">关键路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\mt6797.dtsi</span></span><br><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\aeon6797_6m_n.dts</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c</span></span><br><span class="line">i2c-core.c：i2c核心层，设备驱动和总线驱动的桥梁</span><br><span class="line">i2c-dev.c：通用 i2c 设备驱动</span><br><span class="line">busses：开源的 adapter </span><br><span class="line">algos：i2c 通信算法</span><br><span class="line"></span><br><span class="line"><span class="comment"># alps\kernel-3.18\include\linux\i2c.h</span></span><br><span class="line"><span class="comment"># alps\kernel-3.18\include\uapi\linux\i2c.h</span></span><br></pre></td></tr></table></figure>
+<h2 id="总线驱动层">总线驱动层</h2><p>总线驱动层主要实现外设驱动部分，初始化硬件（i2c控制器）和提供操作硬件的方法，与 i2c-dev 相对应，其负责的部分通俗点讲就是：知道怎么发数据，但不知道发什么数据。<br>其关键流程如下：</p>
+<ol>
+<li>获取资源</li>
+<li>注册中断、使能时钟等初始化工作</li>
+<li>构建 i2c_adapter</li>
+<li>设置 i2c_adapter</li>
+<li>注册 i2c_adapter<blockquote>
+<p>这部分源码就不在此文分析了，感兴趣的朋友可以参考外设系列</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="核心层（i2c-core）">核心层（i2c-core）</h2><p>构建一个 i2c 总线结构体,并且提供匹配方法和驱动用的结构体 ，如总线驱动层和设备驱动层的注册、注销等方法。此部分存在两个匹配过程：</p>
+<ol>
+<li>i2c 总线下的设备（i2c_client）与设备驱动（i2c_driver）之间的匹配。</li>
+<li>i2c控制器（i2c_adapter）与设备之间的匹配。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c\i2c-core.c</span></span><br><span class="line">struct bus_<span class="built_in">type</span> i2c_bus_<span class="built_in">type</span> = &#123;</span><br><span class="line">	.name		= <span class="string">"i2c"</span>,  // 总线名</span><br><span class="line">	.match		= i2c_device_match, // 匹配设备（i2c_client）与设备驱动（i2c_driver）</span><br><span class="line">	.probe		= i2c_device_probe,  // 注册挂载 i2c</span><br><span class="line">	.remove		= i2c_device_remove,</span><br><span class="line">	.shutdown	= i2c_device_shutdown,</span><br><span class="line">	.pm		= &amp;i2c_device_pm_ops,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> __init i2c_init() // init 函数</span><br><span class="line">    <span class="comment"># kernel-3.18/drivers/base/bus.c</span></span><br><span class="line">    bus_register(&amp;i2c_bus_<span class="built_in">type</span>) // 注册i2c总线  <span class="string">"/sys/bus/i2c"</span></span><br><span class="line">    i2c_add_driver(&amp;dummy_driver) // // 注册 i2c 驱动创建“/sys/bus/i2c/driver/dummy” </span><br><span class="line">        i2c_register_driver() // 注册 i2c 驱动</span><br><span class="line">            driver_register(&amp;driver-&gt;driver); // 注册设备驱动，创建上面的“dummy”设备文件</span><br><span class="line">            INIT_LIST_HEAD(&amp;driver-&gt;clients)</span><br><span class="line">        </span><br><span class="line">i2c_device_probe()</span><br><span class="line">    i2c_verify_client(dev) // 获取 i2c_client</span><br><span class="line">    to_i2c_driver(dev-&gt;driver) // 获取 i2c_driver</span><br><span class="line">    driver-&gt;probe(client, i2c_match_id(driver-&gt;id_table,client)) // 调用设备驱动层 probe，查询外设（client）对应的 id</span><br><span class="line">        </span><br><span class="line">i2c_device_match()</span><br><span class="line">	client = i2c_verify_client(dev)// 通过 dev 获取 i2c_client</span><br><span class="line">	of_driver_match_device(dev, drv) // 通过 of 方式匹配</span><br><span class="line">	acpi_driver_match_device(dev, drv) // acpi 方式匹配</span><br><span class="line">	/* <span class="keyword">if</span> 上述两种方式皆未成功 */	</span><br><span class="line">	driver = to_i2c_driver(drv); //通过 drv 获取 i2c_driver</span><br><span class="line">	i2c_match_id(driver-&gt;id_table, client) // 通过查询 id_table 匹配</span><br><span class="line"></span><br><span class="line">i2c_master_send() // 发送一个 i2c 数据包</span><br><span class="line">    // 构建 i2c_msg</span><br><span class="line">    i2c_transfer()</span><br><span class="line">        __i2c_transfer()  // 发送数据包到总线驱动层</span><br><span class="line">i2c_master_recv()        </span><br><span class="line"></span><br><span class="line">/* 通过动态获取|指定 bus number 注册 i2c 控制器 */</span><br><span class="line">i2c_add_adapter()|i2c_add_numbered_adapter() </span><br><span class="line">    i2c_register_adapter(adapter)</span><br><span class="line">    	dev_<span class="built_in">set</span>_name(&amp;adap-&gt;dev, <span class="string">"i2c-%d"</span>, adap-&gt;nr); // 设置 adapter 名字 “i2c-%d”</span><br><span class="line">	    adap-&gt;dev.bus = &amp;i2c_bus_<span class="built_in">type</span>;</span><br><span class="line">	    adap-&gt;dev.type = &amp;i2c_adapter_<span class="built_in">type</span>;</span><br><span class="line">	    /*</span><br><span class="line">	     * 注册设备,  默认创建的设备文件是: /sys/devices/i2c-%d </span><br><span class="line">	     * 若注册 adapter 时指定了父设备，则为：/sys/devices/platform/xxx/i2c-%d </span><br><span class="line">	     */</span><br><span class="line">	    device_register(&amp;adap-&gt;dev);</span><br><span class="line">	    /*</span><br><span class="line">	     * 扫描 __i2c_board_list 匹配 adapter 与 i2c 次设备信息，匹配成功则创建 i2c 设备 （i2c_client）</span><br><span class="line">	     */</span><br><span class="line">	    i2c_scan_static_board_info() </span><br><span class="line">	        i2c_new_device() // 注册 i2c 设备</span><br><span class="line">	            i2c_dev_<span class="built_in">set</span>_name(adap, client) //  设置次设备名<span class="string">" %d-%04x"</span></span><br><span class="line">	            device_register(&amp;client-&gt;dev) //  注册次设备<span class="string">"/sys/devices/platform/xxx/i2c-%d/%d-%04x“ </span><br><span class="line"> </span><br><span class="line"># alps\kernel-3.18\include\linux\i2c.h</span><br><span class="line">i2c_add_driver(driver) </span><br><span class="line">    i2c_register_driver(THIS_MODULE, driver)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>注：主设备表示特定的驱动程序；次设备表示使用该设备的设备  </p>
+</blockquote>
+<h2 id="设备驱动层（i2c-dev）">设备驱动层（i2c-dev）</h2><p>设备驱动层主要是封装主机 i2c 的基本操作，给上层提供接口，与总线驱动层相对应，其：知道发什么数据，但不知道怎么发。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c\i2c-dev.c （也可以是其他设备驱动文件，如：ov9650.c等。）</span></span><br><span class="line">static const struct file_operations i2cdev_fops = &#123;</span><br><span class="line">	.owner		= THIS_MODULE,</span><br><span class="line">	.llseek		= no_llseek,</span><br><span class="line">	.read		= i2cdev_<span class="built_in">read</span>,</span><br><span class="line">	.write		= i2cdev_write,</span><br><span class="line">	.unlocked_ioctl	= i2cdev_ioctl,</span><br><span class="line">	.open		= i2cdev_open,</span><br><span class="line">	.release	= i2cdev_release,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">i2cdev_<span class="built_in">read</span>()</span><br><span class="line">    i2c_master_recv()</span><br><span class="line">    copy_to_user()</span><br><span class="line">i2cdev_write()</span><br><span class="line">    memdup_user()  // 分配内核空间，用户态到内核态的拷贝</span><br><span class="line">        copy_from_user()</span><br><span class="line">    i2c_master_send()</span><br><span class="line">...</span><br><span class="line">i2cdev_open()</span><br><span class="line">    i2c_dev_get_by_minor()</span><br><span class="line">    i2c_get_adapter()</span><br><span class="line">    // 设置 i2c client</span><br><span class="line"></span><br><span class="line">i2c_dev_init()</span><br><span class="line">    register_chrdev(I2C_MAJOR, <span class="string">"i2c"</span>, &amp;i2cdev_fops)</span><br><span class="line">    i2cdev_attach_adapter() // 绑定存在的 i2c 控制器（adapter）</span><br><span class="line">        adap = to_i2c_adapter(dev);</span><br><span class="line">	    i2c_dev = get_free_i2c_dev(adap);</span><br><span class="line">	    /* register this i2c device with the driver core */</span><br><span class="line">	    i2c_dev-&gt;dev = device_create(...<span class="string">"i2c-%d"</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="用户空间">用户空间</h1><p>这里只看一种通用的通过 JNI 操作 i2c 设备的方案，i2c-dev 提供的接口通过 JNI 给 APP 使用，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jni</span></span><br><span class="line">extern <span class="string">"C"</span> &#123;</span><br><span class="line">JNIEXPORT jint JNICALL Java_xxxxxx_xxx_I2c_open()</span><br><span class="line">JNIEXPORT jint JNICALL Java_xxxxxx_xxx_I2c_<span class="built_in">read</span>()</span><br><span class="line">JNIEXPORT jint JNICALL Java_xxxxxx_xxx_I2c_write()</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># app</span></span><br><span class="line">I2c.open(“/dev/i2c-x”)</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">public static class I2c &#123;  </span><br><span class="line">        ...</span><br><span class="line">        public native int open(); </span><br><span class="line">        public native int <span class="built_in">read</span>(); </span><br><span class="line">        public native int write();  </span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
     </entry>
     
     <entry>
@@ -2435,6 +2470,96 @@ git commit
     </entry>
     
     <entry>
+      <title><![CDATA[Android编译过程详解之三]]></title>
+      <url>http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/</url>
+      <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
+<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
+<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
+<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
+<thead>
+<tr>
+<th>常量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRODUCT_NAME</td>
+<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
+</tr>
+<tr>
+<td>PRODUCT_MODEL</td>
+<td>产品的型号，这也是最终用户将看到的</td>
+</tr>
+<tr>
+<td>PRODUCT_LOCALES</td>
+<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGES</td>
+<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
+</tr>
+<tr>
+<td>PRODUCT_DEVICE</td>
+<td>该产品的工业设计的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_MANUFACTURER</td>
+<td>制造商的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_BRAND</td>
+<td>该产品专门定义的商标（如果有的话）</td>
+</tr>
+<tr>
+<td>PRODUCT_PROPERTY_OVERRIDES</td>
+<td>对于商品属性的定义</td>
+</tr>
+<tr>
+<td>PRODUCT_COPY_FILES</td>
+<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
+</tr>
+<tr>
+<td>PRODUCT_OTA_PUBLIC_KEYS</td>
+<td>对于该产品的 OTA 公开 key 的列表</td>
+</tr>
+<tr>
+<td>PRODUCT_POLICY</td>
+<td>产品使用的策略</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGE_OVERLAYS</td>
+<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
+</tr>
+<tr>
+<td>PRODUCT_CONTRIBUTORS_FILE</td>
+<td>HTML 文件，其中包含项目的贡献者</td>
+</tr>
+<tr>
+<td>PRODUCT_TAGS</td>
+<td>该产品的标签，以空格分格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
+<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
+<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
+　　　</p>
+<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Android编译过程详解之二]]></title>
       <url>http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/</url>
       <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a><br>　<br>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　　./go.sh -j8 or make -j8／--jobs</span><br></pre></td></tr></table></figure></p>
@@ -2610,96 +2735,6 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <blockquote>
 <p>模块mk文件详见Android.mk解析：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/#more" target="_blank" rel="external">Android.mk解析</a></p>
 </blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Android编译过程详解之三]]></title>
-      <url>http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/</url>
-      <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
-<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
-<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
-<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
-<thead>
-<tr>
-<th>常量</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PRODUCT_NAME</td>
-<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
-</tr>
-<tr>
-<td>PRODUCT_MODEL</td>
-<td>产品的型号，这也是最终用户将看到的</td>
-</tr>
-<tr>
-<td>PRODUCT_LOCALES</td>
-<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGES</td>
-<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
-</tr>
-<tr>
-<td>PRODUCT_DEVICE</td>
-<td>该产品的工业设计的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_MANUFACTURER</td>
-<td>制造商的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_BRAND</td>
-<td>该产品专门定义的商标（如果有的话）</td>
-</tr>
-<tr>
-<td>PRODUCT_PROPERTY_OVERRIDES</td>
-<td>对于商品属性的定义</td>
-</tr>
-<tr>
-<td>PRODUCT_COPY_FILES</td>
-<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
-</tr>
-<tr>
-<td>PRODUCT_OTA_PUBLIC_KEYS</td>
-<td>对于该产品的 OTA 公开 key 的列表</td>
-</tr>
-<tr>
-<td>PRODUCT_POLICY</td>
-<td>产品使用的策略</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGE_OVERLAYS</td>
-<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
-</tr>
-<tr>
-<td>PRODUCT_CONTRIBUTORS_FILE</td>
-<td>HTML 文件，其中包含项目的贡献者</td>
-</tr>
-<tr>
-<td>PRODUCT_TAGS</td>
-<td>该产品的标签，以空格分格</td>
-</tr>
-</tbody>
-</table>
-<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
-<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
-<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
-　　　</p>
-<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
 ]]></content>
     </entry>
     
