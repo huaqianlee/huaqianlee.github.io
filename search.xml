@@ -21,6 +21,10 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="http://huaqianlee.github.io/2017/12/17/Android/android-sensor-arch-analysis/" target="_blank" rel="external">Android传感器（Sensor）架构简析 (╯_╰)</a></td>
+<td>MTK 传感器架构简析 (╯_╰)</td>
+</tr>
+<tr>
 <td><a href="http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/" target="_blank" rel="external">Android(Linux) 输入子系统解析</a></td>
 <td>从 HW 到 Framework 分析输入子系统</td>
 </tr>
