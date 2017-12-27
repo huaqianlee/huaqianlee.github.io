@@ -369,7 +369,7 @@
       
 
       
-        <p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
+        <p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
 <h1 id="前言">前言</h1><p>Android/Linux 输入设备总类繁杂，常见的有按键、键盘、触摸屏、鼠标、摇杆等，之前其驱动都是采用字符设备、misc 设备处理的，但是如此多的设备就导致驱动混乱，所以 Linux 引入了输入子系统在字符设备等上抽象出一层来统一输入设备的驱动。本文就基于 MTK Android 7.0 源码来分析一下输入子系统。</p>
 <h1 id="输入子系统架构">输入子系统架构</h1><p>输入子系统的系统架构如下图所示：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/mtk/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png" alt="input_system_arch"></p>
 <blockquote>

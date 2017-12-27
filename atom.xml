@@ -340,9 +340,9 @@
     <link href="http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/"/>
     <id>http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/</id>
     <published>2017-11-23T14:42:04.000Z</published>
-    <updated>2017-11-24T14:17:53.302Z</updated>
+    <updated>2017-12-27T14:28:43.119Z</updated>
     
-    <content type="html"><![CDATA[<p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
+    <content type="html"><![CDATA[<p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
 <h1 id="前言">前言</h1><p>Android/Linux 输入设备总类繁杂，常见的有按键、键盘、触摸屏、鼠标、摇杆等，之前其驱动都是采用字符设备、misc 设备处理的，但是如此多的设备就导致驱动混乱，所以 Linux 引入了输入子系统在字符设备等上抽象出一层来统一输入设备的驱动。本文就基于 MTK Android 7.0 源码来分析一下输入子系统。</p>
 <h1 id="输入子系统架构">输入子系统架构</h1><p>输入子系统的系统架构如下图所示：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/android/mtk/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png" alt="input_system_arch"></p>
 <blockquote>
@@ -402,7 +402,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;Android 源码分析系列综述博文： &lt;a href=&quot;http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/&quot;&gt;Android 系统源码分析综述&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Android 源码分析系列综述博文： &lt;a href=&quot;http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/&quot;&gt;Android 系统源码分析综述&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;前言&quot;&gt;前言&lt;/h1&gt;&lt;p&gt;Android/Linux 输入设备总类繁杂，常见的有按键、键盘、触摸屏、鼠标、摇杆等，之前其驱动都是采用字符设备、misc 设备处理的，但是如此多的设备就导致驱动混乱，所以 Linux 引入了输入子系统在字符设备等上抽象出一层来统一输入设备的驱动。本文就基于 MTK Android 7.0 源码来分析一下输入子系统。&lt;/p&gt;
 &lt;h1 id=&quot;输入子系统架构&quot;&gt;输入子系统架构&lt;/h1&gt;&lt;p&gt;输入子系统的系统架构如下图所示：&lt;br&gt;&lt;img src=&quot;http://7xjdax.com1.z0.glb.clouddn.com/android/mtk/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png&quot; alt=&quot;input_system_arch&quot;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -425,10 +425,10 @@
     <link href="http://huaqianlee.github.io/2017/11/21/Android/BMS-of-Android-Power-Management/"/>
     <id>http://huaqianlee.github.io/2017/11/21/Android/BMS-of-Android-Power-Management/</id>
     <published>2017-11-21T13:56:28.000Z</published>
-    <updated>2017-12-18T15:27:57.081Z</updated>
+    <updated>2017-12-27T14:28:41.676Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
+<p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/" target="_blank" rel="external">Android 系统源码分析综述</a></p>
 </blockquote>
 <p><em>Platform information： MTK6797（X20）+ Android 7.0</em></p>
 <p>之前做高通的时候，对高通此部分做过粗略的分析，不过当时胡乱做的些笔记，只简单整理了几篇博客，感兴趣可以参考如下路径：</p>
@@ -485,7 +485,7 @@
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;Android 源码分析系列综述博文： &lt;a href=&quot;http://huaqianlee.github.io/2020/11/21/Android/A-summary-of-Android-source-analysis/&quot;&gt;Android 系统源码分析综述&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Android 源码分析系列综述博文： &lt;a href=&quot;http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/&quot;&gt;Android 系统源码分析综述&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;em&gt;Platform information： MTK6797（X20）+ Android 7.0&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;之前做高通的时候，对高通此部分做过粗略的分析，不过当时胡乱做的些笔记，只简单整理了几篇博客，感兴趣可以参考如下路径：&lt;/p&gt;
@@ -518,7 +518,7 @@
     <link href="http://huaqianlee.github.io/2017/11/14/Android/Android-SELinux-Permison-and-Question/"/>
     <id>http://huaqianlee.github.io/2017/11/14/Android/Android-SELinux-Permison-and-Question/</id>
     <published>2017-11-14T14:26:02.000Z</published>
-    <updated>2017-11-14T14:29:00.974Z</updated>
+    <updated>2017-12-27T14:29:36.393Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>由于现做的是MTK平台，源码路径基于MTK， 不过高通大同小异</p>
@@ -533,7 +533,7 @@
 <blockquote>
 <p>编译时将以合并的方式将厂家policy追加到Google原生。</p>
 </blockquote>
-<h2 id="Log">Log</h2><p>没有权限时可以在内核找到如下 log ：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># avc: denied  &#123; 操作权限  &#125;  for pid=7201  comm=“进程名”  scontext=u:r:源类型:s0  tcontext=u:r:目标类型:s0  tclass=访问类型 permissive=0</span></span><br><span class="line"></span><br><span class="line">avc: denied &#123;getattr <span class="built_in">read</span>&#125; <span class="keyword">for</span> pid=<span class="number">7201</span> comm=<span class="string">"xxx.xxx"</span> scontext=u:r:system_app:s0 tcontext=u:r:shell_data_file:s0 tclass=dir permissive=<span class="number">0</span></span><br><span class="line">``` </span><br><span class="line"><span class="comment">## 权限修改</span></span><br><span class="line">主要有三种方式，前两种只能用来测试，第三种是推荐的正式处理方式。</span><br><span class="line"><span class="comment">### adb在线修改seLinux</span></span><br><span class="line">```bash</span><br><span class="line"><span class="comment"># Enforcing - 表示已打开 ，Permissive - 表示已关闭</span></span><br><span class="line">getenforce;     //获取当前seLinux状态</span><br><span class="line">setenforce <span class="number">1</span>;   //打开seLinux</span><br><span class="line">setenforce <span class="number">0</span>;   //关闭seLinux</span><br></pre></td></tr></table></figure></p>
+<h2 id="Log">Log</h2><p>没有权限时可以在内核找到如下 log ：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># avc: denied  &#123; 操作权限  &#125;  for pid=7201  comm=“进程名”  scontext=u:r:源类型:s0  tcontext=u:r:目标类型:s0  tclass=访问类型 permissive=0</span></span><br><span class="line"></span><br><span class="line">avc: denied &#123;getattr <span class="built_in">read</span>&#125; <span class="keyword">for</span> pid=<span class="number">7201</span> comm=<span class="string">"xxx.xxx"</span> scontext=u:r:system_app:s0 tcontext=u:r:shell_data_file:s0 tclass=dir permissive=<span class="number">0</span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">## 权限修改</span></span><br><span class="line">主要有三种方式，前两种只能用来测试，第三种是推荐的正式处理方式。</span><br><span class="line"><span class="comment">### adb在线修改seLinux</span></span><br><span class="line">```bash</span><br><span class="line"><span class="comment"># Enforcing - 表示已打开 ，Permissive - 表示已关闭</span></span><br><span class="line">getenforce;     //获取当前seLinux状态</span><br><span class="line">setenforce <span class="number">1</span>;   //打开seLinux</span><br><span class="line">setenforce <span class="number">0</span>;   //关闭seLinux</span><br></pre></td></tr></table></figure></p>
 <h3 id="kernel中关闭">kernel中关闭</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\configs\xxx_defconfig</span></span><br><span class="line">CONFIG_SECURITY_SELINUX=y // 屏蔽此配置项</span><br></pre></td></tr></table></figure>
 <h3 id="SELinux_Sepolicy中添加权限">SELinux Sepolicy中添加权限</h3><p>修改相应源类型.te文件（基本以源进程名命名），添加如下一行语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line">allow  源类型 目标类型:访问类型 &#123;操作权限&#125;; // 注意分号</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例，具体写法参考源码</span></span><br><span class="line">allow system_app shell_data_file:dir&#123;getattr <span class="built_in">read</span> write&#125;;</span><br><span class="line">allow mediaserver tfa9897_device:chr_file &#123; open <span class="built_in">read</span> write &#125;; </span><br><span class="line">allow system_server tfa9897_device:chr_file rw_file_perms; </span><br><span class="line"></span><br><span class="line">chr_file - 字符设备  file - 普通文件 dir - 目录</span><br></pre></td></tr></table></figure></p>
 <blockquote>
