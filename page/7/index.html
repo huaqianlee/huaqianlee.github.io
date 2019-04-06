@@ -629,7 +629,7 @@
 <li><p>正在使用的电池电压, 开漏电压(OCV).</p>
 </li>
 </ul>
-<p><img src="https://github.com/huaqianlee/blog-file/blob/master/image/android/qcom/bms_1.png" alt="temp"></p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_1.png" alt="temp"></p>
 <h2 id="硬件架构">硬件架构</h2>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/#more" rel="contents">
@@ -877,7 +877,7 @@
         
           <p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        huaqianlee@gmail.com</em></p>
 <p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。</p>
-<h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="https://github.com/huaqianlee/blog-file/blob/master/image/201566Android-bms-arch.png" alt="电池系统架构"></p>
+<h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
 <p>自上而下，Android电池监控系统分为如下几个部分：</p>
 <h3 id="电池信息查看APP">电池信息查看APP</h3><p>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：<br>
           <div class="post-more-link text-center">
@@ -1002,7 +1002,7 @@
       
         
           <p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
-<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="https://github.com/huaqianlee/blog-file/blob/master/image/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br>
+<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/05/30/Android/Android电源管理架构/#more" rel="contents">
               Read more &raquo;
@@ -1495,9 +1495,9 @@
         
           
             <p>为了方便调试，不用每写一个类都需要写一个main方法对其测试，所以Java编写会经常用到JUnit测试。</p>
-<h3 id="新建一个JUnit-test测试包，如下图:">新建一个JUnit.test测试包，如下图:</h3><p><img src="https://github.com/huaqianlee/blog-file/blob/master/image/blognewjunit.png" alt="new"></p>
+<h3 id="新建一个JUnit-test测试包，如下图:">新建一个JUnit.test测试包，如下图:</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blognewjunit.png" alt="new"></p>
 <h3 id="JUnit测试">JUnit测试</h3><p>可以在原文件类的方法上面加上@Test作为JUnit测试单元运行，也可以新建JUnit文件测试，编写方法如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class PersonTest &#123;</span><br><span class="line"></span><br><span class="line">	@BeforeClass // 测试类加载之前运行</span><br><span class="line">	public static void <span class="built_in">set</span>UpBeforeClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"Before"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Before  // 每个测试方法运行前运行， 常用</span><br><span class="line">	public void <span class="built_in">set</span>Up() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"所有的测试方法运行之前运行！！"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test  // 注解，给程序看</span><br><span class="line">	public void <span class="function"><span class="title">testEat</span></span>()&#123;</span><br><span class="line">		</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.eat();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="function"><span class="title">testRun</span></span>()&#123;</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.run();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@After // 每个测试方法运行后运行 ，常用</span><br><span class="line">	public void tearDown() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"所有的测试方法运行之后运行！！"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    	@AfterClass //测试类加载之后运行</span><br><span class="line">	public static void tearDownAfterClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"After"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="运行JUnit">运行JUnit</h3><p>可以单独运行某个测试方法,也可以选中类,运行所以的测试方法,如下图:<br><img src="https://github.com/huaqianlee/blog-file/blob/master/image/blogrunjunit.png" alt="run"></p>
+<h3 id="运行JUnit">运行JUnit</h3><p>可以单独运行某个测试方法,也可以选中类,运行所以的测试方法,如下图:<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogrunjunit.png" alt="run"></p>
 
           
         

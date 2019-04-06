@@ -94,8 +94,8 @@
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="高通平台Android源码bootloader分析之sbl1(一)高通平台Android源码bootloader分析之sbl1(二)高通平台Android源码bootloader分析之sbl1(三)
 高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot">
-<meta property="og:image" content="https://github.com/huaqianlee/blog-file/blob/master/image/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg">
-<meta property="og:image" content="https://github.com/huaqianlee/blog-file/blob/master/image/blogRPM.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogRPM.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高通平台Android源码bootloader分析之sbl1(一)">
 <meta name="twitter:description" content="高通平台Android源码bootloader分析之sbl1(一)高通平台Android源码bootloader分析之sbl1(二)高通平台Android源码bootloader分析之sbl1(三)
@@ -372,7 +372,7 @@
       
         <p><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(二)</a><br><a href="http://huaqianlee.github.io/2015/08/18/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%89/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1(三)</a></p>
 <p>高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot loader）的代码需要动一下，ap侧就APPSBL代码需要动（对此部分不了解，可参照：<a href="http://huaqianlee.github.io/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" target="_blank" rel="external">bootable源码解析</a>），其他的都是高通搞好了的，甚至有些我们看不到代码。今天就要分析一下开机前几秒钟起着关键作用的sbl1， 这套代码在modem侧的boot_images\中。</p>
-<h2 id="启动流程">启动流程</h2><p>首先来看一下高通的bootloader流程框图，主要由ap、RPM及modem三部分构成，由于我工作主要涉及到ap侧，所以对RPM和modem侧代码不了解，以后有空时间的话到可以研究一下，框图如下：<br><a id="more"></a><br><img src="https://github.com/huaqianlee/blog-file/blob/master/image/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot arch"><br>由上图可知，系统启动流程主要由以下几步组成：</p>
+<h2 id="启动流程">启动流程</h2><p>首先来看一下高通的bootloader流程框图，主要由ap、RPM及modem三部分构成，由于我工作主要涉及到ap侧，所以对RPM和modem侧代码不了解，以后有空时间的话到可以研究一下，框图如下：<br><a id="more"></a><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot arch"><br>由上图可知，系统启动流程主要由以下几步组成：</p>
 <ol>
 <li><p>系统上电或重启。</p>
 </li>
@@ -398,7 +398,7 @@
 <blockquote>
 <p>HLOS APPSBL即为ap侧的bootloader，见：<a href="http://huaqianlee.github.io/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" target="_blank" rel="external">bootable源码解析</a></p>
 </blockquote>
-<p>　　<br>modem侧主要是射频网络相关的代码，我没有研究过也不了解，RPM侧的代码也没怎么研究，高通文档对其介绍如下：<br><img src="https://github.com/huaqianlee/blog-file/blob/master/image/blogRPM.png" alt="RPM"></p>
+<p>　　<br>modem侧主要是射频网络相关的代码，我没有研究过也不了解，RPM侧的代码也没怎么研究，高通文档对其介绍如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogRPM.png" alt="RPM"></p>
 <h2 id="sbl1流程分析">sbl1流程分析</h2><p>接下来我就来跟一下sbl1的代码，总结出关键流程，此部分代码皆在modem侧。我平时主要会涉及的几个重要文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">boot_images\core\boot\secboot3\hw\msm8916\sbl1\sbl1_hw.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\framework\src\pm_init.c</span><br><span class="line">boot_images\core\boot\secboot3\hw\msm8909\sbl1\sbl1_config.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\app\chg\src\pm_app_chg_alg.c</span><br><span class="line">boot_images\core\systemdrivers\pmic\drivers\smb\src\pm_smb.c // 如果带smb135x芯片</span><br></pre></td></tr></table></figure></p>
 <p>首先从其入口文件sbl1.s开始，如下：</p>
 <h3 id="sbl1入口：_sbl1-s">sbl1入口： sbl1.s</h3><p>此部分代码路径在：boot_images/core/boot/secboot3/hw/msm8916/sbl1/sbl1.s，此文件引导处理器，主要有实现如下操作：</p>
