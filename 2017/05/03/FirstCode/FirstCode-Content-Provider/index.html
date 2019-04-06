@@ -96,7 +96,7 @@
 <meta property="og:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
 内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。
 运行时权限Android权限机制为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一共有9组24个权限。">
-<meta property="og:image" content="image/android/firstcode/android_permission.jpg">
+<meta property="og:image" content="https://github.com/huaqianlee/blog-file/blob/master/image/android/firstcode/android_permission.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一行代码之跨程序共享数据-内容提供器">
 <meta name="twitter:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
@@ -375,7 +375,7 @@
         <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
 <p>内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。</p>
 <h2 id="运行时权限">运行时权限</h2><h3 id="Android权限机制">Android权限机制</h3><p>为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一共有9组24个权限。<br><a id="more"></a></p>
-<p><img src="image/android/firstcode/android_permission.jpg" alt="Android danger permission"></p>
+<p><img src="https://github.com/huaqianlee/blog-file/blob/master/image/android/firstcode/android_permission.jpg" alt="Android danger permission"></p>
 <p>权限详情参考：<a href="http://developer.android.com/reference/android/Manifest.permission.html" target="_blank" rel="external">官网权限介绍</a>。</p>
 <h3 id="程序运行时申请权限">程序运行时申请权限</h3><p>以CALL_PHONE为例来说明。定义触发打电话的逻辑：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_CALL);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"tel:10086"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
 <p>在AndroidMainifest.xml中声明权限：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.CALL_PHONE"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>

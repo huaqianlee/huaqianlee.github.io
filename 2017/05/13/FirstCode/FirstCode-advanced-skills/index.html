@@ -94,8 +94,8 @@
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
 全局获取Context新建一个自己Application，如下：123456789101112public class MyApplication extends Application &amp;#123;    private static Context context;        @Override    public void onCreate">
-<meta property="og:image" content="image/image/firstcode/doze_first_level.png">
-<meta property="og:image" content="image/image/firstcode/doze_second_level.png">
+<meta property="og:image" content="https://github.com/huaqianlee/blog-file/blob/master/image/https://github.com/huaqianlee/blog-file/blob/master/image/firstcode/doze_first_level.png">
+<meta property="og:image" content="https://github.com/huaqianlee/blog-file/blob/master/image/https://github.com/huaqianlee/blog-file/blob/master/image/firstcode/doze_second_level.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一行代码之高级技巧">
 <meta name="twitter:description" content="《第一行代码》第2版思维导图及所有学习笔记目录
@@ -389,7 +389,7 @@
 <blockquote>
 <p>不过为了功耗，Android限制减少了cpu唤醒次数，set()可能不十分准确，若准确性要求高，可使用setExact()方法。</p>
 </blockquote>
-<h3 id="Doze模式">Doze模式</h3><p>Android6.0及以上为了省电新加入了Doze模式，满足未插电、屏幕关闭等一段时间将进入doze模式，对cpu、网络、Alarm等进行限制，如下为Android7.0进入Doze模式的两个阶段：<br>阶段一：<br><img src="image/image/firstcode/doze_first_level.png" alt="First Level"><br>阶段二：<br><img src="image/image/firstcode/doze_second_level.png" alt="Second Level"></p>
+<h3 id="Doze模式">Doze模式</h3><p>Android6.0及以上为了省电新加入了Doze模式，满足未插电、屏幕关闭等一段时间将进入doze模式，对cpu、网络、Alarm等进行限制，如下为Android7.0进入Doze模式的两个阶段：<br>阶段一：<br><img src="https://github.com/huaqianlee/blog-file/blob/master/image/https://github.com/huaqianlee/blog-file/blob/master/image/firstcode/doze_first_level.png" alt="First Level"><br>阶段二：<br><img src="https://github.com/huaqianlee/blog-file/blob/master/image/https://github.com/huaqianlee/blog-file/blob/master/image/firstcode/doze_second_level.png" alt="Second Level"></p>
 <p>如若想Alarm在Doze模式也能正常执行，则需要使用AlarmManager的如下两个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setAndAllowWhileIdle()        </span><br><span class="line">setExactAndAllowWhileIdle()</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>区别同上set()与setExact()</p>
