@@ -94,7 +94,7 @@ boot架">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。
 boot架">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blogboot_img.png">
+<meta property="og:image" content="image/blogboot_img.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android源码bootable解析之bootloader LK(little kernel)">
 <meta name="twitter:description" content="记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。
@@ -383,7 +383,7 @@ boot架">
 <p>因为时间有限,并没有详细去跟代码。很多细节都是大概扫了一下函数内容或者根据注释得出结果，如有错误,欢迎指出,共同学习,共同进步。</p>
 </blockquote>
 <h1 id="附">附</h1><p>boot.img的头格式定义在：bootable\bootloader\lk\app\nandwrite\bootimg.h。如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> boot_img_hdr</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> magic[BOOT_MAGIC_SIZE];</span><br><span class="line">    <span class="keyword">unsigned</span> kernel_size;  <span class="comment">/* size in bytes */</span></span><br><span class="line">    <span class="keyword">unsigned</span> kernel_addr;  <span class="comment">/* physical load addr */</span></span><br><span class="line">    <span class="keyword">unsigned</span> ramdisk_size; <span class="comment">/* size in bytes */</span></span><br><span class="line">    <span class="keyword">unsigned</span> ramdisk_addr; <span class="comment">/* physical load addr */</span></span><br><span class="line">    <span class="keyword">unsigned</span> second_size;  <span class="comment">/* size in bytes */</span></span><br><span class="line">    <span class="keyword">unsigned</span> second_addr;  <span class="comment">/* physical load addr */</span></span><br><span class="line">    <span class="keyword">unsigned</span> tags_addr;    <span class="comment">/* physical addr for kernel tags */</span></span><br><span class="line">    <span class="keyword">unsigned</span> page_size;    <span class="comment">/* flash page size we assume */</span></span><br><span class="line">    <span class="keyword">unsigned</span> unused[<span class="number">2</span>];    <span class="comment">/* future expansion: should be 0 */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> name[BOOT_NAME_SIZE]; <span class="comment">/* asciiz product name */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> cmdline[BOOT_ARGS_SIZE];</span><br><span class="line">    <span class="keyword">unsigned</span> id[<span class="number">8</span>]; <span class="comment">/* timestamp / checksum / sha1 / etc */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>当我们将编译生成的boot.img用文本编辑软件打开后，能看到boot_im_hdr格式定义的头，如下：<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/blogboot_img.png" alt="boot.img"></p>
+<p>当我们将编译生成的boot.img用文本编辑软件打开后，能看到boot_im_hdr格式定义的头，如下：<br>　　<img src="image/blogboot_img.png" alt="boot.img"></p>
 
       
     </div>
@@ -659,7 +659,7 @@ boot架">
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

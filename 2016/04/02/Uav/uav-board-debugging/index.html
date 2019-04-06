@@ -94,8 +94,8 @@
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .自己的uav主板回来后将软件刷入板子(高通msm8074), 板子不能正常启动.
 通过分析log， 发现死在boot_images\core\boot\secboot3\hw\msm8974\sbl1\sbl1_mc.c 中 sbl1_tlmm_init() —-&amp;gt; boot_gpio_init()， 当我">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/uav_boot_small.png">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/uav_boot_ok.png">
+<meta property="og:image" content="image/uav_boot_small.png">
+<meta property="og:image" content="image/uav_boot_ok.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="无人机开发主板调试">
 <meta name="twitter:description" content="问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .自己的uav主板回来后将软件刷入板子(高通msm8074), 板子不能正常启动.
@@ -378,9 +378,9 @@
 <p>如能正常启动：fastboot flash partition gpt_backup0.bin —&gt; You MUST flash the new partition table first so others should be flashed on new layout. 　　</p>
 </blockquote>
 <p>　</p>
-<p>于是，将userdata分区空间改小一半，终于看到了一丝胜利的曙光，不过虽然能进入linaro系统，但是仍然有问题，空间不够，串口log如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav_boot_small.png" alt="uav_boot_log_1"></p>
+<p>于是，将userdata分区空间改小一半，终于看到了一丝胜利的曙光，不过虽然能进入linaro系统，但是仍然有问题，空间不够，串口log如下：<br><img src="image/uav_boot_small.png" alt="uav_boot_log_1"></p>
 <p>　　</p>
-<p>最后，将userdata相应加大，板子成功启动。串口log如下：<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/uav_boot_ok.png" alt="uav_boot_log_2"></p>
+<p>最后，将userdata相应加大，板子成功启动。串口log如下：<br><img src="image/uav_boot_ok.png" alt="uav_boot_log_2"></p>
 <p>　</p>
 <h2 id="附_USB调试信息打开">附 USB调试信息打开</h2><ol>
 <li><p>Dynamic UDC debug </p>
@@ -663,7 +663,7 @@
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

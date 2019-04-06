@@ -94,10 +94,10 @@
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。
 高通的引导体系结构SBL- Second BootLoader">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png">
+<meta property="og:image" content="image/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg">
+<meta property="og:image" content="image/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg">
+<meta property="og:image" content="image/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png">
+<meta property="og:image" content="image/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 电源管理架构">
 <meta name="twitter:description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。
@@ -373,8 +373,8 @@
 
       
         <p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
-<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br><a id="more"></a></p>
-<h2 id="电源管理框图">电源管理框图</h2><p>　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图补上来。<br><img src="http://7xjdax.com1.z0.glb.clouddn.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg" alt="power"></p>
+<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="image/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br><a id="more"></a></p>
+<h2 id="电源管理框图">电源管理框图</h2><p>　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图补上来。<br><img src="image/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg" alt="power"></p>
 <h2 id="主要文件及路径">主要文件及路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kernel\kernel\power\*</span><br><span class="line">   arch\arm\match-xxx\pm.c</span><br><span class="line">   driver\power\*</span><br><span class="line">   system\core\charger\charger.c   - 关机充电信息，显示充电<span class="built_in">log</span>等</span><br><span class="line">   上层文件太分散，待后期文件详解再一一列出</span><br></pre></td></tr></table></figure>
 <h2 id="Android结构">Android结构</h2><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(即三种低功耗状态)，使系统功耗降到最低。 电源管理架构分为四大部分： APP，Framework，Hal，Kernel。</p>
 <h3 id="应用层(APP)">应用层(APP)</h3><p>　　应用层主要指应用程序及其他使用电源管理的service。</p>
@@ -386,9 +386,9 @@
 <h2 id="">　</h2><p>　</p>
 <h3 id="电源管理机制">电源管理机制</h3><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(如上述三种低功耗状态),使系统功耗降到最低.
 　</p>
-<h4 id="实现流程">实现流程</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png" alt="framework">
+<h4 id="实现流程">实现流程</h4><p><img src="image/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png" alt="framework">
 　</p>
-<h4 id="状态切换流程">状态切换流程</h4><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png" alt="state"></p>
+<h4 id="状态切换流程">状态切换流程</h4><p><img src="image/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png" alt="state"></p>
 
       
     </div>
@@ -666,7 +666,7 @@
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

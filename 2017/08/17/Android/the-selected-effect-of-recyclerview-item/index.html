@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="最近需要对RecyclerView的Item实现选中效果和Item点击事件，尝试了两种方式。
 受限的简易实现方案布局文件首先在Item的布局文件中加入如下代码：1234android:clickable=&quot;true&quot;android:focusableInTouchMode=&quot;true&quot;android:focusable=&quot;true&quot;android:background=&quot;@drawable/sel">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/blog/forme/select_item_effct.gif">
+<meta property="og:image" content="image/blog/forme/select_item_effct.gif">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RecyclerView Item选中效果及点击事件的实现">
 <meta name="twitter:description" content="最近需要对RecyclerView的Item实现选中效果和Item点击事件，尝试了两种方式。
@@ -381,7 +381,7 @@
 <p>实现选中效果，然后为每个itemview添加并注册点击事件，并将点击事件传给外面的调用者，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="keyword">final</span> ViewHolder holder, <span class="keyword">final</span> <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*设置选中状态*/</span></span><br><span class="line">    <span class="keyword">if</span> (position == SelectedNavItem.getSlectedNavItem()) &#123;</span><br><span class="line">        holder.itemView.setBackground(mContext.getResources().getDrawable(R.drawable.selected));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        holder.itemView.setBackground(mContext.getResources().getDrawable(R.drawable.un_select));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    holder.itemView.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            onItemClickListener.onItemClick(holder.itemView, position);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>Activity中的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">adapter.setOnItemClickListener(<span class="keyword">new</span> NavFuncAdapter.OnItemClickListener() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(View view, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        SelectedNavItem.setSlectedNavItem(position);<span class="comment">//自定义的方法，告诉adpter被点击item</span></span><br><span class="line">        adapter.notifyDataSetChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <h1 id="源码地址">源码地址</h1><p><a href="https://github.com/huaqianlee/ForMe" target="_blank" rel="external">ForMe</a></p>
-<h1 id="效果">效果</h1><p><img src="http://7xjdax.com1.z0.glb.clouddn.com/blog/forme/select_item_effct.gif" alt="nav_item_selected"></p>
+<h1 id="效果">效果</h1><p><img src="image/blog/forme/select_item_effct.gif" alt="nav_item_selected"></p>
 
       
     </div>
@@ -655,7 +655,7 @@
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

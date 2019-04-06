@@ -94,8 +94,8 @@
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="Platform Information :　System:    Ａndroid4.4.4　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        huaqianlee@gmail.com
 如有错误欢迎指出，共同学习，共同进步　　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/201566Android-bms-arch.png">
-<meta property="og:image" content="http://7xjdax.com1.z0.glb.clouddn.com/201566battery-info.png">
+<meta property="og:image" content="image/201566Android-bms-arch.png">
+<meta property="og:image" content="image/201566battery-info.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android电池监控系统(BMS)之一电池系统架构">
 <meta name="twitter:description" content="Platform Information :　System:    Ａndroid4.4.4　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        huaqianlee@gmail.com
@@ -372,9 +372,9 @@
       
         <p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        huaqianlee@gmail.com</em></p>
 <p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。</p>
-<h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
+<h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="image/201566Android-bms-arch.png" alt="电池系统架构"></p>
 <p>自上而下，Android电池监控系统分为如下几个部分：</p>
-<h3 id="电池信息查看APP">电池信息查看APP</h3><p>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：<br><a id="more"></a>　<br>　　　<img src="http://7xjdax.com1.z0.glb.clouddn.com/201566battery-info.png" alt="电池信息"></p>
+<h3 id="电池信息查看APP">电池信息查看APP</h3><p>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：<br><a id="more"></a>　<br>　　　<img src="image/201566battery-info.png" alt="电池信息"></p>
 <p>　　代码主要路径：</p>
 <ul>
 <li>packages\apps\Settings\src\com\android\settings\BatteryOemInfo.java  //APP</li>
@@ -696,7 +696,7 @@
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
