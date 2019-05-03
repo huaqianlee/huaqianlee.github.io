@@ -440,7 +440,7 @@ make -j24
     </entry>
     
     <entry>
-      <title><![CDATA[What is fast charge now？]]></title>
+      <title><![CDATA[常用的快充技术简介]]></title>
       <url>http://huaqianlee.github.io/2017/11/13/Android/What-is-fast-charge-now%EF%BC%9F/</url>
       <content type="html"><![CDATA[<p>技术发展越来越快，快充技术也一样，那现在怎么样才能算快充，有哪些快充技术呢？</p>
 <h2 id="高通方案">高通方案</h2><h3 id="高通_Quick_Charge_方案">高通 Quick Charge 方案</h3><h4 id="QC_1-0">QC 1.0</h4><p>最高支持 5V/2A 充电功率(目前已经被划分为慢充)，基本都是骁龙 600 平台。<br><a id="more"></a></p>
