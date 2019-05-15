@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="App," />
+  <meta name="keywords" content="Qualcomm,源码分析," />
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。
-只需要在Activity中重写onBackPressed()即可：1234567891011private DrawerLayout mlayout; @Overridepublic void onBackPressed() &amp;#123;">
+<meta name="description" content="前不久在高通 SDM450 平台接触了 voter 机制（投票机制）。最近终于得空，结合一个问题简单研究了一下。现将研究流程简单记录一下,由于时间有限，所以是实用为目的，没有做详细的分析，不过结合着这篇分析和源码一起参考，应该能快速地应用 voter 做一些事情。
+voter第一步是找到 voter 的实现代码，然后分析 voter 的机制。voter 的实现代码主要是为各种 voter 提供接口">
 <meta property="og:type" content="article">
-<meta property="og:title" content="按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案">
-<meta property="og:url" content="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/index.html">
+<meta property="og:title" content="pmic voter">
+<meta property="og:url" content="http://huaqianlee.github.io/2019/05/15/Android/pmic-voter/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。
-只需要在Activity中重写onBackPressed()即可：1234567891011private DrawerLayout mlayout; @Overridepublic void onBackPressed() &amp;#123;">
+<meta property="og:description" content="前不久在高通 SDM450 平台接触了 voter 机制（投票机制）。最近终于得空，结合一个问题简单研究了一下。现将研究流程简单记录一下,由于时间有限，所以是实用为目的，没有做详细的分析，不过结合着这篇分析和源码一起参考，应该能快速地应用 voter 做一些事情。
+voter第一步是找到 voter 的实现代码，然后分析 voter 的机制。voter 的实现代码主要是为各种 voter 提供接口">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案">
-<meta name="twitter:description" content="今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。
-只需要在Activity中重写onBackPressed()即可：1234567891011private DrawerLayout mlayout; @Overridepublic void onBackPressed() &amp;#123;">
+<meta name="twitter:title" content="pmic voter">
+<meta name="twitter:description" content="前不久在高通 SDM450 平台接触了 voter 机制（投票机制）。最近终于得空，结合一个问题简单研究了一下。现将研究流程简单记录一下,由于时间有限，所以是实用为目的，没有做详细的分析，不过结合着这篇分析和源码一起参考，应该能快速地应用 voter 做一些事情。
+voter第一步是找到 voter 的实现代码，然后分析 voter 的机制。voter 的实现代码主要是为各种 voter 提供接口">
 
 
 
@@ -118,9 +118,9 @@
 
 
 
-  <link rel="canonical" href="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/"/>
+  <link rel="canonical" href="http://huaqianlee.github.io/2019/05/15/Android/pmic-voter/"/>
 
-  <title> 按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案 | Andy.Lee's  Blog </title>
+  <title> pmic voter | Andy.Lee's  Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -302,7 +302,7 @@
             
             
               
-                按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案
+                pmic voter
               
             
           </h1>
@@ -314,8 +314,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-08-18T22:44:17+08:00" content="Aug 18 2017">
-              Aug 18 2017
+            <time itemprop="dateCreated" datetime="2019-05-15T23:48:59+08:00" content="May 15 2019">
+              May 15 2019
             </time>
           </span>
 
@@ -344,8 +344,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/08/18/Android/hides-navigation-in-drawerlayou/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/18/Android/hides-navigation-in-drawerlayou/" itemprop="commentsCount"></span>
+                <a href="/2019/05/15/Android/pmic-voter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/05/15/Android/pmic-voter/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -368,8 +368,17 @@
       
 
       
-        <p>今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。</p>
-<p>只需要在Activity中重写onBackPressed()即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private DrawerLayout mlayout; </span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void <span class="function"><span class="title">onBackPressed</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (mlayout.isDrawerOpen(findViewById(R.id.nav_left_layout)))</span><br><span class="line">        mlayout.closeDrawers();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        super.onBackPressed();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># R.id.nav_left_layout为侧边栏显示部分顶层Layout</span></span><br></pre></td></tr></table></figure></p>
+        <p>前不久在高通 SDM450 平台接触了 voter 机制（投票机制）。最近终于得空，结合一个问题简单研究了一下。现将研究流程简单记录一下,由于时间有限，所以是实用为目的，没有做详细的分析，不过结合着这篇分析和源码一起参考，应该能快速地应用 voter 做一些事情。</p>
+<h1 id="voter">voter</h1><p>第一步是找到 voter 的实现代码，然后分析 voter 的机制。voter 的实现代码主要是为各种 voter 提供接口，我提炼了两个最关键的接口，如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># kern==el/msm-4.9==/drivers/power/supply/qcom/pmic-voter.c</span></span><br><span class="line"><span class="comment">/*</span><br><span class="line">** vote 函数主要用来给 votable 添加投票选项</span><br><span class="line">** votable: 投票的对象</span><br><span class="line">** client_str: 投票者</span><br><span class="line">** enabled: 投票者的内容（val）是否参与投票</span><br><span class="line">** val: 投票内容</span><br><span class="line">**/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vote</span><span class="params">(<span class="keyword">struct</span> votable *votable, <span class="keyword">const</span> <span class="keyword">char</span> *client_str, <span class="keyword">bool</span> enabled, <span class="keyword">int</span> val)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">...</span><br><span class="line">    <span class="keyword">switch</span> (votable-&gt;type) &#123; <span class="comment">// type 的值来自于 create_votable()</span></span><br><span class="line">	<span class="keyword">case</span> VOTE_MIN: <span class="comment">// 取投票对象所有内容的最小值</span></span><br><span class="line">		vote_min(votable, client_id, &amp;effective_result, &amp;effective_id);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> VOTE_MAX:</span><br><span class="line">		vote_max(votable, client_id, &amp;effective_result, &amp;effective_id);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> VOTE_SET_ANY:</span><br><span class="line">		vote_set_any(votable, client_id,</span><br><span class="line">				&amp;effective_result, &amp;effective_id);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 投票相关参数，可以在此文件中搜索此结构体的成员找到其值从哪儿来*/</span></span><br><span class="line"><span class="keyword">struct</span> votable &#123;</span><br><span class="line">	<span class="keyword">int</span>			type;</span><br><span class="line">...</span><br><span class="line">	<span class="keyword">int</span>			(*callback)(<span class="keyword">struct</span> votable *votable,</span><br><span class="line">	&#125;</span><br><span class="line">---&gt; </span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> votable *create_votable(<span class="keyword">const</span> <span class="keyword">char</span> *name,</span><br><span class="line">				<span class="keyword">int</span> votable_type,</span><br><span class="line">				<span class="keyword">int</span> (*callback)(<span class="keyword">struct</span> votable *votable,..)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建 votable, 引入 votable type 和 callback 函数</span></span><br><span class="line">...</span><br><span class="line">    <span class="comment">/* 创建 debugfs*/</span></span><br><span class="line">	debug_root = debugfs_create_dir(<span class="string">"pmic-votable"</span>, NULL);</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line">eg: 创建流入电池电流的投票对象</span><br><span class="line">chip-&gt;fcc_votable = create_votable(<span class="string">"FCC"</span>, VOTE_MIN,</span><br><span class="line">				pl_fcc_vote_callback,</span><br><span class="line">				chip);</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h1 id="pmic_voter_debugfs">pmic voter debugfs</h1><p>通过 voter 的文件节点能够比较清晰的看出 voter 结构。如下：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /sys/kernel/debug/pmic-votable/</span></span><br><span class="line">cat status</span><br><span class="line">FCC: HW_LIMIT_VOTER:			<span class="variable">en=</span><span class="number">0</span> <span class="variable">v=</span>-<span class="number">22</span></span><br><span class="line">FCC: BATT_PROFILE_VOTER:			<span class="variable">en=</span><span class="number">1</span> <span class="variable">v=</span><span class="number">1500000</span></span><br><span class="line">FCC: SW_ICL_MAX_VOTER:			<span class="variable">en=</span><span class="number">1</span> <span class="variable">v=</span><span class="number">1500000</span></span><br><span class="line">FCC: THERMAL_DAEMON_VOTER:			<span class="variable">en=</span><span class="number">0</span> <span class="variable">v=</span><span class="number">0</span></span><br><span class="line">FCC: FCC_SOC_VOTER:			<span class="variable">en=</span><span class="number">1</span> <span class="variable">v=</span><span class="number">1000000</span></span><br><span class="line">FCC: JEITA_VOTER:			<span class="variable">en=</span><span class="number">1</span> <span class="variable">v=</span><span class="number">1500000</span></span><br><span class="line">FCC: STEP_CHG_VOTER:			<span class="variable">en=</span><span class="number">0</span> <span class="variable">v=</span><span class="number">0</span></span><br><span class="line">FCC: TAPER_STEPPER_VOTER:			<span class="variable">en=</span><span class="number">0</span> <span class="variable">v=</span><span class="number">0</span></span><br><span class="line">FCC: <span class="variable">effective=</span>FCC_SOC_VOTER <span class="variable">type=</span>Min <span class="variable">v=</span><span class="number">1000000</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="一个问题案例">一个问题案例</h1><p><strong>[Description]</strong></p>
+<p>设备在不同温度条件下有不同的电流限制，但是在测试设备时发现一个问题：电池温度升温过程中，设备并没有在 cool 零界限改变温度，而是再超过临界线 2~3 ℃ 的时候才做相应动作。</p>
+<p><strong>[Root cause]</strong></p>
+<p>默认的 jeita 标准相关代码有一个温度临界值保护并延迟改变电流值的设定，当达到临界值时并不马上改变电流限制，继续投票上一阶段的电流值，当温度达到定义的延迟温度时，再投票当前阶段的电流值。</p>
+<p>详细情况如下：</p>
+<h2 id="每个阶段温度和电流值的定义">每个阶段温度和电流值的定义</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># kernel<span class="regexp">/msm-4.9/</span>arch<span class="regexp">/arm64/</span>boot<span class="regexp">/dts/</span>qcom<span class="regexp">/vendor/</span>qg-batterydata-xxx.dtsi</span><br><span class="line"></span><br><span class="line">qcom,jeita-fcc-ranges = &lt;<span class="number">50</span>   <span class="number">150</span>  <span class="number">800000</span>  <span class="comment">//阶段一  COOL</span></span><br><span class="line">			<span class="number">151</span>  <span class="number">450</span>  <span class="number">1500000</span> <span class="comment">// 阶段二 GOOD</span></span><br><span class="line">			<span class="number">451</span>  <span class="number">500</span>  <span class="number">1400000</span>&gt;; <span class="comment">// 阶段三 Warm</span></span><br></pre></td></tr></table></figure>
+<h2 id="关键源码">关键源码</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kernel/msm-4.9/drivers/power/supply/qcom/step-chg-jeita.c</span></span><br><span class="line"><span class="comment">/* 定义 jeita 标准延迟设定相关参数 */</span></span><br><span class="line">chip-&gt;jeita_fcc_config-&gt;psy_prop = POWER_SUPPLY_PROP_TEMP;</span><br><span class="line">chip-&gt;jeita_fcc_config-&gt;prop_name = <span class="string">"BATT_TEMP"</span>;</span><br><span class="line">chip-&gt;jeita_fcc_config-&gt;hysteresis = <span class="number">10</span>;</span><br><span class="line">	</span><br><span class="line"><span class="comment">/* jeita 生效函数 */</span></span><br><span class="line"><span class="keyword">static</span> int handle_jeita(struct step_chg_info *chip)</span><br><span class="line">&#123;</span><br><span class="line">	rc = power_supply_get_property(chip-&gt;batt_psy,</span><br><span class="line">			chip-&gt;jeita_fcc_config-&gt;psy_prop, &amp;pval);</span><br><span class="line">	rc = get_val(chip-&gt;jeita_fcc_config-&gt;fcc_cfg,</span><br><span class="line">		chip-&gt;jeita_fcc_config-&gt;hysteresis,</span><br><span class="line">		chip-&gt;jeita_fcc_index,</span><br><span class="line">		pval.intval,</span><br><span class="line">		&amp;chip-&gt;jeita_fcc_index,</span><br><span class="line">		&amp;fcc_ua);</span><br><span class="line">		</span><br><span class="line">	<span class="comment">/* 投票获取到的电流值 */</span>	</span><br><span class="line">	vote(chip-&gt;fcc_votable, JEITA_VOTER, fcc_ua ? <span class="keyword">true</span> : <span class="keyword">false</span>, fcc_ua);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 获取当前应投票的电流值 */</span></span><br><span class="line">get_val(...) 	</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/*</span><br><span class="line">	 * Check for hysteresis if it in the neighbourhood</span><br><span class="line">	 * of our current index.</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="keyword">if</span> (*new_index == current_index + <span class="number">1</span>) &#123;</span><br><span class="line">	    <span class="comment">/* 当温度小于临界值 + 延迟时，继续使用上一阶段的电流值</span><br><span class="line">		if (threshold &lt; range[*new_index].low_threshold + hysteresis) &#123;</span><br><span class="line">			/*</span><br><span class="line">			 * Stay in the current index, threshold is not higher</span><br><span class="line">			 * by hysteresis amount</span><br><span class="line">			 */</span></span><br><span class="line">			*new_index = current_index;</span><br><span class="line">			*val = range[current_index].value;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (*new_index == current_index - <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (threshold &gt; range[*new_index].high_threshold - hysteresis) &#123;</span><br><span class="line">			<span class="comment">/*</span><br><span class="line">			 * stay in the current index, threshold is not lower</span><br><span class="line">			 * by hysteresis amount</span><br><span class="line">			 */</span></span><br><span class="line">			*new_index = current_index;</span><br><span class="line">			*val = range[current_index].value;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -392,7 +401,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/App/" rel="tag">#App</a>
+            <a href="/tags/Qualcomm/" rel="tag">#Qualcomm</a>
+          
+            <a href="/tags/源码分析/" rel="tag">#源码分析</a>
           
         </div>
       
@@ -401,16 +412,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/17/Android/the-selected-effect-of-recyclerview-item/" rel="next" title="RecyclerView Item选中效果及点击事件的实现">
-                <i class="fa fa-chevron-left"></i> RecyclerView Item选中效果及点击事件的实现
+              <a href="/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/" rel="next" title="Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook">
+                <i class="fa fa-chevron-left"></i> Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/" rel="prev" title="通过自定义侧边导航栏的RecyclerView动态加载布局">
-                通过自定义侧边导航栏的RecyclerView动态加载布局 <i class="fa fa-chevron-right"></i>
+              <a href="/2100/11/21/Android/A-summary-of-Android-source-analysis/" rel="prev" title="【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客">
+                【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -460,8 +471,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/08/18/Android/hides-navigation-in-drawerlayou/"
-           data-title="按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案" data-url="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/">
+      <div class="ds-thread" data-thread-key="2019/05/15/Android/pmic-voter/"
+           data-title="pmic voter" data-url="http://huaqianlee.github.io/2019/05/15/Android/pmic-voter/">
       </div>
     
   </div>
@@ -624,7 +635,7 @@
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#voter"><span class="nav-number">1.</span> <span class="nav-text">voter</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pmic_voter_debugfs"><span class="nav-number">2.</span> <span class="nav-text">pmic voter debugfs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个问题案例"><span class="nav-number">3.</span> <span class="nav-text">一个问题案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#每个阶段温度和电流值的定义"><span class="nav-number">3.1.</span> <span class="nav-text">每个阶段温度和电流值的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键源码"><span class="nav-number">3.2.</span> <span class="nav-text">关键源码</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
