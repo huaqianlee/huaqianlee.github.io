@@ -428,6 +428,136 @@
             
               
                 
+                <a class="post-title-link" href="/2019/05/16/Android/A-little-knowledge-about-health/" itemprop="url">
+                  一个 health service 不生效问题引出的一点知识
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-05-16T23:57:34+08:00" content="May 16 2019">
+              May 16 2019
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/05/16/Android/A-little-knowledge-about-health/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/05/16/Android/A-little-knowledge-about-health/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>从 Android P 开始，Google 开始推荐厂家再定制一个 health ，前不久遇到一个定制 health 不生效的问题。在分析解决问题的过程中，学习到了一点新知识，在这篇文章里根据解决问题的流程做一个小小的记录。</p>
+<blockquote>
+<p>问题：定制 health service 中的一些 health 信息未成功反应到 Framework。</p>
+<p>已知：定制 health 和 Google healthd 进程都运行于设备中，定制 health 主要重写 healthd_board_battery_update 函数，会通过库文件引用原生代码（system/core/healthd/）中的实现。</p>
+</blockquote>
+<h1 id="初步方案">初步方案</h1><h2 id="简单介绍">简单介绍</h2><p>服务创建时都编写了一个 x.rc 文件，用来描述 health service 的一些特点，其中就包括其启动时机。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># system/core/healthd/android.hardware.health@2.0-service.rc&#10;/* sevice &#31867;&#22411;&#30340; setction &#34920;&#31034;&#19968;&#20010;&#21487;&#25191;&#34892;&#31243;&#24207;&#65288;&#36827;&#31243;&#65289; */&#10;service health-hal-2-0 /vendor/bin/hw/android.hardware.health@2.0-service or healthd.rc&#10;    class hal &#10;    user system&#10;    group system&#10;    file /dev/kmsg w</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>启动顺序： hal-&gt; core-&gt; main -&gt; later</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2019/05/16/Android/A-little-knowledge-about-health/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2019/05/15/Android/pmic-voter/" itemprop="url">
                   pmic voter
                 </a>
@@ -1395,135 +1525,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/14/Android/Android-SELinux-Permison-and-Question/" itemprop="url">
-                  Android Selinux 权限及问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-14T22:26:02+08:00" content="Nov 14 2017">
-              Nov 14 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/14/Android/Android-SELinux-Permison-and-Question/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/14/Android/Android-SELinux-Permison-and-Question/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>由于现做的是MTK平台，源码路径基于MTK， 不过高通大同小异</p>
-</blockquote>
-<h2 id="说明">说明</h2><p>Android 5.0以后完全引入了 SEAndroid/SELinux 安全机制，这样即使拥有 root 权限或 chmod 777 ，仍然无法再JNI以上访问内核节点。</p>
-<blockquote>
-<p>其实在 Android 4.4 就有限制的启用此安全机制了。后面内容都按照 5.0  以后介绍，4.4 会有些许差异。</p>
-</blockquote>
-<h2 id="SELinux_Mode">SELinux Mode</h2><p>SELinux 分为两种模式，Android 5.0 后所有进程都使用 enforcing mode。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enforcing mode: 限制访问</span><br><span class="line">permissive mode: 只审查权限，不限制</span><br></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/14/Android/Android-SELinux-Permison-and-Question/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1569,7 +1570,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">82</span>
+              <span class="site-state-item-count">83</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
