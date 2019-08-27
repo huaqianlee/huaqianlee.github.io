@@ -228,18 +228,46 @@
   </entry>
   
   <entry>
+    <title>USB port error</title>
+    <link href="http://huaqianlee.github.io/2019/08/27/Bugs/USB-port-error/"/>
+    <id>http://huaqianlee.github.io/2019/08/27/Bugs/USB-port-error/</id>
+    <published>2019-08-27T14:11:32.000Z</published>
+    <updated>2019-08-27T14:11:32.572Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>python_automaticly_order</title>
+    <link href="http://huaqianlee.github.io/2019/08/26/python-automaticly-order/"/>
+    <id>http://huaqianlee.github.io/2019/08/26/python-automaticly-order/</id>
+    <published>2019-08-26T15:46:25.000Z</published>
+    <updated>2019-08-26T15:46:25.914Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>一个 health service 不生效问题引出的一点知识</title>
     <link href="http://huaqianlee.github.io/2019/05/16/Android/A-little-knowledge-about-health/"/>
     <id>http://huaqianlee.github.io/2019/05/16/Android/A-little-knowledge-about-health/</id>
     <published>2019-05-16T15:57:34.000Z</published>
-    <updated>2019-05-16T16:14:18.547Z</updated>
+    <updated>2019-05-16T16:15:12.698Z</updated>
     
     <content type="html"><![CDATA[<p>从 Android P 开始，Google 开始推荐厂家再定制一个 health 。前不久遇到一个定制 health 中的信息未成功反应到 Framework 的问题，在分析解决问题的过程中，学习到了一点新知识，所以就在这篇文章里根据解决问题的流程做一个小小的记录。</p>
 <blockquote>
 <p>问题：定制 health service 中的一些 health 信息未成功反应到 Framework。</p>
 <p>已知：定制 health 和 Google healthd 进程都运行于设备中，定制 health 主要重写 healthd_board_battery_update 函数，会通过库文件引用原生代码（system/core/healthd/）中的实现。</p>
 </blockquote>
-<h1 id="初步方案">初步方案</h1><h2 id="简单介绍">简单介绍</h2><p>服务创建时都编写了一个 x.rc 文件，用来描述 health service 的一些特点，其中就包括其启动时机。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># system/core/healthd/android.hardware.health@2.0-service.rc&#10;/* sevice &#31867;&#22411;&#30340; setction &#34920;&#31034;&#19968;&#20010;&#21487;&#25191;&#34892;&#31243;&#24207;&#65288;&#36827;&#31243;&#65289; */&#10;service health-hal-2-0 /vendor/bin/hw/android.hardware.health@2.0-service or healthd.rc&#10;    class hal &#10;    user system&#10;    group system&#10;    file /dev/kmsg w</span><br></pre></td></tr></table></figure></p>
+<h1 id="初步方案">初步方案</h1><h2 id="简单介绍">简单介绍</h2><p>服务创建时都编写了一个 x.rc 文件，用来描述 health service 的一些特点，其中就包括其启动时机。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># system/core/healthd/android.hardware.health@2.0-service.rc&#10;/* sevice &#31867;&#22411;&#30340; setction &#34920;&#31034;&#19968;&#20010;&#21487;&#25191;&#34892;&#31243;&#24207;&#65288;&#36827;&#31243;&#65289; */&#10;service health-hal-2-0 /vendor/bin/hw/android.hardware.health@2.0-service or healthd.rc&#10;&#9;class hal &#10;&#9;user system&#10;&#9;group system&#10;&#9;file /dev/kmsg w</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>启动顺序： hal-&gt; core-&gt; main -&gt; later</p>
 </blockquote>
@@ -261,7 +289,7 @@
 &lt;p&gt;问题：定制 health service 中的一些 health 信息未成功反应到 Framework。&lt;/p&gt;
 &lt;p&gt;已知：定制 health 和 Google healthd 进程都运行于设备中，定制 health 主要重写 healthd_board_battery_update 函数，会通过库文件引用原生代码（system/core/healthd/）中的实现。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&quot;初步方案&quot;&gt;初步方案&lt;/h1&gt;&lt;h2 id=&quot;简单介绍&quot;&gt;简单介绍&lt;/h2&gt;&lt;p&gt;服务创建时都编写了一个 x.rc 文件，用来描述 health service 的一些特点，其中就包括其启动时机。如下：&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;# system/core/healthd/android.hardware.health@2.0-service.rc&amp;#10;/* sevice &amp;#31867;&amp;#22411;&amp;#30340; setction &amp;#34920;&amp;#31034;&amp;#19968;&amp;#20010;&amp;#21487;&amp;#25191;&amp;#34892;&amp;#31243;&amp;#24207;&amp;#65288;&amp;#36827;&amp;#31243;&amp;#65289; */&amp;#10;service health-hal-2-0 /vendor/bin/hw/android.hardware.health@2.0-service or healthd.rc&amp;#10;    class hal &amp;#10;    user system&amp;#10;    group system&amp;#10;    file /dev/kmsg w&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h1 id=&quot;初步方案&quot;&gt;初步方案&lt;/h1&gt;&lt;h2 id=&quot;简单介绍&quot;&gt;简单介绍&lt;/h2&gt;&lt;p&gt;服务创建时都编写了一个 x.rc 文件，用来描述 health service 的一些特点，其中就包括其启动时机。如下：&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;# system/core/healthd/android.hardware.health@2.0-service.rc&amp;#10;/* sevice &amp;#31867;&amp;#22411;&amp;#30340; setction &amp;#34920;&amp;#31034;&amp;#19968;&amp;#20010;&amp;#21487;&amp;#25191;&amp;#34892;&amp;#31243;&amp;#24207;&amp;#65288;&amp;#36827;&amp;#31243;&amp;#65289; */&amp;#10;service health-hal-2-0 /vendor/bin/hw/android.hardware.health@2.0-service or healthd.rc&amp;#10;&amp;#9;class hal &amp;#10;&amp;#9;user system&amp;#10;&amp;#9;group system&amp;#10;&amp;#9;file /dev/kmsg w&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;启动顺序： hal-&amp;gt; core-&amp;gt; main -&amp;gt; later&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1094,63 +1122,6 @@ make -j24
     
     
       <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>no no no, go go go</title>
-    <link href="http://huaqianlee.github.io/2017/07/20/Life/no-no-no-go-go-go/"/>
-    <id>http://huaqianlee.github.io/2017/07/20/Life/no-no-no-go-go-go/</id>
-    <published>2017-07-20T11:29:53.000Z</published>
-    <updated>2019-04-06T13:32:59.468Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="image//life/bing.jpg" alt="bing"></p>
-<p>最近工作一忙起来，自己又懈怠了， 回家啥都不想做，大多数时候都是锻炼一下，然后撸两把王者，就睡觉了。 好忧伤，人越来越没有以前的激情了， 有时候都在想接受现状，拿着不算太差的工资，好好上班，不用花时间去折腾学习了。这种想法好可怕！</p>
-<p>调整调整！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;image//life/bing.jpg&quot; alt=&quot;bing&quot;&gt;&lt;/p&gt;
-&lt;p&gt;最近工作一忙起来，自己又懈怠了， 回家啥都不想做，大多数时候都是锻炼一下，然后撸两把王者，就睡觉了。 好忧伤，人越来越没有以前的激情了， 有时候都在想接受现状，拿着不算太差
-    
-    </summary>
-    
-      <category term="Life" scheme="http://huaqianlee.github.io/categories/Life/"/>
-    
-    
-      <category term="成长" scheme="http://huaqianlee.github.io/tags/%E6%88%90%E9%95%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MTK Modem 问题集</title>
-    <link href="http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-%E9%97%AE%E9%A2%98%E9%9B%86/"/>
-    <id>http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-问题集/</id>
-    <published>2017-07-12T15:01:42.000Z</published>
-    <updated>2017-07-12T15:02:54.498Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近开始做MTK相关的工作，在第一步编译Modem时就遇到了挺多问题。特在此文整理和Modem相关的问题。</p>
-<h1 id="编译相关问题">编译相关问题</h1><a id="more"></a>
-<h2 id="编译权限问题">编译权限问题</h2><p>编译时提示如下权限问题：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">*******************************************</span><br><span class="line">* [OS]                : Linux</span><br><span class="line">* [PERL]              : v5.<span class="number">10.1</span> or v5.<span class="number">14.2</span></span><br><span class="line">* [MAKE]              : GNU Make v3.<span class="number">81</span></span><br><span class="line">* [SHELL]             : GNU bash v4.<span class="number">1.5</span></span><br><span class="line">* [GCC-ARM-NONE-EABI] : v4.<span class="number">6.2</span> or above</span><br><span class="line">* [NATIVE GCC(UBUNTU)]: v4.<span class="number">5</span> or above</span><br><span class="line"></span><br><span class="line">*******************************************</span><br><span class="line"> Start checking current Build Environment  </span><br><span class="line">*******************************************</span><br><span class="line">* [PERL]              : v5.<span class="number">14.2</span>            [OK] !!!</span><br><span class="line">* [MAKE]              : GNU Make v3.<span class="number">81</span>     [OK] !!!</span><br><span class="line">* [SHELL]             : GNU bash v4.<span class="number">2.25</span>    [HIGHER THAN RECOMMENDED] !!!</span><br><span class="line">sh: <span class="number">1</span>: tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-gcc: Permission denied</span><br><span class="line">* [GCC-ARM-NONE-EABI] : [UNKNOWN VERSION] !!!</span><br><span class="line">* [NATIVE GCC(UBUNTU)]: gcc (Ubuntu/Linaro <span class="number">4.6</span>.<span class="number">3</span>-<span class="number">1</span>ubuntu5) <span class="number">4.6</span>.<span class="number">3</span>  [OK] !!!</span><br><span class="line"></span><br><span class="line">current Build Env. is not recommendation </span><br><span class="line">To avoid unexpected errors , please install the recommended Tool Chain.</span><br><span class="line">*******************************************</span><br><span class="line">  Build Environment is NOT RECOMMENDED!</span><br><span class="line">*******************************************</span><br><span class="line"></span><br><span class="line">makefile check is <span class="keyword">done</span></span><br><span class="line">/bin/bash: tools/init/strcmpex_linux.exe: Permission denied</span><br><span class="line">make: *** [getoptions] Error <span class="number">126</span></span><br></pre></td></tr></table></figure></p>
-<p>这种问题很好解决， 通过chmod对其提供执行权限即可。</p>
-<h2 id="不能定位数据库问题">不能定位数据库问题</h2><p>提示不能定位原始codegen 数据库，错误log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ERROR] Cannot determine the original codegen database: BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P1 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P10 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P11 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P12 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P13 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P14 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P15 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P16 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P17 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P18 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P19 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P2 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P20 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P21 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P3 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P4 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P5 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P6 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P7 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P8 BPLGUInfoCustomApp_MT6735_S00_MOLY_LR9_W1444_MD_LWTG_MP_V94_P9</span><br><span class="line">make[<span class="number">1</span>]: *** [build/ZECHIN6737T_65_M0/LWG_DSDS_COTSX/bin/dep/codegen_dep/cgen_cfg_Modem.det] Error <span class="number">2</span></span><br><span class="line">make: *** [cgen] Error <span class="number">2</span></span><br></pre></td></tr></table></figure></p>
-<p>此问题是因为[mt6735m_all_modem\mtk_rel\ZECHIN6737T_65_M0\LTG_DSDS\dhl\database]路径下面太多的数据库文件，只需要将多余的删除掉即可。</p>
-<h2 id="编译工具链问题">编译工具链问题</h2><p>提示某些工具不能找到，log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lnosys</span><br><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lm</span><br><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lc</span><br><span class="line">tools/GCC/<span class="number">4.6</span>.<span class="number">2</span>/linux/bin/arm-none-eabi-ld: cannot find -lgcc</span><br></pre></td></tr></table></figure></p>
-<p>此问题是因为代码里面的gcc工具链有问题，需要重新安装正确的工具链，由于十分不好找，所以我上传了百度云：<a href="http://pan.baidu.com/s/1pLblCkN" target="_blank" rel="external">GCC地址</a>。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近开始做MTK相关的工作，在第一步编译Modem时就遇到了挺多问题。特在此文整理和Modem相关的问题。&lt;/p&gt;
-&lt;h1 id=&quot;编译相关问题&quot;&gt;编译相关问题&lt;/h1&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
-    
-    
-      <category term="MTK" scheme="http://huaqianlee.github.io/tags/MTK/"/>
     
   </entry>
   

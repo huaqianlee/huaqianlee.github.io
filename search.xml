@@ -192,6 +192,18 @@
     </entry>
     
     <entry>
+      <title><![CDATA[USB port error]]></title>
+      <url>http://huaqianlee.github.io/2019/08/27/Bugs/USB-port-error/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[python_automaticly_order]]></title>
+      <url>http://huaqianlee.github.io/2019/08/26/python-automaticly-order/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[一个 health service 不生效问题引出的一点知识]]></title>
       <url>http://huaqianlee.github.io/2019/05/16/Android/A-little-knowledge-about-health/</url>
       <content type="html"><![CDATA[<p>从 Android P 开始，Google 开始推荐厂家再定制一个 health 。前不久遇到一个定制 health 中的信息未成功反应到 Framework 的问题，在分析解决问题的过程中，学习到了一点新知识，所以就在这篇文章里根据解决问题的流程做一个小小的记录。</p>
@@ -199,7 +211,7 @@
 <p>问题：定制 health service 中的一些 health 信息未成功反应到 Framework。</p>
 <p>已知：定制 health 和 Google healthd 进程都运行于设备中，定制 health 主要重写 healthd_board_battery_update 函数，会通过库文件引用原生代码（system/core/healthd/）中的实现。</p>
 </blockquote>
-<h1 id="初步方案">初步方案</h1><h2 id="简单介绍">简单介绍</h2><p>服务创建时都编写了一个 x.rc 文件，用来描述 health service 的一些特点，其中就包括其启动时机。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># system/core/healthd/android.hardware.health@2.0-service.rc&#10;/* sevice &#31867;&#22411;&#30340; setction &#34920;&#31034;&#19968;&#20010;&#21487;&#25191;&#34892;&#31243;&#24207;&#65288;&#36827;&#31243;&#65289; */&#10;service health-hal-2-0 /vendor/bin/hw/android.hardware.health@2.0-service or healthd.rc&#10;    class hal &#10;    user system&#10;    group system&#10;    file /dev/kmsg w</span><br></pre></td></tr></table></figure></p>
+<h1 id="初步方案">初步方案</h1><h2 id="简单介绍">简单介绍</h2><p>服务创建时都编写了一个 x.rc 文件，用来描述 health service 的一些特点，其中就包括其启动时机。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># system/core/healthd/android.hardware.health@2.0-service.rc&#10;/* sevice &#31867;&#22411;&#30340; setction &#34920;&#31034;&#19968;&#20010;&#21487;&#25191;&#34892;&#31243;&#24207;&#65288;&#36827;&#31243;&#65289; */&#10;service health-hal-2-0 /vendor/bin/hw/android.hardware.health@2.0-service or healthd.rc&#10;&#9;class hal &#10;&#9;user system&#10;&#9;group system&#10;&#9;file /dev/kmsg w</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>启动顺序： hal-&gt; core-&gt; main -&gt; later</p>
 </blockquote>
@@ -824,7 +836,7 @@ make -j24
 <blockquote>
 <p>不过为了功耗，Android限制减少了cpu唤醒次数，set()可能不十分准确，若准确性要求高，可使用setExact()方法。</p>
 </blockquote>
-<h3 id="Doze模式">Doze模式</h3><p>Android6.0及以上为了省电新加入了Doze模式，满足未插电、屏幕关闭等一段时间将进入doze模式，对cpu、网络、Alarm等进行限制，如下为Android7.0进入Doze模式的两个阶段：<br>阶段一：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/doze_first_level.png" alt="First Level"><br>阶段二：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/doze_second_level.png" alt="Second Level"></p>
+<h3 id="Doze模式">Doze模式</h3><p>Android6.0及以上为了省电新加入了Doze模式，满足未插电、屏幕关闭等一段时间将进入doze模式，对cpu、网络、Alarm等进行限制，如下为Android7.0进入Doze模式的两个阶段：<br>阶段一：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/doze_first_level.png" alt="First Level"><br>阶段二：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/doze_second_level.png" alt="Second Level"></p>
 <p>如若想Alarm在Doze模式也能正常执行，则需要使用AlarmManager的如下两个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setAndAllowWhileIdle()        </span><br><span class="line">setExactAndAllowWhileIdle()</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>区别同上set()与setExact()</p>
@@ -1357,7 +1369,7 @@ make -j24
       <title><![CDATA[第一行代码之UI]]></title>
       <url>http://huaqianlee.github.io/2017/03/25/FirstCode/firstcode-note-UI/</url>
       <content type="html"><![CDATA[<p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<p>本部分思维导图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/UI.png" alt="UI"><br><a id="more"></a></p>
+<p>本部分思维导图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/UI.png" alt="UI"><br><a id="more"></a></p>
 <h2 id="常用控件">常用控件</h2><p>如下总结一些常用的参数配置或者方法，某些参数可能对于其它控件也适用。</p>
 <h3 id="TextView">TextView</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">android:gravity - 指定文字对齐方式，用指定控件内容的位置。</span><br><span class="line">android:layout_gravity -  指定控件相对于父布局的位置。</span><br></pre></td></tr></table></figure>
 <h3 id="Button">Button</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:textAllCaps=<span class="string">"false"</span> - 禁用Button字母自动大写转换</span><br></pre></td></tr></table></figure>
@@ -1433,7 +1445,7 @@ make -j24
       <url>http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/</url>
       <content type="html"><![CDATA[<p> <a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
 <h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.<br><a id="more"></a></p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/prj_struct.png" alt="项目结构"></p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/prj_struct.png" alt="项目结构"></p>
 <ul>
 <li>.gradle &amp; .idea<br>Android Studio自动生成, 无需关心, 版本管理时,一般将其忽略(即.gitignore文件).</li>
 <li>app<br>项目代码、资源基本位于此路径。</li>
@@ -1478,17 +1490,17 @@ make -j24
 <h4 id="返回数据给上一活动">返回数据给上一活动</h4><p>FirstActivity中添加代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent  intent = new Intent(FirstActivity.this, SecondActivity.class);</span><br><span class="line">startActivityForResult(intent,<span class="number">1</span>);</span><br></pre></td></tr></table></figure></p>
 <p>FirstActivity中重写回调函数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(requestCode) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>: </span><br><span class="line">            <span class="keyword">if</span>(resultCode = RESULT_OK)</span><br><span class="line">                String returnData = data.getStringExtra(<span class="string">"data_return"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>SecondActivity中实现返回逻辑：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent();</span><br><span class="line">intent.putExtra(<span class="string">"data_return"</span>, <span class="string">"Hello, FirstActivity!"</span>);</span><br><span class="line"><span class="built_in">set</span>Result(RESULT_OK, intent);</span><br><span class="line">finish();</span><br><span class="line"><span class="comment"># 为了在按返回键时也返回数据,需要重写onBackPressed()方法,并加入如上内容.</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="活动的生命周期">活动的生命周期</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/lifecycle.gif" alt="lifecycle"></p>
+<h2 id="活动的生命周期">活动的生命周期</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/lifecycle.gif" alt="lifecycle"></p>
 <p>根据生命周期，活动存在被回收的可能性，所以为了有好的体验，需要保存数据。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Overide</span><br><span class="line">protected void onSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">    super.onSaveInstanceState(outState);</span><br><span class="line">    String tempData = <span class="string">"**********"</span>;</span><br><span class="line">    outState.putString(<span class="string">"data_key"</span>, tempData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>恢复数据:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    ....</span><br><span class="line">    <span class="keyword">if</span>(savedInstanceState != null)&#123;</span><br><span class="line">        String tmpData = savedInstaceState.getString(<span class="string">"data_key"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>Bundle对象亦可放在Intent对象中传递.</p>
 </blockquote>
 <h2 id="活动的启动模式">活动的启动模式</h2><p>活动启动模式一共4种：standard、singleTop、singleTask和singleInstance。AndroidManifest.xml中<activity>指定android:launchMode属性来选择。</activity></p>
-<h3 id="standard">standard</h3><p>系统默认，每启动一个活动就在栈顶创建，即使已经存在。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/standard.jpg" alt="standard"></p>
-<h3 id="singleTop">singleTop</h3><p>活动启动时，栈顶如果不存在此活动，则创建此活动。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/singleTop.jpg" alt="singleTop"></p>
-<h3 id="singleTask">singleTask</h3><p>活动启动时，如果栈里存在此活动，则将之前的全部出栈，将此活动置于栈顶。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/singleTask.jpg" alt="singleTask"></p>
-<h3 id="singleInstance">singleInstance</h3><p>启动活动时，单独创建一个返回栈来管理，这样所有应用可以共用返回栈，访问此活动。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/singleInstance.jpg" alt="singleInstance"></p>
+<h3 id="standard">standard</h3><p>系统默认，每启动一个活动就在栈顶创建，即使已经存在。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/standard.jpg" alt="standard"></p>
+<h3 id="singleTop">singleTop</h3><p>活动启动时，栈顶如果不存在此活动，则创建此活动。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/singleTop.jpg" alt="singleTop"></p>
+<h3 id="singleTask">singleTask</h3><p>活动启动时，如果栈里存在此活动，则将之前的全部出栈，将此活动置于栈顶。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/singleTask.jpg" alt="singleTask"></p>
+<h3 id="singleInstance">singleInstance</h3><p>启动活动时，单独创建一个返回栈来管理，这样所有应用可以共用返回栈，访问此活动。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/singleInstance.jpg" alt="singleInstance"></p>
 <h2 id="最佳实践及有用的技巧">最佳实践及有用的技巧</h2><h3 id="随时随地退出程序">随时随地退出程序</h3><p>随时随地退出程序，建一个ActivityCollector类和所有新建类的基类BaseActivity类。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class ActivityCollector &#123;</span><br><span class="line">    public static List&lt;Activity&gt; activities = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public static void addActivity(Activity activity) &#123;</span><br><span class="line">        activities.add(activity);</span><br><span class="line">    &#125;</span><br><span class="line">    public static void removeActivity(Activity activity) &#123;</span><br><span class="line">        activities.remove(activity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void <span class="function"><span class="title">finishAll</span></span>() &#123;</span><br><span class="line">        <span class="keyword">for</span>(Acitivity activity : activities) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!activity.isFinishing()) &#123;</span><br><span class="line">                activity.finish();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class BaseActivity extends AppCompatActivity &#123;</span><br><span class="line">    protected void onCreate(Bundle saveInstanceState) &#123;</span><br><span class="line">        ...</span><br><span class="line">        ActivityCollector.addActivity(this);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected void <span class="function"><span class="title">onDestory</span></span> () &#123;</span><br><span class="line">        ...</span><br><span class="line">        ActivityCollector.removeActivity(this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>当需要销毁所有活动时<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ActivityCollector.finishAll();</span><br><span class="line">android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line"><span class="comment"># kill掉当前进程， 确保万一的语句</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="项目合作时启动活动的最佳写法">项目合作时启动活动的最佳写法</h3><p>在需要被启动的活动中实现actionStart()方法。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void actionStart(Context context, String data1, String data2) &#123;</span><br><span class="line">    Intent intent = new Intent(context, xxx.class);</span><br><span class="line">    intent.putExtra(<span class="string">"param1"</span>,data1);</span><br><span class="line">    intent.putExtra(<span class="string">"param2"</span>,data2);</span><br><span class="line">    context.startActivity(intent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -1499,7 +1511,7 @@ make -j24
       <title><![CDATA[第一行代码之启程 ]]></title>
       <url>http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/</url>
       <content type="html"><![CDATA[<p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过50%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。</p>
-<p>《第一行代码》思维导图如下:<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81.png" alt="脑图1"></p>
+<p>《第一行代码》思维导图如下:<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81.png" alt="脑图1"></p>
 <a id="more"></a>
 <p>《第一行代码》学习笔记目录:</p>
 <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码之项目结构与活动</a></p>
@@ -2639,96 +2651,6 @@ git commit
     </entry>
     
     <entry>
-      <title><![CDATA[Android编译过程详解之三]]></title>
-      <url>http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/</url>
-      <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
-<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
-<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
-<ul>
-<li>AndroidProducts.mk </li>
-<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
-<li>BoardConfig.mk</li>
-<li>verndorsetup.sh</li>
-</ul>
-<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
-<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
-<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
-<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
-<thead>
-<tr>
-<th>常量</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PRODUCT_NAME</td>
-<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
-</tr>
-<tr>
-<td>PRODUCT_MODEL</td>
-<td>产品的型号，这也是最终用户将看到的</td>
-</tr>
-<tr>
-<td>PRODUCT_LOCALES</td>
-<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGES</td>
-<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
-</tr>
-<tr>
-<td>PRODUCT_DEVICE</td>
-<td>该产品的工业设计的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_MANUFACTURER</td>
-<td>制造商的名称</td>
-</tr>
-<tr>
-<td>PRODUCT_BRAND</td>
-<td>该产品专门定义的商标（如果有的话）</td>
-</tr>
-<tr>
-<td>PRODUCT_PROPERTY_OVERRIDES</td>
-<td>对于商品属性的定义</td>
-</tr>
-<tr>
-<td>PRODUCT_COPY_FILES</td>
-<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
-</tr>
-<tr>
-<td>PRODUCT_OTA_PUBLIC_KEYS</td>
-<td>对于该产品的 OTA 公开 key 的列表</td>
-</tr>
-<tr>
-<td>PRODUCT_POLICY</td>
-<td>产品使用的策略</td>
-</tr>
-<tr>
-<td>PRODUCT_PACKAGE_OVERLAYS</td>
-<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
-</tr>
-<tr>
-<td>PRODUCT_CONTRIBUTORS_FILE</td>
-<td>HTML 文件，其中包含项目的贡献者</td>
-</tr>
-<tr>
-<td>PRODUCT_TAGS</td>
-<td>该产品的标签，以空格分格</td>
-</tr>
-</tbody>
-</table>
-<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
-<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
-<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
-　　　</p>
-<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[Android编译过程详解之二]]></title>
       <url>http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/</url>
       <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a><br>　<br>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　　./go.sh -j8 or make -j8／--jobs</span><br></pre></td></tr></table></figure></p>
@@ -2904,6 +2826,96 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 <blockquote>
 <p>模块mk文件详见Android.mk解析：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/#more" target="_blank" rel="external">Android.mk解析</a></p>
 </blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android编译过程详解之三]]></title>
+      <url>http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/</url>
+      <content type="html"><![CDATA[<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a></p>
+<p>　　前两个篇基本完全涉及到了整个编译过程，接下来着重分析一下和公司产品相关的mk文件。有两个路径前面没有怎么提到过，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build/target/product <span class="comment"># 当前产品配置的mk文件，如：需要包含哪些apk在此产品中</span></span><br><span class="line">build/target/board  <span class="comment"># 硬件芯片配置的mk文件，如：GPU、是否支持浮点运算等</span></span><br></pre></td></tr></table></figure></p>
+<p>　　除以上两个路径外，对产品定义的文件通常位于device目录下，还可以定义在vender目录下（不过Google已不建议如此做了），device目录下根据公司名和产品名分为两级目录，这个上文已经介绍过。通常一个产品定义如下四个文件：</p>
+<ul>
+<li>AndroidProducts.mk </li>
+<li>产品版本定义文件（一般针对不同应用环境存在多个，如：msm8916_32.mk）</li>
+<li>BoardConfig.mk</li>
+<li>verndorsetup.sh</li>
+</ul>
+<h2 id="AndroidProducts-mk">AndroidProducts.mk</h2><a id="more"></a>
+<p>此文件定义PRODUCT_MAKEFILES ，用来导入产品版本配置文件列表，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. build\target\product\AndroidProducts.mk  ＃定义默认产品配置文件</span><br><span class="line">ifneq ($(TARGET_BUILD_APPS),)　＃根据TARGET_BUILD_APPS确定编译那些APP，TARGET_BUILD_APPS由上文envsetup.sh中的命令指定</span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_armv5.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">PRODUCT_MAKEFILES := \</span><br><span class="line">    $(LOCAL_DIR)/core.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/generic_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_arm.mk \</span><br><span class="line">    $(LOCAL_DIR)/full.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/aosp_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/full_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/vbox_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_x86.mk \</span><br><span class="line">    $(LOCAL_DIR)/sdk_mips.mk \</span><br><span class="line">    $(LOCAL_DIR)/large_emu_hw.mk</span><br><span class="line">endif</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="number">2</span>. device\qcom\msm8916_32\AndroidProducts.mk  <span class="comment"># 自定义产品配置文件，内容如下：</span></span><br><span class="line">　PRODUCT_MAKEFILES := \</span><br><span class="line">	　$(LOCAL_DIR)/msm8916_32.mk</span><br></pre></td></tr></table></figure></p>
+<h2 id="产品版本定义文件">产品版本定义文件</h2><p>对于我用到文件则为msm8916_32.mk，主要定义此产品版本要编入哪些东西，主要变量如下：</p>
+<h3 id="产品版本定义文件定义变量">产品版本定义文件定义变量</h3><table>
+<thead>
+<tr>
+<th>常量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRODUCT_NAME</td>
+<td>最终用户将看到的完整产品名，会出现在“关于手机”信息中</td>
+</tr>
+<tr>
+<td>PRODUCT_MODEL</td>
+<td>产品的型号，这也是最终用户将看到的</td>
+</tr>
+<tr>
+<td>PRODUCT_LOCALES</td>
+<td>该产品支持的地区，以空格分格，例如：en_GB de_DE es_ES fr_CA</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGES</td>
+<td>该产品版本中包含的 APK 应用程序，以空格分格，例如：Calendar Contacts</td>
+</tr>
+<tr>
+<td>PRODUCT_DEVICE</td>
+<td>该产品的工业设计的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_MANUFACTURER</td>
+<td>制造商的名称</td>
+</tr>
+<tr>
+<td>PRODUCT_BRAND</td>
+<td>该产品专门定义的商标（如果有的话）</td>
+</tr>
+<tr>
+<td>PRODUCT_PROPERTY_OVERRIDES</td>
+<td>对于商品属性的定义</td>
+</tr>
+<tr>
+<td>PRODUCT_COPY_FILES</td>
+<td>编译该产品时需要拷贝的文件，以“源路径 : 目标路径”的形式</td>
+</tr>
+<tr>
+<td>PRODUCT_OTA_PUBLIC_KEYS</td>
+<td>对于该产品的 OTA 公开 key 的列表</td>
+</tr>
+<tr>
+<td>PRODUCT_POLICY</td>
+<td>产品使用的策略</td>
+</tr>
+<tr>
+<td>PRODUCT_PACKAGE_OVERLAYS</td>
+<td>指出是否要使用默认的资源或添加产品特定定义来覆盖</td>
+</tr>
+<tr>
+<td>PRODUCT_CONTRIBUTORS_FILE</td>
+<td>HTML 文件，其中包含项目的贡献者</td>
+</tr>
+<tr>
+<td>PRODUCT_TAGS</td>
+<td>该产品的标签，以空格分格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msm8916_32-mk">msm8916_32.mk</h3><p>此文件除了引入定义以上变量以外，还有如下关键代码：　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(call inherit-product, device/qcom/common/common.mk) <span class="comment"># 继承common.mk，此文件定义了很多值为配置文件、脚本文件的常量</span></span><br><span class="line"></span><br><span class="line">-include $(QCPATH)/common/config/rendering-engine.mk <span class="comment"># （字体渲染引擎开关）font rendering engine feature switch</span></span><br><span class="line">-include $(TOP)/customer/oem_common.mk <span class="comment"># 自定义，引入一些定制变量</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="BoardConfig-mk">BoardConfig.mk</h2><p>　　该文件用来配置硬件主板，它其中定义的都是设备底层的硬件特性。例如：该设备的主板相关信息，Wifi 相关信息，还有 bootloader，内核，radioimage 等信息。对于该文件的示例，请参看 Android 源码树已经有的文件。</p>
+<h2 id="vendorsetup-sh">vendorsetup.sh</h2><p>　　该文件中作用是通过 add_lunch_combo 函数在 lunch 函数中添加一个菜单选项。该函数的参数是产品名称加上编译类型，中间以“-”连接，例如：add_lunch_combo full_lt26-userdebug。/build/envsetup.sh 会扫描所有 device 和 vender 二 级目 录下的名称 为”vendorsetup.sh”文件，并根据其中的内容来确定 lunch 函数的 菜单选项。</p>
+<h2 id="后记">后记</h2><p>　　只有代码不会说谎，此文可能过时, 不过可以给你一个大致的脉络，然后再跟一下代码，就ok了。另，如需了解模块mk文件，参考我的另一篇博文：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Android.mk解析</a>。我写这系列博客，主要参考了Google官网和另外两篇网上Google出来的文章，地址见下References，感谢Google，感谢另两篇文章的作者。
+　　　</p>
+<h2 id="References">References</h2><p><a href="http://source.android.com/source/initializing.html" target="_blank" rel="external">http://source.android.com/source/initializing.html</a> （需翻墙）<br><a href="http://source.android.com/source/building.html" target="_blank" rel="external">http://source.android.com/source/building.html</a> （需翻墙）<br><a href="http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html" target="_blank" rel="external">http://www.cnblogs.com/mr-raptor/archive/2012/06/07/2540359.html</a><br><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-cn-android-build/</a></p>
 ]]></content>
     </entry>
     

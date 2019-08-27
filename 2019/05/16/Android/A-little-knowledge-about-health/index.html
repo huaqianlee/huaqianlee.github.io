@@ -379,7 +379,7 @@
 <p>问题：定制 health service 中的一些 health 信息未成功反应到 Framework。</p>
 <p>已知：定制 health 和 Google healthd 进程都运行于设备中，定制 health 主要重写 healthd_board_battery_update 函数，会通过库文件引用原生代码（system/core/healthd/）中的实现。</p>
 </blockquote>
-<h1 id="初步方案">初步方案</h1><h2 id="简单介绍">简单介绍</h2><p>服务创建时都编写了一个 x.rc 文件，用来描述 health service 的一些特点，其中就包括其启动时机。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># system/core/healthd/android.hardware.health@2.0-service.rc&#10;/* sevice &#31867;&#22411;&#30340; setction &#34920;&#31034;&#19968;&#20010;&#21487;&#25191;&#34892;&#31243;&#24207;&#65288;&#36827;&#31243;&#65289; */&#10;service health-hal-2-0 /vendor/bin/hw/android.hardware.health@2.0-service or healthd.rc&#10;    class hal &#10;    user system&#10;    group system&#10;    file /dev/kmsg w</span><br></pre></td></tr></table></figure></p>
+<h1 id="初步方案">初步方案</h1><h2 id="简单介绍">简单介绍</h2><p>服务创建时都编写了一个 x.rc 文件，用来描述 health service 的一些特点，其中就包括其启动时机。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># system/core/healthd/android.hardware.health@2.0-service.rc&#10;/* sevice &#31867;&#22411;&#30340; setction &#34920;&#31034;&#19968;&#20010;&#21487;&#25191;&#34892;&#31243;&#24207;&#65288;&#36827;&#31243;&#65289; */&#10;service health-hal-2-0 /vendor/bin/hw/android.hardware.health@2.0-service or healthd.rc&#10;&#9;class hal &#10;&#9;user system&#10;&#9;group system&#10;&#9;file /dev/kmsg w</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>启动顺序： hal-&gt; core-&gt; main -&gt; later</p>
 </blockquote>
@@ -433,8 +433,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2100/11/21/Android/A-summary-of-Android-source-analysis/" rel="prev" title="【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客">
-                【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/26/python-automaticly-order/" rel="prev" title="python_automaticly_order">
+                python_automaticly_order <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,7 +530,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">83</span>
+              <span class="site-state-item-count">85</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
