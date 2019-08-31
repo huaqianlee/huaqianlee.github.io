@@ -302,6 +302,262 @@
             
               
                 
+                <a class="post-title-link" href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/" itemprop="url">
+                  高通电池管理系统（BMS）驱动分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-06-24T21:52:24+08:00" content="Jun 24 2015">
+              Jun 24 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/24/Android/qaulcomm-bms-driver-analysis/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>File: qpnp-vm-bms.c -  Battery monitor system　</p>
+</blockquote>
+<h2 id="简要">简要</h2><p>BMS(Battery Monitoring System)主要提供如下功能：</p>
+<ul>
+<li><p>通过一定算法计算SOC(state of charge电量状态) or 剩余电量.</p>
+</li>
+<li><p>正在使用的电池电压, 开漏电压(OCV).</p>
+</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_1.png" alt="temp"></p>
+<h2 id="硬件架构">硬件架构</h2>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/11/Git/git常用及进阶命令总结/" itemprop="url">
+                  Git常用及进阶命令总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-06-11T22:10:41+08:00" content="Jun 11 2015">
+              Jun 11 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/11/Git/git常用及进阶命令总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/11/Git/git常用及进阶命令总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>　　Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　<br>　<br>　　言归正传，Git十分好用，应用也十分广泛,现在最好的代码托管网站Github就是基于git创建的，而且现在大多数公司及个人都在使用它进行代码管理，要熟练使用还是需要花一些苦功夫的，我现在也还只是会基本的应用，更深层次的使用还不熟悉。为了方便自己以后使用，将自己常用的一些命令加以总结，并Google了一些常用及进阶命令，一并列出，方便查询使用。</p>
+<p><strong>最重要的命令: git <command> —help</strong></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/06/11/Git/git常用及进阶命令总结/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/" itemprop="url">
                   Android电池监控系统(BMS)之一电池系统架构
                 </a>
@@ -1288,251 +1544,6 @@ eg:
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/21/Linux/Linux常用快捷键及命令总结/" itemprop="url">
-                  Linux常用快捷键及命令总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2014-12-21T20:10:01+08:00" content="Dec 21 2014">
-              Dec 21 2014
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/21/Linux/Linux常用快捷键及命令总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/21/Linux/Linux常用快捷键及命令总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>　　或许我是一个geek范的人，又或许是想显得很有逼格， whatever， 反正我就喜欢Linux的命令行，喜欢黑黑的geek风，这样完全体现出了技术的酷炫。现将一些自己觉得很有用能让自己显得很牛的装X快捷键和指令总结如下，其中有一部分相当有用，使用后逼格瞬间提升，不信看文章最后的后记。</p>
-<h2 id="Shell终端常用快捷键">Shell终端常用快捷键</h2><p>　　当进行命令行操作时，使用快捷键将极大提高工作效率，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + U – 剪切光标前的内容</span><br><span class="line">Ctrl + K – 剪切光标至行末的内容</span><br><span class="line">Ctrl + Y – 粘贴</span><br><span class="line">Ctrl + E – 移动光标到行末</span><br><span class="line">Ctrl + A – 移动光标到行首</span><br><span class="line">ALT + F – 跳向下一个空格</span><br><span class="line">ALT + B – 跳回上一个空格</span><br><span class="line">ALT + Backspace – 删除前一个单词</span><br><span class="line">Ctrl + W – 剪切光标前一个单词</span><br><span class="line">Ctrl + Insert – 复制</span><br><span class="line">Shift + Insert – 粘贴</span><br><span class="line"><span class="comment"># 下面两个命令的用法，如： 在shell终端输入vi main.c进入vi界面后，想切换到命令行，可以通过Ctrl+Z</span></span><br><span class="line">Ctrl + Z – 暂停应用程序</span><br><span class="line"><span class="built_in">fg</span> – 重新将程序唤到前台</span><br></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/21/Linux/Linux常用快捷键及命令总结/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/11/17/Linux/Linux文件IO操作及网络架构/" itemprop="url">
-                  Linux文件I/O操作及网络架构
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2014-11-17T20:15:42+08:00" content="Nov 17 2014">
-              Nov 17 2014
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/11/17/Linux/Linux文件IO操作及网络架构/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/17/Linux/Linux文件IO操作及网络架构/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>图片摘自网络，这些图片清晰的描述出了文件I/O和网络操作的脉络。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/17/Linux/Linux文件IO操作及网络架构/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1578,7 +1589,7 @@ eg:
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-count">87</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1586,7 +1597,7 @@ eg:
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1595,7 +1606,7 @@ eg:
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
