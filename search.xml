@@ -197,16 +197,15 @@
       <content type="html"><![CDATA[<blockquote>
 <p>没有太多时间去查看详细源代码，所以仍然有很多不清晰或者理解不到位的地方，后续将 Linux 相关知识学习得更深入的时候再来更新一次。  </p>
 </blockquote>
-<h1 id="进程与线程">进程与线程</h1><p>在 Linux 中，进程和线程几乎没有什么区别，主要的区别就是线程共享同样的虚拟内存地址空间。对于 kernel 来说，进程和线程没有任何明显的区别，都是一个可运行的 task 。线程创建函数 pthread_create() 会调用 clone(), 而进程创建函数 fork() 最终也是调用 clone()。我们查看<a href="https://linux.die.net/man/2/clone" target="_blank" rel="external">clone</a>函数的介绍时，可以看到 clone() 的参数 flags 用来指明子‘进程’和父‘进程’共享什么，所以可以说进程就是不共享任何东西的一个典型线程（一个不成熟的观点，不一定正确）。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/process_thread_to_task.jpeg" alt="process_thread_to_task">  </p>
+<h1 id="进程与线程">进程与线程</h1><p>在 Linux 中，进程和线程几乎没有什么区别，主要的区别就是线程共享同样的虚拟内存地址空间。对于 kernel 来说，进程和线程都是一个可运行的 task 。</p>
+<p>线程创建函数 pthread_create() 会调用 clone(), 而进程创建函数 fork() 最终也是调用 clone()。我们查看<a href="https://linux.die.net/man/2/clone" target="_blank" rel="external">clone</a>函数的介绍时，可以看到 clone() 的参数 flags 用来指明子‘进程’和父‘进程’共享什么，所以可以说进程就是不共享任何东西的一个典型线程（一个不成熟的观点，不一定正确）。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/process_thread_to_task.jpeg" alt="process_thread_to_task">  </p>
 <blockquote>
 <p>摘录线程库发展史：Linux threading libraries evolution: Linux Threads, NGPT, NPTL. The library is part of gilbc, programmer interface is POSIX pthreads.  </p>
 </blockquote>
 <h1 id="线程模型">线程模型</h1><a id="more"></a>
 <p>Linux 中的线程是 “1-1” 模型, 而不是 “1-N” 或者 “M-N” 模型。下面简单介绍一下线程模型。</p>
 <h2 id="“1-1”_模型">“1-1” 模型</h2><p>将每个用户级线程映射到一个内核级线程（即 task）。<br>优点：<br>消耗更少的资源，比如内存（虚拟的和物理的）和 内核对象（object）。并且也会更少地上下文切换，从而提高性能，在理想情况下，当你拥有和运行线程一样多的处理器的时候，将可能几乎没有上下文切换。<br>缺点：<br>可能是延迟更大：如果池中的所有线程都忙，并且您添加了新的短任务，则可能需要等待很长时间才能开始执行。</p>
-<h2 id="“1-N”_模型">“1-N” 模型</h2><p>将多个用户级线程映射到一个内核级线程,早期 OS 的线程实现方式。</p>
-<p>优点: 内核不干涉线程的任何生命活动和上下文切换。线程的管理在用户空间进行,因而效率比较高;</p>
-<p>缺点: 一个进程中的多个线程只能调度到一个CPU，这种约束限制了可用的并行总量，并且如果某个线程 block 了，其他线程都只能等着。</p>
+<h2 id="“1-N”_模型">“1-N” 模型</h2><p>将多个用户级线程映射到一个内核级线程,早期 OS 的线程实现方式。<br>优点: 内核不干涉线程的任何生命活动和上下文切换。线程的管理在用户空间进行,因而效率比较高;<br>缺点: 一个进程中的多个线程只能调度到一个CPU，这种约束限制了可用的并行总量，并且如果某个线程 block 了，其他线程都只能等着。</p>
 <h2 id="“M-N”_模型">“M-N” 模型</h2><p>在线程池里，将 M 个用户线程映射到 N 个内核线程 (M &gt;= N)，可以算结合上面两种方法的优势，但会牺牲一些额外的用户模式调度。</p>
 ]]></content>
     </entry>
@@ -219,8 +218,9 @@
 <p>Review：<br>主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 <a href="http://Medium.com（需要梯子）以及各个公司的技术" target="_blank" rel="external">http://Medium.com（需要梯子）以及各个公司的技术</a> blog，如 Netflix 的。</p>
 <p>Tip：<br>主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。</p>
 <p>Share：<br>主要是为了建立你的影响力，能够输出价值观。分享一篇有观点和思考的技术文章。</p>
-<h1 id="Algorithm">Algorithm</h1><p>本周用 c 语言完成了两道算法题。<br><a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="external">Two Sum</a><br><a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/twoSum.c" target="_blank" rel="external">Solutions</a></p>
-<p><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">Add Two Numbers</a><br><a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/addTwoNumbers.c" target="_blank" rel="external">Solutions</a></p>
+<a id="more"></a>
+<h1 id="Algorithm">Algorithm</h1><p>本周用 c 语言完成了两道算法题。<br>算法题目：<a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="external">Two Sum</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/twoSum.c" target="_blank" rel="external">Solutions</a></p>
+<p>算法题目：<a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">Add Two Numbers</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/addTwoNumbers.c" target="_blank" rel="external">Solutions</a></p>
 <h1 id="Review">Review</h1><p>因为自己想学习一下正则表达式，所以就找了一篇英文教程：<a href="https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285" target="_blank" rel="external">Regex tutorial — A quick cheatsheet by examples</a> 。 </p>
 <p>这篇文章简单介绍了 topics 及相关实例，十分适合入门学习，而且通过这个网站我发现了一个<a href="https://regex101.com/r/cO8lqs/2" target="_blank" rel="external">在线 regex 调试器</a> ，通过这个在线调试器我们就能很方便的进行正则表达式学习。</p>
 <h1 id="Tips">Tips</h1><p>没有下意识的总结记录下来，一下子还很难以想起来这周自己又学习到什么有意义的技术技巧。</p>

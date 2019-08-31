@@ -500,7 +500,8 @@
           <blockquote>
 <p>没有太多时间去查看详细源代码，所以仍然有很多不清晰或者理解不到位的地方，后续将 Linux 相关知识学习得更深入的时候再来更新一次。  </p>
 </blockquote>
-<h1 id="进程与线程">进程与线程</h1><p>在 Linux 中，进程和线程几乎没有什么区别，主要的区别就是线程共享同样的虚拟内存地址空间。对于 kernel 来说，进程和线程没有任何明显的区别，都是一个可运行的 task 。线程创建函数 pthread_create() 会调用 clone(), 而进程创建函数 fork() 最终也是调用 clone()。我们查看<a href="https://linux.die.net/man/2/clone">clone</a>函数的介绍时，可以看到 clone() 的参数 flags 用来指明子‘进程’和父‘进程’共享什么，所以可以说进程就是不共享任何东西的一个典型线程（一个不成熟的观点，不一定正确）。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/process_thread_to_task.jpeg" alt="process_thread_to_task">  </p>
+<h1 id="进程与线程">进程与线程</h1><p>在 Linux 中，进程和线程几乎没有什么区别，主要的区别就是线程共享同样的虚拟内存地址空间。对于 kernel 来说，进程和线程都是一个可运行的 task 。</p>
+<p>线程创建函数 pthread_create() 会调用 clone(), 而进程创建函数 fork() 最终也是调用 clone()。我们查看<a href="https://linux.die.net/man/2/clone">clone</a>函数的介绍时，可以看到 clone() 的参数 flags 用来指明子‘进程’和父‘进程’共享什么，所以可以说进程就是不共享任何东西的一个典型线程（一个不成熟的观点，不一定正确）。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/process_thread_to_task.jpeg" alt="process_thread_to_task">  </p>
 <blockquote>
 <p>摘录线程库发展史：Linux threading libraries evolution: Linux Threads, NGPT, NPTL. The library is part of gilbc, programmer interface is POSIX pthreads.  </p>
 </blockquote>
@@ -626,20 +627,16 @@
 
       
         
-          
-            <p>ARTS 简单介绍</p>
+          <p>ARTS 简单介绍</p>
 <p>Algorithm：<br>主要是为了编程训练和学习。每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。</p>
-<p>Review：<br>主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 <a href="http://Medium.com（需要梯子）以及各个公司的技术" target="_blank" rel="external">http://Medium.com（需要梯子）以及各个公司的技术</a> blog，如 Netflix 的。</p>
+<p>Review：<br>主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 <a href="http://Medium.com（需要梯子）以及各个公司的技术">http://Medium.com（需要梯子）以及各个公司的技术</a> blog，如 Netflix 的。</p>
 <p>Tip：<br>主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。</p>
 <p>Share：<br>主要是为了建立你的影响力，能够输出价值观。分享一篇有观点和思考的技术文章。</p>
-<h1 id="Algorithm">Algorithm</h1><p>本周用 c 语言完成了两道算法题。<br><a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="external">Two Sum</a><br><a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/twoSum.c" target="_blank" rel="external">Solutions</a></p>
-<p><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">Add Two Numbers</a><br><a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/addTwoNumbers.c" target="_blank" rel="external">Solutions</a></p>
-<h1 id="Review">Review</h1><p>因为自己想学习一下正则表达式，所以就找了一篇英文教程：<a href="https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285" target="_blank" rel="external">Regex tutorial — A quick cheatsheet by examples</a> 。 </p>
-<p>这篇文章简单介绍了 topics 及相关实例，十分适合入门学习，而且通过这个网站我发现了一个<a href="https://regex101.com/r/cO8lqs/2" target="_blank" rel="external">在线 regex 调试器</a> ，通过这个在线调试器我们就能很方便的进行正则表达式学习。</p>
-<h1 id="Tips">Tips</h1><p>没有下意识的总结记录下来，一下子还很难以想起来这周自己又学习到什么有意义的技术技巧。</p>
-<h1 id="Share">Share</h1><p><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">进程与线程</a></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2019/08/31/ATRS/First-week-of-ATRS-Start/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
