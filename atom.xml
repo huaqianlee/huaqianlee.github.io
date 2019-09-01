@@ -232,7 +232,7 @@
     <link href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/"/>
     <id>http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/</id>
     <published>2019-08-31T09:35:46.000Z</published>
-    <updated>2019-08-31T14:34:54.350Z</updated>
+    <updated>2019-08-31T14:37:06.669Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>没有太多时间去查看详细源代码，所以仍然有很多不清晰或者理解不到位的地方，后续将 Linux 相关知识学习得更深入的时候再来更新一次。  </p>
@@ -245,7 +245,7 @@
 <h1 id="线程模型">线程模型</h1><a id="more"></a>
 <p>Linux 中的线程是 “1-1” 模型, 而不是 “1-N” 或者 “M-N” 模型。下面简单介绍一下线程模型。</p>
 <h2 id="“1-1”_模型">“1-1” 模型</h2><p>将每个用户级线程映射到一个内核级线程（即 task）。<br>优点：<br>消耗更少的资源，比如内存（虚拟的和物理的）和 内核对象（object）。并且也会更少地上下文切换，从而提高性能，在理想情况下，当你拥有和运行线程一样多的处理器的时候，将可能几乎没有上下文切换。<br>缺点：<br>可能是延迟更大：如果池中的所有线程都忙，并且您添加了新的短任务，则可能需要等待很长时间才能开始执行。</p>
-<h2 id="“1-N”_模型">“1-N” 模型</h2><p>将多个用户级线程映射到一个内核级线程,早期 OS 的线程实现方式。<br>优点: 内核不干涉线程的任何生命活动和上下文切换。线程的管理在用户空间进行,因而效率比较高;<br>缺点: 一个进程中的多个线程只能调度到一个CPU，这种约束限制了可用的并行总量，并且如果某个线程 block 了，其他线程都只能等着。</p>
+<h2 id="“1-N”_模型">“1-N” 模型</h2><p>将多个用户级线程映射到一个内核级线程,早期 OS 的线程实现方式。<br>优点:<br>内核不干涉线程的任何生命活动和上下文切换。线程的管理在用户空间进行,因而效率比较高;<br>缺点:<br>一个进程中的多个线程只能调度到一个CPU，这种约束限制了可用的并行总量，并且如果某个线程 block 了，其他线程都只能等着。</p>
 <h2 id="“M-N”_模型">“M-N” 模型</h2><p>在线程池里，将 M 个用户线程映射到 N 个内核线程 (M &gt;= N)，可以算结合上面两种方法的优势，但会牺牲一些额外的用户模式调度。</p>
 ]]></content>
     
@@ -273,11 +273,11 @@
     <link href="http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/"/>
     <id>http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/</id>
     <published>2019-08-31T08:39:35.000Z</published>
-    <updated>2019-08-31T14:22:19.687Z</updated>
+    <updated>2019-09-01T02:37:53.565Z</updated>
     
     <content type="html"><![CDATA[<p>ARTS 简单介绍</p>
 <p>Algorithm：<br>主要是为了编程训练和学习。每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。</p>
-<p>Review：<br>主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 <a href="http://Medium.com（需要梯子）以及各个公司的技术" target="_blank" rel="external">http://Medium.com（需要梯子）以及各个公司的技术</a> blog，如 Netflix 的。</p>
+<p>Review：<br>主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 <a href="http://Medium.com" target="_blank" rel="external">Medium</a>（需要梯子）以及各个公司的技术 blog，如 Netflix 的。</p>
 <p>Tip：<br>主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。</p>
 <p>Share：<br>主要是为了建立你的影响力，能够输出价值观。分享一篇有观点和思考的技术文章。</p>
 <a id="more"></a>
@@ -285,7 +285,11 @@
 <p>算法题目：<a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">Add Two Numbers</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/addTwoNumbers.c" target="_blank" rel="external">Solutions</a></p>
 <h1 id="Review">Review</h1><p>因为自己想学习一下正则表达式，所以就找了一篇英文教程：<a href="https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285" target="_blank" rel="external">Regex tutorial — A quick cheatsheet by examples</a> 。 </p>
 <p>这篇文章简单介绍了 topics 及相关实例，十分适合入门学习，而且通过这个网站我发现了一个<a href="https://regex101.com/r/cO8lqs/2" target="_blank" rel="external">在线 regex 调试器</a> ，通过这个在线调试器我们就能很方便的进行正则表达式学习。</p>
-<h1 id="Tips">Tips</h1><p>没有下意识的总结记录下来，一下子还很难以想起来这周自己又学习到什么有意义的技术技巧。</p>
+<h1 id="Tips">Tips</h1><p>这周学到了两个版本管理的技巧。</p>
+<ol>
+<li>快速撤销本地的所有修改和提交件。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">repo forall -vc <span class="string">"git reset --hard; git clean -fdx"</span></span><br><span class="line">forall - Execute <span class="keyword">for</span> all repos.</span><br><span class="line">v - Print the output of the <span class="built_in">command</span></span><br><span class="line">c - Command to execute,the actual <span class="built_in">command</span></span><br><span class="line">```  </span><br><span class="line"><span class="number">2</span>. 将版本回退到指定时间。</span><br><span class="line">```bash</span><br><span class="line">repo forall -c <span class="string">'git checkout '</span>git rev-list --all -n1 --before=<span class="string">"2019-08-15 15:00"</span><span class="string">''</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <h1 id="Share">Share</h1><p><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">进程与线程</a></p>
 ]]></content>
     
@@ -293,7 +297,7 @@
     
       &lt;p&gt;ARTS 简单介绍&lt;/p&gt;
 &lt;p&gt;Algorithm：&lt;br&gt;主要是为了编程训练和学习。每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。&lt;/p&gt;
-&lt;p&gt;Review：&lt;br&gt;主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 &lt;a href=&quot;http://Medium.com（需要梯子）以及各个公司的技术&quot;&gt;http://Medium.com（需要梯子）以及各个公司的技术&lt;/a&gt; blog，如 Netflix 的。&lt;/p&gt;
+&lt;p&gt;Review：&lt;br&gt;主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 &lt;a href=&quot;http://Medium.com&quot;&gt;Medium&lt;/a&gt;（需要梯子）以及各个公司的技术 blog，如 Netflix 的。&lt;/p&gt;
 &lt;p&gt;Tip：&lt;br&gt;主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。&lt;/p&gt;
 &lt;p&gt;Share：&lt;br&gt;主要是为了建立你的影响力，能够输出价值观。分享一篇有观点和思考的技术文章。&lt;/p&gt;
     
