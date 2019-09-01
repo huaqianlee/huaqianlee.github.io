@@ -273,7 +273,7 @@
     <link href="http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/"/>
     <id>http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/</id>
     <published>2019-08-31T08:39:35.000Z</published>
-    <updated>2019-09-01T02:37:53.565Z</updated>
+    <updated>2019-09-01T02:58:23.623Z</updated>
     
     <content type="html"><![CDATA[<p>ARTS 简单介绍</p>
 <p>Algorithm：<br>主要是为了编程训练和学习。每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。</p>
@@ -287,7 +287,7 @@
 <p>这篇文章简单介绍了 topics 及相关实例，十分适合入门学习，而且通过这个网站我发现了一个<a href="https://regex101.com/r/cO8lqs/2" target="_blank" rel="external">在线 regex 调试器</a> ，通过这个在线调试器我们就能很方便的进行正则表达式学习。</p>
 <h1 id="Tips">Tips</h1><p>这周学到了两个版本管理的技巧。</p>
 <ol>
-<li>快速撤销本地的所有修改和提交件。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">repo forall -vc <span class="string">"git reset --hard; git clean -fdx"</span></span><br><span class="line">forall - Execute <span class="keyword">for</span> all repos.</span><br><span class="line">v - Print the output of the <span class="built_in">command</span></span><br><span class="line">c - Command to execute,the actual <span class="built_in">command</span></span><br><span class="line">```  </span><br><span class="line"><span class="number">2</span>. 将版本回退到指定时间。</span><br><span class="line">```bash</span><br><span class="line">repo forall -c <span class="string">'git checkout '</span>git rev-list --all -n1 --before=<span class="string">"2019-08-15 15:00"</span><span class="string">''</span></span><br></pre></td></tr></table></figure>
+<li>快速撤销本地的所有修改和提交件。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">repo forall -vc <span class="string">"git reset --hard; git clean -fdx"</span></span><br><span class="line">forall - Execute <span class="keyword">for</span> all repos.</span><br><span class="line">v - Print the output of the <span class="built_in">command</span></span><br><span class="line">c - Command to execute,the actual <span class="built_in">command</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 将版本回退到指定时间。</span><br><span class="line">```bash</span><br><span class="line">repo forall -c <span class="string">'git checkout '</span>git rev-list --all -n1 --before=<span class="string">"2019-08-15 15:00"</span><span class="string">''</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h1 id="Share">Share</h1><p><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">进程与线程</a></p>
