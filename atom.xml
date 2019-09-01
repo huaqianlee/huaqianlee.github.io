@@ -273,7 +273,7 @@
     <link href="http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/"/>
     <id>http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/</id>
     <published>2019-08-31T08:39:35.000Z</published>
-    <updated>2019-09-01T02:58:23.623Z</updated>
+    <updated>2019-09-01T03:15:26.506Z</updated>
     
     <content type="html"><![CDATA[<p>ARTS 简单介绍</p>
 <p>Algorithm：<br>主要是为了编程训练和学习。每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。</p>
@@ -281,15 +281,12 @@
 <p>Tip：<br>主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。</p>
 <p>Share：<br>主要是为了建立你的影响力，能够输出价值观。分享一篇有观点和思考的技术文章。</p>
 <a id="more"></a>
-<h1 id="Algorithm">Algorithm</h1><p>本周用 c 语言完成了两道算法题。<br>算法题目：<a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="external">Two Sum</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/twoSum.c" target="_blank" rel="external">Solutions</a></p>
-<p>算法题目：<a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">Add Two Numbers</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/addTwoNumbers.c" target="_blank" rel="external">Solutions</a></p>
+<h1 id="Algorithm">Algorithm</h1><p>本周用 c 语言完成了两道算法题。<br>算法题目：<a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="external">Two Sum</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/twoSum.c" target="_blank" rel="external">Solutions</a>  </p>
+<p>算法题目：<a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">Add Two Numbers</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/addTwoNumbers.c" target="_blank" rel="external">Solutions</a>  </p>
 <h1 id="Review">Review</h1><p>因为自己想学习一下正则表达式，所以就找了一篇英文教程：<a href="https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285" target="_blank" rel="external">Regex tutorial — A quick cheatsheet by examples</a> 。 </p>
 <p>这篇文章简单介绍了 topics 及相关实例，十分适合入门学习，而且通过这个网站我发现了一个<a href="https://regex101.com/r/cO8lqs/2" target="_blank" rel="external">在线 regex 调试器</a> ，通过这个在线调试器我们就能很方便的进行正则表达式学习。</p>
 <h1 id="Tips">Tips</h1><p>这周学到了两个版本管理的技巧。</p>
-<ol>
-<li>快速撤销本地的所有修改和提交件。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">repo forall -vc <span class="string">"git reset --hard; git clean -fdx"</span></span><br><span class="line">forall - Execute <span class="keyword">for</span> all repos.</span><br><span class="line">v - Print the output of the <span class="built_in">command</span></span><br><span class="line">c - Command to execute,the actual <span class="built_in">command</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 将版本回退到指定时间。</span><br><span class="line">```bash</span><br><span class="line">repo forall -c <span class="string">'git checkout '</span>git rev-list --all -n1 --before=<span class="string">"2019-08-15 15:00"</span><span class="string">''</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+<h2 id="快速撤销本地的所有修改和提交件。">快速撤销本地的所有修改和提交件。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">repo forall -vc <span class="string">"git reset --hard; git clean -fdx"</span></span><br><span class="line">forall - Execute <span class="keyword">for</span> all repos.</span><br><span class="line">v - Print the output of the <span class="built_in">command</span></span><br><span class="line">c - Command to execute,the actual <span class="built_in">command</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">## 将版本回退到指定时间。</span></span><br><span class="line">```bash</span><br><span class="line">repo forall -c <span class="string">'git checkout '</span>git rev-list --all -n1 --before=<span class="string">"2019-08-15 15:00"</span><span class="string">''</span></span><br></pre></td></tr></table></figure>
 <h1 id="Share">Share</h1><p><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">进程与线程</a></p>
 ]]></content>
     
