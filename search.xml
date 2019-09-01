@@ -4,16 +4,16 @@
   
     
     <entry>
-      <title><![CDATA[所有博客主题分类一览]]></title>
-      <url>http://huaqianlee.github.io/2119/09/01/SUMMARY/</url>
-      <content type="html"><![CDATA[<h2 id="Collect_all_blog_topics">Collect all blog topics</h2><h2 id="Linux">Linux</h2><a id="more"></a>
-<ul>
+      <title><![CDATA[【置顶】博客主题分类一览]]></title>
+      <url>http://huaqianlee.github.io/2100/11/22/SUMMARY/</url>
+      <content type="html"><![CDATA[<h2 id="Linux">Linux</h2><ul>
 <li><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">Process and thread in linux</a></li>
 <li><a href="http://huaqianlee.github.io/2014/12/21/Linux/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" target="_blank" rel="external">Linux常用快捷键及命令总结</a></li>
 <li><a href="http://huaqianlee.github.io/2014/11/17/Linux/Linux%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C%E5%8F%8A%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/" target="_blank" rel="external">Linux文件IO操作及网络架构</a></li>
 <li><a href="http://huaqianlee.github.io/2015/03/17/Linux/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E9%87%8C%E6%93%8D%E4%BD%9C%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6-create-open-read-write/" target="_blank" rel="external">如何在内核里操作读写文件</a></li>
-<li>[深入理解Linux启动过程]<a href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" target="_blank" rel="external">http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</a>)</li>
-<li><a href="http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/" target="_blank" rel="external">linux系统使用问题集</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" target="_blank" rel="external">深入理解Linux启动过程</a></li>
+<li><a href="http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/" target="_blank" rel="external">linux系统使用问题集</a><a id="more"></a>
+</li>
 </ul>
 <h2 id="ARTS">ARTS</h2><ul>
 <li><a href="http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/" target="_blank" rel="external">First week of ATRS: Start</a></li>
@@ -140,8 +140,7 @@
       <content type="html"><![CDATA[<blockquote>
 <p>一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。</p>
 </blockquote>
-<h1 id="前言">前言</h1><a id="more"></a>
-<p>之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。</p>
+<h1 id="前言">前言</h1><p>之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。<br><a id="more"></a></p>
 <p>以前看代码，喜欢按照调用流程一步步的完整跟下来，这样比较费时间，尤其觉得对于驱动部分不是很必要，所以这次就准备主要专注于关键文件和关键函数，以及软件框架。</p>
 <h1 id="Android架构">Android架构</h1><h1 id="源码分析">源码分析</h1><p>准备从三个方向来分析源码，一是从工作相关的方向，将所有外设，从最底层到最上层；二是针对某些模块的代码进行分析；三是根据系统源码架构和结构一层一层分析原理。</p>
 <h2 id="外设方向">外设方向</h2><table>
