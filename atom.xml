@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2019-05-05T16:04:31.202Z</updated>
+  <updated>2019-09-01T11:19:00.975Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -16,17 +16,161 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>所有博客主题分类一览</title>
+    <link href="http://huaqianlee.github.io/2119/09/01/SUMMARY/"/>
+    <id>http://huaqianlee.github.io/2119/09/01/SUMMARY/</id>
+    <published>2119-09-01T06:34:36.000Z</published>
+    <updated>2019-09-01T11:19:00.975Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Collect_all_blog_topics">Collect all blog topics</h2><h2 id="Linux">Linux</h2><a id="more"></a>
+<ul>
+<li><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">Process and thread in linux</a></li>
+<li><a href="http://huaqianlee.github.io/2014/12/21/Linux/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" target="_blank" rel="external">Linux常用快捷键及命令总结</a></li>
+<li><a href="http://huaqianlee.github.io/2014/11/17/Linux/Linux%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C%E5%8F%8A%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/" target="_blank" rel="external">Linux文件IO操作及网络架构</a></li>
+<li><a href="http://huaqianlee.github.io/2015/03/17/Linux/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E9%87%8C%E6%93%8D%E4%BD%9C%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6-create-open-read-write/" target="_blank" rel="external">如何在内核里操作读写文件</a></li>
+<li>[深入理解Linux启动过程]<a href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" target="_blank" rel="external">http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</a>)</li>
+<li><a href="http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/" target="_blank" rel="external">linux系统使用问题集</a></li>
+</ul>
+<h2 id="ARTS">ARTS</h2><ul>
+<li><a href="http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/" target="_blank" rel="external">First week of ATRS: Start</a></li>
+</ul>
+<h2 id="Android">Android</h2><p><em>APP</em></p>
+<ul>
+<li><a href="http://huaqianlee.github.io/2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/" target="_blank" rel="external">Getting Started With RecyclerView and CardView on Android</a></li>
+<li><a href="http://huaqianlee.github.io/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/" target="_blank" rel="external">通过自定义侧边导航栏的RecyclerView动态加载布局</a></li>
+<li><a href="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/" target="_blank" rel="external">按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案</a></li>
+<li><a href="http://huaqianlee.github.io/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/" target="_blank" rel="external">基于DrawerLayout打造卡片式Navigation</a></li>
+<li><a href="http://huaqianlee.github.io/2017/08/17/Android/the-selected-effect-of-recyclerview-item/" target="_blank" rel="external">RecyclerView Item选中效果及点击事件的实现</a>   </li>
+<li><a href="http://huaqianlee.github.io/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/" target="_blank" rel="external">实现真正意义上的第一个APP之启程</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/19/Android/Android%E4%B8%ADadb-Android-Debug-Bridge-%E5%91%BD%E4%BB%A4%E7%9A%84%E7%94%A8%E6%B3%95/" target="_blank" rel="external">Android中adb命令的用法</a></li>
+<li><a href="http://huaqianlee.github.io/2015/05/29/Android/Android-Stdudio-Linux-windows-mac%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" target="_blank" rel="external">Android Stdudio常用快捷键</a></li>
+</ul>
+<p><em>System &amp;&amp; Bsp</em></p>
+<ul>
+<li><a href="_posts/Android/A-summary-of-Android-source-analysis.md"><strong>Android 系统源码分析综述：整理总结源码分析的所有博客</strong></a></li>
+<li><a href="http://huaqianlee.github.io/2018/08/23/Android/Three-ways-to-dump-usb-register/" target="_blank" rel="external">Three ways to dump usb register</a></li>
+<li><a href="http://huaqianlee.github.io/2019/05/15/Android/pmic-voter/" target="_blank" rel="external">pmic voter</a></li>
+<li><a href="http://huaqianlee.github.io/2019/05/16/Android/A-little-knowledge-about-health/" target="_blank" rel="external">一个 health service 不生效问题引出的一点知识</a></li>
+<li><a href="http://huaqianlee.github.io/2017/11/13/Android/What-is-fast-charge-now/" target="_blank" rel="external">常用的快充技术简介</a></li>
+<li><a href="http://huaqianlee.github.io/2019/08/27/Android/USB-port-error/" target="_blank" rel="external">UFP was modified as DRP when we unplug OTG</a></li>
+<li><a href="http://huaqianlee.github.io/2017/12/17/Android/android-sensor-arch-analysis/" target="_blank" rel="external">Android传感器（Sensor）架构简析 (╯_╰)</a></li>
+<li><a href="http://huaqianlee.github.io/2017/12/03/Android/Android-Linux-i2c-driver-arch/" target="_blank" rel="external">Android/Linux  I2C 驱动架构分析</a></li>
+<li><a href="http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/" target="_blank" rel="external">Android(Linux) 输入子系统解析</a></li>
+<li><a href="http://huaqianlee.github.io/2017/11/21/Android/BMS-of-Android-Power-Management/" target="_blank" rel="external">Android 电源管理之电池管理系统(BMS)</a></li>
+<li><a href="http://huaqianlee.github.io/2017/11/14/Android/Android-SELinux-Permison-and-Question/" target="_blank" rel="external">Android Selinux 权限及问题</a></li>
+<li><a href="http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-%E9%97%AE%E9%A2%98%E9%9B%86/" target="_blank" rel="external">MTK-Modem-问题集</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">Android日志系统详解</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/" target="_blank" rel="external">怎么用Android日志系统更好地去调试</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" target="_blank" rel="external">怎么抓取Android测试日志文件</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" target="_blank" rel="external">Android编译过程详解之一</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" target="_blank" rel="external">Android编译过程详解之二</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" target="_blank" rel="external">Android编译过程详解之三</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/23/Android/%E9%AB%98%E9%80%9AAndroid%E8%AE%BE%E5%A4%87%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90-%E4%BB%8Epower-on%E4%B8%8A%E7%94%B5%E5%88%B0Home-Lanucher%E5%90%AF%E5%8A%A8/" target="_blank" rel="external">高通Android设备启动流程分析-从power-on上电到Home-Lanucher启动</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1 一</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1 二</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/18/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%89/" target="_blank" rel="external">高通平台Android源码bootloader分析之sbl1 三</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/19/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BLinux%E5%86%85%E6%A0%B8%E8%AE%BE%E5%A4%87%E6%A0%91-DT-Device-Tree-dts%E6%96%87%E4%BB%B6/" target="_blank" rel="external">高通平台Android源码分析之Linux内核设备树dts文件</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" target="_blank" rel="external">Android电池监控系统BMS之电池系统架构</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" target="_blank" rel="external">Android源码bootable解析之LK</a></li>
+<li><a href="http://huaqianlee.github.io/2015/05/30/Android/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/" target="_blank" rel="external">Android电源管理架构</a></li>
+<li><a href="http://huaqianlee.github.io/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/" target="_blank" rel="external">高通Android不带电量计的电量计算方式</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/24/Android/qaulcomm-bms-driver-analysis/" target="_blank" rel="external">高通电池管理系统（BMS）驱动分析</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/24/Android/linear-charger-driver/" target="_blank" rel="external">高通 linear charger 驱动分析</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/24/Android/qcom-pmic-driver/" target="_blank" rel="external">高通 PMIC 架构简析</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/24/Android/smb135x-charger-driver/" target="_blank" rel="external">高通 smb135x charger 驱动分析</a></li>
+</ul>
+<h2 id="Git">Git</h2><ul>
+<li><a href="http://huaqianlee.github.io/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/" target="_blank" rel="external">Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/11/Git/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" target="_blank" rel="external">git常用及进阶命令总结</a></li>
+<li><a href="http://huaqianlee.github.io/2015/10/22/Git/git-experence/" target="_blank" rel="external">git常见问题总结</a></li>
+</ul>
+<h2 id="Uav">Uav</h2><ul>
+<li><a href="http://huaqianlee.github.io/2017/03/29/Uav/px4-imu-mpu9250-code-structure/" target="_blank" rel="external">PX4之外设代码结构及流程-IMU</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/25/Uav/PX4-for-Snapdragon-Flight/" target="_blank" rel="external">PX4 for Snapdragon Flight</a></li>
+<li><a href="http://huaqianlee.github.io/2016/05/11/Uav/qualcomm-px4-code-reading-note/" target="_blank" rel="external">高通px4代码阅读笔记</a></li>
+<li><a href="http://huaqianlee.github.io/2016/04/02/Uav/uav-board-debugging/" target="_blank" rel="external">无人机主板调试</a></li>
+<li><a href="http://huaqianlee.github.io/2016/04/27/Uav/Qualcomm-uav-blsp-port/" target="_blank" rel="external">高通无人机8074BLSP接口说明</a></li>
+<li><a href="http://huaqianlee.github.io/2016/05/07/Uav/mobile-and-uav-sensors/" target="_blank" rel="external">手机无人机常用sensor介绍</a></li>
+<li><a href="http://huaqianlee.github.io/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/" target="_blank" rel="external">camera架构与调试-菜鸟笔记</a></li>
+</ul>
+<h2 id="英语">英语</h2><ul>
+<li><a href="http://huaqianlee.github.io/2017/05/08/English/Americal-and-english-phonetic/" target="_blank" rel="external">英式音标与美式音标</a></li>
+</ul>
+<h2 id="Kotlin">Kotlin</h2><ul>
+<li><a href="http://huaqianlee.github.io/2017/05/23/Kotlin/Kotlin-HElloWorld/" target="_blank" rel="external">Android Kotlin之曲折HelloWord</a></li>
+</ul>
+<h2 id="学习笔记">学习笔记</h2><p><em>第一行代码</em></p>
+<ul>
+<li><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" target="_blank" rel="external">第一行代码思维导图及学习笔记目录</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" target="_blank" rel="external">第一行代码之项目结构与活动</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/25/FirstCode/firstcode-note-UI/" target="_blank" rel="external">第一行代码之UI</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/" target="_blank" rel="external">第一行代码之广播机制</a></li>
+<li><a href="http://huaqianlee.github.io/2017/04/29/FirstCode/FirstCode-data-storage/" target="_blank" rel="external">第一行代码之数据存储</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/03/FirstCode/FirstCode-Content-Provider/" target="_blank" rel="external">第一行代码之跨程序共享数据-内容提供器</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-media/" target="_blank" rel="external">第一行代码之手机多媒体</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-Service/" target="_blank" rel="external">第一行代码之服务</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/" target="_blank" rel="external">第一行代码之网络</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/" target="_blank" rel="external">第一行代码之碎片</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/" target="_blank" rel="external">第一行代码之Material Design</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/" target="_blank" rel="external">第一行代码之高级技巧</a></li>
+</ul>
+<p><em>Android群英传</em></p>
+<p><em>Linux内核完全注释</em></p>
+<ul>
+<li><a href="http://huaqianlee.github.io/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/" target="_blank" rel="external">Linux内核完全注释之80x86内存管理</a></li>
+</ul>
+<h2 id="Hexo">Hexo</h2><ul>
+<li><a href="http://huaqianlee.github.io/2014/10/24/Hexo/build-person-blog-with-hexo/" target="_blank" rel="external">构建个人博客</a></li>
+<li><a href="http://huaqianlee.github.io/2014/10/20/Hexo/hello-world/" target="_blank" rel="external">hello-world</a></li>
+</ul>
+<h2 id="Java">Java</h2><ul>
+<li><a href="http://huaqianlee.github.io/2015/01/20/Java/JUnit-test%E7%9A%84%E7%94%A8%E6%B3%95/" target="_blank" rel="external">JUnit-test的用法</a></li>
+<li><a href="http://huaqianlee.github.io/2014/10/27/Java/The-document-convetions-for-Java/" target="_blank" rel="external">Java注释规范</a></li>
+</ul>
+<h2 id="Think">Think</h2><ul>
+<li><a href="http://huaqianlee.github.io/2014/11/01/Think/How-to-read/" target="_blank" rel="external">How-to-read</a></li>
+</ul>
+<h2 id="Web">Web</h2><ul>
+<li><a href="http://huaqianlee.github.io/2015/01/18/Web/xml%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">xml基础</a></li>
+<li><a href="http://huaqianlee.github.io/2015/01/19/Web/xml%E6%96%87%E4%BB%B6%E7%BA%A6%E6%9D%9F%E4%B8%8E%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">xml文件约束与解析</a></li>
+</ul>
+<h2 id="Life">Life</h2><ul>
+<li><a href="http://huaqianlee.github.io/2018/02/12/Life/Bye-2017-Hi-2018/" target="_blank" rel="external">17 小结，18 计划!</a></li>
+<li><a href="http://huaqianlee.github.io/2015/10/08/Life/2015%E5%B9%B410%E6%9C%887%E6%97%A5-%E5%B0%8F%E4%B8%91/" target="_blank" rel="external">2015年10月7日:小丑</a></li>
+<li><a href="http://huaqianlee.github.io/2013/09/19/Life/four-years/" target="_blank" rel="external">Four years</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/17/Life/Ashamed/" target="_blank" rel="external">Ashamed</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/24/Life/About-my-books-and-my-plan/" target="_blank" rel="external">所买的书</a></li>
+<li><a href="http://huaqianlee.github.io/2017/07/20/Life/no-no-no-go-go-go/" target="_blank" rel="external">no no no, go go go</a></li>
+</ul>
+<h2 id="Other">Other</h2><ul>
+<li><a href="http://huaqianlee.github.io/2017/11/08/Other/MDB-ICP-protocol/" target="_blank" rel="external">纸币器和MDB协议</a></li>
+<li><a href="_posts/Android/What-is-fast-charge-now？.md">Android快充介绍</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Collect_all_blog_topics&quot;&gt;Collect all blog topics&lt;/h2&gt;&lt;h2 id=&quot;Linux&quot;&gt;Linux&lt;/h2&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客</title>
     <link href="http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/"/>
     <id>http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/</id>
     <published>2100-11-21T13:55:43.000Z</published>
-    <updated>2019-05-05T16:04:31.202Z</updated>
+    <updated>2019-09-01T11:19:11.878Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。</p>
 </blockquote>
-<h1 id="前言">前言</h1><p>之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。</p>
-<p>以前看代码，喜欢按照调用流程一步步的完整跟下来，这样比较费时间，尤其觉得对于驱动部分不是很必要，所以这次就准备主要专注于关键文件和关键函数，以及软件框架。<br><a id="more"></a></p>
+<h1 id="前言">前言</h1><a id="more"></a>
+<p>之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。</p>
+<p>以前看代码，喜欢按照调用流程一步步的完整跟下来，这样比较费时间，尤其觉得对于驱动部分不是很必要，所以这次就准备主要专注于关键文件和关键函数，以及软件框架。</p>
 <h1 id="Android架构">Android架构</h1><h1 id="源码分析">源码分析</h1><p>准备从三个方向来分析源码，一是从工作相关的方向，将所有外设，从最底层到最上层；二是针对某些模块的代码进行分析；三是根据系统源码架构和结构一层一层分析原理。</p>
 <h2 id="外设方向">外设方向</h2><table>
 <thead>
@@ -36,6 +180,18 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>- <a href="http://huaqianlee.github.io/2017/11/13/Android/What-is-fast-charge-now/" target="_blank" rel="external">常用的快充技术简介</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://huaqianlee.github.io/2019/08/27/Android/USB-port-error/" target="_blank" rel="external">UFP was modified as DRP when we unplug OTG</a></td>
+<td>Type-c 端口模型</td>
+</tr>
+<tr>
+<td><a href="http://huaqianlee.github.io/2019/05/15/Android/pmic-voter/" target="_blank" rel="external">pmic voter</a></td>
+<td>PMIC 投票机制</td>
+</tr>
 <tr>
 <td><a href="http://huaqianlee.github.io/2018/08/23/Android/Three-ways-to-dump-usb-register/" target="_blank" rel="external">Three ways to dump usb registers</a></td>
 <td>获取 USB register values 的三种方式</td>
@@ -94,6 +250,10 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="http://huaqianlee.github.io/2019/05/16/Android/A-little-knowledge-about-health/" target="_blank" rel="external">一个 health service 不生效问题引出的一点知识</a></td>
+<td>Healthd 重载</td>
+</tr>
 <tr>
 <td><a href="http://huaqianlee.github.io/2015/08/23/Android/%E9%AB%98%E9%80%9AAndroid%E8%AE%BE%E5%A4%87%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90-%E4%BB%8Epower-on%E4%B8%8A%E7%94%B5%E5%88%B0Home-Lanucher%E5%90%AF%E5%8A%A8/" target="_blank" rel="external">高通Android设备启动流程分析</a></td>
 <td>从power-on上电到Home Lanucher启动</td>
@@ -211,8 +371,7 @@
       &lt;blockquote&gt;
 &lt;p&gt;一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&quot;前言&quot;&gt;前言&lt;/h1&gt;&lt;p&gt;之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。&lt;/p&gt;
-&lt;p&gt;以前看代码，喜欢按照调用流程一步步的完整跟下来，这样比较费时间，尤其觉得对于驱动部分不是很必要，所以这次就准备主要专注于关键文件和关键函数，以及软件框架。&lt;br&gt;
+&lt;h1 id=&quot;前言&quot;&gt;前言&lt;/h1&gt;
     
     </summary>
     
@@ -316,10 +475,10 @@
   
   <entry>
     <title>UFP was modified as DRP when we unplug OTG</title>
-    <link href="http://huaqianlee.github.io/2019/08/27/Bugs/USB-port-error/"/>
-    <id>http://huaqianlee.github.io/2019/08/27/Bugs/USB-port-error/</id>
+    <link href="http://huaqianlee.github.io/2019/08/27/Android/USB-port-error/"/>
+    <id>http://huaqianlee.github.io/2019/08/27/Android/USB-port-error/</id>
     <published>2019-08-27T14:11:32.000Z</published>
-    <updated>2019-08-31T14:16:39.668Z</updated>
+    <updated>2019-09-01T06:22:00.451Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Term">Term</h1><ul>
 <li><p>DFP - Downstream Facing Port<br>下行端口，可以理解为 Host 的 Type-c 端口或者作为 Host 的 hub ，DFP 提供 VBUS，可以提供数据。在协议规范中 DFP 特指数据的下行传输，笼统意义上指的是数据下行和对外提供电源的设备。典型的 DFP 设备是电源适配器。</p>
@@ -367,36 +526,12 @@
     
     </summary>
     
-      <category term="Bugs" scheme="http://huaqianlee.github.io/categories/Bugs/"/>
+      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
     
     
       <category term="Bug" scheme="http://huaqianlee.github.io/tags/Bug/"/>
     
       <category term="Qualcomm" scheme="http://huaqianlee.github.io/tags/Qualcomm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python_automaticly_order</title>
-    <link href="http://huaqianlee.github.io/2019/08/26/Python/python-automaticly-order/"/>
-    <id>http://huaqianlee.github.io/2019/08/26/Python/python-automaticly-order/</id>
-    <published>2019-08-26T15:46:25.000Z</published>
-    <updated>2019-08-31T14:13:28.684Z</updated>
-    
-    <content type="html"><![CDATA[<p>Todo……</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Todo……&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="Python" scheme="http://huaqianlee.github.io/categories/Python/"/>
-    
-    
-      <category term="Script" scheme="http://huaqianlee.github.io/tags/Script/"/>
     
   </entry>
   
@@ -971,10 +1106,10 @@ make -j24
   
   <entry>
     <title>常用的快充技术简介</title>
-    <link href="http://huaqianlee.github.io/2017/11/13/Android/What-is-fast-charge-now%EF%BC%9F/"/>
-    <id>http://huaqianlee.github.io/2017/11/13/Android/What-is-fast-charge-now？/</id>
+    <link href="http://huaqianlee.github.io/2017/11/13/Android/What-is-fast-charge-now/"/>
+    <id>http://huaqianlee.github.io/2017/11/13/Android/What-is-fast-charge-now/</id>
     <published>2017-11-12T16:01:36.000Z</published>
-    <updated>2019-05-03T16:16:17.976Z</updated>
+    <updated>2019-09-01T07:48:03.901Z</updated>
     
     <content type="html"><![CDATA[<p>技术发展越来越快，快充技术也一样，那现在怎么样才能算快充，有哪些快充技术呢？</p>
 <h2 id="高通方案">高通方案</h2><h3 id="高通_Quick_Charge_方案">高通 Quick Charge 方案</h3><h4 id="QC_1-0">QC 1.0</h4><p>最高支持 5V/2A 充电功率(目前已经被划分为慢充)，基本都是骁龙 600 平台。<br><a id="more"></a></p>
