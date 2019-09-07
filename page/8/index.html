@@ -302,6 +302,129 @@
             
               
                 
+                <a class="post-title-link" href="/2015/06/24/Android/smb135x-charger-driver/" itemprop="url">
+                  高通 smb135x charger 驱动分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-06-24T21:52:49+08:00" content="Jun 24 2015">
+              Jun 24 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/24/Android/smb135x-charger-driver/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/24/Android/smb135x-charger-driver/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="analysis_log">analysis log</h2><!--mroe-->
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.763039</span>] __smb135x_write: Writing <span class="number">0</span>x41=<span class="number">0</span>x06</span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.774459</span>] __smb135x_write: Writing <span class="number">0</span>x41=<span class="number">0</span>x26</span><br><span class="line">函数调用:    </span><br><span class="line">static int __smb135x_write(struct smb135x_chg *chip, int reg,u8 val)</span><br><span class="line">-&gt;smb135x_write(struct smb135x_chg *chip, int reg,u8 val) / smb135x_masked_write(struct smb135x_chg *chip, int reg,	u8 mask, u8 val)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.777868</span>] fast_chg_handler: rt_<span class="built_in">stat</span> = <span class="number">0</span>x00</span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.782184</span>] usbin_uv_handler: chip-&gt;usb_present = <span class="number">1</span> usb_present = <span class="number">0</span></span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.788369</span>] handle_usb_removal: setting usb psy <span class="built_in">type</span> = <span class="number">0</span></span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.793689</span>] handle_usb_removal: setting usb psy present = <span class="number">0</span></span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.799241</span>] power_ok_handler: rt_<span class="built_in">stat</span> = <span class="number">0</span>x00</span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.803472</span>] src_detect_handler: chip-&gt;usb_present = <span class="number">0</span> usb_present = <span class="number">0</span></span><br><span class="line">函数调用: </span><br><span class="line">fast_chg_handler(struct smb135x_chg *chip, u8 rt_<span class="built_in">stat</span>)</span><br><span class="line">usbin_uv_handler(struct smb135x_chg *chip, u8 rt_<span class="built_in">stat</span>)</span><br><span class="line">handle_usb_removal(struct smb135x_chg *chip)</span><br><span class="line">(-&gt;usbin_uv_handler(struct smb135x_chg *chip, u8 rt_<span class="built_in">stat</span>)/usbin_ov_handler(struct smb135x_chg *chip, u8 rt_<span class="built_in">stat</span>)/determine_initial_status(struct smb135x_chg *chip))</span><br><span class="line">static struct irq_handler_info handlers[]= </span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">			&#123;</span><br><span class="line">				.name		= <span class="string">"fast_chg"</span>,</span><br><span class="line">				.smb_irq	= fast_chg_handler,</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				.name		= <span class="string">"usbin_uv"</span>,</span><br><span class="line">				.smb_irq	= usbin_uv_handler,</span><br><span class="line">			&#125;,</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line">-&gt;smb135x_irq_<span class="built_in">read</span>(struct smb135x_chg *chip)</span><br><span class="line">/static irqreturn_t smb135x_chg_<span class="built_in">stat</span>_handler(int irq, void *dev_id)</span><br><span class="line">-&gt;smb135x_chg_<span class="built_in">stat</span>_handler(int irq, void *dev_id)</span><br><span class="line">-&gt;smb135x_main_charger_probe(struct i2c_client *client,const struct i2c_device_id *id)</span><br><span class="line"></span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.809926</span>] smb135x_chg_<span class="built_in">stat</span>_handler: handler count = <span class="number">4</span></span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.815104</span>] smb135x_chg_<span class="built_in">stat</span>_handler: batt psy changed</span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.820247</span>] smb135x_chg_<span class="built_in">stat</span>_handler: usb psy changed</span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.825260</span>] smb135x_chg_<span class="built_in">stat</span>_handler: dc psy changed</span><br><span class="line">函数调用:</span><br><span class="line">smb135x_chg_<span class="built_in">stat</span>_handler(int irq, void *dev_id)</span><br><span class="line">smb135x_external_power_changed(struct power_supply *psy)</span><br><span class="line">-&gt;  smb135x_main_charger_probe(struct i2c_client *client,const struct i2c_device_id *id)/(force_irq_<span class="built_in">set</span>(void *data, u64 val)/smb135x_resume(struct device *dev))</span><br><span class="line"></span><br><span class="line">&lt;<span class="number">6</span>&gt;[<span class="number">52515.836445</span>] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_DISCONNECT_EVENT received</span><br><span class="line">函数调用:</span><br><span class="line">         kernel/drivers/usb/chipidea/ci13xxx_msm.c:<span class="number">186</span>:		dev_info(dev, <span class="string">"CI13XXX_CONTROLLER_DISCONNECT_EVENT received\n"</span>);</span><br><span class="line"></span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.837146</span>] smb135x_get_prop_batt_status: STATUS_4_REG=<span class="number">80</span></span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.841747</span>] smb135x_get_prop_batt_status: STATUS_4_REG=<span class="number">80</span></span><br><span class="line">函数调用:</span><br><span class="line">smb135x_get_prop_batt_status(struct smb135x_chg *chip)</span><br><span class="line">-&gt;smb135x_battery_get_property(struct power_supply *psy,enum power_supply_property prop,union power_supply_propval *val)/</span><br><span class="line">     smb135x_parallel_get_property(...)</span><br><span class="line"></span><br><span class="line">&lt;<span class="number">3</span>&gt;[<span class="number">52515.847405</span>] smb135x_external_power_changed: current_<span class="built_in">limit</span> = <span class="number">0</span></span><br><span class="line">函数调用:</span><br><span class="line">        smb135x_external_power_changed(struct power_supply *psy)</span><br><span class="line"></span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
+<h2 id="driver_architecture">driver architecture</h2><h3 id="the_important_structure">the important structure</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">static struct i2c_driver smb135x_charger_driver = &#123;</span><br><span class="line">	.driver		= &#123;</span><br><span class="line">		.name		= <span class="string">"smb135x-charger"</span>,</span><br><span class="line">		.owner		= THIS_MODULE,</span><br><span class="line">		.of_match_table	= smb135x_match_table,    // get the dtsi profile</span><br><span class="line">		.pm		= &amp;smb135x_pm_ops,</span><br><span class="line">	&#125;,</span><br><span class="line">	.probe		= smb135x_charger_probe,</span><br><span class="line">	.remove		= smb135x_charger_remove,</span><br><span class="line">	.id_table	= smb135x_charger_id,</span><br><span class="line">&#125;;</span><br><span class="line">           /*represent an I2C slave device*/</span><br><span class="line">struct i2c_client &#123;</span><br><span class="line">	unsigned short flags;		/* div., see below		*/</span><br><span class="line">	unsigned short addr;		/* chip address - NOTE: <span class="number">7</span>bit	*/</span><br><span class="line">					/* addresses are stored <span class="keyword">in</span> the	*/</span><br><span class="line">					/* _LOWER_ <span class="number">7</span> bits		*/</span><br><span class="line">	char name[I2C_NAME_SIZE];</span><br><span class="line">	struct i2c_adapter *adapter;	/* the adapter we sit on	*/</span><br><span class="line">	struct i2c_driver *driver;	/* and our access routines	*/</span><br><span class="line">	struct device dev;		/* the device structure		*/</span><br><span class="line">	int irq;			/* irq issued by device		*/</span><br><span class="line">	struct list_head detected;</span><br><span class="line">&#125;;</span><br><span class="line">struct i2c_device_id &#123;</span><br><span class="line">	char name[I2C_NAME_SIZE];</span><br><span class="line">	kernel_ulong_t driver_data;	/* Data private to the driver */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct device_node &#123;</span><br><span class="line">	const char *name;</span><br><span class="line">	const char *<span class="built_in">type</span>;</span><br><span class="line">	phandle phandle;</span><br><span class="line">	const char *full_name;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line">struct smb135x_chg &#123;</span><br><span class="line">	struct i2c_client		*client;</span><br><span class="line">	struct device			*dev;</span><br><span class="line">	struct mutex			<span class="built_in">read</span>_write_lock;</span><br><span class="line">        ...</span><br><span class="line">	/* psy */</span><br><span class="line">	struct power_supply		*usb_psy;</span><br><span class="line">	int				usb_psy_ma;</span><br><span class="line">	struct power_supply		batt_psy;</span><br><span class="line">	struct power_supply		dc_psy;</span><br><span class="line">	struct power_supply		parallel_psy;</span><br><span class="line">	struct power_supply		*bms_psy;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line">struct power_supply &#123;</span><br><span class="line">	const char *name;</span><br><span class="line">	enum power_supply_<span class="built_in">type</span> <span class="built_in">type</span>;</span><br><span class="line">	enum power_supply_property *properties;</span><br><span class="line">	...</span><br><span class="line">        int (*get_property)(...)</span><br><span class="line">        int (*<span class="built_in">set</span>_property)(...)</span><br><span class="line">        ...       /* private */      struct device *dev;</span><br><span class="line">      ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="driver_analysis">driver analysis</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注册驱动:</span></span><br><span class="line">	<span class="keyword">if</span> (is_parallel_charger(client))</span><br><span class="line">	        smb135x_parallel_charger_probe(client, id);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		smb135x_main_charger_probe(client, id); // 驱动注册入口函数</span><br><span class="line">                chip = devm_kzalloc(&amp;client-&gt;dev, sizeof(*chip), GFP_KERNEL);</span><br><span class="line">	        chip-&gt;client = client;</span><br><span class="line">	        chip-&gt;dev = &amp;client-&gt;dev;   // get the dev</span><br><span class="line">                smb_parse_dt(chip)     // parse DT nodes</span><br><span class="line">      usb_psy = power_supply_get_by_name(<span class="string">"usb"</span>); // get usb Supply</span><br><span class="line">    struct device *dev = class_find_device(power_supply_class, NULL, name,power_supply_match_device_by_name);</span><br><span class="line">    dev_get_drvdata(dev)</span><br><span class="line">     INIT_DELAYED_WORK(&amp;chip-&gt;wireless_insertion_work,wireless_insertion_work);</span><br><span class="line">     smb135x_<span class="built_in">read</span>(chip, CFG_4_REG, &amp;reg) // probe the device to check <span class="keyword">if</span> its actually connected</span><br><span class="line">     i2c_<span class="built_in">set</span>_clientdata(client, chip);  // client-&gt;...-&gt;driver_datat = chip</span><br><span class="line">     smb135x_chip_version_and_revision(chip) // judge the chip version(smb1357/<span class="number">1358</span>....)</span><br><span class="line">     dump_regs(chip) // <span class="built_in">read</span> and display the register<span class="string">'s value</span><br><span class="line">     smb135x_regulator_init(chip) // initialize regulator(稳压器)</span><br><span class="line">     smb135x_hw_init(chip) // initialize hardware(初始化芯片各种参数)</span><br><span class="line">     determine_initial_status(chip) //determine init status</span><br><span class="line">     .../* initialize Battery power_supply*/</span><br><span class="line">     chip-&gt;batt_psy.get_property	= smb135x_battery_get_property;</span><br><span class="line">     chip-&gt;batt_psy.set_property	= smb135x_battery_set_property;</span><br><span class="line">     chip-&gt;batt_psy.external_power_changed = smb135x_external_power_changed;   // register external power  update online function</span><br><span class="line">     chip-&gt;batt_psy.property_is_writeable = smb135x_battery_is_writeable;</span><br><span class="line">     power_supply_register(chip-&gt;dev, &amp;chip-&gt;batt_psy) // register Battery power Supply</span><br><span class="line">     ....// get the profile and register the function</span><br><span class="line">     power_supply_register(chip-&gt;dev, &amp;chip-&gt;dc_psy); // register dc psy  </span><br><span class="line">     devm_request_threaded_irq(struct device *dev, unsigned int irq, irq_handler_t handler, irq_handler_t thread_fn,unsigned long irqflags, </span><br><span class="line">                                                         const char *devname, void *dev_id)  // allocate(分配) an interrupt line for a managed device</span><br><span class="line">               enable_irq_wake(client-&gt;irq); // control irq power management wakeup</span><br><span class="line">               create_debugfs_entries(chip); // create debug</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/" itemprop="url">
                   高通电池管理系统（BMS）驱动分析
                 </a>
@@ -1406,144 +1529,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/18/Web/xml基础/" itemprop="url">
-                  xml基础
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-01-18T00:13:28+08:00" content="Jan 18 2015">
-              Jan 18 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/01/18/Web/xml基础/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/18/Web/xml基础/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>XML 是有w3c组织发布的一种可扩展标记语言(Extensible Markup Language)。</p>
-<h2 id="XML_的常见应用">XML 的常见应用</h2><p>XML常见的应用场景：
-　</p>
-<ol>
-<li>XML技术除用于保存有关系的数据之外，它还经常用作软件配置文件，以描述程序模块之间的关系。<br>2.在一个软件系统中，为提高系统的灵活性，它所启动的模块通常由其配置文件决定<br>　<br>例如一个软件在启动时，它需要启动Ａ、Ｂ两个模块，而A、Ｂ这两个模块在启动时，又分别需要A1、A2和B1、B2模块的支持，为了准确描述这种关系，此时使用ＸＭＬ文件最为合适不过。</li>
-</ol>
-<h2 id="XML的语法">XML的语法</h2><h3 id="文档的声明">文档的声明</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"GB2312"</span>  standalone=<span class="string">"yes"</span> ?&gt;</span><br><span class="line">    encoding - 文档的字符编码。（代码里面写什么格式，一般就将文档存为什么格式，一般通用“UTF-<span class="number">8</span>”）</span><br><span class="line">    standalone - 文档是否为独立的，有依赖</span><br><span class="line">```    </span><br><span class="line"><span class="comment">###元素</span></span><br><span class="line"></span><br><span class="line">元素指XML中的标签,可以嵌套,只有一个主标签,两种书写方式如下:</span><br><span class="line">•包含标签体：&lt;a&gt;www.itcast.cn&lt;/a&gt;</span><br><span class="line">•不含标签体的：&lt;a&gt;&lt;/a&gt;, 简写为：&lt;a/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">###属性</span></span><br><span class="line">属性值必须用<span class="string">""</span> 或<span class="string">''</span> 引起来,如:</span><br><span class="line">```bash</span><br><span class="line">&lt;input name=“text”&gt;</span><br><span class="line">也可以:(XML将空格也当做内容,不过现在浏览器都会执行处理,调用trim())</span><br><span class="line">&lt;input&gt;</span><br><span class="line">   &lt;name&gt;text&lt;/name&gt;</span><br><span class="line">&lt;/input&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="注释">注释</h3><p>&lt;!—注释—&gt;  // 注释语句必须写在XML声明语句后面</p>
-<h3 id="CDATA区">CDATA区</h3><p>CDATA(character data)区用于让解析引擎不对其进行处理,按照原始内容显示. </p>
-<pre><code class="bash">格式:&lt;![CDATA[ 内容 ]]&gt;
-eg:
-  &lt;![CDATA[
-      &lt;itcast&gt;
-          &lt;br/&gt;
-      &lt;/itcast&gt;
-  ]]&gt;
-</code></pre>
-<h3 id="转义字符">转义字符</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogxml.png" alt="escape">        </p>
-<h3 id="处理指令">处理指令</h3><p>处理指令，简称PI （processing instruction）。处理指令用来指挥解析引擎如何解析XML文档内容。例如，在XML文档中可以使用xml-stylesheet指令，通知XML解析引擎，应用css文件显示xml文档内容。<br>&lt;?xml-stylesheet type=”text/css” href=”1.css”?&gt;<br>处理指令必须以“&lt;?”作为开头，以“?&gt;”作为结尾，XML声明语句就是最常见的一种处理指令。 </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1589,7 +1574,7 @@ eg:
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">87</span>
+              <span class="site-state-item-count">88</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

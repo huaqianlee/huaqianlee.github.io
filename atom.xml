@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2019-09-01T12:31:38.427Z</updated>
+  <updated>2019-09-01T14:58:35.824Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,16 +20,15 @@
     <link href="http://huaqianlee.github.io/2100/11/22/SUMMARY/"/>
     <id>http://huaqianlee.github.io/2100/11/22/SUMMARY/</id>
     <published>2100-11-22T06:34:36.000Z</published>
-    <updated>2019-09-01T12:31:38.427Z</updated>
+    <updated>2019-09-01T14:58:35.824Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Linux">Linux</h2><ul>
 <li><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">Process and thread in linux</a></li>
 <li><a href="http://huaqianlee.github.io/2014/12/21/Linux/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" target="_blank" rel="external">Linux常用快捷键及命令总结</a></li>
 <li><a href="http://huaqianlee.github.io/2014/11/17/Linux/Linux%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C%E5%8F%8A%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/" target="_blank" rel="external">Linux文件IO操作及网络架构</a></li>
 <li><a href="http://huaqianlee.github.io/2015/03/17/Linux/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E9%87%8C%E6%93%8D%E4%BD%9C%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6-create-open-read-write/" target="_blank" rel="external">如何在内核里操作读写文件</a></li>
-<li><a href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" target="_blank" rel="external">深入理解Linux启动过程</a></li>
-<li><a href="http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/" target="_blank" rel="external">linux系统使用问题集</a><a id="more"></a>
-</li>
+<li><a href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" target="_blank" rel="external">深入理解Linux启动过程</a><a id="more"></a></li>
+<li><a href="http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/" target="_blank" rel="external">linux系统使用问题集</a></li>
 </ul>
 <h2 id="ARTS">ARTS</h2><ul>
 <li><a href="http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/" target="_blank" rel="external">First week of ATRS: Start</a></li>
@@ -156,8 +155,7 @@
 &lt;li&gt;&lt;a href=&quot;http://huaqianlee.github.io/2014/12/21/Linux/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/&quot;&gt;Linux常用快捷键及命令总结&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://huaqianlee.github.io/2014/11/17/Linux/Linux%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C%E5%8F%8A%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/&quot;&gt;Linux文件IO操作及网络架构&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://huaqianlee.github.io/2015/03/17/Linux/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E9%87%8C%E6%93%8D%E4%BD%9C%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6-create-open-read-write/&quot;&gt;如何在内核里操作读写文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/&quot;&gt;深入理解Linux启动过程&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/&quot;&gt;linux系统使用问题集&lt;/a&gt;
+&lt;li&gt;&lt;a href=&quot;http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/&quot;&gt;深入理解Linux启动过程&lt;/a&gt;
     
     </summary>
     
@@ -392,6 +390,42 @@
   </entry>
   
   <entry>
+    <title>Second week of ATRS: Hurry</title>
+    <link href="http://huaqianlee.github.io/2019/09/07/ATRS/Second-week-of-ATRS-Hurry/"/>
+    <id>http://huaqianlee.github.io/2019/09/07/ATRS/Second-week-of-ATRS-Hurry/</id>
+    <published>2019-09-07T12:49:00.000Z</published>
+    <updated>2019-09-07T15:48:07.075Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/reverse-integer/" target="_blank" rel="external">Reverse Integer</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/reverseInteger.c" target="_blank" rel="external">C solution</a></p>
+<h1 id="Review">Review</h1><p>Because I am learnning python, I was attracted by the <a href="https://medium.com/free-code-camp/learning-python-from-zero-to-hero-120ea540b567" target="_blank" rel="external">Learning Python: From Zero to Hero</a> article of <a href="http://Medium.com" target="_blank" rel="external">Medium</a>. This article is very good ,  it almost show all the python-related knowledge in a limited page. Such as , variables, conditional statements, looping, collection/array, key-value collection, iterate , classes and objects, encapsulation, inheritance, etc.</p>
+<a id="more"></a>
+<h1 id="Tips">Tips</h1><ul>
+<li><p>Get the patch of the specified commission.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git diff origin/master HEAD <span class="comment"># Get patch for all commits which are not merged</span></span><br><span class="line">git diff start_commit_id end_commit_id <span class="comment"># Get patch between start_commit_id and end_commit_id</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A way to avoid that security issue between vendor and system.<br>I am not sure when, if I am correct , there is security issues with file operations between vendor and system from Android O. I found a way to avoid it this week, that is, escape selinux verification in the following file.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">external/selinux/libselinux/src/avc.c</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Share">Share</h1>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title：&lt;a href=&quot;https://leetcode.com/problems/reverse-integer/&quot;&gt;Reverse Integer&lt;/a&gt;&lt;br&gt;Solution：&lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/reverseInteger.c&quot;&gt;C solution&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Review&quot;&gt;Review&lt;/h1&gt;&lt;p&gt;Because I am learnning python, I was attracted by the &lt;a href=&quot;https://medium.com/free-code-camp/learning-python-from-zero-to-hero-120ea540b567&quot;&gt;Learning Python: From Zero to Hero&lt;/a&gt; article of &lt;a href=&quot;http://Medium.com&quot;&gt;Medium&lt;/a&gt;. This article is very good ,  it almost show all the python-related knowledge in a limited page. Such as , variables, conditional statements, looping, collection/array, key-value collection, iterate , classes and objects, encapsulation, inheritance, etc.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="ATRS" scheme="http://huaqianlee.github.io/categories/ATRS/"/>
+    
+    
+      <category term="Algorithm" scheme="http://huaqianlee.github.io/tags/Algorithm/"/>
+    
+      <category term="Program Kill" scheme="http://huaqianlee.github.io/tags/Program-Kill/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Process and thread in linux</title>
     <link href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/"/>
     <id>http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/</id>
@@ -437,15 +471,15 @@
     <link href="http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/"/>
     <id>http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/</id>
     <published>2019-08-31T08:39:35.000Z</published>
-    <updated>2019-09-01T03:58:31.369Z</updated>
+    <updated>2019-09-07T12:43:21.582Z</updated>
     
     <content type="html"><![CDATA[<h1 id="ARTS_简单介绍">ARTS 简单介绍</h1><p>Algorithm：<br>主要是为了编程训练和学习。每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。</p>
 <p>Review：<br>主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 <a href="http://Medium.com" target="_blank" rel="external">Medium</a>（需要梯子）以及各个公司的技术 blog，如 Netflix 的。</p>
 <p>Tip：<br>主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。</p>
 <p>Share：<br>主要是为了建立你的影响力，能够输出价值观。分享一篇有观点和思考的技术文章。</p>
 <a id="more"></a>
-<h1 id="Algorithm">Algorithm</h1><p>本周用 c 语言完成了两道算法题。<br>算法题目：<a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="external">Two Sum</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/twoSum.c" target="_blank" rel="external">Solutions</a>  </p>
-<p>算法题目：<a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">Add Two Numbers</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/addTwoNumbers.c" target="_blank" rel="external">Solutions</a>  </p>
+<h1 id="Algorithm">Algorithm</h1><p>本周用 c 语言完成了两道算法题。<br>算法题目：<a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="external">Two Sum</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/twoSum.c" target="_blank" rel="external">C Solution</a>  </p>
+<p>算法题目：<a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">Add Two Numbers</a><br>我的代码：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/addTwoNumbers.c" target="_blank" rel="external">C Solution</a>  </p>
 <h1 id="Review">Review</h1><p>因为自己想学习一下正则表达式，所以就找了一篇英文教程：<a href="https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285" target="_blank" rel="external">Regex tutorial — A quick cheatsheet by examples</a> 。 </p>
 <p>这篇文章简单介绍了 topics 及相关实例，十分适合入门学习，而且通过这个网站我发现了一个<a href="https://regex101.com/r/cO8lqs/2" target="_blank" rel="external">在线 regex 调试器</a> ，通过这个在线调试器我们就能很方便的进行正则表达式学习。</p>
 <h1 id="Tips">Tips</h1><p>这周学到了两个版本管理的技巧。</p>
@@ -454,7 +488,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">repo forall -vc <span class="string">"git reset --hard; git clean -fdx"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># explanation</span></span><br><span class="line">forall - Execute <span class="keyword">for</span> all repos.</span><br><span class="line">v - Print the output of the <span class="built_in">command</span></span><br><span class="line">c - Command to execute,the actual <span class="built_in">command</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将版本回退到指定时间</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo forall -c <span class="string">'git checkout '</span>git rev-list --all -n1 --before=<span class="string">"2019-08-15 15:00"</span><span class="string">''</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo forall -c <span class="string">'git checkout `git rev-list --all -n1 --before="2019-08-15 15:00"`'</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h1 id="Share">Share</h1><p><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">进程与线程</a></p>
@@ -1294,31 +1328,6 @@ make -j24
     <summary type="html">
     
       &lt;h2 id=&quot;准备布局文件&quot;&gt;准备布局文件&lt;/h2&gt;&lt;p&gt;布局一：&lt;br&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pi&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;android.support.constraint.ConstraintLayout&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;attribute&quot;&gt;xmlns:android&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;http://schemas.android.com/apk/res/android&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;attribute&quot;&gt;xmlns:tools&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;http://schemas.android.com/tools&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;attribute&quot;&gt;xmlns:app&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;http://schemas.android.com/apk/res-auto&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;attribute&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;match_parent&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;attribute&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;match_parent&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;attribute&quot;&gt;tools:context&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;me.huaqianlee.forme.ToDoFragment&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;TextView&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;match_parent&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;match_parent&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &lt;span class=&quot;attribute&quot;&gt;android:layout_marginTop&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;50dp&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &lt;span class=&quot;attribute&quot;&gt;android:textSize&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;15sp&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;android:text&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;This is Todo main view layout!&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;android.support.constraint.ConstraintLayout&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
-    
-    
-      <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案</title>
-    <link href="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/"/>
-    <id>http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/</id>
-    <published>2017-08-18T14:44:17.000Z</published>
-    <updated>2017-08-18T15:06:05.163Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。</p>
-<p>只需要在Activity中重写onBackPressed()即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private DrawerLayout mlayout; </span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void <span class="function"><span class="title">onBackPressed</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (mlayout.isDrawerOpen(findViewById(R.id.nav_left_layout)))</span><br><span class="line">        mlayout.closeDrawers();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        super.onBackPressed();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># R.id.nav_left_layout为侧边栏显示部分顶层Layout</span></span><br></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。&lt;/p&gt;
-&lt;p&gt;只需要在Activity中重写onBackPressed()即可：&lt;br&gt;&lt;figure class=&quot;h
     
     </summary>
     
