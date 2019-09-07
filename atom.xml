@@ -395,25 +395,21 @@
     <link href="http://huaqianlee.github.io/2019/09/07/ARTS/Second-week-of-ARTS-Hurry/"/>
     <id>http://huaqianlee.github.io/2019/09/07/ARTS/Second-week-of-ARTS-Hurry/</id>
     <published>2019-09-07T12:49:00.000Z</published>
-    <updated>2019-09-07T15:55:26.259Z</updated>
+    <updated>2019-09-07T16:05:00.230Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/reverse-integer/" target="_blank" rel="external">Reverse Integer</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/reverseInteger.c" target="_blank" rel="external">C solution</a></p>
-<h1 id="Review">Review</h1><p>Because I am learnning python, I was attracted by the <a href="https://medium.com/free-code-camp/learning-python-from-zero-to-hero-120ea540b567" target="_blank" rel="external">Learning Python: From Zero to Hero</a> article of <a href="http://Medium.com" target="_blank" rel="external">Medium</a>. This article is very good ,  it almost show all the python-related knowledge in a limited page. Such as , variables, conditional statements, looping, collection/array, key-value collection, iterate , classes and objects, encapsulation, inheritance, etc.</p>
+<h1 id="Review">Review</h1><p>Because I am learnning python, I was attracted by the <a href="https://medium.com/free-code-camp/learning-python-from-zero-to-hero-120ea540b567" target="_blank" rel="external">Learning Python: From Zero to Hero</a> article of <a href="http://Medium.com" target="_blank" rel="external">Medium</a>.  </p>
+<p>This article is very good ,  it almost show all the python-related knowledge in a limited page. Such as , variables, conditional statements, looping, collection/array, key-value collection, iterate , classes and objects, encapsulation, inheritance, etc.</p>
 <a id="more"></a>
-<h1 id="Tips">Tips</h1><ul>
-<li><p>Get the patch of the specified commission.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git diff origin/master HEAD <span class="comment"># Get patch for all commits which are not merged</span></span><br><span class="line">git diff start_commit_id end_commit_id <span class="comment"># Get patch between start_commit_id and end_commit_id</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>A way to avoid that security issue between vendor and system.<br>I am not sure when, if I am correct , there is security issues with file operations between vendor and system from Android O. I found a way to avoid it this week, that is, escape selinux verification in the following file.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">external/selinux/libselinux/src/avc.c</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<h1 id="Tips">Tips</h1><h2 id="Get_the_patch_of_the_specified_commission-">Get the patch of the specified commission.</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git diff origin/master HEAD <span class="comment"># Get patch for all commits which are not merged</span></span><br><span class="line">git diff start_commit_id end_commit_id <span class="comment"># Get patch between start_commit_id and end_commit_id</span></span><br></pre></td></tr></table></figure>
+<h2 id="A_way_to_avoid_that_security_issue_between_vendor_and_system-">A way to avoid that security issue between vendor and system.</h2><p>I am not sure when, if I am correct , there is security issues with file operations between vendor and system from Android O. I found a way to avoid it this week, that is, escape selinux verification in the following file.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">external/selinux/libselinux/src/avc.c</span><br></pre></td></tr></table></figure></p>
 <h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
       &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title：&lt;a href=&quot;https://leetcode.com/problems/reverse-integer/&quot;&gt;Reverse Integer&lt;/a&gt;&lt;br&gt;Solution：&lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/reverseInteger.c&quot;&gt;C solution&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Review&quot;&gt;Review&lt;/h1&gt;&lt;p&gt;Because I am learnning python, I was attracted by the &lt;a href=&quot;https://medium.com/free-code-camp/learning-python-from-zero-to-hero-120ea540b567&quot;&gt;Learning Python: From Zero to Hero&lt;/a&gt; article of &lt;a href=&quot;http://Medium.com&quot;&gt;Medium&lt;/a&gt;. This article is very good ,  it almost show all the python-related knowledge in a limited page. Such as , variables, conditional statements, looping, collection/array, key-value collection, iterate , classes and objects, encapsulation, inheritance, etc.&lt;/p&gt;
+&lt;h1 id=&quot;Review&quot;&gt;Review&lt;/h1&gt;&lt;p&gt;Because I am learnning python, I was attracted by the &lt;a href=&quot;https://medium.com/free-code-camp/learning-python-from-zero-to-hero-120ea540b567&quot;&gt;Learning Python: From Zero to Hero&lt;/a&gt; article of &lt;a href=&quot;http://Medium.com&quot;&gt;Medium&lt;/a&gt;.  &lt;/p&gt;
+&lt;p&gt;This article is very good ,  it almost show all the python-related knowledge in a limited page. Such as , variables, conditional statements, looping, collection/array, key-value collection, iterate , classes and objects, encapsulation, inheritance, etc.&lt;/p&gt;
     
     </summary>
     
