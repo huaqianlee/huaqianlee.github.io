@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2019-09-01T14:58:35.824Z</updated>
+  <updated>2019-09-07T15:56:16.497Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huaqianlee.github.io/2100/11/22/SUMMARY/"/>
     <id>http://huaqianlee.github.io/2100/11/22/SUMMARY/</id>
     <published>2100-11-22T06:34:36.000Z</published>
-    <updated>2019-09-01T14:58:35.824Z</updated>
+    <updated>2019-09-07T15:56:16.497Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Linux">Linux</h2><ul>
 <li><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">Process and thread in linux</a></li>
@@ -31,7 +31,8 @@
 <li><a href="http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/" target="_blank" rel="external">linux系统使用问题集</a></li>
 </ul>
 <h2 id="ARTS">ARTS</h2><ul>
-<li><a href="http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/" target="_blank" rel="external">First week of ATRS: Start</a></li>
+<li><a href="http://huaqianlee.github.io/2019/09/07/ARTS/Second-week-of-ARTS-Hurry/" target="_blank" rel="external">Second week of ARTS: Hurry</a></li>
+<li><a href="http://huaqianlee.github.io/2019/08/31/ARTS/First-week-of-ARTS-Start/" target="_blank" rel="external">First week of ARTS: Start</a></li>
 </ul>
 <h2 id="Android">Android</h2><p><em>APP</em></p>
 <ul>
@@ -390,11 +391,11 @@
   </entry>
   
   <entry>
-    <title>Second week of ATRS: Hurry</title>
-    <link href="http://huaqianlee.github.io/2019/09/07/ATRS/Second-week-of-ATRS-Hurry/"/>
-    <id>http://huaqianlee.github.io/2019/09/07/ATRS/Second-week-of-ATRS-Hurry/</id>
+    <title>Second week of ARTS: Hurry</title>
+    <link href="http://huaqianlee.github.io/2019/09/07/ARTS/Second-week-of-ATRS-Hurry/"/>
+    <id>http://huaqianlee.github.io/2019/09/07/ARTS/Second-week-of-ATRS-Hurry/</id>
     <published>2019-09-07T12:49:00.000Z</published>
-    <updated>2019-09-07T15:48:07.075Z</updated>
+    <updated>2019-09-07T15:55:26.259Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/reverse-integer/" target="_blank" rel="external">Reverse Integer</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/reverseInteger.c" target="_blank" rel="external">C solution</a></p>
 <h1 id="Review">Review</h1><p>Because I am learnning python, I was attracted by the <a href="https://medium.com/free-code-camp/learning-python-from-zero-to-hero-120ea540b567" target="_blank" rel="external">Learning Python: From Zero to Hero</a> article of <a href="http://Medium.com" target="_blank" rel="external">Medium</a>. This article is very good ,  it almost show all the python-related knowledge in a limited page. Such as , variables, conditional statements, looping, collection/array, key-value collection, iterate , classes and objects, encapsulation, inheritance, etc.</p>
@@ -416,12 +417,12 @@
     
     </summary>
     
-      <category term="ATRS" scheme="http://huaqianlee.github.io/categories/ATRS/"/>
+      <category term="ARTS" scheme="http://huaqianlee.github.io/categories/ARTS/"/>
     
     
       <category term="Algorithm" scheme="http://huaqianlee.github.io/tags/Algorithm/"/>
     
-      <category term="Program Kill" scheme="http://huaqianlee.github.io/tags/Program-Kill/"/>
+      <category term="成长" scheme="http://huaqianlee.github.io/tags/%E6%88%90%E9%95%BF/"/>
     
   </entry>
   
@@ -467,11 +468,11 @@
   </entry>
   
   <entry>
-    <title>First week of ATRS: Start</title>
-    <link href="http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/"/>
-    <id>http://huaqianlee.github.io/2019/08/31/ATRS/First-week-of-ATRS-Start/</id>
+    <title>First week of ARTS: Start</title>
+    <link href="http://huaqianlee.github.io/2019/08/31/ARTS/First-week-of-ATRS-Start/"/>
+    <id>http://huaqianlee.github.io/2019/08/31/ARTS/First-week-of-ATRS-Start/</id>
     <published>2019-08-31T08:39:35.000Z</published>
-    <updated>2019-09-07T12:43:21.582Z</updated>
+    <updated>2019-09-07T15:55:34.858Z</updated>
     
     <content type="html"><![CDATA[<h1 id="ARTS_简单介绍">ARTS 简单介绍</h1><p>Algorithm：<br>主要是为了编程训练和学习。每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。</p>
 <p>Review：<br>主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 <a href="http://Medium.com" target="_blank" rel="external">Medium</a>（需要梯子）以及各个公司的技术 blog，如 Netflix 的。</p>
@@ -503,12 +504,12 @@
     
     </summary>
     
-      <category term="ATRS" scheme="http://huaqianlee.github.io/categories/ATRS/"/>
+      <category term="ARTS" scheme="http://huaqianlee.github.io/categories/ARTS/"/>
     
     
       <category term="Algorithm" scheme="http://huaqianlee.github.io/tags/Algorithm/"/>
     
-      <category term="Program Kill" scheme="http://huaqianlee.github.io/tags/Program-Kill/"/>
+      <category term="成长" scheme="http://huaqianlee.github.io/tags/%E6%88%90%E9%95%BF/"/>
     
   </entry>
   
