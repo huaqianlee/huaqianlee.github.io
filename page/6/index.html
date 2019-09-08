@@ -302,6 +302,123 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/02/Uav/uav-board-debugging/" itemprop="url">
+                  无人机开发主板调试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-02T21:01:57+08:00" content="Apr 2 2016">
+              Apr 2 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="问题一_：_新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16_-">问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .</h2><p>自己的uav主板回来后将软件刷入板子(高通msm8074), 板子不能正常启动.</p>
+<p>通过分析log， 发现死在boot_images\core\boot\secboot3\hw\msm8974\sbl1\sbl1_mc.c 中 sbl1_tlmm_init() —-&gt; boot_gpio_init()， 当我屏蔽此函数后， log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Format: Log Type - Time(microsec) - Message </span><br><span class="line">Log <span class="built_in">type</span>: B - since boot(excluding boot rom). D - delta </span><br><span class="line">B - <span class="number">41663</span> - SBL1, Start </span><br><span class="line">B - <span class="number">46909</span> - scatterload_region &amp;&amp; ram_init, Start </span><br><span class="line">D - <span class="number">30</span> - scatterload_region &amp;&amp; ram_init, Delta </span><br><span class="line">B - <span class="number">63897</span> - pm_device_init, Start </span><br><span class="line">D - <span class="number">27297</span> - pm_device_init, Delta </span><br><span class="line">B - <span class="number">91317</span> - boot_flash_init, Start </span><br><span class="line">D - <span class="number">10919</span> - boot_flash_init, Delta </span><br><span class="line">B - <span class="number">102632</span> - boot_config_data_table_init, Start </span><br><span class="line">D - <span class="number">134932</span> - boot_config_data_table_init, Delta </span><br><span class="line">B - <span class="number">239150</span> - sbl1_ddr_<span class="built_in">set</span>_params, Start </span><br><span class="line">B - <span class="number">241773</span> - Pre_DDR_clock_init, Start </span><br><span class="line">D - <span class="number">274</span> - Pre_DDR_clock_init, Delta </span><br><span class="line">D - <span class="number">0</span> - sbl1_ddr_<span class="built_in">set</span>_params, Delta </span><br><span class="line">B - <span class="number">255773</span> - pm_driver_init, Start </span><br><span class="line">D - <span class="number">16134</span> - pm_driver_init, Delta </span><br><span class="line">B - <span class="number">271907</span> - clock_init, Start </span><br><span class="line">D - <span class="number">152</span> - clock_init, Delta </span><br><span class="line">B - <span class="number">274988</span> - Image Load, Start </span><br><span class="line">B - <span class="number">295209</span> - Tz Execution, Start </span><br><span class="line">D - <span class="number">193065</span> - Tz Execution, Delta </span><br><span class="line">B - <span class="number">496387</span> - Image Load, Start </span><br><span class="line">B - <span class="number">506361</span> - Signal PBL to Jump to RPM FW </span><br><span class="line">B - <span class="number">506605</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Start   </span><br><span class="line">B - <span class="number">540399</span> - <span class="number">1</span><span class="comment">######################################################### </span></span><br><span class="line">D - <span class="number">45323</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Delta </span><br><span class="line"><span class="comment">#不屏蔽boot_gpio_init()函数,则停在此处， boot_gpio_init()中</span></span><br><span class="line">B - <span class="number">558302</span> - <span class="number">11</span><span class="comment">#########################################################   </span></span><br><span class="line">B - <span class="number">685884</span> - Image Load, Start </span><br><span class="line">B - <span class="number">689391</span> - WDT Execution, Start </span><br><span class="line">D - <span class="number">213</span> - WDT Execution, Delta </span><br><span class="line">B - <span class="number">694790</span> - Image Load, Start </span><br><span class="line">B - <span class="number">707905</span> - sbl1_efs_handle_cookies, Start</span><br></pre></td></tr></table></figure></p>
+<p>　<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/02/Uav/uav-board-debugging/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/01/04/Linux/linux-problem-set/" itemprop="url">
                   linux系统使用问题集
                 </a>
@@ -343,13 +460,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/04/Linux/linux-problem-set/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/Linux/linux-problem-set/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -465,13 +575,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/22/Git/git-experence/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/22/Git/git-experence/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -593,13 +696,6 @@ git commit
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/08/Life/2015年10月7日-小丑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/08/Life/2015年10月7日-小丑/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -715,13 +811,6 @@ git commit
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/23/Android/高通Android设备启动流程分析-从power-on上电到Home-Lanucher启动/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/23/Android/高通Android设备启动流程分析-从power-on上电到Home-Lanucher启动/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -840,13 +929,6 @@ git commit
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/21/Linux/深入理解Linux启动过程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/21/Linux/深入理解Linux启动过程/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -964,13 +1046,6 @@ git commit
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/19/Android/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/19/Android/高通平台Android源码分析之Linux内核设备树-DT-Device-Tree-dts文件/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1092,13 +1167,6 @@ git commit
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/18/Android/高通平台Android源码bootloader分析之sbl1-三/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/18/Android/高通平台Android源码bootloader分析之sbl1-三/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1216,13 +1284,6 @@ git commit
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/15/Android/高通平台Android源码bootloader分析之sbl1-二/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/15/Android/高通平台Android源码bootloader分析之sbl1-二/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1345,13 +1406,6 @@ git commit
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/15/Android/高通平台Android源码bootloader分析之sbl1-一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/15/Android/高通平台Android源码bootloader分析之sbl1-一/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1377,129 +1431,6 @@ git commit
 <h2 id="启动流程">启动流程</h2><p>首先来看一下高通的bootloader流程框图，主要由ap、RPM及modem三部分构成，由于我工作主要涉及到ap侧，所以对RPM和modem侧代码不了解，以后有空时间的话到可以研究一下，框图如下：<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/08/15/Android/高通平台Android源码bootloader分析之sbl1-一/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/25/Android/Android源码bootable解析之LK-bootloader-little-kernel/" itemprop="url">
-                  Android源码bootable解析之bootloader LK(little kernel)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-07-25T15:56:13+08:00" content="Jul 25 2015">
-              Jul 25 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/25/Android/Android源码bootable解析之LK-bootloader-little-kernel/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/25/Android/Android源码bootable解析之LK-bootloader-little-kernel/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。</p>
-<h2 id="boot架构">boot架构</h2>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/25/Android/Android源码bootable解析之LK-bootloader-little-kernel/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1574,7 +1505,7 @@ git commit
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">88</span>
+              <span class="site-state-item-count">89</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1582,7 +1513,7 @@ git commit
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1591,7 +1522,7 @@ git commit
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1798,30 +1729,9 @@ git commit
 
   
 
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"andylee"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
 
 
+  
 
 
 

@@ -302,6 +302,121 @@
             
               
                 
+                <a class="post-title-link" href="/2018/08/23/Android/Three-ways-to-dump-usb-register/" itemprop="url">
+                  Three ways to dump usb register
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-08-23T22:07:48+08:00" content="Aug 23 2018">
+              Aug 23 2018
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Add_node">Add node</h3><p>此方法只为一个示例，有些平台不是使用此文件，如 SDM450（MSM8953）使用的 dwc3-qcom.c 。<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"># kernel/msm-4.9/drivers/usb/phy/phy-msm-usb.c</span><br><span class="line"><span class="chunk">@@ -51,6 +51,11 @@</span></span><br><span class="line"> </span><br><span class="line"> #include &lt;linux/msm-bus.h&gt;</span><br><span class="line"> </span><br><span class="line"><span class="addition">+#undef dev_dbg</span></span><br><span class="line"><span class="addition">+#define dev_dbg dev_info</span></span><br><span class="line"><span class="addition">+#undef pr_debug</span></span><br><span class="line"><span class="addition">+#define pr_debug pr_info</span></span><br><span class="line"><span class="addition">+</span></span><br><span class="line"> /**</span><br><span class="line">  * Requested USB votes for BUS bandwidth</span><br><span class="line">  *</span><br><span class="line">@@ -3601,6 +3606,53 @@ static int msm_otg_setup_devices(struct</span><br><span class="line"> 	return retval;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="addition">+</span></span><br><span class="line"><span class="addition">+#define DUMP_ENTRIES	152</span></span><br><span class="line"><span class="addition">+</span></span><br><span class="line"><span class="addition">+static ssize_t usbphy_regs_show(struct device *dev,</span></span><br><span class="line"><span class="addition">+			       struct device_attribute *attr, char *buf)</span></span><br><span class="line"><span class="addition">+&#123;</span></span><br><span class="line"><span class="addition">+	struct msm_otg *motg = the_msm_otg;</span></span><br><span class="line"><span class="addition">+	//struct msm_otg_platform_data *pdata = motg-&gt;pdata;</span></span><br><span class="line"><span class="addition">+	struct usb_phy *phy = &amp;motg-&gt;phy;</span></span><br><span class="line"><span class="addition">+	u32 *dump;</span></span><br><span class="line"><span class="addition">+	unsigned int i,  n = 0;</span></span><br><span class="line"><span class="addition">+	//dbg_trace("[%s] %pK\n", __func__, buf);</span></span><br><span class="line"><span class="addition">+	if (attr == NULL || buf == NULL) &#123;</span></span><br><span class="line"><span class="addition">+		dev_err(dev, "[%s] EINVAL\n", __func__);</span></span><br><span class="line"><span class="addition">+		return 0;</span></span><br><span class="line"><span class="addition">+	&#125;</span></span><br><span class="line"><span class="addition">+	if (atomic_read(&amp;motg-&gt;in_lpm))&#123;</span></span><br><span class="line"><span class="addition">+	        dev_err(dev, "[%s] usb in lpm\n", __func__);</span></span><br><span class="line"><span class="addition">+		return 0;</span></span><br><span class="line"><span class="addition">+        &#125;</span></span><br><span class="line"><span class="addition">+	dump = kmalloc(sizeof(u8) * DUMP_ENTRIES, GFP_KERNEL);</span></span><br><span class="line"><span class="addition">+	if (!dump)</span></span><br><span class="line"><span class="addition">+		return 0;</span></span><br><span class="line"><span class="addition">+</span></span><br><span class="line"><span class="addition">+        for(i = 0; i &lt; DUMP_ENTRIES -1; i++)</span></span><br><span class="line"><span class="addition">+        dump[i] = ulpi_read(phy, i);</span></span><br><span class="line"><span class="addition">+</span></span><br><span class="line"><span class="addition">+	for (i = 0; i &lt; DUMP_ENTRIES -1; i++) &#123;</span></span><br><span class="line"><span class="addition">+		n += scnprintf(buf + n, PAGE_SIZE - n,</span></span><br><span class="line"><span class="addition">+			       "reg[0x%04X] = 0x%04X\n",</span></span><br><span class="line"><span class="addition">+			       i, dump[i]);</span></span><br><span class="line"><span class="addition">+	&#125;</span></span><br><span class="line"><span class="addition">+	kfree(dump);</span></span><br><span class="line"><span class="addition">+</span></span><br><span class="line"><span class="addition">+	return n;</span></span><br><span class="line"><span class="addition">+&#125;</span></span><br><span class="line"><span class="addition">+</span></span><br><span class="line"><span class="addition">+static ssize_t usbphy_regs_store(struct device *dev,</span></span><br><span class="line"><span class="addition">+		struct device_attribute *attr, const char</span></span><br><span class="line"><span class="addition">+		*buf, size_t size)</span></span><br><span class="line"><span class="addition">+&#123;</span></span><br><span class="line"><span class="addition">+	return size;</span></span><br><span class="line"><span class="addition">+&#125;</span></span><br><span class="line"><span class="addition">+</span></span><br><span class="line"><span class="addition">+static DEVICE_ATTR(usbphy_regs, 0644,</span></span><br><span class="line"><span class="addition">+		usbphy_regs_show, usbphy_regs_store);</span></span><br><span class="line"><span class="addition">+</span></span><br><span class="line"> static ssize_t dpdm_pulldown_enable_show(struct device *dev,</span><br><span class="line"> 			       struct device_attribute *attr, char *buf)</span><br><span class="line"> &#123;</span><br><span class="line">@@ -4426,6 +4478,7 @@ static int msm_otg_probe(struct platform</span><br><span class="line"> 	motg-&gt;caps |= ALLOW_HOST_PHY_RETENTION;</span><br><span class="line"> </span><br><span class="line"> 	device_create_file(&amp;pdev-&gt;dev, &amp;dev_attr_dpdm_pulldown_enable);</span><br><span class="line"><span class="addition">+	device_create_file(&amp;pdev-&gt;dev, &amp;dev_attr_usbphy_regs);</span></span><br><span class="line"> </span><br><span class="line"> 	if (motg-&gt;pdata-&gt;enable_lpm_on_dev_suspend)</span><br><span class="line"> 		motg-&gt;caps |= ALLOW_LPM_ON_DEV_SUSPEND;</span><br><span class="line">@@ -4527,6 +4580,7 @@ otg_remove_devices:</span><br><span class="line"> remove_cdev:</span><br><span class="line"> 	pm_runtime_disable(&amp;pdev-&gt;dev);</span><br><span class="line"> 	device_remove_file(&amp;pdev-&gt;dev, &amp;dev_attr_dpdm_pulldown_enable);</span><br><span class="line"><span class="addition">+	device_remove_file(&amp;pdev-&gt;dev, &amp;dev_attr_usbphy_regs);</span></span><br><span class="line"> 	msm_otg_debugfs_cleanup();</span><br><span class="line"> phy_reg_deinit:</span><br><span class="line"> 	devm_regulator_unregister(motg-&gt;phy.dev, motg-&gt;dpdm_rdev);</span><br><span class="line">@@ -4619,6 +4673,7 @@ static int msm_otg_remove(struct platfor</span><br><span class="line"> 	usb_remove_phy(phy);</span><br><span class="line"> </span><br><span class="line"> 	device_remove_file(&amp;pdev-&gt;dev, &amp;dev_attr_dpdm_pulldown_enable);</span><br><span class="line"><span class="addition">+	device_remove_file(&amp;pdev-&gt;dev, &amp;dev_attr_usbphy_regs);</span></span><br><span class="line"> </span><br><span class="line"> 	/*</span><br><span class="line"> 	 * Put PHY in low power mode.</span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/08/23/Android/Three-ways-to-dump-usb-register/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/02/12/Life/Bye-2017-Hi-2018/" itemprop="url">
                   17 小结，18 计划!
                 </a>
@@ -324,13 +439,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/02/12/Life/Bye-2017-Hi-2018/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/12/Life/Bye-2017-Hi-2018/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -447,13 +555,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/12/17/Android/android-sensor-arch-analysis/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/17/Android/android-sensor-arch-analysis/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -576,13 +677,6 @@
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/12/03/Android/Android-Linux-i2c-driver-arch/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/03/Android/Android-Linux-i2c-driver-arch/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -698,13 +792,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/23/Android/Android-Linux-input-system-analysis/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/23/Android/Android-Linux-input-system-analysis/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -825,13 +912,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/21/Android/BMS-of-Android-Power-Management/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/21/Android/BMS-of-Android-Power-Management/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -964,13 +1044,6 @@
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/14/Android/Android-SELinux-Permison-and-Question/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/14/Android/Android-SELinux-Permison-and-Question/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1093,13 +1166,6 @@
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/13/Android/What-is-fast-charge-now/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/13/Android/What-is-fast-charge-now/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1215,13 +1281,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1343,13 +1402,6 @@
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/08/Other/MDB-ICP-protocol/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/08/Other/MDB-ICP-protocol/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1377,128 +1429,6 @@
 </blockquote>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/11/08/Other/MDB-ICP-protocol/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/" itemprop="url">
-                  通过自定义侧边导航栏的RecyclerView动态加载布局
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-08-18T22:45:08+08:00" content="Aug 18 2017">
-              Aug 18 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="准备布局文件">准备布局文件</h2><p>布局一：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">android.support.constraint.ConstraintLayout</span></span><br><span class="line">        <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">        <span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span></span><br><span class="line">        <span class="attribute">xmlns:app</span>=<span class="value">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">tools:context</span>=<span class="value">"me.huaqianlee.forme.ToDoFragment"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="title">TextView</span> <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span> <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">              <span class="attribute">android:layout_marginTop</span>=<span class="value">"50dp"</span></span><br><span class="line">              <span class="attribute">android:textSize</span>=<span class="value">"15sp"</span></span><br><span class="line">    <span class="attribute">android:text</span>=<span class="value">"This is Todo main view layout!"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1573,7 +1503,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">88</span>
+              <span class="site-state-item-count">89</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1581,7 +1511,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1590,7 +1520,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1797,30 +1727,9 @@
 
   
 
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"andylee"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
 
 
+  
 
 
 
