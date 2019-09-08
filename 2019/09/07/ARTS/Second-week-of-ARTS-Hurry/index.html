@@ -370,7 +370,8 @@ This article is very good ,  it al">
 <a id="more"></a>
 <h1 id="Tips">Tips</h1><h2 id="Get_the_patch_of_the_specified_commission-">Get the patch of the specified commission.</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git diff origin/master HEAD <span class="comment"># Get patch for all commits which are not merged</span></span><br><span class="line">git diff start_commit_id end_commit_id <span class="comment"># Get patch between start_commit_id and end_commit_id</span></span><br></pre></td></tr></table></figure>
 <h2 id="A_way_to_avoid_that_security_issue_between_vendor_and_system-">A way to avoid that security issue between vendor and system.</h2><p>I am not sure when, if I am correct , there is security issues with file operations between vendor and system from Android O. I found a way to avoid it this week, that is, escape selinux verification in the following file.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">external/selinux/libselinux/src/avc.c</span><br></pre></td></tr></table></figure></p>
-<h1 id="Share">Share</h1>
+<h1 id="Share">Share</h1><p><a href="http://huaqianlee.github.io/2019/09/08/Shell/A-little-basic-knowledge-of-the-shell/" target="_blank" rel="external">A little basic knowledge of the shell</a></p>
+
       
     </div>
 
