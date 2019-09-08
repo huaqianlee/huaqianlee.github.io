@@ -379,7 +379,7 @@ what is a shellA shell is a software interface that is ofthen a command line int
 <h2 id="Input_and_output_redirection">Input and output redirection</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"&lt;"</span>   <span class="comment"># input redirection.</span></span><br><span class="line"><span class="string">"&gt;"</span>   <span class="comment"># output redirection</span></span><br><span class="line"><span class="string">"&gt;&gt;"</span>  <span class="comment"># output append redirection.</span></span><br><span class="line"><span class="string">"2&gt;"</span>  <span class="comment"># error output redirection.</span></span><br><span class="line"><span class="string">"&amp;&gt;"</span>  <span class="comment"># all output redirection.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># input + output redirection, EOF part redirect as input f cat.</span></span><br><span class="line">cat &gt; file.txt &lt;&lt;EOF</span><br><span class="line">Hello, Shell!</span><br><span class="line">EOF </span><br><span class="line"><span class="comment"># EOF can be any strings, it is only a conventional writing (End Of File)</span></span><br></pre></td></tr></table></figure>
 <h2 id="Variable">Variable</h2><h3 id="Definition_of_variables">Definition of variables</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var=value</span><br><span class="line"><span class="built_in">let</span> var=value</span><br><span class="line">l=ls</span><br><span class="line">var=$(ls <span class="operator">-l</span> /etc) </span><br><span class="line">or</span><br><span class="line">var=`ls <span class="operator">-l</span> /etc`</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>quote: ${var}, sometimes we can only use $var, sometimes we can’t, like, ${var}test != $vartest.</p>
+<p>quote: \${var}, sometimes we can only use \$var, sometimes we can’t, like, \${var}test != $vartest.</p>
 </blockquote>
 <h3 id="Scope_of_the_variable">Scope of the variable</h3><p>Variable only works in the current terminal or the current shell script. </p>
 <p>If we want to use it in the child process, we need to export it as follows:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> var(=xxx)</span><br></pre></td></tr></table></figure></p>
@@ -425,8 +425,8 @@ what is a shellA shell is a software interface that is ofthen a command line int
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2100/11/21/Android/A-summary-of-Android-source-analysis/" rel="prev" title="【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客">
-                【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2100/11/22/SUMMARY/" rel="prev" title="【置顶】博客主题分类一览">
+                【置顶】博客主题分类一览 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

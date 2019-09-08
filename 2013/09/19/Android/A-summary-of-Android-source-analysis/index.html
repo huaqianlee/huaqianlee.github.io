@@ -86,21 +86,21 @@
 
 
 
-<meta name="description" content="一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。
+<meta name="description" content="工作、生活重心等都发生了较大变化，不会计划性更新此部分了，先取消置顶，但有空也会写写，等有较高质量的时候再考虑恢复置顶。  
 
-前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 A">
+前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客">
-<meta property="og:url" content="http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/index.html">
+<meta property="og:url" content="http://huaqianlee.github.io/2013/09/19/Android/A-summary-of-Android-source-analysis/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
-<meta property="og:description" content="一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。
+<meta property="og:description" content="工作、生活重心等都发生了较大变化，不会计划性更新此部分了，先取消置顶，但有空也会写写，等有较高质量的时候再考虑恢复置顶。  
 
-前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 A">
+前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客">
-<meta name="twitter:description" content="一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。
+<meta name="twitter:description" content="工作、生活重心等都发生了较大变化，不会计划性更新此部分了，先取消置顶，但有空也会写写，等有较高质量的时候再考虑恢复置顶。  
 
-前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 A">
+前言之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。">
 
 
 
@@ -121,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/"/>
+  <link rel="canonical" href="http://huaqianlee.github.io/2013/09/19/Android/A-summary-of-Android-source-analysis/"/>
 
   <title> 【置顶】Android 系统源码分析综述：整理总结源码分析的所有博客 | Andy.Lee's  Blog </title>
 </head>
@@ -317,8 +317,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2100-11-21T21:55:43+08:00" content="Nov 21 2100">
-              Nov 21 2100
+            <time itemprop="dateCreated" datetime="2013-09-19T21:55:43+08:00" content="Sep 19 2013">
+              Sep 19 2013
             </time>
           </span>
 
@@ -365,10 +365,9 @@
 
       
         <blockquote>
-<p>一直都想对整个Android系统的源码做一个完整的分析，并形成一些有质量的文章。之前做高通平台时，也零零碎碎的分析过一些Android系统的源码，但是当时基本都是用笔记软件随意做了一些记录，没有系统性的总结，导致很多东西又忘记了。最近开始做MTK平台，就准备开始抽空好好跟读一下源码，边分析边写博客。</p>
+<p>工作、生活重心等都发生了较大变化，不会计划性更新此部分了，先取消置顶，但有空也会写写，等有较高质量的时候再考虑恢复置顶。  </p>
 </blockquote>
-<h1 id="前言">前言</h1><p>之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。<br><a id="more"></a></p>
-<p>以前看代码，喜欢按照调用流程一步步的完整跟下来，这样比较费时间，尤其觉得对于驱动部分不是很必要，所以这次就准备主要专注于关键文件和关键函数，以及软件框架。</p>
+<h1 id="前言">前言</h1><p>之前的几篇高通的博客是基于Android 4.4 分析，现在准备通过工作时 MTK 平台 Android 7.0 的源码来进行分析，不过也会将以前基于高通的博客归类于此文。<br><a id="more"></a><br>以前看代码，喜欢按照调用流程一步步的完整跟下来，这样比较费时间，尤其觉得对于驱动部分不是很必要，所以这次就准备主要专注于关键文件和关键函数，以及软件框架。</p>
 <h1 id="Android架构">Android架构</h1><h1 id="源码分析">源码分析</h1><p>准备从三个方向来分析源码，一是从工作相关的方向，将所有外设，从最底层到最上层；二是针对某些模块的代码进行分析；三是根据系统源码架构和结构一层一层分析原理。</p>
 <h2 id="外设方向">外设方向</h2><table>
 <thead>
@@ -597,16 +596,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/08/Shell/A-little-basic-knowledge-of-the-shell/" rel="next" title="A little basic knowledge of the shell">
-                <i class="fa fa-chevron-left"></i> A little basic knowledge of the shell
+              <a href="/2013/09/19/Life/four-years/" rel="next" title="Four years">
+                <i class="fa fa-chevron-left"></i> Four years
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2100/11/22/SUMMARY/" rel="prev" title="【置顶】博客主题分类一览">
-                【置顶】博客主题分类一览 <i class="fa fa-chevron-right"></i>
+              <a href="/2014/10/20/Hexo/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
