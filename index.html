@@ -403,8 +403,125 @@
             
               
                 
+                <a class="post-title-link" href="/2019/09/15/Git/How-does-android-repo-work/" itemprop="url">
+                  How does the repo of android source code work ?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-09-15T17:40:17+08:00" content="Sep 15 2019">
+              Sep 15 2019
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在 <code>android</code> 源码中，主要用 <a href="https://android.googlesource.com/tools/repo"><strong>Repo</strong></a> 和 <a href="https://git-scm.com/"><strong>Git</strong></a> 来进行版本管理。<code>Repo</code> 是一个由谷歌构建，运行在 Git 之上的仓库管理工具，其让多项目管理变得更容易，尤其对于基本的网络操作，譬如，下载由上百个项目组成的 Android 源码。</p>
+<h1 id="Repo_的组成和基本使用">Repo 的组成和基本使用</h1><h2 id="Repo_launcher">Repo launcher</h2><p><code>Repo</code> 的第一部分，其是一个 <code>Python</code> 脚本，主要用来获取完整的 <code>Repo</code> 工具并转发接收到的命令 .</p>
+<h2 id="Repo_Tool">Repo Tool</h2><p><code>Repo</code> 的第二部分，由 <code>Repo launcher</code> 下载到 <code>$srcDir/.repo/repo</code>，其是主要功能部分，处理 <code>Repo launcher</code> 转发的命令。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2019/09/15/Git/How-does-android-repo-work/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2019/09/13/ARTS/Third-week-of-ARTS/" itemprop="url">
-                  Third week of ARTS
+                  Third week of ARTS: Repo
                 </a>
               
             
@@ -466,14 +583,15 @@
       
         
           <h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/palindrome-number/">Palindrome Number</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/isPalindrome.c">C solution</a></p>
-<h1 id="Review">Review</h1><p><a href="https://android.googlesource.com/tools/repo">repo</a></p>
+<h1 id="Review">Review</h1><p>I always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage of repo, repo &amp;&amp; git , etc in detail. It helps me a lot. But I have not absorbed them yet, I need more time.<br><a href="https://android.googlesource.com/tools/repo">repo</a></p>
 <ul>
 <li><a href="https://source.android.com/setup/develop">Source Control Tools</a></li>
 <li><a href="https://source.android.com/setup/create/coding-tasks">Source Control Workflow</a></li>
 <li><a href="https://source.android.com/setup/develop/repo">Repo Command Reference</a></li>
 <li><a href="https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md">Repo Manifest Format</a></li>
 <li><a href="https://android.googlesource.com/tools/repo/+/HEAD/docs/repo-hooks.md">Repo hooks</a></li>
-<li><a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/separating-topic-branches.txt">How to separate topic branches</a>
+<li><a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/separating-topic-branches.txt">How to separate topic branches</a>  </li>
+</ul>
           <div class="post-more-link text-center">
             <a class="btn" href="/2019/09/13/ARTS/Third-week-of-ARTS/#more" rel="contents">
               Read more &raquo;
@@ -1348,127 +1466,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/" itemprop="url">
-                  Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-05-05T20:04:59+08:00" content="May 5 2019">
-              May 5 2019
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近在本地搭建了一个 Gitbook ，用于内网访问。总结一下简单流程形成此文，细节设置可以参考官网。</p>
-<h2 id="Gitbook">Gitbook</h2><h3 id="Install_Git">Install Git</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt <span class="keyword">install</span> git</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1509,7 +1511,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">90</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1526,7 +1528,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

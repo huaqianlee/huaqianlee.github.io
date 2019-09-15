@@ -87,38 +87,17 @@
 
 
 <meta name="description" content="AlgorithmTitle：Palindrome NumberSolution：C solution
-Reviewrepo
-
-Source Control Tools
-Source Control Workflow
-Repo Command Reference
-Repo Manifest Format
-Repo hooks
-How to separate topic branches">
+ReviewI always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Third week of ARTS">
+<meta property="og:title" content="Third week of ARTS: Repo">
 <meta property="og:url" content="http://huaqianlee.github.io/2019/09/13/ARTS/Third-week-of-ARTS/index.html">
 <meta property="og:site_name" content="Andy.Lee's  Blog">
 <meta property="og:description" content="AlgorithmTitle：Palindrome NumberSolution：C solution
-Reviewrepo
-
-Source Control Tools
-Source Control Workflow
-Repo Command Reference
-Repo Manifest Format
-Repo hooks
-How to separate topic branches">
+ReviewI always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Third week of ARTS">
+<meta name="twitter:title" content="Third week of ARTS: Repo">
 <meta name="twitter:description" content="AlgorithmTitle：Palindrome NumberSolution：C solution
-Reviewrepo
-
-Source Control Tools
-Source Control Workflow
-Repo Command Reference
-Repo Manifest Format
-Repo hooks
-How to separate topic branches">
+ReviewI always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage">
 
 
 
@@ -141,7 +120,7 @@ How to separate topic branches">
 
   <link rel="canonical" href="http://huaqianlee.github.io/2019/09/13/ARTS/Third-week-of-ARTS/"/>
 
-  <title> Third week of ARTS | Andy.Lee's  Blog </title>
+  <title> Third week of ARTS: Repo | Andy.Lee's  Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -323,7 +302,7 @@ How to separate topic branches">
             
             
               
-                Third week of ARTS
+                Third week of ARTS: Repo
               
             
           </h1>
@@ -383,19 +362,20 @@ How to separate topic branches">
 
       
         <h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/palindrome-number/" target="_blank" rel="external">Palindrome Number</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/isPalindrome.c" target="_blank" rel="external">C solution</a></p>
-<h1 id="Review">Review</h1><p><a href="https://android.googlesource.com/tools/repo" target="_blank" rel="external">repo</a></p>
+<h1 id="Review">Review</h1><p>I always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage of repo, repo &amp;&amp; git , etc in detail. It helps me a lot. But I have not absorbed them yet, I need more time.<br><a href="https://android.googlesource.com/tools/repo" target="_blank" rel="external">repo</a></p>
 <ul>
 <li><a href="https://source.android.com/setup/develop" target="_blank" rel="external">Source Control Tools</a></li>
 <li><a href="https://source.android.com/setup/create/coding-tasks" target="_blank" rel="external">Source Control Workflow</a></li>
 <li><a href="https://source.android.com/setup/develop/repo" target="_blank" rel="external">Repo Command Reference</a></li>
 <li><a href="https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md" target="_blank" rel="external">Repo Manifest Format</a></li>
 <li><a href="https://android.googlesource.com/tools/repo/+/HEAD/docs/repo-hooks.md" target="_blank" rel="external">Repo hooks</a></li>
-<li><a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/separating-topic-branches.txt" target="_blank" rel="external">How to separate topic branches</a><a id="more"></a>
-<h1 id="Tips">Tips</h1><h2 id="Delete_Files_Using_Extended_Pattern_Matching_Operators-">Delete Files Using Extended Pattern Matching Operators.</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># enable extglob</span></span><br><span class="line"><span class="built_in">shopt</span> <span class="operator">-s</span> extglob</span><br><span class="line"></span><br><span class="line">rm -v !(<span class="string">"filename"</span>)</span><br><span class="line">rm -v !(<span class="string">"filename1"</span>|<span class="string">"filename2"</span>) </span><br><span class="line"><span class="comment"># such as,</span></span><br><span class="line">rm -i !(*.zip)</span><br><span class="line">rm -v !(*.zip|*.odt)</span><br><span class="line"></span><br><span class="line"><span class="comment"># disable extglob</span></span><br><span class="line"><span class="built_in">shopt</span> -u extglob</span><br></pre></td></tr></table></figure>
-</li>
+<li><a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/separating-topic-branches.txt" target="_blank" rel="external">How to separate topic branches</a>  </li>
 </ul>
+<a id="more"></a>
+<h1 id="Tips">Tips</h1><h2 id="Delete_Files_Using_Extended_Pattern_Matching_Operators-">Delete Files Using Extended Pattern Matching Operators.</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># enable extglob</span></span><br><span class="line"><span class="built_in">shopt</span> <span class="operator">-s</span> extglob</span><br><span class="line"></span><br><span class="line">rm -v !(<span class="string">"filename"</span>)</span><br><span class="line">rm -v !(<span class="string">"filename1"</span>|<span class="string">"filename2"</span>) </span><br><span class="line"><span class="comment"># such as,</span></span><br><span class="line">rm -i !(*.zip)</span><br><span class="line">rm -v !(*.zip|*.odt)</span><br><span class="line"></span><br><span class="line"><span class="comment"># disable extglob</span></span><br><span class="line"><span class="built_in">shopt</span> -u extglob</span><br></pre></td></tr></table></figure>
 <h2 id="Delete_Files_Using_Linux_find_Command">Delete Files Using Linux find Command</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">find /directory/ -type f -not -name <span class="string">'PATTERN'</span> -delete</span><br><span class="line">find /directory/ -type f -not -name <span class="string">'PATTERN'</span> -print0 | xargs -<span class="number">0</span> -I &#123;&#125; rm &#123;&#125;</span><br><span class="line">find /directory/ -type f -not -name <span class="string">'PATTERN'</span> -print0 | xargs -<span class="number">0</span> -I &#123;&#125; rm [options] &#123;&#125;</span><br><span class="line"><span class="comment"># such as,</span></span><br><span class="line">find . -type f -not -name <span class="string">'*.gz'</span>-delete</span><br><span class="line">find . -type f -not -name <span class="string">'*gz'</span> -print0 | xargs -<span class="number">0</span>  -I &#123;&#125; rm -v &#123;&#125;</span><br><span class="line">find . -type f -not \(-name <span class="string">'*gz'</span> -or -name <span class="string">'*odt'</span> -or -name <span class="string">'*.jpg'</span> \) -delete</span><br></pre></td></tr></table></figure>
-<h1 id="Share">Share</h1>
+<h1 id="Share">Share</h1><p><a href="http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/" target="_blank" rel="external">How does the repo of android source code work ?</a></p>
+
       
     </div>
 
@@ -436,8 +416,8 @@ How to separate topic branches">
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2100/11/22/SUMMARY/" rel="prev" title="【置顶】博客主题分类一览">
-                【置顶】博客主题分类一览 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/15/Git/How-does-android-repo-work/" rel="prev" title="How does the repo of android source code work ?">
+                How does the repo of android source code work ? <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -529,7 +509,7 @@ How to separate topic branches">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">90</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -546,7 +526,7 @@ How to separate topic branches">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

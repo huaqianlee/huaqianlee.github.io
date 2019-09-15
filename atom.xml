@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huaqianlee.github.io/"/>
-  <updated>2019-09-08T09:23:41.967Z</updated>
+  <updated>2019-09-15T14:47:50.198Z</updated>
   <id>http://huaqianlee.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huaqianlee.github.io/2100/11/22/SUMMARY/"/>
     <id>http://huaqianlee.github.io/2100/11/22/SUMMARY/</id>
     <published>2100-11-22T06:34:36.000Z</published>
-    <updated>2019-09-08T09:23:41.967Z</updated>
+    <updated>2019-09-15T14:47:50.198Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Linux">Linux</h2><ul>
 <li><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/" target="_blank" rel="external">Process and thread in linux</a></li>
@@ -31,6 +31,7 @@
 <li><a href="http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/" target="_blank" rel="external">linux系统使用问题集</a></li>
 </ul>
 <h2 id="ARTS">ARTS</h2><ul>
+<li><a href="http://huaqianlee.github.io/2019/09/07/ARTS/Third-week-of-ARTS/" target="_blank" rel="external">Third week of ARTS: Repo</a></li>
 <li><a href="http://huaqianlee.github.io/2019/09/07/ARTS/Second-week-of-ARTS-Hurry/" target="_blank" rel="external">Second week of ARTS: Hurry</a></li>
 <li><a href="http://huaqianlee.github.io/2019/08/31/ARTS/First-week-of-ARTS-Start/" target="_blank" rel="external">First week of ARTS: Start</a></li>
 </ul>
@@ -81,6 +82,7 @@
 <li><a href="http://huaqianlee.github.io/2015/06/24/Android/smb135x-charger-driver/" target="_blank" rel="external">高通 smb135x charger 驱动分析</a></li>
 </ul>
 <h2 id="Git">Git</h2><ul>
+<li><a href="http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/" target="_blank" rel="external">How does the repo of android source code work ?</a></li>
 <li><a href="http://huaqianlee.github.io/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/" target="_blank" rel="external">Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook</a></li>
 <li><a href="http://huaqianlee.github.io/2015/06/11/Git/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" target="_blank" rel="external">git常用及进阶命令总结</a></li>
 <li><a href="http://huaqianlee.github.io/2015/10/22/Git/git-experence/" target="_blank" rel="external">git常见问题总结</a></li>
@@ -164,38 +166,164 @@
   </entry>
   
   <entry>
-    <title>Third week of ARTS</title>
+    <title>How does the repo of android source code work ?</title>
+    <link href="http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/"/>
+    <id>http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/</id>
+    <published>2019-09-15T09:40:17.000Z</published>
+    <updated>2019-09-15T14:49:58.760Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 <code>android</code> 源码中，主要用 <a href="https://android.googlesource.com/tools/repo" target="_blank" rel="external"><strong>Repo</strong></a> 和 <a href="https://git-scm.com/" target="_blank" rel="external"><strong>Git</strong></a> 来进行版本管理。<code>Repo</code> 是一个由谷歌构建，运行在 Git 之上的仓库管理工具，其让多项目管理变得更容易，尤其对于基本的网络操作，譬如，下载由上百个项目组成的 Android 源码。</p>
+<h1 id="Repo_的组成和基本使用">Repo 的组成和基本使用</h1><h2 id="Repo_launcher">Repo launcher</h2><p><code>Repo</code> 的第一部分，其是一个 <code>Python</code> 脚本，主要用来获取完整的 <code>Repo</code> 工具并转发接收到的命令 .</p>
+<h2 id="Repo_Tool">Repo Tool</h2><p><code>Repo</code> 的第二部分，由 <code>Repo launcher</code> 下载到 <code>$srcDir/.repo/repo</code>，其是主要功能部分，处理 <code>Repo launcher</code> 转发的命令。<br><a id="more"></a></p>
+<h2 id="官方的获取方式">官方的获取方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/bin</span><br><span class="line">PATH=~/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line">curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo</span><br><span class="line">chmod a+x ~/bin/repo</span><br></pre></td></tr></table></figure>
+<h2 id="官方源码下载方式">官方源码下载方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">repo init -u https://android.googlesource.com/platform/manifest -b android-<span class="number">4.0</span>.<span class="number">1</span>_r1</span><br><span class="line">repo sync [-c --no-tags]</span><br></pre></td></tr></table></figure>
+<h1 id="Repo_怎么工作">Repo 怎么工作</h1><p>下载代码时 <code>repo</code> 主要工作流程如下：</p>
+<ol>
+<li><code>repo init</code> 在当前路径创建 <code>.repo</code> 文件夹并克隆 <a href="https://android.googlesource.com/tools/repo" target="_blank" rel="external">repo 的 git 仓库</a>到 <code>.repo/repo</code>（即 <code>Repo Tool</code>）。</li>
+<li>以 <a href="https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server#_getting_git_on_a_server" target="_blank" rel="external"><code>--bare</code></a> 方式克隆 <code>-u</code> 选项指定的 <code>git</code> 仓库（没有工作空间的仓库）到 <code>.repo/manifests.git</code>。 </li>
+<li>创建 <code>.repo/manifests</code> 目录，通过创建 <code>.repo/manifests/.git</code> 作为 <code>.repo/manifests.git</code> 的符号链接将其转换为 <code>Git</code> 仓库。 </li>
+<li><strong>Checkout</strong> <code>-b</code> 选项指定的分支，并创建 <code>.repo/manifests</code> 目录中的指定文件（通过 <code>-m</code> 指定，通常默认为 <code>.repo/manifests/defualt.xml</code>）的符号链接 <code>.repo/manifest.xml</code>。</li>
+<li><code>repo sync</code> 将 <code>manifest.xml</code> 和 <code>local_manifest.xml</code> 中每一个 <code>project</code> 的 <code>git</code> 仓库克隆到 <code>.repo/projects</code>。</li>
+<li>通过链接到相应空仓库的 <code>.git</code> 创建工作路径， <strong>checkout</strong>  <code>manifest</code> 中指定的分支，并更新 <code>.repo/project.list</code>。 <blockquote>
+<p>项目存在的情况下， 一般执行 <code>git pull [--rebase]</code>来下载更新源码。</p>
+</blockquote>
+</li>
+</ol>
+<p><code>repo init</code>的大体流程上如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">repo init -u <span class="variable">$URL</span> -b <span class="variable">$BRANCH</span> -m <span class="variable">$MANIFEST</span></span><br><span class="line"> --------------------</span><br><span class="line"> mkdir .repo; <span class="built_in">cd</span> .repo</span><br><span class="line"> git <span class="built_in">clone</span> https://android.googlesource.com/tools/repo</span><br><span class="line"> git <span class="built_in">clone</span> --bare <span class="variable">$URL</span> manifests.git</span><br><span class="line"> mkdir -p manifests/.git; <span class="built_in">cd</span> manifests/.git</span><br><span class="line"> <span class="keyword">for</span> i <span class="keyword">in</span> ../../manifests.git/*; <span class="keyword">do</span> ln <span class="operator">-s</span> <span class="variable">$i</span> .; <span class="keyword">done</span></span><br><span class="line"> <span class="built_in">cd</span> ..</span><br><span class="line"> git checkout <span class="variable">$BRANCH</span> -- .</span><br><span class="line"> <span class="built_in">cd</span> ..</span><br><span class="line"> ln <span class="operator">-s</span> manifests/<span class="variable">$MANIFEST</span> manifest.xml</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>我们可以通过 <code>repo --trace init ...</code> 来追踪执行过程  </p>
+</blockquote>
+<h1 id="VCS(Version_Control_System)_的使用">VCS(Version Control System) 的使用</h1><h2 id="常见工作流程">常见工作流程</h2><ol>
+<li>repo start 创建一个新的 topic 分支</li>
+<li>git add</li>
+<li>git commit</li>
+<li>repo upload (个人习惯使用的方式：git push origin HEAD:refs/for/branch)</li>
+</ol>
+<h2 id="常见工作命令">常见工作命令</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">Command</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">repo init</td>
+<td style="text-align:left">Initializes a new client.</td>
+</tr>
+<tr>
+<td style="text-align:left">repo sync</td>
+<td style="text-align:left">Syncs the client to the repositories.</td>
+</tr>
+<tr>
+<td style="text-align:left">repo start</td>
+<td style="text-align:left">Starts a new branch.</td>
+</tr>
+<tr>
+<td style="text-align:left">repo status</td>
+<td style="text-align:left">Shows the status of the current branch.</td>
+</tr>
+<tr>
+<td style="text-align:left">repo upload</td>
+<td style="text-align:left">Uploads changes to the review server.</td>
+</tr>
+<tr>
+<td style="text-align:left">git add</td>
+<td style="text-align:left">Stages the files.</td>
+</tr>
+<tr>
+<td style="text-align:left">git commit</td>
+<td style="text-align:left">Commits the staged files.</td>
+</tr>
+<tr>
+<td style="text-align:left">git branch</td>
+<td style="text-align:left">Shows the current branches.</td>
+</tr>
+<tr>
+<td style="text-align:left">git branch [branch]</td>
+<td style="text-align:left">Creates a new topic branch.</td>
+</tr>
+<tr>
+<td style="text-align:left">git checkout [branch]</td>
+<td style="text-align:left">Switches HEAD to the specified branch.</td>
+</tr>
+<tr>
+<td style="text-align:left">git merge [branch]</td>
+<td style="text-align:left">Merges [branch] into current branch.</td>
+</tr>
+<tr>
+<td style="text-align:left">git diff</td>
+<td style="text-align:left">Shows diff of the unstaged changes.</td>
+</tr>
+<tr>
+<td style="text-align:left">git diff —cached</td>
+<td style="text-align:left">Shows diff of the staged changes.</td>
+</tr>
+<tr>
+<td style="text-align:left">git log</td>
+<td style="text-align:left">Shows the history of the current branch.</td>
+</tr>
+<tr>
+<td style="text-align:left">git log m/[codeline]..</td>
+<td style="text-align:left">Shows the commits that aren’t pushed.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Reference">Reference</h1><p><a href="https://stackoverflow.com/questions/6149725/how-does-the-android-repo-manifest-repository-work" target="_blank" rel="external">stack overflow.</a><br><a href="https://source.android.com/setup/develop" target="_blank" rel="external">Source Control Tools.</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在 &lt;code&gt;android&lt;/code&gt; 源码中，主要用 &lt;a href=&quot;https://android.googlesource.com/tools/repo&quot;&gt;&lt;strong&gt;Repo&lt;/strong&gt;&lt;/a&gt; 和 &lt;a href=&quot;https://git-scm.com/&quot;&gt;&lt;strong&gt;Git&lt;/strong&gt;&lt;/a&gt; 来进行版本管理。&lt;code&gt;Repo&lt;/code&gt; 是一个由谷歌构建，运行在 Git 之上的仓库管理工具，其让多项目管理变得更容易，尤其对于基本的网络操作，譬如，下载由上百个项目组成的 Android 源码。&lt;/p&gt;
+&lt;h1 id=&quot;Repo_的组成和基本使用&quot;&gt;Repo 的组成和基本使用&lt;/h1&gt;&lt;h2 id=&quot;Repo_launcher&quot;&gt;Repo launcher&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Repo&lt;/code&gt; 的第一部分，其是一个 &lt;code&gt;Python&lt;/code&gt; 脚本，主要用来获取完整的 &lt;code&gt;Repo&lt;/code&gt; 工具并转发接收到的命令 .&lt;/p&gt;
+&lt;h2 id=&quot;Repo_Tool&quot;&gt;Repo Tool&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Repo&lt;/code&gt; 的第二部分，由 &lt;code&gt;Repo launcher&lt;/code&gt; 下载到 &lt;code&gt;$srcDir/.repo/repo&lt;/code&gt;，其是主要功能部分，处理 &lt;code&gt;Repo launcher&lt;/code&gt; 转发的命令。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Git" scheme="http://huaqianlee.github.io/categories/Git/"/>
+    
+    
+      <category term="Repo" scheme="http://huaqianlee.github.io/tags/Repo/"/>
+    
+      <category term="Tools" scheme="http://huaqianlee.github.io/tags/Tools/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Third week of ARTS: Repo</title>
     <link href="http://huaqianlee.github.io/2019/09/13/ARTS/Third-week-of-ARTS/"/>
     <id>http://huaqianlee.github.io/2019/09/13/ARTS/Third-week-of-ARTS/</id>
     <published>2019-09-13T08:34:02.000Z</published>
-    <updated>2019-09-14T15:27:33.679Z</updated>
+    <updated>2019-09-15T14:48:38.666Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/palindrome-number/" target="_blank" rel="external">Palindrome Number</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/isPalindrome.c" target="_blank" rel="external">C solution</a></p>
-<h1 id="Review">Review</h1><p><a href="https://android.googlesource.com/tools/repo" target="_blank" rel="external">repo</a></p>
+<h1 id="Review">Review</h1><p>I always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage of repo, repo &amp;&amp; git , etc in detail. It helps me a lot. But I have not absorbed them yet, I need more time.<br><a href="https://android.googlesource.com/tools/repo" target="_blank" rel="external">repo</a></p>
 <ul>
 <li><a href="https://source.android.com/setup/develop" target="_blank" rel="external">Source Control Tools</a></li>
 <li><a href="https://source.android.com/setup/create/coding-tasks" target="_blank" rel="external">Source Control Workflow</a></li>
 <li><a href="https://source.android.com/setup/develop/repo" target="_blank" rel="external">Repo Command Reference</a></li>
 <li><a href="https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md" target="_blank" rel="external">Repo Manifest Format</a></li>
 <li><a href="https://android.googlesource.com/tools/repo/+/HEAD/docs/repo-hooks.md" target="_blank" rel="external">Repo hooks</a></li>
-<li><a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/separating-topic-branches.txt" target="_blank" rel="external">How to separate topic branches</a><a id="more"></a>
-<h1 id="Tips">Tips</h1><h2 id="Delete_Files_Using_Extended_Pattern_Matching_Operators-">Delete Files Using Extended Pattern Matching Operators.</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># enable extglob</span></span><br><span class="line"><span class="built_in">shopt</span> <span class="operator">-s</span> extglob</span><br><span class="line"></span><br><span class="line">rm -v !(<span class="string">"filename"</span>)</span><br><span class="line">rm -v !(<span class="string">"filename1"</span>|<span class="string">"filename2"</span>) </span><br><span class="line"><span class="comment"># such as,</span></span><br><span class="line">rm -i !(*.zip)</span><br><span class="line">rm -v !(*.zip|*.odt)</span><br><span class="line"></span><br><span class="line"><span class="comment"># disable extglob</span></span><br><span class="line"><span class="built_in">shopt</span> -u extglob</span><br></pre></td></tr></table></figure>
-</li>
+<li><a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/separating-topic-branches.txt" target="_blank" rel="external">How to separate topic branches</a>  </li>
 </ul>
+<a id="more"></a>
+<h1 id="Tips">Tips</h1><h2 id="Delete_Files_Using_Extended_Pattern_Matching_Operators-">Delete Files Using Extended Pattern Matching Operators.</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># enable extglob</span></span><br><span class="line"><span class="built_in">shopt</span> <span class="operator">-s</span> extglob</span><br><span class="line"></span><br><span class="line">rm -v !(<span class="string">"filename"</span>)</span><br><span class="line">rm -v !(<span class="string">"filename1"</span>|<span class="string">"filename2"</span>) </span><br><span class="line"><span class="comment"># such as,</span></span><br><span class="line">rm -i !(*.zip)</span><br><span class="line">rm -v !(*.zip|*.odt)</span><br><span class="line"></span><br><span class="line"><span class="comment"># disable extglob</span></span><br><span class="line"><span class="built_in">shopt</span> -u extglob</span><br></pre></td></tr></table></figure>
 <h2 id="Delete_Files_Using_Linux_find_Command">Delete Files Using Linux find Command</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">find /directory/ -type f -not -name <span class="string">'PATTERN'</span> -delete</span><br><span class="line">find /directory/ -type f -not -name <span class="string">'PATTERN'</span> -print0 | xargs -<span class="number">0</span> -I &#123;&#125; rm &#123;&#125;</span><br><span class="line">find /directory/ -type f -not -name <span class="string">'PATTERN'</span> -print0 | xargs -<span class="number">0</span> -I &#123;&#125; rm [options] &#123;&#125;</span><br><span class="line"><span class="comment"># such as,</span></span><br><span class="line">find . -type f -not -name <span class="string">'*.gz'</span>-delete</span><br><span class="line">find . -type f -not -name <span class="string">'*gz'</span> -print0 | xargs -<span class="number">0</span>  -I &#123;&#125; rm -v &#123;&#125;</span><br><span class="line">find . -type f -not \(-name <span class="string">'*gz'</span> -or -name <span class="string">'*odt'</span> -or -name <span class="string">'*.jpg'</span> \) -delete</span><br></pre></td></tr></table></figure>
-<h1 id="Share">Share</h1>]]></content>
+<h1 id="Share">Share</h1><p><a href="http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/" target="_blank" rel="external">How does the repo of android source code work ?</a></p>
+]]></content>
     
     <summary type="html">
     
       &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title：&lt;a href=&quot;https://leetcode.com/problems/palindrome-number/&quot;&gt;Palindrome Number&lt;/a&gt;&lt;br&gt;Solution：&lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/isPalindrome.c&quot;&gt;C solution&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Review&quot;&gt;Review&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://android.googlesource.com/tools/repo&quot;&gt;repo&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Review&quot;&gt;Review&lt;/h1&gt;&lt;p&gt;I always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage of repo, repo &amp;amp;&amp;amp; git , etc in detail. It helps me a lot. But I have not absorbed them yet, I need more time.&lt;br&gt;&lt;a href=&quot;https://android.googlesource.com/tools/repo&quot;&gt;repo&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://source.android.com/setup/develop&quot;&gt;Source Control Tools&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://source.android.com/setup/create/coding-tasks&quot;&gt;Source Control Workflow&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://source.android.com/setup/develop/repo&quot;&gt;Repo Command Reference&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md&quot;&gt;Repo Manifest Format&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://android.googlesource.com/tools/repo/+/HEAD/docs/repo-hooks.md&quot;&gt;Repo hooks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/separating-topic-branches.txt&quot;&gt;How to separate topic branches&lt;/a&gt;
+&lt;li&gt;&lt;a href=&quot;https://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/separating-topic-branches.txt&quot;&gt;How to separate topic branches&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -1125,52 +1253,6 @@ make -j24
     
     
       <category term="App" scheme="http://huaqianlee.github.io/tags/App/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>纸币器和MDB协议</title>
-    <link href="http://huaqianlee.github.io/2017/11/08/Other/MDB-ICP-protocol/"/>
-    <id>http://huaqianlee.github.io/2017/11/08/Other/MDB-ICP-protocol/</id>
-    <published>2017-11-08T14:22:45.000Z</published>
-    <updated>2017-11-08T14:31:37.259Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="MDB协议">MDB协议</h2><h3 id="简介">简介</h3><p>MDB/ICP协议为一个主从接口的串口通信标准的协议， 规定波特率为9600bps，总线有唯一主机（vending machine controller, VMC）和最多32个从机外设，每个外设设有唯一的地址和命令，且由主机初始化。</p>
-<p>电源上电、总线复位或外设收到一个复位命令，所对应的外设都被禁止。在顺序初始化外设期间，VMC通过外设的应答来选择被外设所支持的特征。</p>
-<blockquote>
-<p>协议推荐所以主控制器VMC和外设都需支持所有低等级标准</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="通信格式">通信格式</h3><h4 id="字节格式">字节格式</h4><p>一个字节定义为11位：1个起始位+8个数据位+1个模式位+1个停止位。</p>
-<ul>
-<li>VMC发送数据到外设：模式位 = 1 表示为地址字节， = 0 表示为数据字节</li>
-<li>外设发送数据到VMC：模式位 = 1 表示所有字节发送完成</li>
-</ul>
-<h4 id="块格式">块格式</h4><h5 id="主到从">主到从</h5><p>主控制器VMC发送给从机的数据格式：1个地址字节+n个数据字节+1个校验和节（最大不超过36个字节）。地址字节由 高5位外设地址+低三位外设命令组成。</p>
-<p>主控制器响应外设时发送 ：ACK（应答）、NAK（不应答）、RET（重发）。5ms超时不响应相当于NAK。如从机5ms无响应，VMC应重发相同或不同命令， 知道从机响应或达到最大响应时间（硬币器2S、纸币器5S）。在此期间VMC应该同时访问其他外设。</p>
-<p><strong>主控器VMC可以通过拉低发送线100ms以上对总线进行复位。</strong></p>
-<h4 id="从到主">从到主</h4><p>从机发送到主控制器的数据格式：1数据块+1字节校验和（最大不超过36字节）。</p>
-<p>从机外设响应主控制器发送数据时，主控制器VMC在5ms无响应时间内必须响应ACK、NAK或RET。否则外设需要重发数据或者在下一次会话时附加上数据。</p>
-<h4 id="校验和">校验和</h4><p>校验和为所有地址及数据字节的累加和（不包含校验和字节）。</p>
-<h4 id="总线复位">总线复位</h4><p>主控器VMC可以通过上拉激活发送线100ms以上对所有外设进行复位，复位后外设处于上电复位状态。</p>
-<h4 id="一些标准">一些标准</h4><p>响应码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ACK - <span class="number">00</span>H   RET - AAH   NAK -  FFH</span><br></pre></td></tr></table></figure></p>
-<p>外设地址：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Address             Definition  </span><br><span class="line">-------------------------------------------------</span><br><span class="line"><span class="number">00000</span>xxxB    (<span class="number">00</span>H)  Reserved <span class="keyword">for</span> VMC </span><br><span class="line"><span class="number">00001</span>xxxB    (<span class="number">08</span>H)  Changer  </span><br><span class="line"><span class="number">00010</span>xxxB    (<span class="number">10</span>H)  Cashless Device <span class="comment">#1  </span></span><br><span class="line"><span class="number">00011</span>xxxB    (<span class="number">18</span>H)  Communications Gateway </span><br><span class="line"><span class="number">00100</span>xxxB    (<span class="number">20</span>H)  Display  </span><br><span class="line"><span class="number">00101</span>xxxB    (<span class="number">28</span>H)  Energy Management System </span><br><span class="line"><span class="number">00110</span>xxxB    (<span class="number">30</span>H)  Bill Validator  </span><br><span class="line"><span class="number">00111</span>xxxB    (<span class="number">38</span>H)  Reserved <span class="keyword">for</span> Future Standard Peripheral</span><br><span class="line"><span class="number">01000</span>xxxB    (<span class="number">40</span>H)  Universal Satellite Device <span class="comment">#1 </span></span><br><span class="line"><span class="number">01001</span>xxxB    (<span class="number">48</span>H)  Universal Satellite Device <span class="comment">#2 </span></span><br><span class="line"><span class="number">01010</span>xxxB    (<span class="number">50</span>H)  Universal Satellite Device <span class="comment">#3 </span></span><br><span class="line"><span class="number">01011</span>xxxB    (<span class="number">58</span>H)  Coin Hopper or Tube - Dispenser </span><br><span class="line"><span class="number">01100</span>xxxB    (<span class="number">60</span>H)  Cashless Device <span class="comment">#2</span></span><br><span class="line"><span class="number">01101</span>xxxB    (<span class="number">68</span>H)  Reserved <span class="keyword">for</span> Future Standard Peripherals</span><br><span class="line">...</span><br><span class="line"><span class="number">11011</span>xxxB    (D8H)  Reserved <span class="keyword">for</span> Future Standard Peripherals</span><br><span class="line"><span class="number">11100</span>xxxB    (E0H)  Experimental Peripheral <span class="comment">#1</span></span><br><span class="line"><span class="number">11101</span>xxxB    (E8H)  Experimental Peripheral <span class="comment">#2 </span></span><br><span class="line"><span class="number">11110</span>xxxB    (F0H)  Vending Machine Specific Peripheral <span class="comment">#1 </span></span><br><span class="line"><span class="number">11111</span>xxxB    (F8H)  Vending Machine Specific Peripheral <span class="comment">#2</span></span><br></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;MDB协议&quot;&gt;MDB协议&lt;/h2&gt;&lt;h3 id=&quot;简介&quot;&gt;简介&lt;/h3&gt;&lt;p&gt;MDB/ICP协议为一个主从接口的串口通信标准的协议， 规定波特率为9600bps，总线有唯一主机（vending machine controller, VMC）和最多32个从机外设，每个外设设有唯一的地址和命令，且由主机初始化。&lt;/p&gt;
-&lt;p&gt;电源上电、总线复位或外设收到一个复位命令，所对应的外设都被禁止。在顺序初始化外设期间，VMC通过外设的应答来选择被外设所支持的特征。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;协议推荐所以主控制器VMC和外设都需支持所有低等级标准&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Other" scheme="http://huaqianlee.github.io/categories/Other/"/>
-    
-    
-      <category term="Protocol" scheme="http://huaqianlee.github.io/tags/Protocol/"/>
     
   </entry>
   
