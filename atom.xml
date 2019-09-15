@@ -170,7 +170,7 @@
     <link href="http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/"/>
     <id>http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/</id>
     <published>2019-09-15T09:40:17.000Z</published>
-    <updated>2019-09-15T14:49:58.760Z</updated>
+    <updated>2019-09-15T15:01:32.054Z</updated>
     
     <content type="html"><![CDATA[<p>在 <code>android</code> 源码中，主要用 <a href="https://android.googlesource.com/tools/repo" target="_blank" rel="external"><strong>Repo</strong></a> 和 <a href="https://git-scm.com/" target="_blank" rel="external"><strong>Git</strong></a> 来进行版本管理。<code>Repo</code> 是一个由谷歌构建，运行在 Git 之上的仓库管理工具，其让多项目管理变得更容易，尤其对于基本的网络操作，譬如，下载由上百个项目组成的 Android 源码。</p>
 <h1 id="Repo_的组成和基本使用">Repo 的组成和基本使用</h1><h2 id="Repo_launcher">Repo launcher</h2><p><code>Repo</code> 的第一部分，其是一个 <code>Python</code> 脚本，主要用来获取完整的 <code>Repo</code> 工具并转发接收到的命令 .</p>
@@ -180,7 +180,7 @@
 <h1 id="Repo_怎么工作">Repo 怎么工作</h1><p>下载代码时 <code>repo</code> 主要工作流程如下：</p>
 <ol>
 <li><code>repo init</code> 在当前路径创建 <code>.repo</code> 文件夹并克隆 <a href="https://android.googlesource.com/tools/repo" target="_blank" rel="external">repo 的 git 仓库</a>到 <code>.repo/repo</code>（即 <code>Repo Tool</code>）。</li>
-<li>以 <a href="https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server#_getting_git_on_a_server" target="_blank" rel="external"><code>--bare</code></a> 方式克隆 <code>-u</code> 选项指定的 <code>git</code> 仓库（没有工作空间的仓库）到 <code>.repo/manifests.git</code>。 </li>
+<li>以 <code>--bare</code><a href="https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server#_getting_git_on_a_server" target="_blank" rel="external">(reference link)</a> 方式克隆 <code>-u</code> 选项指定的 <code>git</code> 仓库（没有工作空间的仓库）到 <code>.repo/manifests.git</code>。 </li>
 <li>创建 <code>.repo/manifests</code> 目录，通过创建 <code>.repo/manifests/.git</code> 作为 <code>.repo/manifests.git</code> 的符号链接将其转换为 <code>Git</code> 仓库。 </li>
 <li><strong>Checkout</strong> <code>-b</code> 选项指定的分支，并创建 <code>.repo/manifests</code> 目录中的指定文件（通过 <code>-m</code> 指定，通常默认为 <code>.repo/manifests/defualt.xml</code>）的符号链接 <code>.repo/manifest.xml</code>。</li>
 <li><code>repo sync</code> 将 <code>manifest.xml</code> 和 <code>local_manifest.xml</code> 中每一个 <code>project</code> 的 <code>git</code> 仓库克隆到 <code>.repo/projects</code>。</li>
