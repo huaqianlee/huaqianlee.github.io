@@ -170,21 +170,23 @@
     <link href="http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/"/>
     <id>http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/</id>
     <published>2019-10-20T14:52:39.000Z</published>
-    <updated>2019-10-20T15:04:12.933Z</updated>
+    <updated>2019-10-20T16:18:12.919Z</updated>
     
     <content type="html"><![CDATA[<p>生病、私事、连续十多天的加班。。。 等等借口让我断更 ARTS 快一个月了，比较让人沮丧，先把标题准备起，花一周把进度赶上。</p>
 <blockquote>
-<p>临时标准</p>
+<p>临时标注</p>
 </blockquote>
+<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="external">Remove Duplicates from Sorted Array</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a><a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a></p>
 <a id="more"></a>
-<h1 id="Algorithm">Algorithm</h1><h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;生病、私事、连续十多天的加班。。。 等等借口让我断更 ARTS 快一个月了，比较让人沮丧，先把标题准备起，花一周把进度赶上。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;临时标准&lt;/p&gt;
+&lt;p&gt;临时标注&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title: &lt;a href=&quot;https://leetcode.com/problems/remove-duplicates-from-sorted-array/&quot;&gt;Remove Duplicates from Sorted Array&lt;/a&gt;&lt;br&gt;Solution: &lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java&quot;&gt;Java&lt;/a&gt;&lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java&quot;&gt;Java&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -198,32 +200,43 @@
   </entry>
   
   <entry>
-    <title>sixth week of ARTs</title>
-    <link href="http://huaqianlee.github.io/2019/10/20/ARTS/Sixth-week-of-ARTs/"/>
-    <id>http://huaqianlee.github.io/2019/10/20/ARTS/Sixth-week-of-ARTs/</id>
-    <published>2019-10-20T14:44:44.000Z</published>
-    <updated>2019-10-20T14:44:44.528Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>Seventh week of ARTs</title>
     <link href="http://huaqianlee.github.io/2019/10/13/ARTS/Seventh-week-of-ARTs/"/>
     <id>http://huaqianlee.github.io/2019/10/13/ARTS/Seventh-week-of-ARTs/</id>
     <published>2019-10-13T14:45:09.000Z</published>
-    <updated>2019-10-20T15:04:21.163Z</updated>
+    <updated>2019-10-20T16:17:21.867Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><a id="more"></a>
+    <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" rel="external">Merge Two Sorted Lists</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
 <h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;
+      &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title: &lt;a href=&quot;https://leetcode.com/problems/merge-two-sorted-lists/&quot;&gt;Merge Two Sorted Lists&lt;/a&gt;&lt;br&gt;Solution: &lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java&quot;&gt;Java&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="ARTS" scheme="http://huaqianlee.github.io/categories/ARTS/"/>
+    
+    
+      <category term="Algorithm" scheme="http://huaqianlee.github.io/tags/Algorithm/"/>
+    
+      <category term="成长" scheme="http://huaqianlee.github.io/tags/%E6%88%90%E9%95%BF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sixth week of ARTs</title>
+    <link href="http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/"/>
+    <id>http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/</id>
+    <published>2019-10-06T14:44:44.000Z</published>
+    <updated>2019-10-20T16:16:49.207Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="external">Valid Parentheses</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py" target="_blank" rel="external">Python</a><br><a id="more"></a></p>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title: &lt;a href=&quot;https://leetcode.com/problems/valid-parentheses/&quot;&gt;Valid Parentheses&lt;/a&gt;&lt;br&gt;Solution: &lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py&quot;&gt;Python&lt;/a&gt;&lt;br&gt;
     
     </summary>
     
@@ -241,14 +254,14 @@
     <link href="http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/"/>
     <id>http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/</id>
     <published>2019-09-29T14:44:56.000Z</published>
-    <updated>2019-10-20T15:04:30.375Z</updated>
+    <updated>2019-10-20T16:15:42.874Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><a id="more"></a>
+    <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="external">Longest Common Prefix</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
 <h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;
+      &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title: &lt;a href=&quot;https://leetcode.com/problems/longest-common-prefix/&quot;&gt;Longest Common Prefix&lt;/a&gt;&lt;br&gt;Solution: &lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java&quot;&gt;Java&lt;/a&gt;&lt;br&gt;
     
     </summary>
     
@@ -266,14 +279,14 @@
     <link href="http://huaqianlee.github.io/2019/09/22/ARTS/Fourth-week-of-ARTS/"/>
     <id>http://huaqianlee.github.io/2019/09/22/ARTS/Fourth-week-of-ARTS/</id>
     <published>2019-09-22T14:44:01.000Z</published>
-    <updated>2019-10-20T15:04:26.209Z</updated>
+    <updated>2019-10-20T16:15:06.020Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><a id="more"></a>
+    <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="external">Roman to Integer</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java" target="_blank" rel="external">Java Solution:</a><br><a id="more"></a></p>
 <h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;
+      &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title: &lt;a href=&quot;https://leetcode.com/problems/roman-to-integer/&quot;&gt;Roman to Integer&lt;/a&gt;&lt;br&gt;Solution: &lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java&quot;&gt;Java Solution:&lt;/a&gt;&lt;br&gt;
     
     </summary>
     

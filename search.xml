@@ -141,36 +141,38 @@
       <url>http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/</url>
       <content type="html"><![CDATA[<p>生病、私事、连续十多天的加班。。。 等等借口让我断更 ARTS 快一个月了，比较让人沮丧，先把标题准备起，花一周把进度赶上。</p>
 <blockquote>
-<p>临时标准</p>
+<p>临时标注</p>
 </blockquote>
+<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="external">Remove Duplicates from Sorted Array</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a><a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a></p>
 <a id="more"></a>
-<h1 id="Algorithm">Algorithm</h1><h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[sixth week of ARTs]]></title>
-      <url>http://huaqianlee.github.io/2019/10/20/ARTS/Sixth-week-of-ARTs/</url>
-      <content type="html"></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Seventh week of ARTs]]></title>
       <url>http://huaqianlee.github.io/2019/10/13/ARTS/Seventh-week-of-ARTs/</url>
-      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><a id="more"></a>
+      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" rel="external">Merge Two Sorted Lists</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Sixth week of ARTs]]></title>
+      <url>http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/</url>
+      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="external">Valid Parentheses</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py" target="_blank" rel="external">Python</a><br><a id="more"></a></p>
 <h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Fifth week of ARTS]]></title>
       <url>http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/</url>
-      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><a id="more"></a>
+      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="external">Longest Common Prefix</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
 <h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Fourth week of ARTS]]></title>
       <url>http://huaqianlee.github.io/2019/09/22/ARTS/Fourth-week-of-ARTS/</url>
-      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><a id="more"></a>
+      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="external">Roman to Integer</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java" target="_blank" rel="external">Java Solution:</a><br><a id="more"></a></p>
 <h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
     </entry>
     
