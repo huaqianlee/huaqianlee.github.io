@@ -145,12 +145,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[All tips of ARTS]]></title>
-      <url>http://huaqianlee.github.io/2019/10/22/ARTS/All-tips-of-ARTS/</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[Eighth week of ARTs]]></title>
       <url>http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/</url>
       <content type="html"><![CDATA[<p>生病、私事、连续十多天的加班。。。 等等借口让我断更 ARTS 快一个月了，比较让人沮丧，先把标题准备起，花一周把进度赶上。</p>
@@ -197,9 +191,9 @@
     <entry>
       <title><![CDATA[Fourth week of ARTS]]></title>
       <url>http://huaqianlee.github.io/2019/09/22/ARTS/Fourth-week-of-ARTS/</url>
-      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="external">Roman to Integer</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java" target="_blank" rel="external">Java Solution:</a><br><a id="more"></a></p>
+      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="external">Roman to Integer</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java" target="_blank" rel="external">Java Solution:</a></p>
 <h1 id="Review">Review</h1><p>Today I access <a href="">Medium</a>,This article called <a href="https://medium.com/free-code-camp/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83" target="_blank" rel="external"><code>Putting comments in code: the good, the bad, and the ugly.</code></a> got into my eyes first. So I choose it as my <code>Review</code>.</p>
-<p>This article mainly says the cliche <code>“Good code is self-documenting.”</code> It tells the good, the bad, and the ugly when it comes to commenting our code. </p>
+<p>This article mainly says the cliche <code>“Good code is self-documenting.”</code> It tells the good, the bad, and the ugly when it comes to commenting our code.<br><a id="more"></a></p>
 <h1 id="Tips">Tips</h1><p>In my job, I always build the android source code or capture some logs. I just named the logs manually before, forgot to named them automaticly. This week I remember the followsing way.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD | tee build-$(date <span class="string">"+%Y%m%d-%H%M%S"</span>).log <span class="comment"># Generate build log</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="Share">Share</h1>]]></content>
     </entry>
