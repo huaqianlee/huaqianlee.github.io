@@ -166,19 +166,64 @@
   </entry>
   
   <entry>
+    <title>Ninth week of ARTS</title>
+    <link href="http://huaqianlee.github.io/2019/10/23/ARTS/Ninth-week-of-ARTS/"/>
+    <id>http://huaqianlee.github.io/2019/10/23/ARTS/Ninth-week-of-ARTS/</id>
+    <published>2019-10-22T16:00:43.000Z</published>
+    <updated>2019-10-22T16:10:42.823Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-element/" target="_blank" rel="external">Remove Element</a>.<br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java" target="_blank" rel="external">Java</a>.</p>
+<a id="more"></a>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title: &lt;a href=&quot;https://leetcode.com/problems/remove-element/&quot;&gt;Remove Element&lt;/a&gt;.&lt;br&gt;Solution: &lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java&quot;&gt;Java&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="ARTS" scheme="http://huaqianlee.github.io/categories/ARTS/"/>
+    
+    
+      <category term="Algorithm" scheme="http://huaqianlee.github.io/tags/Algorithm/"/>
+    
+      <category term="成长" scheme="http://huaqianlee.github.io/tags/%E6%88%90%E9%95%BF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>All tips of ARTS</title>
+    <link href="http://huaqianlee.github.io/2019/10/22/ARTS/All-tips-of-ARTS/"/>
+    <id>http://huaqianlee.github.io/2019/10/22/ARTS/All-tips-of-ARTS/</id>
+    <published>2019-10-22T15:45:07.000Z</published>
+    <updated>2019-10-22T15:46:42.757Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="ARTS" scheme="http://huaqianlee.github.io/categories/ARTS/"/>
+    
+    
+      <category term="成长" scheme="http://huaqianlee.github.io/tags/%E6%88%90%E9%95%BF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Eighth week of ARTs</title>
     <link href="http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/"/>
     <id>http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/</id>
     <published>2019-10-20T14:52:39.000Z</published>
-    <updated>2019-10-20T16:18:12.919Z</updated>
+    <updated>2019-10-22T16:10:54.751Z</updated>
     
     <content type="html"><![CDATA[<p>生病、私事、连续十多天的加班。。。 等等借口让我断更 ARTS 快一个月了，比较让人沮丧，先把标题准备起，花一周把进度赶上。</p>
 <blockquote>
 <p>临时标注</p>
 </blockquote>
-<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="external">Remove Duplicates from Sorted Array</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a><a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a></p>
+<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="external">Remove Duplicates from Sorted Array</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a></p>
 <a id="more"></a>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>Patch the staged and untracked files via <code>git</code>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached // diff staged (after <span class="string">'git add'</span>)</span><br><span class="line">git add -N &lt;unstracked_file_name&gt;; git diff <span class="comment"># diff untracked file</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
@@ -186,7 +231,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;临时标注&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title: &lt;a href=&quot;https://leetcode.com/problems/remove-duplicates-from-sorted-array/&quot;&gt;Remove Duplicates from Sorted Array&lt;/a&gt;&lt;br&gt;Solution: &lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java&quot;&gt;Java&lt;/a&gt;&lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java&quot;&gt;Java&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Algorithm&quot;&gt;Algorithm&lt;/h1&gt;&lt;p&gt;Title: &lt;a href=&quot;https://leetcode.com/problems/remove-duplicates-from-sorted-array/&quot;&gt;Remove Duplicates from Sorted Array&lt;/a&gt;&lt;br&gt;Solution: &lt;a href=&quot;https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java&quot;&gt;Java&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -204,10 +249,11 @@
     <link href="http://huaqianlee.github.io/2019/10/13/ARTS/Seventh-week-of-ARTs/"/>
     <id>http://huaqianlee.github.io/2019/10/13/ARTS/Seventh-week-of-ARTs/</id>
     <published>2019-10-13T14:45:09.000Z</published>
-    <updated>2019-10-20T16:17:21.867Z</updated>
+    <updated>2019-10-22T15:55:40.274Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" rel="external">Merge Two Sorted Lists</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>I forgot the following git cmds when I needed them.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b topic-branch // checkout and branch a new topic branch.</span><br><span class="line">git branch --set-upstream-to=origin/branch topic-branch //  <span class="built_in">set</span> tracking information <span class="keyword">for</span> topic-branch.</span><br></pre></td></tr></table></figure></p>
+<h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
@@ -229,10 +275,11 @@
     <link href="http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/"/>
     <id>http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/</id>
     <published>2019-10-06T14:44:44.000Z</published>
-    <updated>2019-10-20T16:16:49.207Z</updated>
+    <updated>2019-10-22T15:50:55.492Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="external">Valid Parentheses</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py" target="_blank" rel="external">Python</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>Quickly replace all specified strings under the specified path.<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> .<span class="regexp">/ -type f -exec sed -i 's/</span>old_string<span class="regexp">/new_string/g</span><span class="string">' &#123;&#125; \;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
@@ -254,10 +301,18 @@
     <link href="http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/"/>
     <id>http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/</id>
     <published>2019-09-29T14:44:56.000Z</published>
-    <updated>2019-10-20T16:15:42.874Z</updated>
+    <updated>2019-10-22T15:35:41.828Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="external">Longest Common Prefix</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>This week I leaned the way to unmount <code>sshfs</code>. <code>sshfs</code> is used to map(mount) a remote server dir to the local pc.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fusermount -u remote_dir // unmount sshfs</span><br></pre></td></tr></table></figure></p>
+<p>BTW, I summarize the sample use of <code>sshfs</code> cmd as follows.</p>
+<h2 id="mount">mount</h2><p>mkdir ~/remote_dir<br>sshfs -o idmap=user $USER@far:/dir ~/remote_dir</p>
+<h2 id="unmount">unmount</h2><p>fusermount -u ~/dir</p>
+<h2 id="To_add_it_to_your_^/etc/fstab^">To add it to your ^/etc/fstab^</h2><p>sshfs#$USER@<ip>:/dir /home/$USER/remote_dir fuse defaults,idmap=user 0 0</ip></p>
+<blockquote>
+<p>sshfs $USER@<ip>:/dir /home/$USER/remote_dir // mount via terminal</ip></p>
+</blockquote>
+<h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
@@ -279,10 +334,13 @@
     <link href="http://huaqianlee.github.io/2019/09/22/ARTS/Fourth-week-of-ARTS/"/>
     <id>http://huaqianlee.github.io/2019/09/22/ARTS/Fourth-week-of-ARTS/</id>
     <published>2019-09-22T14:44:01.000Z</published>
-    <updated>2019-10-20T16:15:06.020Z</updated>
+    <updated>2019-10-22T15:28:42.357Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="external">Roman to Integer</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java" target="_blank" rel="external">Java Solution:</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><p>Today I access <a href="">Medium</a>,This article called <a href="https://medium.com/free-code-camp/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83" target="_blank" rel="external"><code>Putting comments in code: the good, the bad, and the ugly.</code></a> got into my eyes first. So I choose it as my <code>Review</code>.</p>
+<p>This article mainly says the cliche <code>“Good code is self-documenting.”</code> It tells the good, the bad, and the ugly when it comes to commenting our code. </p>
+<h1 id="Tips">Tips</h1><p>In my job, I always build the android source code or capture some logs. I just named the logs manually before, forgot to named them automaticly. This week I remember the followsing way.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD | tee build-$(date <span class="string">"+%Y%m%d-%H%M%S"</span>).log <span class="comment"># Generate build log</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
@@ -428,7 +486,7 @@
     <link href="http://huaqianlee.github.io/2019/09/13/ARTS/Third-week-of-ARTS/"/>
     <id>http://huaqianlee.github.io/2019/09/13/ARTS/Third-week-of-ARTS/</id>
     <published>2019-09-13T08:34:02.000Z</published>
-    <updated>2019-09-15T14:55:10.787Z</updated>
+    <updated>2019-10-22T15:19:40.036Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/palindrome-number/" target="_blank" rel="external">Palindrome Number</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/isPalindrome.c" target="_blank" rel="external">C solution</a></p>
 <h1 id="Review">Review</h1><p>I always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage of repo, repo &amp;&amp; git , etc in detail. It helps me a lot. But I have not absorbed them yet, I need more time.</p>
@@ -925,118 +983,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Android传感器（Sensor）架构简析 (╯_╰)</title>
-    <link href="http://huaqianlee.github.io/2017/12/17/Android/android-sensor-arch-analysis/"/>
-    <id>http://huaqianlee.github.io/2017/12/17/Android/android-sensor-arch-analysis/</id>
-    <published>2017-12-17T02:49:12.000Z</published>
-    <updated>2019-04-06T14:25:27.033Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>这真的是一篇简析。。。 (╯_╰)  本来准备详细分析整个 sensor 架构的，实在时间紧张，只能先简析了。</p>
-</blockquote>
-<p><em>Platform information： MTK6797（X20）+ Android 7.0</em></p>
-<h1 id="Android_支持的传感器">Android 支持的传感器</h1><p>现在 Android 支持多达数十种的各种各样的传感器，支持的类型如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_type.jpg" alt="Sensor_Type"></p>
-<h1 id="Android_Sensor_架构">Android Sensor 架构</h1><a id="more"></a>
-<p>因为功耗和效率等原因，高通后期平台将 sensor 部分放在 aDSP 中，与如下分析十分不同。</p>
-<p>Android 传感器系统架构如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_arch.jpg" alt="sensor_arch"></p>
-<p>传感器驱动一般会有如下五种数据传输形式：input event设备驱动、MISC驱动、SYS驱动、HWMON设备驱动以及ioctl。如下是一幅网上看到未知来源的图片，更清晰的描述了底层架构，如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_arch.png" alt="sensor_arch"></p>
-<h1 id="源码分析">源码分析</h1><p>传感器源码架构大致相同，本文就来分析陀螺仪部分源码。</p>
-<h2 id="Kernel_部分">Kernel 部分</h2><p>传感器几乎都是采用 I2C 总线， 所以先分析一下 I2C 部分。</p>
-<h3 id="I2C_总线配置">I2C 总线配置</h3><p>MTK 为GPIO、I2C等配置提供了 DCT 工具， 可以直接在 UI 里面配置好 I2C 相关定义（codegen.dws 文件中），配好后编译会自动生成一些相关的 DTS 文件和头文件（如 cust_i2c.dtsi）。</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/i2c_dct.jpg" alt="i2c-dct"></p>
-<blockquote>
-<p>高通是直接在 dts 里面定义。另需要注意：一条 i2c 总线只支持一种速率，不同速率外设需要挂接到不同总线。</p>
-</blockquote>
-<p>MTK 是在 DCT 配好 i2c 相关（lk 和 kernel 都需要配）,如果有兼容 sensor 则配置在 dts 中，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\mt6797.dtsi</span></span><br><span class="line">i2c0:i2c@<span class="number">11007000</span> &#123;</span><br><span class="line">	compatible = <span class="string">"mediatek,mt6797-i2c"</span>;</span><br><span class="line">	id = &lt;<span class="number">0</span>&gt;;</span><br><span class="line">	reg = &lt;<span class="number">0</span>x11007000 <span class="number">0</span>x1000&gt;,</span><br><span class="line">		&lt;<span class="number">0</span>x11000100 <span class="number">0</span>x80&gt;;</span><br><span class="line">	interrupts = &lt;GIC_SPI <span class="number">84</span> IRQ_TYPE_LEVEL_LOW&gt;;</span><br><span class="line">	clocks = &lt;&amp;infrasys INFRA_I2C0&gt;, &lt;&amp;infrasys INFRA_AP_DMA&gt;;</span><br><span class="line">	clock-names = <span class="string">"main"</span>, <span class="string">"dma"</span>;</span><br><span class="line">	clock-div = &lt;<span class="number">10</span>&gt;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\aeon6797_6m_n.dts</span></span><br><span class="line">/* 兼容 sensor 配置*/</span><br><span class="line">i2c0@<span class="number">11007000</span> &#123;</span><br><span class="line">  cust_gyro@<span class="number">6</span>b &#123; // name@i2c_address</span><br><span class="line">	compatible = <span class="string">"mediatek,xxx_gyro"</span>;</span><br><span class="line">	reg = &lt;<span class="number">0</span>x6b&gt;;// i2c 地址</span><br><span class="line">	....</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cust_gyro@<span class="number">1</span> &#123; //name@<span class="number">0</span>  为 first sensor 参数</span><br><span class="line">	compatible			= <span class="string">"mediatek,bmi160_gyro"</span>; // 驱动解析识别字符</span><br><span class="line">	i2c_num				= &lt;<span class="number">1</span>&gt;;  // i2c channel，硬件决定</span><br><span class="line">	i2c_addr			= &lt;<span class="number">0</span>x68 <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>&gt;; </span><br><span class="line">	direction			= &lt;<span class="number">6</span>&gt;; // 映射坐标，见下图</span><br><span class="line">	power_id			= &lt;<span class="number">0</span>xffff&gt;; // ldo id</span><br><span class="line">	power_vol			= &lt;<span class="number">0</span>&gt;; // ldo voltage</span><br><span class="line">	firlen				= &lt;<span class="number">0</span>&gt;; // 数据过滤长度， 通常为<span class="number">0</span></span><br><span class="line">	is_batch_supported		= &lt;<span class="number">0</span>&gt;; </span><br><span class="line">&#125;;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>关于上面 dts 中 方向参数 direction 取值依据参考下图：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/mapping_coordinate.jpg" alt="mapping_coordinate"></p>
-<h3 id="Gyro_Driver">Gyro Driver</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># alps\kernel-3.18\drivers\misc\mediatek\gyroscope\bmi160_gyro\bmi160_gyro.c</span></span><br><span class="line">bmi160_gyro_init()</span><br><span class="line">    get_gyro_dts_func()  <span class="comment">// 从 dts 获取自定义的参数</span></span><br><span class="line">    gyro_driver_add(bmi160_gyro_init_info)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">struct</span> gyro_init_info bmi160_gyro_init_info</span><br><span class="line">    <span class="title">bmi160_gyro_local_init</span><span class="params">()</span></span><br><span class="line">        <span class="title">i2c_add_driver</span><span class="params">(&amp;bmg_i2c_driver)</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">struct</span> i2c_driver bmg_i2c_driver  </span><br><span class="line">    <span class="title">bmi160_gyro_i2c_probe</span><span class="params">()</span></span><br><span class="line">        <span class="comment">// 初始化结构体</span></span><br><span class="line">        <span class="title">hwmsen_get_convert</span><span class="params">()</span> <span class="comment">// 获得坐标映射转换值</span></span><br><span class="line">        <span class="title">bmg_init_client</span><span class="params">()</span> <span class="comment">// 初始化设备，如 ID ， 范围，数据格式等</span></span><br><span class="line">        <span class="title">misc_register</span><span class="params">()</span> <span class="comment">// bmg_open\bmg_release\bmg_unlocked_ioctl; 注册设备，for factory mode , engineer mode , and so on</span></span><br><span class="line">        <span class="title">bmg_create_attr</span><span class="params">()</span> <span class="comment">// 创建platform_driver attr</span></span><br><span class="line">        <span class="title">gyro_register_control_path</span><span class="params">()</span>  <span class="comment">// struct gyro_control_path，见下 Common 部分</span></span><br><span class="line">        <span class="title">gyro_register_data_path</span><span class="params">()</span> <span class="comment">// struct gyro_data_path</span></span><br><span class="line">        <span class="title">device_register</span><span class="params">()</span></span><br><span class="line">        <span class="title">device_create_file</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="Gyro_Common">Gyro Common</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># alps\kernel-3.18\drivers\misc\mediatek\gyroscope\inc\gyroscope.h    </span></span><br><span class="line"><span class="keyword">struct</span> gyro_control_path &#123;</span><br><span class="line">	<span class="keyword">int</span> (*open_report_data)(<span class="keyword">int</span> open);</span><br><span class="line">	<span class="keyword">int</span> (*enable_nodata)(<span class="keyword">int</span> en);</span><br><span class="line">	<span class="keyword">int</span> (*set_delay)(u64 delay);</span><br><span class="line">	<span class="keyword">bool</span> is_report_input_direct;</span><br><span class="line">	<span class="keyword">bool</span> is_support_batch;</span><br><span class="line">	<span class="keyword">int</span> (*gyro_calibration)(<span class="keyword">int</span> type, <span class="keyword">int</span> cali[<span class="number">3</span>]);</span><br><span class="line">	<span class="keyword">bool</span> is_use_common_factory;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> gyro_data_path &#123;</span><br><span class="line">	<span class="keyword">int</span> (*get_data)(<span class="keyword">int</span> *x, <span class="keyword">int</span> *y, <span class="keyword">int</span> *z, <span class="keyword">int</span> *status);</span><br><span class="line">	<span class="keyword">int</span> (*get_raw_data)(<span class="keyword">int</span> *x, <span class="keyword">int</span> *y, <span class="keyword">int</span> *z);</span><br><span class="line">	<span class="keyword">int</span> vender_div;</span><br><span class="line">&#125;;    </span><br><span class="line">    </span><br><span class="line"><span class="preprocessor"># alps\kernel-3.18\drivers\misc\mediatek\gyroscope\gyroscope.c    </span></span><br><span class="line">gyro_probe()</span><br><span class="line">    gyro_real_driver_init()</span><br><span class="line">    gyro_input_init() <span class="comment">// 初始化 input dev</span></span><br><span class="line">        input_register_device(dev)</span><br><span class="line"></span><br><span class="line">gyro_driver_add()</span><br><span class="line">    platform_driver_register()</span><br><span class="line">    </span><br><span class="line"><span class="preprocessor"># alps\kernel-3.18\drivers\misc\mediatek\gyroscope\gyrohub\gyrohub.c  <span class="comment">// sensorhub</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># alps\vendor\mediatek\proprietary\hardware\sensor\sensors.c</span></span><br><span class="line"><span class="keyword">struct</span> sensor_t sSensorList[] =</span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        .name       = GYROSCOPE,</span><br><span class="line">        .vendor     = GYROSCOPE_VENDER,</span><br><span class="line">        .version    = <span class="number">3</span>, <span class="comment">// 软件版本</span></span><br><span class="line">        .handle     = ID_GYROSCOPE+ID_OFFSET, <span class="comment">// sensor handle（识别 ID）</span></span><br><span class="line">        .type       = SENSOR_TYPE_GYROSCOPE, <span class="comment">// sensor 类型</span></span><br><span class="line">        .maxRange   = GYROSCOPE_RANGE,<span class="comment">//34.91f, // 数据最大范围</span></span><br><span class="line">        .resolution = GYROSCOPE_RESOLUTION,<span class="comment">//0.0107f, // 数据精度</span></span><br><span class="line">        .power      = GYROSCOPE_POWER,<span class="comment">//6.1f, // 电流消耗（mA）</span></span><br><span class="line">        .minDelay   = GYROSCOPE_MINDELAY,   <span class="comment">// 最小数据上报延迟</span></span><br><span class="line">		.maxDelay   = <span class="number">1000000</span>,               <span class="comment">// 最大延迟</span></span><br><span class="line">        .flags      = SENSOR_FLAG_CONTINUOUS_MODE,</span><br><span class="line">        .reserved   = &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">open_sensors()</span><br><span class="line">    init_nusensors()</span><br></pre></td></tr></table></figure>
-<h1 id="附">附</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># shell 文件路径</span></span><br><span class="line">/sys/bus/platform/drivers/xxx</span><br></pre></td></tr></table></figure>
-<p>驱动数据和控制流：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/work_flow.jpg" alt="flow"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;这真的是一篇简析。。。 (╯_╰)  本来准备详细分析整个 sensor 架构的，实在时间紧张，只能先简析了。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;em&gt;Platform information： MTK6797（X20）+ Android 7.0&lt;/em&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Android_支持的传感器&quot;&gt;Android 支持的传感器&lt;/h1&gt;&lt;p&gt;现在 Android 支持多达数十种的各种各样的传感器，支持的类型如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_type.jpg&quot; alt=&quot;Sensor_Type&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Android_Sensor_架构&quot;&gt;Android Sensor 架构&lt;/h1&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
-    
-    
-      <category term="MTK" scheme="http://huaqianlee.github.io/tags/MTK/"/>
-    
-      <category term="源码分析" scheme="http://huaqianlee.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android/Linux  I2C 驱动架构分析</title>
-    <link href="http://huaqianlee.github.io/2017/12/03/Android/Android-Linux-i2c-driver-arch/"/>
-    <id>http://huaqianlee.github.io/2017/12/03/Android/Android-Linux-i2c-driver-arch/</id>
-    <published>2017-12-03T13:37:07.000Z</published>
-    <updated>2019-04-06T14:25:27.024Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言">前言</h1><p>分析传感器源码的时候，发现对 I2C 的驱动也有些忘记了，所以就再分析一下并形成这篇博文。</p>
-<h1 id="驱动架构">驱动架构</h1><h2 id="I2C_驱动架构">I2C 驱动架构</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/i2c_arch.jpg" alt="i2c-arch"><br><a id="more"></a></p>
-<h1 id="源码分析">源码分析</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c</span></span><br></pre></td></tr></table></figure>
-<h2 id="重要的结构体">重要的结构体</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\include\linux\i2c.h</span></span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 适配器，即挂接在 i2c 总线上的 i2c 控制器</span><br><span class="line"> * i2c_adapter is the structure used to identify a physical i2c bus along</span><br><span class="line"> * with the access algorithms necessary to access it.</span><br><span class="line"> */</span><br><span class="line">struct i2c_adapter &#123;</span><br><span class="line">	struct module *owner;</span><br><span class="line">	unsigned int class;		  /* classes to allow probing <span class="keyword">for</span> */</span><br><span class="line">	const struct i2c_algorithm *algo; /* the algorithm to access the bus */</span><br><span class="line">	struct device dev;		/* the adapter device */</span><br><span class="line">	....</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 设备驱动</span><br><span class="line"> */</span><br><span class="line">struct i2c_driver &#123;</span><br><span class="line">	unsigned int class;</span><br><span class="line"></span><br><span class="line">	/* Standard driver model interfaces */</span><br><span class="line">	int (*probe)(struct i2c_client *, const struct i2c_device_id *); // 匹配 i2c 设备（i2c_client）</span><br><span class="line">	int (*remove)(struct i2c_client *);</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">	struct device_driver driver;   </span><br><span class="line">	const struct i2c_device_id *id_table; // 此设备驱动服务的设备 ID</span><br><span class="line"></span><br><span class="line">	int (*detect)(struct i2c_client *, struct i2c_board_info *);</span><br><span class="line">	const unsigned short *address_list; // 此设备驱动支持的设备地址</span><br><span class="line">	struct list_head clients;  // 挂接此设备驱动匹配成功 i2c_client</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 设备</span><br><span class="line"> */</span><br><span class="line">struct i2c_client &#123;</span><br><span class="line">	unsigned short flags;		/* div., see below		*/</span><br><span class="line">	unsigned short addr;		/* chip address - NOTE: <span class="number">7</span>bit	*/</span><br><span class="line">					/* addresses are stored <span class="keyword">in</span> the	*/</span><br><span class="line">					/* _LOWER_ <span class="number">7</span> bits		*/</span><br><span class="line">	char name[I2C_NAME_SIZE];</span><br><span class="line">	struct i2c_adapter *adapter;	/* the adapter we sit on	*/</span><br><span class="line">	struct device dev;		/* the device structure		*/</span><br><span class="line">	int irq;			/* irq issued by device		*/</span><br><span class="line">	struct list_head detected;</span><br><span class="line"><span class="comment">#ifdef CONFIG_MTK_I2C_EXTENSION</span></span><br><span class="line">	__u32 timing;			/* parameters of timings		*/</span><br><span class="line">	__u32 ext_flag;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 描述 i2c 设备信息</span><br><span class="line"> */</span><br><span class="line">struct i2c_board_info &#123;</span><br><span class="line">	char		<span class="built_in">type</span>[I2C_NAME_SIZE];</span><br><span class="line">	unsigned short	flags;</span><br><span class="line">	unsigned short	addr;</span><br><span class="line">	void		*platform_data;</span><br><span class="line">	struct dev_archdata	*archdata;</span><br><span class="line">	struct device_node *of_node;</span><br><span class="line">	struct acpi_dev_node acpi_node;</span><br><span class="line">	int		irq;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># alps\kernel-3.18\include\uapi\linux\i2c.h</span></span><br><span class="line">/*</span><br><span class="line"> * 表示一个 i2c 数据包</span><br><span class="line"> */</span><br><span class="line">struct i2c_msg &#123;</span><br><span class="line">	__u16 addr;	     /* slave address */</span><br><span class="line">	__u16 flags;</span><br><span class="line"><span class="comment">#define I2C_M_TEN		0x0010	/* this is a ten bit chip address */</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">#define I2C_M_RECV_LEN		0x0400	/* length will be first received byte */</span></span><br><span class="line">	__u16 len;		/* msg length				*/</span><br><span class="line">	__u8 *buf;		/* pointer to msg data			*/</span><br><span class="line"><span class="comment">#ifdef CONFIG_MTK_I2C_EXTENSION</span></span><br><span class="line">	__u32 timing;	/* parameters of timings		*/</span><br><span class="line">	__u32 ext_flag;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<blockquote>
-</blockquote>
-<h2 id="关键路径">关键路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\mt6797.dtsi</span></span><br><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\aeon6797_6m_n.dts</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c</span></span><br><span class="line">i2c-core.c：i2c核心层，设备驱动和总线驱动的桥梁</span><br><span class="line">i2c-dev.c：通用 i2c 设备驱动</span><br><span class="line">busses：开源的 adapter </span><br><span class="line">algos：i2c 通信算法</span><br><span class="line"></span><br><span class="line"><span class="comment"># alps\kernel-3.18\include\linux\i2c.h</span></span><br><span class="line"><span class="comment"># alps\kernel-3.18\include\uapi\linux\i2c.h</span></span><br></pre></td></tr></table></figure>
-<h2 id="总线驱动层">总线驱动层</h2><p>总线驱动层主要实现外设驱动部分，初始化硬件（i2c控制器）和提供操作硬件的方法，与 i2c-dev 相对应，其负责的部分通俗点讲就是：知道怎么发数据，但不知道发什么数据。<br>其关键流程如下：</p>
-<ol>
-<li>获取资源</li>
-<li>注册中断、使能时钟等初始化工作</li>
-<li>构建 i2c_adapter</li>
-<li>设置 i2c_adapter</li>
-<li>注册 i2c_adapter<blockquote>
-<p>这部分源码就不在此文分析了，感兴趣的朋友可以参考外设系列</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="核心层（i2c-core）">核心层（i2c-core）</h2><p>构建一个 i2c 总线结构体,并且提供匹配方法和驱动用的结构体 ，如总线驱动层和设备驱动层的注册、注销等方法。此部分存在两个匹配过程：</p>
-<ol>
-<li>i2c 总线下的设备（i2c_client）与设备驱动（i2c_driver）之间的匹配。</li>
-<li>i2c控制器（i2c_adapter）与设备之间的匹配。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c\i2c-core.c</span></span><br><span class="line">struct bus_<span class="built_in">type</span> i2c_bus_<span class="built_in">type</span> = &#123;</span><br><span class="line">	.name		= <span class="string">"i2c"</span>,  // 总线名</span><br><span class="line">	.match		= i2c_device_match, // 匹配设备（i2c_client）与设备驱动（i2c_driver）</span><br><span class="line">	.probe		= i2c_device_probe,  // 注册挂载 i2c</span><br><span class="line">	.remove		= i2c_device_remove,</span><br><span class="line">	.shutdown	= i2c_device_shutdown,</span><br><span class="line">	.pm		= &amp;i2c_device_pm_ops,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> __init i2c_init() // init 函数</span><br><span class="line">    <span class="comment"># kernel-3.18/drivers/base/bus.c</span></span><br><span class="line">    bus_register(&amp;i2c_bus_<span class="built_in">type</span>) // 注册i2c总线  <span class="string">"/sys/bus/i2c"</span></span><br><span class="line">    i2c_add_driver(&amp;dummy_driver) // // 注册 i2c 驱动创建“/sys/bus/i2c/driver/dummy” </span><br><span class="line">        i2c_register_driver() // 注册 i2c 驱动</span><br><span class="line">            driver_register(&amp;driver-&gt;driver); // 注册设备驱动，创建上面的“dummy”设备文件</span><br><span class="line">            INIT_LIST_HEAD(&amp;driver-&gt;clients)</span><br><span class="line">        </span><br><span class="line">i2c_device_probe()</span><br><span class="line">    i2c_verify_client(dev) // 获取 i2c_client</span><br><span class="line">    to_i2c_driver(dev-&gt;driver) // 获取 i2c_driver</span><br><span class="line">    driver-&gt;probe(client, i2c_match_id(driver-&gt;id_table,client)) // 调用设备驱动层 probe，查询外设（client）对应的 id</span><br><span class="line">        </span><br><span class="line">i2c_device_match()</span><br><span class="line">	client = i2c_verify_client(dev)// 通过 dev 获取 i2c_client</span><br><span class="line">	of_driver_match_device(dev, drv) // 通过 of 方式匹配</span><br><span class="line">	acpi_driver_match_device(dev, drv) // acpi 方式匹配</span><br><span class="line">	/* <span class="keyword">if</span> 上述两种方式皆未成功 */	</span><br><span class="line">	driver = to_i2c_driver(drv); //通过 drv 获取 i2c_driver</span><br><span class="line">	i2c_match_id(driver-&gt;id_table, client) // 通过查询 id_table 匹配</span><br><span class="line"></span><br><span class="line">i2c_master_send() // 发送一个 i2c 数据包</span><br><span class="line">    // 构建 i2c_msg</span><br><span class="line">    i2c_transfer()</span><br><span class="line">        __i2c_transfer()  // 发送数据包到总线驱动层</span><br><span class="line">i2c_master_recv()        </span><br><span class="line"></span><br><span class="line">/* 通过动态获取|指定 bus number 注册 i2c 控制器 */</span><br><span class="line">i2c_add_adapter()|i2c_add_numbered_adapter() </span><br><span class="line">    i2c_register_adapter(adapter)</span><br><span class="line">    	dev_<span class="built_in">set</span>_name(&amp;adap-&gt;dev, <span class="string">"i2c-%d"</span>, adap-&gt;nr); // 设置 adapter 名字 “i2c-%d”</span><br><span class="line">	    adap-&gt;dev.bus = &amp;i2c_bus_<span class="built_in">type</span>;</span><br><span class="line">	    adap-&gt;dev.type = &amp;i2c_adapter_<span class="built_in">type</span>;</span><br><span class="line">	    /*</span><br><span class="line">	     * 注册设备,  默认创建的设备文件是: /sys/devices/i2c-%d </span><br><span class="line">	     * 若注册 adapter 时指定了父设备，则为：/sys/devices/platform/xxx/i2c-%d </span><br><span class="line">	     */</span><br><span class="line">	    device_register(&amp;adap-&gt;dev);</span><br><span class="line">	    /*</span><br><span class="line">	     * 扫描 __i2c_board_list 匹配 adapter 与 i2c 次设备信息，匹配成功则创建 i2c 设备 （i2c_client）</span><br><span class="line">	     */</span><br><span class="line">	    i2c_scan_static_board_info() </span><br><span class="line">	        i2c_new_device() // 注册 i2c 设备</span><br><span class="line">	            i2c_dev_<span class="built_in">set</span>_name(adap, client) //  设置次设备名<span class="string">" %d-%04x"</span></span><br><span class="line">	            device_register(&amp;client-&gt;dev) //  注册次设备<span class="string">"/sys/devices/platform/xxx/i2c-%d/%d-%04x“ </span><br><span class="line"> </span><br><span class="line"># alps\kernel-3.18\include\linux\i2c.h</span><br><span class="line">i2c_add_driver(driver) </span><br><span class="line">    i2c_register_driver(THIS_MODULE, driver)</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>注：主设备表示特定的驱动程序；次设备表示使用该设备驱动的设备  </p>
-</blockquote>
-<h2 id="设备驱动层（i2c-dev）">设备驱动层（i2c-dev）</h2><p>设备驱动层主要是封装主机 i2c 的基本操作，给上层提供接口，与总线驱动层相对应，其：知道发什么数据，但不知道怎么发。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\drivers\i2c\i2c-dev.c （也可以是其他设备驱动文件，如：ov9650.c等。）</span></span><br><span class="line">static const struct file_operations i2cdev_fops = &#123;</span><br><span class="line">	.owner		= THIS_MODULE,</span><br><span class="line">	.llseek		= no_llseek,</span><br><span class="line">	.read		= i2cdev_<span class="built_in">read</span>,</span><br><span class="line">	.write		= i2cdev_write,</span><br><span class="line">	.unlocked_ioctl	= i2cdev_ioctl,</span><br><span class="line">	.open		= i2cdev_open,</span><br><span class="line">	.release	= i2cdev_release,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">i2cdev_<span class="built_in">read</span>()</span><br><span class="line">    i2c_master_recv()</span><br><span class="line">    copy_to_user()</span><br><span class="line">i2cdev_write()</span><br><span class="line">    memdup_user()  // 分配内核空间，用户态到内核态的拷贝</span><br><span class="line">        copy_from_user()</span><br><span class="line">    i2c_master_send()</span><br><span class="line">...</span><br><span class="line">i2cdev_open()</span><br><span class="line">    i2c_dev_get_by_minor()</span><br><span class="line">    i2c_get_adapter()</span><br><span class="line">    // 设置 i2c client</span><br><span class="line"></span><br><span class="line">i2c_dev_init()</span><br><span class="line">    register_chrdev(I2C_MAJOR, <span class="string">"i2c"</span>, &amp;i2cdev_fops)</span><br><span class="line">    i2cdev_attach_adapter() // 绑定存在的 i2c 控制器（adapter）</span><br><span class="line">        adap = to_i2c_adapter(dev);</span><br><span class="line">	    i2c_dev = get_free_i2c_dev(adap);</span><br><span class="line">	    /* register this i2c device with the driver core */</span><br><span class="line">	    i2c_dev-&gt;dev = device_create(...<span class="string">"i2c-%d"</span>)</span><br></pre></td></tr></table></figure></p>
-<h1 id="用户空间">用户空间</h1><p>这里只看一种通用的通过 JNI 操作 i2c 设备的方案，i2c-dev 提供的接口通过 JNI 给 APP 使用，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jni</span></span><br><span class="line">extern <span class="string">"C"</span> &#123;</span><br><span class="line">JNIEXPORT jint JNICALL Java_xxxxxx_xxx_I2c_open()</span><br><span class="line">JNIEXPORT jint JNICALL Java_xxxxxx_xxx_I2c_<span class="built_in">read</span>()</span><br><span class="line">JNIEXPORT jint JNICALL Java_xxxxxx_xxx_I2c_write()</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># app</span></span><br><span class="line">I2c.open(“/dev/i2c-x”)</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">public static class I2c &#123;  </span><br><span class="line">        ...</span><br><span class="line">        public native int open(); </span><br><span class="line">        public native int <span class="built_in">read</span>(); </span><br><span class="line">        public native int write();  </span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;前言&lt;/h1&gt;&lt;p&gt;分析传感器源码的时候，发现对 I2C 的驱动也有些忘记了，所以就再分析一下并形成这篇博文。&lt;/p&gt;
-&lt;h1 id=&quot;驱动架构&quot;&gt;驱动架构&lt;/h1&gt;&lt;h2 id=&quot;I2C_驱动架构&quot;&gt;I2C 驱动架构&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/i2c_arch.jpg&quot; alt=&quot;i2c-arch&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://huaqianlee.github.io/categories/Android/"/>
-    
-    
-      <category term="MTK" scheme="http://huaqianlee.github.io/tags/MTK/"/>
-    
-      <category term="源码分析" scheme="http://huaqianlee.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     
   </entry>
   

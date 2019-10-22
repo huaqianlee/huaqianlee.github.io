@@ -137,43 +137,71 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Ninth week of ARTS]]></title>
+      <url>http://huaqianlee.github.io/2019/10/23/ARTS/Ninth-week-of-ARTS/</url>
+      <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-element/" target="_blank" rel="external">Remove Element</a>.<br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java" target="_blank" rel="external">Java</a>.</p>
+<a id="more"></a>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[All tips of ARTS]]></title>
+      <url>http://huaqianlee.github.io/2019/10/22/ARTS/All-tips-of-ARTS/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Eighth week of ARTs]]></title>
       <url>http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/</url>
       <content type="html"><![CDATA[<p>生病、私事、连续十多天的加班。。。 等等借口让我断更 ARTS 快一个月了，比较让人沮丧，先把标题准备起，花一周把进度赶上。</p>
 <blockquote>
 <p>临时标注</p>
 </blockquote>
-<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="external">Remove Duplicates from Sorted Array</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a><a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a></p>
+<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="external">Remove Duplicates from Sorted Array</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="external">Java</a></p>
 <a id="more"></a>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>Patch the staged and untracked files via <code>git</code>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached // diff staged (after <span class="string">'git add'</span>)</span><br><span class="line">git add -N &lt;unstracked_file_name&gt;; git diff <span class="comment"># diff untracked file</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Share">Share</h1>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Seventh week of ARTs]]></title>
       <url>http://huaqianlee.github.io/2019/10/13/ARTS/Seventh-week-of-ARTs/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" rel="external">Merge Two Sorted Lists</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>I forgot the following git cmds when I needed them.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b topic-branch // checkout and branch a new topic branch.</span><br><span class="line">git branch --set-upstream-to=origin/branch topic-branch //  <span class="built_in">set</span> tracking information <span class="keyword">for</span> topic-branch.</span><br></pre></td></tr></table></figure></p>
+<h1 id="Share">Share</h1>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Sixth week of ARTs]]></title>
       <url>http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="external">Valid Parentheses</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py" target="_blank" rel="external">Python</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>Quickly replace all specified strings under the specified path.<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> .<span class="regexp">/ -type f -exec sed -i 's/</span>old_string<span class="regexp">/new_string/g</span><span class="string">' &#123;&#125; \;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Share">Share</h1>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Fifth week of ARTS]]></title>
       <url>http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="external">Longest Common Prefix</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>This week I leaned the way to unmount <code>sshfs</code>. <code>sshfs</code> is used to map(mount) a remote server dir to the local pc.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fusermount -u remote_dir // unmount sshfs</span><br></pre></td></tr></table></figure></p>
+<p>BTW, I summarize the sample use of <code>sshfs</code> cmd as follows.</p>
+<h2 id="mount">mount</h2><p>mkdir ~/remote_dir<br>sshfs -o idmap=user $USER@far:/dir ~/remote_dir</p>
+<h2 id="unmount">unmount</h2><p>fusermount -u ~/dir</p>
+<h2 id="To_add_it_to_your_^/etc/fstab^">To add it to your ^/etc/fstab^</h2><p>sshfs#$USER@<ip>:/dir /home/$USER/remote_dir fuse defaults,idmap=user 0 0</ip></p>
+<blockquote>
+<p>sshfs $USER@<ip>:/dir /home/$USER/remote_dir // mount via terminal</ip></p>
+</blockquote>
+<h1 id="Share">Share</h1>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Fourth week of ARTS]]></title>
       <url>http://huaqianlee.github.io/2019/09/22/ARTS/Fourth-week-of-ARTS/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="external">Roman to Integer</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java" target="_blank" rel="external">Java Solution:</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><p>Today I access <a href="">Medium</a>,This article called <a href="https://medium.com/free-code-camp/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83" target="_blank" rel="external"><code>Putting comments in code: the good, the bad, and the ugly.</code></a> got into my eyes first. So I choose it as my <code>Review</code>.</p>
+<p>This article mainly says the cliche <code>“Good code is self-documenting.”</code> It tells the good, the bad, and the ugly when it comes to commenting our code. </p>
+<h1 id="Tips">Tips</h1><p>In my job, I always build the android source code or capture some logs. I just named the logs manually before, forgot to named them automaticly. This week I remember the followsing way.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD | tee build-$(date <span class="string">"+%Y%m%d-%H%M%S"</span>).log <span class="comment"># Generate build log</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Share">Share</h1>]]></content>
     </entry>
     
     <entry>

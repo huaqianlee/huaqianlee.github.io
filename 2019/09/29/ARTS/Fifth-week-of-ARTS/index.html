@@ -359,7 +359,15 @@
 
       
         <h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="external">Longest Common Prefix</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>
+<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>This week I leaned the way to unmount <code>sshfs</code>. <code>sshfs</code> is used to map(mount) a remote server dir to the local pc.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fusermount -u remote_dir // unmount sshfs</span><br></pre></td></tr></table></figure></p>
+<p>BTW, I summarize the sample use of <code>sshfs</code> cmd as follows.</p>
+<h2 id="mount">mount</h2><p>mkdir ~/remote_dir<br>sshfs -o idmap=user $USER@far:/dir ~/remote_dir</p>
+<h2 id="unmount">unmount</h2><p>fusermount -u ~/dir</p>
+<h2 id="To_add_it_to_your_^/etc/fstab^">To add it to your ^/etc/fstab^</h2><p>sshfs#$USER@<ip>:/dir /home/$USER/remote_dir fuse defaults,idmap=user 0 0</ip></p>
+<blockquote>
+<p>sshfs $USER@<ip>:/dir /home/$USER/remote_dir // mount via terminal</ip></p>
+</blockquote>
+<h1 id="Share">Share</h1>
       
     </div>
 
@@ -493,7 +501,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">96</span>
+              <span class="site-state-item-count">98</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -611,7 +619,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-number">2.</span> <span class="nav-text">Review</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tips"><span class="nav-number">3.</span> <span class="nav-text">Tips</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Share"><span class="nav-number">4.</span> <span class="nav-text">Share</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-number">2.</span> <span class="nav-text">Review</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tips"><span class="nav-number">3.</span> <span class="nav-text">Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mount"><span class="nav-number">3.1.</span> <span class="nav-text">mount</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unmount"><span class="nav-number">3.2.</span> <span class="nav-text">unmount</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#To_add_it_to_your_^/etc/fstab^"><span class="nav-number">3.3.</span> <span class="nav-text">To add it to your ^/etc/fstab^</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Share"><span class="nav-number">4.</span> <span class="nav-text">Share</span></a></li></ol></div>
             
           </div>
         </section>
