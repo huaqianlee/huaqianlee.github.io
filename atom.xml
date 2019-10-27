@@ -170,11 +170,15 @@
     <link href="http://huaqianlee.github.io/2019/10/23/ARTS/Ninth-week-of-ARTS/"/>
     <id>http://huaqianlee.github.io/2019/10/23/ARTS/Ninth-week-of-ARTS/</id>
     <published>2019-10-22T16:00:43.000Z</published>
-    <updated>2019-10-22T16:10:42.823Z</updated>
+    <updated>2019-10-27T15:13:20.555Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-element/" target="_blank" rel="external">Remove Element</a>.<br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java" target="_blank" rel="external">Java</a>.</p>
 <a id="more"></a>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><h1 id="Share">Share</h1>]]></content>
+<h1 id="Review">Review</h1><p>I found a usage of “repo init … —reference” this week, I want to know more, so I read <a href="https://forum.xda-developers.com/android/software/guide-android-repo-mirroring-t3170869" target="_blank" rel="external">Android Repo Mirroring</a> this week.</p>
+<p>This article explains “repo mirroring” in a simple and clear way through examples.</p>
+<h1 id="Tips">Tips</h1><p>Download android code from local mirror(code). As follows:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo init -u url -b &lt;branch&gt; --reference=&lt;<span class="built_in">local</span>_dir&gt;</span><br></pre></td></tr></table></figure></p>
+<p>It could increase download speed and to save the storage when we want to keep multiple sets of code.</p>
+<h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
     
@@ -257,10 +261,11 @@
     <link href="http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/"/>
     <id>http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/</id>
     <published>2019-10-06T14:44:44.000Z</published>
-    <updated>2019-10-22T15:50:55.492Z</updated>
+    <updated>2019-10-27T15:34:36.480Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="external">Valid Parentheses</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py" target="_blank" rel="external">Python</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>Quickly replace all specified strings under the specified path.<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> .<span class="regexp">/ -type f -exec sed -i 's/</span>old_string<span class="regexp">/new_string/g</span><span class="string">' &#123;&#125; \;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Review">Review</h1><p>I read <a href="https://organizationsandmarkets.com/2010/08/31/how-to-read-an-academic-article/" target="_blank" rel="external">How to Read an Academic Article</a> this week. It teaches me to read academic article by sharing handout. It simply summarizes the method of fast reading, a lot of them maybe be a cliche, but the summary is very helpful.</p>
+<h1 id="Tips">Tips</h1><p>Quickly replace all specified strings under the specified path.<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> .<span class="regexp">/ -type f -exec sed -i 's/</span>old_string<span class="regexp">/new_string/g</span><span class="string">' &#123;&#125; \;</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="Share">Share</h1>]]></content>
     
     <summary type="html">
@@ -283,10 +288,19 @@
     <link href="http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/"/>
     <id>http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/</id>
     <published>2019-09-29T14:44:56.000Z</published>
-    <updated>2019-10-22T15:35:41.828Z</updated>
+    <updated>2019-10-27T14:48:49.879Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="external">Longest Common Prefix</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java" target="_blank" rel="external">Java</a><br><a id="more"></a></p>
-<h1 id="Review">Review</h1><h1 id="Tips">Tips</h1><p>This week I leaned the way to unmount <code>sshfs</code>. <code>sshfs</code> is used to map(mount) a remote server dir to the local pc.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fusermount -u remote_dir // unmount sshfs</span><br></pre></td></tr></table></figure></p>
+<h1 id="Review">Review</h1><p>I always want to change the mind of my loves, but I didn’t use the good way to do it. So I read <a href="https://forge.medium.com/how-to-change-a-mind-1774681b9369" target="_blank" rel="external">How to Change a Mind</a> this week.</p>
+<p>To be honesty, I can’t get this article well, it is a little hard to me. But I got the following opinions from this topic.</p>
+<ol>
+<li>Firstly we should think or do like the people who we want to change.</li>
+<li>For scams, we should let the people lose the faith in the person not in the scams, it will be a better way. Quote the sentence:  <blockquote>
+<p>“Dylan did not need to lose his faith in what his elders were saying; he needed to lose his faith in them.” </p>
+</blockquote>
+</li>
+</ol>
+<h1 id="Tips">Tips</h1><p>This week I leaned the way to unmount <code>sshfs</code>. <code>sshfs</code> is used to map(mount) a remote server dir to the local pc.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fusermount -u remote_dir // unmount sshfs</span><br></pre></td></tr></table></figure></p>
 <p>BTW, I summarize the sample use of <code>sshfs</code> cmd as follows.</p>
 <h2 id="mount">mount</h2><p>mkdir ~/remote_dir<br>sshfs -o idmap=user $USER@far:/dir ~/remote_dir</p>
 <h2 id="unmount">unmount</h2><p>fusermount -u ~/dir</p>
