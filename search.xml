@@ -137,7 +137,52 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Ninth week of ARTS]]></title>
+      <title><![CDATA[Oh, the Git! - part 1]]></title>
+      <url>http://huaqianlee.github.io/2019/11/17/Git/Some-knowledge-about-git/</url>
+      <content type="html"><![CDATA[<h1 id="Preface">Preface</h1><p>Git has always been a must-have skill for developers, I will submize a series of blogs related to it, but I don’t know too much about git now.</p>
+<p><a href="https://git-scm.com/book/en/v2" target="_blank" rel="external">Pro Git</a> is the best guide of git, I need to read it when I have plenty of time so that I can check for gaps.</p>
+<h1 id="VCS(Version_Control_System)">VCS(Version Control System)</h1><h2 id="Central_VCS">Central VCS</h2><p>Central VCS mainly includes <code>SVN</code> and <code>CVS</code>, its newwork architecture is client-server.<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/Central%20VCS.jpg" alt="Central VCS"><br><a id="more"></a><br>Advantages:</p>
+<ul>
+<li>Centralized version management.</li>
+<li>File version management and branch management.</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>The client must remain connectec to the server at all times.</li>
+</ul>
+<h2 id="Distributed_VCS">Distributed VCS</h2><p>Distributed VCS mainly includes <code>Git</code> and <code>Mercurial</code>,its network architecture is distributied.<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/Distributed%20VCS.jpg" alt="Distributed VCS"></p>
+<p>Advantages:</p>
+<ul>
+<li>Complete repositories on both server and client.</li>
+<li>The client can manage the version independently.</li>
+<li>Most operations without relying on the server.</li>
+</ul>
+<h1 id="Config">Config</h1><h2 id="Config_user">Config user</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git config --[ <span class="built_in">local</span> | global | system ] user.name <span class="string">"your_name"</span></span><br><span class="line">git config --[ <span class="built_in">local</span> | global | system ] user.email <span class="string">"your_email@domain.com"</span>   <span class="comment"># email notification</span></span><br><span class="line"></span><br><span class="line">git config --local <span class="comment"># Valid for the current repository, if no option defualts to local</span></span><br><span class="line">git config --global <span class="comment"># Valid for the current user.</span></span><br><span class="line">git config --system <span class="comment"># Valid for all user.</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>local - .git/config.<br>global - ~/.gitconfig.<br>system - git installation path.</p>
+</blockquote>
+<h2 id="Check_configuration">Check configuration</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --list --local <span class="comment"># Highest priority</span></span><br><span class="line">git config --list --global <span class="comment"># Higher priority</span></span><br><span class="line">git config --list --system <span class="comment"># Low priority</span></span><br></pre></td></tr></table></figure>
+<h2 id="Clean_configuration">Clean configuration</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --unset --local user.name</span><br><span class="line">git config --unset --global user.name</span><br><span class="line">git config --unset --system user.name</span><br></pre></td></tr></table></figure>
+<h1 id="Basic_usage">Basic usage</h1><h2 id="Init_git_repository">Init git repository</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;project&gt;</span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line">or </span><br><span class="line"></span><br><span class="line">git init &lt;project&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Work_flow">Work flow</h2><p>Basic cmds:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add [&lt;file&gt; | .]  <span class="comment"># . : All files of current directory.</span></span><br><span class="line">git commit [--allow-empty] [-m &lt;msg&gt;]</span><br><span class="line">git push</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>git &lt;cmd&gt; --help</code> for the details.</p>
+</blockquote>
+<p>Work flow:</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/vcs_work_flow.jpg" alt="Work flow"></p>
+<h1 id="Tips">Tips</h1><h2 id="Rename">Rename</h2><p>We can rename one files as follows:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mv name new_name</span><br><span class="line">git add new_name</span><br><span class="line">git rm name</span><br></pre></td></tr></table></figure></p>
+<p>The better way:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mv name new_name</span><br></pre></td></tr></table></figure></p>
+<h2 id="Log">Log</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --oneline -n&lt;number&gt; <span class="comment"># -n : last &lt;number&gt; record </span></span><br><span class="line">git <span class="built_in">log</span> --onelie --all -n5 --graph <span class="comment"># --all: all branches. </span></span><br><span class="line">git <span class="built_in">log</span> branch</span><br></pre></td></tr></table></figure>
+<h2 id="UI">UI</h2><p>We can check the information of repository through UI as long as we install <code>gitk</code>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gitk <span class="comment"># open graphical interface.</span></span><br><span class="line">gitk file</span><br></pre></td></tr></table></figure></p>
+<h2 id="more_tips">more tips</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># info from remote repository.</span></span><br><span class="line">author <span class="comment"># who did the first commission, `git cherry-pick` won't change it</span></span><br><span class="line">committer <span class="comment"># who did the last commission.</span></span><br><span class="line">tag <span class="comment"># tag for project stage.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># cmds</span></span><br><span class="line">git <span class="built_in">help</span> --web cmd  <span class="comment"># View cmd's help by web</span></span><br><span class="line">git checkout -b &lt;branch&gt; <span class="comment"># Create and checkout &lt;branch&gt;</span></span><br><span class="line">git commit -am <span class="comment"># git add + git commit -m, not suggested.</span></span><br><span class="line">git reset --hard <span class="comment"># clean staging area and working dirctory</span></span><br><span class="line">git show <span class="comment"># Shows one or more objects (blobs, trees, tags and commits).</span></span><br><span class="line">git blame <span class="comment"># Show what revision and author last modified each line of a file.</span></span><br><span class="line">git stash <span class="comment"># Stash the changes in a dirty working directory away.</span></span><br><span class="line">git stash pop <span class="comment"># Pop the stashed changes.</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-</code> : single char options, like -m , -a;<br> <code>--</code>: multi char options, like —web, —hard; </p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[The ninth week of ARTS]]></title>
       <url>http://huaqianlee.github.io/2019/10/23/ARTS/Ninth-week-of-ARTS/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-element/" target="_blank" rel="external">Remove Element</a>.<br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java" target="_blank" rel="external">Java</a>.</p>
 <h1 id="Review">Review</h1><p>I found a usage of “repo init … —reference” this week, I want to know more, so I read <a href="https://forum.xda-developers.com/android/software/guide-android-repo-mirroring-t3170869" target="_blank" rel="external">Android Repo Mirroring</a> this week.</p>
@@ -148,7 +193,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Eighth week of ARTs]]></title>
+      <title><![CDATA[The eighth week of ARTs]]></title>
       <url>http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/</url>
       <content type="html"><![CDATA[<p>生病、私事、连续十多天的加班。。。 等等借口让我断更 ARTS 快一个月了，比较让人沮丧，先把标题准备起，花一周把进度赶上。</p>
 <blockquote>
@@ -161,7 +206,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Seventh week of ARTs]]></title>
+      <title><![CDATA[The seventh week of ARTs]]></title>
       <url>http://huaqianlee.github.io/2019/10/13/ARTS/Seventh-week-of-ARTs/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" rel="external">Merge Two Sorted Lists</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java" target="_blank" rel="external">Java</a></p>
 <h1 id="Review">Review</h1><a id="more"></a>
@@ -170,7 +215,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Sixth week of ARTs]]></title>
+      <title><![CDATA[The sixth week of ARTs]]></title>
       <url>http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="external">Valid Parentheses</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py" target="_blank" rel="external">Python</a></p>
 <h1 id="Review">Review</h1><p>I read <a href="https://organizationsandmarkets.com/2010/08/31/how-to-read-an-academic-article/" target="_blank" rel="external">How to Read an Academic Article</a> this week. It teaches me to read academic article by sharing handout. It simply summarizes the method of fast reading, a lot of them maybe be a cliche, but the summary is very helpful.<br><a id="more"></a></p>
@@ -179,7 +224,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Fifth week of ARTS]]></title>
+      <title><![CDATA[The fifth week of ARTS]]></title>
       <url>http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="external">Longest Common Prefix</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java" target="_blank" rel="external">Java</a></p>
 <h1 id="Review">Review</h1><p>I always want to change the mind of my loves, but I didn’t use the good way to do it. So I read <a href="https://forge.medium.com/how-to-change-a-mind-1774681b9369" target="_blank" rel="external">How to Change a Mind</a> this week.</p>
@@ -197,7 +242,7 @@
 <p>BTW, I summarize the sample use of <code>sshfs</code> cmd as follows.</p>
 <h2 id="mount">mount</h2><p>mkdir ~/remote_dir<br>sshfs -o idmap=user $USER@far:/dir ~/remote_dir</p>
 <h2 id="unmount">unmount</h2><p>fusermount -u ~/dir</p>
-<h2 id="To_add_it_to_your_^/etc/fstab^">To add it to your ^/etc/fstab^</h2><p>sshfs#$USER@<ip>:/dir /home/$USER/remote_dir fuse defaults,idmap=user 0 0</ip></p>
+<h2 id="To_add_it_to_your_/etc/fstab">To add it to your <code>/etc/fstab</code></h2><p>sshfs#$USER@<ip>:/dir /home/$USER/remote_dir fuse defaults,idmap=user 0 0</ip></p>
 <blockquote>
 <p>sshfs $USER@<ip>:/dir /home/$USER/remote_dir // mount via terminal</ip></p>
 </blockquote>
@@ -205,7 +250,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Fourth week of ARTS]]></title>
+      <title><![CDATA[The fourth week of ARTS]]></title>
       <url>http://huaqianlee.github.io/2019/09/22/ARTS/Fourth-week-of-ARTS/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="external">Roman to Integer</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java" target="_blank" rel="external">Java Solution:</a></p>
 <h1 id="Review">Review</h1><p>Today I access <a href="">Medium</a>,This article called <a href="https://medium.com/free-code-camp/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83" target="_blank" rel="external"><code>Putting comments in code: the good, the bad, and the ugly.</code></a> got into my eyes first. So I choose it as my <code>Review</code>.</p>
@@ -319,7 +364,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Third week of ARTS: Repo]]></title>
+      <title><![CDATA[The third week of ARTS: Repo]]></title>
       <url>http://huaqianlee.github.io/2019/09/13/ARTS/Third-week-of-ARTS/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/palindrome-number/" target="_blank" rel="external">Palindrome Number</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/isPalindrome.c" target="_blank" rel="external">C solution</a></p>
 <h1 id="Review">Review</h1><p>I always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage of repo, repo &amp;&amp; git , etc in detail. It helps me a lot. But I have not absorbed them yet, I need more time.</p>
@@ -383,7 +428,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Second week of ARTS: Hurry]]></title>
+      <title><![CDATA[The second week of ARTS: Hurry]]></title>
       <url>http://huaqianlee.github.io/2019/09/07/ARTS/Second-week-of-ARTS-Hurry/</url>
       <content type="html"><![CDATA[<h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/reverse-integer/" target="_blank" rel="external">Reverse Integer</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/reverseInteger.c" target="_blank" rel="external">C solution</a></p>
 <h1 id="Review">Review</h1><p>Because I am learnning python, I was attracted by the <a href="https://medium.com/free-code-camp/learning-python-from-zero-to-hero-120ea540b567" target="_blank" rel="external">Learning Python: From Zero to Hero</a> article of <a href="http://Medium.com" target="_blank" rel="external">Medium</a>.  </p>
@@ -415,7 +460,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[First week of ARTS: Start]]></title>
+      <title><![CDATA[The first week of ARTS: Start]]></title>
       <url>http://huaqianlee.github.io/2019/08/31/ARTS/First-week-of-ARTS-Start/</url>
       <content type="html"><![CDATA[<h1 id="ARTS_简单介绍">ARTS 简单介绍</h1><p>Algorithm：<br>主要是为了编程训练和学习。每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。</p>
 <p>Review：<br>主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 <a href="http://Medium.com" target="_blank" rel="external">Medium</a>（需要梯子）以及各个公司的技术 blog，如 Netflix 的。</p>
