@@ -302,8 +302,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/" itemprop="url">
-                  高通电池管理系统（BMS）驱动分析
+                <a class="post-title-link" href="/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/" itemprop="url">
+                  camera架构与调试-菜鸟笔记
                 </a>
               
             
@@ -316,8 +316,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-06-24T21:52:24+08:00" content="Jun 24 2015">
-              Jun 24 2015
+            <time itemprop="dateCreated" datetime="2016-07-07T23:37:41+08:00" content="Jul 7 2016">
+              Jul 7 2016
             </time>
           </span>
 
@@ -330,8 +330,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
                   </a>
                 </span>
 
@@ -365,19 +365,11 @@
       
         
           <blockquote>
-<p>File: qpnp-vm-bms.c -  Battery monitor system　</p>
+<p>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就</p>
 </blockquote>
-<h2 id="简要">简要</h2><p>BMS(Battery Monitoring System)主要提供如下功能：</p>
-<ul>
-<li><p>通过一定算法计算SOC(state of charge电量状态) or 剩余电量.</p>
-</li>
-<li><p>正在使用的电池电压, 开漏电压(OCV).</p>
-</li>
-</ul>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_1.png" alt="temp"></p>
-<h2 id="硬件架构">硬件架构</h2>
+<h2 id="VFE">VFE</h2><p>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vfe.png" alt="VFE FLOW"></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/#more" rel="contents">
+            <a class="btn" href="/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -428,8 +420,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/06/11/Git/git常用及进阶命令总结/" itemprop="url">
-                  Git常用及进阶命令总结
+                <a class="post-title-link" href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/" itemprop="url">
+                  高通px4代码阅读笔记
                 </a>
               
             
@@ -442,8 +434,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-06-11T22:10:41+08:00" content="Jun 11 2015">
-              Jun 11 2015
+            <time itemprop="dateCreated" datetime="2016-05-11T21:45:25+08:00" content="May 11 2016">
+              May 11 2016
             </time>
           </span>
 
@@ -456,8 +448,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
                   </a>
                 </span>
 
@@ -490,10 +482,15 @@
 
       
         
-          <p>　　Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　<br>　<br>　　言归正传，Git十分好用，应用也十分广泛,现在最好的代码托管网站Github就是基于git创建的，而且现在大多数公司及个人都在使用它进行代码管理，要熟练使用还是需要花一些苦功夫的，我现在也还只是会基本的应用，更深层次的使用还不熟悉。为了方便自己以后使用，将自己常用的一些命令加以总结，并Google了一些常用及进阶命令，一并列出，方便查询使用。</p>
-<p><strong>最重要的命令: git <command> —help</strong></p>
+          <p><strong>像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。</strong></p>
+<p>代码地址：<a href="https://github.com/ATLFlight/Firmware">ATLFlight/Firmware</a><br>参考文档：<a href="http://dev.px4.io/tutorial-hello-sky.html?q=">px4 devguide</a></p>
+<blockquote>
+<p>由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.</p>
+</blockquote>
+<p>============================================================================================================</p>
+<h2 id="关键路径及文件">关键路径及文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\mavlink   //  信息数据处理</span><br><span class="line">mavlink_main.cpp</span><br><span class="line">mavlink_receiver.cpp</span><br><span class="line"></span><br><span class="line">FastRPC   --  aDSP 与 apps 之间远程调用</span><br><span class="line"><span class="number">1</span>. 共享内存（不包括L1/L2缓存）</span><br><span class="line"><span class="number">2</span>. aDSP中能支持有限的物理映射</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules\muorb\</span><br><span class="line">adsp </span><br><span class="line">Krait</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\posix-configs\eagle\flight    // config 文件</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules  // 功能模块</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\makefiles\ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp   // 遥控器</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\device\vdev.cpp   <span class="comment"># Virtual character device base class.</span></span><br><span class="line">mavilink、uorb 继承于此类</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/11/Git/git常用及进阶命令总结/#more" rel="contents">
+            <a class="btn" href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -544,8 +541,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/" itemprop="url">
-                  Android电池监控系统(BMS)之一电池系统架构
+                <a class="post-title-link" href="/2016/05/07/Uav/mobile-and-uav-sensors/" itemprop="url">
+                  手机无人机常用sensor介绍
                 </a>
               
             
@@ -558,8 +555,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-06-06T22:17:36+08:00" content="Jun 6 2015">
-              Jun 6 2015
+            <time itemprop="dateCreated" datetime="2016-05-07T00:12:14+08:00" content="May 7 2016">
+              May 7 2016
             </time>
           </span>
 
@@ -572,8 +569,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
                   </a>
                 </span>
 
@@ -606,13 +603,13 @@
 
       
         
-          <p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        huaqianlee@gmail.com</em></p>
-<p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。</p>
-<h2 id="电池系统架构">电池系统架构</h2><p>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
-<p>自上而下，Android电池监控系统分为如下几个部分：</p>
-<h3 id="电池信息查看APP">电池信息查看APP</h3><p>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：<br>
+          <p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
+<blockquote>
+<p>资料皆是网上获取,不能完全保证准确性.</p>
+</blockquote>
+<h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/06/Android/Android电池监控系统-BMS-之电池系统架构/#more" rel="contents">
+            <a class="btn" href="/2016/05/07/Uav/mobile-and-uav-sensors/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -663,8 +660,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/05/30/Android/Android电源管理架构/" itemprop="url">
-                  Android 电源管理架构
+                <a class="post-title-link" href="/2016/04/27/Uav/Qualcomm-uav-blsp-port/" itemprop="url">
+                  高通无人机8074 BLSP接口说明
                 </a>
               
             
@@ -677,8 +674,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-05-30T16:04:45+08:00" content="May 30 2015">
-              May 30 2015
+            <time itemprop="dateCreated" datetime="2016-04-27T00:11:58+08:00" content="Apr 27 2016">
+              Apr 27 2016
             </time>
           </span>
 
@@ -691,8 +688,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
                   </a>
                 </span>
 
@@ -725,10 +722,14 @@
 
       
         
-          <p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
-<h2 id="高通的引导体系结构">高通的引导体系结构</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong><br>
+          <h2 id="概述">概述</h2><p>BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/BLSP.png" alt="BLSP"></p>
+<blockquote>
+<ol>
+<li>BAM（Bus Access Manager）is used to move data to/from the peripheral buffers;  2.每个BLSP外设静态连接到一对BAM管道，BLSP支持BAM 和non-BAM-based 数据传输。</li>
+</ol>
+</blockquote>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/30/Android/Android电源管理架构/#more" rel="contents">
+            <a class="btn" href="/2016/04/27/Uav/Qualcomm-uav-blsp-port/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -779,8 +780,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/05/29/Android/Android-Stdudio-Linux-windows-mac常用快捷键/" itemprop="url">
-                  Android Stdudio Linux/windows/mac常用快捷键
+                <a class="post-title-link" href="/2016/04/02/Uav/uav-board-debugging/" itemprop="url">
+                  无人机开发主板调试
                 </a>
               
             
@@ -793,8 +794,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-05-29T20:10:41+08:00" content="May 29 2015">
-              May 29 2015
+            <time itemprop="dateCreated" datetime="2016-04-02T21:01:57+08:00" content="Apr 2 2016">
+              Apr 2 2016
             </time>
           </span>
 
@@ -807,8 +808,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
                   </a>
                 </span>
 
@@ -841,9 +842,11 @@
 
       
         
-          <p>　　前些时间把Android Studio的环境折腾好，典型的geek风一下子完全吸引了我，比eclipse好用太多了，有很多意外的功能,快捷键可以自定义，但我基本都用的默认的。或许用Macbook Pro做Android开发是最好的选择，但自己平时要搞Linux/Android底层相关的东西，thinkpad就成为最好的选择，所以就入手了thinkpad，用着Ubuntu和Windows，先总结我使用环境下的快捷键。<br>
+          <h2 id="问题一_：_新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16_-">问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .</h2><p>自己的uav主板回来后将软件刷入板子(高通msm8074), 板子不能正常启动.</p>
+<p>通过分析log， 发现死在boot_images\core\boot\secboot3\hw\msm8974\sbl1\sbl1_mc.c 中 sbl1_tlmm_init() —-&gt; boot_gpio_init()， 当我屏蔽此函数后， log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Format: Log Type - Time(microsec) - Message </span><br><span class="line">Log <span class="built_in">type</span>: B - since boot(excluding boot rom). D - delta </span><br><span class="line">B - <span class="number">41663</span> - SBL1, Start </span><br><span class="line">B - <span class="number">46909</span> - scatterload_region &amp;&amp; ram_init, Start </span><br><span class="line">D - <span class="number">30</span> - scatterload_region &amp;&amp; ram_init, Delta </span><br><span class="line">B - <span class="number">63897</span> - pm_device_init, Start </span><br><span class="line">D - <span class="number">27297</span> - pm_device_init, Delta </span><br><span class="line">B - <span class="number">91317</span> - boot_flash_init, Start </span><br><span class="line">D - <span class="number">10919</span> - boot_flash_init, Delta </span><br><span class="line">B - <span class="number">102632</span> - boot_config_data_table_init, Start </span><br><span class="line">D - <span class="number">134932</span> - boot_config_data_table_init, Delta </span><br><span class="line">B - <span class="number">239150</span> - sbl1_ddr_<span class="built_in">set</span>_params, Start </span><br><span class="line">B - <span class="number">241773</span> - Pre_DDR_clock_init, Start </span><br><span class="line">D - <span class="number">274</span> - Pre_DDR_clock_init, Delta </span><br><span class="line">D - <span class="number">0</span> - sbl1_ddr_<span class="built_in">set</span>_params, Delta </span><br><span class="line">B - <span class="number">255773</span> - pm_driver_init, Start </span><br><span class="line">D - <span class="number">16134</span> - pm_driver_init, Delta </span><br><span class="line">B - <span class="number">271907</span> - clock_init, Start </span><br><span class="line">D - <span class="number">152</span> - clock_init, Delta </span><br><span class="line">B - <span class="number">274988</span> - Image Load, Start </span><br><span class="line">B - <span class="number">295209</span> - Tz Execution, Start </span><br><span class="line">D - <span class="number">193065</span> - Tz Execution, Delta </span><br><span class="line">B - <span class="number">496387</span> - Image Load, Start </span><br><span class="line">B - <span class="number">506361</span> - Signal PBL to Jump to RPM FW </span><br><span class="line">B - <span class="number">506605</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Start   </span><br><span class="line">B - <span class="number">540399</span> - <span class="number">1</span><span class="comment">######################################################### </span></span><br><span class="line">D - <span class="number">45323</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Delta </span><br><span class="line"><span class="comment">#不屏蔽boot_gpio_init()函数,则停在此处， boot_gpio_init()中</span></span><br><span class="line">B - <span class="number">558302</span> - <span class="number">11</span><span class="comment">#########################################################   </span></span><br><span class="line">B - <span class="number">685884</span> - Image Load, Start </span><br><span class="line">B - <span class="number">689391</span> - WDT Execution, Start </span><br><span class="line">D - <span class="number">213</span> - WDT Execution, Delta </span><br><span class="line">B - <span class="number">694790</span> - Image Load, Start </span><br><span class="line">B - <span class="number">707905</span> - sbl1_efs_handle_cookies, Start</span><br></pre></td></tr></table></figure></p>
+<p>　<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/29/Android/Android-Stdudio-Linux-windows-mac常用快捷键/#more" rel="contents">
+            <a class="btn" href="/2016/04/02/Uav/uav-board-debugging/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -894,8 +897,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/" itemprop="url">
-                  如何在内核里操作文件(create/open/read/write)
+                <a class="post-title-link" href="/2016/01/04/Linux/linux-problem-set/" itemprop="url">
+                  linux系统使用问题集
                 </a>
               
             
@@ -908,8 +911,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-03-17T22:15:42+08:00" content="Mar 17 2015">
-              Mar 17 2015
+            <time itemprop="dateCreated" datetime="2016-01-04T21:40:23+08:00" content="Jan 4 2016">
+              Jan 4 2016
             </time>
           </span>
 
@@ -956,11 +959,9 @@
 
       
         
-          <p>　　因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：</p>
-<h2 id="Includes">Includes</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/fs.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/segment.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;asm/uaccess.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;linux/buffer_head.h&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Opening_a_file">Opening a file</h2>
+          <h2 id="问题一_ubuntu_密码正确进不了系统">问题一 ubuntu 密码正确进不了系统</h2><p><strong>现象：</strong><br>即使密码输入正确也不能进入系统。<br><strong>原因：</strong><br>设置环境变量时出错，影响到系统。<br><strong>解决：</strong><br>开机时按住shift 进入 recovery 模式，选第二个恢复模式，12.04的界面是fsck和root选项在同一页，先选fsck解除写限制（按下fsck后等几秒即可），再选root，vi /etc/profile， vi /etc/environment 恢复下环境变量，再重新登录。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/17/Linux/如何在内核里操作读写文件-create-open-read-write/#more" rel="contents">
+            <a class="btn" href="/2016/01/04/Linux/linux-problem-set/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1011,8 +1012,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/01/21/Android/高通Android不带电量计的电量计算方式/" itemprop="url">
-                  Android不带电量计的电量计算
+                <a class="post-title-link" href="/2015/10/22/Git/git-experence/" itemprop="url">
+                  Git 常见问题集
                 </a>
               
             
@@ -1025,8 +1026,244 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-01-21T20:10:01+08:00" content="Jan 21 2015">
-              Jan 21 2015
+            <time itemprop="dateCreated" datetime="2015-10-22T12:49:10+08:00" content="Oct 22 2015">
+              Oct 22 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="问题一_-gitignore无效，不能过滤某些文件或路径。">问题一 .gitignore无效，不能过滤某些文件或路径。</h2><p><strong>现象:</strong><br>在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。</p>
+<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。</p>
+<p><strong>解决：</strong><br>从版本库删除文件和目录，更新。</p>
+<pre><code class="bash">git rm (--cached) files directories -r <span class="operator">-f</span>
+git commit
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/22/Git/git-experence/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/08/Life/2015年10月7日-小丑/" itemprop="url">
+                  2015年10月7日:小丑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-10-08T00:42:16+08:00" content="Oct 8 2015">
+              Oct 8 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Life/" itemprop="url" rel="index">
+                    <span itemprop="name">Life</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>The Only Fair Is  Not Fair.</strong><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogemptychair.jpg" alt="em"></p>
+<p>前些天去看华仔的《解救吾先生》，当“吾先生”在将死之际清唱《小丑》时，我感动得眼泛泪光。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/08/Life/2015年10月7日-小丑/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/23/Android/高通Android设备启动流程分析-从power-on上电到Home-Lanucher启动/" itemprop="url">
+                  高通Android设备启动流程分析(从power-on上电到Home Lanucher启动)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-08-23T22:07:48+08:00" content="Aug 23 2015">
+              Aug 23 2015
             </time>
           </span>
 
@@ -1073,10 +1310,11 @@
 
       
         
-          <p>　　一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。</p>
-<h2 id="SOC（state_of_charge_荷电状态_-_电量）">SOC（state of charge 荷电状态 - 电量）</h2><p>英文缩写:<br>FCC　　Full-charge capacity<br>RC 　　Remaining capacity (剩余电量)<br>CC 　　Coulumb counter<br>UUC　　Unusable capacity<br>RUC　　Remaining usable capacity<br>SoC　　State of charge<br>OCV　　Open circuit voltage<br>
+          <p><em>Platform Information :<br>　System:    Ａndroid5.1<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        huaqianlee@gmail.com</em></p>
+<p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>在我第一次接触Android得时候，我就很想知道Android设备在按下电源键后是怎么启动到主界面的，但是到现在为止也没有完全理清这个过程，所以就决定从按下power键开始来分析一下这个流程。虽然Android基于Linux内核开发的一个操作系统，但是在init进程后Android附加了很多其他操作，所以其启动流程还是有比较大的差别的，关于Linux系统的启动流程可以参考我的另一篇博文：<a href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">深入理解linux启动过程</a>。</p>
+<p>因为我现在工作中用到的是高通的源码，并且高通也是目前Android手机的主流芯片，所以我就按照高通的msm8916来分析了，不过其他的也应该大同小异。<br>　<br>首先来看一下官方给出的Android系统架构：<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/21/Android/高通Android不带电量计的电量计算方式/#more" rel="contents">
+            <a class="btn" href="/2015/08/23/Android/高通Android设备启动流程分析-从power-on上电到Home-Lanucher启动/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1127,8 +1365,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/01/20/Java/JUnit-test的用法/" itemprop="url">
-                  JUnit-test的用法
+                <a class="post-title-link" href="/2015/08/21/Linux/深入理解Linux启动过程/" itemprop="url">
+                  深入理解Linux启动过程(译)
                 </a>
               
             
@@ -1141,8 +1379,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-01-20T00:07:56+08:00" content="Jan 20 2015">
-              Jan 20 2015
+            <time itemprop="dateCreated" datetime="2015-08-21T21:23:41+08:00" content="Aug 21 2015">
+              Aug 21 2015
             </time>
           </span>
 
@@ -1155,8 +1393,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -1189,265 +1427,15 @@
 
       
         
-          
-            <p>为了方便调试，不用每写一个类都需要写一个main方法对其测试，所以Java编写会经常用到JUnit测试。</p>
-<h3 id="新建一个JUnit-test测试包，如下图:">新建一个JUnit.test测试包，如下图:</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blognewjunit.png" alt="new"></p>
-<h3 id="JUnit测试">JUnit测试</h3><p>可以在原文件类的方法上面加上@Test作为JUnit测试单元运行，也可以新建JUnit文件测试，编写方法如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class PersonTest &#123;</span><br><span class="line"></span><br><span class="line">	@BeforeClass // 测试类加载之前运行</span><br><span class="line">	public static void <span class="built_in">set</span>UpBeforeClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"Before"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Before  // 每个测试方法运行前运行， 常用</span><br><span class="line">	public void <span class="built_in">set</span>Up() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"所有的测试方法运行之前运行！！"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test  // 注解，给程序看</span><br><span class="line">	public void <span class="function"><span class="title">testEat</span></span>()&#123;</span><br><span class="line">		</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.eat();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="function"><span class="title">testRun</span></span>()&#123;</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.run();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@After // 每个测试方法运行后运行 ，常用</span><br><span class="line">	public void tearDown() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"所有的测试方法运行之后运行！！"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    	@AfterClass //测试类加载之后运行</span><br><span class="line">	public static void tearDownAfterClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">"After"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="运行JUnit">运行JUnit</h3><p>可以单独运行某个测试方法,也可以选中类,运行所以的测试方法,如下图:<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogrunjunit.png" alt="run"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/19/Web/xml文件约束与解析/" itemprop="url">
-                  xml文件约束与解析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-01-19T23:12:35+08:00" content="Jan 19 2015">
-              Jan 19 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在XML技术里，可以编写一个文档来约束一个XML文档的书写规范，这称之为XML约束,常用的约束技术:<br>　1.  XML DTD<br>　2.  XML Schema</p>
-<h1 id="DTD">DTD</h1><h2 id="DTD格式">DTD格式</h2><p>DTD(Document Type Definition)，全称为文档类型定义。 DTD文件应使用UTF-8或Unicode。格式如下:
-　</p>
-<h3 id="外部文件">外部文件</h3><p>　<img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogdtd.png" alt=""></p>
-<blockquote>
-<p>#PCDATA:放置字符数据　</p>
+          <blockquote>
+<p><strong>第一篇完全译文，因为自己对技术和英文的热爱，所以决定翻译此文，水平有限，所以肯定会有不恰当的地方，欢迎移驾至原地址：<a href="http://www.ibm.com/developerworks/linux/library/l-linuxboot/">http://www.ibm.com/developerworks/linux/library/l-linuxboot/</a></strong><br>注：因为想写一篇博文来阐述并理清Android启动的完全过程，发现了这篇文章，觉得写得十分好，帮我解答了很多疑惑。</p>
 </blockquote>
+<h2 id="引言">引言</h2><p>Linux系统的启动过程由很多阶段组成，但是无论你是启动标准的x86桌面还是启动嵌入式PowerPC目标，许多流程都是惊人的相似的。这篇文章从初始化引导程序到第一个用户空间应用程序探索Linux启动进程。顺着这个流程，你将知道很多和启动相关的主题，比如：引导程序，内核解压, 初始RAM磁盘,以及其他Linux引导元素。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/19/Web/xml文件约束与解析/#more" rel="contents">
+            <a class="btn" href="/2015/08/21/Linux/深入理解Linux启动过程/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/18/Web/xml基础/" itemprop="url">
-                  xml基础
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-01-18T00:13:28+08:00" content="Jan 18 2015">
-              Jan 18 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>XML 是有w3c组织发布的一种可扩展标记语言(Extensible Markup Language)。</p>
-<h2 id="XML_的常见应用">XML 的常见应用</h2><p>XML常见的应用场景：
-　</p>
-<ol>
-<li>XML技术除用于保存有关系的数据之外，它还经常用作软件配置文件，以描述程序模块之间的关系。<br>2.在一个软件系统中，为提高系统的灵活性，它所启动的模块通常由其配置文件决定<br>　<br>例如一个软件在启动时，它需要启动Ａ、Ｂ两个模块，而A、Ｂ这两个模块在启动时，又分别需要A1、A2和B1、B2模块的支持，为了准确描述这种关系，此时使用ＸＭＬ文件最为合适不过。</li>
-</ol>
-<h2 id="XML的语法">XML的语法</h2><h3 id="文档的声明">文档的声明</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"GB2312"</span>  standalone=<span class="string">"yes"</span> ?&gt;</span><br><span class="line">    encoding - 文档的字符编码。（代码里面写什么格式，一般就将文档存为什么格式，一般通用“UTF-<span class="number">8</span>”）</span><br><span class="line">    standalone - 文档是否为独立的，有依赖</span><br><span class="line">```    </span><br><span class="line"><span class="comment">###元素</span></span><br><span class="line"></span><br><span class="line">元素指XML中的标签,可以嵌套,只有一个主标签,两种书写方式如下:</span><br><span class="line">•包含标签体：&lt;a&gt;www.itcast.cn&lt;/a&gt;</span><br><span class="line">•不含标签体的：&lt;a&gt;&lt;/a&gt;, 简写为：&lt;a/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">###属性</span></span><br><span class="line">属性值必须用<span class="string">""</span> 或<span class="string">''</span> 引起来,如:</span><br><span class="line">```bash</span><br><span class="line">&lt;input name=“text”&gt;</span><br><span class="line">也可以:(XML将空格也当做内容,不过现在浏览器都会执行处理,调用trim())</span><br><span class="line">&lt;input&gt;</span><br><span class="line">   &lt;name&gt;text&lt;/name&gt;</span><br><span class="line">&lt;/input&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="注释">注释</h3><p>&lt;!—注释—&gt;  // 注释语句必须写在XML声明语句后面</p>
-<h3 id="CDATA区">CDATA区</h3><p>CDATA(character data)区用于让解析引擎不对其进行处理,按照原始内容显示. </p>
-<pre><code class="bash">格式:&lt;![CDATA[ 内容 ]]&gt;
-eg:
-  &lt;![CDATA[
-      &lt;itcast&gt;
-          &lt;br/&gt;
-      &lt;/itcast&gt;
-  ]]&gt;
-</code></pre>
-<h3 id="转义字符">转义字符</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogxml.png" alt="escape">        </p>
-<h3 id="处理指令">处理指令</h3><p>处理指令，简称PI （processing instruction）。处理指令用来指挥解析引擎如何解析XML文档内容。例如，在XML文档中可以使用xml-stylesheet指令，通知XML解析引擎，应用css文件显示xml文档内容。<br>&lt;?xml-stylesheet type=”text/css” href=”1.css”?&gt;<br>处理指令必须以“&lt;?”作为开头，以“?&gt;”作为结尾，XML声明语句就是最常见的一种处理指令。 </p>
-
-          
         
       
     </div>
@@ -1478,7 +1466,7 @@ eg:
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1519,7 +1507,7 @@ eg:
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">98</span>
+              <span class="site-state-item-count">124</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1527,7 +1515,7 @@ eg:
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1645,7 +1633,7 @@ eg:
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

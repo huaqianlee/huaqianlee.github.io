@@ -302,8 +302,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/12/17/Android/android-sensor-arch-analysis/" itemprop="url">
-                  Android传感器（Sensor）架构简析 (╯_╰)
+                <a class="post-title-link" href="/2019/12/08/ARTS/Fifteenth-week-of-ARTS/" itemprop="url">
+                  Fifteenth week of ARTS
                 </a>
               
             
@@ -316,8 +316,194 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-12-17T10:49:12+08:00" content="Dec 17 2017">
-              Dec 17 2017
+            <time itemprop="dateCreated" datetime="2019-12-08T23:38:06+08:00" content="Dec 8 2019">
+              Dec 8 2019
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/12/01/ARTS/Fourteenth-week-of-ARTS/" itemprop="url">
+                  Fourteenth week of ARTS
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-12-01T23:37:30+08:00" content="Dec 1 2019">
+              Dec 1 2019
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/11/17/Git/Some-knowledge-about-git/" itemprop="url">
+                  Oh, the Git! - Basic
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-11-17T23:38:05+08:00" content="Nov 17 2019">
+              Nov 17 2019
             </time>
           </span>
 
@@ -330,8 +516,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
                   </a>
                 </span>
 
@@ -364,15 +550,11 @@
 
       
         
-          <blockquote>
-<p>这真的是一篇简析。。。 (╯_╰)  本来准备详细分析整个 sensor 架构的，实在时间紧张，只能先简析了。</p>
-</blockquote>
-<p><em>Platform information： MTK6797（X20）+ Android 7.0</em></p>
-<h1 id="Android_支持的传感器">Android 支持的传感器</h1><p>现在 Android 支持多达数十种的各种各样的传感器，支持的类型如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_type.jpg" alt="Sensor_Type"></p>
-<h1 id="Android_Sensor_架构">Android Sensor 架构</h1>
+          <h1 id="Preface">Preface</h1><p>Git has always been a must-have skill for developers, I will submize a series of blogs related to it, although I don’t know too much about git now.</p>
+<p><a href="https://git-scm.com/book/en/v2">Pro Git</a> is the best guide of git, I need to read it when I have plenty of time so that I can check for gaps.</p>
+<h1 id="VCS(Version_Control_System)">VCS(Version Control System)</h1><h2 id="Central_VCS">Central VCS</h2><p>Central VCS mainly includes <code>SVN</code> and <code>CVS</code>, its newwork architecture is client-server.<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/Central%20VCS.jpg" alt="Central VCS"><br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/17/Android/android-sensor-arch-analysis/#more" rel="contents">
+            <a class="btn" href="/2019/11/17/Git/Some-knowledge-about-git/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -423,8 +605,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/12/03/Android/Android-Linux-i2c-driver-arch/" itemprop="url">
-                  Android/Linux  I2C 驱动架构分析
+                <a class="post-title-link" href="/2019/11/17/ARTS/Twelfth-week-of-ARTS/" itemprop="url">
+                  Twelfth week of ARTS
                 </a>
               
             
@@ -437,8 +619,287 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-12-03T21:37:07+08:00" content="Dec 3 2017">
-              Dec 3 2017
+            <time itemprop="dateCreated" datetime="2019-11-17T23:35:47+08:00" content="Nov 17 2019">
+              Nov 17 2019
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/11/10/ARTS/Eleventh-week-of-ARTS/" itemprop="url">
+                  Eleventh week of ARTS
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-11-10T22:59:03+08:00" content="Nov 10 2019">
+              Nov 10 2019
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/11/03/ARTS/Tenth-week-of-ARTS/" itemprop="url">
+                  Tenth week fo ARTS
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-11-03T22:58:17+08:00" content="Nov 3 2019">
+              Nov 3 2019
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/10/23/ARTS/Ninth-week-of-ARTS/" itemprop="url">
+                  The ninth week of ARTS
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-10-23T00:00:43+08:00" content="Oct 23 2019">
+              Oct 23 2019
             </time>
           </span>
 
@@ -451,8 +912,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/ARTS/" itemprop="url" rel="index">
+                    <span itemprop="name">ARTS</span>
                   </a>
                 </span>
 
@@ -485,10 +946,11 @@
 
       
         
-          <h1 id="前言">前言</h1><p>分析传感器源码的时候，发现对 I2C 的驱动也有些忘记了，所以就再分析一下并形成这篇博文。</p>
-<h1 id="驱动架构">驱动架构</h1><h2 id="I2C_驱动架构">I2C 驱动架构</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/i2c_arch.jpg" alt="i2c-arch"><br>
+          <h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-element/">Remove Element</a>.<br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java">Java</a>.</p>
+<h1 id="Review">Review</h1><p>I found a usage of “repo init … —reference” this week, I want to know more, so I read <a href="https://forum.xda-developers.com/android/software/guide-android-repo-mirroring-t3170869">Android Repo Mirroring</a> this week.</p>
+<p>This article explains “repo mirroring” in a simple and clear way through examples.<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/03/Android/Android-Linux-i2c-driver-arch/#more" rel="contents">
+            <a class="btn" href="/2019/10/23/ARTS/Ninth-week-of-ARTS/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -539,8 +1001,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/11/23/Android/Android-Linux-input-system-analysis/" itemprop="url">
-                  Android(Linux) 输入子系统解析
+                <a class="post-title-link" href="/2019/10/20/ARTS/Eighth-week-of-ARTs/" itemprop="url">
+                  The eighth week of ARTs
                 </a>
               
             
@@ -553,8 +1015,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-23T22:42:04+08:00" content="Nov 23 2017">
-              Nov 23 2017
+            <time itemprop="dateCreated" datetime="2019-10-20T22:52:39+08:00" content="Oct 20 2019">
+              Oct 20 2019
             </time>
           </span>
 
@@ -567,8 +1029,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/ARTS/" itemprop="url" rel="index">
+                    <span itemprop="name">ARTS</span>
                   </a>
                 </span>
 
@@ -601,14 +1063,14 @@
 
       
         
-          <p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/">Android 系统源码分析综述</a></p>
-<h1 id="前言">前言</h1><p>Android/Linux 输入设备总类繁杂，常见的有按键、键盘、触摸屏、鼠标、摇杆等，之前其驱动都是采用字符设备、misc 设备处理的，但是如此多的设备就导致驱动混乱，所以 Linux 引入了输入子系统在字符设备等上抽象出一层来统一输入设备的驱动。本文就基于 MTK Android 7.0 源码来分析一下输入子系统。</p>
-<h1 id="输入子系统架构">输入子系统架构</h1><p>输入子系统的系统架构如下图所示：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png" alt="input_system_arch"></p>
+          <p>生病、私事、连续十多天的加班。。。 等等借口让我断更 ARTS 快一个月了，比较让人沮丧，先把标题准备起，花一周把进度赶上。</p>
 <blockquote>
-<p>Framework 层以上只是简单跟了一下源码，没有深入查看</p>
+<p>临时标注</p>
 </blockquote>
+<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">Remove Duplicates from Sorted Array</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java">Java</a></p>
+<h1 id="Review">Review</h1>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/23/Android/Android-Linux-input-system-analysis/#more" rel="contents">
+            <a class="btn" href="/2019/10/20/ARTS/Eighth-week-of-ARTs/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -659,8 +1121,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/11/21/Android/BMS-of-Android-Power-Management/" itemprop="url">
-                  Android 电源管理之电池管理系统(BMS)
+                <a class="post-title-link" href="/2019/10/13/ARTS/Seventh-week-of-ARTs/" itemprop="url">
+                  The seventh week of ARTs
                 </a>
               
             
@@ -673,8 +1135,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-21T21:56:28+08:00" content="Nov 21 2017">
-              Nov 21 2017
+            <time itemprop="dateCreated" datetime="2019-10-13T22:45:09+08:00" content="Oct 13 2019">
+              Oct 13 2019
             </time>
           </span>
 
@@ -687,8 +1149,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/ARTS/" itemprop="url" rel="index">
+                    <span itemprop="name">ARTS</span>
                   </a>
                 </span>
 
@@ -721,25 +1183,10 @@
 
       
         
-          <blockquote>
-<p>Android 源码分析系列综述博文： <a href="http://huaqianlee.github.io/2100/11/21/Android/A-summary-of-Android-source-analysis/">Android 系统源码分析综述</a></p>
-</blockquote>
-<p><em>Platform information： MTK6797（X20）+ Android 7.0</em></p>
-<p>之前做高通的时候，对高通此部分做过粗略的分析，不过当时胡乱做的些笔记，只简单整理了几篇博客，感兴趣可以参考如下路径：</p>
-<p><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/">高通平台Android源码bootloader分析之sbl1(一)</a></p>
-<p><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/">高通平台Android源码bootloader分析之sbl1(二)</a></p>
-<p><a href="http://huaqianlee.github.io/2015/08/18/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%89/">高通平台Android源码bootloader分析之sbl1(三)</a></p>
-<p><a href="http://huaqianlee.github.io/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/">Android不带电量计的电量计算</a></p>
-<p><a href="http://huaqianlee.github.io/2015/05/30/Android/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/">Android 电源管理架构</a></p>
-<p><a href="http://huaqianlee.github.io/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">Android电池监控系统-BMS-之电池系统架构 (有坑未填)</a></p>
-<p><a href="http://huaqianlee.github.io/2015/06/24/Android/qaulcomm-bms-driver-analysis/">高通电池管理系统（BMS）驱动分析</a></p>
-<p><a href="http://huaqianlee.github.io/2015/06/24/Android/smb135x-charger-driver/">高通 smb135x charger 驱动分析</a></p>
-<p><a href="http://huaqianlee.github.io/2015/06/24/Android/qcom-pmic-driver/">高通 PMIC 架构简析</a></p>
-<p><a href="http://huaqianlee.github.io/2015/06/24/Android/linear-charger-driver/">高通 linear charger 驱动分析</a></p>
-<h1 id="充电简析">充电简析</h1><h2 id="充电状态机">充电状态机</h2><p>电池充电过程分为预充、恒流充电（CC模式）、恒压充电（CV模式）、涓流充电四个流程，MTK的状态机如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/chargind_state.jpg" alt="state"><br>
+          <h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/merge-two-sorted-lists/">Merge Two Sorted Lists</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java">Java</a></p>
+<h1 id="Review">Review</h1>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/21/Android/BMS-of-Android-Power-Management/#more" rel="contents">
+            <a class="btn" href="/2019/10/13/ARTS/Seventh-week-of-ARTs/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -790,8 +1237,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/11/14/Android/Android-SELinux-Permison-and-Question/" itemprop="url">
-                  Android Selinux 权限及问题
+                <a class="post-title-link" href="/2019/10/06/ARTS/Sixth-week-of-ARTs/" itemprop="url">
+                  The sixth week of ARTs
                 </a>
               
             
@@ -804,8 +1251,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-14T22:26:02+08:00" content="Nov 14 2017">
-              Nov 14 2017
+            <time itemprop="dateCreated" datetime="2019-10-06T22:44:44+08:00" content="Oct 6 2019">
+              Oct 6 2019
             </time>
           </span>
 
@@ -818,8 +1265,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/ARTS/" itemprop="url" rel="index">
+                    <span itemprop="name">ARTS</span>
                   </a>
                 </span>
 
@@ -852,603 +1299,13 @@
 
       
         
-          <blockquote>
-<p>由于现做的是MTK平台，源码路径基于MTK， 不过高通大同小异</p>
-</blockquote>
-<h2 id="说明">说明</h2><p>Android 5.0以后完全引入了 SEAndroid/SELinux 安全机制，这样即使拥有 root 权限或 chmod 777 ，仍然无法再JNI以上访问内核节点。</p>
-<blockquote>
-<p>其实在 Android 4.4 就有限制的启用此安全机制了。后面内容都按照 5.0  以后介绍，4.4 会有些许差异。</p>
-</blockquote>
-<h2 id="SELinux_Mode">SELinux Mode</h2><p>SELinux 分为两种模式，Android 5.0 后所有进程都使用 enforcing mode。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enforcing mode: 限制访问</span><br><span class="line">permissive mode: 只审查权限，不限制</span><br></pre></td></tr></table></figure></p>
+          <h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/valid-parentheses/">Valid Parentheses</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py">Python</a></p>
+<h1 id="Review">Review</h1><p>I read <a href="https://organizationsandmarkets.com/2010/08/31/how-to-read-an-academic-article/">How to Read an Academic Article</a> this week. It teaches me to read academic article by sharing handout. It simply summarizes the method of fast reading, a lot of them maybe be a cliche, but the summary is very helpful.<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/14/Android/Android-SELinux-Permison-and-Question/#more" rel="contents">
+            <a class="btn" href="/2019/10/06/ARTS/Sixth-week-of-ARTs/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/13/Android/What-is-fast-charge-now/" itemprop="url">
-                  常用的快充技术简介
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-13T00:01:36+08:00" content="Nov 13 2017">
-              Nov 13 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>技术发展越来越快，快充技术也一样，那现在怎么样才能算快充，有哪些快充技术呢？</p>
-<h2 id="高通方案">高通方案</h2><h3 id="高通_Quick_Charge_方案">高通 Quick Charge 方案</h3><h4 id="QC_1-0">QC 1.0</h4><p>最高支持 5V/2A 充电功率(目前已经被划分为慢充)，基本都是骁龙 600 平台。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/13/Android/What-is-fast-charge-now/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/" itemprop="url">
-                  Getting Started With RecyclerView and CardView on Android
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-08T22:23:59+08:00" content="Nov 8 2017">
-              Nov 8 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>偶然看到这篇文章，觉得写得很好，简单明了，所以尝试将其翻译一下。</p>
-</blockquote>
-<p>如果你想创作一个用列表显示数据的Android应用，Android L提供了两个让你更容易实现的新特性：RecyclerView和CardView。通过用这些控件，可以很容易让你的app符合Google的Material Design规范。</p>
-<p>创作APP时一个模板参考的好地方：<a href="https://go.redirectingat.com/?id=1342X589339&amp;site=code.tutsplus.com&amp;xs=1&amp;isjs=1&amp;url=https%3A%2F%2Fcodecanyon.net%2Fcategory%2Fmobile%2Fandroid%3F_ga%3D2.255032513.873197305.1503543294-826134730.1503543294&amp;xguid=6c32060c165aa0d81cc926f785d03c1a&amp;xuuid=40b87ed972cd06dc4bfc1a62b8c59465&amp;xsessid=e18f51adda215e4913eb634122cf8895&amp;xcreo=0&amp;xed=0&amp;sref=https%3A%2F%2Fcode.tutsplus.com%2Ftutorials%2Fgetting-started-with-recyclerview-and-cardview-on-android--cms-23465&amp;xtz=-480">Envato market</a>。你可以找到成千上万的APP模板，从<a href="https://go.redirectingat.com/?id=1342X589339&amp;site=code.tutsplus.com&amp;xs=1&amp;isjs=1&amp;url=https%3A%2F%2Fcodecanyon.net%2Fitem%2Flayar-tancep-youtube-app-for-android%2F5190062%3F_ga%3D2.248270926.873197305.1503543294-826134730.1503543294&amp;xguid=6c32060c165aa0d81cc926f785d03c1a&amp;xuuid=40b87ed972cd06dc4bfc1a62b8c59465&amp;xsessid=e18f51adda215e4913eb634122cf8895&amp;xcreo=0&amp;xed=0&amp;sref=https%3A%2F%2Fcode.tutsplus.com%2Ftutorials%2Fgetting-started-with-recyclerview-and-cardview-on-android--cms-23465&amp;xtz=-480">Youtube</a>到<a href="https://go.redirectingat.com/?id=1342X589339&amp;site=code.tutsplus.com&amp;xs=1&amp;isjs=1&amp;url=https%3A%2F%2Fcodecanyon.net%2Fitem%2Fflappybot-an-obstacle-avoidance-game%2F6827330%3F_ga%3D2.248270926.873197305.1503543294-826134730.1503543294&amp;xguid=6c32060c165aa0d81cc926f785d03c1a&amp;xuuid=40b87ed972cd06dc4bfc1a62b8c59465&amp;xsessid=e18f51adda215e4913eb634122cf8895&amp;xcreo=0&amp;xed=0&amp;sref=https%3A%2F%2Fcode.tutsplus.com%2Ftutorials%2Fgetting-started-with-recyclerview-and-cardview-on-android--cms-23465&amp;xtz=-480">obstacleavoidance game</a>。</p>
-<p>或者你可以尝试一下<a href="https://codecanyon.net/item/universal-full-multipurpose-android-app/6512720?_ga=2.217207135.873197305.1503543294-826134730.1503543294">通用的Android app模板</a>,它能为你创作任何种类app提供一个坚实的基础。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog/recyclerview_cardview/Universal-Android-app.png" alt="Universal-Android-app"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/08/Other/MDB-ICP-protocol/" itemprop="url">
-                  纸币器和MDB协议
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-08T22:22:45+08:00" content="Nov 8 2017">
-              Nov 8 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="MDB协议">MDB协议</h2><h3 id="简介">简介</h3><p>MDB/ICP协议为一个主从接口的串口通信标准的协议， 规定波特率为9600bps，总线有唯一主机（vending machine controller, VMC）和最多32个从机外设，每个外设设有唯一的地址和命令，且由主机初始化。</p>
-<p>电源上电、总线复位或外设收到一个复位命令，所对应的外设都被禁止。在顺序初始化外设期间，VMC通过外设的应答来选择被外设所支持的特征。</p>
-<blockquote>
-<p>协议推荐所以主控制器VMC和外设都需支持所有低等级标准</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/08/Other/MDB-ICP-protocol/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/" itemprop="url">
-                  通过自定义侧边导航栏的RecyclerView动态加载布局
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-08-18T22:45:08+08:00" content="Aug 18 2017">
-              Aug 18 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="准备布局文件">准备布局文件</h2><p>布局一：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">android.support.constraint.ConstraintLayout</span></span><br><span class="line">        <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">        <span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span></span><br><span class="line">        <span class="attribute">xmlns:app</span>=<span class="value">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">tools:context</span>=<span class="value">"me.huaqianlee.forme.ToDoFragment"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="title">TextView</span> <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span> <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">              <span class="attribute">android:layout_marginTop</span>=<span class="value">"50dp"</span></span><br><span class="line">              <span class="attribute">android:textSize</span>=<span class="value">"15sp"</span></span><br><span class="line">    <span class="attribute">android:text</span>=<span class="value">"This is Todo main view layout!"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/18/Android/hides-navigation-in-drawerlayou/" itemprop="url">
-                  按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-08-18T22:44:17+08:00" content="Aug 18 2017">
-              Aug 18 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天写自己的练习APP时，发现侧边导航栏可见时，我按返回键，Activity直接退出了， 可是我想要的是只是关闭侧边栏，研究了一下，其实解决办法挺简单。</p>
-<p>只需要在Activity中重写onBackPressed()即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private DrawerLayout mlayout; </span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void <span class="function"><span class="title">onBackPressed</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (mlayout.isDrawerOpen(findViewById(R.id.nav_left_layout)))</span><br><span class="line">        mlayout.closeDrawers();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        super.onBackPressed();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># R.id.nav_left_layout为侧边栏显示部分顶层Layout</span></span><br></pre></td></tr></table></figure></p>
-
-          
         
       
     </div>
@@ -1479,7 +1336,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1520,7 +1377,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">98</span>
+              <span class="site-state-item-count">124</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1528,7 +1385,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1646,7 +1503,7 @@
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

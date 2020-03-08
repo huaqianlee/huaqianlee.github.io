@@ -403,8 +403,8 @@
             
               
                 
-                <a class="post-title-link" href="/2019/11/17/Git/Some-knowledge-about-git/" itemprop="url">
-                  Oh, the Git! - part 1
+                <a class="post-title-link" href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/" itemprop="url">
+                  Oh, the Git! - detached HEAD
                 </a>
               
             
@@ -417,8 +417,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-11-17T23:38:05+08:00" content="Nov 17 2019">
-              Nov 17 2019
+            <time itemprop="dateCreated" datetime="2020-03-08T18:49:40+08:00" content="Mar 8 2020">
+              Mar 8 2020
             </time>
           </span>
 
@@ -465,11 +465,10 @@
 
       
         
-          <h1 id="Preface">Preface</h1><p>Git has always been a must-have skill for developers, I will submize a series of blogs related to it, but I don’t know too much about git now.</p>
-<p><a href="https://git-scm.com/book/en/v2">Pro Git</a> is the best guide of git, I need to read it when I have plenty of time so that I can check for gaps.</p>
-<h1 id="VCS(Version_Control_System)">VCS(Version Control System)</h1><h2 id="Central_VCS">Central VCS</h2><p>Central VCS mainly includes <code>SVN</code> and <code>CVS</code>, its newwork architecture is client-server.<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/Central%20VCS.jpg" alt="Central VCS"><br>
+          <p># Todo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline --all --graph</span><br><span class="line">* <span class="number">5</span>ea3cec (HEAD -&gt; master) Modify README.md of src</span><br><span class="line">* <span class="number">2</span>b6e826 Same file, same blob</span><br><span class="line">* <span class="number">1</span>ff08f2 Modify README.md.</span><br><span class="line">* <span class="number">8</span>c19a38 Add Copyright notice.</span><br><span class="line">* <span class="number">318</span>c11a Copy css to lib.</span><br><span class="line">| * <span class="number">1134</span>f9e (dev) Make graph more readability</span><br><span class="line">| * <span class="number">71</span>c40d3 Modify README.md <span class="keyword">in</span> dev branch.</span><br><span class="line">|/</span><br><span class="line">* ce4297f Add image.</span><br><span class="line">| * <span class="number">2</span>cb23ac (dev-<span class="number">1.0</span>) README <span class="keyword">for</span> dev-<span class="number">1.0</span> branch.</span><br><span class="line">|/</span><br><span class="line">* <span class="number">6</span><span class="built_in">fc</span>4b44 (tag: kikoff_tag) Copy doc README.md</span><br><span class="line">* <span class="number">726</span>c6c0 Add <span class="built_in">source</span> README.md</span><br><span class="line">* c8ff9c5 Add README</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2019/11/17/Git/Some-knowledge-about-git/#more" rel="contents">
+            <a class="btn" href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -520,8 +519,8 @@
             
               
                 
-                <a class="post-title-link" href="/2019/10/23/ARTS/Ninth-week-of-ARTS/" itemprop="url">
-                  The ninth week of ARTS
+                <a class="post-title-link" href="/2020/03/07/Git/Some-knowledge-about-git-local-git/" itemprop="url">
+                  Oh, the Git! - local .git
                 </a>
               
             
@@ -534,715 +533,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-10-23T00:00:43+08:00" content="Oct 23 2019">
-              Oct 23 2019
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index">
-                    <span itemprop="name">ARTS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-element/">Remove Element</a>.<br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java">Java</a>.</p>
-<h1 id="Review">Review</h1><p>I found a usage of “repo init … —reference” this week, I want to know more, so I read <a href="https://forum.xda-developers.com/android/software/guide-android-repo-mirroring-t3170869">Android Repo Mirroring</a> this week.</p>
-<p>This article explains “repo mirroring” in a simple and clear way through examples.<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2019/10/23/ARTS/Ninth-week-of-ARTS/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/10/20/ARTS/Eighth-week-of-ARTs/" itemprop="url">
-                  The eighth week of ARTs
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-10-20T22:52:39+08:00" content="Oct 20 2019">
-              Oct 20 2019
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index">
-                    <span itemprop="name">ARTS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>生病、私事、连续十多天的加班。。。 等等借口让我断更 ARTS 快一个月了，比较让人沮丧，先把标题准备起，花一周把进度赶上。</p>
-<blockquote>
-<p>临时标注</p>
-</blockquote>
-<h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">Remove Duplicates from Sorted Array</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java">Java</a></p>
-<h1 id="Review">Review</h1>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2019/10/20/ARTS/Eighth-week-of-ARTs/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/10/13/ARTS/Seventh-week-of-ARTs/" itemprop="url">
-                  The seventh week of ARTs
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-10-13T22:45:09+08:00" content="Oct 13 2019">
-              Oct 13 2019
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index">
-                    <span itemprop="name">ARTS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/merge-two-sorted-lists/">Merge Two Sorted Lists</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java">Java</a></p>
-<h1 id="Review">Review</h1>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2019/10/13/ARTS/Seventh-week-of-ARTs/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/10/06/ARTS/Sixth-week-of-ARTs/" itemprop="url">
-                  The sixth week of ARTs
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-10-06T22:44:44+08:00" content="Oct 6 2019">
-              Oct 6 2019
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index">
-                    <span itemprop="name">ARTS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/valid-parentheses/">Valid Parentheses</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py">Python</a></p>
-<h1 id="Review">Review</h1><p>I read <a href="https://organizationsandmarkets.com/2010/08/31/how-to-read-an-academic-article/">How to Read an Academic Article</a> this week. It teaches me to read academic article by sharing handout. It simply summarizes the method of fast reading, a lot of them maybe be a cliche, but the summary is very helpful.<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2019/10/06/ARTS/Sixth-week-of-ARTs/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/09/29/ARTS/Fifth-week-of-ARTS/" itemprop="url">
-                  The fifth week of ARTS
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-09-29T22:44:56+08:00" content="Sep 29 2019">
-              Sep 29 2019
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index">
-                    <span itemprop="name">ARTS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/longest-common-prefix/">Longest Common Prefix</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java">Java</a></p>
-<h1 id="Review">Review</h1><p>I always want to change the mind of my loves, but I didn’t use the good way to do it. So I read <a href="https://forge.medium.com/how-to-change-a-mind-1774681b9369">How to Change a Mind</a> this week.</p>
-<p>To be honesty, I can’t get this article well, it is a little hard to me. But I got the following opinions from this topic.</p>
-<ol>
-<li>Firstly we should think or do like the people who we want to change.</li>
-<li>For scams, we should let the people lose the faith in the person not in the scams, it will be a better way. Quote the sentence:  <blockquote>
-<p>“Dylan did not need to lose his faith in what his elders were saying; he needed to lose his faith in them.” </p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2019/09/29/ARTS/Fifth-week-of-ARTS/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/09/22/ARTS/Fourth-week-of-ARTS/" itemprop="url">
-                  The fourth week of ARTS
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-09-22T22:44:01+08:00" content="Sep 22 2019">
-              Sep 22 2019
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index">
-                    <span itemprop="name">ARTS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Algorithm">Algorithm</h1><p>Title: <a href="https://leetcode.com/problems/roman-to-integer/">Roman to Integer</a><br>Solution: <a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java">Java Solution:</a></p>
-<h1 id="Review">Review</h1><p>Today I access <a href="">Medium</a>,This article called <a href="https://medium.com/free-code-camp/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83"><code>Putting comments in code: the good, the bad, and the ugly.</code></a> got into my eyes first. So I choose it as my <code>Review</code>.</p>
-<p>This article mainly says the cliche <code>“Good code is self-documenting.”</code> It tells the good, the bad, and the ugly when it comes to commenting our code.<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2019/09/22/ARTS/Fourth-week-of-ARTS/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/09/15/Git/How-does-android-repo-work/" itemprop="url">
-                  How does the repo of android source code work ?
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-09-15T17:40:17+08:00" content="Sep 15 2019">
-              Sep 15 2019
+            <time itemprop="dateCreated" datetime="2020-03-07T18:42:33+08:00" content="Mar 7 2020">
+              Mar 7 2020
             </time>
           </span>
 
@@ -1289,11 +581,10 @@
 
       
         
-          <p>在 <code>android</code> 源码中，主要用 <a href="https://android.googlesource.com/tools/repo"><strong>Repo</strong></a> 和 <a href="https://git-scm.com/"><strong>Git</strong></a> 来进行版本管理。<code>Repo</code> 是一个由谷歌构建，运行在 Git 之上的仓库管理工具，其让多项目管理变得更容易，尤其对于基本的网络操作，譬如，下载由上百个项目组成的 Android 源码。</p>
-<h1 id="Repo_的组成和基本使用">Repo 的组成和基本使用</h1><h2 id="Repo_launcher">Repo launcher</h2><p><code>Repo</code> 的第一部分，其是一个 <code>Python</code> 脚本，主要用来获取完整的 <code>Repo</code> 工具并转发接收到的命令 .</p>
-<h2 id="Repo_Tool">Repo Tool</h2><p><code>Repo</code> 的第二部分，由 <code>Repo launcher</code> 下载到 <code>$srcDir/.repo/repo</code>，其是主要功能部分，处理 <code>Repo launcher</code> 转发的命令。<br>
+          <p><code>.git</code> directory acts a major role in <code>git</code> VCS. We can do local verson management directly depended on <code>.git</code> directory. I will parse <code>.git</code> in current topic. </p>
+<h1 id="Directory_tree">Directory tree</h1><p>First, I created a project and managed it through <code>git</code>, its directory tree is as follows:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">E:.</span><br><span class="line">│  README.md</span><br><span class="line">│</span><br><span class="line">├─doc</span><br><span class="line">│      README.md</span><br><span class="line">│</span><br><span class="line">├─img</span><br><span class="line">│      check.png</span><br><span class="line">│</span><br><span class="line">├─lib</span><br><span class="line">│      css_practice_1.html</span><br><span class="line">│</span><br><span class="line">└─src</span><br><span class="line">        README.md</span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2019/09/15/Git/How-does-android-repo-work/#more" rel="contents">
+            <a class="btn" href="/2020/03/07/Git/Some-knowledge-about-git-local-git/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1344,8 +635,8 @@
             
               
                 
-                <a class="post-title-link" href="/2019/09/13/ARTS/Third-week-of-ARTS/" itemprop="url">
-                  The third week of ARTS: Repo
+                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-filesystems/" itemprop="url">
+                  Consolidating the foundation of Linux, filesystems
                 </a>
               
             
@@ -1358,30 +649,11 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2019-09-13T16:34:02+08:00" content="Sep 13 2019">
-              Sep 13 2019
+            <time itemprop="dateCreated" datetime="2020-02-14T12:11:50+08:00" content="Feb 14 2020">
+              Feb 14 2020
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index">
-                    <span itemprop="name">ARTS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -1406,22 +678,567 @@
 
       
         
-          <h1 id="Algorithm">Algorithm</h1><p>Title：<a href="https://leetcode.com/problems/palindrome-number/">Palindrome Number</a><br>Solution：<a href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/isPalindrome.c">C solution</a></p>
-<h1 id="Review">Review</h1><p>I always don’t kwnow enough about repo, so I read some articles about repo this week. These articles describe the repo Manifest format, usage of repo, repo &amp;&amp; git , etc in detail. It helps me a lot. But I have not absorbed them yet, I need more time.</p>
-<p>The links are as follows:<br><a href="https://android.googlesource.com/tools/repo">repo</a></p>
-<ul>
-<li><a href="https://source.android.com/setup/develop">Source Control Tools</a></li>
-<li><a href="https://source.android.com/setup/create/coding-tasks">Source Control Workflow</a></li>
-<li><a href="https://source.android.com/setup/develop/repo">Repo Command Reference</a></li>
-<li><a href="https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md">Repo Manifest Format</a></li>
-<li><a href="https://android.googlesource.com/tools/repo/+/HEAD/docs/repo-hooks.md">Repo hooks</a></li>
-<li><a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/separating-topic-branches.txt">How to separate topic branches</a>  </li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2019/09/13/ARTS/Third-week-of-ARTS/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-memory-ram-and-disk/" itemprop="url">
+                  Consolidating the foundation of Linux, memory/ram and disk
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-02-14T12:11:31+08:00" content="Feb 14 2020">
+              Feb 14 2020
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-screen-system-log-SELinux-etc/" itemprop="url">
+                  Consolidating the foundation of Linux, screen , system log, SELinux , etc
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-02-14T12:10:16+08:00" content="Feb 14 2020">
+              Feb 14 2020
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-process/" itemprop="url">
+                  Consolidating the foundation of Linux, process
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-02-14T12:09:01+08:00" content="Feb 14 2020">
+              Feb 14 2020
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-grub/" itemprop="url">
+                  Consolidating the foundation of Linux, grub
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-02-14T12:08:30+08:00" content="Feb 14 2020">
+              Feb 14 2020
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-install/" itemprop="url">
+                  Consolidating the foundation of Linux, install
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-02-14T12:08:12+08:00" content="Feb 14 2020">
+              Feb 14 2020
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-service/" itemprop="url">
+                  Consolidating the foundation of Linux, service
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-02-14T12:07:23+08:00" content="Feb 14 2020">
+              Feb 14 2020
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
         
       
     </div>
@@ -1452,7 +1269,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1493,7 +1310,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">98</span>
+              <span class="site-state-item-count">124</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1501,7 +1318,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1619,7 +1436,7 @@
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
