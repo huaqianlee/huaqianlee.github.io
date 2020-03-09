@@ -302,8 +302,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/29/FirstCode/FirstCode-data-storage/" itemprop="url">
-                  第一行代码之数据存储
+                <a class="post-title-link" href="/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/" itemprop="url">
+                  camera架构与调试-菜鸟笔记
                 </a>
               
             
@@ -316,361 +316,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-04-29T18:35:49+08:00" content="Apr 29 2017">
-              Apr 29 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h2 id="文件存储">文件存储</h2><h3 id="数据存到文件">数据存到文件</h3><p>Context类提供了一个openFileOutput()方法，可以用于文件存储，此方法有两个参数：</p>
-<ul>
-<li>arg1 - 文件名，不包括路径，全默认存储于/data/data/<packagename>/files/</li>
-<li>arg2 - 文件操作模式， MODE_PRIVATE（覆盖式）和 MODE_APPEND（追加式）
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/29/FirstCode/FirstCode-data-storage/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/29/Uav/px4-imu-mpu9250-code-structure/" itemprop="url">
-                  PX4之外设代码结构及流程-IMU
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-29T22:08:54+08:00" content="Mar 29 2017">
-              Mar 29 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Uav/" itemprop="url" rel="index">
-                    <span itemprop="name">Uav</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最新PX4的代码库有很大的改变，使用了一个轻量级的、统一的驱动抽象层：DriverFramework。 POSIX和 QuRT的驱动都写入这个驱动框架当中。</p>
-<p>本文以MPU9250为例简单分析一下外设的相关代码，其余外设亦相似的。</p>
-<h2 id="代码结构及流程">代码结构及流程</h2><p>最新代码库中，MPU9250的代码结构及流程如下：</p>
-<p> <img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/uav/px4/IMU_CODE_STR.png" alt="流程图"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/29/Uav/px4-imu-mpu9250-code-structure/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/" itemprop="url">
-                  第一行代码之广播机制
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-25T21:06:00+08:00" content="Mar 25 2017">
-              Mar 25 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h2 id="广播机制">广播机制</h2><h3 id="标准广播">标准广播</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/firstcode/normal_broadcasts.png" alt="normal_broadcast"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/25/Uav/PX4-for-Snapdragon-Flight/" itemprop="url">
-                  PX4 for Snapdragon Flight
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-25T19:45:25+08:00" content="Mar 25 2017">
-              Mar 25 2017
+            <time itemprop="dateCreated" datetime="2016-07-07T23:37:41+08:00" content="Jul 7 2016">
+              Jul 7 2016
             </time>
           </span>
 
@@ -718,15 +365,11 @@
       
         
           <blockquote>
-<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. </p>
+<p>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就</p>
 </blockquote>
-<h1 id="快速驱动无人机升空">快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: <a href="https://github.com/ATLFlight/drone-controller">DroneControl</a>)，准备好环境，有问题主要参考如下三个地址：</p>
-<p><a href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases">PX4编译和执行</a></p>
-<p><a href="https://dev.px4.io">PX4开发手册</a></p>
-<p><a href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/">QGroundcontrol开发手册</a></p>
-<h2 id="连接无人机">连接无人机</h2><p>首先PC通过WiFi连上无人机，通过xshell或者putty ssh远程登录无人机。</p>
+<h2 id="VFE">VFE</h2><p>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vfe.png" alt="VFE FLOW"></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/25/Uav/PX4-for-Snapdragon-Flight/#more" rel="contents">
+            <a class="btn" href="/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -777,8 +420,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/25/FirstCode/firstcode-note-UI/" itemprop="url">
-                  第一行代码之UI
+                <a class="post-title-link" href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/" itemprop="url">
+                  高通px4代码阅读笔记
                 </a>
               
             
@@ -791,8 +434,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-25T08:34:40+08:00" content="Mar 25 2017">
-              Mar 25 2017
+            <time itemprop="dateCreated" datetime="2016-05-11T21:45:25+08:00" content="May 11 2016">
+              May 11 2016
             </time>
           </span>
 
@@ -805,8 +448,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
                   </a>
                 </span>
 
@@ -839,10 +482,15 @@
 
       
         
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<p>本部分思维导图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/UI.png" alt="UI"><br>
+          <p><strong>像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。</strong></p>
+<p>代码地址：<a href="https://github.com/ATLFlight/Firmware">ATLFlight/Firmware</a><br>参考文档：<a href="http://dev.px4.io/tutorial-hello-sky.html?q=">px4 devguide</a></p>
+<blockquote>
+<p>由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.</p>
+</blockquote>
+<p>============================================================================================================</p>
+<h2 id="关键路径及文件">关键路径及文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\mavlink   //  信息数据处理</span><br><span class="line">mavlink_main.cpp</span><br><span class="line">mavlink_receiver.cpp</span><br><span class="line"></span><br><span class="line">FastRPC   --  aDSP 与 apps 之间远程调用</span><br><span class="line"><span class="number">1</span>. 共享内存（不包括L1/L2缓存）</span><br><span class="line"><span class="number">2</span>. aDSP中能支持有限的物理映射</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules\muorb\</span><br><span class="line">adsp </span><br><span class="line">Krait</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\posix-configs\eagle\flight    // config 文件</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules  // 功能模块</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\makefiles\ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp   // 遥控器</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\device\vdev.cpp   <span class="comment"># Virtual character device base class.</span></span><br><span class="line">mavilink、uorb 继承于此类</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/25/FirstCode/firstcode-note-UI/#more" rel="contents">
+            <a class="btn" href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -893,8 +541,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/" itemprop="url">
-                  Linux内核完全注释之80x86内存管理
+                <a class="post-title-link" href="/2016/05/07/Uav/mobile-and-uav-sensors/" itemprop="url">
+                  手机无人机常用sensor介绍
                 </a>
               
             
@@ -907,8 +555,364 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-24T22:28:51+08:00" content="Mar 24 2017">
-              Mar 24 2017
+            <time itemprop="dateCreated" datetime="2016-05-07T00:12:14+08:00" content="May 7 2016">
+              May 7 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>一直以来对这些常用的传感器不是很清楚, 有时听到名字或者简称,不知道有什么具体的用途,特地简单总结一下.</p>
+<blockquote>
+<p>资料皆是网上获取,不能完全保证准确性.</p>
+</blockquote>
+<h2 id="重力传感器(gravity/g-sensor)">重力传感器(gravity/g-sensor)</h2><p>重力传感器是根据压电效应的原理来工作的, 将加速度转化成电压输出。简单来说是测量内部一片重物(重物和压电片做成一体)重力正交两个方向的分力大小，来判定水平方向。<br>应用场景：手机横竖屏幕切换、翻转静音、平衡球、各种射击、赛车游戏等。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/07/Uav/mobile-and-uav-sensors/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/27/Uav/Qualcomm-uav-blsp-port/" itemprop="url">
+                  高通无人机8074 BLSP接口说明
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-27T00:11:58+08:00" content="Apr 27 2016">
+              Apr 27 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="概述">概述</h2><p>BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/BLSP.png" alt="BLSP"></p>
+<blockquote>
+<ol>
+<li>BAM（Bus Access Manager）is used to move data to/from the peripheral buffers;  2.每个BLSP外设静态连接到一对BAM管道，BLSP支持BAM 和non-BAM-based 数据传输。</li>
+</ol>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/27/Uav/Qualcomm-uav-blsp-port/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/02/Uav/uav-board-debugging/" itemprop="url">
+                  无人机开发主板调试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-02T21:01:57+08:00" content="Apr 2 2016">
+              Apr 2 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index">
+                    <span itemprop="name">Uav</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="问题一_：_新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16_-">问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .</h2><p>自己的uav主板回来后将软件刷入板子(高通msm8074), 板子不能正常启动.</p>
+<p>通过分析log， 发现死在boot_images\core\boot\secboot3\hw\msm8974\sbl1\sbl1_mc.c 中 sbl1_tlmm_init() —-&gt; boot_gpio_init()， 当我屏蔽此函数后， log如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Format: Log Type - Time(microsec) - Message </span><br><span class="line">Log <span class="built_in">type</span>: B - since boot(excluding boot rom). D - delta </span><br><span class="line">B - <span class="number">41663</span> - SBL1, Start </span><br><span class="line">B - <span class="number">46909</span> - scatterload_region &amp;&amp; ram_init, Start </span><br><span class="line">D - <span class="number">30</span> - scatterload_region &amp;&amp; ram_init, Delta </span><br><span class="line">B - <span class="number">63897</span> - pm_device_init, Start </span><br><span class="line">D - <span class="number">27297</span> - pm_device_init, Delta </span><br><span class="line">B - <span class="number">91317</span> - boot_flash_init, Start </span><br><span class="line">D - <span class="number">10919</span> - boot_flash_init, Delta </span><br><span class="line">B - <span class="number">102632</span> - boot_config_data_table_init, Start </span><br><span class="line">D - <span class="number">134932</span> - boot_config_data_table_init, Delta </span><br><span class="line">B - <span class="number">239150</span> - sbl1_ddr_<span class="built_in">set</span>_params, Start </span><br><span class="line">B - <span class="number">241773</span> - Pre_DDR_clock_init, Start </span><br><span class="line">D - <span class="number">274</span> - Pre_DDR_clock_init, Delta </span><br><span class="line">D - <span class="number">0</span> - sbl1_ddr_<span class="built_in">set</span>_params, Delta </span><br><span class="line">B - <span class="number">255773</span> - pm_driver_init, Start </span><br><span class="line">D - <span class="number">16134</span> - pm_driver_init, Delta </span><br><span class="line">B - <span class="number">271907</span> - clock_init, Start </span><br><span class="line">D - <span class="number">152</span> - clock_init, Delta </span><br><span class="line">B - <span class="number">274988</span> - Image Load, Start </span><br><span class="line">B - <span class="number">295209</span> - Tz Execution, Start </span><br><span class="line">D - <span class="number">193065</span> - Tz Execution, Delta </span><br><span class="line">B - <span class="number">496387</span> - Image Load, Start </span><br><span class="line">B - <span class="number">506361</span> - Signal PBL to Jump to RPM FW </span><br><span class="line">B - <span class="number">506605</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Start   </span><br><span class="line">B - <span class="number">540399</span> - <span class="number">1</span><span class="comment">######################################################### </span></span><br><span class="line">D - <span class="number">45323</span> - sbl1_<span class="built_in">wait</span>_<span class="keyword">for</span>_ddr_training, Delta </span><br><span class="line"><span class="comment">#不屏蔽boot_gpio_init()函数,则停在此处， boot_gpio_init()中</span></span><br><span class="line">B - <span class="number">558302</span> - <span class="number">11</span><span class="comment">#########################################################   </span></span><br><span class="line">B - <span class="number">685884</span> - Image Load, Start </span><br><span class="line">B - <span class="number">689391</span> - WDT Execution, Start </span><br><span class="line">D - <span class="number">213</span> - WDT Execution, Delta </span><br><span class="line">B - <span class="number">694790</span> - Image Load, Start </span><br><span class="line">B - <span class="number">707905</span> - sbl1_efs_handle_cookies, Start</span><br></pre></td></tr></table></figure></p>
+<p>　<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/02/Uav/uav-board-debugging/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/04/Linux/linux-problem-set/" itemprop="url">
+                  linux系统使用问题集
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-01-04T21:40:23+08:00" content="Jan 4 2016">
+              Jan 4 2016
             </time>
           </span>
 
@@ -955,10 +959,9 @@
 
       
         
-          <p><a href="http://pan.baidu.com/s/1kVgED6n">Linux内核完全注释PDF下载</a></p>
-<p>如下图所示，80x86从逻辑地址到物理地址变换使用分段和分页两种机制。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/book/add_change.png" alt=""><br>
+          <h2 id="问题一_ubuntu_密码正确进不了系统">问题一 ubuntu 密码正确进不了系统</h2><p><strong>现象：</strong><br>即使密码输入正确也不能进入系统。<br><strong>原因：</strong><br>设置环境变量时出错，影响到系统。<br><strong>解决：</strong><br>开机时按住shift 进入 recovery 模式，选第二个恢复模式，12.04的界面是fsck和root选项在同一页，先选fsck解除写限制（按下fsck后等几秒即可），再选root，vi /etc/profile， vi /etc/environment 恢复下环境变量，再重新登录。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/#more" rel="contents">
+            <a class="btn" href="/2016/01/04/Linux/linux-problem-set/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1009,8 +1012,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/24/Life/About-my-books-and-my-plan/" itemprop="url">
-                  所买的书
+                <a class="post-title-link" href="/2015/10/22/Git/git-experence/" itemprop="url">
+                  Git 常见问题集
                 </a>
               
             
@@ -1023,8 +1026,128 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-24T21:47:41+08:00" content="Mar 24 2017">
-              Mar 24 2017
+            <time itemprop="dateCreated" datetime="2015-10-22T12:49:10+08:00" content="Oct 22 2015">
+              Oct 22 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="问题一_-gitignore无效，不能过滤某些文件或路径。">问题一 .gitignore无效，不能过滤某些文件或路径。</h2><p><strong>现象:</strong><br>在.gitignore中添加了files和directories过滤，但git status仍会显示files和directories。</p>
+<p><strong>原因：</strong><br>在git仓库中已经存在此files和directories，其已经被git跟踪。.gitignore只对未加入版本管理的文件生效。</p>
+<p><strong>解决：</strong><br>从版本库删除文件和目录，更新。</p>
+<pre><code class="bash">git rm (--cached) files directories -r <span class="operator">-f</span>
+git commit
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/22/Git/git-experence/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/08/Life/2015年10月7日-小丑/" itemprop="url">
+                  2015年10月7日:小丑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-10-08T00:42:16+08:00" content="Oct 8 2015">
+              Oct 8 2015
             </time>
           </span>
 
@@ -1071,9 +1194,10 @@
 
       
         
-          <p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/mybooks.jpg" alt="myBooks"><br><strong>书架一脚</strong></p>
+          <p><strong>The Only Fair Is  Not Fair.</strong><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogemptychair.jpg" alt="em"></p>
+<p>前些天去看华仔的《解救吾先生》，当“吾先生”在将死之际清唱《小丑》时，我感动得眼泛泪光。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/24/Life/About-my-books-and-my-plan/#more" rel="contents">
+            <a class="btn" href="/2015/10/08/Life/2015年10月7日-小丑/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1124,8 +1248,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" itemprop="url">
-                  第一行代码之项目结构与活动
+                <a class="post-title-link" href="/2015/08/23/Android/高通Android设备启动流程分析-从power-on上电到Home-Lanucher启动/" itemprop="url">
+                  高通Android设备启动流程分析(从power-on上电到Home Lanucher启动)
                 </a>
               
             
@@ -1138,8 +1262,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-24T20:07:01+08:00" content="Mar 24 2017">
-              Mar 24 2017
+            <time itemprop="dateCreated" datetime="2015-08-23T22:07:48+08:00" content="Aug 23 2015">
+              Aug 23 2015
             </time>
           </span>
 
@@ -1152,8 +1276,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -1186,10 +1310,11 @@
 
       
         
-          <p> <a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h1 id="第一个应用">第一个应用</h1><h2 id="项目结构">项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.<br>
+          <p><em>Platform Information :<br>　System:    Ａndroid5.1<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        huaqianlee@gmail.com</em></p>
+<p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>在我第一次接触Android得时候，我就很想知道Android设备在按下电源键后是怎么启动到主界面的，但是到现在为止也没有完全理清这个过程，所以就决定从按下power键开始来分析一下这个流程。虽然Android基于Linux内核开发的一个操作系统，但是在init进程后Android附加了很多其他操作，所以其启动流程还是有比较大的差别的，关于Linux系统的启动流程可以参考我的另一篇博文：<a href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">深入理解linux启动过程</a>。</p>
+<p>因为我现在工作中用到的是高通的源码，并且高通也是目前Android手机的主流芯片，所以我就按照高通的msm8916来分析了，不过其他的也应该大同小异。<br>　<br>首先来看一下官方给出的Android系统架构：<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/#more" rel="contents">
+            <a class="btn" href="/2015/08/23/Android/高通Android设备启动流程分析-从power-on上电到Home-Lanucher启动/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1240,8 +1365,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" itemprop="url">
-                  第一行代码之启程 
+                <a class="post-title-link" href="/2015/08/21/Linux/深入理解Linux启动过程/" itemprop="url">
+                  深入理解Linux启动过程(译)
                 </a>
               
             
@@ -1254,8 +1379,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-24T07:30:48+08:00" content="Mar 24 2017">
-              Mar 24 2017
+            <time itemprop="dateCreated" datetime="2015-08-21T21:23:41+08:00" content="Aug 21 2015">
+              Aug 21 2015
             </time>
           </span>
 
@@ -1268,8 +1393,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -1302,129 +1427,15 @@
 
       
         
-          <p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过50%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。</p>
-<p>《第一行代码》思维导图如下:<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81.png" alt="脑图1"></p>
+          <blockquote>
+<p><strong>第一篇完全译文，因为自己对技术和英文的热爱，所以决定翻译此文，水平有限，所以肯定会有不恰当的地方，欢迎移驾至原地址：<a href="http://www.ibm.com/developerworks/linux/library/l-linuxboot/">http://www.ibm.com/developerworks/linux/library/l-linuxboot/</a></strong><br>注：因为想写一篇博文来阐述并理清Android启动的完全过程，发现了这篇文章，觉得写得十分好，帮我解答了很多疑惑。</p>
+</blockquote>
+<h2 id="引言">引言</h2><p>Linux系统的启动过程由很多阶段组成，但是无论你是启动标准的x86桌面还是启动嵌入式PowerPC目标，许多流程都是惊人的相似的。这篇文章从初始化引导程序到第一个用户空间应用程序探索Linux启动进程。顺着这个流程，你将知道很多和启动相关的主题，比如：引导程序，内核解压, 初始RAM磁盘,以及其他Linux引导元素。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/#more" rel="contents">
+            <a class="btn" href="/2015/08/21/Linux/深入理解Linux启动过程/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/17/Life/Ashamed/" itemprop="url">
-                  Ashamed
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-17T19:53:12+08:00" content="Mar 17 2017">
-              Mar 17 2017
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>惭愧! 惭愧!</p>
-<p>  作为一个即将迈入三十的中年人, 又懈怠浪费了这么多时间. 工作不给力, 得好好准备准备换换环境了, 然后也差不多该回成都了.</p>
-<p>  博客\CODING需要更积极些.</p>
-<p>加油!加油!  </p>
-
-          
         
       
     </div>
@@ -1455,7 +1466,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1496,7 +1507,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">124</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1513,7 +1524,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

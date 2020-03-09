@@ -582,7 +582,8 @@
       
         
           <p><code>.git</code> directory acts a major role in <code>git</code> VCS. We can do local verson management directly depended on <code>.git</code> directory. I will parse <code>.git</code> in current topic. </p>
-<h1 id="Directory_tree">Directory tree</h1><p>First, I created a project and managed it through <code>git</code>, its directory tree is as follows:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">E:.</span><br><span class="line">│  README.md</span><br><span class="line">│</span><br><span class="line">├─doc</span><br><span class="line">│      README.md</span><br><span class="line">│</span><br><span class="line">├─img</span><br><span class="line">│      check.png</span><br><span class="line">│</span><br><span class="line">├─lib</span><br><span class="line">│      css_practice_1.html</span><br><span class="line">│</span><br><span class="line">└─src</span><br><span class="line">        README.md</span><br></pre></td></tr></table></figure></p>
+<h1 id="Directory_tree">Directory tree</h1><p>First, I created a project and managed it through <code>git</code>, its directory tree is as follows:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── doc</span><br><span class="line">│   └── README.md</span><br><span class="line">├── .git</span><br><span class="line">│   ├── COMMIT_EDITMSG</span><br><span class="line">│   ├── config</span><br><span class="line">│   ├── description</span><br><span class="line">│   ├── HEAD</span><br><span class="line">│   ├── hooks</span><br><span class="line">│   │   ├── applypatch-msg.sample</span><br><span class="line">│   │   ├── commit-msg.sample</span><br><span class="line">│   │   ├── fsmonitor-watchman.sample</span><br><span class="line">│   │   ├── post-update.sample</span><br><span class="line">│   │   ├── pre-applypatch.sample</span><br><span class="line">│   │   ├── pre-commit.sample</span><br><span class="line">│   │   ├── prepare-commit-msg.sample</span><br><span class="line">│   │   ├── pre-push.sample</span><br><span class="line">│   │   ├── pre-rebase.sample</span><br><span class="line">│   │   ├── pre-receive.sample</span><br><span class="line">│   │   └── update.sample</span><br><span class="line">│   ├── index</span><br><span class="line">│   ├── info</span><br><span class="line">│   │   └── exclude</span><br><span class="line">│   ├── logs</span><br><span class="line">│   │   ├── HEAD</span><br><span class="line">│   │   └── refs</span><br><span class="line">│   │       └── heads</span><br><span class="line">│   │           ├── dev</span><br><span class="line">│   │           ├── dev-<span class="number">1.0</span></span><br><span class="line">│   │           └── master</span><br><span class="line">│   ├── objects</span><br><span class="line">│   │   ├── <span class="number">02</span></span><br><span class="line">│   │   │   ├── <span class="number">40351</span>d75b3f451e0ec4b399c38c3758f007152</span><br><span class="line">│   │   │   └── d8eae705ebf203142fd2f381d3b216dde2b28f</span><br><span class="line">|   |   |...</span><br><span class="line">│   │   ├── c8</span><br><span class="line">│   │   │   └── ff9c55ce2651d8380a14bee5b43b37e14fa7<span class="built_in">fc</span></span><br><span class="line">│   │   ├── f0</span><br><span class="line">│   │   │   └── <span class="number">45488</span>f3fa9a350ac01f48f2b000fe51a53f5aa</span><br><span class="line">│   │   ├── info</span><br><span class="line">│   │   └── pack</span><br><span class="line">│   ├── ORIG_HEAD</span><br><span class="line">│   └── refs</span><br><span class="line">│       ├── heads</span><br><span class="line">│       │   ├── dev</span><br><span class="line">│       │   ├── dev-<span class="number">1.0</span></span><br><span class="line">│       │   └── master</span><br><span class="line">│       └── tags</span><br><span class="line">│           └── kikoff_tag</span><br><span class="line">├── img</span><br><span class="line">│   └── check.png</span><br><span class="line">├── lib</span><br><span class="line">│   └── css_practice_1.html</span><br><span class="line">├── README.md</span><br><span class="line">└── src</span><br><span class="line">    └── README.md</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2020/03/07/Git/Some-knowledge-about-git-local-git/#more" rel="contents">
               Read more &raquo;
@@ -635,8 +636,8 @@
             
               
                 
-                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-filesystems/" itemprop="url">
-                  Consolidating the foundation of Linux, filesystems
+                <a class="post-title-link" href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/" itemprop="url">
+                  Consolidating the foundation of Linux, vim
                 </a>
               
             
@@ -649,8 +650,372 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2020-02-14T12:11:50+08:00" content="Feb 14 2020">
-              Feb 14 2020
+            <time itemprop="dateCreated" datetime="2020-02-06T11:45:32+08:00" content="Feb 6 2020">
+              Feb 6 2020
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="vim">vim</h2><p>Global config.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vimrc</span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/" itemprop="url">
+                  Consolidating the foundation of Linux, basic cmds
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-02-06T11:43:20+08:00" content="Feb 6 2020">
+              Feb 6 2020
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Command_Interface">Command Interface</h2><p>We can enter command interface via the following ways.</p>
+<ol>
+<li>Excute <code>init 3</code> with root. <blockquote>
+<p>init run at runlevel 3.  </p>
+</blockquote>
+</li>
+<li>Hotkey: Ctrl + ALt + F1/2/3/…</li>
+</ol>
+<h3 id="init">init</h3><p><code>init</code> is the first process, it is Commonly located on <code>/sbin/init</code>, if kernel can’t find <code>init</code>, it will try to run <code>/bin/sh</code>, if the operation fails , the OS will fail to start successfully. </p>
+<p><code>init</code> has 7 runlevels, we can check the default runlevel and runlevels in <code>/etc/inittab</code>. As follows:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Default runlevel. The runlevels used are:</span><br><span class="line">#   0 - halt (<span class="operator"><span class="keyword">Do</span> <span class="keyword">NOT</span> <span class="keyword">set</span> initdefault <span class="keyword">to</span> this)</span><br><span class="line">#   <span class="number">1</span> - Single <span class="keyword">user</span> <span class="keyword">mode</span>(root)</span><br><span class="line">#   <span class="number">2</span> - Multiuser, without NFS (The same <span class="keyword">as</span> <span class="number">3</span>, <span class="keyword">if</span> you <span class="keyword">do</span> <span class="keyword">not</span> have networking)</span><br><span class="line">#   <span class="number">3</span> - <span class="keyword">Full</span> multiuser <span class="keyword">mode</span>(standard runlevel)</span><br><span class="line">#   <span class="number">4</span> - unused(secure <span class="keyword">mode</span>)</span><br><span class="line">#   <span class="number">5</span> - X11(<span class="keyword">user</span> interface)</span><br><span class="line">#   <span class="number">6</span> - reboot (<span class="keyword">Do</span> <span class="keyword">NOT</span> <span class="keyword">set</span> initdefault <span class="keyword">to</span> this)</span><br><span class="line">#</span><br><span class="line">id:<span class="number">5</span>:initdefault:</span></span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/01/06/Think/A-little-impression/" itemprop="url">
+                  A little impression
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-01-06T23:19:11+08:00" content="Jan 6 2020">
+              Jan 6 2020
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Think/" itemprop="url" rel="index">
+                    <span itemprop="name">Think</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近越发的觉得自己的基础不牢，好像懂得很多，但是一深入探究就会发现自己有太多的知识盲区。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/12/29/ARTS/Eighteenth-week-of-ARTS/" itemprop="url">
+                  Eighteenth week of ARTS
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-12-29T23:38:03+08:00" content="Dec 29 2019">
+              Dec 29 2019
             </time>
           </span>
 
@@ -728,8 +1093,8 @@
             
               
                 
-                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-memory-ram-and-disk/" itemprop="url">
-                  Consolidating the foundation of Linux, memory/ram and disk
+                <a class="post-title-link" href="/2019/12/23/ARTS/Thirteenth-week-of-ARTS/" itemprop="url">
+                  Thirteenth week of ARTS
                 </a>
               
             
@@ -742,8 +1107,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2020-02-14T12:11:31+08:00" content="Feb 14 2020">
-              Feb 14 2020
+            <time itemprop="dateCreated" datetime="2019-12-23T23:37:32+08:00" content="Dec 23 2019">
+              Dec 23 2019
             </time>
           </span>
 
@@ -821,8 +1186,8 @@
             
               
                 
-                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-screen-system-log-SELinux-etc/" itemprop="url">
-                  Consolidating the foundation of Linux, screen , system log, SELinux , etc
+                <a class="post-title-link" href="/2019/12/22/ARTS/Seventeenth-week-of-ARTS/" itemprop="url">
+                  Seventeenth week of ARTS
                 </a>
               
             
@@ -835,8 +1200,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2020-02-14T12:10:16+08:00" content="Feb 14 2020">
-              Feb 14 2020
+            <time itemprop="dateCreated" datetime="2019-12-22T23:38:03+08:00" content="Dec 22 2019">
+              Dec 22 2019
             </time>
           </span>
 
@@ -914,8 +1279,8 @@
             
               
                 
-                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-process/" itemprop="url">
-                  Consolidating the foundation of Linux, process
+                <a class="post-title-link" href="/2019/12/15/ARTS/Sixteenth-week-of-ARTS/" itemprop="url">
+                  Sixteenth week of ARTS
                 </a>
               
             
@@ -928,287 +1293,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2020-02-14T12:09:01+08:00" content="Feb 14 2020">
-              Feb 14 2020
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-grub/" itemprop="url">
-                  Consolidating the foundation of Linux, grub
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2020-02-14T12:08:30+08:00" content="Feb 14 2020">
-              Feb 14 2020
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-install/" itemprop="url">
-                  Consolidating the foundation of Linux, install
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2020-02-14T12:08:12+08:00" content="Feb 14 2020">
-              Feb 14 2020
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2020/02/14/Consolidating-the-foundation-of-Linux-service/" itemprop="url">
-                  Consolidating the foundation of Linux, service
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2020-02-14T12:07:23+08:00" content="Feb 14 2020">
-              Feb 14 2020
+            <time itemprop="dateCreated" datetime="2019-12-15T23:38:03+08:00" content="Dec 15 2019">
+              Dec 15 2019
             </time>
           </span>
 
@@ -1269,7 +1355,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1310,7 +1396,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">124</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1327,7 +1413,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
