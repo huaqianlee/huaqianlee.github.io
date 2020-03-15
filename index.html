@@ -465,7 +465,7 @@
 
       
         
-          <p><code>detached HEAD</code> is a common situation, sometimes useful, sometimes dangerous. It does point to any branches, so it will be cleaned by <code>git</code>.</p>
+          <p><code>detached HEAD</code> is a common situation, sometimes useful, sometimes dangerous. It doesn’t point to any branches, so it will be cleaned by <code>git</code>.</p>
 <p>The current commit history is as follows:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline --all --graph</span><br><span class="line">* <span class="number">5</span>ea3cec (HEAD -&gt; master) Modify README.md of src</span><br><span class="line">* <span class="number">2</span>b6e826 Same file, same blob</span><br><span class="line">* <span class="number">1</span>ff08f2 Modify README.md.</span><br><span class="line">* <span class="number">8</span>c19a38 Add Copyright notice.</span><br><span class="line">* <span class="number">318</span>c11a Copy css to lib.</span><br><span class="line">| * <span class="number">1134</span>f9e (dev) Make graph more readability</span><br><span class="line">| * <span class="number">71</span>c40d3 Modify README.md <span class="keyword">in</span> dev branch.</span><br><span class="line">|/</span><br><span class="line">* ce4297f Add image.</span><br><span class="line">| * <span class="number">2</span>cb23ac (dev-<span class="number">1.0</span>) README <span class="keyword">for</span> dev-<span class="number">1.0</span> branch.</span><br><span class="line">|/</span><br><span class="line">* <span class="number">6</span><span class="built_in">fc</span>4b44 (tag: kikoff_tag) Copy doc README.md</span><br><span class="line">* <span class="number">726</span>c6c0 Add <span class="built_in">source</span> README.md</span><br><span class="line">* c8ff9c5 Add README</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
@@ -699,7 +699,8 @@
 
       
         
-          <h2 id="vim">vim</h2><p>Global config.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vimrc</span><br></pre></td></tr></table></figure></p>
+          <h2 id="vim">vim</h2><p>Global config.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vimrc</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/#more" rel="contents">
               Read more &raquo;
