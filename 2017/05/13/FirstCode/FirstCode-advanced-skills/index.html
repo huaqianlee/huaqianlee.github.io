@@ -1,38 +1,305 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>第一行代码之高级技巧 | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="《第一行代码》第2版思维导图及所有学习笔记目录 全局获取Context新建一个自己Application，如下： 123456789101112public class MyApplication extends Application &amp;#123;    private static Context context;        @Override    public void onCreat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一行代码之高级技巧">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="《第一行代码》第2版思维导图及所有学习笔记目录 全局获取Context新建一个自己Application，如下： 123456789101112public class MyApplication extends Application &amp;#123;    private static Context context;        @Override    public void onCreat">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/doze_first_level.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/doze_second_level.png">
+<meta property="article:published_time" content="2017-05-13T11:09:08.000Z">
+<meta property="article:modified_time" content="2019-08-27T14:26:37.193Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="App">
+<meta property="article:tag" content="FirstCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/doze_first_level.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-FirstCode/FirstCode-advanced-skills" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/13/FirstCode/FirstCode-advanced-skills/" class="article-date">
+  <time datetime="2017-05-13T11:09:08.000Z" itemprop="datePublished">May 13 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第一行代码之高级技巧
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="全局获取Context"><a href="#全局获取Context" class="headerlink" title="全局获取Context"></a>全局获取Context</h2><p>新建一个自己Application，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context context;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        context = getApplicationContext();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> context;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>指定程序启动时初始化的Application，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">&quot;com.example.networknest.MyApplication&quot;</span> //完整的包名</span></span><br><span class="line"><span class="tag">    <span class="attr">...</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span>    </span><br></pre></td></tr></table></figure>
+<p>需要Context时而没有，即可调用如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Toast.makeText(MyApplication.getContext(),...).show();</span><br></pre></td></tr></table></figure>
+<p>不过LItePal要正常工作也需要配置起自己的Application，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:name=&quot;org.litepal.LitePalApplication&quot;</span><br></pre></td></tr></table></figure>
+<p>其也是为了能在内部自动获取Context，遇到这种冲突，类似如下方式解决：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context context;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        context = getApplicationContext();</span><br><span class="line">        LitePalApplication.initialize(context);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用Intent传递对象"><a href="#使用Intent传递对象" class="headerlink" title="使用Intent传递对象"></a>使用Intent传递对象</h2><h3 id="Serializable方式"><a href="#Serializable方式" class="headerlink" title="Serializable方式"></a>Serializable方式</h3><p>将对象实现Serializable接口，让对象成为序列化可存储传输状态，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 对象实现接口</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"># 传输</span><br><span class="line">intent.putExtra(<span class="string">&quot;person_data&quot;</span>,person);</span><br><span class="line"></span><br><span class="line"># 接收</span><br><span class="line">Person person = (Person)getIntent().getSerializableExtra(<span class="string">&quot;person_data&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Parcelable方式"><a href="#Parcelable方式" class="headerlink" title="Parcelable方式"></a>Parcelable方式</h3><blockquote>
+<p><strong>推荐此方式，效率更高</strong></p>
+</blockquote>
+<p>Parcelable方式是将对象分解为Intent支持的数据类型，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 对象实现接口</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Parcelable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">describeContents</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel dest, <span class="keyword">int</span> flags)</span> </span>&#123;</span><br><span class="line">        dest.writeString(name); <span class="comment">// 写出name</span></span><br><span class="line">        dest.writeInt(age);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Parcelable.Creator&lt;Person&gt; CREATOR = <span class="keyword">new</span> Parecelable.Creator&lt;Person&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Person <span class="title">createFromParcel</span><span class="params">(Parcel source)</span> </span>&#123;</span><br><span class="line">            Person person = <span class="keyword">new</span> Person();</span><br><span class="line">            <span class="comment">/*必须与上面写出的顺序一致*/</span></span><br><span class="line">            person.name = source.readString();<span class="comment">// 读取name</span></span><br><span class="line">            person.age = source.readInt();</span><br><span class="line">            <span class="keyword">return</span> person;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> Person[] newArray(<span class="keyword">int</span> size) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Person[size];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 传输</span><br><span class="line">intent.putExtra(<span class="string">&quot;person_data&quot;</span>,person);</span><br><span class="line"></span><br><span class="line"># 接收</span><br><span class="line">Person person = (Person)getIntent().getParcelableExtra(<span class="string">&quot;person_data&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="定制日志工具"><a href="#定制日志工具" class="headerlink" title="定制日志工具"></a>定制日志工具</h2><p>为了方便控制开关日志，一般会定义一个日志工具类，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VERBOSE = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEBUG = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INFO = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> WARN = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ERROR = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NOTHING = <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> level = VERBOSE;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">v</span><span class="params">(String tag, String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (level &lt;= VERBOSE) &#123;</span><br><span class="line">            Log.v(tag, msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">d</span><span class="params">(String tag, String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (level &lt;= DEBUG) &#123;</span><br><span class="line">            Log.d(tag, msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">i</span><span class="params">(String tag, String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (level &lt;= INFO) &#123;</span><br><span class="line">            Log.i(tag, msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">w</span><span class="params">(String tag, String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (level &lt;= WARN) &#123;</span><br><span class="line">            Log.w(tag, msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">e</span><span class="params">(String tag, String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (level &lt;= ERROR) &#123;</span><br><span class="line">            Log.e(tag, msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用</span><br><span class="line">LogUtil.v() ...</span><br><span class="line"></span><br><span class="line"># 关闭所有日志</span><br><span class="line">LogUtil.level = NOTHING;</span><br></pre></td></tr></table></figure>
+<h2 id="创建定时任务"><a href="#创建定时任务" class="headerlink" title="创建定时任务"></a>创建定时任务</h2><h3 id="Alarm机制"><a href="#Alarm机制" class="headerlink" title="Alarm机制"></a>Alarm机制</h3><p>简单用法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);</span><br><span class="line"><span class="keyword">long</span> triggerAtTime = SystemClock.elapsedRealtime() + <span class="number">10</span>*<span class="number">1000</span>;</span><br><span class="line"><span class="comment">/*开机至今时间（ms）+定时时间*/</span></span><br><span class="line">manager.set(AlarmManager.ELAPSED_REALTIME_WAKE_UP, triggerAtTime, pendingIntent);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** arg1: 指定AlarmManager工作类型，即时间计算方式与是否唤醒CPU。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> triggerAtTime = System.currentTimeMillis() + <span class="number">10</span>*<span class="number">1000</span>;</span><br><span class="line"><span class="comment">/*1970.1.1 0点至今时间（ms）+定时时间*/</span></span><br><span class="line">manager.set(AlarmManager.RTC_WAKEUP, triggerAtTime, pendingIntent);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>一个后台定时服务示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LongRunningService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    onBind()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent , <span class="keyword">int</span> flags , <span class="keyword">int</span> startId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">                    <span class="comment">// 执行具体逻辑操作， 新开线程，为了定时准确性</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);</span><br><span class="line">        <span class="keyword">long</span> triggerAtTime = SystemClock.elapsedRealtime() + <span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>;<span class="comment">// 定时一小时</span></span><br><span class="line">        Intent i = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, LongRunningService.class);</span><br><span class="line">        PenddingIntent pi = PendingIntent.getService(<span class="keyword">this</span>, <span class="number">0</span>, i, <span class="number">0</span>);</span><br><span class="line">        manager.set(AlarmManager.ELAPSED_REALTIME_WAKE_UP, triggerAtTime, pendingIntent);   </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent, flags, startId); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要定时服务时启动服务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, LongRunningService.class);</span><br><span class="line">context.startService(intent);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>不过为了功耗，Android限制减少了cpu唤醒次数，set()可能不十分准确，若准确性要求高，可使用setExact()方法。</p>
+</blockquote>
+<h3 id="Doze模式"><a href="#Doze模式" class="headerlink" title="Doze模式"></a>Doze模式</h3><p>Android6.0及以上为了省电新加入了Doze模式，满足未插电、屏幕关闭等一段时间将进入doze模式，对cpu、网络、Alarm等进行限制，如下为Android7.0进入Doze模式的两个阶段：<br>阶段一：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/doze_first_level.png" alt="First Level"><br>阶段二：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/doze_second_level.png" alt="Second Level"></p>
+<p>如若想Alarm在Doze模式也能正常执行，则需要使用AlarmManager的如下两个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setAndAllowWhileIdle()        </span><br><span class="line">setExactAndAllowWhileIdle()  </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>区别同上set()与setExact()</p>
+</blockquote>
+<h2 id="多窗口模式编程"><a href="#多窗口模式编程" class="headerlink" title="多窗口模式编程"></a>多窗口模式编程</h2><p>进入多窗口模式活动会重建，可以通过如下方式改变：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">activity</span></span></span><br><span class="line"><span class="tag">    <span class="attr">...</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:configChanges</span>=<span class="string">&quot;orientation|keyboardHidden|screenSize|screenLayout&quot;</span>&gt;</span></span><br><span class="line">    // 多窗口、横竖屏切换，活动皆不会被重建</span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span>    </span><br></pre></td></tr></table></figure>
+<p>屏幕的变化将通知到Acitvity的onConfigurationChanged()方法，可以重写此方法进行逻辑处理。</p>
+<p>禁用多窗口模式：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># <span class="tag">&lt;<span class="name">application</span>&gt;</span>或<span class="tag">&lt;<span class="name">activity</span>&gt;</span>标签加入</span><br><span class="line">android:resizeableActivity=&quot;false&quot;  // 默认为true，支持</span><br></pre></td></tr></table></figure>
+<p>不过targetSDKVersion低于24的，上述属性将不会生效，这就得通过另一种方案：制定不支持横竖屏切换，因为android规定24以下不允许横竖屏切换的亦不知多窗口，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:screenOrientation=[&quot;portrait&quot;|&quot;landscape&quot;]</span><br></pre></td></tr></table></figure>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><p>使用Java8新特性，需先在app/build.gradle添加如下配置：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">defaultConfig &#123;</span><br><span class="line">    ...</span><br><span class="line">    jackOptions.enabled = <span class="keyword">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">compileOptions &#123;</span><br><span class="line">    <span class="keyword">sourceCompatibility</span> JavaVersion.VERSION_1_8</span><br><span class="line">    <span class="keyword">targetCompatibility</span> JavaVersion.VERSION_1_8</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只有一个待实现方法的接口，都可使用Lambda表达式，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;).start();</span><br><span class="line"></span><br><span class="line"># Lambda 方式</span><br><span class="line"><span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">    <span class="comment">// 实现run()逻辑</span></span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure>
+<p>带参数的书写方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(String a, <span class="keyword">int</span> b) -&gt; &#123;<span class="comment">// 还可以省略掉参数类型，Java根据上下文推断    </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
-
-{% block page_class %}page-post-detail{% endblock %}
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/" data-id="ckg0p46g8005ro8gw69cb64it" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/23/Kotlin/Kotlin-HElloWorld/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android Kotlin之曲折HelloWord
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/10/FirstCode/FirstCode-Material-Design/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">第一行代码之Material Design</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

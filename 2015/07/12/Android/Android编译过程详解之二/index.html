@@ -1,38 +1,307 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
 
+  
+  <title>Android编译过程详解之二 | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android编译过程详解之一　　Android编译过程详解之二　　Android编译过程详解之三　　Android.mk解析　　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如： 1　　　.&#x2F;go.sh -j8 or make -j8／--jobs 　 参数“-j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android编译过程详解之二">
+<meta property="og:url" content="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="Android编译过程详解之一　　Android编译过程详解之二　　Android编译过程详解之三　　Android.mk解析　　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如： 1　　　.&#x2F;go.sh -j8 or make -j8／--jobs 　 参数“-j">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20150711Makemain_mk.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogdroid.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogmk.png">
+<meta property="article:published_time" content="2015-07-12T08:43:04.000Z">
+<meta property="article:modified_time" content="2019-04-06T14:25:27.020Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Qualcomm">
+<meta property="article:tag" content="源码分析">
+<meta property="article:tag" content="编译">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20150711Makemain_mk.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+</head>
 
-{% block page_class %}page-post-detail{% endblock %}
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/Android编译过程详解之二" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" class="article-date">
+  <time datetime="2015-07-12T08:43:04.000Z" itemprop="datePublished">Jul 12 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android编译过程详解之二
+    </h1>
+  
 
-{% block content %}
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a><br>　<br>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　　./go.sh -j8 or make -j8／--<span class="built_in">jobs</span> 　</span><br></pre></td></tr></table></figure>
+<p>参数“-j“ 和”–jobs ”指定了同时编译的线程数量，通常是编译主机 CPU 支持的并发线程总数的 1 倍或 2 倍（如：在一个 4 核，每个核支持两个线程的 CPU 上，可以使用 make -j8 或 make -j16）。在调用 make 命令时，如果没有指定任何目标，则将编译默认目标“droid”（下面详解），然后将会编译出完整的 Android 系统镜像。</p>
+<h2 id="build系统分类"><a href="#build系统分类" class="headerlink" title="build系统分类"></a>build系统分类</h2><p>　　整个build系统的Make文件可以分为三类：</p>
+<ol>
+<li>build系统核心文件：定义整个build系统的框架，其他所有make文件都是在这个框架的基础上写出来的。</li>
+<li>产品的make文件：位于device目录，通常以公司名和产品名分为两级目录，如：\device\qcom\msm8916_32。</li>
+<li>模块的make文件：每个模块专用的make文件，kernel中统一名字为Makefile，其他为Android.mk。　</li>
+</ol>
+<p>##build结果<br>所有的编译产物都将位于 /out 目录下，该目录下主要有以下几个子目录：</p>
+<ul>
+<li>/out/host/：该目录下包含了针对主机的 Android 开发工具的产物。即 SDK 中的各种工具，例如：emulator，adb，aapt 等。</li>
+<li>/out/target/common/：该目录下包含了针对设备的共通的编译产物，主要是 Java 应用代码和 Java 库。</li>
+<li>/out/target/product/<product_name>/：包含了针对特定设备的编译结果以及平台相关的 C/C++ 库和二进制文件。其中，<product_name>是具体目标设备的名称。</li>
+<li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。<a id="more"></a>
+Build 的产物中最重要的是几个镜像文件，它们都位于 /out/target/product/<product_name>/ 目录下。</li>
+<li>system.img：包含了 Android OS 的系统文件，库，可执行文件以及预置的应用程序，将被挂载到根分区，描述的是设备上的system分区，即/system目录。</li>
+<li>ramdisk.img：在启动时将被 Linux 内核挂载为只读分区，它包含了 /init 文件和一些配置文件。它用来挂载其他系统镜像、文件系统，并启动 init 进程。</li>
+<li>userdata.img：将被挂载为 /data，包含了应用程序相关的数据以及和用户相关的数据。</li>
+<li>boot.img：包含有Kernel及其启动参数、Ramdisk，以及可选的BootLoader第二阶段。</li>
+<li>recovery.img：设备进入recovery模式时所加载的镜像，相当于除正常启动系统的第二系统，此系统用来更新正常系统，即刷机。</li>
+</ul>
+<p>##go.sh<br>先来分析一下go.sh文件，其代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;OEM_PROJECT_NAME=<span class="variable">$OEM_PROJECT_NAME</span>&quot;</span></span><br><span class="line">start_time=`date +%s`</span><br><span class="line"><span class="built_in">source</span> customer/oem_define.sh <span class="comment"># 导入OEM厂商配置</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">setup_ccache</span></span>() &#123;　＃设置ccache，提高编译速度</span><br><span class="line">    <span class="built_in">export</span> CCACHE_DIR=../.ccache</span><br><span class="line">    <span class="built_in">export</span> USE_CCACHE=1</span><br><span class="line">    <span class="keyword">if</span> [ ! -d <span class="variable">$CCACHE_DIR</span> ];<span class="keyword">then</span> </span><br><span class="line">    	prebuilts/misc/linux-x86/ccache/ccache -M 10G　　＃设置编译文件缓存大小为10G</span><br><span class="line">    <span class="keyword">fi</span>    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">delete_ccache</span></span>() &#123; <span class="comment"># 删除缓存</span></span><br><span class="line">    prebuilts/misc/linux-x86/ccache/ccache -C</span><br><span class="line">    rm -rf <span class="variable">$CCACHE_DIR</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setup_ccache <span class="comment"># 调用setup_ccache()</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$1</span>&quot;</span> = <span class="string">&quot;clean&quot;</span> ];<span class="keyword">then</span>  <span class="comment">#如果第一个参数为clean，清除ccache缓存</span></span><br><span class="line">	delete_ccache</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">oemtools/copy_mp.sh  <span class="comment"># copy modem bin文件</span></span><br><span class="line">make <span class="variable">$1</span> <span class="variable">$2</span> <span class="variable">$3</span> <span class="variable">$4</span> <span class="variable">$5</span>  <span class="comment"># 调用Makefile编译，下面详解 </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">end_time=`date +%s`</span><br><span class="line"><span class="built_in">let</span> min=(<span class="variable">$end_time</span>-<span class="variable">$start_time</span>)/60</span><br><span class="line"><span class="built_in">let</span> sec=(<span class="variable">$end_time</span>-<span class="variable">$start_time</span>)%60</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;build_time <span class="variable">$min</span> mins <span class="variable">$sec</span> seconds&quot;</span>  <span class="comment">#打印编译时间</span></span><br></pre></td></tr></table></figure>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<p>##make<br>　　执行make命令的时候会执行当前路径的Makefile文件，内容如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### DO NOT EDIT THIS FILE ###</span></span><br><span class="line">include build/core/main.mk 　　</span><br><span class="line"><span class="comment">### DO NOT EDIT THIS FILE ###</span></span><br></pre></td></tr></table></figure>
+<p>　　相信上面的文件大家都能看懂，接下来就解析一下main.mk，此文件中定义了整个Android的编译关系，主要文件（黄色背景除$开头的文件皆位于build\core\目录下）关系如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20150711Makemain_mk.png" alt="make"></p>
+<p>###main.mk<br>　　此文件首先对编译环境进行检查，然后引入其他相关mk文件，另，还将定义几个主要的make目标，如droid，sdk等，关键代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主要引入了如下mk文件</span></span><br><span class="line">include $(BUILD_SYSTEM)/help.mk <span class="comment"># Targets that provide quick help on the build system.</span></span><br><span class="line">-include $(OEM_RESOURCE_DIR)/CustomerSpec.mk <span class="comment"># 自定义，引入项目配置文件</span></span><br><span class="line">-include $(TOP)/customer/oem_define.mk <span class="comment"># 导入OEM厂商配置</span></span><br><span class="line">-include $(BUILD_SYSTEM)/config.mk <span class="comment">#整个build系统的配置文件</span></span><br><span class="line">-include $(BUILD_SYSTEM)/cleanbuild.mk <span class="comment"># 允许强制清除编译文件</span></span><br><span class="line">-include vendor/google/build/config.mk <span class="comment">#Google特性配置</span></span><br><span class="line">-include $(BUILD_SYSTEM)/definitions.mk <span class="comment"># 引入Build 系统其他文件将用到的函数和全局变量定义。例如：</span></span><br><span class="line">    my-dir : 当前路径</span><br><span class="line">    all-subdir-makefiles ：当前目录及子目录Makefile文件</span><br><span class="line">    all-subdir-java-files：当前目录及子目录java文件</span><br><span class="line">    all-java-files-under： 指定目录及子目录java文件</span><br><span class="line">    sign-package ： 对package签名</span><br><span class="line">    include $(BUILD_SYSTEM)/distdir.mk <span class="comment"># 定义dist目标，dist目标用来拷贝文件到指定路径</span></span><br><span class="line">-include $(BUILD_SYSTEM)/dex_preopt.mk <span class="comment"># 针对启动jar包的预优化</span></span><br><span class="line">-include build/core/pdk_config.mk <span class="comment"># pdk（Platform Development Kit）的配置包</span></span><br><span class="line">-include $(BUILD_SYSTEM)/post_clean.mk  <span class="comment"># 在前一次 Build 的基础上检查当前 Build 的配置，并执行必要清理工作</span></span><br><span class="line">-include $(BUILD_SYSTEM)/legacy_prebuilts.mk <span class="comment"># 定义GRANDFATHERED_ALL_PREBUILT </span></span><br><span class="line">-include $(BUILD_SYSTEM)/Makefile <span class="comment"># main.mk的辅助文件</span></span><br><span class="line">-include $(BUILD_SYSTEM)/help.mk <span class="comment"># 列出主要的make目标及其说明</span></span><br><span class="line">-include $(ONE_SHOT_MAKEFILE) <span class="comment"># 一个变量，当使用“mm”编译时，值为当前指定路径下的mk文件路径</span></span><br><span class="line">...</span><br><span class="line">DEFAULT_GOAL := droid <span class="comment"># 定义默认make目标</span></span><br><span class="line"><span class="comment"># 依据不同编译条件，包含不同目录</span></span><br><span class="line">subdirs += build/tools/acp</span><br><span class="line">subdirs := $(TOP)</span><br><span class="line"><span class="comment"># 导入所有Android.mk,顶层Android.mk下详解</span></span><br><span class="line">subdir_makefiles := \</span><br><span class="line">	$(shell build/tools/findleaves.py --prune=$(OUT_DIR)  --prune=.repo --prune=.git --prune=kernel --prune=prj_out --prune=links --prune=.svn $(subdirs) Android.mk) </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>编译器平台相关的mk文件在build\core\combo路径下，如：javac.mk、select.mk等　</p>
+</blockquote>
+<p>另，因定义了DEFAULT_GOAL := droid，当在根目录输入“Make”时，实际上就等同于我们执行“make droid”。加载include的所有文件，完成对所有mk文件的解析以后就会寻找生成droid的规则，依次生成它的依赖，直到所有满足的模块被编译好，然后使用相应的工具打包成相应的img。　</p>
+<p>　droid目标依赖于很多其他目标，这些目标相互配合实现了整个系统的编译，droid依赖的其他make目标关系如下图：<br>　　<img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogdroid.png" alt="droid依赖目标关系图">　</p>
+<p>　build系统中的一些make目标如下：</p>
+<p>###droid的依赖目标<br>|目标|说明|<br>|—-|—–|<br>|$(modules_to_install)|modules_to_install 变量包含了当前配置下所有会被安装的模块（一个模块是否会被安装依赖于该产品的配置文件，模块的标签等信息），因此该目标将导致所有会被安装的模块的编译|<br>|$(modules_to_check)|该目标用来确保我们定义的构建模块是没有冗余的|<br>|$(INSTALLED_ANDROID_INFO_TXT_TARGET)|该目标会生成一个关于当前 Build 配置的设备信息的文件，该文件的生成路径是：out/target/product/<product_name>/android-info.txt|<br>|systemimage|生成 system.img|<br>|$(INSTALLED_BOOTIMAGE_TARGET)|生成 boot.img|<br>|$(INSTALLED_RECOVERYIMAGE_TARGET)|生成 recovery.img|<br>|$(INSTALLED_USERDATAIMAGE_TARGET)|生成 userdata.img|<br>|$(INSTALLED_CACHEIMAGE_TARGET)|生成 cache.img|<br>|$(INSTALLED_FILES_FILE)|该目标会生成 out/target/product/<product_name>/ installed-files.txt 文件，该文件中内容是当前系统镜像中已经安装的文件列表| </p>
+<p>###其他主要目标<br>|目标|说明|<br>|—-|—–|<br>|make clean|执行清理，等同于：rm -rf out/|<br>|make sdk|编译出 Android 的 SDK|<br>|make clean-sdk|清理 SDK 的编译产物|<br>|make update-api|更新 API。在 framework API 改动之后，需要首先执行该命令来更新 API，公开的 API 记录在 frameworks/base/api 目录下|<br>|make dist    |执行 Build，并将 MAKECMDGOALS 变量定义的输出文件拷贝到 /out/dist 目录|<br>|make all|    编译所有内容，不管当前产品的定义中是否会包含|<br>|make help|帮助信息，显示主要的 make 目标|<br>|make snod|从已经编译出的包快速重建系统镜像|<br>|make libandroid_runtime|编译所有 JNI framework 内容|<br>|make framework|编译所有 Java framework 内容|<br>|make services|编译系统服务和相关内容|<br>|make <local_target>|编译一个指定的模块，local_target 为模块的名称|<br>|make clean-<local_target>|清理一个指定模块的编译结果|<br>|make dump-products|显示所有产品的编译配置信息，例如：产品名，产品支持的地区语言，产品中会包含的模块等信息|<br>|make PRODUCT-xxx-yyy|编译某个指定的产品|<br>|make bootimage|生成 boot.img|<br>|make recoveryimage|生成 recovery.img|<br>|make userdataimage|生成 userdata.img|<br>|make cacheimage|生成 cache.img|</p>
+<h3 id="build-core-config-mk"><a href="#build-core-config-mk" class="headerlink" title="build\core\config.mk"></a>build\core\config.mk</h3><p>　　此文件是最重要的mk文件之一，主要定义不同模块的编译常量、编译参数及常见文件后缀（如.zip,.jar,.apk）；根据BoardConfig.mk配置产品相关参数；设置常用工具的路径。其主要源码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义标准源文件路径等的环境变量</span></span><br><span class="line">SRC_HEADERS := \</span><br><span class="line">	$(TOPDIR)system/core/include \</span><br><span class="line">	$(TOPDIR)hardware/libhardware/include \</span><br><span class="line">	$(TOPDIR)hardware/libhardware_legacy/include \</span><br><span class="line">	$(TOPDIR)hardware/ril/include \</span><br><span class="line">	$(TOPDIR)libnativehelper/include \</span><br><span class="line">	$(TOPDIR)frameworks/native/include \</span><br><span class="line">	$(TOPDIR)frameworks/native/opengl/include \</span><br><span class="line">	$(TOPDIR)frameworks/av/include \</span><br><span class="line">	$(TOPDIR)frameworks/base/include \</span><br><span class="line">	$(TOPDIR)external/skia/include</span><br><span class="line">SRC_HOST_HEADERS:=$(TOPDIR)tools/include  </span><br><span class="line">SRC_LIBRARIES:= $(TOPDIR)libs</span><br><span class="line">SRC_SERVERS:= $(TOPDIR)servers</span><br><span class="line">SRC_TARGET_DIR := $(TOPDIR)build/target</span><br><span class="line">SRC_API_DIR := $(TOPDIR)prebuilts/sdk/api</span><br><span class="line">...</span><br><span class="line">include $(BUILD_SYSTEM)/dumpvar.mk  <span class="comment"># build之前显示此次build的配置信息</span></span><br><span class="line">include $(BUILD_SYSTEM)/pathmap.mk <span class="comment"># 将许多头文件的路径通过名值对的方式定义为映射表，并提供 include-path-for 函数来获取。如，通过$(call include-path-for, frameworks-native)便可以获取到 framework 本地代码需要的头文件路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义编译命令常量，对应相关mk文件，每个常量描述一种类型模块的编译方式</span></span><br><span class="line">BUILD_COMBOS:= $(BUILD_SYSTEM)/combo <span class="comment"># 编译器平台相关mk文件</span></span><br><span class="line">CLEAR_VARS:= $(BUILD_SYSTEM)/clear_vars.mk <span class="comment"># 清除之前定义环境变量</span></span><br><span class="line">BUILD_HOST_STATIC_LIBRARY:= $(BUILD_SYSTEM)/host_static_library.mk  <span class="comment"># 编译主机静态库，指编译此系统的主机，即PC</span></span><br><span class="line">BUILD_HOST_SHARED_LIBRARY:= $(BUILD_SYSTEM)/host_shared_library.mk <span class="comment"># 编译主机动态库</span></span><br><span class="line">BUILD_STATIC_LIBRARY:= $(BUILD_SYSTEM)/static_library.mk <span class="comment"># 编译设备静态库</span></span><br><span class="line">BUILD_RAW_STATIC_LIBRARY := $(BUILD_SYSTEM)/raw_static_library.mk <span class="comment"># 编译原生静态库</span></span><br><span class="line">BUILD_SHARED_LIBRARY:= $(BUILD_SYSTEM)/shared_library.mk <span class="comment"># 编译设备动态库</span></span><br><span class="line">BUILD_EXECUTABLE:= $(BUILD_SYSTEM)/executable.mk <span class="comment"># 编译设备可执行文件</span></span><br><span class="line">BUILD_RAW_EXECUTABLE:= $(BUILD_SYSTEM)/raw_executable.mk <span class="comment"># 编译原生可执行文件</span></span><br><span class="line">BUILD_HOST_EXECUTABLE:= $(BUILD_SYSTEM)/host_executable.mk <span class="comment"># 编译主机可执行文件</span></span><br><span class="line">BUILD_PACKAGE:= $(BUILD_SYSTEM)/package.mk <span class="comment"># 编译apk文件</span></span><br><span class="line">BUILD_PHONY_PACKAGE:= $(BUILD_SYSTEM)/phony_package.mk <span class="comment"># </span></span><br><span class="line">BUILD_HOST_PREBUILT:= $(BUILD_SYSTEM)/host_prebuilt.mk <span class="comment"># 处理一个或多个主机使用的已编译文件，依赖multi_prebuilt.mk</span></span><br><span class="line">BUILD_PREBUILT:= $(BUILD_SYSTEM)/prebuilt.mk <span class="comment"># 处理一个已经编译好的文件，如：jar包</span></span><br><span class="line">BUILD_MULTI_PREBUILT:= $(BUILD_SYSTEM)/multi_prebuilt.mk <span class="comment"># 处理一个或多个已编译文件，依赖prebuilt.mk</span></span><br><span class="line">BUILD_JAVA_LIBRARY:= $(BUILD_SYSTEM)/java_library.mk <span class="comment"># 编译设备动态java库</span></span><br><span class="line">BUILD_STATIC_JAVA_LIBRARY:= $(BUILD_SYSTEM)/static_java_library.mk <span class="comment"># 编译设备静态java库 </span></span><br><span class="line">BUILD_HOST_JAVA_LIBRARY:= $(BUILD_SYSTEM)/host_java_library.mk  <span class="comment"># 编译主机动态java库</span></span><br><span class="line">BUILD_DROIDDOC:= $(BUILD_SYSTEM)/droiddoc.mk</span><br><span class="line">BUILD_COPY_HEADERS := $(BUILD_SYSTEM)/copy_headers.mk</span><br><span class="line">BUILD_NATIVE_TEST := $(BUILD_SYSTEM)/native_test.mk</span><br><span class="line">BUILD_HOST_NATIVE_TEST := $(BUILD_SYSTEM)/host_native_test.mk</span><br><span class="line">BUILD_NOTICE_FILE := $(BUILD_SYSTEM)/notice_files.mk</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">include $(BUILD_SYSTEM)/envsetup.mk <span class="comment">#定义全局变量、用户特殊编译配置等 ，下详解</span></span><br><span class="line"><span class="comment"># Boards may be defined under $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)</span></span><br><span class="line"><span class="comment"># or under vendor/*/$(TARGET_DEVICE).  Search in both places, but</span></span><br><span class="line"><span class="comment"># make sure only one exists.</span></span><br><span class="line"><span class="comment"># Real boards should always be associated with an OEM vendor.</span></span><br><span class="line"><span class="comment">#在$(SRC_TARGET_DIR)/board/$(TARGET_DEVICE) 或vendor/*/$(TARGET_DEVICE)中搜索BoardConfig.mk文件，但两个路径中只能存在一个mk文件</span></span><br><span class="line">board_config_mk := \</span><br><span class="line">	$(strip $(wildcard \</span><br><span class="line">		$(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)/BoardConfig.mk \</span><br><span class="line">		$(shell <span class="built_in">test</span> -d device &amp;&amp; find device -maxdepth 4 -path <span class="string">&#x27;*/$(TARGET_DEVICE)/BoardConfig.mk&#x27;</span>) \</span><br><span class="line">		$(shell <span class="built_in">test</span> -d vendor &amp;&amp; find vendor -maxdepth 4 -path <span class="string">&#x27;*/$(TARGET_DEVICE)/BoardConfig.mk&#x27;</span>) \</span><br><span class="line">	))</span><br><span class="line">ifeq ($(board_config_mk),)</span><br><span class="line">  $(error No config file found <span class="keyword">for</span> TARGET_DEVICE $(TARGET_DEVICE))</span><br><span class="line">endif</span><br><span class="line">ifneq ($(words $(board_config_mk)),1)</span><br><span class="line">  $(error Multiple board config files <span class="keyword">for</span> TARGET_DEVICE $(TARGET_DEVICE): $(board_config_mk))</span><br><span class="line">endif</span><br><span class="line">include $(board_config_mk)</span><br><span class="line">ifeq ($(TARGET_ARCH),)</span><br><span class="line">  $(error TARGET_ARCH not defined by board config: $(board_config_mk))</span><br><span class="line">endif</span><br><span class="line">TARGET_DEVICE_DIR := $(patsubst %/,%,$(dir $(board_config_mk)))</span><br><span class="line">board_config_mk :=</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>　　不同类型的模块的编译过程会有一些相同的步骤，例如：编译一个 Java 库和编译一个 APK 文件都需要定义如何编译 Java 文件。因此，config.mk中导入的mk 文件的定义中会包含一些共同的代码逻辑。为了减少代码冗余，将共同的代码复用起来，将共同代码放到专门的文件中，然后在其他文件中包含这些文件的方式来实现的。这些包含关系如下图所示：<br>　　　<img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogmk.png" alt="模块mk文件的关系"></p>
+<h3 id="build-core-envsetup-mk"><a href="#build-core-envsetup-mk" class="headerlink" title="build\core\ envsetup.mk"></a>build\core\ envsetup.mk</h3><p>此文件主要包括product_config.mk文件，配置build系统需要的环境变量，确定当前编译的主机平台信息，然后指定编译时输出文件的OUT目录。部分关键代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The product defaults to generic on hardware</span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> This will be overridden in product_config.mk if make</span></span><br><span class="line"><span class="comment"># was invoked with a PRODUCT-xxx-yyy goal.</span></span><br><span class="line">ifeq ($(TARGET_PRODUCT),)</span><br><span class="line">TARGET_PRODUCT := full</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line"><span class="comment"># the variant -- the set of files that are included for a build</span></span><br><span class="line">ifeq ($(strip $(TARGET_BUILD_VARIANT)),)</span><br><span class="line">TARGET_BUILD_VARIANT := eng</span><br><span class="line">endif</span><br><span class="line">...</span><br><span class="line"><span class="comment"># Read the product specs so we an get TARGET_DEVICE and other</span></span><br><span class="line"><span class="comment"># variables that we need in order to locate the output files.</span></span><br><span class="line">include $(BUILD_SYSTEM)/product_config.mk</span><br><span class="line">...</span><br><span class="line"><span class="comment"># 指定编译文件输出路径</span></span><br><span class="line">ifeq (,$(strip $(OUT_DIR)))</span><br><span class="line">ifeq (,$(strip $(OUT_DIR_COMMON_BASE)))</span><br><span class="line">OUT_DIR := $(TOPDIR)out</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">OUT_DIR := $(OUT_DIR_COMMON_BASE)/$(notdir $(PWD))</span><br><span class="line">endif</span><br><span class="line">endif</span><br><span class="line">DEBUG_OUT_DIR := $(OUT_DIR)/debug </span><br><span class="line">PRODUCT_OUT := $(TARGET_PRODUCT_OUT_ROOT)/$(TARGET_DEVICE)</span><br><span class="line">TARGET_OUT_JAVA_LIBRARIES:= $(TARGET_OUT)/framework</span><br><span class="line">TARGET_OUT_INTERMEDIATES := $(PRODUCT_OUT)/obj</span><br><span class="line">TARGET_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_SYSTEM)</span><br><span class="line">TARGET_OUT_CACHE := $(PRODUCT_OUT)/cache</span><br><span class="line">```　</span><br><span class="line"><span class="comment">## build\core\ product_config.mk</span></span><br><span class="line">此文件主要根据lunch选择的编译项读取device目录或vendor目录下不同厂商自己定义的AndroidProducts.mk文件，内包含目标产品配置文件，如：msm8916_32.mk；</span><br><span class="line">```bash</span><br><span class="line"><span class="comment"># </span></span><br><span class="line">include $(BUILD_SYSTEM)/node_fns.mk</span><br><span class="line">include $(BUILD_SYSTEM)/product.mk</span><br><span class="line">include $(BUILD_SYSTEM)/device.mk </span><br><span class="line">...</span><br><span class="line"><span class="comment"># Import all product makefiles.</span></span><br><span class="line">$(call import-products, $(all_product_makefiles)) <span class="comment"># 找到并导入所有Makefile</span></span><br><span class="line"> <span class="comment"># Import all or just the current product makefile</span></span><br><span class="line">$(call import-products, $(current_product_makefile)) <span class="comment"># 找到并导入当前产品的Makefile</span></span><br><span class="line">$(check-all-products) <span class="comment"># 完整性检查</span></span><br><span class="line">...</span><br><span class="line"><span class="comment"># 调用resolve-short-product-name函数，返回TARGET_PRODUCT的配置文件目录</span></span><br><span class="line">INTERNAL_PRODUCT := $(call resolve-short-product-name, $(TARGET_PRODUCT))</span><br><span class="line">...</span><br><span class="line"><span class="comment"># Find the device that this product maps to.</span></span><br><span class="line">TARGET_DEVICE := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_DEVICE) <span class="comment"># 获得目标设备名</span></span><br><span class="line"><span class="comment">#如：INTERNAL_PRODUCT = device\qcom\msm8916_32\msm8916_32.mk</span></span><br><span class="line">    TARGET_DEVICE  = msm8916_32</span><br></pre></td></tr></table></figure>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<h3 id="build-core-product-mk"><a href="#build-core-product-mk" class="headerlink" title="build\core\ product.mk"></a>build\core\ product.mk</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取所有AndroidProducts.mk文件</span></span><br><span class="line">define _find-android-products-files</span><br><span class="line">$(shell <span class="built_in">test</span> -d device &amp;&amp; find device -maxdepth 6 -name AndroidProducts.mk) \</span><br><span class="line">  $(shell <span class="built_in">test</span> -d vendor &amp;&amp; find vendor -maxdepth 6 -name AndroidProducts.mk) \</span><br><span class="line">  $(SRC_TARGET_DIR)/product/AndroidProducts.mk</span><br><span class="line">endef</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取AndroidProducts.mk文件中设置的所有PRODUCT_MAKEFILES变量序列（其实为产品配置文件路径）</span></span><br><span class="line">define get-all-product-makefiles</span><br><span class="line">$(call get-product-makefiles,$(_find-android-products-files))</span><br><span class="line">endef</span><br></pre></td></tr></table></figure>
+
+<h3 id="build-core-device-mk"><a href="#build-core-device-mk" class="headerlink" title="build\core\ device.mk"></a>build\core\ device.mk</h3><p>这个文件没怎么看懂， 大致就是定义变量、根据device名字获得mk文件路径、检查device的必须变量是否被定义之类的，以后有闲功夫再研究。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">_device_var_list := \</span><br><span class="line">    DEVICE_NAME \</span><br><span class="line">    DEVICE_BOARD \</span><br><span class="line">    DEVICE_REGION</span><br><span class="line"></span><br><span class="line">define dump-device</span><br><span class="line">$(info ==== $(1) ====)\</span><br><span class="line">$(foreach v,$(_device_var_list),\</span><br><span class="line">$(info DEVICES.$(1).$(v) := $(DEVICES.$(1).$(v))))\</span><br><span class="line">$(info --------)</span><br><span class="line"></span><br><span class="line">endefdefine import-devices</span><br><span class="line">$(call import-nodes,DEVICES,$(1),$(_device_var_list))</span><br><span class="line"></span><br><span class="line">define _resolve-short-device-name</span><br></pre></td></tr></table></figure>
+
+<h3 id="build-core-node-fns-mk"><a href="#build-core-node-fns-mk" class="headerlink" title="build\core\ node_fns.mk"></a>build\core\ node_fns.mk</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">define clear-var-list $(foreach v,$(1),$(<span class="built_in">eval</span> $(v):=)) <span class="comment"># 清除用“:=”的变量名</span></span><br><span class="line">define copy-var-list $(foreach v,$(2),$(<span class="built_in">eval</span> $(strip $(1)).$(v):=$($(v)))) <span class="comment"># 拷贝变量名</span></span><br><span class="line">define move-var-list </span><br><span class="line"></span><br><span class="line">define import-nodes  $(1) $(2) $(3) <span class="comment"># 导入变量，此定义需要三个入口参数：</span></span><br><span class="line">$(1)是一个字串，是输出变量的主干名。例如”PRODUCTS<span class="string">&quot;和”DEVICES“</span></span><br><span class="line"><span class="string"><span class="subst">$(2)</span>是一个makefile文件列表，这些文件中应该含有对<span class="subst">$(3)</span>中变量的定义</span></span><br><span class="line"><span class="string"><span class="subst">$(3)</span>是一个变量列表</span></span><br><span class="line"><span class="string">  import-nodes会创建这样形式的变量，例如：<span class="subst">$(1)</span>=&quot;</span>PRODUCTS<span class="string">&quot;,<span class="subst">$(2)</span>中含有&quot;</span>build/target/product/core.mk<span class="string">&quot;, <span class="subst">$(3)</span>中含有&quot;</span>PRODUCT_NAME<span class="string">&quot;,而core.mk中定义了PRODUCT_NAME:=core，则变量为：PRODUCT.build/target/product/core.mk.PRODUCT_NAME:=core。</span></span><br><span class="line"><span class="string">  import-nodes中还考虑了inherit（即继承）的问题，如果某个PRODUCT.xxx.xxx变量的值中有‘@inherit:&lt;mk文件&gt;’标识，则会把那个mk文件中相应的变量的属性添加到PRODUCT.xxx.xxx中。&#x27;@inherit:&lt;mk文件&gt;&#x27;是通过inherit-product命令添加的。这个函数定义在product.mk里面。 </span></span><br><span class="line"><span class="string">... </span></span><br><span class="line"><span class="string"># 定义其他对变量等的处理，没去细看，也不一一列出了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="device-qcom-msm8916-32-Android-mk"><a href="#device-qcom-msm8916-32-Android-mk" class="headerlink" title="device\qcom\msm8916_32\Android.mk"></a>device\qcom\msm8916_32\Android.mk</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include $(CLEAR_VARS)</span></span><br><span class="line"><span class="comment">#LOCAL_MODULE       := wpa_supplicant.conf</span></span><br><span class="line"><span class="comment">#LOCAL_MODULE_TAGS  := optional # 默认在所有版本下都编译</span></span><br><span class="line"><span class="comment">#LOCAL_MODULE_CLASS := ETC</span></span><br><span class="line"><span class="comment">#LOCAL_SRC_FILES    := $(LOCAL_MODULE)</span></span><br><span class="line"><span class="comment">#LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/wifi</span></span><br><span class="line"><span class="comment">#include $(BUILD_PREBUILT)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#include $(call all-makefiles-under,$(LOCAL_PATH)) # 导入所有mk文件</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>模块mk文件详见Android.mk解析：<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/#more">Android.mk解析</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" data-id="ckg0p46hh00cwo8gwerz4h3w3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android编译过程详解之三
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

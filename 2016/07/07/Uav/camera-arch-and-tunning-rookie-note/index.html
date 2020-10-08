@@ -1,38 +1,297 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
 
+  
+  <title>camera架构与调试-菜鸟笔记 | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就  ##VFEVFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 V">
+<meta property="og:type" content="article">
+<meta property="og:title" content="camera架构与调试-菜鸟笔记">
+<meta property="og:url" content="http://huaqianlee.github.io/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就  ##VFEVFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 V">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vfe.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/raw%20bits.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/rgb_all.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/rgb.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/rgb_4.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/sensor_rgb.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/gamma_note.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/lsc_note.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/exposure_dc.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/domain_note.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/exposure_note.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/frame.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/cmos_rolling_shutter.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/stripe.jpg">
+<meta property="article:published_time" content="2016-07-07T15:37:41.000Z">
+<meta property="article:modified_time" content="2019-04-06T14:25:27.131Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Qualcomm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vfe.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+</head>
 
-{% block page_class %}page-post-detail{% endblock %}
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Uav/camera-arch-and-tunning-rookie-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/" class="article-date">
+  <time datetime="2016-07-07T15:37:41.000Z" itemprop="datePublished">Jul 7 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Uav/">Uav</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      camera架构与调试-菜鸟笔记
+    </h1>
+  
 
-{% block content %}
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就</p>
+</blockquote>
+<p>##VFE<br>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vfe.png" alt="VFE FLOW"></p>
+<a id="more"></a>
+<p>###MIPI<br>现在的camera基本都采用MIPI接口， MIPI以一种采用差分方式按位传输数据的接口。只有四条引脚（DN、DP，CN、CP）。</p>
+<p>###数据<br>根据自己的理解我大致将VFE根据数据格式分为四个部分：</p>
+<ul>
+<li>Raw RGB（也称为Bayer RGB）</li>
+<li>Sensor RGB</li>
+<li>Image RGB</li>
+<li>YUV</li>
+</ul>
+<h4 id="Raw-RGB"><a href="#Raw-RGB" class="headerlink" title="Raw RGB"></a>Raw RGB</h4><p>Raw RGB为原始数据，分为Qcom raw 和 mipi raw， 现在基本都使用mipi  raw，mipi raw数据1pixel为10bits的数据(1 chanel)，即将所有数据按位重新排列，图像的行列应该为4的倍数。如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/raw%20bits.png" alt="raw bits"></p>
+<h5 id="所有pixel图像数据构成按照如下规律排列（表格中为某种颜色的亮度值）："><a href="#所有pixel图像数据构成按照如下规律排列（表格中为某种颜色的亮度值）：" class="headerlink" title="所有pixel图像数据构成按照如下规律排列（表格中为某种颜色的亮度值）："></a>所有pixel图像数据构成按照如下规律排列（表格中为某种颜色的亮度值）：</h5><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/rgb_all.jpg" alt="rgb_all"><br>GB： 指靠近B的G. 其余同理<br>#####Raw RGB数据构成规则按照下表方式排列，对角线可以两两兑换.<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/rgb.png" alt="rgb"><br>####Raw RGB 有四种排列方式，如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/rgb_4.jpg" alt="rgb_4"></p>
+<h4 id="Sensor-RGB"><a href="#Sensor-RGB" class="headerlink" title="Sensor RGB"></a>Sensor RGB</h4><p>Sensor RGB为camera Sensor处理过的数据，即上流程图demosaic之后的数据，1 pixel 为 3 Chanel，现在基本都为888格式的 RGB 24bits数据。<br>Sensor RGB图像数据构成按如下排列：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/sensor_rgb.jpg" alt="sensor_rgb"></p>
+<p>####Image RGB<br>Image RGB是Sensor RGB通过color correction转变过来的，会按照三种不同光源强度乘以不同的矩阵得到不同的Image RGB，这三种光源强度为：<br>D65 - daylight color temp 为 6500k<br>TL  -   3800~4000k<br>A    -   2800k</p>
+<blockquote>
+<p>后两种记不清楚了， 简单搜索了一下，没有在网上找到准确的资源，先这样写着</p>
+</blockquote>
+<h4 id="YUV"><a href="#YUV" class="headerlink" title="YUV"></a>YUV</h4><p>YUV，分为三个分量，“Y”表示明亮度（Luminance或Luma），也就是灰度值；而“U”和“V” 表示的则是色度（Chrominance或Chroma）。是与RGB类似的颜色编码方法，主要用于计算机端。由Image RGB通过gamma处理而来，如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/gamma_note.jpg" alt="gamma_note"></p>
+<p>###LSC<br>LSC即为Lens  shading correction， 其主要就是修正边角较暗的地方，如下笔记：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/lsc_note.jpg" alt="lsc_note"></p>
+<p>###BLC<br>BLC即为black level correction，主要处理暗电流，笔记如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/exposure_dc.jpg" alt="exposure_dc"></p>
+<p>###domain<br>domain分为spatial domain和frequency domain， 笔记如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/domain_note.jpg" alt="domain_note"></p>
+<p>###CPP<br>VFE模块完成后则会进入CPP模块，cpp模块主要有如下两部分：</p>
+<ul>
+<li>WNR - wavelet noise reduction</li>
+<li>ASF -  Auto special Filter （-&gt; sharpness）<br>exposure index 和 gain index 是cpp模块的trigger condition</li>
+</ul>
+<p>附  图片一般会经过4层曝光处理，chromatix工具<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/exposure_note.jpg" alt="exposure_note"></p>
+<p>附 Chromatix Tool<br>driver_info.txt (等同于dts中的信息)， 通过chromatix产生tuning file（cpp项的 exposure index和gain index很可能源于此文件）</p>
+<p>###Driver<br>驱动中图像处理，笔记如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/frame.png" alt="frame"></p>
+<p>现在的cmos基本都是使用rolling shutter， 方式如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/cmos_rolling_shutter.jpg" alt="cmos_rolling_shutter"></p>
+<p>####附 糊涂笔记<br>VT clock —&gt; banding  （50HZ/60HZ/AUTO/OFF —&gt;app上的配置）<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/stripe.jpg" alt="stripe"></p>
+<p>####driver_info.txt<br>Chromatix Tool会用到的一个Sensor info文件，内容与<root_dir>\mm-camera\mm-camera2\media-controller\modules\sensors\sensor_libs\imx214\imx214_lib.c 相关，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. max frame rate  ---&gt; depends on sensor register and project</span><br><span class="line">2. min line count ---&gt; value &#x3D; 1, depends on sensor property # 1 line * 1 pixel  clock * cloumnum &#x3D; min exposure time</span><br><span class="line">3. max line count in max fps. # max line count &#x3D; FL - offset</span><br><span class="line">4. max line count  ---&gt; FL * (maxfps&#x2F;minfps) - offset</span><br><span class="line">5.raw image width</span><br><span class="line">6. raw image height</span><br><span class="line">7. bayer pattern</span><br><span class="line">8.bits per pixel</span><br><span class="line">9. packed or not ---&gt; 1: mipi; 0: others,depend on sensor</span><br><span class="line">10~13. crop ---&gt; crop掉无效边，top、right、bottom、left.</span><br><span class="line">14~16 blacklevel ---&gt; 厂商单位 12bits  &#x2F; 16(2的4次方) -&gt;8bit</span><br></pre></td></tr></table></figure>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/" data-id="ckg0p46gz009no8gw1wo1a8zg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li></ul>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/17/Life/Ashamed/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Ashamed
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">高通px4代码阅读笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

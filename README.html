@@ -1,47 +1,340 @@
-{% extends '_layout.swig' %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
 
-{% block title %}
-  {% set page_title_suffix = ' | ' + config.title %}
+  
+  <title>Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="My blog files如果对我写的文章感兴趣, 欢迎访问我的个人博客。 博客地址: Andy Lee’s Blog Linux Process and thread in linux Linux常用快捷键及命令总结 Linux文件IO操作及网络架构 如何在内核里操作读写文件 深入理解Linux启动过程 linux系统使用问题集  ARTS Third week of ARTS: Repo Se">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Andy.Lee&#39;s  Blog">
+<meta property="og:url" content="http://huaqianlee.github.io/README.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="My blog files如果对我写的文章感兴趣, 欢迎访问我的个人博客。 博客地址: Andy Lee’s Blog Linux Process and thread in linux Linux常用快捷键及命令总结 Linux文件IO操作及网络架构 如何在内核里操作读写文件 深入理解Linux启动过程 linux系统使用问题集  ARTS Third week of ARTS: Repo Se">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-26T14:15:47.461Z">
+<meta property="article:modified_time" content="2019-09-15T14:47:14.727Z">
+<meta property="article:author" content="Andy.Lee">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-  {% if page.type === "categories" %}
-    {{ __('title.category') + page_title_suffix }}
-  {% elif page.type === "tags" %}
-    {{ __('title.tag') + page_title_suffix }}
-  {% else %}
-    {{ page.title + page_title_suffix }}
-  {% endif %}
-{% endblock %}
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {# tagcloud page support #}
-    {% if page.type === "tags" %}
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            {{ _p('counter.tag_cloud', site.tags.length) }}
-        </div>
-        <div class="tag-cloud-tags">
-          {{ tagcloud({min_font: 12, max_font: 30, amount: 200, color: true, start_color: '#ccc', end_color: '#111'}) }}
-        </div>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
       </div>
-    {% elif page.type === 'categories' %}
-      <div class="category-all-page">
-        <div class="category-all-title">
-            {{ _p('counter.categories', site.categories.length) }}
-        </div>
-        <div class="category-all">
-          {{ list_categories() }}
-        </div>
-      </div>
-    {% else %}
-      {{ page.content }}
-    {% endif %}
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/README.html" class="article-date">
+  <time datetime="2020-06-26T14:15:47.461Z" itemprop="datePublished">Jun 26 2020</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="My-blog-files"><a href="#My-blog-files" class="headerlink" title="My blog files"></a>My blog files</h2><p>如果对我写的文章感兴趣, 欢迎访问我的个人博客。</p>
+<p><em>博客地址:</em> <a href="http://huaqianlee.github.io/">Andy Lee’s Blog</a></p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><ul>
+<li><a href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/">Process and thread in linux</a></li>
+<li><a href="http://huaqianlee.github.io/2014/12/21/Linux/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">Linux常用快捷键及命令总结</a></li>
+<li><a href="http://huaqianlee.github.io/2014/11/17/Linux/Linux%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C%E5%8F%8A%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/">Linux文件IO操作及网络架构</a></li>
+<li><a href="http://huaqianlee.github.io/2015/03/17/Linux/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E9%87%8C%E6%93%8D%E4%BD%9C%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6-create-open-read-write/">如何在内核里操作读写文件</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">深入理解Linux启动过程</a></li>
+<li><a href="http://huaqianlee.github.io/2016/01/04/Linux/linux-problem-set/">linux系统使用问题集</a></li>
+</ul>
+<h2 id="ARTS"><a href="#ARTS" class="headerlink" title="ARTS"></a>ARTS</h2><ul>
+<li><a href="http://huaqianlee.github.io/2019/09/07/ARTS/Third-week-of-ARTS/">Third week of ARTS: Repo</a></li>
+<li><a href="http://huaqianlee.github.io/2019/09/07/ARTS/Second-week-of-ARTS-Hurry/">Second week of ARTS: Hurry</a></li>
+<li><a href="http://huaqianlee.github.io/2019/08/31/ARTS/First-week-of-ARTS-Start/">First week of ARTS: Start</a></li>
+</ul>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><p><em>APP</em></p>
+<ul>
+<li><a href="http://huaqianlee.github.io/2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/">Getting Started With RecyclerView and CardView on Android</a></li>
+<li><a href="http://huaqianlee.github.io/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/">通过自定义侧边导航栏的RecyclerView动态加载布局</a></li>
+<li><a href="http://huaqianlee.github.io/2017/08/18/Android/hides-navigation-in-drawerlayou/">按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案</a></li>
+<li><a href="http://huaqianlee.github.io/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/">基于DrawerLayout打造卡片式Navigation</a></li>
+<li><a href="http://huaqianlee.github.io/2017/08/17/Android/the-selected-effect-of-recyclerview-item/">RecyclerView Item选中效果及点击事件的实现</a>   </li>
+<li><a href="http://huaqianlee.github.io/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/">实现真正意义上的第一个APP之启程</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/19/Android/Android%E4%B8%ADadb-Android-Debug-Bridge-%E5%91%BD%E4%BB%A4%E7%9A%84%E7%94%A8%E6%B3%95/">Android中adb命令的用法</a></li>
+<li><a href="http://huaqianlee.github.io/2015/05/29/Android/Android-Stdudio-Linux-windows-mac%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">Android Stdudio常用快捷键</a></li>
+</ul>
+<p><em>System &amp;&amp; Bsp</em></p>
+<ul>
+<li><a href="_posts/Android/A-summary-of-Android-source-analysis.md"><strong>Android 系统源码分析综述：整理总结源码分析的所有博客</strong></a></li>
+<li><a href="http://huaqianlee.github.io/2018/08/23/Android/Three-ways-to-dump-usb-register/">Three ways to dump usb register</a></li>
+<li><a href="http://huaqianlee.github.io/2019/05/15/Android/pmic-voter/">pmic voter</a></li>
+<li><a href="http://huaqianlee.github.io/2019/05/16/Android/A-little-knowledge-about-health/">一个 health service 不生效问题引出的一点知识</a></li>
+<li><a href="http://huaqianlee.github.io/2017/11/13/Android/What-is-fast-charge-now/">常用的快充技术简介</a></li>
+<li><a href="http://huaqianlee.github.io/2019/08/27/Android/USB-port-error/">UFP was modified as DRP when we unplug OTG</a></li>
+<li><a href="http://huaqianlee.github.io/2017/12/17/Android/android-sensor-arch-analysis/">Android传感器（Sensor）架构简析 (╯_╰)</a></li>
+<li><a href="http://huaqianlee.github.io/2017/12/03/Android/Android-Linux-i2c-driver-arch/">Android/Linux  I2C 驱动架构分析</a></li>
+<li><a href="http://huaqianlee.github.io/2017/11/23/Android/Android-Linux-input-system-analysis/">Android(Linux) 输入子系统解析</a></li>
+<li><a href="http://huaqianlee.github.io/2017/11/21/Android/BMS-of-Android-Power-Management/">Android 电源管理之电池管理系统(BMS)</a></li>
+<li><a href="http://huaqianlee.github.io/2017/11/14/Android/Android-SELinux-Permison-and-Question/">Android Selinux 权限及问题</a></li>
+<li><a href="http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-%E9%97%AE%E9%A2%98%E9%9B%86/">MTK-Modem-问题集</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">About ActivityNotFoundException Unable to find explicit activity class &amp;&amp; Android.mk解析</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">Android日志系统详解</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/">怎么用Android日志系统更好地去调试</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/">怎么抓取Android测试日志文件</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/23/Android/%E9%AB%98%E9%80%9AAndroid%E8%AE%BE%E5%A4%87%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90-%E4%BB%8Epower-on%E4%B8%8A%E7%94%B5%E5%88%B0Home-Lanucher%E5%90%AF%E5%8A%A8/">高通Android设备启动流程分析-从power-on上电到Home-Lanucher启动</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/">高通平台Android源码bootloader分析之sbl1 一</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/">高通平台Android源码bootloader分析之sbl1 二</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/18/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%89/">高通平台Android源码bootloader分析之sbl1 三</a></li>
+<li><a href="http://huaqianlee.github.io/2015/08/19/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BLinux%E5%86%85%E6%A0%B8%E8%AE%BE%E5%A4%87%E6%A0%91-DT-Device-Tree-dts%E6%96%87%E4%BB%B6/">高通平台Android源码分析之Linux内核设备树dts文件</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">Android电池监控系统BMS之电池系统架构</a></li>
+<li><a href="http://huaqianlee.github.io/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/">Android源码bootable解析之LK</a></li>
+<li><a href="http://huaqianlee.github.io/2015/05/30/Android/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/">Android电源管理架构</a></li>
+<li><a href="http://huaqianlee.github.io/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/">高通Android不带电量计的电量计算方式</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/24/Android/qaulcomm-bms-driver-analysis/">高通电池管理系统（BMS）驱动分析</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/24/Android/linear-charger-driver/">高通 linear charger 驱动分析</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/24/Android/qcom-pmic-driver/">高通 PMIC 架构简析</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/24/Android/smb135x-charger-driver/">高通 smb135x charger 驱动分析</a></li>
+</ul>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><ul>
+<li><a href="http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/">How does the repo of android source code work ?</a></li>
+<li><a href="http://huaqianlee.github.io/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/">Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook</a></li>
+<li><a href="http://huaqianlee.github.io/2015/06/11/Git/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">git常用及进阶命令总结</a></li>
+<li><a href="http://huaqianlee.github.io/2015/10/22/Git/git-experence/">git常见问题总结</a></li>
+</ul>
+<h2 id="Uav"><a href="#Uav" class="headerlink" title="Uav"></a>Uav</h2><ul>
+<li><a href="http://huaqianlee.github.io/2017/03/29/Uav/px4-imu-mpu9250-code-structure/">PX4之外设代码结构及流程-IMU</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/25/Uav/PX4-for-Snapdragon-Flight/">PX4 for Snapdragon Flight</a></li>
+<li><a href="http://huaqianlee.github.io/2016/05/11/Uav/qualcomm-px4-code-reading-note/">高通px4代码阅读笔记</a></li>
+<li><a href="http://huaqianlee.github.io/2016/04/02/Uav/uav-board-debugging/">无人机主板调试</a></li>
+<li><a href="http://huaqianlee.github.io/2016/04/27/Uav/Qualcomm-uav-blsp-port/">高通无人机8074BLSP接口说明</a></li>
+<li><a href="http://huaqianlee.github.io/2016/05/07/Uav/mobile-and-uav-sensors/">手机无人机常用sensor介绍</a></li>
+<li><a href="http://huaqianlee.github.io/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/">camera架构与调试-菜鸟笔记</a></li>
+</ul>
+<h2 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h2><ul>
+<li><a href="http://huaqianlee.github.io/2017/05/08/English/Americal-and-english-phonetic/">英式音标与美式音标</a></li>
+</ul>
+<h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><ul>
+<li><a href="http://huaqianlee.github.io/2017/05/23/Kotlin/Kotlin-HElloWorld/">Android Kotlin之曲折HelloWord</a></li>
+</ul>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p><em>第一行代码</em></p>
+<ul>
+<li><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">第一行代码思维导图及学习笔记目录</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/">第一行代码之项目结构与活动</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/25/FirstCode/firstcode-note-UI/">第一行代码之UI</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/">第一行代码之广播机制</a></li>
+<li><a href="http://huaqianlee.github.io/2017/04/29/FirstCode/FirstCode-data-storage/">第一行代码之数据存储</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/03/FirstCode/FirstCode-Content-Provider/">第一行代码之跨程序共享数据-内容提供器</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-media/">第一行代码之手机多媒体</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-Service/">第一行代码之服务</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/">第一行代码之网络</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/">第一行代码之碎片</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/">第一行代码之Material Design</a></li>
+<li><a href="http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/">第一行代码之高级技巧</a></li>
+</ul>
+<p><em>Android群英传</em></p>
+<p><em>Linux内核完全注释</em></p>
+<ul>
+<li><a href="http://huaqianlee.github.io/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/">Linux内核完全注释之80x86内存管理</a></li>
+</ul>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><ul>
+<li><a href="http://huaqianlee.github.io/2014/10/24/Hexo/build-person-blog-with-hexo/">构建个人博客</a></li>
+<li><a href="http://huaqianlee.github.io/2014/10/20/Hexo/hello-world/">hello-world</a></li>
+</ul>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><ul>
+<li><a href="http://huaqianlee.github.io/2015/01/20/Java/JUnit-test%E7%9A%84%E7%94%A8%E6%B3%95/">JUnit-test的用法</a></li>
+<li><a href="http://huaqianlee.github.io/2014/10/27/Java/The-document-convetions-for-Java/">Java注释规范</a></li>
+</ul>
+<h2 id="Think"><a href="#Think" class="headerlink" title="Think"></a>Think</h2><ul>
+<li><a href="http://huaqianlee.github.io/2014/11/01/Think/How-to-read/">How-to-read</a></li>
+</ul>
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><ul>
+<li><a href="http://huaqianlee.github.io/2015/01/18/Web/xml%E5%9F%BA%E7%A1%80/">xml基础</a></li>
+<li><a href="http://huaqianlee.github.io/2015/01/19/Web/xml%E6%96%87%E4%BB%B6%E7%BA%A6%E6%9D%9F%E4%B8%8E%E8%A7%A3%E6%9E%90/">xml文件约束与解析</a></li>
+</ul>
+<h2 id="Life"><a href="#Life" class="headerlink" title="Life"></a>Life</h2><ul>
+<li><a href="http://huaqianlee.github.io/2018/02/12/Life/Bye-2017-Hi-2018/">17 小结，18 计划!</a></li>
+<li><a href="http://huaqianlee.github.io/2015/10/08/Life/2015%E5%B9%B410%E6%9C%887%E6%97%A5-%E5%B0%8F%E4%B8%91/">2015年10月7日:小丑</a></li>
+<li><a href="http://huaqianlee.github.io/2013/09/19/Life/four-years/">Four years</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/17/Life/Ashamed/">Ashamed</a></li>
+<li><a href="http://huaqianlee.github.io/2017/03/24/Life/About-my-books-and-my-plan/">所买的书</a></li>
+<li><a href="http://huaqianlee.github.io/2017/07/20/Life/no-no-no-go-go-go/">no no no, go go go</a></li>
+</ul>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ul>
+<li><a href="http://huaqianlee.github.io/2017/11/08/Other/MDB-ICP-protocol/">纸币器和MDB协议</a></li>
+<li><a href="_posts/Android/What-is-fast-charge-now%EF%BC%9F.md">Android快充介绍</a></li>
+</ul>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>_config.yml 为根目录文件的备份</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/README.html" data-id="ckg0p46et0003o8gw7xtl2ujw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
+    </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

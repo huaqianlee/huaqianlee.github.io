@@ -1,63 +1,675 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post-collapse.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
 
-{% block title %} {{ __('title.archive') }} | {{ config.title }} {% endblock %}
+  
+  <title>Archives: 2017 | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Just need to enjoy life.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Andy.Lee&#39;s  Blog">
+<meta property="og:url" content="http://huaqianlee.github.io/archives/2017/page/2/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="Just need to enjoy life.">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Andy.Lee">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-{% block page_class %} page-archive {% endblock %}
+</head>
 
-{% block content %}
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Android/the-selected-effect-of-recyclerview-item" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/17/Android/the-selected-effect-of-recyclerview-item/" class="article-date">
+  <time datetime="2017-08-17T11:46:41.000Z" itemprop="datePublished">Aug 17 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/17/Android/the-selected-effect-of-recyclerview-item/">RecyclerView Item选中效果及点击事件的实现</a>
+    </h1>
+  
 
-    <span class="archive-page-counter">
-      {% set cheers %}
-      {% set posts_length = site.posts.length %}
-      {% if posts_length > 210 %} {% set cheers = 'excellent' %}
-        {% elif posts_length > 130 %} {% set cheers = 'great' %}
-        {% elif posts_length > 80 %} {% set cheers = 'good' %}
-        {% elif posts_length > 50 %} {% set cheers = 'nice' %}
-        {% elif posts_length > 30 %} {% set cheers = 'ok' %}
-      {% else %}
-        {% set cheers = 'um' %}
-      {% endif %}
-      {{ __('cheers.' + cheers) }}! {{ _p("counter.archive_posts", site.posts.length) }} {{ __('keep_on') }}
-    </span>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近需要对RecyclerView的Item实现选中效果和Item点击事件，尝试了两种方式。</p>
+<h1 id="受限的简易实现方案"><a href="#受限的简易实现方案" class="headerlink" title="受限的简易实现方案"></a>受限的简易实现方案</h1><h2 id="布局文件"><a href="#布局文件" class="headerlink" title="布局文件"></a>布局文件</h2><p>首先在Item的布局文件中加入如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">android:clickable=<span class="string">&quot;true&quot;</span></span><br><span class="line">android:focusableInTouchMode=<span class="string">&quot;true&quot;</span></span><br><span class="line">android:focusable=<span class="string">&quot;true&quot;</span></span><br><span class="line">android:background=<span class="string">&quot;@drawable/selector_item_selected&quot;</span></span><br></pre></td></tr></table></figure>
+<p>完成selector_item_selected.xml：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span><br><span class="line">&lt;selector xmlns:android=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span><br><span class="line">    &lt;item android:state_focused=<span class="string">&quot;true&quot;</span> android:drawable=<span class="string">&quot;@drawable/select&quot;</span>/&gt;</span><br><span class="line">    &lt;item android:state_focused=<span class="string">&quot;false&quot;</span> android:drawable=<span class="string">&quot;@drawable/un_select&quot;</span>/&gt;</span><br><span class="line">&lt;/selector&gt;</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/08/17/Android/the-selected-effect-of-recyclerview-item/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/08/17/Android/the-selected-effect-of-recyclerview-item/" data-id="ckg0p46fy004go8gw0f827gg7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li></ul>
 
-    {% for post in page.posts %}
-
-      {# Show year #}
-      {% set year %}
-      {% set post.year = date(post.date, 'YYYY') %}
-
-      {% if post.year !== year %}
-        {% set year = post.year %}
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-{{ year }}">{{ year }}</h2>
-        </div>
-      {% endif %}
-      {# endshow #}
-
-      {{ post_template.render(post) }}
-
-    {% endfor %}
-
-  </section>
-
-  {% include '_partials/pagination.swig' %}
-
-{% endblock %}
-
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+    </footer>
+  </div>
+  
+</article>
 
 
-{% block script_extra %}
-  {% if theme.use_motion %}
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  {% endif %}
-{% endblock %}
+  
+    <article id="post-Android/the-card-navigation-base-on-drawerlayout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/" class="article-date">
+  <time datetime="2017-08-17T11:46:16.000Z" itemprop="datePublished">Aug 17 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/">基于DrawerLayout打造卡片式Navigation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前段时间开始了利用空闲时间做一个练习APP <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/ForMe">ForMe</a>。根据设计APP需要通过左边导航栏切换主界面功能，自己平时在使用Google的NewsTab，觉得很不错，就准备参考其界面来设计。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog/app/newstab_view.jpg" alt="newsTab"></p>
+        
+          <p class="article-more-link">
+            <a href="/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/" data-id="ckg0p46fy004do8gw5bl595nm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Life/no-no-no-go-go-go" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/20/Life/no-no-no-go-go-go/" class="article-date">
+  <time datetime="2017-07-20T11:29:53.000Z" itemprop="datePublished">Jul 20 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/Life/no-no-no-go-go-go/">no no no, go go go</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/life/bing.jpg" alt="bing"></p>
+<p>最近工作一忙起来，自己又懈怠了， 回家啥都不想做，大多数时候都是锻炼一下，然后撸两把王者，就睡觉了。 好忧伤，人越来越没有以前的激情了， 有时候都在想接受现状，拿着不算太差的工资，好好上班，不用花时间去折腾学习了。这种想法好可怕！</p>
+<p>调整调整！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/07/20/Life/no-no-no-go-go-go/" data-id="ckg0p46go0083o8gw89l4gow3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android/MTK-Modem-问题集" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/12/Android/MTK-Modem-%E9%97%AE%E9%A2%98%E9%9B%86/" class="article-date">
+  <time datetime="2017-07-12T15:01:42.000Z" itemprop="datePublished">Jul 12 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/12/Android/MTK-Modem-%E9%97%AE%E9%A2%98%E9%9B%86/">MTK Modem 问题集</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近开始做MTK相关的工作，在第一步编译Modem时就遇到了挺多问题。特在此文整理和Modem相关的问题。</p>
+<h1 id="编译相关问题"><a href="#编译相关问题" class="headerlink" title="编译相关问题"></a>编译相关问题</h1>
+        
+          <p class="article-more-link">
+            <a href="/2017/07/12/Android/MTK-Modem-%E9%97%AE%E9%A2%98%E9%9B%86/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/07/12/Android/MTK-Modem-%E9%97%AE%E9%A2%98%E9%9B%86/" data-id="ckg0p46fq003ao8gw5h1q0k63" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android/实现真正意义上的第一个APP之启程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/" class="article-date">
+  <time datetime="2017-07-11T13:20:58.000Z" itemprop="datePublished">Jul 11 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/">实现真正意义上的第一个APP之启程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>自学了这么久的Android，各种例程和Demo敲了不少，但是还未自己从头设计实现过一个完整的APP，今天准备根据自己的需求定制一款APP：ForMe（暂定此名）。第一次完全自己设计实现，可能会有很多问题，自己边学边优化。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/" data-id="ckg0p46fz004ko8gw05q06l9e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Kotlin/Kotlin-HElloWorld" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/23/Kotlin/Kotlin-HElloWorld/" class="article-date">
+  <time datetime="2017-05-23T00:09:56.000Z" itemprop="datePublished">May 23 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Kotlin/">Kotlin</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/23/Kotlin/Kotlin-HElloWorld/">Android Kotlin之曲折HelloWord</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近工作业余时间一直在自学Android，Google I/O 2017 惊闻Kotlin成为Google支持的官方语言，当然得紧跟“中央”的脚步，开始程序入门必备之HelloWord，殊不知这个HelloWord充满了曲折。</p>
+<h2 id="了解Kotlin"><a href="#了解Kotlin" class="headerlink" title="了解Kotlin"></a>了解Kotlin</h2><p>知道了Kotlin之后就开始在网上搜集相关资料，发现了如下个人觉得比较好的资料：<br><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/tutorials/kotlin-android.html">Getting started with Android and Kotlin</a><br><a target="_blank" rel="noopener" href="https://github.com/JetBrains/kotlin">kotlin项目</a><br><a target="_blank" rel="noopener" href="https://github.com/JetBrains/kotlin-examples">kotlin配置及与java的互操作</a><br><a target="_blank" rel="noopener" href="https://github.com/Kotlin/kotlin-koans">kotlin语法练习</a><br><a href="doc/kotlin-docs.pdf">Kotlin1.1手册</a><br><a target="_blank" rel="noopener" href="http://tanfujun.com/kotlin-web-site-cn/docs/reference/">kotlin中文网</a><br><a target="_blank" rel="noopener" href="https://kotlinlang.org/">kotlin官网</a><br><a target="_blank" rel="noopener" href="https://github.com/huanglizhuo/kotlin-in-chinese">中文kotlin项目</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2017/05/23/Kotlin/Kotlin-HElloWorld/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/05/23/Kotlin/Kotlin-HElloWorld/" data-id="ckg0p46gk007go8gw7cms7my4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-FirstCode/FirstCode-advanced-skills" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/13/FirstCode/FirstCode-advanced-skills/" class="article-date">
+  <time datetime="2017-05-13T11:09:08.000Z" itemprop="datePublished">May 13 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/13/FirstCode/FirstCode-advanced-skills/">第一行代码之高级技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="全局获取Context"><a href="#全局获取Context" class="headerlink" title="全局获取Context"></a>全局获取Context</h2><p>新建一个自己Application，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context context;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        context = getApplicationContext();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> context;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/05/13/FirstCode/FirstCode-advanced-skills/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/" data-id="ckg0p46g8005ro8gw69cb64it" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-FirstCode/FirstCode-Material-Design" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/10/FirstCode/FirstCode-Material-Design/" class="article-date">
+  <time datetime="2017-05-10T13:31:27.000Z" itemprop="datePublished">May 10 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/10/FirstCode/FirstCode-Material-Design/">第一行代码之Material Design</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="Toolbar控件"><a href="#Toolbar控件" class="headerlink" title="Toolbar控件"></a>Toolbar控件</h2><h3 id="主题定义"><a href="#主题定义" class="headerlink" title="主题定义"></a>主题定义</h3><p>对应于ActionBar，由于ActionBar被限定于活动顶部，不能实现一些Material Design效果，因此已不推荐使用了。</p>
+<p>ActionBar来自项目指定的主题定义的显示，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># AndroidManifest.xml</span><br><span class="line">android:theme=&quot;@style/AppTheme&quot;</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/05/10/FirstCode/FirstCode-Material-Design/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/" data-id="ckg0p46hi00d1o8gw7z3wbpa6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-FirstCode/FirstCode-Fragment" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/10/FirstCode/FirstCode-Fragment/" class="article-date">
+  <time datetime="2017-05-10T04:24:05.000Z" itemprop="datePublished">May 10 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/10/FirstCode/FirstCode-Fragment/">第一行代码之碎片</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="碎片的使用"><a href="#碎片的使用" class="headerlink" title="碎片的使用"></a>碎片的使用</h2><h3 id="碎片的简单用法"><a href="#碎片的简单用法" class="headerlink" title="碎片的简单用法"></a>碎片的简单用法</h3><p>新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout...</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Button...</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/05/10/FirstCode/FirstCode-Fragment/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/" data-id="ckg0p46g6005go8gw6jov9ycl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-FirstCode/FirstCode-Network" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/09/FirstCode/FirstCode-Network/" class="article-date">
+  <time datetime="2017-05-09T11:29:56.000Z" itemprop="datePublished">May 9 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/09/FirstCode/FirstCode-Network/">第一行代码之网络</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h2><p>WebView控件使用十分简单：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 布局</span><br><span class="line">&lt;WebView /&gt;</span><br><span class="line"></span><br><span class="line"># 应用</span><br><span class="line">webView.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>); <span class="comment">// 设置浏览器属性，支持JavaScript脚本</span></span><br><span class="line">webView.setWebViewClient(<span class="keyword">new</span> WebViewClient());<span class="comment">//目标网页在当前WebView中显示，而不打开系统浏览器</span></span><br><span class="line">webView.loadUrl(<span class="string">&quot;http://huaqianlee.github.io&quot;</span>);</span><br><span class="line"></span><br><span class="line"># 权限</span><br><span class="line">&lt;uses-permission android:name=<span class="string">&quot;android.permission.INTERNET&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/05/09/FirstCode/FirstCode-Network/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/" data-id="ckg0p46g6005jo8gw2ppu6ind" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/archives/2017/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2017/page/3/">3</a><a class="page-number" href="/archives/2017/page/4/">4</a><a class="extend next" rel="next" href="/archives/2017/page/3/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

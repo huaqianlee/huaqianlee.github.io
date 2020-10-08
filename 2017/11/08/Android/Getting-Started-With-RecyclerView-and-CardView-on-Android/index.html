@@ -1,38 +1,311 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
 
+  
+  <title>Getting Started With RecyclerView and CardView on Android | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="偶然看到这篇文章，觉得写得很好，简单明了，所以尝试将其翻译一下。  如果你想创作一个用列表显示数据的Android应用，Android L提供了两个让你更容易实现的新特性：RecyclerView和CardView。通过用这些控件，可以很容易让你的app符合Google的Material Design规范。 创作APP时一个模板参考的好地方：Envato market。你可以找到成千上万的APP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting Started With RecyclerView and CardView on Android">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="偶然看到这篇文章，觉得写得很好，简单明了，所以尝试将其翻译一下。  如果你想创作一个用列表显示数据的Android应用，Android L提供了两个让你更容易实现的新特性：RecyclerView和CardView。通过用这些控件，可以很容易让你的app符合Google的Material Design规范。 创作APP时一个模板参考的好地方：Envato market。你可以找到成千上万的APP">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog/recyclerview_cardview/Universal-Android-app.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog/recyclerview_cardview/device_2015.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog/recyclerview_cardview/device-2015-02.png">
+<meta property="article:published_time" content="2017-11-08T14:23:59.000Z">
+<meta property="article:modified_time" content="2019-04-06T14:25:27.046Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="App">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog/recyclerview_cardview/Universal-Android-app.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+</head>
 
-{% block page_class %}page-post-detail{% endblock %}
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/Getting-Started-With-RecyclerView-and-CardView-on-Android" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/" class="article-date">
+  <time datetime="2017-11-08T14:23:59.000Z" itemprop="datePublished">Nov 8 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Getting Started With RecyclerView and CardView on Android
+    </h1>
+  
 
-{% block content %}
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>偶然看到这篇文章，觉得写得很好，简单明了，所以尝试将其翻译一下。</p>
+</blockquote>
+<p>如果你想创作一个用列表显示数据的Android应用，Android L提供了两个让你更容易实现的新特性：RecyclerView和CardView。通过用这些控件，可以很容易让你的app符合Google的Material Design规范。</p>
+<p>创作APP时一个模板参考的好地方：<a target="_blank" rel="noopener" href="https://go.redirectingat.com/?id=1342X589339&site=code.tutsplus.com&xs=1&isjs=1&url=https://codecanyon.net/category/mobile/android?_ga=2.255032513.873197305.1503543294-826134730.1503543294&xguid=6c32060c165aa0d81cc926f785d03c1a&xuuid=40b87ed972cd06dc4bfc1a62b8c59465&xsessid=e18f51adda215e4913eb634122cf8895&xcreo=0&xed=0&sref=https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465&xtz=-480">Envato market</a>。你可以找到成千上万的APP模板，从<a target="_blank" rel="noopener" href="https://go.redirectingat.com/?id=1342X589339&site=code.tutsplus.com&xs=1&isjs=1&url=https://codecanyon.net/item/layar-tancep-youtube-app-for-android/5190062?_ga=2.248270926.873197305.1503543294-826134730.1503543294&xguid=6c32060c165aa0d81cc926f785d03c1a&xuuid=40b87ed972cd06dc4bfc1a62b8c59465&xsessid=e18f51adda215e4913eb634122cf8895&xcreo=0&xed=0&sref=https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465&xtz=-480">Youtube</a>到<a target="_blank" rel="noopener" href="https://go.redirectingat.com/?id=1342X589339&site=code.tutsplus.com&xs=1&isjs=1&url=https://codecanyon.net/item/flappybot-an-obstacle-avoidance-game/6827330?_ga=2.248270926.873197305.1503543294-826134730.1503543294&xguid=6c32060c165aa0d81cc926f785d03c1a&xuuid=40b87ed972cd06dc4bfc1a62b8c59465&xsessid=e18f51adda215e4913eb634122cf8895&xcreo=0&xed=0&sref=https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465&xtz=-480">obstacleavoidance game</a>。</p>
+<p>或者你可以尝试一下<a target="_blank" rel="noopener" href="https://codecanyon.net/item/universal-full-multipurpose-android-app/6512720?_ga=2.217207135.873197305.1503543294-826134730.1503543294">通用的Android app模板</a>,它能为你创作任何种类app提供一个坚实的基础。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog/recyclerview_cardview/Universal-Android-app.png" alt="Universal-Android-app"></p>
+<a id="more"></a>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>为了继续，你应该使用最新版本Android Studio。你可以从<a target="_blank" rel="noopener" href="http://developer.android.com/sdk/index.html">Android 开发者官网</a>获得它。</p>
+<h2 id="支持老版本"><a href="#支持老版本" class="headerlink" title="支持老版本"></a>支持老版本</h2><p>在写这篇文章时，只有少于2%的Android设备运行在Android L上。无论怎样，多亏v7 Support Library，你能使用RecyclerView和CardView控件运行在老版本的安卓设备上面，通过在你工程中build.grade文件添加如下依赖片段实现：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">compile</span> <span class="string">&#x27;com.android.support:cardview-v7:21.0.+&#x27;</span></span><br><span class="line"><span class="keyword">compile</span> <span class="string">&#x27;com.android.support:recyclerview-v7:21.0.+&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="创建CardView"><a href="#创建CardView" class="headerlink" title="创建CardView"></a>创建CardView</h2><p><em>CardView</em>是一个<em>ViewGroup</em>，像其他<em>ViewGroup</em>一样，它能通过Layout xml文件添加到你的 <em>Activity</em> 或者 <em>Fragment</em>。</p>
+<p>为了创建一个空<em>CardView</em>，你应该添加如下代码片段到你的layout XML文件中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">android.support.v7.widget.CardView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:card_view</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.v7.widget.CardView</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最为一个更实际的例子，咱们创建一个<em>LinearLayout</em>并将<em>CardView</em>作为子控件放在里面。<em>CardView</em>可以代表一个人，包含如下信息：</p>
+<ul>
+<li><em>TextView</em> - 显示人名</li>
+<li><em>TextView</em> - 显示年纪</li>
+<li><em>ImageView</em> - 显示照片</li>
+</ul>
+<p>xml内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span> <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:padding</span>=<span class="string">&quot;16dp&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;<span class="name">android.support.v7.widget.CardView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/cv&quot;</span></span></span><br><span class="line"><span class="tag">        &gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="tag">&lt;<span class="name">RelativeLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:padding</span>=<span class="string">&quot;16dp&quot;</span></span></span><br><span class="line"><span class="tag">            &gt;</span></span><br><span class="line"> </span><br><span class="line">            <span class="tag">&lt;<span class="name">ImageView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/person_photo&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_alignParentLeft</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_alignParentTop</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_marginRight</span>=<span class="string">&quot;16dp&quot;</span></span></span><br><span class="line"><span class="tag">                /&gt;</span></span><br><span class="line"> </span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/person_name&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_toRightOf</span>=<span class="string">&quot;@+id/person_photo&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_alignParentTop</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textSize</span>=<span class="string">&quot;30sp&quot;</span></span></span><br><span class="line"><span class="tag">                /&gt;</span></span><br><span class="line"> </span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/person_age&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_toRightOf</span>=<span class="string">&quot;@+id/person_photo&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_below</span>=<span class="string">&quot;@+id/person_name&quot;</span></span></span><br><span class="line"><span class="tag">                /&gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">android.support.v7.widget.CardView</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果这个xml文件被用作<em>Activity</em>的layout，并且给<em>TextView</em>和ImageView*设置有意义的值，那么在Android设备上面它看起来应该像这个样子：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog/recyclerview_cardview/device_2015.png" alt="device"></p>
+<h2 id="创建RecyclerView"><a href="#创建RecyclerView" class="headerlink" title="创建RecyclerView"></a>创建RecyclerView</h2><h3 id="在Layout中定义它"><a href="#在Layout中定义它" class="headerlink" title="在Layout中定义它"></a>在Layout中定义它</h3><p>使用一个<em>RecyclerView</em>实例有一些复杂，但是在layout xml中定义它十分简单。可以定义如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">android.support.v7.widget.RecyclerView</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">&quot;@+id/rv&quot;</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过如下代码片段在你的<em>Activity</em>中去获得句柄：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RecyclerView rv = (RecyclerView)findViewById(R.id.rv);</span><br></pre></td></tr></table></figure>
+<p>如果你确定<em>RecyclerView</em>的大小不会改变，你可以添加如下语句：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rv.setHasFixedSize(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="使用LayoutManager"><a href="#使用LayoutManager" class="headerlink" title="使用LayoutManager"></a>使用LayoutManager</h3><p>和<em>ListView</em>不一样，<em>RecyclerView</em>需要一个<em>LayoutManger</em>去管理其子项的位置。你可以通过继承<em>RecyclerView.LayoutManager</em>类定义自己的<em>LayoutManager</em>。不过，大多数案子里面，你直接使用如下预定义的<em>LayoutManager</em>子类就可以了：</p>
+<ul>
+<li>LinearLayoutManager</li>
+<li>GridLayoutManager</li>
+<li>StaggeredGridLayoutManager<br>在这篇教程里，我将使用<em>LinearLayoutManager</em>，它默认将让你的<em>RecyclerView</em>看起来像一个<em>ListView</em>。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LinearLayoutManager llm = <span class="keyword">new</span> LinearLayoutManager(context);</span><br><span class="line">rv.setLayoutManager(llm);</span><br></pre></td></tr></table></figure>
+<h3 id="定义内容"><a href="#定义内容" class="headerlink" title="定义内容"></a>定义内容</h3>和<em>ListView</em>一样，<em>RecyclerView</em>也需要一个适配器去接入数据。但是在创建适配器前，我们先创建我们需要的数据。创建一个简单的类来代表一个人然后写一个方法来初始化一个<em>Person</em>对象集：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    String age;</span><br><span class="line">    <span class="keyword">int</span> photoId;</span><br><span class="line"> </span><br><span class="line">    Person(String name, String age, <span class="keyword">int</span> photoId) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.photoId = photoId;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span> List&lt;Person&gt; persons;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// This method creates an ArrayList that has three Person objects</span></span><br><span class="line"><span class="comment">// Checkout the project associated with this tutorial on Github if</span></span><br><span class="line"><span class="comment">// you want to use the same images.</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initializeData</span><span class="params">()</span></span>&#123;</span><br><span class="line">    persons = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    persons.add(<span class="keyword">new</span> Person(<span class="string">&quot;Emma Wilson&quot;</span>, <span class="string">&quot;23 years old&quot;</span>, R.drawable.emma));</span><br><span class="line">    persons.add(<span class="keyword">new</span> Person(<span class="string">&quot;Lavery Maiss&quot;</span>, <span class="string">&quot;25 years old&quot;</span>, R.drawable.lavery));</span><br><span class="line">    persons.add(<span class="keyword">new</span> Person(<span class="string">&quot;Lillie Watts&quot;</span>, <span class="string">&quot;35 years old&quot;</span>, R.drawable.lillie));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建适配器"><a href="#创建适配器" class="headerlink" title="创建适配器"></a>创建适配器</h3>要创建一个<em>RecyclerView</em>可以使用的适配器，你必须继承<em>RecyclerView.Adapter</em>。这个适配器遵循<strong>View holder</strong>设计模式，也就意味着你需要定义一个类继承与<em>RecyclerView.ViewHolder</em>。这种模式最大限度减少调用<em>findViewByIdea</em>方法。</li>
+</ul>
+<p>前面我们已经在 XML Layout中定义了一个<em>CardView</em>代表一个人。我们将重复利用此布局文件。在我们自定义<em>ViewHolder</em>的构造方法中，初始化此视图属于<em>RecyclerView</em>的子项。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RVAdapter</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">RVAdapter</span>.<span class="title">PersonViewHolder</span>&gt;</span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonViewHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;      </span><br><span class="line">        CardView cv;</span><br><span class="line">        TextView personName;</span><br><span class="line">        TextView personAge;</span><br><span class="line">        ImageView personPhoto;</span><br><span class="line"> </span><br><span class="line">        PersonViewHolder(View itemView) &#123;</span><br><span class="line">            <span class="keyword">super</span>(itemView);</span><br><span class="line">            cv = (CardView)itemView.findViewById(R.id.cv);</span><br><span class="line">            personName = (TextView)itemView.findViewById(R.id.person_name);</span><br><span class="line">            personAge = (TextView)itemView.findViewById(R.id.person_age);</span><br><span class="line">            personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来，为自定义适配器增加一个构造方法来处理<em>RecyclerView</em>显示的数据。我们的数据有<em>Person</em>对象集组成，添加如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Person&gt; persons;</span><br><span class="line"> </span><br><span class="line">RVAdapter(List&lt;Person&gt; persons)&#123;</span><br><span class="line">    <span class="keyword">this</span>.persons = persons;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>RecyclerView.Adapter</em>有三个抽象方法必须被重写。咱们从<em>getItemCount</em>方法开始。这个方法返回子项存在数据的数量。对于我们由<em>List</em>形成的数据，我们只需要调用<em>List</em>对象的*size()*方法即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> persons.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来，重写<em>onCreateViewHolder</em>方法。正如方法名所展示，当自定义<em>ViewHolder</em>需要被初始化时调用。我们指明<em>RecyclerView</em>每个子项使用的布局。通过使用<em>LayoutInflater</em>完成，传递着结果到自定义的<em>ViewHolder</em>的构造方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> PersonViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup viewGroup, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, <span class="keyword">false</span>);</span><br><span class="line">    PersonViewHolder pvh = <span class="keyword">new</span> PersonViewHolder(v);</span><br><span class="line">    <span class="keyword">return</span> pvh;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重写<em>onBindViewHolder</em>方法去指明每一个<em>RecyclerView</em>子项的内容。这个反复与<em>ListView</em>的适配器的<em>getView</em>方法十分相似。在我们的例子中，你必须设置<em>CardView</em>中的名字、年纪以及照片。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(PersonViewHolder personViewHolder, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    personViewHolder.personName.setText(persons.get(i).name);</span><br><span class="line">    personViewHolder.personAge.setText(persons.get(i).age);</span><br><span class="line">    personViewHolder.personPhoto.setImageResource(persons.get(i).photoId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最好，你需要重写<em>onAttachedToRecyclerView</em>方法。我们就简单实用地直接调用父类的实现。</p>
+<blockquote>
+<p>注：新版本已经不需要重写此方法。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAttachedToRecyclerView</span><span class="params">(RecyclerView recyclerView)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onAttachedToRecyclerView(recyclerView);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实用适配器"><a href="#实用适配器" class="headerlink" title="实用适配器"></a>实用适配器</h3><p>现在适配器准备好了，接下来就是让<em>Activity</em>通过适配器构造函数和<em>RecyclerView</em>的<em>setAdapter</em>去初始化和使用这个适配器了。添加如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RVAdapter adapter = <span class="keyword">new</span> RVAdapter(persons);</span><br><span class="line">rv.setAdapter(adapter);</span><br></pre></td></tr></table></figure>
+<h3 id="编译及运行"><a href="#编译及运行" class="headerlink" title="编译及运行"></a>编译及运行</h3><p>当你在你的Android设备上运行这个例程时，你将会看类似如下图片的结果：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog/recyclerview_cardview/device-2015-02.png" alt="device"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>在这篇教程，你已经学会了怎么去使用在Android L中引入的<em>CardView</em>和<em>RecyclerView</em>控件。你也明白了在Material Design应用中怎么去使用这些控件。注意：通过<em>RecyclerView</em>可以做几乎所有<em>ListView</em>所做的事，不过为了更少的代码，使用<em>ListView</em>仍然是一个比较好的选择。</p>
+<p>你可以参考Android Developers reference去获得更多关于<em>CardView</em>和<em>RecyclerView</em>类的信息。</p>
+<p>最好，如果你想更快速地开发你的app，不要忘记在Envato Market查看Android app templates。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465">原文章地址。</a></p>
+</blockquote>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/" data-id="ckg0p46fq0037o8gwf8yicbsx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/13/Android/What-is-fast-charge-now/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          常用的快充技术简介
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/08/Other/MDB-ICP-protocol/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">纸币器和MDB协议</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

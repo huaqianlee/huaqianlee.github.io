@@ -1,38 +1,323 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Consolidating the foundation of Linux, basic cmds | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Command InterfaceWe can enter command interface via the following ways.  Excute init 3 with root.  init run at runlevel 3.     Hotkey: Ctrl + ALt + F1&#x2F;2&#x2F;3&#x2F;…  initinit is the first process, it commonly">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Consolidating the foundation of Linux, basic cmds">
+<meta property="og:url" content="http://huaqianlee.github.io/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="Command InterfaceWe can enter command interface via the following ways.  Excute init 3 with root.  init run at runlevel 3.     Hotkey: Ctrl + ALt + F1&#x2F;2&#x2F;3&#x2F;…  initinit is the first process, it commonly">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-06T03:43:20.000Z">
+<meta property="article:modified_time" content="2020-07-18T09:20:50.785Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux/Consolidating-the-foundation-of-Linux-basic-cmds" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/" class="article-date">
+  <time datetime="2020-02-06T03:43:20.000Z" itemprop="datePublished">Feb 6 2020</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Consolidating the foundation of Linux, basic cmds
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Command-Interface"><a href="#Command-Interface" class="headerlink" title="Command Interface"></a>Command Interface</h2><p>We can enter command interface via the following ways.</p>
+<ol>
+<li>Excute <code>init 3</code> with root. <blockquote>
+<p>init run at runlevel 3.  </p>
+</blockquote>
+</li>
+<li>Hotkey: Ctrl + ALt + F1/2/3/…</li>
+</ol>
+<h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p><code>init</code> is the first process, it commonly locates on <code>/sbin/init</code>, if kernel can’t find <code>init</code>, it will try to run <code>/bin/sh</code>, if the operation fails , the OS will fail to start successfully. </p>
+<p><code>init</code> has 7 runlevels, we can check the default runlevel and runlevels in <code>/etc/inittab</code>. As follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Default runlevel. The runlevels used are:</span><br><span class="line">#   0 - halt (Do NOT set initdefault to this)</span><br><span class="line">#   1 - Single user mode(root)</span><br><span class="line">#   2 - Multiuser, without NFS (The same as 3, if you do not have networking)</span><br><span class="line">#   3 - Full multiuser mode(standard runlevel)</span><br><span class="line">#   4 - unused(secure mode)</span><br><span class="line">#   5 - X11(user interface)</span><br><span class="line">#   6 - reboot (Do NOT set initdefault to this)</span><br><span class="line">#</span><br><span class="line">id:5:initdefault:</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<h3 id="Command-related-Directoriesran"><a href="#Command-related-Directoriesran" class="headerlink" title="Command-related Directoriesran"></a>Command-related Directoriesran</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;etc - configuration file directory</span><br><span class="line">&#x2F;bin - command directory</span><br><span class="line">&#x2F;sbin -  management command directory</span><br><span class="line">&#x2F;usr&#x2F;bin &amp; &#x2F;usr&#x2F;sbin Other commands pre-installed on the system</span><br></pre></td></tr></table></figure>
+
+<h2 id="Help-Commands"><a href="#Help-Commands" class="headerlink" title="Help Commands"></a>Help Commands</h2><p>This part is very important, we can learn all the commands with the following help commands.</p>
+<h3 id="man-manual"><a href="#man-manual" class="headerlink" title="man(manual)"></a>man(manual)</h3><p><code>man</code> has 9 setctions, we can check them via <code>man man</code>, as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">MANUAL SECTIONS</span><br><span class="line">The standard sections of the manual include:</span><br><span class="line"></span><br><span class="line">       1      User Commands</span><br><span class="line"></span><br><span class="line">       2      System Calls</span><br><span class="line"></span><br><span class="line">       3      C Library Functions</span><br><span class="line"></span><br><span class="line">       4      Devices and Special Files</span><br><span class="line"></span><br><span class="line">       5      File Formats and Conventions</span><br><span class="line"></span><br><span class="line">       6      Games et. Al.</span><br><span class="line"></span><br><span class="line">       7      Miscellanea</span><br><span class="line"></span><br><span class="line">       8      System Administration tools and Daemons</span><br><span class="line"></span><br><span class="line">       9      Kernel routines</span><br></pre></td></tr></table></figure>
+
+<p>Manual sections are used to distinguish different parameters. For example, when there is a parameter with the same name, that the category is different. we can specify by sections.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man (1) man <span class="comment"># default is 1</span></span><br></pre></td></tr></table></figure>
+
+<p>When we do not know the classification, all manuals can be got as follows.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man -a passwd</span><br></pre></td></tr></table></figure>
+
+<h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><p>Before introducing this command, we need to figure out two concepts. As follows:</p>
+<ol>
+<li>Builtin commands : come with shell.</li>
+<li>External commands : the others.</li>
+</ol>
+<p>We can figure out what type a command belongs to depend on the following way:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> &lt;<span class="built_in">command</span>&gt;  <span class="comment"># print the type of command</span></span><br><span class="line"></span><br><span class="line">example:</span><br><span class="line">[lee@lee-server bin]$ <span class="built_in">type</span> ls</span><br><span class="line">ls is aliased to `ls --color=auto<span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[lee@lee-server bin]$ type cd</span></span><br><span class="line"><span class="string">cd is a shell builtin</span></span><br></pre></td></tr></table></figure>
+
+<p>Different types of commands have different execution formats, as follows:<br>Builtin commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">help</span> &lt;<span class="built_in">command</span>&gt;</span><br><span class="line"><span class="built_in">help</span> <span class="built_in">cd</span></span><br></pre></td></tr></table></figure>
+
+<p>External commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="built_in">command</span>&gt; --<span class="built_in">help</span></span><br><span class="line">ls --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="info"><a href="#info" class="headerlink" title="info"></a>info</h3><p><code>info</code> is more detailed command than <code>help.</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">info &lt;<span class="built_in">command</span>&gt;</span><br><span class="line">info ls</span><br></pre></td></tr></table></figure>
+
+<h2 id="Basic-commands"><a href="#Basic-commands" class="headerlink" title="Basic commands"></a>Basic commands</h2><h3 id="Switch-Account"><a href="#Switch-Account" class="headerlink" title="Switch Account"></a>Switch Account</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - &lt;usr&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p><code>man pwd</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">NAME</span><br><span class="line">       <span class="built_in">pwd</span> - <span class="built_in">print</span> name of current/working directory</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">       <span class="built_in">pwd</span> [OPTION]...</span><br><span class="line"></span><br><span class="line">DESCRIPTION</span><br><span class="line">       Print the full filename of the current working directory.</span><br><span class="line"></span><br><span class="line">       -L, --logical</span><br><span class="line">              use PWD from environment, even <span class="keyword">if</span> it contains symlinks</span><br><span class="line"></span><br><span class="line">       -P, --physical</span><br><span class="line">              avoid all symlinks</span><br><span class="line"></span><br><span class="line">       --<span class="built_in">help</span> display this <span class="built_in">help</span> and <span class="built_in">exit</span></span><br><span class="line"></span><br><span class="line">       --version</span><br><span class="line">              output version information and <span class="built_in">exit</span></span><br><span class="line"></span><br><span class="line">       NOTE:  your  shell may have its own version of <span class="built_in">pwd</span>, <span class="built_in">which</span> Commonly supersedes the version described here.  Please refer to your shell’s</span><br><span class="line">       documentation <span class="keyword">for</span> details about the options it supports.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>Basic usage:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[lee@lee-server bin]$ ls /home / /home/*</span><br><span class="line">[sudo] password <span class="keyword">for</span> lee: </span><br><span class="line">/:</span><br><span class="line">bin  boot  dev	etc  home  lib	lost+found  media  misc  mnt  net  opt	proc  root  sbin  selinux  srv	sys  tmp  usr  var</span><br><span class="line"></span><br><span class="line">/home:</span><br><span class="line">lee  lost+found</span><br><span class="line"></span><br><span class="line">/home/lee:</span><br><span class="line">bin  blog  Desktop  Documents  Downloads  lee  mbr2.bin  mbr.bin  Music  Pictures  Public  script  server  Templates  Videos</span><br><span class="line"></span><br><span class="line">/home/lost+found:</span><br></pre></td></tr></table></figure>
+
+<p>Common options:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-a, --all</span><br><span class="line">      <span class="keyword">do</span> not ignore entries starting with .</span><br><span class="line">-l    use a long listing format</span><br><span class="line">-r, --reverse</span><br><span class="line">      reverse order <span class="keyword">while</span> sorting</span><br><span class="line">-R, --recursive</span><br><span class="line">      list subdirectories recursively</span><br><span class="line">-t    sort by modification time</span><br></pre></td></tr></table></figure>
+
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> - <span class="comment"># change to $(OLDPWD)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mkdir - Create the DIRECTORY(ies), <span class="keyword">if</span> they <span class="keyword">do</span> not already exist.</span><br><span class="line">rmdir - Remove the DIRECTORY(ies), <span class="keyword">if</span> they are empty.</span><br><span class="line"></span><br><span class="line">Option:</span><br><span class="line">-p, --parents   create/remove DIRECTORY and its ancestors; e.g., `mkdir/rmdir -p a/b/c<span class="string">&#x27; is</span></span><br><span class="line"><span class="string">                    similar to `mkdir/rmdir a/b/c a/b a&#x27;</span></span><br><span class="line"></span><br><span class="line">rm  - Remove (unlink) the FILE(s).</span><br><span class="line"></span><br><span class="line">Option:</span><br><span class="line">  -f, --force           ignore nonexistent files, never prompt</span><br><span class="line">  -r, -R, --recursive   remove directories and their contents recursively</span><br></pre></td></tr></table></figure>
+
+<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><p>Common options:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-a, --archive</span><br><span class="line">        same as -dR --preserve=all; 保留源文件所有信息</span><br><span class="line">-p     same as --preserve=mode,ownership,timestamps; 保留源文件时间</span><br><span class="line">-R, -r, --recursive</span><br><span class="line">        copy directories recursively</span><br><span class="line">-v, --verbose</span><br><span class="line">        explain what is being <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cat - Concatenate FILE(s), or standard input, to standard output.</span><br><span class="line"></span><br><span class="line">head - output the first part of files</span><br><span class="line">        With no FILE, or when FILE is -, <span class="built_in">read</span> standard input. </span><br><span class="line">    -n   output the fist n lines instead of the first 10(default value)</span><br><span class="line"></span><br><span class="line">tail - output the last part of files</span><br><span class="line">    -n  output the last n lines instead of the last 10(default value)</span><br><span class="line">    -f  output appended data as the file grows, eg, get the logs.</span><br><span class="line"></span><br><span class="line">wc - <span class="built_in">print</span> newline, word, and byte counts <span class="keyword">for</span> each file</span><br><span class="line">    -l, --lines</span><br><span class="line">        <span class="built_in">print</span> the newline counts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">more - More is a filter <span class="keyword">for</span> paging through text one screenful at a time.</span><br><span class="line">less</span><br></pre></td></tr></table></figure>
+
+<h3 id="Compression-and-decompression"><a href="#Compression-and-decompression" class="headerlink" title="Compression and decompression"></a>Compression and decompression</h3><p>Common commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># compression rate increases in turn.</span></span><br><span class="line">tar </span><br><span class="line">gzip</span><br><span class="line">bzip2</span><br></pre></td></tr></table></figure>
+
+<p>Commond suffix:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.tar.gz </span><br><span class="line">.tar.bz2 </span><br><span class="line">.tgz</span><br></pre></td></tr></table></figure>
+
+<p>Compress:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -c  </span><br><span class="line">tar czf ，integrate gzip，fast but low compression rate.  common suffix is <span class="string">&#x27;.tar.gz&#x27;</span></span><br><span class="line">tar cjf , integrate bzip2 , slow but high compression rate. Common suffix is <span class="string">&#x27;.tar.bz2&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>Extract:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar xf -C &lt;out_dir&gt; </span><br><span class="line">    zxf</span><br><span class="line">    jxf</span><br></pre></td></tr></table></figure>
 
 
-{% block content %}
+<h3 id="Wildcard"><a href="#Wildcard" class="headerlink" title="Wildcard"></a>Wildcard</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*  any string</span><br><span class="line">？ one char,  file? = filea, fileb  not fileab</span><br><span class="line">[xyz]  one of xyz</span><br><span class="line">[a~z]  range between a and z</span><br><span class="line">[!xyz] or [^xyz] not one of xyz</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/" data-id="ckg0p46go0088o8gwaiaodka0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Consolidating the foundation of Linux, vim
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/06/Think/A-little-impression/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">A little impression</div>
+    </a>
+  
+</nav>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

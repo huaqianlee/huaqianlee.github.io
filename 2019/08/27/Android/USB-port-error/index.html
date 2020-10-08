@@ -1,38 +1,275 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>UFP was modified as DRP when we unplug OTG | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Term DFP - Downstream Facing Port下行端口，可以理解为 Host 的 Type-c 端口或者作为 Host 的 hub ，DFP 提供 VBUS，可以提供数据。在协议规范中 DFP 特指数据的下行传输，笼统意义上指的是数据下行和对外提供电源的设备。典型的 DFP 设备是电源适配器。  UFP - Upstream Facing port上行端口，可以理解为 Devi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UFP was modified as DRP when we unplug OTG">
+<meta property="og:url" content="http://huaqianlee.github.io/2019/08/27/Android/USB-port-error/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="Term DFP - Downstream Facing Port下行端口，可以理解为 Host 的 Type-c 端口或者作为 Host 的 hub ，DFP 提供 VBUS，可以提供数据。在协议规范中 DFP 特指数据的下行传输，笼统意义上指的是数据下行和对外提供电源的设备。典型的 DFP 设备是电源适配器。  UFP - Upstream Facing port上行端口，可以理解为 Devi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-08-27T14:11:32.000Z">
+<meta property="article:modified_time" content="2019-09-01T06:22:00.451Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Bug">
+<meta property="article:tag" content="Qualcomm">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/USB-port-error" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/27/Android/USB-port-error/" class="article-date">
+  <time datetime="2019-08-27T14:11:32.000Z" itemprop="datePublished">Aug 27 2019</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UFP was modified as DRP when we unplug OTG
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Term"><a href="#Term" class="headerlink" title="Term"></a>Term</h1><ul>
+<li><p>DFP - Downstream Facing Port<br>下行端口，可以理解为 Host 的 Type-c 端口或者作为 Host 的 hub ，DFP 提供 VBUS，可以提供数据。在协议规范中 DFP 特指数据的下行传输，笼统意义上指的是数据下行和对外提供电源的设备。典型的 DFP 设备是电源适配器。</p>
+</li>
+<li><p>UFP - Upstream Facing port<br>上行端口，可以理解为 Device 上的 Type-c 端口或者连接到 Host/DFP of a hub ，UFP 从 VBUS 中取电，并可提供数据。典型设备是 U 盘，移动硬盘。</p>
+</li>
+<li><p>DRP - DUal Role Port (DFP + UFP)<br>双角色端口，DRP 既可以做 DFP(Host)，也可以做 UFP(Device)，也可以在 DFP 与 UFP 间动态切换。典型的DRP设备是笔记本电脑。</p>
+</li>
+</ul>
+<blockquote>
+<p>引用摘录：A DRP port is a port that can operate as either a sink or source.</p>
+<p>source - takes the data role of a DFP.<br>sink - take the data role of a UFP.</p>
+<p>A current sink is a port or circuit point that accepts negative current, e.g. current into the circuit which it drains to ground.<br>A current source is a port or circuit point that provides positive current. A good example of a current source is a DC power supply</p>
+</blockquote>
+<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>逻辑：USB 默认为 UFP，不能使用 OTG ；若要使用需要通过 node 将其设为 DRP ， 但是在拔出后需要将其设回 UFP。 </p>
+<p>问题： 当拔掉 OTG 之后，USB 仍然为 DRP ，导致不用设置 node 即可连接 OTG。</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><a id="more"></a>
+
+<h2 id="初步解析"><a href="#初步解析" class="headerlink" title="初步解析"></a>初步解析</h2><p>通过在 smblib_handle_typec_removal 函数设置 USB 端口模式的地方加日志读取端口状态，发现 DRP 是被成功设置了的，但是短暂时间后又被其他地方修改为 UFP 模式了。</p>
+<p>通过寄存器相关关键字等各种方式皆不能找到其余修改的地方。</p>
+<p>因为老版本（Android N）上是没有问题的，所以尝试在本问题版本（Android Q） one by one 烧写 N 的镜像，最终发现 pmic.elf 分区会让问题得以解决。</p>
+<h2 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h2><p>对比代码发现如下两种修改方法可以解决问题：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------------------------------------</span><br><span class="line">diff --git a/QcomPkg/Library/PmicLib/target/sdm660_pm660_pm660l/psi/pm_config_target_pbs_ram.c b/QcomPkg/Library/PmicLib/target/sdm660_pm660_pm660l/psi/pm_config_target_pbs_ram.c</span><br><span class="line">index bfb32ba..cb012b4 <span class="number">100755</span></span><br><span class="line">--- a/QcomPkg/Library/PmicLib/target/sdm660_pm660_pm660l/psi/pm_config_target_pbs_ram.c</span><br><span class="line">+++ b/QcomPkg/Library/PmicLib/target/sdm660_pm660_pm660l/psi/pm_config_target_pbs_ram.c</span><br><span class="line">@@ <span class="number">-58</span>,<span class="number">7</span> +<span class="number">58</span>,<span class="number">7</span> @@ pm_pbs_seq [ ][PBS_RAM_DATA_SIZE] =</span><br><span class="line">      &#123; <span class="number">0x00</span>,  <span class="number">0x1B</span>,   <span class="number">0x01</span>,   <span class="number">0x18</span>&#125;,  <span class="comment">// W#1 -        0x804 Header offset, Header Version, PBS RAM Revision, PBS RAM Branch</span></span><br><span class="line">      &#123; <span class="number">0x2C</span>,  <span class="number">0x08</span>,   <span class="number">0xFF</span>,   <span class="number">0x83</span>&#125;,  <span class="comment">// W#2 -        0x808 Start of trigger jump table:</span></span><br><span class="line">      &#123; <span class="number">0x68</span>,  <span class="number">0x08</span>,   <span class="number">0xFF</span>,   <span class="number">0x83</span>&#125;,  <span class="comment">// W#3 -        0x80C</span></span><br><span class="line"># mothod first.</span><br><span class="line">-      &#123; <span class="number">0xC4</span>,  <span class="number">0x08</span>,   <span class="number">0xFF</span>,   <span class="number">0x83</span>&#125;,  <span class="comment">// W#4 -        0x810</span></span><br><span class="line">+      &#123; <span class="number">0xB8</span>,  <span class="number">0x08</span>,   <span class="number">0xFF</span>,   <span class="number">0x83</span>&#125;,  <span class="comment">// W#4 -        0x810</span></span><br><span class="line">OR </span><br><span class="line"># mothod second.</span><br><span class="line">-      &#123; <span class="number">0x38</span>,  <span class="number">0x09</span>,   <span class="number">0xFF</span>,   <span class="number">0x83</span>&#125;,  <span class="comment">// W#5 -        0x814</span></span><br><span class="line">+      &#123; <span class="number">0x2C</span>,  <span class="number">0x09</span>,   <span class="number">0xFF</span>,   <span class="number">0x83</span>&#125;,  <span class="comment">// W#5 -        0x814</span></span><br><span class="line">      &#123; <span class="number">0xC4</span>,  <span class="number">0x0F</span>,   <span class="number">0xFF</span>,   <span class="number">0x83</span>&#125;,  <span class="comment">// W#6 -        0x818 Fixed Offset = RAM-Base-Addr + 0x18 + 0x00 =&gt; SLEEP-SET</span></span><br><span class="line">      &#123; <span class="number">0xCC</span>,  <span class="number">0x0F</span>,   <span class="number">0xFF</span>,   <span class="number">0x83</span>&#125;,  <span class="comment">// W#7 -        0x81C Fixed Offset = RAM-Base-Addr + 0x18 + 0x04 =&gt; PON X Reasons</span></span><br><span class="line">--------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<p>但是针对这个问题咨询高通得到的回复是：PSI 模块是不允许修改的，会导致难以预料的问题，所以这种方案作罢。因为没有找到相关资料，不清楚这个差异具体是什么，高通也未给出清晰的答案。</p>
+<h2 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h2><p>拔掉时延时 5 毫秒才重置 USB 为 UFP 模式，试图在 PSI 之后修改，经过测试此修改方案能解决此问题。如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/drivers/power/supply/qcom/smb-lib.c b/drivers/power/supply/qcom/smb-lib.c</span><br><span class="line">--- a/drivers/power/supply/qcom/smb-lib.c</span><br><span class="line">+++ b/drivers/power/supply/qcom/smb-lib.c</span><br><span class="line">@@ <span class="number">-4378</span>,<span class="number">12</span> +<span class="number">4378</span>,<span class="number">28</span> @@</span><br><span class="line"> <span class="meta">#<span class="meta-keyword">ifdef</span> FEATURE__DET_DRIVER</span></span><br><span class="line"> 	<span class="comment">/* configure power role for default */</span></span><br><span class="line"> 	_power_role_val.intval = _det_get_default_power_role();</span><br><span class="line"></span><br><span class="line">+	msleep(<span class="number">5</span>);  # 延时等 PSI 修改 USB 为 DRP 完成，然后我们再修改为 UFP</span><br><span class="line">	rc = smblib_set_prop_typec_power_role(chg, &amp;_power_role_val);</span><br></pre></td></tr></table></figure>
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+<h2 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h2><p>此方案与方案二类似，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/drivers/power/supply/qcom/smb-lib.c b/drivers/power/supply/qcom/smb-lib.c</span><br><span class="line">--- a/drivers/power/supply/qcom/smb-lib.c</span><br><span class="line">+++ b/drivers/power/supply/qcom/smb-lib.c</span><br><span class="line">@@ <span class="number">-4378</span>,<span class="number">12</span> +<span class="number">4378</span>,<span class="number">28</span> @@</span><br><span class="line"> <span class="meta">#<span class="meta-keyword">ifdef</span> FEATURE__DET_DRIVER</span></span><br><span class="line"> 	<span class="comment">/* configure power role for default */</span></span><br><span class="line"> 	_power_role_val.intval = _det_get_default_power_role();  <span class="comment">// 获取需要设定端口模式</span></span><br><span class="line">-	rc = smblib_set_prop_typec_power_role(chg, &amp;_power_role_val);</span><br><span class="line">-	<span class="keyword">if</span> (rc &lt; <span class="number">0</span>) &#123;</span><br><span class="line">-		smblib_err(chg,</span><br><span class="line">-			<span class="string">&quot;Couldn&#x27;t configure power role for %d rc=%d\n&quot;</span>, _power_role_val.intval, rc);</span><br><span class="line">+	<span class="keyword">if</span>(_power_role_val.intval == POWER_SUPPLY_TYPEC_PR_SINK)&#123;</span><br><span class="line">+		rc = smblib_masked_write(chg, TYPE_C_INTRPT_ENB_SOFTWARE_CTRL_REG, TYPEC_DISABLE_CMD_BIT, TYPEC_DISABLE_CMD_BIT);</span><br><span class="line">+		<span class="keyword">if</span>(rc &lt; <span class="number">0</span>)</span><br><span class="line">+			smblib_err(chg, <span class="string">&quot;Couldn&#x27;t disable type-c\n&quot;</span>);</span><br><span class="line">+</span><br><span class="line">+		msleep(<span class="number">200</span>);  # 延时等 PSI 修改 USB 为 DRP 完成，然后我们再修改为 UFP</span><br><span class="line">+		rc = smblib_masked_write(chg, TYPE_C_INTRPT_ENB_SOFTWARE_CTRL_REG, UFP_EN_CMD_BIT | DFP_EN_CMD_BIT, UFP_EN_CMD_BIT);</span><br><span class="line">+		<span class="keyword">if</span>(rc &lt; <span class="number">0</span>)</span><br><span class="line">+			smblib_err(chg, <span class="string">&quot;Couldn&#x27;t configure power role for %d rc=%d\n&quot;</span>, _power_role_val.intval, rc);</span><br><span class="line">+</span><br><span class="line">+		msleep(<span class="number">10</span>);</span><br><span class="line">+		rc = smblib_masked_write(chg, TYPE_C_INTRPT_ENB_SOFTWARE_CTRL_REG, TYPEC_DISABLE_CMD_BIT, <span class="number">0</span>);</span><br><span class="line">+		<span class="keyword">if</span>(rc &lt; <span class="number">0</span>)</span><br><span class="line">+			smblib_err(chg, <span class="string">&quot;Couldn&#x27;t enable type-c\n&quot;</span>);</span><br><span class="line">+	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">+		rc = smblib_set_prop_typec_power_role(chg, &amp;_power_role_val); <span class="comment">// write 3 bit， if 中的内容部分算此函数的子集，只是提取出来添加了 TYPEC_DISABLE_CMD_BIT 和延时</span></span><br><span class="line">+		<span class="keyword">if</span>(rc &lt; <span class="number">0</span>)</span><br><span class="line">+			smblib_err(chg, <span class="string">&quot;Couldn&#x27;t configure power role for %d rc=%d\n&quot;</span>, _power_role_val.intval, rc);</span><br><span class="line"> 	&#125;</span><br><span class="line"> <span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"> 	<span class="comment">/* enable DRP */</span></span><br><span class="line"> 	rc = smblib_masked_write(chg, TYPE_C_INTRPT_ENB_SOFTWARE_CTRL_REG,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2019/08/27/Android/USB-port-error/" data-id="ckg0p46fr003ho8gw3ohcbuhg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li></ul>
 
-{% block page_class %}page-post-detail{% endblock %}
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/08/31/ARTS/First-week-of-ARTS-Start/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          The first week of ARTS: Start
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/16/Android/A-little-knowledge-about-health/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">一个 health service 不生效问题引出的一点知识</div>
+    </a>
+  
+</nav>
 
+  
+</article>
 
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
-
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

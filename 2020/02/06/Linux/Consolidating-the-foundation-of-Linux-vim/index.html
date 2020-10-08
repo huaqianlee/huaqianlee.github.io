@@ -1,38 +1,284 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Consolidating the foundation of Linux, vim | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="vimGlobal config. 1vi &#x2F;etc&#x2F;vimrc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Consolidating the foundation of Linux, vim">
+<meta property="og:url" content="http://huaqianlee.github.io/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="vimGlobal config. 1vi &#x2F;etc&#x2F;vimrc">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-06T03:45:32.000Z">
+<meta property="article:modified_time" content="2020-07-19T09:45:46.684Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Tools">
+<meta property="article:tag" content="Vim">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux/Consolidating-the-foundation-of-Linux-vim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/" class="article-date">
+  <time datetime="2020-02-06T03:45:32.000Z" itemprop="datePublished">Feb 6 2020</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Consolidating the foundation of Linux, vim
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><p>Global config.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vimrc</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<h2 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h2><h3 id="Normal-Mode"><a href="#Normal-Mode" class="headerlink" title="Normal Mode"></a>Normal Mode</h3><h4 id="Enter-insert-mode"><a href="#Enter-insert-mode" class="headerlink" title="Enter insert mode"></a>Enter insert mode</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">I/i</span><br><span class="line">i - Before cursor</span><br><span class="line">I - Beginning of line</span><br><span class="line"></span><br><span class="line">A/a</span><br><span class="line">a - After cursor</span><br><span class="line">A - End of line</span><br><span class="line"></span><br><span class="line">O/o</span><br><span class="line">o - Next line</span><br><span class="line">O - Last line</span><br><span class="line"></span><br><span class="line">cw -  Replace from the cursor to eh end of the word</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Moves"><a href="#Moves" class="headerlink" title="Moves"></a>Moves</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Move around</span></span><br><span class="line">Use the arrow cursor keys , or <span class="string">&quot;h&quot;</span> to go left, <span class="string">&quot;j&quot;</span> to go down, <span class="string">&quot;k&quot;</span> to go up, <span class="string">&quot;l&quot;</span> to go right.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">0 - Go to the first column</span><br><span class="line">^ - Go to the first non-blank character of the line</span><br><span class="line">$ - Go to the last column</span><br><span class="line">g_ - Got to the last non-blank character of line</span><br><span class="line">fa - Go to next occurence of the letter `a` on the line.</span><br><span class="line">    , - Find the next occurrence</span><br><span class="line">    ; - Find the previous occurrence</span><br><span class="line">t, - Go to just before the character `,`</span><br><span class="line">3fa - Find the 3rd occurrence of `a` on this line</span><br><span class="line">F/T - Like `f` and `t` but backward</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">G -  Go last line</span><br><span class="line">gg -  Go first line</span><br><span class="line"></span><br><span class="line"><span class="comment"># Go specified line.</span></span><br><span class="line">NG  - Go to line N</span><br><span class="line">:N  - Go to line N</span><br><span class="line"></span><br><span class="line">w - Go to the start of the following word</span><br><span class="line">e - Go to the end of this word</span><br><span class="line"></span><br><span class="line">% - Go to the corresponding (, &#123;, [</span><br><span class="line"></span><br><span class="line">* - Go to next occurrence of the word under the cursor</span><br><span class="line"><span class="comment"># - Go to previous occurrence of the word under the cursor</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># search for pattern</span></span><br><span class="line">/pattern  </span><br><span class="line">n next </span><br><span class="line">N  above</span><br></pre></td></tr></table></figure>
+
+<h4 id="Copy-Paste"><a href="#Copy-Paste" class="headerlink" title="Copy/Paste"></a>Copy/Paste</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">y -  Copy the content from the current cursor to next cursor. Controled by arrow keys or `h\j\k\l`</span><br><span class="line">yy -  Copy the current line </span><br><span class="line">3yy - Copy the following three lines.</span><br><span class="line">y$ -  Copy content from cursor to end of line.</span><br><span class="line"></span><br><span class="line">d  -  Delet the content from the current cursor to next cursor. Controled by arrow keys or `h\j\k\l`</span><br><span class="line">dd  -  Delete (and copy) the current line</span><br><span class="line">d$ -  Cut content from cursor to end of line.</span><br><span class="line"></span><br><span class="line">p -  Paste</span><br></pre></td></tr></table></figure>
+
+<h4 id="Modify"><a href="#Modify" class="headerlink" title="Modify"></a>Modify</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">r -  Replace</span><br><span class="line">R -  Continuous replacement</span><br><span class="line">x  -  Delete one char</span><br><span class="line"></span><br><span class="line">dt<span class="string">&quot; - Remove everything until `&quot;</span>`</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Undo-Redo"><a href="#Undo-Redo" class="headerlink" title="Undo/Redo"></a>Undo/Redo</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u -  Undo</span><br><span class="line">Ctrl + r  -  Redo</span><br></pre></td></tr></table></figure>
+
+<h4 id="Repeat-commands"><a href="#Repeat-commands" class="headerlink" title="Repeat commands"></a>Repeat commands</h4><ol>
+<li><code>.</code> will repeat the last command.  </li>
+<li><code>N&lt;command&gt;</code> will repeat the command N times  </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># examples</span></span><br><span class="line">2dd  -  will delete 2 lines</span><br><span class="line">3p  -  will paste the text 3 <span class="built_in">times</span></span><br><span class="line">100idesu [ESC]  -  will write “desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu”</span><br><span class="line">.  -  Just after the last <span class="built_in">command</span> will write again the 100 “desu”.</span><br><span class="line">3.  -  Will write 3 “desu” (and not 300, how clever).</span><br></pre></td></tr></table></figure>
+
+<h4 id="Combination-command"><a href="#Combination-command" class="headerlink" title="Combination command"></a>Combination command</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;start position&gt;&lt;<span class="built_in">command</span>&gt;&lt;end position&gt;</span><br><span class="line">0y$ means</span><br><span class="line"></span><br><span class="line">0  -  go to the beginning of this line</span><br><span class="line">y  -  yank from here</span><br><span class="line">$  -  up to the end of this line</span><br><span class="line"></span><br><span class="line">ye - yank from here to the end of the word</span><br><span class="line">y2/foo - yank up to the second occurrence of “foo”.</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment"># These command can only be used after an operator in visual mode</span></span><br><span class="line">&lt;action&gt;a&lt;object&gt; </span><br><span class="line">&lt;action&gt;i&lt;object&gt;</span><br><span class="line"></span><br><span class="line">action: d (delete), y (yank), v (select <span class="keyword">in</span> visual mode)</span><br><span class="line">object:  `w` a word, `W` a WORD (extended word), `s` a sentence, `p` a paragraph. But also, natural character such as `<span class="string">&quot;, &#x27;, ), &#125;, ]`.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Suppose the cursor is on the first o of `(map (+) (&quot;</span>foo<span class="string">&quot;))`.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">vi&quot;</span> -  will select foo.</span><br><span class="line">va<span class="string">&quot;  -  will select &quot;</span>foo<span class="string">&quot;.</span></span><br><span class="line"><span class="string">vi)  -  will select &quot;</span>foo<span class="string">&quot;.</span></span><br><span class="line"><span class="string">va)  -  will select (&quot;</span>foo<span class="string">&quot;).</span></span><br><span class="line"><span class="string">v2i)  -  will select map (+) (&quot;</span>foo<span class="string">&quot;)</span></span><br><span class="line"><span class="string">v2a)  -  will select (map (+) (&quot;</span>foo<span class="string">&quot;))</span></span><br></pre></td></tr></table></figure>
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+<h3 id="Insert-Mode"><a href="#Insert-Mode" class="headerlink" title="Insert Mode"></a>Insert Mode</h3><p><code>Insert Mode</code> is edit mode, there is nothing to write.</p>
+<h3 id="Command-Mode"><a href="#Command-Mode" class="headerlink" title="Command Mode"></a>Command Mode</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">:<span class="built_in">help</span></span><br><span class="line">:<span class="built_in">help</span> &lt;<span class="built_in">command</span>&gt;</span><br><span class="line"></span><br><span class="line">:<span class="built_in">set</span> nu (number)</span><br><span class="line">:<span class="built_in">set</span> nonu</span><br><span class="line"></span><br><span class="line">:<span class="built_in">set</span> mouse=a</span><br><span class="line"></span><br><span class="line">:<span class="built_in">set</span> hls[earch]    <span class="comment"># highlight seaching result</span></span><br><span class="line">:<span class="built_in">set</span> nohlsearch  <span class="comment"># Cancel highlighting</span></span><br><span class="line"></span><br><span class="line">:e &lt;patch/to/file&gt;  <span class="comment"># Open file.</span></span><br><span class="line">:saveas &lt;patch/to/file&gt; <span class="comment"># Save to/as &lt;patch/to/file&gt;</span></span><br><span class="line">:w filename , save as filename</span><br><span class="line">:q! <span class="comment"># Quit without saving</span></span><br><span class="line">:qa! <span class="comment"># Quit even if there are modified hidden buffers</span></span><br><span class="line">:wq, :x, or ZZ <span class="comment"># Save and quite,(:x only save if necessary)</span></span><br><span class="line">    Vim  写隐藏文件 .swap ，保存时才替换</span><br><span class="line"></span><br><span class="line"><span class="comment"># vi x.file y.file    </span></span><br><span class="line">:bn <span class="comment"># Show next file(buffer)</span></span><br><span class="line">:bp <span class="comment"># Show previous file(buffer)</span></span><br></pre></td></tr></table></figure>
 
-{% block page_class %}page-post-detail{% endblock %}
+<h3 id="Use-shell-commands-temporarily-in-Vim"><a href="#Use-shell-commands-temporarily-in-Vim" class="headerlink" title="Use shell commands temporarily in Vim."></a>Use shell commands temporarily in Vim.</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Convenient to copy patch information, etc.</span></span><br><span class="line">:! (eg, :!ifconfig) </span><br><span class="line">:！<span class="built_in">which</span> shutdown</span><br></pre></td></tr></table></figure>
+
+<h3 id="Replace"><a href="#Replace" class="headerlink" title="Replace"></a>Replace</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:s/old/new      <span class="comment"># Replace first ‘old’ of current line.</span></span><br><span class="line">:s/old/new/g    <span class="comment"># Replace all &#x27;old&#x27; of current line.</span></span><br><span class="line">:%s/old/new     <span class="comment"># Replace first &#x27;old&#x27; of every line of current file.</span></span><br><span class="line">:%s/old/new/g   <span class="comment"># Replace globally all &#x27;old&#x27; of current file.</span></span><br><span class="line">:3,5s/old/new(/g) <span class="comment"># Replace (all) &#x27;old&#x27; between 3 and 5 line.</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Visual-Mode"><a href="#Visual-Mode" class="headerlink" title="Visual Mode"></a>Visual Mode</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># enter visual mode</span></span><br><span class="line">v <span class="comment"># Character visual mode, operate in units of characters.</span></span><br><span class="line">V <span class="comment"># Line visual mode, Operate in uinits of lines.</span></span><br><span class="line">Ctrl + v <span class="comment"># Block visual mode, Operate in uinits of blocks.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># operating cmd</span></span><br><span class="line"><span class="string">&#x27;I&#x27;</span>     <span class="comment"># Insert content in the upper left corner of the block.</span></span><br><span class="line"><span class="string">&#x27;Esc&#x27;</span>   <span class="comment"># Press behind `I` in succession, insert the same content at the beginning of the block line.</span></span><br><span class="line"><span class="string">&#x27;d&#x27;</span>     <span class="comment"># Delete the block.</span></span><br></pre></td></tr></table></figure>
 
 
-{% block content %}
+<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><blockquote>
+<p>#Todo. Select rectangular blocks: <C-v></p>
+</blockquote>
+<h1 id="CMDs"><a href="#CMDs" class="headerlink" title="CMDs"></a>CMDs</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># fun cmds</span><br><span class="line">:h!</span><br><span class="line">:h 42</span><br></pre></td></tr></table></figure>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/" data-id="ckg0p46gp008ao8gw1zwh8p09" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li></ul>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Oh, the Git! - local .git
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Consolidating the foundation of Linux, basic cmds</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,38 +1,290 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>高通电池管理系统（BMS）驱动分析 | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="File: qpnp-vm-bms.c -  Battery monitor system　  简要BMS(Battery Monitoring System)主要提供如下功能：  通过一定算法计算SOC(state of charge电量状态) or 剩余电量.  正在使用的电池电压, 开漏电压(OCV).    硬件架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高通电池管理系统（BMS）驱动分析">
+<meta property="og:url" content="http://huaqianlee.github.io/2015/06/24/Android/qaulcomm-bms-driver-analysis/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="File: qpnp-vm-bms.c -  Battery monitor system　  简要BMS(Battery Monitoring System)主要提供如下功能：  通过一定算法计算SOC(state of charge电量状态) or 剩余电量.  正在使用的电池电压, 开漏电压(OCV).    硬件架构">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_1.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_2.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_3.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_4.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_5.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_6.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_7.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_8.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_9.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_10.jpg">
+<meta property="article:published_time" content="2015-06-24T13:52:24.000Z">
+<meta property="article:modified_time" content="2019-04-06T14:25:27.053Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Qualcomm">
+<meta property="article:tag" content="源码分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/qaulcomm-bms-driver-analysis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/" class="article-date">
+  <time datetime="2015-06-24T13:52:24.000Z" itemprop="datePublished">Jun 24 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      高通电池管理系统（BMS）驱动分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>File: qpnp-vm-bms.c -  Battery monitor system　</p>
+</blockquote>
+<h2 id="简要"><a href="#简要" class="headerlink" title="简要"></a>简要</h2><p>BMS(Battery Monitoring System)主要提供如下功能：</p>
+<ul>
+<li><p>通过一定算法计算SOC(state of charge电量状态) or 剩余电量.</p>
+</li>
+<li><p>正在使用的电池电压, 开漏电压(OCV).</p>
+</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_1.png" alt="temp"></p>
+<h2 id="硬件架构"><a href="#硬件架构" class="headerlink" title="硬件架构"></a>硬件架构</h2><a id="more"></a>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_2.jpg" alt="hw_arch"><br>硬件实现过冷过热检测停止充电：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_3.png" alt="temp_monitor"></p>
+<!--more-->        
+<h2 id="工作状态机"><a href="#工作状态机" class="headerlink" title="工作状态机"></a>工作状态机</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_4.jpg" alt="bms_state"></p>
+<h2 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_5.jpg" alt="sw_arch"></p>
+<p>SoC计算主要分为两部分:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Kernel space</span></span><br><span class="line">Hardware configuration</span><br><span class="line">Initial SoC calculation</span><br><span class="line">Shutdown OCV save</span><br><span class="line">Battery detection</span><br><span class="line">Set battery profile</span><br><span class="line">Interrupts handling</span><br><span class="line">Data <span class="built_in">read</span> from the hardware data (FIFO and accumulator)</span><br><span class="line">SoC lookup based on OCV (calculated <span class="keyword">in</span> user space) and batt_temp</span><br><span class="line">Driver <span class="built_in">source</span> code is available at /drivers/power/qpnp-vm-bms.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># User space</span></span><br><span class="line">OCV calculation using hardware data (FIFO and accumulator) <span class="built_in">read</span> from kernel space</span><br><span class="line">Updates the calculated OCV to kernel space through power supply class</span><br><span class="line">User space algorithm is shipped as a binary to the customers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># BMS driver is mainly composed of two main areas:</span></span><br><span class="line">Interface</span><br><span class="line">    Purpose – To update/report when there is a change <span class="keyword">in</span> SoC</span><br><span class="line">     Important <span class="built_in">functions</span></span><br><span class="line">         get_prop_bms_capacity()</span><br><span class="line">         get_prop_bms_rbatt()</span><br><span class="line">         get_batt_therm()</span><br><span class="line">         report_voltage_based_soc()</span><br><span class="line">         report_vm_bms_soc()</span><br><span class="line">         report_eoc()</span><br><span class="line">Core engine</span><br><span class="line">    Purpose – Calculate and save the state of the battery</span><br><span class="line">    Important <span class="built_in">functions</span></span><br><span class="line">         qpnp_vm_bms_probe()</span><br><span class="line">         parse_bms_dt_properties()</span><br><span class="line">         config_battery_data()</span><br><span class="line">         battery_status_check()</span><br><span class="line">         calculate_initial_soc</span><br><span class="line">         bms_request_irqs()</span><br><span class="line">         monitor_soc_work()</span><br><span class="line">         report_state_of_charge()</span><br></pre></td></tr></table></figure>
+
+<h2 id="驱动架构分析"><a href="#驱动架构分析" class="headerlink" title="驱动架构分析"></a>驱动架构分析</h2><h3 id="Interface-Mapping"><a href="#Interface-Mapping" class="headerlink" title="Interface Mapping"></a>Interface Mapping</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_6.jpg" alt="IM"><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_7.jpg" alt="IM"></p>
+<h3 id="几个主要的结构体"><a href="#几个主要的结构体" class="headerlink" title="几个主要的结构体"></a>几个主要的结构体</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">/*This is the client/device handle returned when a SPMI device  is registered with a controller. */</span><br><span class="line">struct spmi_device &#123;</span><br><span class="line">	struct device		dev;                       // 设备结构体,在内核中用来描述每一个结构体</span><br><span class="line">	const char		*name;                  // 此设备在驱动中的名字</span><br><span class="line">	struct spmi_controller	*ctrl;      // 管理挂接此spmi设备的SMPI控制者</span><br><span class="line">	struct spmi_resource	res;                // SMPI resource <span class="keyword">for</span> 主节点</span><br><span class="line">	struct spmi_resource	*dev_node; // array of SPMI resources when used with spmi-dev-container</span><br><span class="line">	u32			num_dev_node;         // 设备节点的数量</span><br><span class="line">	u8			sid;                               // 从设备ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/* struct spmi_controller: interface to the SPMI master controller */</span><br><span class="line">struct spmi_controller &#123;</span><br><span class="line">	struct device		dev;</span><br><span class="line">	unsigned int		nr;                                                                         //  board-specific number identifier <span class="keyword">for</span> this controller/bus</span><br><span class="line">	struct completion	dev_released;                                            // 完成状态</span><br><span class="line">	int		(*cmd)(struct spmi_controller *, u8 opcode, u8 sid);// sends a non-data <span class="built_in">command</span> sequence on the SPMI bus.</span><br><span class="line">	int		(*read_cmd)(struct spmi_controller *,                          // sends a register <span class="built_in">read</span> <span class="built_in">command</span> sequence on the SPMI bus.</span><br><span class="line">				u8 opcode, u8 sid, u16 addr, u8 bc, u8 *buf);</span><br><span class="line">	int		(*write_cmd)(struct spmi_controller *,                         // sends a register write <span class="built_in">command</span> sequence on the SPMI bus.</span><br><span class="line">				u8 opcode, u8 sid, u16 addr, u8 bc, u8 *buf);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct qpnp_bms_chip &#123;</span><br><span class="line">	struct device			*dev;</span><br><span class="line">	struct spmi_device		*spmi;</span><br><span class="line">	dev_t				dev_no;</span><br><span class="line">	u16				base;</span><br><span class="line">	u8				revision[2];</span><br><span class="line">	u32				batt_pres_addr;</span><br><span class="line">	u32				chg_pres_addr;</span><br><span class="line"></span><br><span class="line">	/* status variables */</span><br><span class="line">	u8				current_fsm_state;</span><br><span class="line">	bool				last_soc_invalid;</span><br><span class="line">        ....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct device_node &#123;</span><br><span class="line">	const char *name;</span><br><span class="line">	const char *<span class="built_in">type</span>;</span><br><span class="line">	phandle phandle;</span><br><span class="line">	const char *full_name;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct power_supply &#123;</span><br><span class="line">	const char *name;</span><br><span class="line">	enum power_supply_type <span class="built_in">type</span>;</span><br><span class="line">	enum power_supply_property *properties;</span><br><span class="line">	...</span><br><span class="line">        int (*get_property)(...)  </span><br><span class="line">        int (*set_property)(...)</span><br><span class="line">        ...</span><br><span class="line">       /* private */</span><br><span class="line">      struct device *dev;</span><br><span class="line">      ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="驱动分析"><a href="#驱动分析" class="headerlink" title="驱动分析"></a>驱动分析</h2><h3 id="主线一-initialization-probe"><a href="#主线一-initialization-probe" class="headerlink" title="主线一: initialization - probe"></a>主线一: initialization - probe</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_8.jpg" alt="probe"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">入口函数: static int qpnp_vm_bms_probe(struct spmi_device *spmi)    // 注册SMPI设备</span><br><span class="line">          chip = devm_kzalloc(&amp;spmi-&gt;dev, sizeof(*chip), GFP_KERNEL);   //给struct qpnp_bms_chip *chip(bms芯片设备)分配空间    </span><br><span class="line">          rc = bms_get_adc(chip, spmi); // 获取adc设备       </span><br><span class="line">                      chip-&gt;vadc_dev = qpnp_get_vadc(&amp;spmi-&gt;dev, <span class="string">&quot;bms&quot;</span>)// 获取vadc设备 spmi --&gt; spmi_device </span><br><span class="line">                      chip-&gt;iadc_dev = qpnp_get_iadc(&amp;spmi-&gt;dev, <span class="string">&quot;bms&quot;</span>)  // 获取iadc设备      </span><br><span class="line">                      chip-&gt;adc_tm_dev = qpnp_get_adc_tm(&amp;spmi-&gt;dev, <span class="string">&quot;bms&quot;</span>)  // 获取temp adc设备</span><br><span class="line">          revid_dev_node = of_parse_phandle(spmi-&gt;dev.of_node,<span class="string">&quot;qcom,pmic-revid&quot;</span>, 0);//获取struct device_node *revid_dev_node，解析dtsi配置文件(RREVID_REVID_PM8916寄存器（chip variant))。</span><br><span class="line">          chip-&gt;revid_data = get_revid_data(revid_dev_node)   //</span><br><span class="line">                       list_for_each_entry(revid_chip, &amp;revid_chips, link) // 遍历链表获取revid_data</span><br><span class="line">          rc = qpnp_pon_is_warm_reset(); //Checks <span class="keyword">if</span> the PMIC went through a warm reset.</span><br><span class="line">          chip-&gt;warm_reset = !!rc;  // converts not 0 to 1, 0  to 0</span><br><span class="line">          rc = parse_spmi_dt_properties(chip, spmi)  // 解析spmi的dtsi配置文件</span><br><span class="line">          rc = parse_bms_dt_properties(chip)    // 解析bms的dtsi配置文件</span><br><span class="line">          <span class="keyword">if</span> (chip-&gt;dt.cfg_disable_bms) </span><br><span class="line">                rc = qpnp_masked_write_base(chip, chip-&gt;base + EN_CTL_REG,BMS_EN_BIT, 0);  // <span class="built_in">disable</span> VMBMS</span><br><span class="line">          rc = qpnp_read_wrapper(chip, chip-&gt;revision,chip-&gt;base + REVISION1_REG, 2);//<span class="built_in">read</span> version register</span><br><span class="line">          dev_set_drvdata(&amp;spmi-&gt;dev, chip)  // 给spmi设备驱动赋值</span><br><span class="line">  device_init_wakeup(&amp;spmi-&gt;dev, 1) // device wakeup initialization</span><br><span class="line">  mutex_init(&amp;chip-&gt;bms_xxx) // 初始化一个 chip-&gt;bms_xxx mutex_t</span><br><span class="line">  init_waitqueue_head(&amp;chip-&gt;bms_wait_q) // 初始化等待序列头    </span><br><span class="line">          rc = set_battery_data(chip); 	//<span class="built_in">read</span> battery-id and select the battery profile                        </span><br><span class="line">              rc = config_battery_data(chip-&gt;batt_data) // <span class="built_in">set</span> the battery profile </span><br><span class="line">              wakeup_source_init(&amp;chip-&gt;vbms_xxx_source.source, name) // 根据name  prepare 一个wakeup <span class="built_in">source</span>(chip-&gt;vbms_xxx_source.source)并添加入链表</span><br><span class="line">              INIT_DELAYED_WORK(&amp;chip-&gt;monitor_soc_work, monitor_soc_work); // 注册电量监控函数并延时                             </span><br><span class="line">          INIT_DELAYED_WORK(&amp;chip-&gt;voltage_soc_timeout_work,voltage_soc_timeout_work);</span><br><span class="line"> bms_init_defaults(chip);  // chip 初始化为默认值</span><br><span class="line"> bms_load_hw_defaults(chip); // load 写入设置chip硬件默认值</span><br><span class="line">     setup_vbat_monitoring(chip); //vbat monitoring setup</span><br><span class="line">                    qpnp_adc_tm_channel_measure(chip-&gt;adc_tm_dev,&amp;chip-&gt;vbat_monitor_params)</span><br><span class="line">     bms_request_irqs(chip)  // chip 请求中断</span><br><span class="line"> battery_insertion_check(chip);// 电池插入检测</span><br><span class="line"> battery_status_check(chip); // 电池状态检测:charging start/stop/full, 并执行相应操作</span><br><span class="line">                charging_began(chip) // 开始充电</span><br><span class="line">                charging_ended(chip) // 停止充电</span><br><span class="line">     register_bms_char_device(chip) //character device to pass data to the userspace</span><br><span class="line">alloc_chrdev_region(&amp;chip-&gt;dev_no, 0, 1, <span class="string">&quot;vm_bms&quot;</span>)  // 为此设备分配空间</span><br><span class="line">cdev_init(&amp;chip-&gt;bms_cdev, &amp;bms_fops) // 初始化此设备</span><br><span class="line">cdev_add(&amp;chip-&gt;bms_cdev, chip-&gt;dev_no, 1) // 加入设备链表</span><br><span class="line">                chip-&gt;bms_class = class_create(THIS_MODULE, <span class="string">&quot;vm_bms&quot;</span>)  // create a class structure (class.c), be used <span class="keyword">in</span> calls to device_create();</span><br><span class="line">                chip-&gt;bms_device = device_create(chip-&gt;bms_class,NULL, chip-&gt;dev_no,NULL, <span class="string">&quot;vm_bms&quot;</span>);//creates a device and registers it with sysfs</span><br><span class="line">    calculate_initial_soc(chip) // calculate and initial the SOC （select  soc form cutoff soc and current soc）</span><br><span class="line">                 read_and_update_ocv(chip, batt_temp, <span class="literal">true</span>)</span><br><span class="line">                 ...</span><br><span class="line">                 rc = read_shutdown_ocv_soc(chip); // 读取上次关机电量</span><br><span class="line">       xx = lookup_soc_ocv(chip, est_ocv,batt_temp); // 读取电量给相关变量赋值</span><br><span class="line">       <span class="keyword">if</span>（chip-&gt;warm_reset） //重启</span><br><span class="line">          ...</span><br><span class="line">       <span class="keyword">if</span>(!shutdown_soc_invalid &amp;&amp;(abs(chip-&gt;shutdown_soc - chip-&gt;calculated_soc) &lt;chip-&gt;dt.cfg_shutdown_soc_valid_limit)  //如果关机SOC和现在的soc相差小于</span><br><span class="line">cfg_shutdown_soc_valid_limit  （msm-pm8916.dtsi 中定义：qcom,shutdown-soc-valid-limit = &lt;5&gt;;）</span><br><span class="line">         ...</span><br><span class="line">)</span><br><span class="line">   /* setup &amp; register the battery power supply */</span><br><span class="line">   ....  chip-&gt;bms_psy.xxx = xxx;    // 设置参数,  关联函数参照5.1</span><br><span class="line">               chip-&gt;bms_psy.getproperty= ppnp_vm_bms_power_get_property  // 调用方式  chip-&gt;bms_psy-&gt;get_property(chip-&gt;bms_psy,POWER_SUPPLY_PROP_CAPACITY, &amp;ret);   </span><br><span class="line">                      get_prop_bms_capacity(struct qpnp_bms_chip *chip)</span><br><span class="line">                               report_state_of_charge(chip)</span><br><span class="line">                                        report_vm_bms_soc(chip)</span><br><span class="line">   power_supply_register(chip-&gt;dev, &amp;chip-&gt;bms_psy)  // power_supply_register</span><br><span class="line">   get_battery_voltage(chip, &amp;vbatt)  // 获取电池电压      </span><br><span class="line">             chip-&gt;debug_root = debugfs_create_dir(<span class="string">&quot;qpnp_vmbms&quot;</span>, NULL)   // 创建debug路径</span><br><span class="line">   ent = debugfs_create_file(<span class="string">&quot;bms_data&quot;</span>, S_IFREG | S_IRUGO, chip-&gt;debug_root, chip,&amp;bms_data_debugfs_ops);// 创建debugfile</span><br><span class="line">   schedule_delayed_work(&amp;chip-&gt;monitor_soc_work, 0); // 调度 SoC监控函数</span><br><span class="line">       static void monitor_soc_work(struct work_struct *work)</span><br><span class="line">   /* schedule a work to check <span class="keyword">if</span> the userspace vmbms module has registered. Fall-back to voltage-based-soc reporting  <span class="keyword">if</span> it has not.	 */</span><br><span class="line">   schedule_delayed_work(&amp;chip-&gt;voltage_soc_timeout_work,msecs_to_jiffies(chip-&gt;dt.cfg_voltage_soc_timeout_ms)) </span><br><span class="line"></span><br><span class="line">/* Probe   Success */  </span><br></pre></td></tr></table></figure>
+<h3 id="主线二-SoC-work-loop"><a href="#主线二-SoC-work-loop" class="headerlink" title="主线二: SoC work loop"></a>主线二: SoC work loop</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_9.jpg" alt="loop"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">      static void monitor_soc_work(struct work_struct *work)</span><br><span class="line">               /*将自定义设备结构体保存在文件指针的私有数据域中,以便访问设备时可以随时拿来使用*/</span><br><span class="line">             (根据结构体成员的指针 work 找到对应结构体的指针， qpnp_bms_chip整个结构体类型，结构体成员（第一个参数）的类型)</span><br><span class="line">               struct qpnp_bms_chip *chip = container_of(work,struct qpnp_bms_chip,	monitor_soc_work.work); // 取出chip </span><br><span class="line">               bms_stay_awake(&amp;chip-&gt;vbms_soc_wake_source )//</span><br><span class="line">                          wakeup_source_report_event(ws) // Report wakeup event using the given <span class="built_in">source</span>.</span><br><span class="line">                calculate_delta_time(&amp;chip-&gt;tm_sec, &amp;chip-&gt;delta_time_s)  // 计算 delta time(elapsed_time 实耗时间)       </span><br><span class="line">                mutex_lock(&amp;chip-&gt;last_soc_mutex)</span><br><span class="line">                rc = get_battery_voltage(chip, &amp;vbat_uv)     // 如果电池存在,获取电池电压(vadc)</span><br><span class="line">                <span class="keyword">if</span> (chip-&gt;dt.cfg_use_voltage_soc)   // lihuaqian: <span class="keyword">if</span>( BMS device not opened )</span><br><span class="line">             calculate_soc_from_voltage(chip); // 通过电压计算SoC(state of charge 电量)</span><br><span class="line">                                   <span class="keyword">if</span> (voltage_based_soc == 100)</span><br><span class="line">              <span class="keyword">if</span> (chip-&gt;dt.cfg_report_charger_eoc)    </span><br><span class="line">            report_eoc(chip);  // 上报eoc</span><br><span class="line">               <span class="keyword">else</span>  </span><br><span class="line">      rc = get_batt_therm(chip, &amp;batt_temp);      // 获取电池热量</span><br><span class="line">                           new_soc = lookup_soc_ocv(chip, chip-&gt;last_ocv_uv,batt_temp);//  获得SoC(电量,见Battery Capacity Percent)</span><br><span class="line">      report_vm_bms_soc(chip);//update last_soc immediately </span><br><span class="line">                           power_supply_changed(&amp;chip-&gt;bms_psy)  // 修改电池信息</span><br><span class="line">pm_stay_awake(psy-&gt;dev);  //Notify the PM core that a wakeup event is being processed</span><br><span class="line">schedule_work(&amp;psy-&gt;changed_work);  //   schedule the changed_work <span class="keyword">function</span></span><br><span class="line">                          low_soc_check(chip)  // low SOC configuration</span><br><span class="line">              schedule_delayed_work(&amp;chip-&gt;monitor_soc_work,	msecs_to_jiffies(get_calculation_delay_ms(chip)));// schedule the work only <span class="keyword">if</span> last_soc has not caught up with the calculated soc                                                                                                                                                                                                      or <span class="keyword">if</span> we are using voltage based soc</span><br></pre></td></tr></table></figure>
+
+<h3 id="主线三-Report-SoC"><a href="#主线三-Report-SoC" class="headerlink" title="主线三: Report  SoC"></a>主线三: Report  SoC</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_10.jpg" alt="report"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    static int report_vm_bms_soc(struct qpnp_bms_chip *chip)</span><br><span class="line">            soc = chip-&gt;calculated_soc</span><br><span class="line">            calculate_delta_time(&amp;last_change_sec, &amp;time_since_last_change_sec)</span><br><span class="line">            charging = is_battery_charging(chip)</span><br><span class="line">            <span class="keyword">if</span> (charging..)</span><br><span class="line">chip-&gt;catch_up_time_sec</span><br><span class="line">chip-&gt;charge_start_tm_sec = last_change_sec;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                   / * last_soc &lt; soc  ... <span class="keyword">if</span> we have not been charging at all since the last time this was called, report previous SoC. Otherwise, scale and catch up. */</span><br><span class="line">                        ...</span><br><span class="line">                        soc = scale_soc_while_chg(chip, charge_time_sec,chip-&gt;catch_up_time_sec,soc, chip-&gt;last_soc);  // scale and catch up</span><br><span class="line">           check_eoc_condition(chip);// 检测电池 条件状况</span><br><span class="line">			rc = report_eoc(chip);</span><br><span class="line">           check_recharge_condition(chip) // 检测 充电 condition</span><br><span class="line">           backup_ocv_soc(chip, chip-&gt;last_ocv_uv, chip-&gt;last_soc) //Backup the actual ocv (last_ocv_uv) and not the last_soc-interpolated ocv.</span><br></pre></td></tr></table></figure>
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
-
-{% block page_class %}page-post-detail{% endblock %}
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2015/06/24/Android/qaulcomm-bms-driver-analysis/" data-id="ckg0p46fv0042o8gw51mkgvjg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li></ul>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/24/Android/smb135x-charger-driver/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          高通 smb135x charger 驱动分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/11/Git/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Git常用及进阶命令总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

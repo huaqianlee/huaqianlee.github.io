@@ -1,38 +1,270 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
 
+  
+  <title>Android不带电量计的电量计算 | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。 ##SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge capacityRC 　　Remaining capacity (剩余电量)CC 　　Coul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android不带电量计的电量计算">
+<meta property="og:url" content="http://huaqianlee.github.io/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。 ##SOC（state of charge 荷电状态 - 电量）英文缩写:FCC　　Full-charge capacityRC 　　Remaining capacity (剩余电量)CC 　　Coul">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F1.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F2.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F3.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F4.png">
+<meta property="article:published_time" content="2015-01-21T12:10:01.000Z">
+<meta property="article:modified_time" content="2019-04-06T14:25:26.999Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Qualcomm">
+<meta property="article:tag" content="源码分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+</head>
 
-{% block page_class %}page-post-detail{% endblock %}
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/高通Android不带电量计的电量计算方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2015-01-21T12:10:01.000Z" itemprop="datePublished">Jan 21 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android不带电量计的电量计算
+    </h1>
+  
 
-{% block content %}
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。</p>
+<p>##SOC（state of charge 荷电状态 - 电量）<br>英文缩写:<br>FCC　　Full-charge capacity<br>RC 　　Remaining capacity (剩余电量)<br>CC 　　Coulumb counter<br>UUC　　Unusable capacity<br>RUC　　Remaining usable capacity<br>SoC　　State of charge<br>OCV　　Open circuit voltage</p>
+<a id="more"></a>
+<p>SOC=(RC-CC-UUC)/(FCC-UUC)<br>RUC=RC-CC-UUC<br>##电池电量决定因素</p>
+<p>　　电池电量百分比主要有电池dtsi文件中百分比参数计算而得，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">	qcom,pc-temp-ocv-lut &#123;</span><br><span class="line">		qcom,lut-col-legend = &lt;(-10) 0 25 50&gt;;  // Temperature      lut-data（电池OCV ）的column</span><br><span class="line">		qcom,lut-row-legend =  &lt;100 89 78&gt;,     // Capacity Percent        row</span><br><span class="line">				&lt;67 56 45&gt;,</span><br><span class="line">				&lt;34 23 14&gt;,</span><br><span class="line">				&lt;8 4 0&gt;;</span><br><span class="line">...				</span><br><span class="line">		qcom,lut-data = </span><br><span class="line">		&lt;4290	4285	4327	4328&gt;,</span><br><span class="line">		&lt;4151	4162	4193	4208&gt;,</span><br><span class="line">		&lt;4064	4072	4080	4016&gt;,</span><br><span class="line">		&lt;3928	3943	3963	3980&gt;,</span><br><span class="line">		&lt;3874	3881	3881	3894&gt;,</span><br><span class="line">		&lt;3809	3834	3823	3820&gt;,</span><br><span class="line"></span><br><span class="line">		&lt;3768	3785	3793	3792&gt;, </span><br><span class="line">		&lt;3733	3756	3784	3785&gt;, </span><br><span class="line">		&lt;3701	3723	3762	3761&gt;, </span><br><span class="line">		&lt;3624	3643	3739	3738&gt;, </span><br><span class="line">		&lt;3614	3623	3689	3688&gt;, 	</span><br><span class="line">		&lt;3510	3499	3455	3458&gt;; </span><br><span class="line">	</span><br><span class="line">	&#125;;</span><br></pre></td></tr></table></figure>
+<p>##关键结构</p>
+<p>###dts table structure：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * struct pc_temp_ocv_lut -</span><br><span class="line"> * @rows:	number of percent charge entries should be &lt;= PC_TEMP_ROWS</span><br><span class="line"> * @cols:	number of temperature entries should be &lt;= PC_TEMP_COLS</span><br><span class="line"> * @temp:	the temperatures at <span class="built_in">which</span> ocv data is available <span class="keyword">in</span> the table</span><br><span class="line"> *		The temperatures must be <span class="keyword">in</span> increasing order from 0 to rows.</span><br><span class="line"> * @percent:	the percent charge at <span class="built_in">which</span> ocv data is available <span class="keyword">in</span> the table</span><br><span class="line"> *		The  percentcharge must be <span class="keyword">in</span> decreasing order from 0 to cols.</span><br><span class="line"> * @ocv:	the open circuit voltage</span><br><span class="line"> */</span><br><span class="line">struct pc_temp_ocv_lut &#123;</span><br><span class="line">	int rows;</span><br><span class="line">	int cols;</span><br><span class="line">	int temp[PC_TEMP_COLS];</span><br><span class="line">	int percent[PC_TEMP_ROWS];</span><br><span class="line">	int ocv[PC_TEMP_ROWS][PC_TEMP_COLS];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<p>##calculate percentcharge  function</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int linear_interpolate(int y0, int x0, int y1, int x1, int x)</span><br><span class="line">	<span class="keyword">if</span> (y0 == y1 || x == x0)	<span class="built_in">return</span> y0;</span><br><span class="line">	<span class="keyword">if</span> (x1 == x0 || x == x1)	<span class="built_in">return</span> y1;</span><br><span class="line">	<span class="built_in">return</span> y0 + ((y1 - y0) * (x - x0) / (x1 - x0));</span><br></pre></td></tr></table></figure>
+<p>##驱动分析</p>
+<p>###关键函数： </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// File:  qpnp-vm-bms.c</span><br><span class="line">    lookup_soc_ocv(struct qpnp_bms_chip *chip, int ocv_uv, int batt_temp)、</span><br><span class="line">soc_ocv = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, ocv_uv / 1000);  //calculate the  capacity percent</span><br><span class="line">soc_cutoff = interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, chip-&gt;dt.cfg_v_cutoff_uv / 1000);</span><br><span class="line">soc_final = DIV_ROUND_CLOSEST(100 * (soc_ocv - soc_cutoff),(100 - soc_cutoff));</span><br><span class="line">      DIV_ROUND_CLOSEST(x,y)    ---&gt;    (x-1&gt;0) || (y-1&gt;0) || x&gt;0  ? (x+y/2)/y : (x-y/2)/y</span><br><span class="line"><span class="keyword">if</span> (!is_battery_charging(chip) &amp;&amp; chip-&gt;current_now &gt; 0) // 没有充电 重新计算电量</span><br><span class="line">        iavg_ma = calculate_uuc_iavg(chip);</span><br><span class="line">        fcc = interpolate_fcc(chip-&gt;batt_data-&gt;fcc_temp_lut,batt_temp);</span><br><span class="line">        acc = interpolate_acc(chip-&gt;batt_data-&gt;ibat_acc_lut,	batt_temp, iavg_ma);</span><br><span class="line">    both call ：</span><br><span class="line">linear_interpolate(int y0, int x0, int y1, int x1, int x)</span><br><span class="line">        soc_uuc = ((fcc - acc) * 100) / fcc;</span><br><span class="line">	soc_uuc = adjust_uuc(chip, soc_uuc);</span><br><span class="line">	soc_acc = DIV_ROUND_CLOSEST(100 * (soc_ocv - soc_uuc),(100 - soc_uuc));</span><br><span class="line">        soc_final = soc_acc;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        ... // charging - reset all the counters</span><br><span class="line">soc_final = bound_soc(soc_final) // 最终电量</span><br></pre></td></tr></table></figure>
+<p>###百分比计算函数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   interpolate_pc(chip-&gt;batt_data-&gt;pc_temp_ocv_lut,batt_temp, ocv_uv / 1000);  //calculate the  capacity percent</span><br><span class="line"><span class="keyword">if</span> (batt_temp == pc_temp_ocv-&gt;temp[j] * DEGC_SCALE) &#123;  /* found an exact match <span class="keyword">for</span> temp <span class="keyword">in</span> the table */</span><br><span class="line">	<span class="keyword">for</span> (i = 0; i &lt; rows; i++)    // i: rows- Capacity Percent  j: columns-Temperature</span><br><span class="line">                   ...</span><br><span class="line">	    pc = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;percent[i - 1],pc_temp_ocv-&gt;ocv[i - 1][j],ocv); // calculate 不匹配dts表格的percentcharge </span><br><span class="line">                   转换为公式见下公式一;                                </span><br><span class="line"></span><br><span class="line">  /* batt_temp is within temperature <span class="keyword">for</span> column j-1 and j */</span><br><span class="line"> is_between(pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;ocv[i+1][j], ocv)   // caculate temp1 percentcharge</span><br><span class="line">        pcj = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j],pc_temp_ocv-&gt;percent[i + 1],pc_temp_ocv-&gt;ocv[i+1][j],	ocv);</span><br><span class="line">                  转换为公式见下公式二;                         </span><br><span class="line">           is_between(pc_temp_ocv-&gt;ocv[i][j-1],pc_temp_ocv-&gt;ocv[i+1][j-1], ocv)) // caculate temp2 percentcharge</span><br><span class="line">	    pcj_minus_one = linear_interpolate(pc_temp_ocv-&gt;percent[i],pc_temp_ocv-&gt;ocv[i][j-1],pc_temp_ocv-&gt;percent[i + 1],pc_temp_ocv-&gt;ocv[i+1][j-1],ocv);</span><br><span class="line">                   转换为公式见下公式三;                       </span><br><span class="line">          <span class="keyword">if</span> (pcj &amp;&amp; pcj_minus_one) // temp1 and temp2 都存在，calculate percentcharge </span><br><span class="line">                   pc = linear_interpolate(pcj_minus_one,pc_temp_ocv-&gt;temp[j-1] * DEGC_SCALE,	pcj,pc_temp_ocv-&gt;temp[j] * DEGC_SCALE,batt_temp);</span><br><span class="line">                   转换为公式见下公式四;                      </span><br><span class="line">           否则：<span class="built_in">return</span> pcj 、pcj_minus_one、其他临界值</span><br></pre></td></tr></table></figure>
+<p>###公式一<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F1.png" alt="公式一"><br>###公式二<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F2.png" alt="公式二"><br>###公式三<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F3.png" alt="公式三"><br>###公式四<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blog%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F4.png" alt="公式四"></p>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/" data-id="ckg0p46g1004uo8gwfbm10ex2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/17/Linux/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E9%87%8C%E6%93%8D%E4%BD%9C%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6-create-open-read-write/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          如何在内核里操作文件(create/open/read/write)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/01/20/Java/JUnit-test%E7%9A%84%E7%94%A8%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JUnit-test的用法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

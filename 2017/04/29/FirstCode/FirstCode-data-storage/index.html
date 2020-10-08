@@ -1,38 +1,329 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>第一行代码之数据存储 | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="《第一行代码》第2版思维导图及所有学习笔记目录 文件存储数据存到文件Context类提供了一个openFileOutput()方法，可以用于文件存储，此方法有两个参数：  arg1 - 文件名，不包括路径，全默认存储于&#x2F;data&#x2F;data&#x2F;&#x2F;files&#x2F; arg2 - 文件操作模式， MODE_PRIVATE（覆盖式）和 MODE_APPEND（追加式）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一行代码之数据存储">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/04/29/FirstCode/FirstCode-data-storage/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="《第一行代码》第2版思维导图及所有学习笔记目录 文件存储数据存到文件Context类提供了一个openFileOutput()方法，可以用于文件存储，此方法有两个参数：  arg1 - 文件名，不包括路径，全默认存储于&#x2F;data&#x2F;data&#x2F;&#x2F;files&#x2F; arg2 - 文件操作模式， MODE_PRIVATE（覆盖式）和 MODE_APPEND（追加式）">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-04-29T10:35:49.000Z">
+<meta property="article:modified_time" content="2017-06-18T01:37:31.601Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="App">
+<meta property="article:tag" content="FirstCode">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-FirstCode/FirstCode-data-storage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/29/FirstCode/FirstCode-data-storage/" class="article-date">
+  <time datetime="2017-04-29T10:35:49.000Z" itemprop="datePublished">Apr 29 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第一行代码之数据存储
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h2 id="文件存储"><a href="#文件存储" class="headerlink" title="文件存储"></a>文件存储</h2><h3 id="数据存到文件"><a href="#数据存到文件" class="headerlink" title="数据存到文件"></a>数据存到文件</h3><p>Context类提供了一个openFileOutput()方法，可以用于文件存储，此方法有两个参数：</p>
+<ul>
+<li>arg1 - 文件名，不包括路径，全默认存储于/data/data/<packagename>/files/</li>
+<li>arg2 - 文件操作模式， MODE_PRIVATE（覆盖式）和 MODE_APPEND（追加式）<a id="more"></a> 
+
+</li>
+</ul>
+<p>如下是一个简短示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    FileOutputStream out = <span class="keyword">null</span>;</span><br><span class="line">    BufferedWriter writer = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        out = openFileOutput(<span class="string">&quot;data&quot;</span>, Context.MODE_PRIVATE);</span><br><span class="line">        writer = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(out));</span><br><span class="line">        writer.write(<span class="string">&quot;the content&quot;</span>);</span><br><span class="line">    &#125; ... <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(wirter != <span class="keyword">null</span>)</span><br><span class="line">            writer.close();</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="从文件中读取数据"><a href="#从文件中读取数据" class="headerlink" title="从文件中读取数据"></a>从文件中读取数据</h3><p>Context类提供了一个openFileInput()方法，用于从文件读取数据，简例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public String <span class="function"><span class="title">load</span></span>() &#123;</span><br><span class="line">    FileInputStream <span class="keyword">in</span> = null;</span><br><span class="line">    BufferedReader reader = null;</span><br><span class="line">    StringBuilder content = new StringBuilder();</span><br><span class="line">    try &#123;</span><br><span class="line">        <span class="keyword">in</span> = openFileInput(<span class="string">&quot;data&quot;</span>);</span><br><span class="line">        reader = new BufferedReader(new InputStreamReader(<span class="keyword">in</span>));</span><br><span class="line">        String line = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">while</span>((line = reader.readLine()) != null) &#123;</span><br><span class="line">            content.append(line);</span><br><span class="line">        &#125;...finally &#123;</span><br><span class="line">            <span class="keyword">if</span>(reader != null) &#123;</span><br><span class="line">                reader.close();</span><br><span class="line">            &#125;</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> content.toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断字符是否为空的一个方式</span></span><br><span class="line">TextUtils.isEmpty(string)</span><br></pre></td></tr></table></figure>
+
+<h2 id="SharedPreferences存储"><a href="#SharedPreferences存储" class="headerlink" title="SharedPreferences存储"></a>SharedPreferences存储</h2><h3 id="将数据存储到SharedPreferences中"><a href="#将数据存储到SharedPreferences中" class="headerlink" title="将数据存储到SharedPreferences中"></a>将数据存储到SharedPreferences中</h3><p>SharedPreferences是通过键值对的方式存储，Android中获取SharedPreferences对象的三种方法：</p>
+<ol>
+<li><p>Context类中的getSharedPreferences()方法。</p>
+<ul>
+<li>arg1: SharedPreferences文件名，<strong>存于：/data/data/<package_name>/shared_prefs/</strong></li>
+<li>arg2: 操作模式，只有MODE_PRIVATE一种方式，传入0也一样的效果，其余皆被废弃</li>
+</ul>
+</li>
+<li><p>Activity中的getPreferences()方法。</p>
+<ul>
+<li>一个参数：操作模式，自动以类名命名文件</li>
+</ul>
+</li>
+<li><p>PreferenceManager类中的getDefaultSharedPreferences()静态方法，</p>
+<ul>
+<li>接收Context参数，自动用包名为前缀命名文件 </li>
+</ul>
+</li>
+</ol>
+<p>获取了SharedPreferences对象后， 就可以存储数据了，主要分三步实现：</p>
+<ul>
+<li><p><strong>step1</strong>：通过SharedPreferences对象的edit()方法获取SharedPreferences.Editor对象</p>
+</li>
+<li><p><strong>step2</strong>：通过putXxx()方法向SharedPreferences.Editor对象添加数据</p>
+</li>
+<li><p><strong>step3</strong>：调用apply()方法提交数据，完成数据存储。</p>
+</li>
+</ul>
+<p>一个存储的简单书写方式：    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SharedPreferences.Editor editor = getSharedPreferences(<span class="string">&quot;data&quot;</span>,MODE_PRIVATE).edit();</span><br><span class="line">editor.putString(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;andy&quot;</span>);</span><br><span class="line">editor.putInt(<span class="string">&quot;age&quot;</span>,)</span><br><span class="line">editor.putBoolean(<span class="string">&quot;married&quot;</span>,<span class="keyword">true</span>);</span><br><span class="line">editor.apply();</span><br></pre></td></tr></table></figure>
+<h3 id="从SharedPreferences中读取数据"><a href="#从SharedPreferences中读取数据" class="headerlink" title="从SharedPreferences中读取数据"></a>从SharedPreferences中读取数据</h3><p>读取数据的方式十分简单，得到SharedPreferences对象后通过getX()方法即可获取到数据。getX()方法有两个参数：</p>
+<ul>
+<li>arg1：key值</li>
+<li>arg2：当通过key值找不到内容时的默认值</li>
+</ul>
+<h2 id="SQLite数据库存储"><a href="#SQLite数据库存储" class="headerlink" title="SQLite数据库存储"></a>SQLite数据库存储</h2><p>SQL的数据类型：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">integer：整型</span><br><span class="line">real：浮点型</span><br><span class="line">text：文本类型</span><br><span class="line">blob：二进制</span><br><span class="line"><span class="comment"># 一些其他关键字</span></span><br><span class="line">primary key：设为主键</span><br><span class="line">autoincrement：自增长</span><br></pre></td></tr></table></figure>
+<p>一个关键的抽象类SQLiteOpenHelper及其两个实例方法：<br><strong>getReadableDatabase()</strong> 和 **getWritableDatabase()**。两个方法都能创建或打开数据库，不过当数据不可写入是，getWritableDatabase()将报异常。</p>
+<h3 id="创建数据库及CRUD操作"><a href="#创建数据库及CRUD操作" class="headerlink" title="创建数据库及CRUD操作"></a>创建数据库及CRUD操作</h3><p>要使用SQLite，首先需要实现SQLiteOpenHelper抽象类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDatabaseHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_BOOK = <span class="string">&quot;create table Book (&quot;</span> +</span><br><span class="line">            <span class="string">&quot;id integer primary key autoincrement,&quot;</span> +</span><br><span class="line">            <span class="string">&quot;author text,&quot;</span> +</span><br><span class="line">            <span class="string">&quot;price real,&quot;</span> +</span><br><span class="line">            <span class="string">&quot;pages integer,&quot;</span> +</span><br><span class="line">            <span class="string">&quot;name text)&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_CATEGORY = <span class="string">&quot;create table Category (&quot;</span> +</span><br><span class="line">            <span class="string">&quot;id integer primary key autoincrement,&quot;</span> +</span><br><span class="line">            <span class="string">&quot;category_name text,&quot;</span> +</span><br><span class="line">            <span class="string">&quot;category_code integer)&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Context mcontext;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDataBaseHelper</span><span class="params">(Context context, String name, SQLiteDatabase.CursorFactory factory, <span class="keyword">int</span> version)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, name, factory, version);</span><br><span class="line">        mcontext = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">/*创建数据库*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>&#123;</span><br><span class="line">        db.execSQL(CREATE_BOOK);</span><br><span class="line">        db.execSQL(CREATE_CATEGORY);</span><br><span class="line">        Toast.makeText(mcontext, <span class="string">&quot; Created succeeded!&quot;</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*升级数据库*/</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span> </span>&#123;</span><br><span class="line">        db.execSQL(<span class="string">&quot;drop table if exists Book&quot;</span>);</span><br><span class="line">        db.execSQL(<span class="string">&quot;drop table if exists Category&quot;</span>);</span><br><span class="line">        onCreate(db);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了这类之后，就可以进行CRUD操作了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#c-create r-retrieve(查询) u-update d-delete</span><br><span class="line"><span class="keyword">final</span> MyDataBaseHelper helper = <span class="keyword">new</span> MyDataBaseHelper(<span class="keyword">this</span>, <span class="string">&quot;BookStore.db&quot;</span>, <span class="keyword">null</span>, <span class="number">1</span>); <span class="comment">// 1 为数据库版本号， 当升级数据库的时候需更新</span></span><br><span class="line"><span class="comment">// 创建数据库</span></span><br><span class="line">SQLiteDatabase db = helper.getWritableDatabase();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加数据</span></span><br><span class="line">ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line">values.put(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Just for fun&quot;</span>);</span><br><span class="line">...</span><br><span class="line">db.insert(<span class="string">&quot;Book&quot;</span>, <span class="keyword">null</span>, values);</span><br><span class="line"><span class="comment">// 更新数据</span></span><br><span class="line">values.put(<span class="string">&quot;price&quot;</span>,<span class="number">1000</span>);</span><br><span class="line">db.update(<span class="string">&quot;Book&quot;</span>, values,<span class="string">&quot;name=?&quot;</span>,<span class="keyword">new</span> String[]&#123;<span class="string">&quot;Just for fun&quot;</span>&#125;);</span><br><span class="line"><span class="comment">// 删除数据</span></span><br><span class="line">db.delete(<span class="string">&quot;Book&quot;</span>,<span class="string">&quot;price &lt; ?&quot;</span>, <span class="keyword">new</span> String[]&#123;<span class="string">&quot;100&quot;</span>&#125;);</span><br><span class="line"><span class="comment">// 查询数据</span></span><br><span class="line">Cursor cursor = db.query(<span class="string">&quot;Book&quot;</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br><span class="line"><span class="keyword">if</span> (cursor.moveToFirst()) &#123;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        String name = cursor.getString(cursor.getColumnIndex(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">while</span> (cursor.moveToNext());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="直接使用SQL操作数据库"><a href="#直接使用SQL操作数据库" class="headerlink" title="直接使用SQL操作数据库"></a>直接使用SQL操作数据库</h3><p>直接使用SQL来完成CRUD操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加数据</span></span><br><span class="line">db.execSQL(<span class="string">&quot;insert into Book(name,author,pages,price) values(?,?,?,?)&quot;</span>, new String&#123;<span class="string">&quot;Just for fun&quot;</span>,<span class="string">&quot;Linus&quot;</span>,<span class="string">&quot;355&quot;</span>,<span class="string">&quot;99&quot;</span>&#125;);</span><br><span class="line"><span class="comment"># 更新数据</span></span><br><span class="line">de.execSQL(<span class="string">&quot;update Book set price =? where name = ?&quot;</span>,new String[]&#123;<span class="string">&quot;88&quot;</span>,<span class="string">&quot;Just for fun&quot;</span>);</span><br><span class="line"><span class="comment"># 删除数据</span></span><br><span class="line">db.execSQL(<span class="string">&quot;delete from Book where pages &gt; ?&quot;</span>, new String[]&#123;<span class="string">&quot;300&quot;</span>&#125;);</span><br><span class="line"><span class="comment"># 查询数据</span></span><br><span class="line">db.rawQuery(<span class="string">&quot;select * from Book&quot;</span>,null);</span><br></pre></td></tr></table></figure>
+<h3 id="命令查看数据库"><a href="#命令查看数据库" class="headerlink" title="命令查看数据库"></a>命令查看数据库</h3><p>连接上手机，adb shell进入终端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看数据库中的表</span></span><br><span class="line">.table   </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看建表语句</span></span><br><span class="line">.schema</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查询语句</span></span><br><span class="line">select * from Book</span><br></pre></td></tr></table></figure>
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+<h2 id="使用开源LitePal操作数据库"><a href="#使用开源LitePal操作数据库" class="headerlink" title="使用开源LitePal操作数据库"></a>使用开源LitePal操作数据库</h2><p>Litepal采用了对象关系映射(ORM)的模式，其地址：<a target="_blank" rel="noopener" href="https://github.com/LitePalFramework/LitePal">https://github.com/LitePalFramework/LitePal</a>。</p>
+<h3 id="配置LitePal"><a href="#配置LitePal" class="headerlink" title="配置LitePal"></a>配置LitePal</h3><p>要使用LitePal首先需要再app/build.gradle文件里添加依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile <span class="string">&#x27;org.litepal.android:core:1.3.2&#x27;</span> <span class="comment"># 目前最新已经俩到1.5.1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来需要配置litepal.xml文件。需在app/src/main下新建assets/litepal.xml。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;litepal&gt;</span><br><span class="line">    &lt;dbname value&#x3D;&quot;BookStore&quot;&gt;&lt;&#x2F;dbname&gt; # 指定数据库名</span><br><span class="line">    &lt;version value&#x3D;&quot;1&quot;&gt;&lt;&#x2F;version&gt; # 指定数据库版本号</span><br><span class="line">    &lt;list&gt;&lt;&#x2F;list&gt;  # 指定映射模型</span><br><span class="line">&lt;&#x2F;litepal&gt;</span><br></pre></td></tr></table></figure>
+<p>最后需要再AndroidMannifest.xml中做如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;org.litepal.LitePalApplication&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span></span></span><br><span class="line"><span class="tag">    &gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果已经有了自己的application，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;com.example.MyOwnApplication&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span></span></span><br><span class="line"><span class="tag">    &gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以通过如下方式实现让LitePal成功运行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyOwnApplication</span> <span class="keyword">extends</span> <span class="title">AnotherApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        LitePal.initialize(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建和升级数据库"><a href="#创建和升级数据库" class="headerlink" title="创建和升级数据库"></a>创建和升级数据库</h3><p>为了创建一个Book表，先定义一个Book类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="keyword">extends</span> <span class="title">DataSupport</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String author;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// generated getters and setters.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来将Book类添加到litepal.xml的映射模型列表中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">class</span>=<span class="string">&quot;com.example.litepaltest.Book&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>现在进行任意一次数据库操作，BookStore.db就会自动被创建出来：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connector.getDataBase(); <span class="comment">// LitePal 的一个最简单数据库操作方法</span></span><br></pre></td></tr></table></figure>
+<p>现在如若要向表中添加列等数据，只需要在Book类中添加一个字段即可。</p>
+<h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加数据</span></span><br><span class="line">Book book = <span class="keyword">new</span> Book();</span><br><span class="line">book.setXx();</span><br><span class="line">book.save();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以存储对象更新数据</span></span><br><span class="line">book.setXx();</span><br><span class="line">book.save();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通用方式更新数据</span></span><br><span class="line">book.setPrice(<span class="number">14.95</span>);</span><br><span class="line">book.setPress(<span class="string">&quot;Anchor&quot;</span>);</span><br><span class="line">book.updateAll(<span class="string">&quot;name=? and author = ?&quot;</span>,<span class="string">&quot;Just for fun&quot;</span>,<span class="string">&quot;Linus&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定数据更新为默认值</span></span><br><span class="line">book.setToDefault(<span class="string">&quot;pages&quot;</span>);</span><br><span class="line">book.updateAll();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除数据</span></span><br><span class="line">DataSupport.deleteAll(Book.class, <span class="string">&quot;price &lt; ?&quot;</span>,<span class="string">&quot;15&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询数据</span></span><br><span class="line">List&lt;Book&gt; books = DataSupport.findAll(Book.class);</span><br></pre></td></tr></table></figure>
 
-{% block page_class %}page-post-detail{% endblock %}
+<h3 id="更多方法"><a href="#更多方法" class="headerlink" title="更多方法"></a>更多方法</h3><p><a target="_blank" rel="noopener" href="https://github.com/LitePalFramework/LitePal">https://github.com/LitePalFramework/LitePal</a>。</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/04/29/FirstCode/FirstCode-data-storage/" data-id="ckg0p46g9005vo8gwg371340d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li></ul>
 
-{% block content %}
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/03/FirstCode/FirstCode-Content-Provider/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          第一行代码之跨程序共享数据-内容提供器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/29/Uav/px4-imu-mpu9250-code-structure/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PX4之外设代码结构及流程-IMU</div>
+    </a>
+  
+</nav>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  
+</article>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

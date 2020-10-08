@@ -1,38 +1,284 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
 
+  
+  <title>Android传感器（Sensor）架构简析 (╯_╰) | Andy.Lee&#39;s  Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这真的是一篇简析。。。 (╯_╰)  本来准备详细分析整个 sensor 架构的，实在时间紧张，只能先简析了。  Platform information： MTK6797（X20）+ Android 7.0 Android 支持的传感器现在 Android 支持多达数十种的各种各样的传感器，支持的类型如下：  Android Sensor 架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android传感器（Sensor）架构简析 (╯_╰)">
+<meta property="og:url" content="http://huaqianlee.github.io/2017/12/17/Android/android-sensor-arch-analysis/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="这真的是一篇简析。。。 (╯_╰)  本来准备详细分析整个 sensor 架构的，实在时间紧张，只能先简析了。  Platform information： MTK6797（X20）+ Android 7.0 Android 支持的传感器现在 Android 支持多达数十种的各种各样的传感器，支持的类型如下：  Android Sensor 架构">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_type.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_arch.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_arch.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/i2c_dct.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/mapping_coordinate.jpg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/work_flow.jpg">
+<meta property="article:published_time" content="2017-12-17T02:49:12.000Z">
+<meta property="article:modified_time" content="2019-04-06T14:25:27.034Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="源码分析">
+<meta property="article:tag" content="MTK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_type.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Andy.Lee&#39;s  Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+</head>
 
-{% block page_class %}page-post-detail{% endblock %}
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Andy.Lee&#39;s  Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://huaqianlee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/android-sensor-arch-analysis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/17/Android/android-sensor-arch-analysis/" class="article-date">
+  <time datetime="2017-12-17T02:49:12.000Z" itemprop="datePublished">Dec 17 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android传感器（Sensor）架构简析 (╯_╰)
+    </h1>
+  
 
-{% block content %}
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>这真的是一篇简析。。。 (╯_╰)  本来准备详细分析整个 sensor 架构的，实在时间紧张，只能先简析了。</p>
+</blockquote>
+<p><em>Platform information： MTK6797（X20）+ Android 7.0</em></p>
+<h1 id="Android-支持的传感器"><a href="#Android-支持的传感器" class="headerlink" title="Android 支持的传感器"></a>Android 支持的传感器</h1><p>现在 Android 支持多达数十种的各种各样的传感器，支持的类型如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_type.jpg" alt="Sensor_Type"></p>
+<h1 id="Android-Sensor-架构"><a href="#Android-Sensor-架构" class="headerlink" title="Android Sensor 架构"></a>Android Sensor 架构</h1><a id="more"></a>
+<p>因为功耗和效率等原因，高通后期平台将 sensor 部分放在 aDSP 中，与如下分析十分不同。</p>
+<p>Android 传感器系统架构如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_arch.jpg" alt="sensor_arch"></p>
+<p>传感器驱动一般会有如下五种数据传输形式：input event设备驱动、MISC驱动、SYS驱动、HWMON设备驱动以及ioctl。如下是一幅网上看到未知来源的图片，更清晰的描述了底层架构，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/sensor_arch.png" alt="sensor_arch"></p>
+<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><p>传感器源码架构大致相同，本文就来分析陀螺仪部分源码。</p>
+<h2 id="Kernel-部分"><a href="#Kernel-部分" class="headerlink" title="Kernel 部分"></a>Kernel 部分</h2><p>传感器几乎都是采用 I2C 总线， 所以先分析一下 I2C 部分。</p>
+<h3 id="I2C-总线配置"><a href="#I2C-总线配置" class="headerlink" title="I2C 总线配置"></a>I2C 总线配置</h3><p>MTK 为GPIO、I2C等配置提供了 DCT 工具， 可以直接在 UI 里面配置好 I2C 相关定义（codegen.dws 文件中），配好后编译会自动生成一些相关的 DTS 文件和头文件（如 cust_i2c.dtsi）。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/i2c_dct.jpg" alt="i2c-dct"></p>
+<blockquote>
+<p>高通是直接在 dts 里面定义。另需要注意：一条 i2c 总线只支持一种速率，不同速率外设需要挂接到不同总线。</p>
+</blockquote>
+<p>MTK 是在 DCT 配好 i2c 相关（lk 和 kernel 都需要配）,如果有兼容 sensor 则配置在 dts 中，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\mt6797.dtsi</span></span><br><span class="line">i2c0:i2c@11007000 &#123;</span><br><span class="line">	compatible = <span class="string">&quot;mediatek,mt6797-i2c&quot;</span>;</span><br><span class="line">	id = &lt;0&gt;;</span><br><span class="line">	reg = &lt;0x11007000 0x1000&gt;,</span><br><span class="line">		&lt;0x11000100 0x80&gt;;</span><br><span class="line">	interrupts = &lt;GIC_SPI 84 IRQ_TYPE_LEVEL_LOW&gt;;</span><br><span class="line">	clocks = &lt;&amp;infrasys INFRA_I2C0&gt;, &lt;&amp;infrasys INFRA_AP_DMA&gt;;</span><br><span class="line">	clock-names = <span class="string">&quot;main&quot;</span>, <span class="string">&quot;dma&quot;</span>;</span><br><span class="line">	clock-div = &lt;10&gt;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\boot\dts\aeon6797_6m_n.dts</span></span><br><span class="line">/* 兼容 sensor 配置*/</span><br><span class="line">i2c0@11007000 &#123;</span><br><span class="line">  cust_gyro@6b &#123; // name@i2c_address</span><br><span class="line">	compatible = <span class="string">&quot;mediatek,xxx_gyro&quot;</span>;</span><br><span class="line">	reg = &lt;0x6b&gt;;// i2c 地址</span><br><span class="line">	....</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cust_gyro@1 &#123; //name@0  为 first sensor 参数</span><br><span class="line">	compatible			= <span class="string">&quot;mediatek,bmi160_gyro&quot;</span>; // 驱动解析识别字符</span><br><span class="line">	i2c_num				= &lt;1&gt;;  // i2c channel，硬件决定</span><br><span class="line">	i2c_addr			= &lt;0x68 0 0 0&gt;; </span><br><span class="line">	direction			= &lt;6&gt;; // 映射坐标，见下图</span><br><span class="line">	power_id			= &lt;0xffff&gt;; // ldo id</span><br><span class="line">	power_vol			= &lt;0&gt;; // ldo voltage</span><br><span class="line">	firlen				= &lt;0&gt;; // 数据过滤长度， 通常为0</span><br><span class="line">	is_batch_supported		= &lt;0&gt;; </span><br><span class="line">&#125;;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>关于上面 dts 中 方向参数 direction 取值依据参考下图：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/mapping_coordinate.jpg" alt="mapping_coordinate"></p>
+<h3 id="Gyro-Driver"><a href="#Gyro-Driver" class="headerlink" title="Gyro Driver"></a>Gyro Driver</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># alps\kernel-3.18\drivers\misc\mediatek\gyroscope\bmi160_gyro\bmi160_gyro.c</span></span><br><span class="line">bmi160_gyro_init()</span><br><span class="line">    get_gyro_dts_func()  <span class="comment">// 从 dts 获取自定义的参数</span></span><br><span class="line">    gyro_driver_add(bmi160_gyro_init_info)</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">gyro_init_info</span> <span class="title">bmi160_gyro_init_info</span></span></span><br><span class="line"><span class="class">    <span class="title">bmi160_gyro_local_init</span>()</span></span><br><span class="line"><span class="class">        <span class="title">i2c_add_driver</span>(&amp;<span class="title">bmg_i2c_driver</span>)</span></span><br><span class="line"><span class="class">        </span></span><br><span class="line"><span class="class"><span class="title">static</span> <span class="title">struct</span> <span class="title">i2c_driver</span> <span class="title">bmg_i2c_driver</span>  </span></span><br><span class="line"><span class="class">    <span class="title">bmi160_gyro_i2c_probe</span>()</span></span><br><span class="line"><span class="class">        // 初始化结构体</span></span><br><span class="line"><span class="class">        <span class="title">hwmsen_get_convert</span>() // 获得坐标映射转换值</span></span><br><span class="line"><span class="class">        <span class="title">bmg_init_client</span>() // 初始化设备，如 <span class="title">ID</span> ， 范围，数据格式等</span></span><br><span class="line"><span class="class">        <span class="title">misc_register</span>() // <span class="title">bmg_open</span>\<span class="title">bmg_release</span>\<span class="title">bmg_unlocked_ioctl</span>;</span> 注册设备，<span class="keyword">for</span> factory mode , engineer mode , <span class="keyword">and</span> so on</span><br><span class="line">        bmg_create_attr() <span class="comment">// 创建platform_driver attr</span></span><br><span class="line">        gyro_register_control_path()  <span class="comment">// struct gyro_control_path，见下 Common 部分</span></span><br><span class="line">        gyro_register_data_path() <span class="comment">// struct gyro_data_path</span></span><br><span class="line">        device_register()</span><br><span class="line">        device_create_file()</span><br></pre></td></tr></table></figure>
+<h3 id="Gyro-Common"><a href="#Gyro-Common" class="headerlink" title="Gyro Common"></a>Gyro Common</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># alps\kernel-3.18\drivers\misc\mediatek\gyroscope\inc\gyroscope.h    </span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">gyro_control_path</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> (*open_report_data)(<span class="keyword">int</span> open);</span><br><span class="line">	<span class="keyword">int</span> (*enable_nodata)(<span class="keyword">int</span> en);</span><br><span class="line">	<span class="keyword">int</span> (*set_delay)(u64 delay);</span><br><span class="line">	<span class="keyword">bool</span> is_report_input_direct;</span><br><span class="line">	<span class="keyword">bool</span> is_support_batch;</span><br><span class="line">	<span class="keyword">int</span> (*gyro_calibration)(<span class="keyword">int</span> type, <span class="keyword">int</span> cali[<span class="number">3</span>]);</span><br><span class="line">	<span class="keyword">bool</span> is_use_common_factory;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">gyro_data_path</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> (*get_data)(<span class="keyword">int</span> *x, <span class="keyword">int</span> *y, <span class="keyword">int</span> *z, <span class="keyword">int</span> *status);</span><br><span class="line">	<span class="keyword">int</span> (*get_raw_data)(<span class="keyword">int</span> *x, <span class="keyword">int</span> *y, <span class="keyword">int</span> *z);</span><br><span class="line">	<span class="keyword">int</span> vender_div;</span><br><span class="line">&#125;;    </span><br><span class="line">    </span><br><span class="line"><span class="meta"># alps\kernel-3.18\drivers\misc\mediatek\gyroscope\gyroscope.c    </span></span><br><span class="line">gyro_probe()</span><br><span class="line">    gyro_real_driver_init()</span><br><span class="line">    gyro_input_init() <span class="comment">// 初始化 input dev</span></span><br><span class="line">        input_register_device(dev)</span><br><span class="line"></span><br><span class="line">gyro_driver_add()</span><br><span class="line">    platform_driver_register()</span><br><span class="line">    </span><br><span class="line"><span class="meta"># alps\kernel-3.18\drivers\misc\mediatek\gyroscope\gyrohub\gyrohub.c  <span class="comment">// sensorhub   </span></span></span><br></pre></td></tr></table></figure>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># alps\vendor\mediatek\proprietary\hardware\sensor\sensors.c</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sensor_t</span> <span class="title">sSensorList</span>[] =</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    &#123;</span><br><span class="line">        .name       = GYROSCOPE,</span><br><span class="line">        .vendor     = GYROSCOPE_VENDER,</span><br><span class="line">        .version    = <span class="number">3</span>, <span class="comment">// 软件版本</span></span><br><span class="line">        .handle     = ID_GYROSCOPE+ID_OFFSET, <span class="comment">// sensor handle（识别 ID）</span></span><br><span class="line">        .type       = SENSOR_TYPE_GYROSCOPE, <span class="comment">// sensor 类型</span></span><br><span class="line">        .maxRange   = GYROSCOPE_RANGE,<span class="comment">//34.91f, // 数据最大范围</span></span><br><span class="line">        .resolution = GYROSCOPE_RESOLUTION,<span class="comment">//0.0107f, // 数据精度</span></span><br><span class="line">        .power      = GYROSCOPE_POWER,<span class="comment">//6.1f, // 电流消耗（mA）</span></span><br><span class="line">        .minDelay   = GYROSCOPE_MINDELAY,   <span class="comment">// 最小数据上报延迟</span></span><br><span class="line">		.maxDelay   = <span class="number">1000000</span>,               <span class="comment">// 最大延迟</span></span><br><span class="line">        .flags      = SENSOR_FLAG_CONTINUOUS_MODE,</span><br><span class="line">        .reserved   = &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">open_sensors()</span><br><span class="line">    init_nusensors()</span><br></pre></td></tr></table></figure>
+<h1 id="附"><a href="#附" class="headerlink" title="附"></a>附</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># shell 文件路径</span></span><br><span class="line">/sys/bus/platform/drivers/xxx</span><br></pre></td></tr></table></figure>
+<p>驱动数据和控制流：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/mtk/work_flow.jpg" alt="flow"></p>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://huaqianlee.github.io/2017/12/17/Android/android-sensor-arch-analysis/" data-id="ckg0p46ft003oo8gw2vjv5j6h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/02/12/Life/Bye-2017-Hi-2018/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          17 小结，18 计划!
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/03/Android/Android-Linux-i2c-driver-arch/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android/Linux  I2C 驱动架构分析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARTS/">ARTS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Think/">Think</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Uav/">Uav</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/" rel="tag">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bug/" rel="tag">Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Experience/" rel="tag">Experience</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FirstCode/" rel="tag">FirstCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" rel="tag">Linux内核完全注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTK/" rel="tag">MTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PX4/" rel="tag">PX4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Program-Kill/" rel="tag">Program Kill</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Protocol/" rel="tag">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qualcomm/" rel="tag">Qualcomm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Repo/" rel="tag">Repo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dts%E6%96%87%E4%BB%B6/" rel="tag">dts文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF/" rel="tag">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6IO/" rel="tag">文件IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag">电源管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%91%E6%96%87/" rel="tag">译文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Android-Studio/" style="font-size: 11px;">Android Studio</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Bug/" style="font-size: 12px;">Bug</a> <a href="/tags/Experience/" style="font-size: 10px;">Experience</a> <a href="/tags/FirstCode/" style="font-size: 16px;">FirstCode</a> <a href="/tags/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">Linux内核完全注释</a> <a href="/tags/Log/" style="font-size: 12px;">Log</a> <a href="/tags/MTK/" style="font-size: 14px;">MTK</a> <a href="/tags/PX4/" style="font-size: 12px;">PX4</a> <a href="/tags/Program-Kill/" style="font-size: 10px;">Program Kill</a> <a href="/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/tags/Qualcomm/" style="font-size: 19px;">Qualcomm</a> <a href="/tags/Repo/" style="font-size: 10px;">Repo</a> <a href="/tags/Tools/" style="font-size: 17px;">Tools</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/dts%E6%96%87%E4%BB%B6/" style="font-size: 10px;">dts文件</a> <a href="/tags/kernel/" style="font-size: 12px;">kernel</a> <a href="/tags/xml/" style="font-size: 11px;">xml</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 17px;">成长</a> <a href="/tags/%E6%96%87%E4%BB%B6IO/" style="font-size: 11px;">文件IO</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 20px;">源码分析</a> <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" style="font-size: 11px;">电源管理</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size: 13px;">编译</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AF%91%E6%96%87/" style="font-size: 13px;">译文</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 11px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2100/11/">November 2100</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2100/11/22/SUMMARY/">【置顶】博客主题分类一览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">Oh, the Git! - detached HEAD</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/">Oh, the Git! - local .git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">Consolidating the foundation of Linux, vim</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/">Consolidating the foundation of Linux, basic cmds</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Andy.Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
