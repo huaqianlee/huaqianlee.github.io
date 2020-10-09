@@ -12,12 +12,12 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Just need to enjoy life.">
@@ -102,6 +102,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -118,12 +119,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">114</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">102</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -136,11 +137,38 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -150,6 +178,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -163,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -177,82 +207,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/" class="post-title-link" itemprop="url">实现真正意义上的第一个APP之启程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: Jul 11 2017 21:20:58 / Modified: 21:25:04" itemprop="dateCreated datePublished" datetime="2017-07-11T21:20:58+08:00">Jul 11 2017</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>自学了这么久的Android，各种例程和Demo敲了不少，但是还未自己从头设计实现过一个完整的APP，今天准备根据自己的需求定制一款APP：ForMe（暂定此名）。第一次完全自己设计实现，可能会有很多问题，自己边学边优化。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/05/23/Kotlin/Kotlin-HElloWorld/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/23/Kotlin/Kotlin-HElloWorld/" class="post-title-link" itemprop="url">Android Kotlin之曲折HelloWord</a>
+            <a href="/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/" class="post-title-link" itemprop="url">第一行代码之广播机制</a>
         </h2>
 
         <div class="post-meta">
@@ -262,172 +217,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: May 23 2017 8:09:56" itemprop="dateCreated datePublished" datetime="2017-05-23T08:09:56+08:00">May 23 2017</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Aug 21 2017 21:54:41" itemprop="dateModified" datetime="2017-08-21T21:54:41+08:00">Aug 21 2017</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Kotlin/" itemprop="url" rel="index"><span itemprop="name">Kotlin</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近工作业余时间一直在自学Android，Google I/O 2017 惊闻Kotlin成为Google支持的官方语言，当然得紧跟“中央”的脚步，开始程序入门必备之HelloWord，殊不知这个HelloWord充满了曲折。</p>
-<h2 id="了解Kotlin"><a href="#了解Kotlin" class="headerlink" title="了解Kotlin"></a>了解Kotlin</h2><p>知道了Kotlin之后就开始在网上搜集相关资料，发现了如下个人觉得比较好的资料：<br><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/tutorials/kotlin-android.html">Getting started with Android and Kotlin</a><br><a target="_blank" rel="noopener" href="https://github.com/JetBrains/kotlin">kotlin项目</a><br><a target="_blank" rel="noopener" href="https://github.com/JetBrains/kotlin-examples">kotlin配置及与java的互操作</a><br><a target="_blank" rel="noopener" href="https://github.com/Kotlin/kotlin-koans">kotlin语法练习</a><br><a href="doc/kotlin-docs.pdf">Kotlin1.1手册</a><br><a target="_blank" rel="noopener" href="http://tanfujun.com/kotlin-web-site-cn/docs/reference/">kotlin中文网</a><br><a target="_blank" rel="noopener" href="https://kotlinlang.org/">kotlin官网</a><br><a target="_blank" rel="noopener" href="https://github.com/huanglizhuo/kotlin-in-chinese">中文kotlin项目</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/05/23/Kotlin/Kotlin-HElloWorld/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/05/13/FirstCode/FirstCode-advanced-skills/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/13/FirstCode/FirstCode-advanced-skills/" class="post-title-link" itemprop="url">第一行代码之高级技巧</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: May 13 2017 19:09:08" itemprop="dateCreated datePublished" datetime="2017-05-13T19:09:08+08:00">May 13 2017</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Aug 27 2019 22:26:37" itemprop="dateModified" datetime="2019-08-27T22:26:37+08:00">Aug 27 2019</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h2 id="全局获取Context"><a href="#全局获取Context" class="headerlink" title="全局获取Context"></a>全局获取Context</h2><p>新建一个自己Application，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context context;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        context = getApplicationContext();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> context;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/05/13/FirstCode/FirstCode-advanced-skills/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Material-Design/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/10/FirstCode/FirstCode-Material-Design/" class="post-title-link" itemprop="url">第一行代码之Material Design</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: May 10 2017 21:31:27" itemprop="dateCreated datePublished" datetime="2017-05-10T21:31:27+08:00">May 10 2017</time>
+              <time title="Created: Mar 25 2017 21:06:00" itemprop="dateCreated datePublished" datetime="2017-03-25T21:06:00+08:00">Mar 25 2017</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -458,12 +248,10 @@
 
       
           <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h2 id="Toolbar控件"><a href="#Toolbar控件" class="headerlink" title="Toolbar控件"></a>Toolbar控件</h2><h3 id="主题定义"><a href="#主题定义" class="headerlink" title="主题定义"></a>主题定义</h3><p>对应于ActionBar，由于ActionBar被限定于活动顶部，不能实现一些Material Design效果，因此已不推荐使用了。</p>
-<p>ActionBar来自项目指定的主题定义的显示，如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># AndroidManifest.xml</span><br><span class="line">android:theme=&quot;@style/AppTheme&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="广播机制"><a href="#广播机制" class="headerlink" title="广播机制"></a>广播机制</h2><h3 id="标准广播"><a href="#标准广播" class="headerlink" title="标准广播"></a>标准广播</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/firstcode/normal_broadcasts.png" alt="normal_broadcast"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2017/05/10/FirstCode/FirstCode-Material-Design/#more" rel="contents">
+              <a class="btn" href="/2017/03/25/FirstCode/FirstCode-Broadcast-Receiver/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -487,7 +275,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/05/10/FirstCode/FirstCode-Fragment/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/03/25/Uav/PX4-for-Snapdragon-Flight/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -501,7 +289,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2017/05/10/FirstCode/FirstCode-Fragment/" class="post-title-link" itemprop="url">第一行代码之碎片</a>
+            <a href="/2017/03/25/Uav/PX4-for-Snapdragon-Flight/" class="post-title-link" itemprop="url">PX4 for Snapdragon Flight</a>
         </h2>
 
         <div class="post-meta">
@@ -511,7 +299,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: May 10 2017 12:24:05" itemprop="dateCreated datePublished" datetime="2017-05-10T12:24:05+08:00">May 10 2017</time>
+              <time title="Created: Mar 25 2017 19:45:25" itemprop="dateCreated datePublished" datetime="2017-03-25T19:45:25+08:00">Mar 25 2017</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -526,7 +314,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                  <a href="/categories/Uav/" itemprop="url" rel="index"><span itemprop="name">Uav</span></a>
                 </span>
             </span>
 
@@ -541,180 +329,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h2 id="碎片的使用"><a href="#碎片的使用" class="headerlink" title="碎片的使用"></a>碎片的使用</h2><h3 id="碎片的简单用法"><a href="#碎片的简单用法" class="headerlink" title="碎片的简单用法"></a>碎片的简单用法</h3><p>新建一个示例包含两个碎片，平分活动空间，新建左侧碎片布局，如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout...</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Button...</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/05/10/FirstCode/FirstCode-Fragment/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/05/09/FirstCode/FirstCode-Network/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/09/FirstCode/FirstCode-Network/" class="post-title-link" itemprop="url">第一行代码之网络</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: May 9 2017 19:29:56" itemprop="dateCreated datePublished" datetime="2017-05-09T19:29:56+08:00">May 9 2017</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jun 18 2017 14:11:49" itemprop="dateModified" datetime="2017-06-18T14:11:49+08:00">Jun 18 2017</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h2 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h2><p>WebView控件使用十分简单：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 布局</span><br><span class="line">&lt;WebView /&gt;</span><br><span class="line"></span><br><span class="line"># 应用</span><br><span class="line">webView.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>); <span class="comment">// 设置浏览器属性，支持JavaScript脚本</span></span><br><span class="line">webView.setWebViewClient(<span class="keyword">new</span> WebViewClient());<span class="comment">//目标网页在当前WebView中显示，而不打开系统浏览器</span></span><br><span class="line">webView.loadUrl(<span class="string">&quot;http://huaqianlee.github.io&quot;</span>);</span><br><span class="line"></span><br><span class="line"># 权限</span><br><span class="line">&lt;uses-permission android:name=<span class="string">&quot;android.permission.INTERNET&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/05/09/FirstCode/FirstCode-Network/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/05/08/English/Americal-and-english-phonetic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/08/English/Americal-and-english-phonetic/" class="post-title-link" itemprop="url">美式音标与英式音标</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: May 8 2017 19:06:31" itemprop="dateCreated datePublished" datetime="2017-05-08T19:06:31+08:00">May 8 2017</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/English/" itemprop="url" rel="index"><span itemprop="name">English</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>由于自己现在自学的是美音，与学生时代学的国际音标有很大不同，查单词的时候时不时就会被音标搞困惑。因此特意搜索整理了一份美式音标表(K.k音标)以及与英式音标的区别。</p>
-<h2 id="美式音标"><a href="#美式音标" class="headerlink" title="美式音标"></a>美式音标</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/english/America_ph.png" alt="美式音标"></p>
-<blockquote>
-<p><strong>[m] [n] [ŋ] [l] [r] - 母音前母音后发音不同</strong></p>
+          <blockquote>
+<p>公司刚好有基于8074的无人机主板,虽然与官方snapdragon board有些差异,但也差不多,本文就是自己在此板上跑px4的阶段笔记,写的比较简单粗糙. </p>
 </blockquote>
+<h1 id="快速驱动无人机升空"><a href="#快速驱动无人机升空" class="headerlink" title="快速驱动无人机升空"></a>快速驱动无人机升空</h1><p>主要通过PX4+QGroundcontrol+DX9的方式，手机APP+Qgroundcontrol+DX9也类似,只是将遥控器换成了APP(Android版地址: <a target="_blank" rel="noopener" href="https://github.com/ATLFlight/drone-controller">DroneControl</a>)，准备好环境，有问题主要参考如下三个地址：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ATLFlight/ATLFlightDocs/blob/master/PX4.md#stable-releases">PX4编译和执行</a></p>
+<p><a target="_blank" rel="noopener" href="https://dev.px4.io/">PX4开发手册</a></p>
+<p><a target="_blank" rel="noopener" href="https://donlakeflyer.gitbooks.io/qgroundcontrol-developers-guide/content/">QGroundcontrol开发手册</a></p>
+<h2 id="连接无人机"><a href="#连接无人机" class="headerlink" title="连接无人机"></a>连接无人机</h2><p>首先PC通过WiFi连上无人机，通过xshell或者putty ssh远程登录无人机。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2017/05/08/English/Americal-and-english-phonetic/#more" rel="contents">
+              <a class="btn" href="/2017/03/25/Uav/PX4-for-Snapdragon-Flight/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -738,7 +363,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-Service/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/03/25/FirstCode/firstcode-note-UI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -752,7 +377,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2017/05/06/FirstCode/FirstCode-Service/" class="post-title-link" itemprop="url">第一行代码之服务</a>
+            <a href="/2017/03/25/FirstCode/firstcode-note-UI/" class="post-title-link" itemprop="url">第一行代码之UI</a>
         </h2>
 
         <div class="post-meta">
@@ -762,7 +387,89 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: May 6 2017 23:58:30" itemprop="dateCreated datePublished" datetime="2017-05-06T23:58:30+08:00">May 6 2017</time>
+              <time title="Created: Mar 25 2017 8:34:40" itemprop="dateCreated datePublished" datetime="2017-03-25T08:34:40+08:00">Mar 25 2017</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Aug 27 2019 22:25:07" itemprop="dateModified" datetime="2019-08-27T22:25:07+08:00">Aug 27 2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<p>本部分思维导图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/UI.png" alt="UI"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/25/FirstCode/firstcode-note-UI/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/" class="post-title-link" itemprop="url">Linux内核完全注释之80x86内存管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Mar 24 2017 22:28:51" itemprop="dateCreated datePublished" datetime="2017-03-24T22:28:51+08:00">Mar 24 2017</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -777,7 +484,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
                 </span>
             </span>
 
@@ -792,12 +499,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h2 id="多线程编程"><a href="#多线程编程" class="headerlink" title="多线程编程"></a>多线程编程</h2><h3 id="线程基本用法"><a href="#线程基本用法" class="headerlink" title="线程基本用法"></a>线程基本用法</h3><p>方式一：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> MyThread().start();</span><br></pre></td></tr></table></figure>
+          <p><a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1kVgED6n">Linux内核完全注释PDF下载</a></p>
+<p>如下图所示，80x86从逻辑地址到物理地址变换使用分段和分页两种机制。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/book/add_change.png"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2017/05/06/FirstCode/FirstCode-Service/#more" rel="contents">
+              <a class="btn" href="/2017/03/24/Linux/Linux-kernel-content-80x86-mem-manage/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -821,7 +527,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/05/06/FirstCode/FirstCode-media/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/03/24/Life/About-my-books-and-my-plan/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -835,7 +541,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2017/05/06/FirstCode/FirstCode-media/" class="post-title-link" itemprop="url">第一行代码之手机多媒体</a>
+            <a href="/2017/03/24/Life/About-my-books-and-my-plan/" class="post-title-link" itemprop="url">所买的书</a>
         </h2>
 
         <div class="post-meta">
@@ -845,90 +551,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: May 6 2017 23:57:26" itemprop="dateCreated datePublished" datetime="2017-05-06T23:57:26+08:00">May 6 2017</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jun 18 2017 9:37:11" itemprop="dateModified" datetime="2017-06-18T09:37:11+08:00">Jun 18 2017</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<h2 id="使用通知"><a href="#使用通知" class="headerlink" title="使用通知"></a>使用通知</h2><h3 id="通知基本用法"><a href="#通知基本用法" class="headerlink" title="通知基本用法"></a>通知基本用法</h3><p>获取通知:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/05/06/FirstCode/FirstCode-media/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/05/03/FirstCode/FirstCode-Content-Provider/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/03/FirstCode/FirstCode-Content-Provider/" class="post-title-link" itemprop="url">第一行代码之跨程序共享数据-内容提供器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: May 3 2017 21:51:23" itemprop="dateCreated datePublished" datetime="2017-05-03T21:51:23+08:00">May 3 2017</time>
+              <time title="Created: Mar 24 2017 21:47:41" itemprop="dateCreated datePublished" datetime="2017-03-24T21:47:41+08:00">Mar 24 2017</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -943,6 +566,87 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/" itemprop="url" rel="index"><span itemprop="name">Life</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/mybooks.jpg" alt="myBooks"><br><strong>书架一脚</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/24/Life/About-my-books-and-my-plan/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/" class="post-title-link" itemprop="url">第一行代码之项目结构与活动</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Mar 24 2017 20:07:01" itemprop="dateCreated datePublished" datetime="2017-03-24T20:07:01+08:00">Mar 24 2017</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Aug 27 2019 22:28:51" itemprop="dateModified" datetime="2019-08-27T22:28:51+08:00">Aug 27 2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
                 </span>
             </span>
@@ -958,12 +662,341 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
-<p>内容提供器(Content Provider)是Android实现跨程序共享数据的标准方式。</p>
-<h2 id="运行时权限"><a href="#运行时权限" class="headerlink" title="运行时权限"></a>运行时权限</h2><h3 id="Android权限机制"><a href="#Android权限机制" class="headerlink" title="Android权限机制"></a>Android权限机制</h3><p>为了安全，Android6.0后引入了新特性，让APP申请的权限用户可控，Android的权限分为了两类：1. 普通权限，2.危险权限。危险权限一共有9组24个权限。</p>
+          <p> <a href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">《第一行代码》第2版思维导图及所有学习笔记目录</a></p>
+<h1 id="第一个应用"><a href="#第一个应用" class="headerlink" title="第一个应用"></a>第一个应用</h1><h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p>很早以前第一次接触Android代码的项目结构的时候确实够头疼滴.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2017/05/03/FirstCode/FirstCode-Content-Provider/#more" rel="contents">
+              <a class="btn" href="/2017/03/24/FirstCode/FirstCode-learning-note-project-structure-and-activity/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/" class="post-title-link" itemprop="url">第一行代码之启程 </a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Mar 24 2017 7:30:48" itemprop="dateCreated datePublished" datetime="2017-03-24T07:30:48+08:00">Mar 24 2017</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Aug 27 2019 22:28:49" itemprop="dateModified" datetime="2019-08-27T22:28:49+08:00">Aug 27 2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>因为工作等原因(其实主要是自己懒^_^), 之前Android学习总是断断续续的. 自己也买了一打的书, 全放在角落里了, 超过50%都没怎么看。 这次自己有了些新想法, 就计划把这些书都再学习一下, 顺便针对自己觉得有必要的知识加以整理做好笔记,就从《第一行代码》第2版开始。首先在此文中梳理下整本书的思维导图及学习笔记目录。</p>
+<p>《第一行代码》思维导图如下:<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/firstcode/%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81.png" alt="脑图1"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/24/FirstCode/The-departure-of-FirstCode-learning-notes/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2017/03/17/Life/Ashamed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/17/Life/Ashamed/" class="post-title-link" itemprop="url">Ashamed</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Mar 17 2017 19:53:12" itemprop="dateCreated datePublished" datetime="2017-03-17T19:53:12+08:00">Mar 17 2017</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Mar 29 2017 22:53:31" itemprop="dateModified" datetime="2017-03-29T22:53:31+08:00">Mar 29 2017</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/" itemprop="url" rel="index"><span itemprop="name">Life</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>惭愧! 惭愧!</p>
+<p>  作为一个即将迈入三十的中年人, 又懈怠浪费了这么多时间. 工作不给力, 得好好准备准备换换环境了, 然后也差不多该回成都了.</p>
+<p>  博客\CODING需要更积极些.</p>
+<p>加油!加油!  </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/" class="post-title-link" itemprop="url">camera架构与调试-菜鸟笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Jul 7 2016 23:37:41" itemprop="dateCreated datePublished" datetime="2016-07-07T23:37:41+08:00">Jul 7 2016</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index"><span itemprop="name">Uav</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就</p>
+</blockquote>
+<p>##VFE<br>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vfe.png" alt="VFE FLOW"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/07/07/Uav/camera-arch-and-tunning-rookie-note/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2016/05/11/Uav/qualcomm-px4-code-reading-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/" class="post-title-link" itemprop="url">高通px4代码阅读笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: May 11 2016 21:45:25" itemprop="dateCreated datePublished" datetime="2016-05-11T21:45:25+08:00">May 11 2016</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Aug 4 2016 22:51:46" itemprop="dateModified" datetime="2016-08-04T22:51:46+08:00">Aug 4 2016</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index"><span itemprop="name">Uav</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>像这种庞大系统的代码， 我一般喜欢先大致了解一下代码结构，然后按照执行流程阅读分析。我阅读的是高通8074平台的px4代码。</strong></p>
+<p>代码地址：<a target="_blank" rel="noopener" href="https://github.com/ATLFlight/Firmware">ATLFlight/Firmware</a><br>参考文档：<a target="_blank" rel="noopener" href="http://dev.px4.io/tutorial-hello-sky.html?q=">px4 devguide</a></p>
+<blockquote>
+<p>由于没有足够的时间再去细细研究, 所以只有这么一个粗略的笔记.</p>
+</blockquote>
+<p>============================================================================================================<br>##关键路径及文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">W:\uav\Firmware\src\modules\mavlink   //  信息数据处理</span><br><span class="line">mavlink_main.cpp</span><br><span class="line">mavlink_receiver.cpp</span><br><span class="line"></span><br><span class="line">FastRPC   --  aDSP 与 apps 之间远程调用</span><br><span class="line">1. 共享内存（不包括L1/L2缓存）</span><br><span class="line">2. aDSP中能支持有限的物理映射</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules\muorb\</span><br><span class="line">adsp </span><br><span class="line">Krait</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\posix-configs\eagle\flight    // config 文件</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\modules  // 功能模块</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\makefiles\ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\rc_receiver\rc_receiver_main.cpp   // 遥控器</span><br><span class="line"></span><br><span class="line">W:\uav\Firmware\src\drivers\device\vdev.cpp   <span class="comment"># Virtual character device base class.</span></span><br><span class="line">mavilink、uorb 继承于此类</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/05/11/Uav/qualcomm-px4-code-reading-note/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -986,7 +1019,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1054,14 +1087,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1072,6 +1105,10 @@
       </div>
   </nav>
 </div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
@@ -1101,6 +1138,9 @@
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
           <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
         </li>
     </ul>
   </div>
@@ -1161,12 +1201,18 @@
 
 <script src="/js/next-boot.js"></script>
 
+<script src="/js/bookmark.js"></script>
+
 
 
 
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

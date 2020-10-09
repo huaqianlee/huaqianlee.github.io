@@ -12,12 +12,12 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Just need to enjoy life.">
@@ -102,6 +102,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -118,12 +119,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">114</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">102</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -136,11 +137,38 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -150,6 +178,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -579,7 +609,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/01/06/Think/A-little-impression/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/11/17/Git/Some-knowledge-about-git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -593,7 +623,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/06/Think/A-little-impression/" class="post-title-link" itemprop="url">A little impression</a>
+            <a href="/2019/11/17/Git/Some-knowledge-about-git/" class="post-title-link" itemprop="url">Oh, the Git! - Basic</a>
         </h2>
 
         <div class="post-meta">
@@ -602,17 +632,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: Jan 6 2020 23:19:11 / Modified: 23:25:17" itemprop="dateCreated datePublished" datetime="2020-01-06T23:19:11+08:00">Jan 6 2020</time>
+              <time title="Created: Nov 17 2019 23:38:05" itemprop="dateCreated datePublished" datetime="2019-11-17T23:38:05+08:00">Nov 17 2019</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Mar 9 2020 21:48:59" itemprop="dateModified" datetime="2020-03-09T21:48:59+08:00">Mar 9 2020</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Think/" itemprop="url" rel="index"><span itemprop="name">Think</span></a>
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
                 </span>
             </span>
 
@@ -627,8 +663,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>最近越发的觉得自己的基础不牢，好像懂得很多，但是一深入探究就会发现自己有太多的知识盲区。</p>
-
+          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>Git has always been a must-have skill for developers, I will submize a series of blogs related to it, although I don’t know too much about git now.</p>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2">Pro Git</a> is the best guide of git, I need to read it when I have plenty of time so that I can check for gaps.</p>
+<h1 id="VCS-Version-Control-System"><a href="#VCS-Version-Control-System" class="headerlink" title="VCS(Version Control System)"></a>VCS(Version Control System)</h1><h2 id="Central-VCS"><a href="#Central-VCS" class="headerlink" title="Central VCS"></a>Central VCS</h2><p>Central VCS mainly includes <code>SVN</code> and <code>CVS</code>, its newwork architecture is client-server.<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/Central%20VCS.jpg" alt="Central VCS"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/17/Git/Some-knowledge-about-git/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -647,7 +692,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/12/29/ARTS/Eighteenth-week-of-ARTS/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/23/ARTS/Ninth-week-of-ARTS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -661,7 +706,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/29/ARTS/Eighteenth-week-of-ARTS/" class="post-title-link" itemprop="url">Eighteenth week of ARTS</a>
+            <a href="/2019/10/23/ARTS/Ninth-week-of-ARTS/" class="post-title-link" itemprop="url">The ninth week of ARTS</a>
         </h2>
 
         <div class="post-meta">
@@ -671,15 +716,24 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Dec 29 2019 23:38:03" itemprop="dateCreated datePublished" datetime="2019-12-29T23:38:03+08:00">Dec 29 2019</time>
+              <time title="Created: Oct 23 2019 0:00:43" itemprop="dateCreated datePublished" datetime="2019-10-23T00:00:43+08:00">Oct 23 2019</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jan 6 2020 22:51:48" itemprop="dateModified" datetime="2020-01-06T22:51:48+08:00">Jan 6 2020</time>
+                <time title="Modified: Oct 9 2020 23:19:07" itemprop="dateModified" datetime="2020-10-09T23:19:07+08:00">Oct 9 2020</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
 
           
 
@@ -692,7 +746,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-element/">Remove Element</a>.<br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java">Java</a>.</p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>I found a usage of “repo init … –reference” this week, I want to know more, so I read <a target="_blank" rel="noopener" href="https://forum.xda-developers.com/android/software/guide-android-repo-mirroring-t3170869">Android Repo Mirroring</a> this week.</p>
+<p>This article explains “repo mirroring” in a simple and clear way through examples.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/23/ARTS/Ninth-week-of-ARTS/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -711,7 +775,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/12/23/ARTS/Thirteenth-week-of-ARTS/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -725,7 +789,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/23/ARTS/Thirteenth-week-of-ARTS/" class="post-title-link" itemprop="url">Thirteenth week of ARTS</a>
+            <a href="/2019/10/20/ARTS/Eighth-week-of-ARTs/" class="post-title-link" itemprop="url">The eighth week of ARTs</a>
         </h2>
 
         <div class="post-meta">
@@ -735,15 +799,24 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Dec 23 2019 23:37:32" itemprop="dateCreated datePublished" datetime="2019-12-23T23:37:32+08:00">Dec 23 2019</time>
+              <time title="Created: Oct 20 2019 22:52:39" itemprop="dateCreated datePublished" datetime="2019-10-20T22:52:39+08:00">Oct 20 2019</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Dec 13 2019 23:48:28" itemprop="dateModified" datetime="2019-12-13T23:48:28+08:00">Dec 13 2019</time>
+                <time title="Modified: Oct 9 2020 23:19:26" itemprop="dateModified" datetime="2020-10-09T23:19:26+08:00">Oct 9 2020</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
 
           
 
@@ -756,7 +829,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">Remove Duplicates from Sorted Array</a><br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java">Java</a></p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/20/ARTS/Eighth-week-of-ARTs/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -775,7 +857,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/12/22/ARTS/Seventeenth-week-of-ARTS/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/13/ARTS/Seventh-week-of-ARTs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -789,7 +871,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/22/ARTS/Seventeenth-week-of-ARTS/" class="post-title-link" itemprop="url">Seventeenth week of ARTS</a>
+            <a href="/2019/10/13/ARTS/Seventh-week-of-ARTs/" class="post-title-link" itemprop="url">The seventh week of ARTs</a>
         </h2>
 
         <div class="post-meta">
@@ -799,15 +881,24 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Dec 22 2019 23:38:03" itemprop="dateCreated datePublished" datetime="2019-12-22T23:38:03+08:00">Dec 22 2019</time>
+              <time title="Created: Oct 13 2019 22:45:09" itemprop="dateCreated datePublished" datetime="2019-10-13T22:45:09+08:00">Oct 13 2019</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jan 6 2020 22:51:26" itemprop="dateModified" datetime="2020-01-06T22:51:26+08:00">Jan 6 2020</time>
+                <time title="Modified: Nov 16 2019 23:06:01" itemprop="dateModified" datetime="2019-11-16T23:06:01+08:00">Nov 16 2019</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
 
           
 
@@ -820,7 +911,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/merge-two-sorted-lists/">Merge Two Sorted Lists</a><br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java">Java</a></p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/13/ARTS/Seventh-week-of-ARTs/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -839,7 +939,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/12/15/ARTS/Sixteenth-week-of-ARTS/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -853,7 +953,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/15/ARTS/Sixteenth-week-of-ARTS/" class="post-title-link" itemprop="url">Sixteenth week of ARTS</a>
+            <a href="/2019/10/06/ARTS/Sixth-week-of-ARTs/" class="post-title-link" itemprop="url">The sixth week of ARTs</a>
         </h2>
 
         <div class="post-meta">
@@ -863,15 +963,24 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Dec 15 2019 23:38:03" itemprop="dateCreated datePublished" datetime="2019-12-15T23:38:03+08:00">Dec 15 2019</time>
+              <time title="Created: Oct 6 2019 22:44:44" itemprop="dateCreated datePublished" datetime="2019-10-06T22:44:44+08:00">Oct 6 2019</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Dec 13 2019 23:49:31" itemprop="dateModified" datetime="2019-12-13T23:49:31+08:00">Dec 13 2019</time>
+                <time title="Modified: Nov 16 2019 23:06:09" itemprop="dateModified" datetime="2019-11-16T23:06:09+08:00">Nov 16 2019</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
 
           
 
@@ -884,7 +993,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-parentheses/">Valid Parentheses</a><br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py">Python</a></p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>I read <a target="_blank" rel="noopener" href="https://organizationsandmarkets.com/2010/08/31/how-to-read-an-academic-article/">How to Read an Academic Article</a> this week. It teaches me to read academic article by sharing handout. It simply summarizes the method of fast reading, a lot of them maybe be a cliche, but the summary is very helpful.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/06/ARTS/Sixth-week-of-ARTs/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -902,7 +1020,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -970,14 +1088,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -988,6 +1106,10 @@
       </div>
   </nav>
 </div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
@@ -1017,6 +1139,9 @@
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
           <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
         </li>
     </ul>
   </div>
@@ -1077,12 +1202,18 @@
 
 <script src="/js/next-boot.js"></script>
 
+<script src="/js/bookmark.js"></script>
+
 
 
 
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

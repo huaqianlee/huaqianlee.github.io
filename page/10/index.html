@@ -12,12 +12,12 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Just need to enjoy life.">
@@ -102,6 +102,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -118,12 +119,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">114</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">102</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -136,11 +137,38 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -150,6 +178,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -163,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -177,7 +207,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/" class="post-title-link" itemprop="url">Android编译过程详解之二</a>
+            <a href="/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">Android不带电量计的电量计算</a>
         </h2>
 
         <div class="post-meta">
@@ -187,14 +217,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Jul 12 2015 16:43:04" itemprop="dateCreated datePublished" datetime="2015-07-12T16:43:04+08:00">Jul 12 2015</time>
+              <time title="Created: Jan 21 2015 20:10:01" itemprop="dateCreated datePublished" datetime="2015-01-21T20:10:01+08:00">Jan 21 2015</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
+                <time title="Modified: Apr 6 2019 22:25:26" itemprop="dateModified" datetime="2019-04-06T22:25:26+08:00">Apr 6 2019</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -217,29 +247,278 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a><br>　<br>　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　　./go.sh -j8 or make -j8／--<span class="built_in">jobs</span> 　</span><br></pre></td></tr></table></figure>
-<p>参数“-j“ 和”–jobs ”指定了同时编译的线程数量，通常是编译主机 CPU 支持的并发线程总数的 1 倍或 2 倍（如：在一个 4 核，每个核支持两个线程的 CPU 上，可以使用 make -j8 或 make -j16）。在调用 make 命令时，如果没有指定任何目标，则将编译默认目标“droid”（下面详解），然后将会编译出完整的 Android 系统镜像。</p>
-<h2 id="build系统分类"><a href="#build系统分类" class="headerlink" title="build系统分类"></a>build系统分类</h2><p>　　整个build系统的Make文件可以分为三类：</p>
+          <p>　　一直比较好奇，Android的电量是怎么计算出来的，今天就借用qualcomm平台的8916芯片研究了一下，因为其不带电量计，所以是通过一个bms系统计算出来的，下面就来详细分析一下计算方法。</p>
+<p>##SOC（state of charge 荷电状态 - 电量）<br>英文缩写:<br>FCC　　Full-charge capacity<br>RC 　　Remaining capacity (剩余电量)<br>CC 　　Coulumb counter<br>UUC　　Unusable capacity<br>RUC　　Remaining usable capacity<br>SoC　　State of charge<br>OCV　　Open circuit voltage</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/01/21/Android/%E9%AB%98%E9%80%9AAndroid%E4%B8%8D%E5%B8%A6%E7%94%B5%E9%87%8F%E8%AE%A1%E7%9A%84%E7%94%B5%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/01/20/Java/JUnit-test%E7%9A%84%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/01/20/Java/JUnit-test%E7%9A%84%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">JUnit-test的用法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Jan 20 2015 0:07:56" itemprop="dateCreated datePublished" datetime="2015-01-20T00:07:56+08:00">Jan 20 2015</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>为了方便调试，不用每写一个类都需要写一个main方法对其测试，所以Java编写会经常用到JUnit测试。<br>###新建一个JUnit.test测试包，如下图:<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blognewjunit.png" alt="new"><br>###JUnit测试</p>
+<p>可以在原文件类的方法上面加上@Test作为JUnit测试单元运行，也可以新建JUnit文件测试，编写方法如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class PersonTest &#123;</span><br><span class="line"></span><br><span class="line">	@BeforeClass // 测试类加载之前运行</span><br><span class="line">	public static void setUpBeforeClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;Before&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Before  // 每个测试方法运行前运行， 常用</span><br><span class="line">	public void setUp() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;所有的测试方法运行之前运行！！&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test  // 注解，给程序看</span><br><span class="line">	public void <span class="function"><span class="title">testEat</span></span>()&#123;</span><br><span class="line">		</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.eat();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="function"><span class="title">testRun</span></span>()&#123;</span><br><span class="line">		cn.itcast.Person p = new cn.itcast.Person();</span><br><span class="line">		p.run();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@After // 每个测试方法运行后运行 ，常用</span><br><span class="line">	public void tearDown() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;所有的测试方法运行之后运行！！&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    	@AfterClass //测试类加载之后运行</span><br><span class="line">	public static void tearDownAfterClass() throws Exception &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;After&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###运行JUnit</p>
+<p>可以单独运行某个测试方法,也可以选中类,运行所以的测试方法,如下图:<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogrunjunit.png" alt="run"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/01/19/Web/xml%E6%96%87%E4%BB%B6%E7%BA%A6%E6%9D%9F%E4%B8%8E%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/01/19/Web/xml%E6%96%87%E4%BB%B6%E7%BA%A6%E6%9D%9F%E4%B8%8E%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">xml文件约束与解析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Jan 19 2015 23:12:35" itemprop="dateCreated datePublished" datetime="2015-01-19T23:12:35+08:00">Jan 19 2015</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Sep 1 2019 15:23:00" itemprop="dateModified" datetime="2019-09-01T15:23:00+08:00">Sep 1 2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在XML技术里，可以编写一个文档来约束一个XML文档的书写规范，这称之为XML约束,常用的约束技术:<br>　1.  XML DTD<br>　2.  XML Schema</p>
+<p>#DTD </p>
+<p>##DTD格式<br>DTD(Document Type Definition)，全称为文档类型定义。 DTD文件应使用UTF-8或Unicode。格式如下:<br>　<br>###外部文件</p>
+<p>　<img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogdtd.png"></p>
+<blockquote>
+<p>#PCDATA:放置字符数据　</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/01/19/Web/xml%E6%96%87%E4%BB%B6%E7%BA%A6%E6%9D%9F%E4%B8%8E%E8%A7%A3%E6%9E%90/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/01/18/Web/xml%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/01/18/Web/xml%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">xml基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Jan 18 2015 0:13:28" itemprop="dateCreated datePublished" datetime="2015-01-18T00:13:28+08:00">Jan 18 2015</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>XML 是有w3c组织发布的一种可扩展标记语言(Extensible Markup Language)。</p>
+<p>##XML 的常见应用</p>
+<p>XML常见的应用场景：
+　</p>
 <ol>
-<li>build系统核心文件：定义整个build系统的框架，其他所有make文件都是在这个框架的基础上写出来的。</li>
-<li>产品的make文件：位于device目录，通常以公司名和产品名分为两级目录，如：\device\qcom\msm8916_32。</li>
-<li>模块的make文件：每个模块专用的make文件，kernel中统一名字为Makefile，其他为Android.mk。　</li>
+<li>XML技术除用于保存有关系的数据之外，它还经常用作软件配置文件，以描述程序模块之间的关系。</li>
+<li>在一个软件系统中，为提高系统的灵活性，它所启动的模块通常由其配置文件决定<br>　<br>例如一个软件在启动时，它需要启动Ａ、Ｂ两个模块，而A、Ｂ这两个模块在启动时，又分别需要A1、A2和B1、B2模块的支持，为了准确描述这种关系，此时使用ＸＭＬ文件最为合适不过。</li>
 </ol>
-<p>##build结果<br>所有的编译产物都将位于 /out 目录下，该目录下主要有以下几个子目录：</p>
-<ul>
-<li>/out/host/：该目录下包含了针对主机的 Android 开发工具的产物。即 SDK 中的各种工具，例如：emulator，adb，aapt 等。</li>
-<li>/out/target/common/：该目录下包含了针对设备的共通的编译产物，主要是 Java 应用代码和 Java 库。</li>
-<li>/out/target/product/<product_name>/：包含了针对特定设备的编译结果以及平台相关的 C/C++ 库和二进制文件。其中，<product_name>是具体目标设备的名称。</li>
-<li>/out/dist/：包含了为多种分发而准备的包，通过“make disttarget”将文件拷贝到该目录，默认的编译目标不会产生该目录。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<p>##XML的语法</p>
+<p>###文档的声明</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;GB2312&quot;</span>  standalone=<span class="string">&quot;yes&quot;</span> ?&gt;</span><br><span class="line">    encoding - 文档的字符编码。（代码里面写什么格式，一般就将文档存为什么格式，一般通用“UTF-8”）</span><br><span class="line">    standalone - 文档是否为独立的，有依赖</span><br><span class="line">```    </span><br><span class="line"><span class="comment">###元素</span></span><br><span class="line"></span><br><span class="line">元素指XML中的标签,可以嵌套,只有一个主标签,两种书写方式如下:</span><br><span class="line">•包含标签体：&lt;a&gt;www.itcast.cn&lt;/a&gt;</span><br><span class="line">•不含标签体的：&lt;a&gt;&lt;/a&gt;, 简写为：&lt;a/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">###属性</span></span><br><span class="line">属性值必须用<span class="string">&quot;&quot;</span> 或<span class="string">&#x27;&#x27;</span> 引起来,如:</span><br><span class="line">```bash</span><br><span class="line">&lt;input name=“text”&gt;</span><br><span class="line">也可以:(XML将空格也当做内容,不过现在浏览器都会执行处理,调用trim())</span><br><span class="line">&lt;input&gt;</span><br><span class="line">   &lt;name&gt;text&lt;/name&gt;</span><br><span class="line">&lt;/input&gt;</span><br></pre></td></tr></table></figure>
+<p>###注释<br>&lt;!–注释–&gt;  // 注释语句必须写在XML声明语句后面</p>
+<p>###CDATA区</p>
+<p>CDATA(character data)区用于让解析引擎不对其进行处理,按照原始内容显示. </p>
+<pre><code class="bash">格式:&lt;![CDATA[ 内容 ]]&gt;
+eg:
+  &lt;![CDATA[
+      &lt;itcast&gt;
+          &lt;br/&gt;
+      &lt;/itcast&gt;
+  ]]&gt;</code></pre>
+<p>###转义字符<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogxml.png" alt="escape"><br>###处理指令</p>
+<p>处理指令，简称PI （processing instruction）。处理指令用来指挥解析引擎如何解析XML文档内容。例如，在XML文档中可以使用xml-stylesheet指令，通知XML解析引擎，应用css文件显示xml文档内容。<br><?xml-stylesheet type="text/css" href="1.css"?><br>处理指令必须以“<?”作为开头，以“?>”作为结尾，XML声明语句就是最常见的一种处理指令。 </p>
+
       
     </div>
 
@@ -258,7 +537,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2014/12/21/Linux/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -272,7 +551,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">About ActivityNotFoundException Unable to find explicit activity class && Android.mk解析</a>
+            <a href="/2014/12/21/Linux/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Linux常用快捷键及命令总结</a>
         </h2>
 
         <div class="post-meta">
@@ -282,14 +561,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Jul 12 2015 14:06:35" itemprop="dateCreated datePublished" datetime="2015-07-12T14:06:35+08:00">Jul 12 2015</time>
+              <time title="Created: Dec 21 2014 20:10:01" itemprop="dateCreated datePublished" datetime="2014-12-21T20:10:01+08:00">Dec 21 2014</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Aug 1 2016 23:18:06" itemprop="dateModified" datetime="2016-08-01T23:18:06+08:00">Aug 1 2016</time>
+                <time title="Modified: Jun 26 2020 23:20:27" itemprop="dateModified" datetime="2020-06-26T23:20:27+08:00">Jun 26 2020</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -297,7 +576,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
                 </span>
             </span>
 
@@ -312,14 +591,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a></p>
-<p>##ActivityNotFoundException 　<br>　　最近将Android从4.4移植到5.1时，添加一个从拨号界面输入*#360*#进入battery info查看界面的功能时（如感兴趣，详情见<a href="http://huaqianlee.github.io/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">Android电池监控系统(bms)之一电池系统架构</a>），activity跳转部分代码如下： </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(input.equals(BATTERY_INFO))</span><br><span class="line">&#123;<span class="comment">//added by lihuaqian</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ComponentName Component = <span class="keyword">new</span> ComponentName(<span class="string">&quot;com.android.settings&quot;</span>,<span class="string">&quot;com.android.settings.BatteryOemInfo&quot;</span>); </span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">        intent.setComponent(Component);</span><br><span class="line">        intent.setAction(Intent.ACTION_VIEW);   </span><br><span class="line">        context.startActivity(intent);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ActivityNotFoundException e) &#123;</span><br><span class="line">        Log.d(TAG, <span class="string">&quot;no activity to battery cmd.&quot;</span>); </span><br><span class="line">        <span class="comment">//e.printStackTrace();   </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　　遇到如下问题：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　ActivityNotFoundException : Unable to find explicit activity class; have you declared this activity <span class="keyword">in</span> your AndroidManifest.xml?</span><br></pre></td></tr></table></figure>
+          <p>　　或许我是一个geek范的人，又或许是想显得很有逼格， whatever， 反正我就喜欢Linux的命令行，喜欢黑黑的geek风，这样完全体现出了技术的酷炫。现将一些自己觉得很有用能让自己显得很牛的装X快捷键和指令总结如下，其中有一部分相当有用，使用后逼格瞬间提升，不信看文章最后的后记。</p>
+<h2 id="Shell终端常用快捷键"><a href="#Shell终端常用快捷键" class="headerlink" title="Shell终端常用快捷键"></a>Shell终端常用快捷键</h2><p>　　当进行命令行操作时，使用快捷键将极大提高工作效率，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + U – 剪切光标前的内容</span><br><span class="line">Ctrl + K – 剪切光标至行末的内容</span><br><span class="line">Ctrl + Y – 粘贴</span><br><span class="line">Ctrl + E – 移动光标到行末</span><br><span class="line">Ctrl + A – 移动光标到行首</span><br><span class="line">ALT + F – 跳向下一个空格</span><br><span class="line">ALT + B – 跳回上一个空格</span><br><span class="line">ALT + Backspace – 删除前一个单词</span><br><span class="line">Ctrl + W – 剪切光标前一个单词</span><br><span class="line">Ctrl + Insert – 复制</span><br><span class="line">Shift + Insert – 粘贴</span><br><span class="line"><span class="comment"># 下面两个命令的用法，如： 在shell终端输入vi main.c进入vi界面后，想切换到命令行，可以通过Ctrl+Z</span></span><br><span class="line">Ctrl + Z – 暂停应用程序</span><br><span class="line"><span class="built_in">fg</span> – 重新将程序唤到前台</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/#more" rel="contents">
+              <a class="btn" href="/2014/12/21/Linux/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -343,7 +620,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2014/11/17/Linux/Linux%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C%E5%8F%8A%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -357,7 +634,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" class="post-title-link" itemprop="url">Android编译过程详解之一</a>
+            <a href="/2014/11/17/Linux/Linux%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C%E5%8F%8A%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">Linux文件I/O操作及网络架构</a>
         </h2>
 
         <div class="post-meta">
@@ -367,7 +644,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Jul 11 2015 19:43:04" itemprop="dateCreated datePublished" datetime="2015-07-11T19:43:04+08:00">Jul 11 2015</time>
+              <time title="Created: Nov 17 2014 20:15:42" itemprop="dateCreated datePublished" datetime="2014-11-17T20:15:42+08:00">Nov 17 2014</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -382,7 +659,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
                 </span>
             </span>
 
@@ -397,13 +674,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>**　　Platform Information :<br>　　　System:    Ａndroid4.4.4<br>　　　Platform:  Qualcomm msm8916<br>　　　Author:     Andy Lee<br>　　　Email:        <a href="mailto:&#x68;&#117;&#x61;&#113;&#x69;&#x61;&#x6e;&#108;&#x65;&#x65;&#64;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#99;&#111;&#x6d;">&#x68;&#117;&#x61;&#113;&#x69;&#x61;&#x6e;&#108;&#x65;&#x65;&#64;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#99;&#111;&#x6d;</a>**</p>
-<p><strong>欢迎指出错误，共同学习，共同进步</strong></p>
-<p>　　<a href="http://huaqianlee.github.io/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/">Android编译过程详解之一</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%BA%8C/">Android编译过程详解之二</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/">Android编译过程详解之三</a><br>　　<a href="http://huaqianlee.github.io/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/">Android.mk解析</a><br>　<br>　　Google给出的编译环境和构建方法见：<a target="_blank" rel="noopener" href="http://source.android.com/source/initializing.html">http://source.android.com/source/initializing.html</a>，过程见：<a target="_blank" rel="noopener" href="http://source.android.com/source/building.html">http://source.android.com/source/building.html</a>，不过这是解释怎么编译一个通用的系统，没有详细描述细节，而且需要翻墙。接下来我就准备跟着高通平台的编译过程来详细了解一下。</p>
-<p>我平时的编译步骤如下：<br>　1. source setup.sh project-name debug/release　加载命令配置环境　<br>　2. ./go.sh  [target] or make  [target]　编译</p>
+          <p>图片摘自网络，这些图片清晰的描述出了文件I/O和网络操作的脉络。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/#more" rel="contents">
+              <a class="btn" href="/2014/11/17/Linux/Linux%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C%E5%8F%8A%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -427,7 +701,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/06/24/Android/linear-charger-driver/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2014/11/01/Think/How-to-read/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -441,7 +715,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/06/24/Android/linear-charger-driver/" class="post-title-link" itemprop="url">高通 linear charger 驱动分析</a>
+            <a href="/2014/11/01/Think/How-to-read/" class="post-title-link" itemprop="url">How to read</a>
         </h2>
 
         <div class="post-meta">
@@ -451,14 +725,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Jun 24 2015 21:53:29" itemprop="dateCreated datePublished" datetime="2015-06-24T21:53:29+08:00">Jun 24 2015</time>
+              <time title="Created: Nov 1 2014 0:26:22" itemprop="dateCreated datePublished" datetime="2014-11-01T00:26:22+08:00">Nov 1 2014</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
+                <time title="Modified: Oct 2 2015 22:47:15" itemprop="dateModified" datetime="2015-10-02T22:47:15+08:00">Oct 2 2015</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -466,7 +740,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                  <a href="/categories/Think/" itemprop="url" rel="index"><span itemprop="name">Think</span></a>
                 </span>
             </span>
 
@@ -481,13 +755,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>File :  qpnp-linear-charger.c<br>acc: alam charger current (not sure, think so now)　</p>
-</blockquote>
-<h2 id="QPNP-Linear-Charger-Blocks"><a href="#QPNP-Linear-Charger-Blocks" class="headerlink" title="QPNP Linear Charger Blocks"></a>QPNP Linear Charger Blocks</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/linearcharger1.jpg" alt="lcb">        </p>
+          <p>　　我这里想谈的是关于技术等方面学习的阅读. 不知道其他人怎么样,关于我一直以来总是有一个错误的方法去阅读书籍.　　</p>
+<p>　　从初中伊始,我对于学习就有了一个错误的想法:想一步步的认真学好每个知识点,掌握每个知识点;因为这个想法让我一直学得很累.当我上了大学后,开始接触单片机、c语言、PCB等新鲜而有趣的知识，但是我还是秉承着错误的学习方法。所以在大学阶段虽然自己很认真的在学习，可是最终发现这样效果并不好，反而在一直消磨着自己的兴趣。这一度都让我怀疑自己的能力。不过幸好，我一直没有放弃，一直在坚持学习，直到后面学习Linux、Java及Android之后，终于深刻意识到自己之前的错误方法。　　</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/06/24/Android/linear-charger-driver/#more" rel="contents">
+              <a class="btn" href="/2014/11/01/Think/How-to-read/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -511,7 +783,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/06/24/Android/qcom-pmic-driver/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2014/10/27/Java/The-document-convetions-for-Java/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -525,7 +797,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/06/24/Android/qcom-pmic-driver/" class="post-title-link" itemprop="url">高通 PMIC 架构简析</a>
+            <a href="/2014/10/27/Java/The-document-convetions-for-Java/" class="post-title-link" itemprop="url">The document convetions for Java</a>
         </h2>
 
         <div class="post-meta">
@@ -535,14 +807,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Jun 24 2015 21:53:03" itemprop="dateCreated datePublished" datetime="2015-06-24T21:53:03+08:00">Jun 24 2015</time>
+              <time title="Created: Oct 27 2014 22:28:28" itemprop="dateCreated datePublished" datetime="2014-10-27T22:28:28+08:00">Oct 27 2014</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
+                <time title="Modified: Nov 1 2014 0:30:26" itemprop="dateModified" datetime="2014-11-01T00:30:26+08:00">Nov 1 2014</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -550,7 +822,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -565,13 +837,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>pmic ic: pm8916     80-NL239-4_A_MSM8916_PMIC_SW_Driver_Overview.pdf　</p>
-</blockquote>
-<h2 id="PMIC-IC-PM8916-overview"><a href="#PMIC-IC-PM8916-overview" class="headerlink" title="PMIC IC PM8916 overview"></a>PMIC IC PM8916 overview</h2><h3 id="pmic-device-is-classified-into-the-following-functionalities"><a href="#pmic-device-is-classified-into-the-following-functionalities" class="headerlink" title="pmic device is classified into the following functionalities"></a>pmic device is classified into the following functionalities</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a . input power management</span><br><span class="line">b . output power management</span><br><span class="line">c . genera housekeeping</span><br><span class="line">d . user Interface </span><br><span class="line">e . IC Interface </span><br><span class="line">f . configurable pins - <span class="built_in">functions</span> within other categories(Multipurpose pins (MPP) and General Purpose Input Output (GPIO)).</span><br></pre></td></tr></table></figure>
+          <p>　　注释一直是编程最重要的部分之一,学习Java很长一段时间了,由于之前一直没有很正式的写过项目，所以一直也就没怎么认真的写过注释．因为注释又是如此的重要，所以今天对Java的注释规范加以总结，也促使自己以后写代码注意注释．</p>
+<p>##注释的地方</p>
+<ol>
+<li>每个源文件开头应该有一段注释,介绍代码的作者\时间等信息.</li>
+<li>当代码比较长,嵌套较深时,应该在某些花括号末尾注明花括号对应的起点.</li>
+<li>重要的属性需要添加注释,每个方法需要添加注释.</li>
+<li>典型的算法等需要特别注意的地方需要添加注释.</li>
+<li>有bug的地方需要加以注释,修改过的代码需要加修改标志注释.</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/06/24/Android/qcom-pmic-driver/#more" rel="contents">
+              <a class="btn" href="/2014/10/27/Java/The-document-convetions-for-Java/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -595,7 +872,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/06/24/Android/smb135x-charger-driver/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2014/10/24/Hexo/build-person-blog-with-hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -609,7 +886,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/06/24/Android/smb135x-charger-driver/" class="post-title-link" itemprop="url">高通 smb135x charger 驱动分析</a>
+            <a href="/2014/10/24/Hexo/build-person-blog-with-hexo/" class="post-title-link" itemprop="url">Build person blog with hexo and  github</a>
         </h2>
 
         <div class="post-meta">
@@ -619,14 +896,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Jun 24 2015 21:52:49" itemprop="dateCreated datePublished" datetime="2015-06-24T21:52:49+08:00">Jun 24 2015</time>
+              <time title="Created: Oct 24 2014 1:12:15" itemprop="dateCreated datePublished" datetime="2014-10-24T01:12:15+08:00">Oct 24 2014</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Nov 24 2017 22:04:21" itemprop="dateModified" datetime="2017-11-24T22:04:21+08:00">Nov 24 2017</time>
+                <time title="Modified: Sep 7 2019 23:15:49" itemprop="dateModified" datetime="2019-09-07T23:15:49+08:00">Sep 7 2019</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -634,7 +911,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
                 </span>
             </span>
 
@@ -649,102 +926,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="analysis-log"><a href="#analysis-log" class="headerlink" title="analysis log"></a>analysis log</h2><!--mroe-->
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;3&gt;[52515.763039] __smb135x_write: Writing 0x41=0x06</span><br><span class="line">&lt;3&gt;[52515.774459] __smb135x_write: Writing 0x41=0x26</span><br><span class="line">函数调用:    </span><br><span class="line">static int __smb135x_write(struct smb135x_chg *chip, int reg,u8 val)</span><br><span class="line">-&gt;smb135x_write(struct smb135x_chg *chip, int reg,u8 val) / smb135x_masked_write(struct smb135x_chg *chip, int reg,	u8 mask, u8 val)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;3&gt;[52515.777868] fast_chg_handler: rt_stat = 0x00</span><br><span class="line">&lt;3&gt;[52515.782184] usbin_uv_handler: chip-&gt;usb_present = 1 usb_present = 0</span><br><span class="line">&lt;3&gt;[52515.788369] handle_usb_removal: setting usb psy <span class="built_in">type</span> = 0</span><br><span class="line">&lt;3&gt;[52515.793689] handle_usb_removal: setting usb psy present = 0</span><br><span class="line">&lt;3&gt;[52515.799241] power_ok_handler: rt_stat = 0x00</span><br><span class="line">&lt;3&gt;[52515.803472] src_detect_handler: chip-&gt;usb_present = 0 usb_present = 0</span><br><span class="line">函数调用: </span><br><span class="line">fast_chg_handler(struct smb135x_chg *chip, u8 rt_stat)</span><br><span class="line">usbin_uv_handler(struct smb135x_chg *chip, u8 rt_stat)</span><br><span class="line">handle_usb_removal(struct smb135x_chg *chip)</span><br><span class="line">(-&gt;usbin_uv_handler(struct smb135x_chg *chip, u8 rt_stat)/usbin_ov_handler(struct smb135x_chg *chip, u8 rt_stat)/determine_initial_status(struct smb135x_chg *chip))</span><br><span class="line">static struct irq_handler_info handlers[]= </span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">			&#123;</span><br><span class="line">				.name		= <span class="string">&quot;fast_chg&quot;</span>,</span><br><span class="line">				.smb_irq	= fast_chg_handler,</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				.name		= <span class="string">&quot;usbin_uv&quot;</span>,</span><br><span class="line">				.smb_irq	= usbin_uv_handler,</span><br><span class="line">			&#125;,</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line">-&gt;smb135x_irq_read(struct smb135x_chg *chip)</span><br><span class="line">/static irqreturn_t smb135x_chg_stat_handler(int irq, void *dev_id)</span><br><span class="line">-&gt;smb135x_chg_stat_handler(int irq, void *dev_id)</span><br><span class="line">-&gt;smb135x_main_charger_probe(struct i2c_client *client,const struct i2c_device_id *id)</span><br><span class="line"></span><br><span class="line">&lt;3&gt;[52515.809926] smb135x_chg_stat_handler: handler count = 4</span><br><span class="line">&lt;3&gt;[52515.815104] smb135x_chg_stat_handler: batt psy changed</span><br><span class="line">&lt;3&gt;[52515.820247] smb135x_chg_stat_handler: usb psy changed</span><br><span class="line">&lt;3&gt;[52515.825260] smb135x_chg_stat_handler: dc psy changed</span><br><span class="line">函数调用:</span><br><span class="line">smb135x_chg_stat_handler(int irq, void *dev_id)</span><br><span class="line">smb135x_external_power_changed(struct power_supply *psy)</span><br><span class="line">-&gt;  smb135x_main_charger_probe(struct i2c_client *client,const struct i2c_device_id *id)/(force_irq_set(void *data, u64 val)/smb135x_resume(struct device *dev))</span><br><span class="line"></span><br><span class="line">&lt;6&gt;[52515.836445] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_DISCONNECT_EVENT received</span><br><span class="line">函数调用:</span><br><span class="line">         kernel/drivers/usb/chipidea/ci13xxx_msm.c:186:		dev_info(dev, <span class="string">&quot;CI13XXX_CONTROLLER_DISCONNECT_EVENT received\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">&lt;3&gt;[52515.837146] smb135x_get_prop_batt_status: STATUS_4_REG=80</span><br><span class="line">&lt;3&gt;[52515.841747] smb135x_get_prop_batt_status: STATUS_4_REG=80</span><br><span class="line">函数调用:</span><br><span class="line">smb135x_get_prop_batt_status(struct smb135x_chg *chip)</span><br><span class="line">-&gt;smb135x_battery_get_property(struct power_supply *psy,enum power_supply_property prop,union power_supply_propval *val)/</span><br><span class="line">     smb135x_parallel_get_property(...)</span><br><span class="line"></span><br><span class="line">&lt;3&gt;[52515.847405] smb135x_external_power_changed: current_limit = 0</span><br><span class="line">函数调用:</span><br><span class="line">        smb135x_external_power_changed(struct power_supply *psy)</span><br><span class="line"></span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
-<h2 id="driver-architecture"><a href="#driver-architecture" class="headerlink" title="driver architecture"></a>driver architecture</h2><h3 id="the-important-structure"><a href="#the-important-structure" class="headerlink" title="the important structure"></a>the important structure</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">static struct i2c_driver smb135x_charger_driver = &#123;</span><br><span class="line">	.driver		= &#123;</span><br><span class="line">		.name		= <span class="string">&quot;smb135x-charger&quot;</span>,</span><br><span class="line">		.owner		= THIS_MODULE,</span><br><span class="line">		.of_match_table	= smb135x_match_table,    // get the dtsi profile</span><br><span class="line">		.pm		= &amp;smb135x_pm_ops,</span><br><span class="line">	&#125;,</span><br><span class="line">	.probe		= smb135x_charger_probe,</span><br><span class="line">	.remove		= smb135x_charger_remove,</span><br><span class="line">	.id_table	= smb135x_charger_id,</span><br><span class="line">&#125;;</span><br><span class="line">           /*represent an I2C slave device*/</span><br><span class="line">struct i2c_client &#123;</span><br><span class="line">	unsigned short flags;		/* div., see below		*/</span><br><span class="line">	unsigned short addr;		/* chip address - NOTE: 7bit	*/</span><br><span class="line">					/* addresses are stored <span class="keyword">in</span> the	*/</span><br><span class="line">					/* _LOWER_ 7 bits		*/</span><br><span class="line">	char name[I2C_NAME_SIZE];</span><br><span class="line">	struct i2c_adapter *adapter;	/* the adapter we sit on	*/</span><br><span class="line">	struct i2c_driver *driver;	/* and our access routines	*/</span><br><span class="line">	struct device dev;		/* the device structure		*/</span><br><span class="line">	int irq;			/* irq issued by device		*/</span><br><span class="line">	struct list_head detected;</span><br><span class="line">&#125;;</span><br><span class="line">struct i2c_device_id &#123;</span><br><span class="line">	char name[I2C_NAME_SIZE];</span><br><span class="line">	kernel_ulong_t driver_data;	/* Data private to the driver */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct device_node &#123;</span><br><span class="line">	const char *name;</span><br><span class="line">	const char *<span class="built_in">type</span>;</span><br><span class="line">	phandle phandle;</span><br><span class="line">	const char *full_name;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line">struct smb135x_chg &#123;</span><br><span class="line">	struct i2c_client		*client;</span><br><span class="line">	struct device			*dev;</span><br><span class="line">	struct mutex			read_write_lock;</span><br><span class="line">        ...</span><br><span class="line">	/* psy */</span><br><span class="line">	struct power_supply		*usb_psy;</span><br><span class="line">	int				usb_psy_ma;</span><br><span class="line">	struct power_supply		batt_psy;</span><br><span class="line">	struct power_supply		dc_psy;</span><br><span class="line">	struct power_supply		parallel_psy;</span><br><span class="line">	struct power_supply		*bms_psy;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line">struct power_supply &#123;</span><br><span class="line">	const char *name;</span><br><span class="line">	enum power_supply_type <span class="built_in">type</span>;</span><br><span class="line">	enum power_supply_property *properties;</span><br><span class="line">	...</span><br><span class="line">        int (*get_property)(...)</span><br><span class="line">        int (*set_property)(...)</span><br><span class="line">        ...       /* private */      struct device *dev;</span><br><span class="line">      ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="driver-analysis"><a href="#driver-analysis" class="headerlink" title="driver analysis"></a>driver analysis</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注册驱动:</span></span><br><span class="line">	<span class="keyword">if</span> (is_parallel_charger(client))</span><br><span class="line">	        smb135x_parallel_charger_probe(client, id);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		smb135x_main_charger_probe(client, id); // 驱动注册入口函数</span><br><span class="line">                chip = devm_kzalloc(&amp;client-&gt;dev, sizeof(*chip), GFP_KERNEL);</span><br><span class="line">	        chip-&gt;client = client;</span><br><span class="line">	        chip-&gt;dev = &amp;client-&gt;dev;   // get the dev</span><br><span class="line">                smb_parse_dt(chip)     // parse DT nodes</span><br><span class="line">      usb_psy = power_supply_get_by_name(<span class="string">&quot;usb&quot;</span>); // get usb Supply</span><br><span class="line">    struct device *dev = class_find_device(power_supply_class, NULL, name,power_supply_match_device_by_name);</span><br><span class="line">    dev_get_drvdata(dev)</span><br><span class="line">     INIT_DELAYED_WORK(&amp;chip-&gt;wireless_insertion_work,wireless_insertion_work);</span><br><span class="line">     smb135x_read(chip, CFG_4_REG, &amp;reg) // probe the device to check <span class="keyword">if</span> its actually connected</span><br><span class="line">     i2c_set_clientdata(client, chip);  // client-&gt;...-&gt;driver_datat = chip</span><br><span class="line">     smb135x_chip_version_and_revision(chip) // judge the chip version(smb1357/1358....)</span><br><span class="line">     dump_regs(chip) // <span class="built_in">read</span> and display the register<span class="string">&#x27;s value</span></span><br><span class="line"><span class="string">     smb135x_regulator_init(chip) // initialize regulator(稳压器)</span></span><br><span class="line"><span class="string">     smb135x_hw_init(chip) // initialize hardware(初始化芯片各种参数)</span></span><br><span class="line"><span class="string">     determine_initial_status(chip) //determine init status</span></span><br><span class="line"><span class="string">     .../* initialize Battery power_supply*/</span></span><br><span class="line"><span class="string">     chip-&gt;batt_psy.get_property	= smb135x_battery_get_property;</span></span><br><span class="line"><span class="string">     chip-&gt;batt_psy.set_property	= smb135x_battery_set_property;</span></span><br><span class="line"><span class="string">     chip-&gt;batt_psy.external_power_changed = smb135x_external_power_changed;   // register external power  update online function</span></span><br><span class="line"><span class="string">     chip-&gt;batt_psy.property_is_writeable = smb135x_battery_is_writeable;</span></span><br><span class="line"><span class="string">     power_supply_register(chip-&gt;dev, &amp;chip-&gt;batt_psy) // register Battery power Supply</span></span><br><span class="line"><span class="string">     ....// get the profile and register the function</span></span><br><span class="line"><span class="string">     power_supply_register(chip-&gt;dev, &amp;chip-&gt;dc_psy); // register dc psy  </span></span><br><span class="line"><span class="string">     devm_request_threaded_irq(struct device *dev, unsigned int irq, irq_handler_t handler, irq_handler_t thread_fn,unsigned long irqflags, </span></span><br><span class="line"><span class="string">                                                         const char *devname, void *dev_id)  // allocate(分配) an interrupt line for a managed device</span></span><br><span class="line"><span class="string">               enable_irq_wake(client-&gt;irq); // control irq power management wakeup</span></span><br><span class="line"><span class="string">               create_debugfs_entries(chip); // create debug </span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/06/24/Android/qaulcomm-bms-driver-analysis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/" class="post-title-link" itemprop="url">高通电池管理系统（BMS）驱动分析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Jun 24 2015 21:52:24" itemprop="dateCreated datePublished" datetime="2015-06-24T21:52:24+08:00">Jun 24 2015</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>File: qpnp-vm-bms.c -  Battery monitor system　</p>
-</blockquote>
-<h2 id="简要"><a href="#简要" class="headerlink" title="简要"></a>简要</h2><p>BMS(Battery Monitoring System)主要提供如下功能：</p>
-<ul>
-<li><p>通过一定算法计算SOC(state of charge电量状态) or 剩余电量.</p>
-</li>
-<li><p>正在使用的电池电压, 开漏电压(OCV).</p>
-</li>
-</ul>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_1.png" alt="temp"></p>
-<h2 id="硬件架构"><a href="#硬件架构" class="headerlink" title="硬件架构"></a>硬件架构</h2>
+          <p>　　基于Hexo和Github的个人博客构建，我参照<a target="_blank" rel="noopener" href="http://ibruce.info/2013/11/22/hexo-your-blog/">hexo你的博客</a>、<a target="_blank" rel="noopener" href="http://hexo.io/docs/">hexo官方文档</a>及<a target="_blank" rel="noopener" href="https://help.github.com/articles/set-up-git/">github官方文档</a>完成了自己的个人blog。通过前段时间学习Android和这些天build自己的github、个人blog，关于学习新东西有一个新的体会，就是官方文档和帮助是最好的资料，虽然是英文的，但是看官方的源文档能提升自己的效率。</p>
+<p>现在写博客只需要几个简单的命令就能完成发布了．</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">$ hexo generat</span><br><span class="line">$ hexo deploy</span><br><span class="line">也可以直接简写为：</span><br><span class="line">$ hexo n <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/#more" rel="contents">
+              <a class="btn" href="/2014/10/24/Hexo/build-person-blog-with-hexo/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -768,7 +955,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/06/11/Git/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2014/10/20/Hexo/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -782,7 +969,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/06/11/Git/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Git常用及进阶命令总结</a>
+            <a href="/2014/10/20/Hexo/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
         </h2>
 
         <div class="post-meta">
@@ -792,14 +979,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: Jun 11 2015 22:10:41" itemprop="dateCreated datePublished" datetime="2015-06-11T22:10:41+08:00">Jun 11 2015</time>
+              <time title="Created: Oct 20 2014 1:12:15" itemprop="dateCreated datePublished" datetime="2014-10-20T01:12:15+08:00">Oct 20 2014</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Sep 8 2019 13:11:36" itemprop="dateModified" datetime="2019-09-08T13:11:36+08:00">Sep 8 2019</time>
+                <time title="Modified: Jul 18 2015 1:11:30" itemprop="dateModified" datetime="2015-07-18T01:11:30+08:00">Jul 18 2015</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -807,7 +994,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
                 </span>
             </span>
 
@@ -822,177 +1009,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>　　Git是Linux撞始人Linus Towards花一周写出来的分布式版本控制系统，大神终究是大神，这么牛逼的东西只需要一周。之前花了一百多刀买了Linus的原版自传《Just for fun》，基本上是他自己写的，很幽默，有兴趣可以看看。Linus很傲，但是傲得有资本，唯一能无视Jobs的现实扭曲力场，对Jobs的盛情邀请say no转身而去的人。　<br>　<br>　　言归正传，Git十分好用，应用也十分广泛,现在最好的代码托管网站Github就是基于git创建的，而且现在大多数公司及个人都在使用它进行代码管理，要熟练使用还是需要花一些苦功夫的，我现在也还只是会基本的应用，更深层次的使用还不熟悉。为了方便自己以后使用，将自己常用的一些命令加以总结，并Google了一些常用及进阶命令，一并列出，方便查询使用。</p>
-<p><strong>最重要的命令: git <command> –help</strong></p>
+          <p>Welcome to <a target="_blank" rel="noopener" href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="http://hexo.io/docs/troubleshooting.html">trobuleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/06/11/Git/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">Android电池监控系统(BMS)之一电池系统架构</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Jun 6 2015 22:17:36" itemprop="dateCreated datePublished" datetime="2015-06-06T22:17:36+08:00">Jun 6 2015</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        <a href="mailto:&#104;&#x75;&#97;&#x71;&#105;&#x61;&#x6e;&#108;&#101;&#101;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;">&#104;&#x75;&#97;&#x71;&#105;&#x61;&#x6e;&#108;&#101;&#101;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;</a></em></p>
-<p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。<br>##电池系统架构<br>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
-<p>自上而下，Android电池监控系统分为如下几个部分：</p>
-<p>###电池信息查看APP<br>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/05/30/Android/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/05/30/Android/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">Android 电源管理架构</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: May 30 2015 16:04:45" itemprop="dateCreated datePublished" datetime="2015-05-30T16:04:45+08:00">May 30 2015</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
-<p>##高通的引导体系结构<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/05/30/Android/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/#more" rel="contents">
+              <a class="btn" href="/2014/10/20/Hexo/hello-world/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1015,7 +1036,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1083,14 +1104,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1101,6 +1122,10 @@
       </div>
   </nav>
 </div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
@@ -1130,6 +1155,9 @@
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
           <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
         </li>
     </ul>
   </div>
@@ -1190,12 +1218,18 @@
 
 <script src="/js/next-boot.js"></script>
 
+<script src="/js/bookmark.js"></script>
+
 
 
 
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

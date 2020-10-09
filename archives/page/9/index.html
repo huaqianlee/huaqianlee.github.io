@@ -12,12 +12,12 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Just need to enjoy life.">
@@ -102,6 +102,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -118,12 +119,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">114</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">102</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -136,11 +137,38 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -150,6 +178,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -167,7 +197,7 @@
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">Good! 114 posts in total. Keep on posting.</span>
+        <span class="collection-header">Good! 102 posts in total. Keep on posting.</span>
       </div>
 
       
@@ -180,15 +210,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-08-19T22:11:46+08:00"
-              content="Aug 19 2015">
-          08-19
+              datetime="2015-07-11T19:43:04+08:00"
+              content="Jul 11 2015">
+          07-11
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/08/19/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BLinux%E5%86%85%E6%A0%B8%E8%AE%BE%E5%A4%87%E6%A0%91-DT-Device-Tree-dts%E6%96%87%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">高通平台Android源码分析之Linux内核设备树(DT - Device Tree)</span>
+          <a class="post-title-link" href="/2015/07/11/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%80/" itemprop="url">
+            <span itemprop="name">Android编译过程详解之一</span>
           </a>
       </div>
 
@@ -200,15 +230,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-08-18T00:48:26+08:00"
-              content="Aug 18 2015">
-          08-18
+              datetime="2015-06-24T21:53:29+08:00"
+              content="Jun 24 2015">
+          06-24
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/08/18/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%89/" itemprop="url">
-            <span itemprop="name">高通平台Android源码bootloader分析之sbl1(三)</span>
+          <a class="post-title-link" href="/2015/06/24/Android/linear-charger-driver/" itemprop="url">
+            <span itemprop="name">高通 linear charger 驱动分析</span>
           </a>
       </div>
 
@@ -220,15 +250,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-08-15T20:44:46+08:00"
-              content="Aug 15 2015">
-          08-15
+              datetime="2015-06-24T21:53:03+08:00"
+              content="Jun 24 2015">
+          06-24
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/" itemprop="url">
-            <span itemprop="name">高通平台Android源码bootloader分析之sbl1(二)</span>
+          <a class="post-title-link" href="/2015/06/24/Android/qcom-pmic-driver/" itemprop="url">
+            <span itemprop="name">高通 PMIC 架构简析</span>
           </a>
       </div>
 
@@ -240,15 +270,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-08-15T20:44:33+08:00"
-              content="Aug 15 2015">
-          08-15
+              datetime="2015-06-24T21:52:49+08:00"
+              content="Jun 24 2015">
+          06-24
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/" itemprop="url">
-            <span itemprop="name">高通平台Android源码bootloader分析之sbl1(一)</span>
+          <a class="post-title-link" href="/2015/06/24/Android/smb135x-charger-driver/" itemprop="url">
+            <span itemprop="name">高通 smb135x charger 驱动分析</span>
           </a>
       </div>
 
@@ -260,15 +290,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-07-25T15:56:13+08:00"
-              content="Jul 25 2015">
-          07-25
+              datetime="2015-06-24T21:52:24+08:00"
+              content="Jun 24 2015">
+          06-24
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" itemprop="url">
-            <span itemprop="name">Android源码bootable解析之bootloader LK(little kernel)</span>
+          <a class="post-title-link" href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/" itemprop="url">
+            <span itemprop="name">高通电池管理系统（BMS）驱动分析</span>
           </a>
       </div>
 
@@ -280,15 +310,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-07-19T19:29:58+08:00"
-              content="Jul 19 2015">
-          07-19
+              datetime="2015-06-11T22:10:41+08:00"
+              content="Jun 11 2015">
+          06-11
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/07/19/Android/Android%E4%B8%ADadb-Android-Debug-Bridge-%E5%91%BD%E4%BB%A4%E7%9A%84%E7%94%A8%E6%B3%95/" itemprop="url">
-            <span itemprop="name">Android中adb(Android Debug Bridge)命令的用法</span>
+          <a class="post-title-link" href="/2015/06/11/Git/git%E5%B8%B8%E7%94%A8%E5%8F%8A%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" itemprop="url">
+            <span itemprop="name">Git常用及进阶命令总结</span>
           </a>
       </div>
 
@@ -300,15 +330,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-07-19T11:43:04+08:00"
-              content="Jul 19 2015">
-          07-19
+              datetime="2015-06-06T22:17:36+08:00"
+              content="Jun 6 2015">
+          06-06
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" itemprop="url">
-            <span itemprop="name">怎么抓取Android日志文件</span>
+          <a class="post-title-link" href="/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" itemprop="url">
+            <span itemprop="name">Android电池监控系统(BMS)之一电池系统架构</span>
           </a>
       </div>
 
@@ -320,15 +350,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-07-18T15:43:04+08:00"
-              content="Jul 18 2015">
-          07-18
+              datetime="2015-05-30T16:04:45+08:00"
+              content="May 30 2015">
+          05-30
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/" itemprop="url">
-            <span itemprop="name">How to debug with Android logging</span>
+          <a class="post-title-link" href="/2015/05/30/Android/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/" itemprop="url">
+            <span itemprop="name">Android 电源管理架构</span>
           </a>
       </div>
 
@@ -340,15 +370,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-07-18T13:43:04+08:00"
-              content="Jul 18 2015">
-          07-18
+              datetime="2015-05-29T20:10:41+08:00"
+              content="May 29 2015">
+          05-29
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" itemprop="url">
-            <span itemprop="name">Android日志系统(logging system)详解</span>
+          <a class="post-title-link" href="/2015/05/29/Android/Android-Stdudio-Linux-windows-mac%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" itemprop="url">
+            <span itemprop="name">Android Stdudio Linux/windows/mac常用快捷键</span>
           </a>
       </div>
 
@@ -360,15 +390,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2015-07-12T16:43:04+08:00"
-              content="Jul 12 2015">
-          07-12
+              datetime="2015-03-17T22:15:42+08:00"
+              content="Mar 17 2015">
+          03-17
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" itemprop="url">
-            <span itemprop="name">Android编译过程详解之三</span>
+          <a class="post-title-link" href="/2015/03/17/Linux/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E9%87%8C%E6%93%8D%E4%BD%9C%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6-create-open-read-write/" itemprop="url">
+            <span itemprop="name">如何在内核里操作文件(create/open/read/write)</span>
           </a>
       </div>
 
@@ -384,7 +414,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/archives/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/12/">12</a><a class="extend next" rel="next" href="/archives/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/archives/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/archives/page/10/">10</a><a class="page-number" href="/archives/page/11/">11</a><a class="extend next" rel="next" href="/archives/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -452,14 +482,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -470,6 +500,10 @@
       </div>
   </nav>
 </div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
@@ -499,6 +533,9 @@
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
           <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
         </li>
     </ul>
   </div>
@@ -559,12 +596,18 @@
 
 <script src="/js/next-boot.js"></script>
 
+<script src="/js/bookmark.js"></script>
+
 
 
 
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

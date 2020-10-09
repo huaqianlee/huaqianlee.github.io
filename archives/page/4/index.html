@@ -12,12 +12,12 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Just need to enjoy life.">
@@ -102,6 +102,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -118,12 +119,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">114</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">102</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -136,11 +137,38 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -150,6 +178,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -167,136 +197,10 @@
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">Good! 114 posts in total. Keep on posting.</span>
+        <span class="collection-header">Good! 102 posts in total. Keep on posting.</span>
       </div>
 
       
-    <div class="collection-year">
-      <span class="collection-header">2019</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-15T23:48:59+08:00"
-              content="May 15 2019">
-          05-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/05/15/Android/pmic-voter/" itemprop="url">
-            <span itemprop="name">pmic voter</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-05T20:04:59+08:00"
-              content="May 5 2019">
-          05-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/" itemprop="url">
-            <span itemprop="name">Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-01-12T23:38:03+08:00"
-              content="Jan 12 2019">
-          01-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/01/12/ARTS/Twentieth-week-of-ARTS/" itemprop="url">
-            <span itemprop="name">Twentieth week of ARTS</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-01-05T23:38:03+08:00"
-              content="Jan 5 2019">
-          01-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/01/05/ARTS/Nineteenth-week-of-ARTS/" itemprop="url">
-            <span itemprop="name">Nineteenth week of ARTS</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2018</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-08-23T22:07:48+08:00"
-              content="Aug 23 2018">
-          08-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/08/23/Android/Three-ways-to-dump-usb-register/" itemprop="url">
-            <span itemprop="name">Three ways to dump usb register</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-02-12T13:17:40+08:00"
-              content="Feb 12 2018">
-          02-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/02/12/Life/Bye-2017-Hi-2018/" itemprop="url">
-            <span itemprop="name">17 小结，18 计划!</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
     <div class="collection-year">
       <span class="collection-header">2017</span>
     </div>
@@ -306,15 +210,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2017-12-17T10:49:12+08:00"
-              content="Dec 17 2017">
-          12-17
+              datetime="2017-11-08T22:23:59+08:00"
+              content="Nov 8 2017">
+          11-08
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2017/12/17/Android/android-sensor-arch-analysis/" itemprop="url">
-            <span itemprop="name">Android传感器（Sensor）架构简析 (╯_╰)</span>
+          <a class="post-title-link" href="/2017/11/08/Android/Getting-Started-With-RecyclerView-and-CardView-on-Android/" itemprop="url">
+            <span itemprop="name">Getting Started With RecyclerView and CardView on Android</span>
           </a>
       </div>
 
@@ -326,15 +230,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2017-12-03T21:37:07+08:00"
-              content="Dec 3 2017">
-          12-03
+              datetime="2017-11-08T22:22:45+08:00"
+              content="Nov 8 2017">
+          11-08
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2017/12/03/Android/Android-Linux-i2c-driver-arch/" itemprop="url">
-            <span itemprop="name">Android/Linux  I2C 驱动架构分析</span>
+          <a class="post-title-link" href="/2017/11/08/Other/MDB-ICP-protocol/" itemprop="url">
+            <span itemprop="name">纸币器和MDB协议</span>
           </a>
       </div>
 
@@ -346,15 +250,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2017-11-23T22:42:04+08:00"
-              content="Nov 23 2017">
-          11-23
+              datetime="2017-08-18T22:45:08+08:00"
+              content="Aug 18 2017">
+          08-18
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2017/11/23/Android/Android-Linux-input-system-analysis/" itemprop="url">
-            <span itemprop="name">Android(Linux) 输入子系统解析</span>
+          <a class="post-title-link" href="/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/" itemprop="url">
+            <span itemprop="name">通过自定义侧边导航栏的RecyclerView动态加载布局</span>
           </a>
       </div>
 
@@ -366,15 +270,135 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2017-11-21T21:56:28+08:00"
-              content="Nov 21 2017">
-          11-21
+              datetime="2017-08-18T22:44:17+08:00"
+              content="Aug 18 2017">
+          08-18
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2017/11/21/Android/BMS-of-Android-Power-Management/" itemprop="url">
-            <span itemprop="name">Android 电源管理之电池管理系统(BMS)</span>
+          <a class="post-title-link" href="/2017/08/18/Android/hides-navigation-in-drawerlayou/" itemprop="url">
+            <span itemprop="name">按返回键只关闭DrawerLayout侧边栏不退出Activity的实现方案</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2017-08-17T19:46:41+08:00"
+              content="Aug 17 2017">
+          08-17
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/08/17/Android/the-selected-effect-of-recyclerview-item/" itemprop="url">
+            <span itemprop="name">RecyclerView Item选中效果及点击事件的实现</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2017-08-17T19:46:16+08:00"
+              content="Aug 17 2017">
+          08-17
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/08/17/Android/the-card-navigation-base-on-drawerlayout/" itemprop="url">
+            <span itemprop="name">基于DrawerLayout打造卡片式Navigation</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2017-07-20T19:29:53+08:00"
+              content="Jul 20 2017">
+          07-20
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/07/20/Life/no-no-no-go-go-go/" itemprop="url">
+            <span itemprop="name">no no no, go go go</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2017-07-12T23:01:42+08:00"
+              content="Jul 12 2017">
+          07-12
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/07/12/Android/MTK-Modem-%E9%97%AE%E9%A2%98%E9%9B%86/" itemprop="url">
+            <span itemprop="name">MTK Modem 问题集</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2017-07-11T21:20:58+08:00"
+              content="Jul 11 2017">
+          07-11
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/07/11/Android/%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAAPP%E4%B9%8B%E5%90%AF%E7%A8%8B/" itemprop="url">
+            <span itemprop="name">实现真正意义上的第一个APP之启程</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2017-05-23T08:09:56+08:00"
+              content="May 23 2017">
+          05-23
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/05/23/Kotlin/Kotlin-HElloWorld/" itemprop="url">
+            <span itemprop="name">Android Kotlin之曲折HelloWord</span>
           </a>
       </div>
 
@@ -390,7 +414,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/12/">12</a><a class="extend next" rel="next" href="/archives/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/archives/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/11/">11</a><a class="extend next" rel="next" href="/archives/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -458,14 +482,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -476,6 +500,10 @@
       </div>
   </nav>
 </div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
@@ -505,6 +533,9 @@
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
           <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
         </li>
     </ul>
   </div>
@@ -565,12 +596,18 @@
 
 <script src="/js/next-boot.js"></script>
 
+<script src="/js/bookmark.js"></script>
+
 
 
 
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
