@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Android编译过程详解之一　　Android编译过程详解之二　　Android编译过程详解之三　　Android.mk解析　　　配置好环境变量后，接下来要做的就是build了。为了提高编译速度，我们自定义了一个go.sh的脚本文件，详细下面解释。另，编译的时候一般会在后面加一个-j8来实现多线程编译，如： 1　　　.&#x2F;go.sh -j8 or make -j8／--jobs 　 参数“-j">
@@ -127,17 +127,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">114</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -301,12 +301,12 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" rel="prev" title="About ActivityNotFoundException Unable to find explicit activity class && Android.mk解析">
-      <i class="fa fa-chevron-left"></i> About ActivityNotFoundException Unable to find explicit activity class && Android.mk解析
+    <a href="/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" rel="prev" title="Android编译过程详解之三">
+      <i class="fa fa-chevron-left"></i> Android编译过程详解之三
     </a></div>
       <div class="post-nav-item">
-    <a href="/2015/07/12/Android/Android%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B9%8B%E4%B8%89/" rel="next" title="Android编译过程详解之三">
-      Android编译过程详解之三 <i class="fa fa-chevron-right"></i>
+    <a href="/2015/07/12/Android/About-ActivityNotFoundException-Unable-to-find-explicit-activity-class-Android-mk%E8%A7%A3%E6%9E%90/" rel="next" title="About ActivityNotFoundException Unable to find explicit activity class && Android.mk解析">
+      About ActivityNotFoundException Unable to find explicit activity class && Android.mk解析 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -422,6 +422,16 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+    </ul>
+  </div>
 
       </div>
 
@@ -441,14 +451,14 @@ Build 的产物中最重要的是几个镜像文件，它们都位于 /out/targe
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2014 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
 
         
