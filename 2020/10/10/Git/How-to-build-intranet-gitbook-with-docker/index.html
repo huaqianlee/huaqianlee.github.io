@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="之前折腾局域网搭建 Gitbook，并写了一篇简易教程：Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook。最近兴趣使然又用 docker 搭建一套方便部署的内网 Gitbook 镜像，也总结一篇简易教程如下。 Install Docker1sudo apt install docker  GitbookGitbook Image下载 Gitbook Dock">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to build intranet gitbook with docker">
+<meta property="og:url" content="http://huaqianlee.github.io/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="之前折腾局域网搭建 Gitbook，并写了一篇简易教程：Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook。最近兴趣使然又用 docker 搭建一套方便部署的内网 Gitbook 镜像，也总结一篇简易教程如下。 Install Docker1sudo apt install docker  GitbookGitbook Image下载 Gitbook Dock">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-10T14:23:38.000Z">
+<meta property="article:modified_time" content="2020-10-10T14:25:06.548Z">
+<meta property="article:author" content="Andy.Lee">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://huaqianlee.github.io/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>How to build intranet gitbook with docker | Andy.Lee's  Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Andy.Lee's  Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Good good study, day day up !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">103</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          How to build intranet gitbook with docker
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: Oct 10 2020 22:23:38 / Modified: 22:25:06" itemprop="dateCreated datePublished" datetime="2020-10-10T22:23:38+08:00">Oct 10 2020</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>之前折腾局域网搭建 Gitbook，并写了一篇简易教程：<a href="http://huaqianlee.github.io/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/">Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook</a>。最近兴趣使然又用 docker 搭建一套方便部署的内网 Gitbook 镜像，也总结一篇简易教程如下。</p>
+<h1 id="Install-Docker"><a href="#Install-Docker" class="headerlink" title="Install Docker"></a>Install Docker</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install docker</span><br></pre></td></tr></table></figure>
+
+<h1 id="Gitbook"><a href="#Gitbook" class="headerlink" title="Gitbook"></a>Gitbook</h1><h2 id="Gitbook-Image"><a href="#Gitbook-Image" class="headerlink" title="Gitbook Image"></a>Gitbook Image</h2><p>下载 Gitbook Docker 镜像，我选择了如下 <a target="_blank" rel="noopener" href="https://hub.docker.com/r/billryan/gitbook">billryan/gitbook 镜像</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull billryan/gitbook</span><br></pre></td></tr></table></figure>
+
+<p><code>mkdir gitbook</code> 创建一个 gitbook 路径，我们也可以将启动的镜像存储为另一个镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># init</span></span><br><span class="line">docker run --rm -v <span class="string">&quot;<span class="variable">$PWD</span>/gitbook:/gitbook&quot;</span> -p 4000:4000 billryan/gitbook gitbook init</span><br><span class="line"><span class="comment"># serve</span></span><br><span class="line">docker run --rm -v <span class="string">&quot;<span class="variable">$PWD</span>/gitbook:/gitbook&quot;</span> -p 4000:4000 billryan/gitbook gitbook serve</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker ps <span class="comment"># Get CONTAINER ID of gitbook</span></span><br><span class="line">docker commit &lt;CONTAINER ID&gt; andylee/gitbook:1.0</span><br></pre></td></tr></table></figure>
+
+<p>存储一个本地 docker 镜像，方便迁移到其他机器，存储和加载命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Save docker image</span></span><br><span class="line">docker save -o &lt;path <span class="keyword">for</span> generated tar file&gt; &lt;image name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load docker image</span></span><br><span class="line">docker load -i &lt;path to image tar file&gt; </span><br></pre></td></tr></table></figure>
+
+<h2 id="Gitbook-build"><a href="#Gitbook-build" class="headerlink" title="Gitbook build"></a>Gitbook build</h2><p>我做了一个脚本 <code>gitbook.sh</code> 给 <code>Jenkins</code> 提供执行脚本，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#GITBOOK_HOME=/home/lee/docker/gitbook/src</span></span><br><span class="line"><span class="comment"># Jenkins gitbook workspace</span></span><br><span class="line">GITBOOK_HOME=/home/lee/docker/jenkins/jenkins_home/workspace/gitbook</span><br><span class="line"><span class="comment"># Nginx static html</span></span><br><span class="line">STATIC_HTML=/home/lee/docker/nginx/static_html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#rm -rf $GITBOOK_HOME/_book</span></span><br><span class="line">docker run --rm  -v <span class="variable">$GITBOOK_HOME</span>:/gitbook -p 4000:4000 andylee/gitbook:1.0 gitbook build</span><br><span class="line"><span class="comment"># docker run as root, so host can&#x27;t rewrite _book, which means gitbook only can be built one times. </span></span><br><span class="line"><span class="comment"># The following are two ways to fix this issue.</span></span><br><span class="line"><span class="comment"># 1. add &#x27;--user &quot;$(id -u):$(id -g)&quot;&#x27; , run docker as current user group, but fails to create /gitbook in docker.  ~Not work.</span></span><br><span class="line"><span class="comment"># 2. chown _book as current user group with root permission. ~Work.</span></span><br><span class="line">sudo -S su - &lt;&lt;EOF</span><br><span class="line">chown -R lee:lee <span class="variable">$GITBOOK_HOME</span>/_book</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment">#docker run  --rm -v $GITBOOK_HOME:/gitbook -p 4000:4000 andylee/gitbook:1.0 gitbook serve</span></span><br><span class="line"><span class="comment">#echo &quot;Execute docker with &#x27;$GITBOOK_HOME&#x27; successfully!&quot;</span></span><br><span class="line"></span><br><span class="line">rm -rf <span class="variable">$STATIC_HTML</span>/*</span><br><span class="line"><span class="comment"># Copy _book static html to Nginx server.</span></span><br><span class="line">cp -rf <span class="variable">$GITBOOK_HOME</span>/_book/* <span class="variable">$STATIC_HTML</span></span><br></pre></td></tr></table></figure>
+
+<p>如果我们不用脚本或者想以一种简单的方式执行 docker，可以在 <code>.bashrc</code> 里添加别名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">alias gitbook&#x3D;&#39;docker run --rm  -v $GITBOOK_HOME:&#x2F;gitbook -p 4000:4000 andylee&#x2F;gitbook:1.0 gitbook&#39;</span><br><span class="line"># init</span><br><span class="line">gitbook init</span><br><span class="line"># serve</span><br><span class="line">gitbook serve</span><br><span class="line"># build</span><br><span class="line">gitbook build</span><br><span class="line"># pdf output</span><br><span class="line">gitbook pdf .</span><br></pre></td></tr></table></figure>
+
+<h1 id="GitLab"><a href="#GitLab" class="headerlink" title="GitLab"></a>GitLab</h1><h2 id="GitLab-Image"><a href="#GitLab-Image" class="headerlink" title="GitLab Image"></a>GitLab Image</h2><h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><p><code>mkdir gitlab</code> 创建一个 gitlab 路径，为了保证 <code>Clone with HTTP</code> 能正常使用，利用官方镜像做一个指定容器端口的镜像（官方默认为 80 ，一般会被占用），编写 Dockerfile 如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Use the official image</span></span><br><span class="line">FROM gitlab/gitlab-ee</span><br><span class="line"><span class="comment"># Add listening port of container</span></span><br><span class="line">EXPOSE 4002</span><br></pre></td></tr></table></figure>
+
+<h3 id="Build-Docker"><a href="#Build-Docker" class="headerlink" title="Build Docker"></a>Build Docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build --tag andylee/gitlab:1.0 . <span class="comment"># Execute in the folder where Dockerfile is</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Run-GitLab-Docker"><a href="#Run-GitLab-Docker" class="headerlink" title="Run GitLab Docker"></a>Run GitLab Docker</h2><p>我做了一个<code>gitlab.sh</code>脚本来运行 GitLab Docker，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">GITLAB_CONFIG=/home/lee/docker/gitlab/config</span><br><span class="line">GITLAB_LOGS=/home/lee/docker/gitlab/logs</span><br><span class="line">GITLAB_DATA=/home/lee/docker/gitlab/data</span><br><span class="line"></span><br><span class="line">docker run -d -p 4043:443 -p 4002:4002 -p 4022:22 --name andylee-gitlab --restart always -v <span class="variable">$GITLAB_CONFIG</span>:/etc/gitlab -v <span class="variable">$GITLAP_LOGS</span>:/var/<span class="built_in">log</span>/gitlab -v <span class="variable">$GITLAB_DATA</span>:/var/opt/gitlab andylee/gitlab:1.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="Config-GitLab"><a href="#Config-GitLab" class="headerlink" title="Config GitLab"></a>Config GitLab</h2><p>配置 <code>gitlab.rb</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/gitlab.rb</span></span><br><span class="line"><span class="comment"># 端口为容器中的端口</span></span><br><span class="line">external_url <span class="string">&#x27;http://192.168.81.64:4002&#x27;</span>  <span class="comment"># 如果不配置此项，Clone with HTTP 中的链接将有由容器 ID 代替，如 http://e6012f4a2630/gitlab-instance-de9e956b/monitoring.git</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不配置如下内容，Clone with SSH 中链接将由容器 ID 代替，如 ssh://git@5ba03b6cd640/root/document.git</span></span><br><span class="line">gitlab_rails[<span class="string">&#x27;gitlab_ssh_host&#x27;</span>] = <span class="string">&#x27;192.168.81.64&#x27;</span></span><br><span class="line">gitlab_rails[<span class="string">&#x27;gitlab_shell_ssh_port&#x27;</span>] = 4022</span><br><span class="line"><span class="comment"># gitlab_rails[&#x27;gitlab_ssh_user&#x27;] = &#x27;root&#x27; . 可不配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># LDAP， Config LDAP authentication.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h2><p><strong>问题一：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab Import url is blocked: <span class="string">&quot;Requests to the local network are not allowed&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>Solution:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Admin -&gt; Settings -&gt; Network -&gt; Outbound Requests -&gt; Allow requests to the <span class="built_in">local</span> network from hooks and services</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题二：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Cloning into &#39;document&#39;...</span><br><span class="line">ssh: connect to host 192.168.81.64 port 2202: Connection refused</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br></pre></td></tr></table></figure>
+<p><strong>Solution:</strong><br>配置的 ssh 访问端口需要与启动容器时的映射端口保持一致，当前问题是由于 <code>gitlab.rb</code> 中错把端口配置为了 2202.</p>
+<h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><h2 id="Jenkins-Image"><a href="#Jenkins-Image" class="headerlink" title="Jenkins Image"></a>Jenkins Image</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker pull jenkins/jenkins</span><br><span class="line"></span><br><span class="line">docker ps <span class="comment"># Get CONTAINER ID of jenkins</span></span><br><span class="line">docker commit &lt;CONTAINER ID&gt; andylee/jenkins:1.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="Run-Jenkins-Docker"><a href="#Run-Jenkins-Docker" class="headerlink" title="Run Jenkins Docker"></a>Run Jenkins Docker</h2><p>我做了一个<code>jenkins.sh</code>脚本来运行 Jenkins Docker，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">JENKINS_HOME=/home/lee/docker/jenkins/jenkins_home</span><br><span class="line"></span><br><span class="line">docker run --name andylee-jenkins -d -v <span class="variable">$JENKINS_HOME</span>:/var/jenkins_home -p 4003:8080 -p 50000:50000 andylee/jenkins:1.0</span><br></pre></td></tr></table></figure>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><p>这里只说一下注意事项和变化点，详细配置方式见<a href="http://huaqianlee.github.io/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/">Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook</a>。</p>
+<ol>
+<li><p>Configure system -&gt; gitlab, 需要注意<code>Gitlab host URL</code>只需要填 server 地址。</p>
+</li>
+<li><p>Configure of project.  </p>
+</li>
+</ol>
+<ul>
+<li>Build Triggers<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 选中如下选项</span></span><br><span class="line">Build when a change is pushed to GitLab. GitLab webhook URL: http://192.168.81.64:4003/project/gitbook</span><br></pre></td></tr></table></figure></li>
+<li>Build-&gt;Execute shell<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先需要将容器中的 ~/.ssh/id_rsa.pub 的内容追加到主机的 ～/.ssh/authorized_keys 中，不然会要求输入 ssh 密码。</span></span><br><span class="line"><span class="comment"># 通过 ssh 在主机中执行 gitbook.sh 脚本</span></span><br><span class="line">ssh -n -l lee 192.168.81.64 <span class="string">&quot;gitbook.sh&quot;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>jenkins_home/jobs/gitbook/config.xml: <code>&lt;command&gt;ssh -n -l lee 192.168.81.64 &amp;quot;gitbook.sh&amp;quot;&lt;/command&gt;</code></p>
+</blockquote>
+</li>
+</ul>
+<ol start="3">
+<li>因为新版本的 Jenkins(当前使用的是 2.249) 已经不支持 disable CSRF， 我们必须在 Gitlab project 中的 webhook 配置上用户名，详细见如下问题二。</li>
+</ol>
+<h2 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h2><p><strong>问题一：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">An error occurred during installation: No such plugin: cloudbees-folder</span><br></pre></td></tr></table></figure>
+<p><strong>Solution:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. modify https as http <span class="keyword">in</span> /var/lib/docker/volumes/jenkins-data/_data/hudson.model.UpdateCenter.xml </span><br><span class="line">2. http://localhost:4003/restart OR service jenkins restart</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>问题二：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP ERROR 403 No valid crumb was included <span class="keyword">in</span> the request</span><br></pre></td></tr></table></figure>
+<p><strong>Solution:</strong></p>
+<ol>
+<li>在<code>Jenkins</code> 中，通过<code>USER -&gt; Configure -&gt; API Token</code> 增加并保存 token 值（api key）。</li>
+<li>在 <code>GitLab project</code> 的 <code>Setting -&gt;Webhooks</code>按照如下要求添加 webhook ，按照要求（此处要注意格式，需要第一步 Jenkins 额外创建一个api key ，让 GitLab 能够有权限触发 Jenkins）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">URL:</span><br><span class="line">http://username:apikey@jenkins.url/project/myPullrequest/</span><br><span class="line"></span><br><span class="line">Secret Token: <span class="comment"># 似乎不是必须的</span></span><br><span class="line">apikey</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line">http://root:1146cb664bbe589fd1a88fe42d24b64315@192.168.81.64:4003/project/gitbook</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><h2 id="Nginx-Image"><a href="#Nginx-Image" class="headerlink" title="Nginx Image"></a>Nginx Image</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx</span><br><span class="line"></span><br><span class="line">docker ps <span class="comment"># Get CONTAINER ID of nginx</span></span><br><span class="line">docker commit &lt;CONTAINER ID&gt; andylee/nginx:1.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="Run-Nginx-Docker"><a href="#Run-Nginx-Docker" class="headerlink" title="Run Nginx Docker"></a>Run Nginx Docker</h2><p>我做了一个<code>nginx.sh</code>脚本来运行 nginx Docker，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">STATIC_HTML=/home/lee/docker/nginx/static_html</span><br><span class="line"><span class="comment"># NGINX_CONFIG=/home/lee/docker/nginx/nginx.conf</span></span><br><span class="line"></span><br><span class="line">docker run --name andylee-nginx -p 4001:80 -v <span class="variable">$STATIC_HTML</span>:/usr/share/nginx/html:ro -d andylee/nginx:1.0</span><br><span class="line"><span class="comment"># docker run --name nginx -p 4001:80 -v $STATIC_HTML:/usr/share/nginx/html:ro -v $NGINX_CONFIG:/etc/nginx/nginx.conf:ro -d nginx</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2100/11/22/SUMMARY/" rel="prev" title="【置顶】博客主题分类一览">
+      <i class="fa fa-chevron-left"></i> 【置顶】博客主题分类一览
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/" rel="next" title="Oh, the Git! - detached HEAD">
+      Oh, the Git! - detached HEAD <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-Docker"><span class="nav-number">1.</span> <span class="nav-text">Install Docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gitbook"><span class="nav-number">2.</span> <span class="nav-text">Gitbook</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gitbook-Image"><span class="nav-number">2.1.</span> <span class="nav-text">Gitbook Image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gitbook-build"><span class="nav-number">2.2.</span> <span class="nav-text">Gitbook build</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GitLab"><span class="nav-number">3.</span> <span class="nav-text">GitLab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-Image"><span class="nav-number">3.1.</span> <span class="nav-text">GitLab Image</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile"><span class="nav-number">3.1.1.</span> <span class="nav-text">Dockerfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-Docker"><span class="nav-number">3.1.2.</span> <span class="nav-text">Build Docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-GitLab-Docker"><span class="nav-number">3.2.</span> <span class="nav-text">Run GitLab Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-GitLab"><span class="nav-number">3.3.</span> <span class="nav-text">Config GitLab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Issues"><span class="nav-number">3.4.</span> <span class="nav-text">Issues</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins"><span class="nav-number">4.</span> <span class="nav-text">Jenkins</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins-Image"><span class="nav-number">4.1.</span> <span class="nav-text">Jenkins Image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-Jenkins-Docker"><span class="nav-number">4.2.</span> <span class="nav-text">Run Jenkins Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">4.3.</span> <span class="nav-text">Config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Issue"><span class="nav-number">4.4.</span> <span class="nav-text">Issue</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx"><span class="nav-number">5.</span> <span class="nav-text">Nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx-Image"><span class="nav-number">5.1.</span> <span class="nav-text">Nginx Image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-Nginx-Docker"><span class="nav-number">5.2.</span> <span class="nav-text">Run Nginx Docker</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy.Lee"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Andy.Lee</p>
+  <div class="site-description" itemprop="description">Just need to enjoy life.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huaqianlee@gmail.com" title="E-Mail → mailto:huaqianlee@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/huaqianlee" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/huaqianlee" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/huaqianlee" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/huaqianlee" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
