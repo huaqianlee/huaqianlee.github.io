@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="How does the repo of android source code work ? .repo通常情况下， Android 的 .repo 里面有如下内容： 12$ ls .repomanifests  manifests.git  manifest.xml  project.list  project-objects  projects  repo  manifestsmanifes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What is in the .repo?">
+<meta property="og:url" content="http://huaqianlee.github.io/2020/10/17/Git/What-is-in-the-repo/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="How does the repo of android source code work ? .repo通常情况下， Android 的 .repo 里面有如下内容： 12$ ls .repomanifests  manifests.git  manifest.xml  project.list  project-objects  projects  repo  manifestsmanifes">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-17T03:20:25.000Z">
+<meta property="article:modified_time" content="2020-10-17T11:38:44.544Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Tools">
+<meta property="article:tag" content="Repo">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://huaqianlee.github.io/2020/10/17/Git/What-is-in-the-repo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>What is in the .repo? | Andy.Lee's  Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Andy.Lee's  Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Good good study, day day up !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">103</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/10/17/Git/What-is-in-the-repo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          What is in the .repo?
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: Oct 17 2020 11:20:25 / Modified: 19:38:44" itemprop="dateCreated datePublished" datetime="2020-10-17T11:20:25+08:00">Oct 17 2020</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/">How does the repo of android source code work ?</a></p>
+<h1 id="repo"><a href="#repo" class="headerlink" title=".repo"></a>.repo</h1><p>通常情况下， Android 的 <code>.repo</code> 里面有如下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls .repo</span><br><span class="line">manifests  manifests.git  manifest.xml  project.list  project-objects  projects  repo</span><br></pre></td></tr></table></figure>
+
+<h1 id="manifests"><a href="#manifests" class="headerlink" title="manifests"></a>manifests</h1><p><code>manifests</code> 路径是项目 manifest 仓的 <code>git checkout</code>，其中的 <code>.git</code> 是 <code>manifest.git</code> 的软链接，追踪 <code>repo init --manifest-branch</code> 指定的分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.repo$ ls manifests/.git/</span><br><span class="line">config       HEAD   index  logs     ORIG_HEAD    refs      shallow</span><br><span class="line">description  hooks  info   objects  packed-refs  rr-cache  svn</span><br><span class="line"></span><br><span class="line">.repo$ ls manifests.git/</span><br><span class="line">branches  description  HEAD   info  objects      refs      svn</span><br><span class="line">config    FETCH_HEAD   hooks  logs  packed-refs  rr-cache</span><br></pre></td></tr></table></figure>
+
+<p>不管远程分支名字是什么，<code>manifests</code> 的本地分支命名为 default。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.repo$ cat manifests/.git/HEAD </span><br><span class="line">ref: refs/heads/default  </span><br><span class="line"></span><br><span class="line">.repo$ cat manifests.git/config  </span><br><span class="line"><span class="comment"># cat manifests/.git/config</span></span><br><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = <span class="literal">true</span></span><br><span class="line">[filter <span class="string">&quot;lfs&quot;</span>]</span><br><span class="line">	smudge = git-lfs smudge --skip -- %f</span><br><span class="line">[remote <span class="string">&quot;origin&quot;</span>]</span><br><span class="line">	url = https://&lt;url&gt;/platform/manifest.git</span><br><span class="line">	fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">[branch <span class="string">&quot;default&quot;</span>]</span><br><span class="line">	remote = origin</span><br><span class="line">	merge = refs/heads/&lt;remote_branch_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="manifests-git"><a href="#manifests-git" class="headerlink" title="manifests.git"></a>manifests.git</h1><p><code>manifests.git</code> 是当前项目 <code>manifest</code> 仓的一个没有工作空间的 <code>checkout</code>，即只 <code>checkout</code> <code>.git</code> ，追踪<code>repo init --manifest-url</code> 指定的 Git 仓。不能手动修改这部分，如果需要修改的话，可重新运行 <code>repo init</code> 来更新设置。</p>
+<h2 id="repo-config-json"><a href="#repo-config-json" class="headerlink" title=".repo_config.json"></a>.repo_config.json</h2><p>缓存 <code>manifests.git/config</code>，用来提升 <code>repo</code> 的速度。</p>
+<h1 id="manifest-xml"><a href="#manifest-xml" class="headerlink" title="manifest.xml"></a>manifest.xml</h1><p><code>repo</code> 使用的 <code>manifest</code> ， 此文件由 <code>repo init --manifest-name</code> 指定链接到 <code>manifests</code> 中的哪一个文件，如下：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">manifest.xml -&gt; manifests/&lt;manifest-name&gt;.xml <span class="comment"># 指向用户希望用来同步源码的 manifest</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<h2 id="Manifest-format"><a href="#Manifest-format" class="headerlink" title="Manifest format"></a>Manifest format</h2><p>以 <a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/manifest/+/master/default.xml">default.xml in Android</a> 为例简单介绍下 manifest 的格式。 </p>
+<blockquote>
+<p>详细格式介绍见 <a target="_blank" rel="noopener" href="https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md">repo Manifest Format</a> 。</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">    name: 独一无二的一个名字， 用作每个项目中 .git/config 的 remote name, 自动用于 git fetch, git remote, git pull and git push 等命令， 大多数时候我们会定义为 ‘origin’.</span></span><br><span class="line"><span class="comment">    alias: 别名，重写 name。</span></span><br><span class="line"><span class="comment">    fetch: 用作所有使用此 remote 的 Git URL 前缀，在后面加上项目名就形成了 ’git clone‘ 需要的链接。</span></span><br><span class="line"><span class="comment">    pushurl: ’git push‘ 的链接前缀，若未定义，则使用 ’fetch‘ 属性。</span></span><br><span class="line"><span class="comment">    review: ’repo upload‘ 的 Gerrit 服务器主机名，此服务器主要用来 review ，如果不指定，’repo upload‘ 命令无效。</span></span><br><span class="line"><span class="comment">    revision: Git 分支名 (e.g. master or refs/heads/master)，若定义，将重写下方 default revision.</span></span><br><span class="line"><span class="comment">   --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">remote</span>  <span class="attr">name</span>=<span class="string">&quot;aosp&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">fetch</span>=<span class="string">&quot;..&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">review</span>=<span class="string">&quot;https://android-review.googlesource.com/&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    默认属性，remote 或 project 未定义则使用此处定义属性。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    remote: projects 的默认 remote name，在前面 remote 中定义</span></span><br><span class="line"><span class="comment">    revision: projects 的默认分支名</span></span><br><span class="line"><span class="comment">    dest-branch: 默认 review 分支名，不设置则使用 revison 属性作为默认分支  </span></span><br><span class="line"><span class="comment">    upstream: sha1 的来源 Git ref 名，有时我们只需要同步到某 Git ref 指定的 sha1，而不用在 `-c mode` 同步整个 ref 空间，则用 upstream 指定 ref ，revision 指定 sha1.</span></span><br><span class="line"><span class="comment">    sync-j: 同步时的默认并行线程数</span></span><br><span class="line"><span class="comment">    sync-c: true， 表示只同步当前 revision， 而不是整个 ref 空间.</span></span><br><span class="line"><span class="comment">   --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">default</span> <span class="attr">revision</span>=<span class="string">&quot;master&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">remote</span>=<span class="string">&quot;aosp&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">sync-j</span>=<span class="string">&quot;4&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">      </span></span><br><span class="line"><span class="comment">   --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">manifest-server</span> <span class="attr">url</span>=<span class="string">&quot;http://android-smartsync.corp.google.com/android.googlesource.com/manifestserver&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">    path: 当前 project 的 git 工作路径</span></span><br><span class="line"><span class="comment">    revision: Git 分支名，可以来自 refs/heads (e.g. just “master”)， “refs/heads/master”， Tags， SHA-1s，如果不设定，则由 remote 或者 default 中的属性决定.</span></span><br><span class="line"><span class="comment">    dest-branch: repo upload 的 review 分支名. 如果这里和 default 都没有指定此属性，则使用 revision 属性</span></span><br><span class="line"><span class="comment">    groups: project 所属组， 多个组用空格或逗号隔开，所有 projects 都默认属于 “all” ，”name:name“， ”path:path“  </span></span><br><span class="line"><span class="comment">    upstream: 指定 sha1 的 Git ref 名</span></span><br><span class="line"><span class="comment">    copyfile: 复制文件到指定位置</span></span><br><span class="line"><span class="comment">    linkfile: 链接文件到指定位置</span></span><br><span class="line"><span class="comment">   --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">&quot;build/make&quot;</span> <span class="attr">name</span>=<span class="string">&quot;platform/build&quot;</span> <span class="attr">groups</span>=<span class="string">&quot;pdk&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">copyfile</span> <span class="attr">src</span>=<span class="string">&quot;core/root.mk&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;Makefile&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">&quot;CleanSpec.mk&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;build/CleanSpec.mk&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">&quot;buildspec.mk.default&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;build/buildspec.mk.default&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">&quot;core&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;build/core&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">&quot;envsetup.sh&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;build/envsetup.sh&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">&quot;target&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;build/target&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">&quot;tools&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;build/tools&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">&quot;build/bazel&quot;</span> <span class="attr">name</span>=<span class="string">&quot;platform/build/bazel&quot;</span> <span class="attr">groups</span>=<span class="string">&quot;pdk&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">&quot;bazel.WORKSPACE&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;WORKSPACE&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">&quot;build/blueprint&quot;</span> <span class="attr">name</span>=<span class="string">&quot;platform/build/blueprint&quot;</span> <span class="attr">groups</span>=<span class="string">&quot;pdk,tradefed&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">&quot;build/soong&quot;</span> <span class="attr">name</span>=<span class="string">&quot;platform/build/soong&quot;</span> <span class="attr">groups</span>=<span class="string">&quot;pdk,tradefed&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">&quot;root.bp&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;Android.bp&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">&quot;bootstrap.bash&quot;</span> <span class="attr">dest</span>=<span class="string">&quot;bootstrap.bash&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">&quot;art&quot;</span> <span class="attr">name</span>=<span class="string">&quot;platform/art&quot;</span> <span class="attr">groups</span>=<span class="string">&quot;pdk&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">&quot;bionic&quot;</span> <span class="attr">name</span>=<span class="string">&quot;platform/bionic&quot;</span> <span class="attr">groups</span>=<span class="string">&quot;pdk&quot;</span> /&gt;</span></span><br><span class="line">...</span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">&quot;tools/treble&quot;</span> <span class="attr">name</span>=<span class="string">&quot;platform/tools/treble&quot;</span> <span class="attr">groups</span>=<span class="string">&quot;tools,pdk&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">&quot;tools/trebuchet&quot;</span> <span class="attr">name</span>=<span class="string">&quot;platform/tools/trebuchet&quot;</span> <span class="attr">groups</span>=<span class="string">&quot;tools,cts,pdk,pdk-cw-fs,pdk-fs&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">repo-hooks</span> <span class="attr">in-project</span>=<span class="string">&quot;platform/tools/repohooks&quot;</span> <span class="attr">enabled-list</span>=<span class="string">&quot;pre-upload&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">## repo hook</span><br><span class="line"></span><br><span class="line">[hook](https://android.googlesource.com/platform/tools/repohooks) 主要在允许执行步骤之前（例如在将提交上载到Gerrit之前），运行 linters，检查格式和运行单元测试。</span><br><span class="line"></span><br><span class="line">&gt; linter 的维基百科解释是：a tool that analyzes source code to flag programming errors, bugs, stylistic errors, and suspicious constructs.<span class="tag">&lt;<span class="name">br</span>/&gt;</span>简单来说就是分析源码，查找问题。</span><br><span class="line"></span><br><span class="line">如下是一个 Android 中的使用范例，在战’pre-upload&#x27;（即，`repo upload`） 阶段运行名为 ’platform/tools/repohooks‘ 的 hook 。</span><br><span class="line">```xml</span><br><span class="line"> <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">&quot;tools/repohooks&quot;</span> <span class="attr">name</span>=<span class="string">&quot;platform/tools/repohooks&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">repo-hooks</span> <span class="attr">in-project</span>=<span class="string">&quot;platform/tools/repohooks&quot;</span> <span class="attr">enabled-list</span>=<span class="string">&quot;pre-upload&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="project-list"><a href="#project-list" class="headerlink" title="project.list"></a>project.list</h1><p><code>repo sync</code> 基于此文件内容增删 projects ，并更新对应的 <code>checkout</code> 工作路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.repo$ more project.list </span><br><span class="line">art</span><br><span class="line">bionic</span><br><span class="line">bootable/bootloader/edk2</span><br><span class="line">bootable/recovery</span><br><span class="line">build/blueprint</span><br><span class="line">build/kati</span><br><span class="line">build/make</span><br><span class="line">build/soong</span><br><span class="line">cts</span><br><span class="line">dalvik</span><br><span class="line">developers/build</span><br><span class="line">...</span><br><span class="line">device/qcom/common</span><br><span class="line">device/qcom/sepolicy</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h1 id="projects"><a href="#projects" class="headerlink" title="projects"></a>projects</h1><p>存放 repo 克隆的 manifest 中指定的所有 project 的 git 仓库，repo 将基于此 git 仓库链接 .git 并创建工作路径，然后 checkout 对应分支，并更新 .repo/project.list。一些 git 将进一步拆分到如下的 project-objects。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.repo$ ls projects</span><br><span class="line">art.git     dalvik.git       frameworks           packages              shortcut-fe.git  vendor</span><br><span class="line">bionic.git  developers       hardware             pdk.git               system</span><br><span class="line">bootable    development.git  kernel               platform_testing.git  <span class="built_in">test</span></span><br><span class="line">build       device           libcore.git          prebuilts             toolchain</span><br><span class="line">cts.git     external         libnativehelper.git  sdk.git               tools</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="project-objects"><a href="#project-objects" class="headerlink" title="project-objects"></a>project-objects</h1><p>可以在多个 <code>git chekcout</code> 中安全共享的 Git 对象，例如，可以将 foo/bar.git 的不同分支 <code>checkout</code> 到 foo/bar-master，foo/bar-release 等， 在 projects 下将为每一个分支创建路径，而  project-objects 下面将会只有一个路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.repo$ ls project-objects/</span><br><span class="line">abl  device  kernel  platform  toolchain</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="repo-1"><a href="#repo-1" class="headerlink" title="repo"></a>repo</h1><p>完整的 Repo 工具，接收并处理 Repo-Launcher 转发的命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ls .repo/repo/</span><br><span class="line">color.py    command.pyc  editor.py   error.pyc        git_config.py   gitc_utils.pyc  git_ssh  manifest_xml.py   pager.pyc     project.py    pyversion.pyc  repoc                  tests      wrapper.py</span><br><span class="line">color.pyc   COPYING      editor.pyc  git_command.py   git_config.pyc  git_refs.py     hooks    manifest_xml.pyc  progress.py   project.pyc   README.md      subcmds                trace.py   wrapper.pyc</span><br><span class="line">command.py  docs         error.py    git_command.pyc  gitc_utils.py   git_refs.pyc    main.py  pager.py          progress.pyc  pyversion.py  repo           SUBMITTING_PATCHES.md  trace.pyc</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Tools/" rel="tag"># Tools</a>
+              <a href="/tags/Repo/" rel="tag"># Repo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/" rel="next" title="How to build intranet gitbook with docker">
+      How to build intranet gitbook with docker <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#repo"><span class="nav-number">1.</span> <span class="nav-text">.repo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#manifests"><span class="nav-number">2.</span> <span class="nav-text">manifests</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#manifests-git"><span class="nav-number">3.</span> <span class="nav-text">manifests.git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#repo-config-json"><span class="nav-number">3.1.</span> <span class="nav-text">.repo_config.json</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#manifest-xml"><span class="nav-number">4.</span> <span class="nav-text">manifest.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Manifest-format"><span class="nav-number">4.1.</span> <span class="nav-text">Manifest format</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#project-list"><span class="nav-number">5.</span> <span class="nav-text">project.list</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#projects"><span class="nav-number">6.</span> <span class="nav-text">projects</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#project-objects"><span class="nav-number">7.</span> <span class="nav-text">project-objects</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#repo-1"><span class="nav-number">8.</span> <span class="nav-text">repo</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy.Lee"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Andy.Lee</p>
+  <div class="site-description" itemprop="description">Just need to enjoy life.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huaqianlee@gmail.com" title="E-Mail → mailto:huaqianlee@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/huaqianlee" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/huaqianlee" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/huaqianlee" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/huaqianlee" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
