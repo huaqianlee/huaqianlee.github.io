@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文的动态图皆来自于莉迪亚·哈莉（Lydia Hallie） 的文章 CS Visualized: Useful Git Commands. 本文整理自自己在公司做的一次技术分享的幻灯片：《原来你是这样的 VCS！》 。  VCS 的发展历史首先，我们来聊聊 VCS， Version Control System， 即版本控制系统的发展历史。   Manual VCS最初的时候，大家都是通过复制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原来你是这样的 VCS！">
+<meta property="og:url" content="http://huaqianlee.github.io/2020/11/13/Git/vcs-repo-git/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="本文的动态图皆来自于莉迪亚·哈莉（Lydia Hallie） 的文章 CS Visualized: Useful Git Commands. 本文整理自自己在公司做的一次技术分享的幻灯片：《原来你是这样的 VCS！》 。  VCS 的发展历史首先，我们来聊聊 VCS， Version Control System， 即版本控制系统的发展历史。   Manual VCS最初的时候，大家都是通过复制">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/manual_vcs.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/central_vcs.jpeg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/distributed_vcs.jpeg">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_workflow.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_official_doc.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/man_git.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_log.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/gitk.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_merge_ff.GIF">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_merge_noff_confict.GIF">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_merge_noff.GIF">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_reset_hard.GIF">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_reset_soft.GIF">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_rebase_i.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_rebase_ff.GIF">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_rebase_drop.GIF">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_rebase_squash.GIF">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/learninggitbranch.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/gitconfig.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_demo_tree.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_head.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_index.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_ls_files.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_config.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_refs.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_logs.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_objects.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_log_demo.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_commit_content1.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_commit_content2.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_demo_log_graph.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_detached_head.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_detached_head_diff.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_detached_head_push.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_workflow.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_tips.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_dirctory.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_launcher_tool.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_manifest.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_manifest_format.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_project_list.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/projects_objects.png">
+<meta property="article:published_time" content="2020-11-12T16:01:38.000Z">
+<meta property="article:modified_time" content="2020-11-12T16:11:21.118Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Tools">
+<meta property="article:tag" content="Repo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/manual_vcs.png">
+
+<link rel="canonical" href="http://huaqianlee.github.io/2020/11/13/Git/vcs-repo-git/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>原来你是这样的 VCS！ | Andy.Lee's  Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Andy.Lee's  Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Good good study, day day up !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">105</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/11/13/Git/vcs-repo-git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          原来你是这样的 VCS！
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: Nov 13 2020 0:01:38 / Modified: 0:11:21" itemprop="dateCreated datePublished" datetime="2020-11-13T00:01:38+08:00">Nov 13 2020</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>本文的动态图皆来自于莉迪亚·哈莉（Lydia Hallie） 的文章 <a target="_blank" rel="noopener" href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1">CS Visualized: Useful Git Commands</a>.<br/> 本文整理自自己在公司做的一次技术分享的幻灯片：<a target="_blank" rel="noopener" href="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/Oh_The_VCS.pdf">《原来你是这样的 VCS！》</a> 。</p>
+</blockquote>
+<h1 id="VCS-的发展历史"><a href="#VCS-的发展历史" class="headerlink" title="VCS 的发展历史"></a>VCS 的发展历史</h1><p>首先，我们来聊聊 VCS， Version Control System， 即版本控制系统的发展历史。  </p>
+<h2 id="Manual-VCS"><a href="#Manual-VCS" class="headerlink" title="Manual VCS"></a>Manual VCS</h2><p>最初的时候，大家都是通过复制目录来进行版本管理，如下图：  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/manual_vcs.png" alt="manual vcs">  </p>
+<p>这样做的缺点显而易见：  </p>
+<ul>
+<li>难以维护</li>
+<li>难以回溯</li>
+</ul>
+<a id="more"></a>
+<h2 id="Central-VCS"><a href="#Central-VCS" class="headerlink" title="Central VCS"></a>Central VCS</h2><p>然后呢，就有了 svn ， 一种集中式版本控制系统，效率一下提升了很多，不过呢仍然有诸多不便，最明显的就是客户端功能较弱。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/central_vcs.jpeg" alt="central_vcs"></p>
+<ul>
+<li>集中的版本管理服务器</li>
+<li>支持版本管理与分支管理</li>
+<li>客户端需要保持与服务器相连</li>
+</ul>
+<h2 id="Distributed-VCS"><a href="#Distributed-VCS" class="headerlink" title="Distributed VCS"></a>Distributed VCS</h2><p>再到后面，Linus 同学就出马了， 不得不说大神就是大神，一直是只能膜拜的存在， 开发了 linux 不说，觉得已有的 VCS 不好用，就自己花了一周多的时间开发了划时代的 git，一种分布式版本控制系统。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/distributed_vcs.jpeg" alt="distributed_vcs"></p>
+<ul>
+<li>服务端和客户端都有完整的版本库</li>
+<li>客户端可以在本地进行版本管理</li>
+<li>能在本地进行回溯等大多数操作</li>
+</ul>
+<h1 id="Git-work-flow"><a href="#Git-work-flow" class="headerlink" title="Git work flow"></a>Git work flow</h1><p> 在工作流程方面来说的话， 我把 Git 看着四个层级，第一呢， working directory， 即工作区， 第二呢 staging area ，即暂存区，第三呢 local repository， 即本地仓库，第四呢，remote repository ，即远程仓库。  </p>
+<p>当我们在本地做了修改，<code>git add</code> 之后，内容就提交到了暂存区，即 <code>index</code> 文件，<code>git commit</code> 之后呢，就提交到了本地仓库，<code>git push</code> 之后，就推到了远程仓库。  </p>
+<p>反过来，我们可以通过 <code>git fetch/clone</code> 从远程仓库取到本地仓库，然后本地仓库的东西可以通过 <code>git reset --soft</code> 还原到暂存区，而暂存区的内容可以通过 <code>git restore --staged</code> 移交到工作区，工作区的修改我们可以通过 <code>git checkout/restore</code> 遗弃掉。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_workflow.png" alt="git_workflow"></p>
+<h1 id="Git-tips"><a href="#Git-tips" class="headerlink" title="Git tips"></a>Git tips</h1><p>接下来，针对我们比较常用的部分分享一些 tips。  </p>
+<h2 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h2><p><a href="git-scm.com">官方文档</a>是我们第一时间应该关注的部分，可以看到上面不仅有教程，还有 cheat sheet 和视频，基本上我们想要的都可以从上面找到的。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_official_doc.png" alt="git_official_doc"></p>
+<h2 id="man"><a href="#man" class="headerlink" title="man"></a>man</h2><p>学过 Linux 的都应该比较熟悉这个命令，我们不可能记住所有的命令以及它们的用法，使用的时候就可以通过 <code>man</code> 命令去确认相关信息，  Git 这个文档不知道是谁写得，名字取得十分有特色：the stupid  content tracker。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/man_git.png" alt="man_git"></p>
+<p>另外一些比较常用的 help 命令：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">help</span>        <span class="comment"># 常用命令</span></span><br><span class="line">git <span class="built_in">help</span> -a     <span class="comment"># 所有命令</span></span><br><span class="line">git <span class="built_in">help</span> -g     <span class="comment"># 常用教程</span></span><br><span class="line"></span><br><span class="line">git &lt;<span class="built_in">command</span>&gt; --<span class="built_in">help</span></span><br><span class="line">git <span class="built_in">help</span> &lt;<span class="built_in">command</span>&gt; <span class="comment"># 指定命令</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="git-config"><a href="#git-config" class="headerlink" title="git config"></a>git config</h2><p><code>git config</code> 命令呢用来配置我们常用的 gitconfig 文件，分为 local，global，sytem 。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="built_in">local</span>      <span class="comment"># 当前 git 仓, .git/config</span></span><br><span class="line">git config --global     <span class="comment"># 当前用户, ~/.gitconfig</span></span><br><span class="line">git config --system     <span class="comment"># 当前电脑的所有用户, git 安装路径</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Priority: local &gt; global &gt; system</p>
+</blockquote>
+<h2 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h2><p><code>git log</code> 算使用频率十分高的一个命令，用来查看提交历史。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --oneline --all -n5 --graph <span class="comment"># oneline 代表单行显示， all 代表显示所有分支， graph 代表以图表展示</span></span><br><span class="line">git <span class="built_in">log</span> &lt;branch&gt;        <span class="comment"># 查看指定分支</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_log.png" alt="git_log"></p>
+<h2 id="gitk"><a href="#gitk" class="headerlink" title="gitk"></a>gitk</h2><p>有时候用命令行的图形化查看提交历史不是那么形象，就可以通过 gitk 来直观的查看。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/gitk.png" alt="gitk"></p>
+<h2 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git diff [-- filename]          <span class="comment"># 比较工作区与暂存区</span></span><br><span class="line">git diff HEAD                   <span class="comment"># 比较工作区与 HEAD</span></span><br><span class="line">git diff --cached | --staged    <span class="comment"># 比较暂存区与 HEAD</span></span><br><span class="line"></span><br><span class="line">git diff HEAD HEAD~1 | HEAD^ / HEAD~2 | HEAD^^ | HEAD^2</span><br><span class="line"><span class="comment"># &#x27;^2&#x27;表示第二个父亲（譬如两个分支 merge 到一起，merged 的分支）, &#x27;~2&#x27; 表示父亲的父亲</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a>git checkout</h2><p><code>git checkout</code> 呢主要就是基于当前基点创建新建一个指针，或者基于暂存区更新工作区。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b &lt;branch&gt; [base SHA-1] <span class="comment"># 创建并切换分支</span></span><br><span class="line">git checkout . | [--] filename <span class="comment"># 基于暂存区更新工作区</span></span><br><span class="line">git checkout SHA-1 <span class="comment"># 以分离头指针形式切换到 SHA-1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="git-merge"><a href="#git-merge" class="headerlink" title="git merge"></a>git merge</h2><h3 id="Fast-forward-–ff"><a href="#Fast-forward-–ff" class="headerlink" title="Fast-forward (–ff)"></a>Fast-forward (–ff)</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_merge_ff.GIF" alt="git_merge_ff"></p>
+<h3 id="No-fast-foward-–no-ff"><a href="#No-fast-foward-–no-ff" class="headerlink" title="No-fast-foward (–no-ff)"></a>No-fast-foward (–no-ff)</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_merge_noff_confict.GIF" alt="git_merge_noff_confict"></p>
+<h3 id="Merge-Conflicts"><a href="#Merge-Conflicts" class="headerlink" title="Merge Conflicts"></a>Merge Conflicts</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_merge_noff.GIF" alt="git_merge_noff"></p>
+<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p>将本地仓库的 HEAD 指针指向指定的 commit。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft|hard|mixed &lt;commit&gt; [file]</span><br><span class="line">--soft: HEAD 指向 &lt;commit&gt;, 工作区和暂存区不变化</span><br><span class="line">--hard: 所有都指向 &lt;commit&gt;</span><br><span class="line">--mixed: 缺省值,HEAD 和暂存区指向 &lt;commit&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="git-reset-–hard"><a href="#git-reset-–hard" class="headerlink" title="git reset –hard"></a>git reset –hard</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_reset_hard.GIF" alt="git_reset_hard"></p>
+<h3 id="git-reset-–soft"><a href="#git-reset-–soft" class="headerlink" title="git reset –soft"></a>git reset –soft</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_reset_soft.GIF" alt="git_reset_soft"></p>
+<h2 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h2><p><code>git rebase</code> 也就是变基操作， 指定父指针进行变基，基本用法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git rebase [-i] start_sha-1 [end_sha-1]</span><br><span class="line"><span class="comment"># start_sha-1: 变基 commit 的父亲</span></span><br><span class="line"><span class="comment"># a. 如果有 end_sha-1, 则变基生成一个分离头指针。</span></span><br><span class="line"><span class="comment"># b. 如果没有 end_sha-1, 则先变基生成一个分离头指针,然后将HEAD 以及分支名等指向此分离头指针。</span></span><br></pre></td></tr></table></figure>
+<p>当我们以 <code>git rebase -i</code> 的形式执行了变基操作后，就会弹出如下的交付界面，最新的 commit 列在最下面， 所有的操作，下面都有注释，个人觉得比较常用的是 <code>p, r, s,e,d</code> 这几个。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_rebase_i.png" alt="git_rebase_i"></p>
+<h3 id="rebase-branch"><a href="#rebase-branch" class="headerlink" title="rebase branch"></a>rebase branch</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_rebase_ff.GIF" alt="git_rebase_ff"></p>
+<h3 id="rebase-drop"><a href="#rebase-drop" class="headerlink" title="rebase - drop"></a>rebase - drop</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_rebase_drop.GIF" alt="git_rebase_drop"></p>
+<h3 id="rebase-squash"><a href="#rebase-squash" class="headerlink" title="rebase - squash"></a>rebase - squash</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_rebase_squash.GIF" alt="git_rebase_squash"></p>
+<h2 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h2><p>stash 翻译过来就是存储的意思，可以理解为栈，当我们开发过程中突然插入了其他紧急情况时，可以把修改推入栈顶，完成任务后再出栈。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git stash           <span class="comment"># 存储当前修改</span></span><br><span class="line">git stash list      <span class="comment"># 查看所有存储的修改</span></span><br><span class="line">git stash pop       <span class="comment"># 推出最新存储的修改</span></span><br><span class="line">git stash apply     <span class="comment"># 用最新存储的修改,但是不推出,仍然保存在栈顶</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin remote.git        <span class="comment"># 关联远程仓库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定远程分支名</span></span><br><span class="line">git branch --set-upstream-to=&lt;upstream&gt;</span><br><span class="line">git branch --track &lt;branchname&gt;</span><br><span class="line">git branch -u &lt;upstream&gt;                <span class="comment"># -u = set-upstream</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置本地分支名为远程分支名,并 push</span></span><br><span class="line">git push -u origin --all                <span class="comment"># push 所有分支</span></span><br><span class="line">git push set-upstream origin branch </span><br><span class="line"></span><br><span class="line">git pull &lt;remote&gt; &lt;branch&gt;              <span class="comment"># 指定 merge 的远程和本地分支</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Search-history"><a href="#Search-history" class="headerlink" title="Search history"></a>Search history</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --all --grep=<span class="string">&#x27;search content&#x27;</span></span><br><span class="line"></span><br><span class="line">git grep <span class="string">&#x27;search content&#x27;</span> $(git rev-list --all)</span><br><span class="line">git rev-list --all | xargs git grep <span class="string">&#x27;search content&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="LearnGitBranching"><a href="#LearnGitBranching" class="headerlink" title="LearnGitBranching"></a>LearnGitBranching</h2><p><a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?NODEMO=&locale=zh_CN">pcottle/learnGitBranching</a>是一个比较好用的在线 Git 练习网站。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/learninggitbranch.png" alt="learninggitbranch"></p>
+<h2 id="gitconfig"><a href="#gitconfig" class="headerlink" title=".gitconfig"></a>.gitconfig</h2><p><a target="_blank" rel="noopener" href="https://github.com/csswizardry/dotfiles/blob/master/.gitconfig">Template: dotfiles/.gitconfig</a> 是一个比较全的 gitconfig 模板，我们可以参考这个模板设计自己的 gitconfig，譬如如下是我的 gitconfig。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/gitconfig.png" alt="gitconfig"></p>
+<h1 id="git-directory"><a href="#git-directory" class="headerlink" title=".git directory"></a>.git directory</h1><p>我创建了一个简单的演示 demo，做了几次提交，创建了些文件夹和文件，如下：  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_demo_tree.png" alt="git_demo_tree"></p>
+<h2 id="git-HEAD"><a href="#git-HEAD" class="headerlink" title=".git/HEAD"></a>.git/HEAD</h2><p><code>HEAD</code> 相当于是一个指针，指向当前工作的分支或者 commit。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_head.png" alt="git_head"></p>
+<h2 id="git-index"><a href="#git-index" class="headerlink" title=".git/index"></a>.git/index</h2><p><code>index</code> 就是我们所说的暂存区，其主要由如下四部分内容组成，不过我们可以不用太关心。  </p>
+<ul>
+<li>一个 12 字节的标头</li>
+<li>排序的 index 条目</li>
+<li>通过签名识别的扩展名</li>
+<li>160 位 SHA-1</li>
+</ul>
+<p>通过下图我们可以看到 <code>index</code> 是一个二进制文件，我们很难从其内容中看出什么东西。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_index.png" alt="git_index"></p>
+<p>不过 <code>Git</code> 提供了 <code>ls-files</code> 命令来查看暂存区中的内容。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_ls_files.png" alt="git_ls_files"></p>
+<h2 id="git-config-1"><a href="#git-config-1" class="headerlink" title=".git/config"></a>.git/config</h2><p>最高优先级的 local configuration, 同一台电脑上的多个项目可以通过此文件进行差异化配置.  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_config.png" alt="git_config"></p>
+<h2 id="git-refs"><a href="#git-refs" class="headerlink" title=".git/refs"></a>.git/refs</h2><p>这个文件夹里面存储的就是所有的 commit ‘指针’文件。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_refs.png" alt="git_refs"></p>
+<h2 id="git-logs"><a href="#git-logs" class="headerlink" title=".git/logs"></a>.git/logs</h2><p>此文件夹存放的是变更历史，可以看到 HEAD 指针， 分支，远程分支的内容都是一样的，只是远程分支的 message 一直是 ‘update by push’。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_logs.png" alt="git_logs"></p>
+<h2 id="git-objects"><a href="#git-objects" class="headerlink" title=".git/objects"></a>.git/objects</h2><p>此文件夹存放所有的对象，即我们管理的内容。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_objects.png" alt="git_objects"></p>
+<h2 id="commit-tree-blob"><a href="#commit-tree-blob" class="headerlink" title="commit, tree,blob"></a>commit, tree,blob</h2><p><code>commit, tree, blob</code> 是 Git 的三个基本单元, 比如我的 Demo 的提交历史如下.  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_log_demo.png" alt="git_log_demo"></p>
+<p>我们可以通过 <code>git cat-file -p</code> 查看 Git 对象的内容，通过 <code>git cat-file -t</code> 查看 Git 对象的类型。</p>
+<h3 id="从第二个-commit-726c6c0-看进去"><a href="#从第二个-commit-726c6c0-看进去" class="headerlink" title="从第二个 commit (726c6c0) 看进去"></a>从第二个 commit (726c6c0) 看进去</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_commit_content1.png" alt="git_commit_content1"></p>
+<h3 id="从-HEAD-看进去"><a href="#从-HEAD-看进去" class="headerlink" title="从 HEAD 看进去"></a>从 HEAD 看进去</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_commit_content2.png" alt="git_commit_content2"></p>
+<p>为了节约空间，任何相同内容的文件 ， 在 Git 看来都是同一个 blob  享元模式 ，享元模式是应用编程比较常见的一个概念，（Flyweight Pattern）主要用于减少创建对象的数量，以减少内存占用和提高性能。感兴趣的下来可以去了解下。享元模式和单例模式有点类似，不过它是针对对象，而单例模式是针对类。譬如相同字符串，只分配一次内存，地址一样，指向同一个对象，可以节省内存。<br>根目录下的 <code>README.md</code> 和 <code>doc/README.md</code> 文件内容相同，所以 Git 只存储一份，</p>
+<h2 id="Detached-HEAD"><a href="#Detached-HEAD" class="headerlink" title="Detached HEAD"></a>Detached HEAD</h2><p>分离头指针，这个在实际开发中也比较容易见到，比如我的当前提交历史如下：  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_demo_log_graph.png" alt="git_demo_log_graph"></p>
+<p>通过 <code>git checkout 8c19a38</code> 切到分离头指针。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_detached_head.png" alt="git_detached_head"></p>
+<p><code>git commit -am</code> 如下修改。   </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_detached_head_diff.png" alt="git_detached_head_diff"></p>
+<p><code>git commit</code> 后的状态如下图，在切换分支时如果我们不用分支或者 tags 关联此 commit，这部分内容就会被 git 回收掉。 不过很多时候分离头指针在 Git 里还是大有用处的，比如在 rebase 的时候。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/git_detached_head_push.png" alt="git_detached_head_push"></p>
+<h1 id="Repo-work-flow"><a href="#Repo-work-flow" class="headerlink" title="Repo work flow"></a>Repo work flow</h1><p>一般开始编码工作之前我都会通过 <code>repo start</code> 创建对应的 <code>Git Topic branch</code>， 完成开发工作后合入主分支，或者直接提交。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- A - B - C - D - master .</span><br><span class="line">            \</span><br><span class="line">            E - F - G - topic234</span><br><span class="line">After merge:</span><br><span class="line">- A - B - C - D - master^ - master</span><br><span class="line">            \                /</span><br><span class="line">            E - F - G - topic234</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_workflow.png" alt="repo_workflow"></p>
+<h1 id="Repo-tips"><a href="#Repo-tips" class="headerlink" title="Repo tips"></a>Repo tips</h1><p>repo 的 tips 内容很简单，就下图的这些命令：</p>
+<ul>
+<li>给所有仓创建 topic 分支</li>
+<li>清除本地修改，保持和远程仓库一致</li>
+<li>回退到指定时间点</li>
+<li>本地镜像多套代码</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_tips.png" alt="repo_tips"></p>
+<h1 id="repo-directory"><a href="#repo-directory" class="headerlink" title=".repo directory"></a>.repo directory</h1><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_dirctory.png" alt="repo_dirctory"></p>
+<h2 id="repo"><a href="#repo" class="headerlink" title="repo"></a>repo</h2><p>repo 由 launcher 和 tool 两部分组成， launcher 是一个 python 脚本，也就是我们用到的 repo ， tool 由其下载 ， tool 也是一系列 python 脚本，我们平时执行 <code>repo xxx</code> 命令时，会把后面的参数转发给 tool ，由 tool 来执行。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_launcher_tool.png" alt="repo_launcher_tool"></p>
+<h2 id="repo-init"><a href="#repo-init" class="headerlink" title="repo init"></a>repo init</h2><p><code>repo init</code> 执行流程转换为命令形式如下：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--------------------</span><br><span class="line">mkdir .repo; <span class="built_in">cd</span> .repo</span><br><span class="line">git <span class="built_in">clone</span> https://gerrit.googlesource.com/git-repo</span><br><span class="line">git <span class="built_in">clone</span> --bare <span class="variable">$URL</span> manifests.git</span><br><span class="line">mkdir -p manifests/.git; <span class="built_in">cd</span> manifests/.git</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ../../manifests.git/*; <span class="keyword">do</span> ln -s <span class="variable">$i</span> .; <span class="keyword">done</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">git checkout <span class="variable">$BRANCH</span> -- .</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">ln -s manifests/<span class="variable">$MANIFEST</span> manifest.xml</span><br></pre></td></tr></table></figure>
+
+<h2 id="repo-sync"><a href="#repo-sync" class="headerlink" title="repo sync"></a>repo sync</h2><ol>
+<li>克隆 manifest.xml 中指定的 git 仓库到 .repo/projects。</li>
+<li>基于.repo/projects 中的裸仓库创建工作路径及其中 .git 链接。</li>
+<li>checkout manifest 中指定的分支到工作路径,并更新 .repo/project.list。</li>
+</ol>
+<h2 id="manifests"><a href="#manifests" class="headerlink" title="manifests"></a>manifests</h2><h3 id="manifests-repo"><a href="#manifests-repo" class="headerlink" title="manifests repo"></a>manifests repo</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_manifest.png" alt="repo_manifest"></p>
+<h3 id="manifest-format"><a href="#manifest-format" class="headerlink" title="manifest format"></a>manifest format</h3><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_manifest_format.png" alt="repo_manifest_format"></p>
+<h2 id="repo-hook"><a href="#repo-hook" class="headerlink" title="repo hook"></a>repo hook</h2><p>Repo 提供了一种机制，使用自定义的 python 模块 hook 运行时的特定阶段。所有 hook 都位于一个 git 项目中，该项目基于 mainifests 在 <code>repo init</code> 时 checkout 。<code>repo hook</code> 在执行步骤之前(例如提交到Gerrit之前)运行 linters, 检查格式及进行单元测试, linter 简单来说就是分析源码，查找问题的工具。</p>
+<p><a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/tools/repohooks">Android 项目</a> 中可以找到一个完整的示例。它可以很容易地被任何基于 repo 的项目使用，并不特定于Android。如下是一个 mainifest 设置范例。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;project path=<span class="string">&quot;tools/repohooks&quot;</span> name=<span class="string">&quot;platform/tools/repohooks&quot;</span> /&gt;</span><br><span class="line">&lt;repo-hooks in-project=<span class="string">&quot;platform/tools/repohooks&quot;</span> enabled-list=<span class="string">&quot;pre-upload&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="project-list"><a href="#project-list" class="headerlink" title="project.list"></a>project.list</h2><p>repo 跟踪的所有仓库:    </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/repo_project_list.png" alt="repo_project_list"></p>
+<h2 id="projects-project-objects"><a href="#projects-project-objects" class="headerlink" title="projects, project-objects"></a>projects, project-objects</h2><ul>
+<li>projects: manifest 中指定的所有 project 的 git 裸仓库,repo 将基于此 git 仓库生成工作区。</li>
+<li>project-objects:可以在多个本地 git 中安全共享的 Git 对象。</li>
+</ul>
+<p>i.e. : 将 foo/bar.git 的不同分支 checkout 到本地 foo/bar-master,foo/bar-release 等, 在 projects 下将为每一个分支创建路径,而 project-objects 下面将会只有一个路径。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/projects_objects.png" alt="projects_objects"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Tools/" rel="tag"># Tools</a>
+              <a href="/tags/Repo/" rel="tag"># Repo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/13/Android/pstore/" rel="next" title="Pstore 的一些记录">
+      Pstore 的一些记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VCS-%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="nav-number">1.</span> <span class="nav-text">VCS 的发展历史</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Manual-VCS"><span class="nav-number">1.1.</span> <span class="nav-text">Manual VCS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Central-VCS"><span class="nav-number">1.2.</span> <span class="nav-text">Central VCS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed-VCS"><span class="nav-number">1.3.</span> <span class="nav-text">Distributed VCS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-work-flow"><span class="nav-number">2.</span> <span class="nav-text">Git work flow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-tips"><span class="nav-number">3.</span> <span class="nav-text">Git tips</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Documentation"><span class="nav-number">3.1.</span> <span class="nav-text">Documentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#man"><span class="nav-number">3.2.</span> <span class="nav-text">man</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-config"><span class="nav-number">3.3.</span> <span class="nav-text">git config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-log"><span class="nav-number">3.4.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitk"><span class="nav-number">3.5.</span> <span class="nav-text">gitk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-diff"><span class="nav-number">3.6.</span> <span class="nav-text">git diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-checkout"><span class="nav-number">3.7.</span> <span class="nav-text">git checkout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-merge"><span class="nav-number">3.8.</span> <span class="nav-text">git merge</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fast-forward-%E2%80%93ff"><span class="nav-number">3.8.1.</span> <span class="nav-text">Fast-forward (–ff)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#No-fast-foward-%E2%80%93no-ff"><span class="nav-number">3.8.2.</span> <span class="nav-text">No-fast-foward (–no-ff)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Merge-Conflicts"><span class="nav-number">3.8.3.</span> <span class="nav-text">Merge Conflicts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset"><span class="nav-number">3.9.</span> <span class="nav-text">git reset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-reset-%E2%80%93hard"><span class="nav-number">3.9.1.</span> <span class="nav-text">git reset –hard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-reset-%E2%80%93soft"><span class="nav-number">3.9.2.</span> <span class="nav-text">git reset –soft</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-rebase"><span class="nav-number">3.10.</span> <span class="nav-text">git rebase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rebase-branch"><span class="nav-number">3.10.1.</span> <span class="nav-text">rebase branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebase-drop"><span class="nav-number">3.10.2.</span> <span class="nav-text">rebase - drop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebase-squash"><span class="nav-number">3.10.3.</span> <span class="nav-text">rebase - squash</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-stash"><span class="nav-number">3.11.</span> <span class="nav-text">git stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-remote"><span class="nav-number">3.12.</span> <span class="nav-text">git remote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-history"><span class="nav-number">3.13.</span> <span class="nav-text">Search history</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LearnGitBranching"><span class="nav-number">3.14.</span> <span class="nav-text">LearnGitBranching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitconfig"><span class="nav-number">3.15.</span> <span class="nav-text">.gitconfig</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-directory"><span class="nav-number">4.</span> <span class="nav-text">.git directory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-HEAD"><span class="nav-number">4.1.</span> <span class="nav-text">.git&#x2F;HEAD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-index"><span class="nav-number">4.2.</span> <span class="nav-text">.git&#x2F;index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-config-1"><span class="nav-number">4.3.</span> <span class="nav-text">.git&#x2F;config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-refs"><span class="nav-number">4.4.</span> <span class="nav-text">.git&#x2F;refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-logs"><span class="nav-number">4.5.</span> <span class="nav-text">.git&#x2F;logs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-objects"><span class="nav-number">4.6.</span> <span class="nav-text">.git&#x2F;objects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#commit-tree-blob"><span class="nav-number">4.7.</span> <span class="nav-text">commit, tree,blob</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E7%AC%AC%E4%BA%8C%E4%B8%AA-commit-726c6c0-%E7%9C%8B%E8%BF%9B%E5%8E%BB"><span class="nav-number">4.7.1.</span> <span class="nav-text">从第二个 commit (726c6c0) 看进去</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E-HEAD-%E7%9C%8B%E8%BF%9B%E5%8E%BB"><span class="nav-number">4.7.2.</span> <span class="nav-text">从 HEAD 看进去</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Detached-HEAD"><span class="nav-number">4.8.</span> <span class="nav-text">Detached HEAD</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Repo-work-flow"><span class="nav-number">5.</span> <span class="nav-text">Repo work flow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Repo-tips"><span class="nav-number">6.</span> <span class="nav-text">Repo tips</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#repo-directory"><span class="nav-number">7.</span> <span class="nav-text">.repo directory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#repo"><span class="nav-number">7.1.</span> <span class="nav-text">repo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#repo-init"><span class="nav-number">7.2.</span> <span class="nav-text">repo init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#repo-sync"><span class="nav-number">7.3.</span> <span class="nav-text">repo sync</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#manifests"><span class="nav-number">7.4.</span> <span class="nav-text">manifests</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#manifests-repo"><span class="nav-number">7.4.1.</span> <span class="nav-text">manifests repo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#manifest-format"><span class="nav-number">7.4.2.</span> <span class="nav-text">manifest format</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#repo-hook"><span class="nav-number">7.5.</span> <span class="nav-text">repo hook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#project-list"><span class="nav-number">7.6.</span> <span class="nav-text">project.list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#projects-project-objects"><span class="nav-number">7.7.</span> <span class="nav-text">projects, project-objects</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy.Lee"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Andy.Lee</p>
+  <div class="site-description" itemprop="description">Just need to enjoy life.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huaqianlee@gmail.com" title="E-Mail → mailto:huaqianlee@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/huaqianlee" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/huaqianlee" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/huaqianlee" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/huaqianlee" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
