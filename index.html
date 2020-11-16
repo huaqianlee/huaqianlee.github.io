@@ -119,12 +119,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">105</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">106</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -193,6 +193,193 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/11/16/Linux/How-to-develop-and-debug-kernel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/16/Linux/How-to-develop-and-debug-kernel/" class="post-title-link" itemprop="url">How to develop and debug kernel</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: Nov 16 2020 21:57:31 / Modified: 21:59:49" itemprop="dateCreated datePublished" datetime="2020-11-16T21:57:31+08:00">Nov 16 2020</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>此篇文章是基于高通 ODM BSP 开发做的一个简单总结，起初是用来对新人进行培训的。</p>
+</blockquote>
+<p>我觉得学习内核驱动时，最开始只需要 ‘Know what, not know how ’。 不用去探究细节，只需要知道整体的框架，知道有哪些需要我们重视的内容即可。</p>
+<h1 id="何为-Linux-内核开发？"><a href="#何为-Linux-内核开发？" class="headerlink" title="何为 Linux 内核开发？"></a>何为 Linux 内核开发？</h1><h2 id="首先，初步认识下-Linux-kernel"><a href="#首先，初步认识下-Linux-kernel" class="headerlink" title="首先，初步认识下 Linux kernel"></a>首先，初步认识下 Linux kernel</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/linux_intro.png" alt="linux_intro"></p>
+<ul>
+<li>Linux 内核的框架如上图。</li>
+<li>设备子系统负责和硬件打交道。</li>
+<li>大部分工作集中在设备子系统部分。</li>
+</ul>
+<h2 id="内核开发是什么？"><a href="#内核开发是什么？" class="headerlink" title="内核开发是什么？"></a>内核开发是什么？</h2><ul>
+<li>广义上讲，新增或修改上图中内核部分的所有子系统。</li>
+<li>非 Linux 源码贡献者，一般来说只修改设备子系统部分。</li>
+</ul>
+<p>接下来，简单聊聊初学者需要重点关注的三个部分：设备树，字符设备，平台设备驱动。</p>
+<h2 id="设备树（DTS）"><a href="#设备树（DTS）" class="headerlink" title="设备树（DTS）"></a>设备树（DTS）</h2><p>设备树相当于一份软件中描述硬件结构的配置框图。假设下图为硬件框图：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/dts_hw.png" alt="dts_hw"> </p>
+<p>那么其软件描述的代码片段如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/ &#123; <span class="comment">// root node</span></span><br><span class="line">model = <span class="string">&quot;Qualcomm Technologies, Inc. SDM xxx&quot;</span>;</span><br><span class="line">compatible = <span class="string">&quot;qcom,sdmxxx&quot;</span>;</span><br><span class="line">cpus &#123;</span><br><span class="line">... cpu@<span class="number">0</span> &#123;</span><br><span class="line">... &#125;;</span><br><span class="line">cpu@<span class="number">1</span> &#123;</span><br><span class="line">... &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">usb@&lt;address&gt; &#123;</span><br><span class="line">... &#125;;</span><br><span class="line">serial@&lt;address&gt; &#123;</span><br><span class="line">... &#125;;</span><br><span class="line">gpio@&lt;address&gt; &#123;</span><br><span class="line">... &#125;;</span><br><span class="line">intc: interrupt-controller@&lt;address&gt; &#123;</span><br><span class="line">... &#125;;</span><br><span class="line">external-bus &#123;</span><br><span class="line">...</span><br><span class="line">i2c@<span class="number">0</span>,<span class="number">0</span> &#123;</span><br><span class="line">... xxx@&lt;address&gt; &#123; <span class="comment">// I2C Dev</span></span><br><span class="line">.... &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">flash@<span class="number">1</span>,<span class="number">0</span> &#123;</span><br><span class="line">... &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符设备驱动"><a href="#字符设备驱动" class="headerlink" title="字符设备驱动"></a>字符设备驱动</h2><ul>
+<li>字符设备驱动是理解设备驱动的基础。</li>
+<li>大多数设备都可以归于字符设备。  </li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/char_dev.png" alt="char_dev"></p>
+<h2 id="平台设备驱动模型"><a href="#平台设备驱动模型" class="headerlink" title="平台设备驱动模型"></a>平台设备驱动模型</h2><ul>
+<li>设备（或驱动）注册时，会通过总线去匹配对应的驱动（或设备）。</li>
+<li>设备和驱动通常需要挂在一种实际总线上，除带有 I2C、SPI、USB 等的设备外，内核为没有实际总线的外设实现了虚拟的平台总线 。</li>
+<li>平台设备驱动是独立于字符设备、网络设备等的一种抽象概念 。</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/platform_dev.png" alt="platform_dev">  </p>
+<h1 id="kernel-开发需要什么样的知识储备？"><a href="#kernel-开发需要什么样的知识储备？" class="headerlink" title="kernel 开发需要什么样的知识储备？"></a>kernel 开发需要什么样的知识储备？</h1><h2 id="C-语言"><a href="#C-语言" class="headerlink" title="C 语言"></a>C 语言</h2><p>良好的 C 语言能力， Linux 官方推荐了如下书籍。  </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/25735837/">The C Programming Language</a></li>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/4743677/">Practical C Programming</a></li>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/1767969/">C: A Reference Manual</a></li>
+</ul>
+<h2 id="GNU"><a href="#GNU" class="headerlink" title="GNU"></a>GNU</h2><p>内核由 GNU C 和 GNU toolchain 实现，所以如下两方面的知识是需要的。</p>
+<ul>
+<li>GNU C 的编码规则</li>
+<li>GNU 工具链的使用</li>
+</ul>
+<h2 id="Linux-基本命令"><a href="#Linux-基本命令" class="headerlink" title="Linux 基本命令"></a>Linux 基本命令</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/4889838/">鸟哥的 Linux 私房菜</a></li>
+</ul>
+<h2 id="设备驱动相关知识"><a href="#设备驱动相关知识" class="headerlink" title="设备驱动相关知识"></a>设备驱动相关知识</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/1723151/">Linux 设备驱动程序</a></li>
+</ul>
+<h2 id="内核原理"><a href="#内核原理" class="headerlink" title="内核原理"></a>内核原理</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/3229243/">Linux 内核完全注释</a></li>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/1767120/">深入理解 Linux 内核</a></li>
+</ul>
+<h1 id="在我们的工作中，kernel-开发一般怎么做？"><a href="#在我们的工作中，kernel-开发一般怎么做？" class="headerlink" title="在我们的工作中，kernel 开发一般怎么做？"></a>在我们的工作中，kernel 开发一般怎么做？</h1><h2 id="Android-设备通常的开发周期"><a href="#Android-设备通常的开发周期" class="headerlink" title="Android 设备通常的开发周期"></a>Android 设备通常的开发周期</h2><p>在我们的工作中，kernel 开发主要集中在 Bringup、Integrate、Verify 三个阶段 。  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/product_phase.png" alt="product_phase"></p>
+<h2 id="源码获取"><a href="#源码获取" class="headerlink" title="源码获取"></a>源码获取</h2><ul>
+<li>高通的代码分两部分：一部分是开源的，可以从 codeaurora.org 下载，还有一部分是高通产权的，需要从高通的网站上下载。</li>
+<li>高通产权的代码存放路径：vendor/qcom/proprietary 。</li>
+<li>实际工作中，SCM 一般会帮忙准备好 Base 代码。<blockquote>
+<p>可以通过 <code>repo init -u https://android.googlesource.com/platform/manifest -b android-4.0.1_r1</code> 在 <a target="_blank" rel="noopener" href="https://source.android.com/setup/build/downloading">Source.android</a> 下载 Google 官方源码。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Bringup"><a href="#Bringup" class="headerlink" title="Bringup"></a>Bringup</h2><ul>
+<li>根据需求实现各种外设模块的基本功能。</li>
+<li>LCD、TP 、Sensor 、Charger 等功能正常，手机能进入 Launcher 界面，能正常使用，USB 连接正常。<br>这样 Bringup 工作就基本完成了。</li>
+</ul>
+<h2 id="Porting-和编写各种外设的驱动（需求的具体实现）"><a href="#Porting-和编写各种外设的驱动（需求的具体实现）" class="headerlink" title="Porting 和编写各种外设的驱动（需求的具体实现）"></a>Porting 和编写各种外设的驱动（需求的具体实现）</h2><ul>
+<li>Porting 硬件相关配置，即实现 DTS 。</li>
+<li>Porting 相关驱动 。</li>
+<li>Sensor 和其他外设有一点差异 。</li>
+<li>其分为 AP 侧驱动（厂商提供）和 ADSP 侧驱动（高通和厂商协同）两种方式 。</li>
+<li>主要配置总线、 GPIO 及 Sensor 的属性 。</li>
+</ul>
+<h2 id="系统维护（解-BUG）"><a href="#系统维护（解-BUG）" class="headerlink" title="系统维护（解 BUG）"></a>系统维护（解 BUG）</h2><ul>
+<li>对比机</li>
+<li>阅读源码</li>
+<li>善用调试工具</li>
+<li><a target="_blank" rel="noopener" href="https://createpoint.qti.qualcomm.com/">Createpoint</a> + <a target="_blank" rel="noopener" href="https://qualcomm-cdmatech-support.my.salesforce.com/">QCOM Case</a> （<em>高通文档工具下载，及向高通在线寻求帮助。</em>）</li>
+<li>搜索引擎</li>
+<li>GTD （主动性）</li>
+<li>文档（Read + Write）</li>
+</ul>
+<h1 id="kernel-调试的常用方式有哪些？"><a href="#kernel-调试的常用方式有哪些？" class="headerlink" title="kernel 调试的常用方式有哪些？"></a>kernel 调试的常用方式有哪些？</h1><h2 id="硬件调试"><a href="#硬件调试" class="headerlink" title="硬件调试"></a>硬件调试</h2><ul>
+<li>示波器</li>
+<li>程控电源</li>
+<li>万用表</li>
+<li>Power monitor </li>
+</ul>
+<h2 id="Logs"><a href="#Logs" class="headerlink" title="Logs"></a>Logs</h2><ul>
+<li>串口日志</li>
+<li>Logging System</li>
+<li>logcat/kmsg… </li>
+<li>Enhanced log</li>
+<li>pstore</li>
+<li>ramdump</li>
+</ul>
+<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><ul>
+<li>adb dumpsys</li>
+<li>gdb</li>
+<li>QPST</li>
+<li>Get ramdump/adsp log/… - systrace</li>
+<li>trace CPU/GPU/Function/Activity/… - powerTop</li>
+<li>power consumption</li>
+<li>kmemleak</li>
+<li>vmstat + top/ps + pmap in android</li>
+<li>out/soong/host/linux-x86/bin/ - simg2img/lpdump… </li>
+<li>objdump</li>
+</ul>
+<h2 id="文件系统或节点"><a href="#文件系统或节点" class="headerlink" title="文件系统或节点"></a>文件系统或节点</h2><ul>
+<li>sys</li>
+<li>power/irq/gpio … </li>
+<li>proc</li>
+<li>内核信息</li>
+<li>打印级别</li>
+<li>dynamic debug</li>
+<li>echo “file xxx.c +p” &gt; /sys/kernel/dynamic_debug/control</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/11/13/Git/vcs-repo-git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -216,10 +403,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: Nov 13 2020 0:01:38 / Modified: 0:11:21" itemprop="dateCreated datePublished" datetime="2020-11-13T00:01:38+08:00">Nov 13 2020</time>
+              <time title="Created: Nov 13 2020 0:01:38" itemprop="dateCreated datePublished" datetime="2020-11-13T00:01:38+08:00">Nov 13 2020</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Nov 14 2020 16:10:55" itemprop="dateModified" datetime="2020-11-14T16:10:55+08:00">Nov 14 2020</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,7 +435,7 @@
 
       
           <blockquote>
-<p>本文的动态图皆来自于莉迪亚·哈莉（Lydia Hallie） 的文章 <a target="_blank" rel="noopener" href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1">CS Visualized: Useful Git Commands</a>.<br/> 本文整理自自己在公司做的一次技术分享的幻灯片：<a target="_blank" rel="noopener" href="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/media/Oh_The_VCS.pdf">《原来你是这样的 VCS！》</a> 。</p>
+<p>本文的动态图皆来自于莉迪亚·哈莉（Lydia Hallie） 的文章 <a target="_blank" rel="noopener" href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1">CS Visualized: Useful Git Commands</a>。</p>
 </blockquote>
 <h1 id="VCS-的发展历史"><a href="#VCS-的发展历史" class="headerlink" title="VCS 的发展历史"></a>VCS 的发展历史</h1><p>首先，我们来聊聊 VCS， Version Control System， 即版本控制系统的发展历史。  </p>
 <h2 id="Manual-VCS"><a href="#Manual-VCS" class="headerlink" title="Manual VCS"></a>Manual VCS</h2><p>最初的时候，大家都是通过复制目录来进行版本管理，如下图：  </p>
@@ -301,9 +494,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: Nov 13 2020 0:00:51 / Modified: 0:12:00" itemprop="dateCreated datePublished" datetime="2020-11-13T00:00:51+08:00">Nov 13 2020</time>
+              <time title="Created: Nov 13 2020 0:00:51" itemprop="dateCreated datePublished" datetime="2020-11-13T00:00:51+08:00">Nov 13 2020</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Nov 14 2020 16:11:23" itemprop="dateModified" datetime="2020-11-14T16:11:23+08:00">Nov 14 2020</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                </span>
             </span>
 
           
@@ -953,89 +1161,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/23/ARTS/Ninth-week-of-ARTS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/23/ARTS/Ninth-week-of-ARTS/" class="post-title-link" itemprop="url">The ninth week of ARTS</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Oct 23 2019 0:00:43" itemprop="dateCreated datePublished" datetime="2019-10-23T00:00:43+08:00">Oct 23 2019</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Oct 10 2020 22:38:25" itemprop="dateModified" datetime="2020-10-10T22:38:25+08:00">Oct 10 2020</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-element/">Remove Element</a>.<br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java">Java</a>.</p>
-<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>I found a usage of “repo init … –reference” this week, I want to know more, so I read <a target="_blank" rel="noopener" href="https://forum.xda-developers.com/android/software/guide-android-repo-mirroring-t3170869">Android Repo Mirroring</a> this week.</p>
-<p>This article explains “repo mirroring” in a simple and clear way through examples.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/23/ARTS/Ninth-week-of-ARTS/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1107,14 +1232,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">106</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
