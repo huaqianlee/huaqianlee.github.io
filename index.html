@@ -119,7 +119,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">106</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">107</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -189,6 +189,735 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/11/19/Linux/Consolidating-the-foundation-of-Linux-vim-tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/19/Linux/Consolidating-the-foundation-of-Linux-vim-tips/" class="post-title-link" itemprop="url">Consolidating the foundation of Linux, vim tips</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: Nov 19 2020 21:55:12 / Modified: 22:02:49" itemprop="dateCreated datePublished" datetime="2020-11-19T21:55:12+08:00">Nov 19 2020</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Vim-Tips"><a href="#Vim-Tips" class="headerlink" title="Vim Tips"></a>Vim Tips</h1><p>Record my commonly used commands in the form of a memo, and will continue to increase according to usage in the future.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Commands</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Help:</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>vimtutor</code></td>
+<td>vim tutor with shell</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>:help user-manual</code></td>
+<td>User manual overview</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>:help usr_02.txt</code></td>
+<td>User manual</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>:help index</code></td>
+<td>All commands for each mode</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>:help insert-index/visual-index/...</code></td>
+<td>All commands for insert/visual/… mode</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>:help -t</code></td>
+<td><code>vim -t &#123;tag&#125;</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>:help E37</code></td>
+<td>‘error inf E37…’ explanation</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>:help &lt;command&gt;</code></td>
+<td>Command’s manual</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>:help w</code></td>
+<td>Common commands</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>:help c_Ctrl-D</code></td>
+<td>Command-line Editing commands</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>:help vimrCtrl-intro</code></td>
+<td>vimrc introduction</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>:r $VIMRUNTIME/vimrc_example.vim</code></td>
+<td>Read vimrc example</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>Ctrl-A</code> or <code>Tab</code></td>
+<td>Automaticly transfer $VIMRUNTIME as <code>:r /usr/share/vim/vim80/</code></td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>:help helphelp</code></td>
+<td>Help on help files</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>help help</code></td>
+<td>help on help commands</td>
+</tr>
+<tr>
+<td><strong>Command Line Editing:</strong></td>
+<td><code>: / ? !</code> …</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>:help ex-edit-index</code></td>
+<td>All commands for command-line</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>/ ?</code></td>
+<td>Forward or reverse search,  <code>n, N</code> - next/previous</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>:e &lt;path/to/file</code></td>
+<td>Open  &lt;path/to/file&gt; ,<code>:e</code> for reloading</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>:saveas &lt;path/to/file&gt;</code></td>
+<td>Save to &lt;path/to/file&gt;</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>:x, ZZ , :wq</code></td>
+<td>Save and quit (:x only save if necessary)</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>:q!</code></td>
+<td>Quit without saving, also: :qa! to quit even if there are modified hidden buffers</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>:bn/bp</code></td>
+<td>Next/previous file</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>:[%s]/old/new/[gcI]</code></td>
+<td>Replace,<code>%</code> - whole file, <code>gc</code> globally and confirm, <code>I</code> - ?</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>:3,5s/old/new/g</code></td>
+<td>Replace from 3 to 5 line</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>:set hls[earch]/nonhls</code></td>
+<td>highlight all matching phrases or not</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>:set [no]ic, &#39;ignorecase&#39;</code></td>
+<td>ignore upper/lower case when searching or not</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>\c</code></td>
+<td>Ignore capital, likes <code>/ignor\c</code>,<code>:s/old\c/new/g</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>:set [no]is,&#39; &#39;incsearch&#39;</code></td>
+<td>show partial matches for a search phrase or not</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>sp[lit] vsp</code></td>
+<td><code>:help split</code>,Split screen horizontal or vertical</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>：vertical res/res + num</code></td>
+<td>Set the width or height</td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>Ctrl-W + Ctrl-W/HJKL</code></td>
+<td>Move between/among splitted screens</td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>Ctrl-W _</code>(resp. `Ctrl-W</td>
+<td>`</td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>Ctrl-W +</code>(resp. <code>Ctrl-W -</code></td>
+<td>Grow (resp. shrink) split</td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>Ctrl-W =</code></td>
+<td>Evenly allocate size</td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>:set [no]scrollbind, [no]scb</code></td>
+<td>Sync the screens which this option is set</td>
+</tr>
+<tr>
+<td>20</td>
+<td><code>Ctrl-D</code></td>
+<td>Show a list of commands</td>
+</tr>
+<tr>
+<td>21</td>
+<td><code>&lt;TAB&gt;</code></td>
+<td>Complete , likes <code>:edi[t] equals :e</code> <code>:!fin[d]</code> and others. like name</td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>:set showmode</code></td>
+<td>Tell you which mode you are on the last line</td>
+</tr>
+<tr>
+<td>23</td>
+<td><code>:r !ls</code></td>
+<td>Put ls’s output below the cursor</td>
+</tr>
+<tr>
+<td>24</td>
+<td><code>:r &lt;file&gt;</code></td>
+<td>Put the contents of file below the cursor</td>
+</tr>
+<tr>
+<td>25</td>
+<td><code>:map Y y$</code></td>
+<td>Map <code>Y</code> command yank to the end of line</td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>:set [no]nu[mber]</code></td>
+<td>Hider/display line number</td>
+</tr>
+<tr>
+<td>27</td>
+<td><code>:set mouse=[all]</code></td>
+<td>Enable mouse usage (all modes)</td>
+</tr>
+<tr>
+<td>28</td>
+<td><code>:se[t]</code></td>
+<td>Show all options that differ from their default value</td>
+</tr>
+<tr>
+<td>29</td>
+<td><code>:se[t] all</code></td>
+<td>Show all but terminal options.</td>
+</tr>
+<tr>
+<td><strong>Normal Mode:</strong></td>
+<td><code>ESC Ctrl-[  Ctrl-C</code>…</td>
+<td>Back to Normal Mode</td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>:help normal-index</code></td>
+<td>All commands for normal mode</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>[n]command</code></td>
+<td>Excute n times command</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>Ctrl-D/Ctrl-U</code>,<code>hjkl</code></td>
+<td>Move down or up,…</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>0,^,$,g_</code></td>
+<td>Go to the first/last column or non-blank character</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>[N]G, :N</code></td>
+<td>Go to line N</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>gg</code>,<code>G</code></td>
+<td>Go to the start of the file, to last line</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>w, e , b</code> <code>2w,3e</code></td>
+<td>Go to the start/end of next word, start of previous word</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>W,E,B</code></td>
+<td>Go to the start/end of next/previous Group</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>fa/F</code>,<code>,</code> <code>;</code></td>
+<td>Go to next/previous ‘a’ on the line,<code>3fa</code> go to 3rd ‘a’, <code>,</code> <code>;</code> next/previous</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>t,/T``,</code> <code>;</code></td>
+<td>Go to before/after ‘,’, <code>,</code> <code>;</code> next/previous</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>%</code></td>
+<td>Go to next corresponding item, likes <code>([&#123;&#125;],#ifdef/#endif</code>)</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>*,#</code></td>
+<td>Go to next/previous occurence of the word, <code>:set hls</code> will highlight them</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>x</code>,<code>J</code></td>
+<td>Delete char, rm line break</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>Ctrl-A</code></td>
+<td>Increment the number</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>U/u</code>,<code>Ctrl-R</code></td>
+<td>Undo all latest changes on one line or undo one changes, redo changes</td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>Ctrl-O</code>,<code>Ctrl-I</code></td>
+<td>Go to older/newer cursor possitons,support switching files</td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>Ctrl-]</code></td>
+<td>jumps to the location of the tag given by the word under the cursor</td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>Ctrl-T</code></td>
+<td>(pop tag) takes you back to the preceding position</td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>Ctrl-G</code></td>
+<td>Prints the current file name, the cursor position, etc.</td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>Te(gt gT),Ve[!],He[!]</code></td>
+<td>Create a Tab/Vertical/Horizontal page, gt/gT - next/previous, ! -&gt; place</td>
+</tr>
+<tr>
+<td><strong>EX commands:</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>:help ex-cmd-index</code></td>
+<td>All commands for ex-cmd</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>man vim</code></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>:!&lt;command&gt;</code> <code>:！which shutdown</code></td>
+<td>Excute shell command</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>Ctrl-Z</code> <code>fg</code></td>
+<td>Pause vim, back to vim</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>vim -pO/o[N] files...</code></td>
+<td>Open N/one(when N is omitted) tab page for each file</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>vim -n</code></td>
+<td>No swap file will be used</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>Ctrl-Shift-C</code>,<code>Ctrl-Shift-V</code></td>
+<td>Copy and Paste, supports outside of vim</td>
+</tr>
+<tr>
+<td><strong>Insert Mode:</strong></td>
+<td><code>a i r s</code> …</td>
+<td>Enter Insert Mode</td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>:help insert-index</code></td>
+<td>All commands for insert mode</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>r,R gR</code></td>
+<td>Replace mode,<code>gR</code>:visual mode replace</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>Ctrl-N, Ctrl-P</code></td>
+<td>Completion,complete the word from start of word</td>
+</tr>
+<tr>
+<td><strong>Visual Mode:</strong></td>
+<td><code>v V Ctrl-V Ctrl-Q</code> …</td>
+<td>Enter visual Mode, CTRL-Q insteads Ctrl-V(used to paste) in Insert and Command-line mode.</td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>:help visual-index</code></td>
+<td>All commands for visual mode</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>v/V/Ctrl-V</code></td>
+<td>Select char/line/block</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>Ctrl-V</code> + <code>I</code> + <code>ESC</code></td>
+<td>Add same content at beginning of all lines</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>Ctrl-V</code> + <code>$</code> + <code>Shift-A</code> + <code>ESC</code></td>
+<td>Add same content at the end of all lines</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>y</code>,<code>d</code>…</td>
+<td>Yank,delete selected content</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>Y ,yy</code></td>
+<td>Yank the current line</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>J</code></td>
+<td>Join all lines together</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>&lt;</code>, <code>&gt;</code></td>
+<td>Indent to the left, to the right</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>=</code></td>
+<td>Auto indent</td>
+</tr>
+<tr>
+<td><strong>Op pending Mode</strong></td>
+<td><code>c d y &lt; &gt;</code> …</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>c[N]&#123;motion&#125; c2w,ce,c$</code></td>
+<td>Delete motion text and start insert</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>y,d&#123;motion&#125; y$,d$,dt&#123;?&#125;</code>, <code>Np</code></td>
+<td>Yank/Delete {motion} text, paste N times</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>&lt;, &gt;</code></td>
+<td>Undent and indent</td>
+</tr>
+<tr>
+<td><strong>Supper Mode</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>v</code>+<code>:</code>-&gt;<code>:&#39;&lt;,&#39;&gt;w flie</code></td>
+<td>Save selected content in a new file</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>./N.</code></td>
+<td>Repeat one/N times the last cmd</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>N&lt;command&gt;</code></td>
+<td>Repeat the command N times,likes <code>2dd,3p</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>100icontent</code></td>
+<td>Write 100 times <code>content</code>,<code>.</code>-&gt;100 times again, <code>3.</code>-&gt;3 times, not 300</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>&lt;start position&gt;&lt;command&gt;&lt;end position&gt;</code></td>
+<td>Command from start positon to end position,<code>y,v (visual select), gU (uppercase), gu (lowercase) ...</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>0y$</code></td>
+<td>Yank from beginning to end of this line</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>ye</code></td>
+<td>Yank from here to end of word</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>y2/foo</code></td>
+<td>Yank up to second foo</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>&lt;action&gt;a/i&lt;object&gt;</code></td>
+<td>Only be used after an operator in visual mode,action:<code>y,d,v...</code>, object:<code>w,W,s,p,&quot;,&#39;,),&#125;,]</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>vis</code></td>
+<td>Select the current sentence</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>vip</code></td>
+<td>Select the current paragraph</td>
+</tr>
+<tr>
+<td>Suppose the cursor is on the first <code>o</code> of <code>(map (+) (&quot;foo&quot;))</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>vi&quot;</code></td>
+<td>Select <code>foo</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>va&quot;</code></td>
+<td>Select <code>&quot;foo&quot;</code></td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>vi)</code></td>
+<td>Select <code>&quot;foo&quot;</code></td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>va)</code></td>
+<td>Select <code>(&quot;foo&quot;)</code></td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>v2i)</code></td>
+<td>Select <code>map (+) (&quot;foo&quot;)</code></td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>v2a)</code></td>
+<td>Select <code>(map (+) (&quot;foo&quot;))</code></td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>:[n]cnext</code></td>
+<td>To go to the [n] next one error</td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>:copen </code></td>
+<td>All matches are available in the quickfix window which can be opened</td>
+</tr>
+<tr>
+<td><strong>Register</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>qa,@a</code></td>
+<td>Start recording your actions in a register, replay the action,</td>
+</tr>
+<tr>
+<td>20</td>
+<td><code>@@</code></td>
+<td>A shortcut to replay the last executed macro</td>
+</tr>
+<tr>
+<td>21</td>
+<td><code>&quot;kyy</code></td>
+<td>Copy the current line into k register</td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>&quot;Kyy</code></td>
+<td>Append the current line into  k register</td>
+</tr>
+<tr>
+<td>23</td>
+<td><code>&quot;kp</code></td>
+<td>Paste k regiser</td>
+</tr>
+<tr>
+<td>24</td>
+<td><code>&quot;+p</code></td>
+<td>Paste from system clipboard on Linux</td>
+</tr>
+<tr>
+<td>25</td>
+<td><code>&quot;*p</code></td>
+<td>To paste from system clipboard on Windows (or from “mouse highlight” clipboard on Linux)</td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>:reg</code></td>
+<td>To access all currently defined registers type</td>
+</tr>
+<tr>
+<td>Suppose on a line containing only the number 1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>27</td>
+<td><code>qaYp&lt;Ctrl-A&gt;q</code></td>
+<td><code>qa</code> Start recording <code>Yp</code> duplicate this line <code>Ctrl-A</code> increment the number <code>q</code> stop recording</td>
+</tr>
+<tr>
+<td>28</td>
+<td><code>@a</code></td>
+<td>Write 2 under the 1</td>
+</tr>
+<tr>
+<td>29</td>
+<td><code>@@</code></td>
+<td>Write 3 under the 2</td>
+</tr>
+<tr>
+<td>30</td>
+<td><code>100@@</code></td>
+<td>Create a list of increasing numbers until 103</td>
+</tr>
+</tbody></table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/19/Linux/Consolidating-the-foundation-of-Linux-vim-tips/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -843,7 +1572,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 19 2020 17:45:46" itemprop="dateModified" datetime="2020-07-19T17:45:46+08:00">Jul 19 2020</time>
+                <time title="Modified: Nov 19 2020 21:59:15" itemprop="dateModified" datetime="2020-11-19T21:59:15+08:00">Nov 19 2020</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -981,89 +1710,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/11/17/Git/Some-knowledge-about-git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/17/Git/Some-knowledge-about-git/" class="post-title-link" itemprop="url">Oh, the Git! - Basic</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Nov 17 2019 23:38:05" itemprop="dateCreated datePublished" datetime="2019-11-17T23:38:05+08:00">Nov 17 2019</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Oct 22 2020 22:57:42" itemprop="dateModified" datetime="2020-10-22T22:57:42+08:00">Oct 22 2020</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>Git has always been a must-have skill for developers, I will submize a series of blogs related to it, although I don’t know too much about git now.</p>
-<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2">Pro Git</a> is the best guide of git, I need to read it when I have plenty of time so that I can check for gaps.</p>
-<h1 id="VCS-Version-Control-System"><a href="#VCS-Version-Control-System" class="headerlink" title="VCS(Version Control System)"></a>VCS(Version Control System)</h1><h2 id="Central-VCS"><a href="#Central-VCS" class="headerlink" title="Central VCS"></a>Central VCS</h2><p>Central VCS mainly includes <code>SVN</code> and <code>CVS</code>, its newwork architecture is client-server.<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/Central%20VCS.jpg" alt="Central VCS"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/17/Git/Some-knowledge-about-git/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1135,7 +1781,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">106</span>
+          <span class="site-state-item-count">107</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
