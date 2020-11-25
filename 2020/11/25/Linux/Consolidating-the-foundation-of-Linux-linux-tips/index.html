@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Linux TipsRecord the commands that I use more frequently in the form of a memo, and will continue to increase according to usage in the future.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Consolidating the foundation of Linux, linux tips">
+<meta property="og:url" content="http://huaqianlee.github.io/2020/11/25/Linux/Consolidating-the-foundation-of-Linux-linux-tips/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="Linux TipsRecord the commands that I use more frequently in the form of a memo, and will continue to increase according to usage in the future.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-11-25T14:39:20.000Z">
+<meta property="article:modified_time" content="2020-11-25T14:40:37.261Z">
+<meta property="article:author" content="Andy.Lee">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://huaqianlee.github.io/2020/11/25/Linux/Consolidating-the-foundation-of-Linux-linux-tips/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Consolidating the foundation of Linux, linux tips | Andy.Lee's  Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Andy.Lee's  Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Good good study, day day up !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">109</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/11/25/Linux/Consolidating-the-foundation-of-Linux-linux-tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Consolidating the foundation of Linux, linux tips
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: Nov 25 2020 22:39:20 / Modified: 22:40:37" itemprop="dateCreated datePublished" datetime="2020-11-25T22:39:20+08:00">Nov 25 2020</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Linux-Tips"><a href="#Linux-Tips" class="headerlink" title="Linux Tips"></a>Linux Tips</h1><p>Record the commands that I use more frequently in the form of a memo, and will continue to increase according to usage in the future.</p>
+<a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Commands</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Basis:</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>apt update</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>apt upgrade</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>apt autoremove</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>apt install update-manager-core</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>do-release-upgrade</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>flameshot``flameshot gui</code></td>
+<td>Capture screen</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl + Alt + F1/../F7</code></td>
+<td>Enter or quit terminal</td>
+</tr>
+<tr>
+<td></td>
+<td><code>killall &lt;nautilus&gt;</code></td>
+<td>Kill file manager</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pkill Xorg</code>, <code>restart lightdm</code></td>
+<td>Log out</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>ls -alrRt</code></td>
+<td><code>-r</code>: reverse, <code>-R</code>: Recursive</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cp -ar(R)pv</code></td>
+<td><code>-p</code> keep mode,ownership,timestamps; <code>-r</code> equals <code>-R</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>tail -nf</code></td>
+<td>Output the last n line appended data as the file grows</td>
+</tr>
+<tr>
+<td></td>
+<td><code>more/less</code></td>
+<td>File perusal filter for crt viewing, <code>less</code> opposite of more</td>
+</tr>
+<tr>
+<td></td>
+<td><code>wc</code></td>
+<td>Print newline, word, and byte couts for each file,<code>-l</code> line</td>
+</tr>
+<tr>
+<td></td>
+<td><code>tar -czf/cjf</code></td>
+<td><code>-j</code> bzip2, .tar.bz2, max compression; <code>-z</code> gzip, tar.gz</td>
+</tr>
+<tr>
+<td></td>
+<td><code>$(date &quot;+%Y%m%d-%H%M%S&quot;)</code></td>
+<td>Get the current system time</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sshfs user@ip:/dir name</code></td>
+<td>mount sshfs</td>
+</tr>
+<tr>
+<td></td>
+<td><code>fuser mount -u name</code></td>
+<td>unmount sshfs <name>, <code> umount -l name</code> for busy error</td>
+</tr>
+<tr>
+<td><strong>Supper Mode</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>find . -type f -exec cat &#123;&#125; +</code></td>
+<td><code>find</code> and <code>cat</code> flies recursively</td>
+</tr>
+<tr>
+<td></td>
+<td><code>find . -type f -exec ls &#123;&#125; +</code></td>
+<td><code>find . type f -exec ls &#123;&#125; \;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>find ./ -type f -exec sed -i &#39;s/old/new/g&#39; &#123;&#125; \;</code></td>
+<td>Replace all old in the current directory with new</td>
+</tr>
+<tr>
+<td><strong>Performance:</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>swapon --show</code></td>
+<td>Check swap space</td>
+</tr>
+<tr>
+<td></td>
+<td><code>swapoff -a</code><br/><code>dd if=/dev/zero of=/swapfile bs=1G count=8</code><br/><code>mkswap /swapfile</code><br/><code>swapon /swapfile</code><br/><code>grep SwapTotal /proc/meminfo</code></td>
+<td>Extend swap space to 8G</td>
+</tr>
+<tr>
+<td></td>
+<td><code>free -h</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>top</code>,<code>htop</code></td>
+<td>Interactive process viewer</td>
+</tr>
+<tr>
+<td></td>
+<td><code>vmstat</code></td>
+<td>Report virtual memory statistics</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pmap</code></td>
+<td>Report memory map of a process</td>
+</tr>
+<tr>
+<td></td>
+<td><code>kmemleak</code></td>
+<td>Embeded memeory analysis tool</td>
+</tr>
+<tr>
+<td><strong>Directory:</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>/var/cache/apt/archives/</code></td>
+<td>All archived debs</td>
+</tr>
+<tr>
+<td></td>
+<td><code>hexedit</code>,<code>hex</code></td>
+<td>Hexdump</td>
+</tr>
+<tr>
+<td></td>
+<td><code>xxd</code></td>
+<td>Make a hexdump or do the reverse</td>
+</tr>
+<tr>
+<td></td>
+<td><code>strings -a</code></td>
+<td><code>-a</code> Scan the whole file</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cpio -if</code></td>
+<td>Copy files to and from archives</td>
+</tr>
+<tr>
+<td><strong>Other</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>addgroup lee vboxusers</code></td>
+<td>Make virtual box recognize USB</td>
+</tr>
+<tr>
+<td></td>
+<td><code>*/?/[xyz]/[^xyz]/[!xyz]/[a~z]</code></td>
+<td>Regular expression</td>
+</tr>
+<tr>
+<td></td>
+<td><code>make &gt; /dev/null</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>`while true; do adb shell cat /proc/interrupts</td>
+<td>grep kgsl; sleep 0.5; done`</td>
+</tr>
+<tr>
+<td></td>
+<td><code>adb shell cd sdcard nohup watch -n 5 &#39;cat /sys/bus/cpu/devices/cpu0/online &gt;&gt; online.log&#39; &amp;</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>readelf -h vmlinux</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>nm</code></td>
+<td>List symbols from object files， `nm -n vmlinux</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ldd</code></td>
+<td>Print shared object dependencies, list dynamic dependencies, likes xxx.so</td>
+</tr>
+<tr>
+<td></td>
+<td><code>objdump</code></td>
+<td>Display information from object files, disassembler</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ndisasm -u</code></td>
+<td>The Netwide Disassembler, an 80x86 binary file disassembler</td>
+</tr>
+<tr>
+<td></td>
+<td><code>c++filt</code></td>
+<td>Demangle C++ and Java symbols</td>
+</tr>
+<tr>
+<td></td>
+<td><code>hexdump, hd</code></td>
+<td>ASCII, decimal, hexadecimal, octal dump， <code>hexdump -s 0x18408a8 -n 1024 vmlinux</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>file</code></td>
+<td>Determine file type, <code>file *.img, *.mbn, *.bin ...</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>readelf</code></td>
+<td>Displays information about ELF files,`readelf -hlSVAI vmlinux</td>
+</tr>
+<tr>
+<td></td>
+<td><code>objdump</code></td>
+<td>Display information from object(files) <code>xxx-objdump -afphG vmlinux</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>objcopy</code></td>
+<td>Copy and tranlate objects, eg:Generate zImage with vimlinux</td>
+</tr>
+<tr>
+<td></td>
+<td><code>[android-unpackbootimg](https://github.com/anestisb/android-unpackbootimg)  -i boot.img -o boot_img/</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>python3 [extract-dtb.py](https://github.com/PabloCastellano/extract-dtb)</code> kernel</td>
+<td>Get dts from kernel</td>
+</tr>
+<tr>
+<td></td>
+<td><code>dtc -I dtb -O dts ... -o ...</code></td>
+<td>Disassembler</td>
+</tr>
+<tr>
+<td></td>
+<td><code>od</code></td>
+<td>Dump files in octal and other formats</td>
+</tr>
+<tr>
+<td></td>
+<td><code>vim -b file</code> + <code>:%!xxd -u</code> + <code>:%!xxd -r</code></td>
+<td>Edit ELF file, <code>-u</code> to hex, <code>-r</code> to binary</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ltrace</code></td>
+<td>A library call tracer</td>
+</tr>
+<tr>
+<td></td>
+<td><code>strace</code></td>
+<td>Trace system calls and signals</td>
+</tr>
+<tr>
+<td></td>
+<td><code>gdb</code></td>
+<td>The GNU debugger</td>
+</tr>
+<tr>
+<td></td>
+<td><code>strip</code></td>
+<td>Discard symbols from object files</td>
+</tr>
+<tr>
+<td></td>
+<td><code>lsof</code></td>
+<td>List open files opened by processes</td>
+</tr>
+<tr>
+<td></td>
+<td><code>fuser</code></td>
+<td>Identify processes using files or sockets</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/proc</code></td>
+<td>Process information pseudo-filesystem</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ELF</code></td>
+<td>Format of Executable and Linking Format(ELF) files</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/19/Linux/Consolidating-the-foundation-of-Linux-vim-tips/" rel="next" title="Consolidating the foundation of Linux, vim tips">
+      Consolidating the foundation of Linux, vim tips <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-Tips"><span class="nav-number">1.</span> <span class="nav-text">Linux Tips</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy.Lee"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Andy.Lee</p>
+  <div class="site-description" itemprop="description">Just need to enjoy life.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huaqianlee@gmail.com" title="E-Mail → mailto:huaqianlee@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/huaqianlee" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/huaqianlee" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/huaqianlee" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/huaqianlee" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

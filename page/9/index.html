@@ -119,7 +119,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">107</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">109</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -129,7 +129,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">28</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">29</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -189,6 +189,174 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/07/19/Android/Android%E4%B8%ADadb-Android-Debug-Bridge-%E5%91%BD%E4%BB%A4%E7%9A%84%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/07/19/Android/Android%E4%B8%ADadb-Android-Debug-Bridge-%E5%91%BD%E4%BB%A4%E7%9A%84%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">Android中adb(Android Debug Bridge)命令的用法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Jul 19 2015 19:29:58" itemprop="dateCreated datePublished" datetime="2015-07-19T19:29:58+08:00">Jul 19 2015</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Aug 22 2015 0:01:03" itemprop="dateModified" datetime="2015-08-22T00:01:03+08:00">Aug 22 2015</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>　　昨天写Android日志系统相关博客时发觉自己对adb命令认知十分不够，所以特意去<a target="_blank" rel="noopener" href="http://developer.android.com/tools/help/adb.html">http://developer.android.com/tools/help/adb.html</a>学习了一下,今天准备按照自己的理解加以修改总结并整理出一篇博文。</p>
+<p>##概览<br>　　adb是Android Debug Bridge的简写，按字面意思理解就是在开发者和Android之间搭建的一个debug桥。adb是一个连接仿真实例或者Android设备的命令行工具，是一个客服端-服务器模式的程序，包括如下三部分：<br>　<br>　　1. 一个运行在开发用的Android手机或者仿真器上面的client，我们可以通过adb命令调用client。其他像ADT插件和DDMS也会创建client。<br>　<br>　　2. 一个运行在开发用的Android手机或者仿真器后台的server，这个server负责管理本设备上运行的client和daemon(守护进程)。<br>　<br>　　3. 一个在每个仿真器或者Android设备后台运行的daemon。</p>
+<blockquote>
+<p>adb tool 可以再<sdk>/platform-tools/中找到　</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/07/19/Android/Android%E4%B8%ADadb-Android-Debug-Bridge-%E5%91%BD%E4%BB%A4%E7%9A%84%E7%94%A8%E6%B3%95/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/" class="post-title-link" itemprop="url">怎么抓取Android日志文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Jul 19 2015 11:43:04" itemprop="dateCreated datePublished" datetime="2015-07-19T11:43:04+08:00">Jul 19 2015</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Aug 1 2016 23:18:06" itemprop="dateModified" datetime="2016-08-01T23:18:06+08:00">Aug 1 2016</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>　　<a href="http://huaqianlee.github.io/2015/07/18/Android/Android-Logging-system-Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">Android日志系统详解</a><br>　　<a href="http://huaqianlee.github.io/2015/07/18/Android/%E6%80%8E%E4%B9%88%E7%94%A8Android%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%8E%BB%E8%B0%83%E8%AF%95-How-to-debug-with-Android-logging/">How to debug with Android logging</a><br>　　<a href="http://huaqianlee.github.io/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/">怎么抓取Android日志文件</a></p>
+<p>　　前两篇blog分别介绍了Android logging系统及编程时怎么应用，关于kernel中的log系统，前面只是大概提及了一下，下次再详细分析。相信大家都知道调试时需要打开USB调试模式，接下来就分析一下怎么抓取日志文件。</p>
+<p>##logcat命令详解<br>　　logcat是最常用的命令之一，其语法如下；</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/07/19/Android/%E6%80%8E%E4%B9%88%E6%8A%93%E5%8F%96Android%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-How-to-get-android-log-file/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -880,179 +1048,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/06/24/Android/smb135x-charger-driver/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/06/24/Android/smb135x-charger-driver/" class="post-title-link" itemprop="url">高通 smb135x charger 驱动分析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Jun 24 2015 21:52:49" itemprop="dateCreated datePublished" datetime="2015-06-24T21:52:49+08:00">Jun 24 2015</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Nov 24 2017 22:04:21" itemprop="dateModified" datetime="2017-11-24T22:04:21+08:00">Nov 24 2017</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="analysis-log"><a href="#analysis-log" class="headerlink" title="analysis log"></a>analysis log</h2><!--mroe-->
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;3&gt;[52515.763039] __smb135x_write: Writing 0x41=0x06</span><br><span class="line">&lt;3&gt;[52515.774459] __smb135x_write: Writing 0x41=0x26</span><br><span class="line">函数调用:    </span><br><span class="line">static int __smb135x_write(struct smb135x_chg *chip, int reg,u8 val)</span><br><span class="line">-&gt;smb135x_write(struct smb135x_chg *chip, int reg,u8 val) / smb135x_masked_write(struct smb135x_chg *chip, int reg,	u8 mask, u8 val)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;3&gt;[52515.777868] fast_chg_handler: rt_stat = 0x00</span><br><span class="line">&lt;3&gt;[52515.782184] usbin_uv_handler: chip-&gt;usb_present = 1 usb_present = 0</span><br><span class="line">&lt;3&gt;[52515.788369] handle_usb_removal: setting usb psy <span class="built_in">type</span> = 0</span><br><span class="line">&lt;3&gt;[52515.793689] handle_usb_removal: setting usb psy present = 0</span><br><span class="line">&lt;3&gt;[52515.799241] power_ok_handler: rt_stat = 0x00</span><br><span class="line">&lt;3&gt;[52515.803472] src_detect_handler: chip-&gt;usb_present = 0 usb_present = 0</span><br><span class="line">函数调用: </span><br><span class="line">fast_chg_handler(struct smb135x_chg *chip, u8 rt_stat)</span><br><span class="line">usbin_uv_handler(struct smb135x_chg *chip, u8 rt_stat)</span><br><span class="line">handle_usb_removal(struct smb135x_chg *chip)</span><br><span class="line">(-&gt;usbin_uv_handler(struct smb135x_chg *chip, u8 rt_stat)/usbin_ov_handler(struct smb135x_chg *chip, u8 rt_stat)/determine_initial_status(struct smb135x_chg *chip))</span><br><span class="line">static struct irq_handler_info handlers[]= </span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">			&#123;</span><br><span class="line">				.name		= <span class="string">&quot;fast_chg&quot;</span>,</span><br><span class="line">				.smb_irq	= fast_chg_handler,</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				.name		= <span class="string">&quot;usbin_uv&quot;</span>,</span><br><span class="line">				.smb_irq	= usbin_uv_handler,</span><br><span class="line">			&#125;,</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line">-&gt;smb135x_irq_read(struct smb135x_chg *chip)</span><br><span class="line">/static irqreturn_t smb135x_chg_stat_handler(int irq, void *dev_id)</span><br><span class="line">-&gt;smb135x_chg_stat_handler(int irq, void *dev_id)</span><br><span class="line">-&gt;smb135x_main_charger_probe(struct i2c_client *client,const struct i2c_device_id *id)</span><br><span class="line"></span><br><span class="line">&lt;3&gt;[52515.809926] smb135x_chg_stat_handler: handler count = 4</span><br><span class="line">&lt;3&gt;[52515.815104] smb135x_chg_stat_handler: batt psy changed</span><br><span class="line">&lt;3&gt;[52515.820247] smb135x_chg_stat_handler: usb psy changed</span><br><span class="line">&lt;3&gt;[52515.825260] smb135x_chg_stat_handler: dc psy changed</span><br><span class="line">函数调用:</span><br><span class="line">smb135x_chg_stat_handler(int irq, void *dev_id)</span><br><span class="line">smb135x_external_power_changed(struct power_supply *psy)</span><br><span class="line">-&gt;  smb135x_main_charger_probe(struct i2c_client *client,const struct i2c_device_id *id)/(force_irq_set(void *data, u64 val)/smb135x_resume(struct device *dev))</span><br><span class="line"></span><br><span class="line">&lt;6&gt;[52515.836445] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_DISCONNECT_EVENT received</span><br><span class="line">函数调用:</span><br><span class="line">         kernel/drivers/usb/chipidea/ci13xxx_msm.c:186:		dev_info(dev, <span class="string">&quot;CI13XXX_CONTROLLER_DISCONNECT_EVENT received\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">&lt;3&gt;[52515.837146] smb135x_get_prop_batt_status: STATUS_4_REG=80</span><br><span class="line">&lt;3&gt;[52515.841747] smb135x_get_prop_batt_status: STATUS_4_REG=80</span><br><span class="line">函数调用:</span><br><span class="line">smb135x_get_prop_batt_status(struct smb135x_chg *chip)</span><br><span class="line">-&gt;smb135x_battery_get_property(struct power_supply *psy,enum power_supply_property prop,union power_supply_propval *val)/</span><br><span class="line">     smb135x_parallel_get_property(...)</span><br><span class="line"></span><br><span class="line">&lt;3&gt;[52515.847405] smb135x_external_power_changed: current_limit = 0</span><br><span class="line">函数调用:</span><br><span class="line">        smb135x_external_power_changed(struct power_supply *psy)</span><br><span class="line"></span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
-<h2 id="driver-architecture"><a href="#driver-architecture" class="headerlink" title="driver architecture"></a>driver architecture</h2><h3 id="the-important-structure"><a href="#the-important-structure" class="headerlink" title="the important structure"></a>the important structure</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">static struct i2c_driver smb135x_charger_driver = &#123;</span><br><span class="line">	.driver		= &#123;</span><br><span class="line">		.name		= <span class="string">&quot;smb135x-charger&quot;</span>,</span><br><span class="line">		.owner		= THIS_MODULE,</span><br><span class="line">		.of_match_table	= smb135x_match_table,    // get the dtsi profile</span><br><span class="line">		.pm		= &amp;smb135x_pm_ops,</span><br><span class="line">	&#125;,</span><br><span class="line">	.probe		= smb135x_charger_probe,</span><br><span class="line">	.remove		= smb135x_charger_remove,</span><br><span class="line">	.id_table	= smb135x_charger_id,</span><br><span class="line">&#125;;</span><br><span class="line">           /*represent an I2C slave device*/</span><br><span class="line">struct i2c_client &#123;</span><br><span class="line">	unsigned short flags;		/* div., see below		*/</span><br><span class="line">	unsigned short addr;		/* chip address - NOTE: 7bit	*/</span><br><span class="line">					/* addresses are stored <span class="keyword">in</span> the	*/</span><br><span class="line">					/* _LOWER_ 7 bits		*/</span><br><span class="line">	char name[I2C_NAME_SIZE];</span><br><span class="line">	struct i2c_adapter *adapter;	/* the adapter we sit on	*/</span><br><span class="line">	struct i2c_driver *driver;	/* and our access routines	*/</span><br><span class="line">	struct device dev;		/* the device structure		*/</span><br><span class="line">	int irq;			/* irq issued by device		*/</span><br><span class="line">	struct list_head detected;</span><br><span class="line">&#125;;</span><br><span class="line">struct i2c_device_id &#123;</span><br><span class="line">	char name[I2C_NAME_SIZE];</span><br><span class="line">	kernel_ulong_t driver_data;	/* Data private to the driver */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct device_node &#123;</span><br><span class="line">	const char *name;</span><br><span class="line">	const char *<span class="built_in">type</span>;</span><br><span class="line">	phandle phandle;</span><br><span class="line">	const char *full_name;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line">struct smb135x_chg &#123;</span><br><span class="line">	struct i2c_client		*client;</span><br><span class="line">	struct device			*dev;</span><br><span class="line">	struct mutex			read_write_lock;</span><br><span class="line">        ...</span><br><span class="line">	/* psy */</span><br><span class="line">	struct power_supply		*usb_psy;</span><br><span class="line">	int				usb_psy_ma;</span><br><span class="line">	struct power_supply		batt_psy;</span><br><span class="line">	struct power_supply		dc_psy;</span><br><span class="line">	struct power_supply		parallel_psy;</span><br><span class="line">	struct power_supply		*bms_psy;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line">struct power_supply &#123;</span><br><span class="line">	const char *name;</span><br><span class="line">	enum power_supply_type <span class="built_in">type</span>;</span><br><span class="line">	enum power_supply_property *properties;</span><br><span class="line">	...</span><br><span class="line">        int (*get_property)(...)</span><br><span class="line">        int (*set_property)(...)</span><br><span class="line">        ...       /* private */      struct device *dev;</span><br><span class="line">      ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="driver-analysis"><a href="#driver-analysis" class="headerlink" title="driver analysis"></a>driver analysis</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注册驱动:</span></span><br><span class="line">	<span class="keyword">if</span> (is_parallel_charger(client))</span><br><span class="line">	        smb135x_parallel_charger_probe(client, id);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		smb135x_main_charger_probe(client, id); // 驱动注册入口函数</span><br><span class="line">                chip = devm_kzalloc(&amp;client-&gt;dev, sizeof(*chip), GFP_KERNEL);</span><br><span class="line">	        chip-&gt;client = client;</span><br><span class="line">	        chip-&gt;dev = &amp;client-&gt;dev;   // get the dev</span><br><span class="line">                smb_parse_dt(chip)     // parse DT nodes</span><br><span class="line">      usb_psy = power_supply_get_by_name(<span class="string">&quot;usb&quot;</span>); // get usb Supply</span><br><span class="line">    struct device *dev = class_find_device(power_supply_class, NULL, name,power_supply_match_device_by_name);</span><br><span class="line">    dev_get_drvdata(dev)</span><br><span class="line">     INIT_DELAYED_WORK(&amp;chip-&gt;wireless_insertion_work,wireless_insertion_work);</span><br><span class="line">     smb135x_read(chip, CFG_4_REG, &amp;reg) // probe the device to check <span class="keyword">if</span> its actually connected</span><br><span class="line">     i2c_set_clientdata(client, chip);  // client-&gt;...-&gt;driver_datat = chip</span><br><span class="line">     smb135x_chip_version_and_revision(chip) // judge the chip version(smb1357/1358....)</span><br><span class="line">     dump_regs(chip) // <span class="built_in">read</span> and display the register<span class="string">&#x27;s value</span></span><br><span class="line"><span class="string">     smb135x_regulator_init(chip) // initialize regulator(稳压器)</span></span><br><span class="line"><span class="string">     smb135x_hw_init(chip) // initialize hardware(初始化芯片各种参数)</span></span><br><span class="line"><span class="string">     determine_initial_status(chip) //determine init status</span></span><br><span class="line"><span class="string">     .../* initialize Battery power_supply*/</span></span><br><span class="line"><span class="string">     chip-&gt;batt_psy.get_property	= smb135x_battery_get_property;</span></span><br><span class="line"><span class="string">     chip-&gt;batt_psy.set_property	= smb135x_battery_set_property;</span></span><br><span class="line"><span class="string">     chip-&gt;batt_psy.external_power_changed = smb135x_external_power_changed;   // register external power  update online function</span></span><br><span class="line"><span class="string">     chip-&gt;batt_psy.property_is_writeable = smb135x_battery_is_writeable;</span></span><br><span class="line"><span class="string">     power_supply_register(chip-&gt;dev, &amp;chip-&gt;batt_psy) // register Battery power Supply</span></span><br><span class="line"><span class="string">     ....// get the profile and register the function</span></span><br><span class="line"><span class="string">     power_supply_register(chip-&gt;dev, &amp;chip-&gt;dc_psy); // register dc psy  </span></span><br><span class="line"><span class="string">     devm_request_threaded_irq(struct device *dev, unsigned int irq, irq_handler_t handler, irq_handler_t thread_fn,unsigned long irqflags, </span></span><br><span class="line"><span class="string">                                                         const char *devname, void *dev_id)  // allocate(分配) an interrupt line for a managed device</span></span><br><span class="line"><span class="string">               enable_irq_wake(client-&gt;irq); // control irq power management wakeup</span></span><br><span class="line"><span class="string">               create_debugfs_entries(chip); // create debug </span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/06/24/Android/qaulcomm-bms-driver-analysis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/" class="post-title-link" itemprop="url">高通电池管理系统（BMS）驱动分析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Jun 24 2015 21:52:24" itemprop="dateCreated datePublished" datetime="2015-06-24T21:52:24+08:00">Jun 24 2015</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>File: qpnp-vm-bms.c -  Battery monitor system　</p>
-</blockquote>
-<h2 id="简要"><a href="#简要" class="headerlink" title="简要"></a>简要</h2><p>BMS(Battery Monitoring System)主要提供如下功能：</p>
-<ul>
-<li><p>通过一定算法计算SOC(state of charge电量状态) or 剩余电量.</p>
-</li>
-<li><p>正在使用的电池电压, 开漏电压(OCV).</p>
-</li>
-</ul>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/qcom/bms_1.png" alt="temp"></p>
-<h2 id="硬件架构"><a href="#硬件架构" class="headerlink" title="硬件架构"></a>硬件架构</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/06/24/Android/qaulcomm-bms-driver-analysis/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1124,7 +1119,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-count">109</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1137,7 +1132,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
