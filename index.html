@@ -119,7 +119,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">109</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">111</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -129,7 +129,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">29</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">30</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -299,7 +299,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Nov 25 2020 22:42:29" itemprop="dateModified" datetime="2020-11-25T22:42:29+08:00">Nov 25 2020</time>
+                <time title="Modified: Dec 6 2020 15:20:52" itemprop="dateModified" datetime="2020-12-06T15:20:52+08:00">Dec 6 2020</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -714,6 +714,269 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/10/10/Android/performance-debug-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/10/Android/performance-debug-guide/" class="post-title-link" itemprop="url">performance_debug_guide</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Oct 10 2020 23:17:46" itemprop="dateCreated datePublished" datetime="2020-10-10T23:17:46+08:00">Oct 10 2020</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jan 10 2021 23:31:28" itemprop="dateModified" datetime="2021-01-10T23:31:28+08:00">Jan 10 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>俗话说“雨过留痕，雁过留声”，之前因为工作需要折腾了小几个月的性能 BUG，还是得留下一点东西，这是第一篇：Android 性能调试手册，这篇文章简单聊聊工作中应该怎么进行性能分析。因为没有深入研究 Performance 相关内容，所以保留出错的权利。</p>
+<h1 id="0-写在开头"><a href="#0-写在开头" class="headerlink" title="0. 写在开头"></a>0. 写在开头</h1><p>在我司处理 Performance 问题时，大多数情况不会像顶级大厂那样优化每一帧，尽量榨干每一个硬件的性能。因为没有前人提供经验，全是自己总结的，如果存在有失偏颇的地方，你也只能看着。我理解的主要处理方式如下：</p>
+<ul>
+<li><p>第一种，推不解。</p>
+<ul>
+<li>gaps 小， 个人经验是 10% 以内即可以尝试推不解，譬如：问题机 Chrome 启动时间为 800 ms， 对比机为 750 ms。</li>
+<li>分析出时间消耗，列出与对比机的对比， 详细阐述差分部分，一般来说大部分差分是原生代码引起，或者 gaps 很小。</li>
+</ul>
+</li>
+<li><p>第二种嘛，当然就是想办法解决或优化了。</p>
+</li>
+</ul>
+<h1 id="1-怎么开始？"><a href="#1-怎么开始？" class="headerlink" title="1. 怎么开始？"></a>1. 怎么开始？</h1><p>针对任何性能问题，我觉得第一步都先需要做如下三个确认：</p>
+<ol start="0">
+<li>确认问题现象，最好自己复现一次。</li>
+<li>确认有没有大量 crash 发生。</li>
+<li>查看 kernel footprint（config）， 确认是否使用 perf config： msmxxx-perf_defconfig。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/10/Android/performance-debug-guide/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/10/10/Android/breakdown-from-touch-input-to-drawing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/10/Android/breakdown-from-touch-input-to-drawing/" class="post-title-link" itemprop="url">APP 启动，触摸事件和 UI 绘制的简单分析示例</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Oct 10 2020 23:17:21" itemprop="dateCreated datePublished" datetime="2020-10-10T23:17:21+08:00">Oct 10 2020</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jan 10 2021 23:30:55" itemprop="dateModified" datetime="2021-01-10T23:30:55+08:00">Jan 10 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>“雨过留痕，雁过留声”的第二篇：APP 启动，触摸事件和 UI 绘制的简单分析示例，此文通过 systrace 分析一个示例 APP 的启动、触摸事件和 UI 绘制的流程和时间消耗。本文的示例 APP （<a target="_blank" rel="noopener" href="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/SimpleApplication.apk">SimpleApplication.apk</a>）只有一个简单的按钮， 点击按钮时会改变屏幕的颜色。同样因为没有深入研究 Performance 相关内容，所以保留出错的权利。</p>
+<blockquote>
+<p>如果对第一篇感兴趣，请查看： <a href="http://huaqianlee.github.io/2020/10/10/Android/performance_debug_guide.html">Android 性能调试手册</a>.</p>
+</blockquote>
+<h1 id="0-写在开头"><a href="#0-写在开头" class="headerlink" title="0. 写在开头"></a>0. 写在开头</h1><p>我一开始看到 systrace 文件时，是一脸懵逼的，所以在开始正文之前先简单说一下 systrace 文件中的一些基本信息，如下：</p>
+<ul>
+<li><code>Frames</code>: 一个圆圈代表一帧。  <ul>
+<li>绿色：正常；</li>
+<li>黄色、红色： 异常，如卡顿、掉帧(Jank) 等，可能是它的渲染时间超过了 16.67ms（60fps）。</li>
+<li>点击圆圈可查看详细信息</li>
+</ul>
+</li>
+<li><code>Alerts</code>: 右侧标签,跟踪记录中出现的问题以及这些问题导致出现卡顿的频率</li>
+<li><code>system_server  iq</code>: 第一帧的触发</li>
+<li><code>gfx3d_clk</code> : GPU 频率</li>
+<li><code>iq in systemsever</code> : 触发中断</li>
+<li><code>bindApplication, activityStart ...</code>： 表示冷启动， 热启动不会有这些信息。</li>
+<li><code>surfaceflinger</code>-&gt;<code>UI Thread</code>-&gt;<code>HIDL::IComposerClient:setPowerMode_2_2:client</code>: 代表 LCD 上电时间  <blockquote>
+<p>一般使用 Chrome 打开 systrace.html， 右上角的 <code>？</code>  也可以提供一些基本的帮助</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="1-获取-systrace"><a href="#1-获取-systrace" class="headerlink" title="1. 获取 systrace"></a>1. 获取 systrace</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a. python systrace.py gfx input view <span class="built_in">sched</span> am wm dalvik freq idle power video app -b 40960 -t 10 -o traceout.html</span><br><span class="line"></span><br><span class="line">Explaination of these categories:</span><br><span class="line">gfx - Graphics</span><br><span class="line">input - Input</span><br><span class="line">view - View System</span><br><span class="line">wm - Window Manager</span><br><span class="line">am - Activity Manager</span><br><span class="line">hal - Hardware Modules</span><br><span class="line">res - Resource Loading</span><br><span class="line">dalvik - Dalvik VM</span><br><span class="line">power - Power Management</span><br><span class="line"><span class="built_in">sched</span> - CPU Scheduling	</span><br><span class="line">freq - CPU Frequency</span><br><span class="line">idle - CPU Idle</span><br><span class="line"></span><br><span class="line">b. Motion: Click icon of SimpleApplication to open it, click first time to change background as white, click sencond time to change background as black.</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-找到点击事件"><a href="#2-找到点击事件" class="headerlink" title="2. 找到点击事件"></a>2. 找到点击事件</h1><p>查看 <code>system_server</code> 的 <code>iq</code> 去定位点击事件发生的时间，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image1.png" alt="image">                                                        </p>
+<p>查看 InputResponse 确认点击事件，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image2.png" alt="image"></p>
+<h1 id="3-查看-UI-thread-和-Frames"><a href="#3-查看-UI-thread-和-Frames" class="headerlink" title="3. 查看 UI thread 和 Frames"></a>3. 查看 UI thread 和 Frames</h1><p>粗略看一下 <code>Frames</code>，发现有一个红色的 frame，红色表示 jank， 即卡顿。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image3.png" alt="image"></p>
+<p>上诉红点也就是代表帧率少于了 60 fps，我们需要去点击红色的圆点查看详细信息，并查看下 <code>UI thread</code>，看看是否有无用的耗时或者阻塞发生。此案例中有 11 ms 左右的 sleep，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image4.png" alt="image"></p>
+<h1 id="4-查看线程状态"><a href="#4-查看线程状态" class="headerlink" title="4. 查看线程状态"></a>4. 查看线程状态</h1><h2 id="4-1-Orange-Uninterruptible-sleep-I-O-Block"><a href="#4-1-Orange-Uninterruptible-sleep-I-O-Block" class="headerlink" title="4.1 Orange: Uninterruptible sleep, I/O Block"></a>4.1 Orange: Uninterruptible sleep, I/O Block</h2><p>此状态表示线程正在等待硬盘 I/O 操作完成，如果有太多的橙色阻塞状态，通常存在低内存的问题。此案例中阻塞状态很短，判断为正常状态，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image5.png" alt="image"></p>
+<h2 id="4-2-Blue-runnable"><a href="#4-2-Blue-runnable" class="headerlink" title="4.2 Blue: runnable"></a>4.2 Blue: runnable</h2><p>表明线程处于可运行状态，等待 CPU 调度。如果线程处于可运行状态时间太长，通常 CPU 忙于调度，需要查看这些时间 CPU 忙于哪些任务。比较常见的问题场景如下：</p>
+<ul>
+<li>后台任务太多。</li>
+<li>CPU 被限频。</li>
+<li>任务运行于特定的 cpuset，而此 CPU 已经满载。</li>
+</ul>
+<p>此案例中处于可运行状态的时间很短，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image6.png" alt="image"></p>
+<h2 id="4-3-Green-running"><a href="#4-3-Green-running" class="headerlink" title="4.3 Green: running"></a>4.3 Green: running</h2><p>接下来查看下线程的运行的时间，如果耗时异常，通常需要注意如下场景：</p>
+<ul>
+<li>是否被限制频率。</li>
+<li>线程跑在大核上还是小核上。</li>
+<li>是否频繁切换线程状态。</li>
+<li>此线程是否运行在错误的核上面。</li>
+</ul>
+<p>此案例中线程运行在大核上，即频率最高的 CPU7，亦无其他异常，如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image7.png" alt="image"></p>
+<p>##　4.4 White: Sleeping</p>
+<p>此状态表示线程无事可做，处于休眠状态，一个概率比较大的情况是被　mutex 阻塞。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image8.png" alt="image"></p>
+<h2 id="4-5-Summary"><a href="#4-5-Summary" class="headerlink" title="4.5 Summary"></a>4.5 Summary</h2><p>如上所示，我们可以看到大部分时间是消耗在运行状态，且没有频繁切换状态，所以这部分问题不是太大，当然如果想要追求更佳的性能，我们可以针对上面说的场景做更深入的调查。</p>
+<h1 id="5-启动时间"><a href="#5-启动时间" class="headerlink" title="5. 启动时间"></a>5. 启动时间</h1><p>从系统角度来看，在 <code>Activity</code> 完成 <code>onCreate/onStart/onResume</code>阶段后，<code>ViewRootImpl</code> 将调用两次 <code>performTraversals</code> 去初始化 Egl、measure、layout、draw等，最后完成界面显示。</p>
+<p>个人认为很难在 systrace 中获得准确的 APP 启动时间，但是我们可以在 activityResume 之后选择一个点来估算相对准确的时间。如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image9.png" alt="image"></p>
+<p>Launcher 调用 startingWindow 去等待第一帧的绘制，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image10.png" alt="image"></p>
+<p>在如下指定位置，第一帧绘制已经完成。                                        </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image11.png" alt="image"></p>
+<p>在 SystemSever 中查看绘制流程。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image12.png" alt="image"></p>
+<h1 id="6-systrace-中的-input"><a href="#6-systrace-中的-input" class="headerlink" title="6. systrace 中的 input"></a>6. systrace 中的 input</h1><p>InputReader 获取 input 事件，然后移交给 InputDispatcher. InputDispatcher 再将输入事件传递给对应的 App，然后请求 Vsync 去绘制第一帧。</p>
+<ul>
+<li>InputReader 负责从 EventHub 读取 Input 事件，然后将其移交给 InputDispatcher 进行事件分发。</li>
+<li>InputDispatcher 打包并分发事件。</li>
+<li>OutboundQueue 存有将分派到相应 AppConnection 的事件</li>
+<li>WaitQueue 记录已分派到 AppConnection，但 App 仍在处理尚未返回处理成功的事件。 如果主线程 freezed 而无法处理输入事件，则 WaitQueue 的值将递增。</li>
+<li>PendingInputEventQueue 记录应用程序需要处理的 Input 事件。</li>
+<li>deliveryInputEvent 标识被输入事件唤醒的 App UI 线程。</li>
+</ul>
+<h2 id="6-1-Input-response"><a href="#6-1-Input-response" class="headerlink" title="6.1 Input response"></a>6.1 Input response</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image13.png" alt="image"></p>
+<h2 id="6-2-OutboundQueue-and-WaitQueue"><a href="#6-2-OutboundQueue-and-WaitQueue" class="headerlink" title="6.2 OutboundQueue and WaitQueue"></a>6.2 OutboundQueue and WaitQueue</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image14.png" alt="image"></p>
+<h2 id="6-3-Native-threads-which-Reads-and-dispatchs-input-event"><a href="#6-3-Native-threads-which-Reads-and-dispatchs-input-event" class="headerlink" title="6.3 Native threads which Reads and dispatchs input event"></a>6.3 Native threads which Reads and dispatchs input event</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image15.png" alt="image"></p>
+<h2 id="6-4-PendingInputEventQueue"><a href="#6-4-PendingInputEventQueue" class="headerlink" title="6.4 PendingInputEventQueue"></a>6.4 PendingInputEventQueue</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image16.png" alt="image"><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image17.png" alt="image"></p>
+<h2 id="7-查看-CPU-信息"><a href="#7-查看-CPU-信息" class="headerlink" title="7. 查看 CPU 信息"></a>7. 查看 CPU 信息</h2><p>主要检查 CPU 使用率、C-stage、时钟频率和时钟频率的限制，以及每个核正在跑什么应用。SimpleApplication 主要运行在大核 cpu7 上，有时运行在中核上， 都是最大频率。所以 CPU 部分没有什么问题。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image18.png" alt="image"></p>
+<h1 id="8-第一次点击事件"><a href="#8-第一次点击事件" class="headerlink" title="8. 第一次点击事件"></a>8. 第一次点击事件</h1><p>前面主要是通过全局视图和启动视图来分析 systrace，下面将分析单击事件。但是我将跳过与前面类似的分析步骤， 只重点查看一些可能会影响 UI 切换速度的差异点。</p>
+<h2 id="8-1-CPU-情况"><a href="#8-1-CPU-情况" class="headerlink" title="8.1 CPU 情况"></a>8.1 CPU 情况</h2><p>SimpleApplication 在现阶段也主要运行在大核 cpu7 上且以最大频率运行，但是部分时间运行在限频状态下的大核和中核，如果需要对其进行优化，这是需要考虑的一点。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image19.png" alt="image"></p>
+<h2 id="8-2-UI-thread"><a href="#8-2-UI-thread" class="headerlink" title="8.2 UI thread"></a>8.2 UI thread</h2><p>第一次单击时睡眠太久，也许这是一个可以优化的点。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image20.png" alt="image"></p>
+<h1 id="9-结论"><a href="#9-结论" class="headerlink" title="9. 结论"></a>9. 结论</h1><h2 id="9-1-启动阶段"><a href="#9-1-启动阶段" class="headerlink" title="9.1  启动阶段"></a>9.1  启动阶段</h2><ul>
+<li>存在卡顿，可能需要查看下是否存在异常的耗时或阻塞的代码。</li>
+<li>UI 线程的状态还不错，如果要提高性能，可以尝试检查下内存状态和后台任务。</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image21.png" alt="image"></p>
+<h2 id="9-2-第一次点击事件"><a href="#9-2-第一次点击事件" class="headerlink" title="9.2 第一次点击事件"></a>9.2 第一次点击事件</h2><ul>
+<li>CPU 频率有在某些阶段被限制，我们可以尝试对其进行优化。</li>
+<li>第一次点击时睡眠太久，也许这是一个可以优化的地方。 为了对其进行优化，我们需要检查 SimpleApplication 的代码，是否被互斥锁阻塞，等等。</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image22.png" alt="image"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -881,175 +1144,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/03/07/Git/Some-knowledge-about-git-local-git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/" class="post-title-link" itemprop="url">Oh, the Git! - local .git</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Mar 7 2020 18:42:33" itemprop="dateCreated datePublished" datetime="2020-03-07T18:42:33+08:00">Mar 7 2020</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Oct 21 2020 22:59:37" itemprop="dateModified" datetime="2020-10-21T22:59:37+08:00">Oct 21 2020</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><code>.git</code> directory acts a major role in <code>git</code> VCS. We can do local verson management directly depended on <code>.git</code> directory. I will parse <code>.git</code> in current topic. </p>
-<h1 id="Directory-tree"><a href="#Directory-tree" class="headerlink" title="Directory tree"></a>Directory tree</h1><p>First, I created a project and managed it through <code>git</code>, its directory tree is as follows:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── doc</span><br><span class="line">│   └── README.md</span><br><span class="line">├── .git</span><br><span class="line">│   ├── COMMIT_EDITMSG</span><br><span class="line">│   ├── config</span><br><span class="line">│   ├── description</span><br><span class="line">│   ├── HEAD</span><br><span class="line">│   ├── hooks</span><br><span class="line">│   │   ├── applypatch-msg.sample</span><br><span class="line">│   │   ├── commit-msg.sample</span><br><span class="line">│   │   ├── fsmonitor-watchman.sample</span><br><span class="line">│   │   ├── post-update.sample</span><br><span class="line">│   │   ├── pre-applypatch.sample</span><br><span class="line">│   │   ├── pre-commit.sample</span><br><span class="line">│   │   ├── prepare-commit-msg.sample</span><br><span class="line">│   │   ├── pre-push.sample</span><br><span class="line">│   │   ├── pre-rebase.sample</span><br><span class="line">│   │   ├── pre-receive.sample</span><br><span class="line">│   │   └── update.sample</span><br><span class="line">│   ├── index</span><br><span class="line">│   ├── info</span><br><span class="line">│   │   └── exclude</span><br><span class="line">│   ├── logs</span><br><span class="line">│   │   ├── HEAD</span><br><span class="line">│   │   └── refs</span><br><span class="line">│   │       └── heads</span><br><span class="line">│   │           ├── dev</span><br><span class="line">│   │           ├── dev-1.0</span><br><span class="line">│   │           └── master</span><br><span class="line">│   ├── objects</span><br><span class="line">│   │   ├── 02</span><br><span class="line">│   │   │   ├── 40351d75b3f451e0ec4b399c38c3758f007152</span><br><span class="line">│   │   │   └── d8eae705ebf203142fd2f381d3b216dde2b28f</span><br><span class="line">|   |   |...</span><br><span class="line">│   │   ├── c8</span><br><span class="line">│   │   │   └── ff9c55ce2651d8380a14bee5b43b37e14fa7fc</span><br><span class="line">│   │   ├── f0</span><br><span class="line">│   │   │   └── 45488f3fa9a350ac01f48f2b000fe51a53f5aa</span><br><span class="line">│   │   ├── info</span><br><span class="line">│   │   └── pack</span><br><span class="line">│   ├── ORIG_HEAD</span><br><span class="line">│   └── refs</span><br><span class="line">│       ├── heads</span><br><span class="line">│       │   ├── dev</span><br><span class="line">│       │   ├── dev-1.0</span><br><span class="line">│       │   └── master</span><br><span class="line">│       └── tags</span><br><span class="line">│           └── kikoff_tag</span><br><span class="line">├── img</span><br><span class="line">│   └── check.png</span><br><span class="line">├── lib</span><br><span class="line">│   └── css_practice_1.html</span><br><span class="line">├── README.md</span><br><span class="line">└── src</span><br><span class="line">    └── README.md</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/03/07/Git/Some-knowledge-about-git-local-git/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/" class="post-title-link" itemprop="url">Consolidating the foundation of Linux, vim</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Feb 6 2020 11:45:32" itemprop="dateCreated datePublished" datetime="2020-02-06T11:45:32+08:00">Feb 6 2020</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Nov 19 2020 22:07:15" itemprop="dateModified" datetime="2020-11-19T22:07:15+08:00">Nov 19 2020</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><p>Global config.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vimrc</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-vim/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1117,7 +1215,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-count">111</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1130,7 +1228,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1194,7 +1292,7 @@
 <div class="copyright">
   
   &copy; 2014 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

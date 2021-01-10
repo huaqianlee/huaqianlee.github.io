@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="“雨过留痕，雁过留声”的第二篇：APP 启动，触摸事件和 UI 绘制的简单分析示例，此文通过 systrace 分析一个示例 APP 的启动、触摸事件和 UI 绘制的流程和时间消耗。本文的示例 APP （SimpleApplication.apk）只有一个简单的按钮， 点击按钮时会改变屏幕的颜色。同样因为没有深入研究 Performance 相关内容，所以保留出错的权利。  如果对第一篇感兴趣，请">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APP 启动，触摸事件和 UI 绘制的简单分析示例">
+<meta property="og:url" content="http://huaqianlee.github.io/2020/10/10/Android/breakdown-from-touch-input-to-drawing/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="“雨过留痕，雁过留声”的第二篇：APP 启动，触摸事件和 UI 绘制的简单分析示例，此文通过 systrace 分析一个示例 APP 的启动、触摸事件和 UI 绘制的流程和时间消耗。本文的示例 APP （SimpleApplication.apk）只有一个简单的按钮， 点击按钮时会改变屏幕的颜色。同样因为没有深入研究 Performance 相关内容，所以保留出错的权利。  如果对第一篇感兴趣，请">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image1.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image2.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image3.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image4.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image5.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image6.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image7.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image8.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image9.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image10.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image11.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image12.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image13.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image14.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image15.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image16.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image17.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image18.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image19.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image20.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image21.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image22.png">
+<meta property="article:published_time" content="2020-10-10T15:17:21.000Z">
+<meta property="article:modified_time" content="2021-01-10T15:30:55.531Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="Performance">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image1.png">
+
+<link rel="canonical" href="http://huaqianlee.github.io/2020/10/10/Android/breakdown-from-touch-input-to-drawing/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>APP 启动，触摸事件和 UI 绘制的简单分析示例 | Andy.Lee's  Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Andy.Lee's  Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Good good study, day day up !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">111</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">30</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/10/10/Android/breakdown-from-touch-input-to-drawing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          APP 启动，触摸事件和 UI 绘制的简单分析示例
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Oct 10 2020 23:17:21" itemprop="dateCreated datePublished" datetime="2020-10-10T23:17:21+08:00">Oct 10 2020</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jan 10 2021 23:30:55" itemprop="dateModified" datetime="2021-01-10T23:30:55+08:00">Jan 10 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>“雨过留痕，雁过留声”的第二篇：APP 启动，触摸事件和 UI 绘制的简单分析示例，此文通过 systrace 分析一个示例 APP 的启动、触摸事件和 UI 绘制的流程和时间消耗。本文的示例 APP （<a target="_blank" rel="noopener" href="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/SimpleApplication.apk">SimpleApplication.apk</a>）只有一个简单的按钮， 点击按钮时会改变屏幕的颜色。同样因为没有深入研究 Performance 相关内容，所以保留出错的权利。</p>
+<blockquote>
+<p>如果对第一篇感兴趣，请查看： <a href="http://huaqianlee.github.io/2020/10/10/Android/performance_debug_guide.html">Android 性能调试手册</a>.</p>
+</blockquote>
+<h1 id="0-写在开头"><a href="#0-写在开头" class="headerlink" title="0. 写在开头"></a>0. 写在开头</h1><p>我一开始看到 systrace 文件时，是一脸懵逼的，所以在开始正文之前先简单说一下 systrace 文件中的一些基本信息，如下：</p>
+<ul>
+<li><code>Frames</code>: 一个圆圈代表一帧。  <ul>
+<li>绿色：正常；</li>
+<li>黄色、红色： 异常，如卡顿、掉帧(Jank) 等，可能是它的渲染时间超过了 16.67ms（60fps）。</li>
+<li>点击圆圈可查看详细信息</li>
+</ul>
+</li>
+<li><code>Alerts</code>: 右侧标签,跟踪记录中出现的问题以及这些问题导致出现卡顿的频率</li>
+<li><code>system_server  iq</code>: 第一帧的触发</li>
+<li><code>gfx3d_clk</code> : GPU 频率</li>
+<li><code>iq in systemsever</code> : 触发中断</li>
+<li><code>bindApplication, activityStart ...</code>： 表示冷启动， 热启动不会有这些信息。</li>
+<li><code>surfaceflinger</code>-&gt;<code>UI Thread</code>-&gt;<code>HIDL::IComposerClient:setPowerMode_2_2:client</code>: 代表 LCD 上电时间  <blockquote>
+<p>一般使用 Chrome 打开 systrace.html， 右上角的 <code>？</code>  也可以提供一些基本的帮助</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="1-获取-systrace"><a href="#1-获取-systrace" class="headerlink" title="1. 获取 systrace"></a>1. 获取 systrace</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a. python systrace.py gfx input view <span class="built_in">sched</span> am wm dalvik freq idle power video app -b 40960 -t 10 -o traceout.html</span><br><span class="line"></span><br><span class="line">Explaination of these categories:</span><br><span class="line">gfx - Graphics</span><br><span class="line">input - Input</span><br><span class="line">view - View System</span><br><span class="line">wm - Window Manager</span><br><span class="line">am - Activity Manager</span><br><span class="line">hal - Hardware Modules</span><br><span class="line">res - Resource Loading</span><br><span class="line">dalvik - Dalvik VM</span><br><span class="line">power - Power Management</span><br><span class="line"><span class="built_in">sched</span> - CPU Scheduling	</span><br><span class="line">freq - CPU Frequency</span><br><span class="line">idle - CPU Idle</span><br><span class="line"></span><br><span class="line">b. Motion: Click icon of SimpleApplication to open it, click first time to change background as white, click sencond time to change background as black.</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-找到点击事件"><a href="#2-找到点击事件" class="headerlink" title="2. 找到点击事件"></a>2. 找到点击事件</h1><p>查看 <code>system_server</code> 的 <code>iq</code> 去定位点击事件发生的时间，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image1.png" alt="image">                                                        </p>
+<p>查看 InputResponse 确认点击事件，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image2.png" alt="image"></p>
+<h1 id="3-查看-UI-thread-和-Frames"><a href="#3-查看-UI-thread-和-Frames" class="headerlink" title="3. 查看 UI thread 和 Frames"></a>3. 查看 UI thread 和 Frames</h1><p>粗略看一下 <code>Frames</code>，发现有一个红色的 frame，红色表示 jank， 即卡顿。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image3.png" alt="image"></p>
+<p>上诉红点也就是代表帧率少于了 60 fps，我们需要去点击红色的圆点查看详细信息，并查看下 <code>UI thread</code>，看看是否有无用的耗时或者阻塞发生。此案例中有 11 ms 左右的 sleep，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image4.png" alt="image"></p>
+<h1 id="4-查看线程状态"><a href="#4-查看线程状态" class="headerlink" title="4. 查看线程状态"></a>4. 查看线程状态</h1><h2 id="4-1-Orange-Uninterruptible-sleep-I-O-Block"><a href="#4-1-Orange-Uninterruptible-sleep-I-O-Block" class="headerlink" title="4.1 Orange: Uninterruptible sleep, I/O Block"></a>4.1 Orange: Uninterruptible sleep, I/O Block</h2><p>此状态表示线程正在等待硬盘 I/O 操作完成，如果有太多的橙色阻塞状态，通常存在低内存的问题。此案例中阻塞状态很短，判断为正常状态，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image5.png" alt="image"></p>
+<h2 id="4-2-Blue-runnable"><a href="#4-2-Blue-runnable" class="headerlink" title="4.2 Blue: runnable"></a>4.2 Blue: runnable</h2><p>表明线程处于可运行状态，等待 CPU 调度。如果线程处于可运行状态时间太长，通常 CPU 忙于调度，需要查看这些时间 CPU 忙于哪些任务。比较常见的问题场景如下：</p>
+<ul>
+<li>后台任务太多。</li>
+<li>CPU 被限频。</li>
+<li>任务运行于特定的 cpuset，而此 CPU 已经满载。</li>
+</ul>
+<p>此案例中处于可运行状态的时间很短，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image6.png" alt="image"></p>
+<h2 id="4-3-Green-running"><a href="#4-3-Green-running" class="headerlink" title="4.3 Green: running"></a>4.3 Green: running</h2><p>接下来查看下线程的运行的时间，如果耗时异常，通常需要注意如下场景：</p>
+<ul>
+<li>是否被限制频率。</li>
+<li>线程跑在大核上还是小核上。</li>
+<li>是否频繁切换线程状态。</li>
+<li>此线程是否运行在错误的核上面。</li>
+</ul>
+<p>此案例中线程运行在大核上，即频率最高的 CPU7，亦无其他异常，如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image7.png" alt="image"></p>
+<p>##　4.4 White: Sleeping</p>
+<p>此状态表示线程无事可做，处于休眠状态，一个概率比较大的情况是被　mutex 阻塞。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image8.png" alt="image"></p>
+<h2 id="4-5-Summary"><a href="#4-5-Summary" class="headerlink" title="4.5 Summary"></a>4.5 Summary</h2><p>如上所示，我们可以看到大部分时间是消耗在运行状态，且没有频繁切换状态，所以这部分问题不是太大，当然如果想要追求更佳的性能，我们可以针对上面说的场景做更深入的调查。</p>
+<h1 id="5-启动时间"><a href="#5-启动时间" class="headerlink" title="5. 启动时间"></a>5. 启动时间</h1><p>从系统角度来看，在 <code>Activity</code> 完成 <code>onCreate/onStart/onResume</code>阶段后，<code>ViewRootImpl</code> 将调用两次 <code>performTraversals</code> 去初始化 Egl、measure、layout、draw等，最后完成界面显示。</p>
+<p>个人认为很难在 systrace 中获得准确的 APP 启动时间，但是我们可以在 activityResume 之后选择一个点来估算相对准确的时间。如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image9.png" alt="image"></p>
+<p>Launcher 调用 startingWindow 去等待第一帧的绘制，如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image10.png" alt="image"></p>
+<p>在如下指定位置，第一帧绘制已经完成。                                        </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image11.png" alt="image"></p>
+<p>在 SystemSever 中查看绘制流程。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image12.png" alt="image"></p>
+<h1 id="6-systrace-中的-input"><a href="#6-systrace-中的-input" class="headerlink" title="6. systrace 中的 input"></a>6. systrace 中的 input</h1><p>InputReader 获取 input 事件，然后移交给 InputDispatcher. InputDispatcher 再将输入事件传递给对应的 App，然后请求 Vsync 去绘制第一帧。</p>
+<ul>
+<li>InputReader 负责从 EventHub 读取 Input 事件，然后将其移交给 InputDispatcher 进行事件分发。</li>
+<li>InputDispatcher 打包并分发事件。</li>
+<li>OutboundQueue 存有将分派到相应 AppConnection 的事件</li>
+<li>WaitQueue 记录已分派到 AppConnection，但 App 仍在处理尚未返回处理成功的事件。 如果主线程 freezed 而无法处理输入事件，则 WaitQueue 的值将递增。</li>
+<li>PendingInputEventQueue 记录应用程序需要处理的 Input 事件。</li>
+<li>deliveryInputEvent 标识被输入事件唤醒的 App UI 线程。</li>
+</ul>
+<h2 id="6-1-Input-response"><a href="#6-1-Input-response" class="headerlink" title="6.1 Input response"></a>6.1 Input response</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image13.png" alt="image"></p>
+<h2 id="6-2-OutboundQueue-and-WaitQueue"><a href="#6-2-OutboundQueue-and-WaitQueue" class="headerlink" title="6.2 OutboundQueue and WaitQueue"></a>6.2 OutboundQueue and WaitQueue</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image14.png" alt="image"></p>
+<h2 id="6-3-Native-threads-which-Reads-and-dispatchs-input-event"><a href="#6-3-Native-threads-which-Reads-and-dispatchs-input-event" class="headerlink" title="6.3 Native threads which Reads and dispatchs input event"></a>6.3 Native threads which Reads and dispatchs input event</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image15.png" alt="image"></p>
+<h2 id="6-4-PendingInputEventQueue"><a href="#6-4-PendingInputEventQueue" class="headerlink" title="6.4 PendingInputEventQueue"></a>6.4 PendingInputEventQueue</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image16.png" alt="image"><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image17.png" alt="image"></p>
+<h2 id="7-查看-CPU-信息"><a href="#7-查看-CPU-信息" class="headerlink" title="7. 查看 CPU 信息"></a>7. 查看 CPU 信息</h2><p>主要检查 CPU 使用率、C-stage、时钟频率和时钟频率的限制，以及每个核正在跑什么应用。SimpleApplication 主要运行在大核 cpu7 上，有时运行在中核上， 都是最大频率。所以 CPU 部分没有什么问题。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image18.png" alt="image"></p>
+<h1 id="8-第一次点击事件"><a href="#8-第一次点击事件" class="headerlink" title="8. 第一次点击事件"></a>8. 第一次点击事件</h1><p>前面主要是通过全局视图和启动视图来分析 systrace，下面将分析单击事件。但是我将跳过与前面类似的分析步骤， 只重点查看一些可能会影响 UI 切换速度的差异点。</p>
+<h2 id="8-1-CPU-情况"><a href="#8-1-CPU-情况" class="headerlink" title="8.1 CPU 情况"></a>8.1 CPU 情况</h2><p>SimpleApplication 在现阶段也主要运行在大核 cpu7 上且以最大频率运行，但是部分时间运行在限频状态下的大核和中核，如果需要对其进行优化，这是需要考虑的一点。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image19.png" alt="image"></p>
+<h2 id="8-2-UI-thread"><a href="#8-2-UI-thread" class="headerlink" title="8.2 UI thread"></a>8.2 UI thread</h2><p>第一次单击时睡眠太久，也许这是一个可以优化的点。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image20.png" alt="image"></p>
+<h1 id="9-结论"><a href="#9-结论" class="headerlink" title="9. 结论"></a>9. 结论</h1><h2 id="9-1-启动阶段"><a href="#9-1-启动阶段" class="headerlink" title="9.1  启动阶段"></a>9.1  启动阶段</h2><ul>
+<li>存在卡顿，可能需要查看下是否存在异常的耗时或阻塞的代码。</li>
+<li>UI 线程的状态还不错，如果要提高性能，可以尝试检查下内存状态和后台任务。</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image21.png" alt="image"></p>
+<h2 id="9-2-第一次点击事件"><a href="#9-2-第一次点击事件" class="headerlink" title="9.2 第一次点击事件"></a>9.2 第一次点击事件</h2><ul>
+<li>CPU 频率有在某些阶段被限制，我们可以尝试对其进行优化。</li>
+<li>第一次点击时睡眠太久，也许这是一个可以优化的地方。 为了对其进行优化，我们需要检查 SimpleApplication 的代码，是否被互斥锁阻塞，等等。</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image22.png" alt="image"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Performance/" rel="tag"># Performance</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/10/Android/performance-debug-guide/" rel="prev" title="performance_debug_guide">
+      <i class="fa fa-chevron-left"></i> performance_debug_guide
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/" rel="next" title="How to build intranet gitbook with docker">
+      How to build intranet gitbook with docker <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E5%86%99%E5%9C%A8%E5%BC%80%E5%A4%B4"><span class="nav-number">1.</span> <span class="nav-text">0. 写在开头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%8E%B7%E5%8F%96-systrace"><span class="nav-number">2.</span> <span class="nav-text">1. 获取 systrace</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%89%BE%E5%88%B0%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">2. 找到点击事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%9F%A5%E7%9C%8B-UI-thread-%E5%92%8C-Frames"><span class="nav-number">4.</span> <span class="nav-text">3. 查看 UI thread 和 Frames</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-number">5.</span> <span class="nav-text">4. 查看线程状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Orange-Uninterruptible-sleep-I-O-Block"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Orange: Uninterruptible sleep, I&#x2F;O Block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Blue-runnable"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 Blue: runnable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Green-running"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 Green: running</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-Summary"><span class="nav-number">5.4.</span> <span class="nav-text">4.5 Summary</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4"><span class="nav-number">6.</span> <span class="nav-text">5. 启动时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-systrace-%E4%B8%AD%E7%9A%84-input"><span class="nav-number">7.</span> <span class="nav-text">6. systrace 中的 input</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-Input-response"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 Input response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-OutboundQueue-and-WaitQueue"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 OutboundQueue and WaitQueue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-Native-threads-which-Reads-and-dispatchs-input-event"><span class="nav-number">7.3.</span> <span class="nav-text">6.3 Native threads which Reads and dispatchs input event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-PendingInputEventQueue"><span class="nav-number">7.4.</span> <span class="nav-text">6.4 PendingInputEventQueue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%9F%A5%E7%9C%8B-CPU-%E4%BF%A1%E6%81%AF"><span class="nav-number">7.5.</span> <span class="nav-text">7. 查看 CPU 信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">8.</span> <span class="nav-text">8. 第一次点击事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-CPU-%E6%83%85%E5%86%B5"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 CPU 情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-UI-thread"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 UI thread</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E7%BB%93%E8%AE%BA"><span class="nav-number">9.</span> <span class="nav-text">9. 结论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-%E5%90%AF%E5%8A%A8%E9%98%B6%E6%AE%B5"><span class="nav-number">9.1.</span> <span class="nav-text">9.1  启动阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">9.2.</span> <span class="nav-text">9.2 第一次点击事件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy.Lee"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Andy.Lee</p>
+  <div class="site-description" itemprop="description">Just need to enjoy life.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huaqianlee@gmail.com" title="E-Mail → mailto:huaqianlee@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/huaqianlee" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/huaqianlee" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/huaqianlee" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/huaqianlee" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

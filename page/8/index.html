@@ -119,7 +119,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">109</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">111</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -129,7 +129,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">29</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">30</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -189,6 +189,176 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2016/04/27/Uav/Qualcomm-uav-blsp-port/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/27/Uav/Qualcomm-uav-blsp-port/" class="post-title-link" itemprop="url">高通无人机8074 BLSP接口说明</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Apr 27 2016 0:11:58" itemprop="dateCreated datePublished" datetime="2016-04-27T00:11:58+08:00">Apr 27 2016</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index"><span itemprop="name">Uav</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>BLSP是高通对于低速接口的一种管理方式，8074 平台含有两个BLSP(BAM Low-Speed Peripheral) 块，对应于12个BLSP端口。 每一个BLSP块含有最多六个Qualcomm Universal Peripheral (QUP)或六个Uart cores，通过相关手册查询到每个外设属于BLSP多少。结构框图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/BLSP.png" alt="BLSP"></p>
+<blockquote>
+<ol>
+<li>BAM（Bus Access Manager）is used to move data to/from the peripheral buffers;  2.每个BLSP外设静态连接到一对BAM管道，BLSP支持BAM 和non-BAM-based 数据传输。</li>
+</ol>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/04/27/Uav/Qualcomm-uav-blsp-port/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2016/04/02/Uav/uav-board-debugging/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/02/Uav/uav-board-debugging/" class="post-title-link" itemprop="url">无人机开发主板调试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Apr 2 2016 21:01:57" itemprop="dateCreated datePublished" datetime="2016-04-02T21:01:57+08:00">Apr 2 2016</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Uav/" itemprop="url" rel="index"><span itemprop="name">Uav</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题一-：-新板子不能开机，关键点：板子2-32（ddr-emmc）换为了2-16"><a href="#问题一-：-新板子不能开机，关键点：板子2-32（ddr-emmc）换为了2-16" class="headerlink" title="问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 ."></a>问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .</h2><p>自己的uav主板回来后将软件刷入板子(高通msm8074), 板子不能正常启动.</p>
+<p>通过分析log， 发现死在boot_images\core\boot\secboot3\hw\msm8974\sbl1\sbl1_mc.c 中 sbl1_tlmm_init() —&gt; boot_gpio_init()， 当我屏蔽此函数后， log如下：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Format: Log Type - Time(microsec) - Message </span><br><span class="line">Log <span class="built_in">type</span>: B - since boot(excluding boot rom). D - delta </span><br><span class="line">B - 41663 - SBL1, Start </span><br><span class="line">B - 46909 - scatterload_region &amp;&amp; ram_init, Start </span><br><span class="line">D - 30 - scatterload_region &amp;&amp; ram_init, Delta </span><br><span class="line">B - 63897 - pm_device_init, Start </span><br><span class="line">D - 27297 - pm_device_init, Delta </span><br><span class="line">B - 91317 - boot_flash_init, Start </span><br><span class="line">D - 10919 - boot_flash_init, Delta </span><br><span class="line">B - 102632 - boot_config_data_table_init, Start </span><br><span class="line">D - 134932 - boot_config_data_table_init, Delta </span><br><span class="line">B - 239150 - sbl1_ddr_set_params, Start </span><br><span class="line">B - 241773 - Pre_DDR_clock_init, Start </span><br><span class="line">D - 274 - Pre_DDR_clock_init, Delta </span><br><span class="line">D - 0 - sbl1_ddr_set_params, Delta </span><br><span class="line">B - 255773 - pm_driver_init, Start </span><br><span class="line">D - 16134 - pm_driver_init, Delta </span><br><span class="line">B - 271907 - clock_init, Start </span><br><span class="line">D - 152 - clock_init, Delta </span><br><span class="line">B - 274988 - Image Load, Start </span><br><span class="line">B - 295209 - Tz Execution, Start </span><br><span class="line">D - 193065 - Tz Execution, Delta </span><br><span class="line">B - 496387 - Image Load, Start </span><br><span class="line">B - 506361 - Signal PBL to Jump to RPM FW </span><br><span class="line">B - 506605 - sbl1_wait_for_ddr_training, Start   </span><br><span class="line">B - 540399 - 1<span class="comment">######################################################### </span></span><br><span class="line">D - 45323 - sbl1_wait_for_ddr_training, Delta </span><br><span class="line"><span class="comment">#不屏蔽boot_gpio_init()函数,则停在此处， boot_gpio_init()中</span></span><br><span class="line">B - 558302 - 11<span class="comment">#########################################################   </span></span><br><span class="line">B - 685884 - Image Load, Start </span><br><span class="line">B - 689391 - WDT Execution, Start </span><br><span class="line">D - 213 - WDT Execution, Delta </span><br><span class="line">B - 694790 - Image Load, Start </span><br><span class="line">B - 707905 - sbl1_efs_handle_cookies, Start </span><br></pre></td></tr></table></figure>
+<p>　</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/04/02/Uav/uav-board-debugging/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -860,175 +1030,10 @@ git commit</code></pre>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/" class="post-title-link" itemprop="url">高通平台Android源码bootloader分析之sbl1(一)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Aug 15 2015 20:44:33" itemprop="dateCreated datePublished" datetime="2015-08-15T20:44:33+08:00">Aug 15 2015</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:26" itemprop="dateModified" datetime="2019-04-06T22:25:26+08:00">Apr 6 2019</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/">高通平台Android源码bootloader分析之sbl1(一)</a><br><a href="http://huaqianlee.github.io/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%BA%8C/">高通平台Android源码bootloader分析之sbl1(二)</a><br><a href="http://huaqianlee.github.io/2015/08/18/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%89/">高通平台Android源码bootloader分析之sbl1(三)</a></p>
-<p>高通8k平台的boot过程搞得比较复杂， 我也是前段时间遇到一些问题深入研究了一下才搞明白。不过虽然弄得很复杂，我们需要动的东西其实很少，modem侧基本就sbl1（全称：Secondary boot loader）的代码需要动一下，ap侧就APPSBL代码需要动（对此部分不了解，可参照：<a href="http://huaqianlee.github.io/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/">bootable源码解析</a>），其他的都是高通搞好了的，甚至有些我们看不到代码。今天就要分析一下开机前几秒钟起着关键作用的sbl1， 这套代码在modem侧的boot_images\中。</p>
-<p>##启动流程<br>首先来看一下高通的bootloader流程框图，主要由ap、RPM及modem三部分构成，由于我工作主要涉及到ap侧，所以对RPM和modem侧代码不了解，以后有空时间的话到可以研究一下，框图如下：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/08/15/Android/%E9%AB%98%E9%80%9A%E5%B9%B3%E5%8F%B0Android%E6%BA%90%E7%A0%81bootloader%E5%88%86%E6%9E%90%E4%B9%8Bsbl1-%E4%B8%80/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" class="post-title-link" itemprop="url">Android源码bootable解析之bootloader LK(little kernel)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Jul 25 2015 15:56:13" itemprop="dateCreated datePublished" datetime="2015-07-25T15:56:13+08:00">Jul 25 2015</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。</p>
-<p>##boot架构</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1096,7 +1101,7 @@ git commit</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-count">111</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1109,7 +1114,7 @@ git commit</code></pre>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1173,7 +1178,7 @@ git commit</code></pre>
 <div class="copyright">
   
   &copy; 2014 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
