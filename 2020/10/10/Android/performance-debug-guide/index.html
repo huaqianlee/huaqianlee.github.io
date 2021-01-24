@@ -28,7 +28,7 @@
 <meta property="og:description" content="俗话说“雨过留痕，雁过留声”，之前因为工作需要折腾了小几个月的性能 BUG，还是得留下一点东西，这是第一篇：Android 性能调试手册，这篇文章简单聊聊工作中应该怎么进行性能分析。因为没有深入研究 Performance 相关内容，所以保留出错的权利。 0. 写在开头在我司处理 Performance 问题时，大多数情况不会像顶级大厂那样优化每一帧，尽量榨干每一个硬件的性能。因为没有前人提供经验">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-10T15:17:46.000Z">
-<meta property="article:modified_time" content="2021-01-10T15:39:06.381Z">
+<meta property="article:modified_time" content="2021-01-24T14:18:45.822Z">
 <meta property="article:author" content="Andy.Lee">
 <meta property="article:tag" content="Performance">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jan 10 2021 23:39:06" itemprop="dateModified" datetime="2021-01-10T23:39:06+08:00">Jan 10 2021</time>
+                <time title="Modified: Jan 24 2021 22:18:45" itemprop="dateModified" datetime="2021-01-24T22:18:45+08:00">Jan 24 2021</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,10 +266,10 @@
 <ol start="0">
 <li>确认问题现象，最好自己复现一次。</li>
 <li>确认有没有大量 crash 发生。</li>
-<li>查看 kernel footprint（config）， 确认是否使用 perf config： msmxxx-perf_defconfig。<a id="more"></a>
-
-</li>
+<li>查看 kernel footprint（config）， 确认是否使用 perf config： msmxxx-perf_defconfig。</li>
 </ol>
+<a id="more"></a>
+
 <h1 id="2-systrace"><a href="#2-systrace" class="headerlink" title="2. systrace"></a>2. systrace</h1><p>我处理的这几十个性能问题中，超过 90% 都是和 APP 相关的，所以先来聊聊这方面的主要工具 systrace， 此篇文章主要讲讲调试方式，如果想了解怎么分析，可以看看我的第二篇文章 <a href="http://huaqianlee.github.io/2020/10/10/Android/breakdown_from_touch_input_to_drawing.html">APP 启动，触摸事件和 UI 绘制的简单分析示例</a> 和官方文档。</p>
 <h2 id="2-1-Python-脚本"><a href="#2-1-Python-脚本" class="headerlink" title="2.1 Python 脚本"></a>2.1 Python 脚本</h2><p>比较常用的方式是通过 Google 提供的 Python 脚本抓取 systrace， 我们可以在 SDK 或者 Android 源码中找到这个脚本，使用方式如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">systrace.py gfx rs input view <span class="built_in">sched</span> am wm camera dalvik freq idle load sync workq power mmc disk sm audio hal video app res binder_driver binder_lock -b 20480 -t 10 -o trace.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># -b trace buffer 大小,单位为 kb，建议 20M，太小会信息不足，太大会因内存不足而抓取不了</span></span><br><span class="line"><span class="comment"># -t 持续时间，单位为秒，时间必须覆盖问题现场，但是也不能太长，不然内存不足</span></span><br><span class="line"><span class="comment"># -o Systrace 输出的文件路径</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要抓取的 tags,一般情况下，我们可以全选。不同的 Android SDK 其 tags 有所不同, 可以通过如下方式查看。</span></span><br><span class="line">systrace.py --list-categories</span><br><span class="line">gfx - Graphics</span><br><span class="line">input - Input</span><br><span class="line">view - View System</span><br><span class="line">wm - Window Manager</span><br><span class="line">am - Activity Manager</span><br><span class="line">hal - Hardware Modules</span><br><span class="line">res - Resource Loading</span><br><span class="line">dalvik - Dalvik VM</span><br><span class="line">power - Power Management</span><br><span class="line"><span class="built_in">sched</span> - CPU Scheduling</span><br><span class="line">freq - CPU Frequency</span><br><span class="line">idle - CPU Idle</span><br><span class="line">...</span><br></pre></td></tr></table></figure>

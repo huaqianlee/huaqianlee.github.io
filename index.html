@@ -745,7 +745,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jan 10 2021 23:39:06" itemprop="dateModified" datetime="2021-01-10T23:39:06+08:00">Jan 10 2021</time>
+                <time title="Modified: Jan 24 2021 22:18:45" itemprop="dateModified" datetime="2021-01-24T22:18:45+08:00">Jan 24 2021</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -784,7 +784,8 @@
 <ol start="0">
 <li>确认问题现象，最好自己复现一次。</li>
 <li>确认有没有大量 crash 发生。</li>
-<li>查看 kernel footprint（config）， 确认是否使用 perf config： msmxxx-perf_defconfig。
+<li>查看 kernel footprint（config）， 确认是否使用 perf config： msmxxx-perf_defconfig。</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/10/10/Android/performance-debug-guide/#more" rel="contents">
@@ -842,7 +843,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jan 10 2021 23:30:55" itemprop="dateModified" datetime="2021-01-10T23:30:55+08:00">Jan 10 2021</time>
+                <time title="Modified: Jan 24 2021 22:21:26" itemprop="dateModified" datetime="2021-01-24T22:21:26+08:00">Jan 24 2021</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -888,77 +889,14 @@
 </li>
 </ul>
 <h1 id="1-获取-systrace"><a href="#1-获取-systrace" class="headerlink" title="1. 获取 systrace"></a>1. 获取 systrace</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a. python systrace.py gfx input view <span class="built_in">sched</span> am wm dalvik freq idle power video app -b 40960 -t 10 -o traceout.html</span><br><span class="line"></span><br><span class="line">Explaination of these categories:</span><br><span class="line">gfx - Graphics</span><br><span class="line">input - Input</span><br><span class="line">view - View System</span><br><span class="line">wm - Window Manager</span><br><span class="line">am - Activity Manager</span><br><span class="line">hal - Hardware Modules</span><br><span class="line">res - Resource Loading</span><br><span class="line">dalvik - Dalvik VM</span><br><span class="line">power - Power Management</span><br><span class="line"><span class="built_in">sched</span> - CPU Scheduling	</span><br><span class="line">freq - CPU Frequency</span><br><span class="line">idle - CPU Idle</span><br><span class="line"></span><br><span class="line">b. Motion: Click icon of SimpleApplication to open it, click first time to change background as white, click sencond time to change background as black.</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-找到点击事件"><a href="#2-找到点击事件" class="headerlink" title="2. 找到点击事件"></a>2. 找到点击事件</h1><p>查看 <code>system_server</code> 的 <code>iq</code> 去定位点击事件发生的时间，如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image1.png" alt="image">                                                        </p>
-<p>查看 InputResponse 确认点击事件，如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image2.png" alt="image"></p>
-<h1 id="3-查看-UI-thread-和-Frames"><a href="#3-查看-UI-thread-和-Frames" class="headerlink" title="3. 查看 UI thread 和 Frames"></a>3. 查看 UI thread 和 Frames</h1><p>粗略看一下 <code>Frames</code>，发现有一个红色的 frame，红色表示 jank， 即卡顿。</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image3.png" alt="image"></p>
-<p>上诉红点也就是代表帧率少于了 60 fps，我们需要去点击红色的圆点查看详细信息，并查看下 <code>UI thread</code>，看看是否有无用的耗时或者阻塞发生。此案例中有 11 ms 左右的 sleep，如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image4.png" alt="image"></p>
-<h1 id="4-查看线程状态"><a href="#4-查看线程状态" class="headerlink" title="4. 查看线程状态"></a>4. 查看线程状态</h1><h2 id="4-1-Orange-Uninterruptible-sleep-I-O-Block"><a href="#4-1-Orange-Uninterruptible-sleep-I-O-Block" class="headerlink" title="4.1 Orange: Uninterruptible sleep, I/O Block"></a>4.1 Orange: Uninterruptible sleep, I/O Block</h2><p>此状态表示线程正在等待硬盘 I/O 操作完成，如果有太多的橙色阻塞状态，通常存在低内存的问题。此案例中阻塞状态很短，判断为正常状态，如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image5.png" alt="image"></p>
-<h2 id="4-2-Blue-runnable"><a href="#4-2-Blue-runnable" class="headerlink" title="4.2 Blue: runnable"></a>4.2 Blue: runnable</h2><p>表明线程处于可运行状态，等待 CPU 调度。如果线程处于可运行状态时间太长，通常 CPU 忙于调度，需要查看这些时间 CPU 忙于哪些任务。比较常见的问题场景如下：</p>
-<ul>
-<li>后台任务太多。</li>
-<li>CPU 被限频。</li>
-<li>任务运行于特定的 cpuset，而此 CPU 已经满载。</li>
-</ul>
-<p>此案例中处于可运行状态的时间很短，如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image6.png" alt="image"></p>
-<h2 id="4-3-Green-running"><a href="#4-3-Green-running" class="headerlink" title="4.3 Green: running"></a>4.3 Green: running</h2><p>接下来查看下线程的运行的时间，如果耗时异常，通常需要注意如下场景：</p>
-<ul>
-<li>是否被限制频率。</li>
-<li>线程跑在大核上还是小核上。</li>
-<li>是否频繁切换线程状态。</li>
-<li>此线程是否运行在错误的核上面。</li>
-</ul>
-<p>此案例中线程运行在大核上，即频率最高的 CPU7，亦无其他异常，如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image7.png" alt="image"></p>
-<p>##　4.4 White: Sleeping</p>
-<p>此状态表示线程无事可做，处于休眠状态，一个概率比较大的情况是被　mutex 阻塞。</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image8.png" alt="image"></p>
-<h2 id="4-5-Summary"><a href="#4-5-Summary" class="headerlink" title="4.5 Summary"></a>4.5 Summary</h2><p>如上所示，我们可以看到大部分时间是消耗在运行状态，且没有频繁切换状态，所以这部分问题不是太大，当然如果想要追求更佳的性能，我们可以针对上面说的场景做更深入的调查。</p>
-<h1 id="5-启动时间"><a href="#5-启动时间" class="headerlink" title="5. 启动时间"></a>5. 启动时间</h1><p>从系统角度来看，在 <code>Activity</code> 完成 <code>onCreate/onStart/onResume</code>阶段后，<code>ViewRootImpl</code> 将调用两次 <code>performTraversals</code> 去初始化 Egl、measure、layout、draw等，最后完成界面显示。</p>
-<p>个人认为很难在 systrace 中获得准确的 APP 启动时间，但是我们可以在 activityResume 之后选择一个点来估算相对准确的时间。如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image9.png" alt="image"></p>
-<p>Launcher 调用 startingWindow 去等待第一帧的绘制，如下：</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image10.png" alt="image"></p>
-<p>在如下指定位置，第一帧绘制已经完成。                                        </p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image11.png" alt="image"></p>
-<p>在 SystemSever 中查看绘制流程。</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image12.png" alt="image"></p>
-<h1 id="6-systrace-中的-input"><a href="#6-systrace-中的-input" class="headerlink" title="6. systrace 中的 input"></a>6. systrace 中的 input</h1><p>InputReader 获取 input 事件，然后移交给 InputDispatcher. InputDispatcher 再将输入事件传递给对应的 App，然后请求 Vsync 去绘制第一帧。</p>
-<ul>
-<li>InputReader 负责从 EventHub 读取 Input 事件，然后将其移交给 InputDispatcher 进行事件分发。</li>
-<li>InputDispatcher 打包并分发事件。</li>
-<li>OutboundQueue 存有将分派到相应 AppConnection 的事件</li>
-<li>WaitQueue 记录已分派到 AppConnection，但 App 仍在处理尚未返回处理成功的事件。 如果主线程 freezed 而无法处理输入事件，则 WaitQueue 的值将递增。</li>
-<li>PendingInputEventQueue 记录应用程序需要处理的 Input 事件。</li>
-<li>deliveryInputEvent 标识被输入事件唤醒的 App UI 线程。</li>
-</ul>
-<h2 id="6-1-Input-response"><a href="#6-1-Input-response" class="headerlink" title="6.1 Input response"></a>6.1 Input response</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image13.png" alt="image"></p>
-<h2 id="6-2-OutboundQueue-and-WaitQueue"><a href="#6-2-OutboundQueue-and-WaitQueue" class="headerlink" title="6.2 OutboundQueue and WaitQueue"></a>6.2 OutboundQueue and WaitQueue</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image14.png" alt="image"></p>
-<h2 id="6-3-Native-threads-which-Reads-and-dispatchs-input-event"><a href="#6-3-Native-threads-which-Reads-and-dispatchs-input-event" class="headerlink" title="6.3 Native threads which Reads and dispatchs input event"></a>6.3 Native threads which Reads and dispatchs input event</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image15.png" alt="image"></p>
-<h2 id="6-4-PendingInputEventQueue"><a href="#6-4-PendingInputEventQueue" class="headerlink" title="6.4 PendingInputEventQueue"></a>6.4 PendingInputEventQueue</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image16.png" alt="image"><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image17.png" alt="image"></p>
-<h2 id="7-查看-CPU-信息"><a href="#7-查看-CPU-信息" class="headerlink" title="7. 查看 CPU 信息"></a>7. 查看 CPU 信息</h2><p>主要检查 CPU 使用率、C-stage、时钟频率和时钟频率的限制，以及每个核正在跑什么应用。SimpleApplication 主要运行在大核 cpu7 上，有时运行在中核上， 都是最大频率。所以 CPU 部分没有什么问题。</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image18.png" alt="image"></p>
-<h1 id="8-第一次点击事件"><a href="#8-第一次点击事件" class="headerlink" title="8. 第一次点击事件"></a>8. 第一次点击事件</h1><p>前面主要是通过全局视图和启动视图来分析 systrace，下面将分析单击事件。但是我将跳过与前面类似的分析步骤， 只重点查看一些可能会影响 UI 切换速度的差异点。</p>
-<h2 id="8-1-CPU-情况"><a href="#8-1-CPU-情况" class="headerlink" title="8.1 CPU 情况"></a>8.1 CPU 情况</h2><p>SimpleApplication 在现阶段也主要运行在大核 cpu7 上且以最大频率运行，但是部分时间运行在限频状态下的大核和中核，如果需要对其进行优化，这是需要考虑的一点。</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image19.png" alt="image"></p>
-<h2 id="8-2-UI-thread"><a href="#8-2-UI-thread" class="headerlink" title="8.2 UI thread"></a>8.2 UI thread</h2><p>第一次单击时睡眠太久，也许这是一个可以优化的点。</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image20.png" alt="image"></p>
-<h1 id="9-结论"><a href="#9-结论" class="headerlink" title="9. 结论"></a>9. 结论</h1><h2 id="9-1-启动阶段"><a href="#9-1-启动阶段" class="headerlink" title="9.1  启动阶段"></a>9.1  启动阶段</h2><ul>
-<li>存在卡顿，可能需要查看下是否存在异常的耗时或阻塞的代码。</li>
-<li>UI 线程的状态还不错，如果要提高性能，可以尝试检查下内存状态和后台任务。</li>
-</ul>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image21.png" alt="image"></p>
-<h2 id="9-2-第一次点击事件"><a href="#9-2-第一次点击事件" class="headerlink" title="9.2 第一次点击事件"></a>9.2 第一次点击事件</h2><ul>
-<li>CPU 频率有在某些阶段被限制，我们可以尝试对其进行优化。</li>
-<li>第一次点击时睡眠太久，也许这是一个可以优化的地方。 为了对其进行优化，我们需要检查 SimpleApplication 的代码，是否被互斥锁阻塞，等等。</li>
-</ul>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/image22.png" alt="image"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/10/Android/breakdown-from-touch-input-to-drawing/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
