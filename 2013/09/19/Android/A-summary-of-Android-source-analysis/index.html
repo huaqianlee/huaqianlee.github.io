@@ -405,10 +405,7 @@
     <a href="/2014/10/20/Hexo/hello-world/" rel="prev" title="Hello World">
       <i class="fa fa-chevron-left"></i> Hello World
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2013/09/19/Life/four-years/" rel="next" title="Four years">
-      Four years <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -421,6 +418,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -625,6 +623,26 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'af176630d44392cdef8f',
+      clientSecret: '63681992881b6f3ecd24146470e5aaf7d068fe14',
+      repo        : 'huaqianlee.github.io',
+      owner       : 'huaqianlee',
+      admin       : ['huaqianlee'],
+      id          : '88ef2e335f637fbf309ea3c87d1d7cf3',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

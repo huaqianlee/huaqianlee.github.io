@@ -290,8 +290,8 @@
       <i class="fa fa-chevron-left"></i> Getting Started With RecyclerView and CardView on Android
     </a></div>
       <div class="post-nav-item">
-    <a href="/2017/08/18/Android/Dynamic-loading-layout-by-recyclerview-item/" rel="next" title="通过自定义侧边导航栏的RecyclerView动态加载布局">
-      通过自定义侧边导航栏的RecyclerView动态加载布局 <i class="fa fa-chevron-right"></i>
+    <a href="/2017/09/19/Life/four-years/" rel="next" title="Four years">
+      Four years <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -305,6 +305,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -509,6 +510,26 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'af176630d44392cdef8f',
+      clientSecret: '63681992881b6f3ecd24146470e5aaf7d068fe14',
+      repo        : 'huaqianlee.github.io',
+      owner       : 'huaqianlee',
+      admin       : ['huaqianlee'],
+      id          : 'd8b90e74b96bc2506043c523e948f716',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
