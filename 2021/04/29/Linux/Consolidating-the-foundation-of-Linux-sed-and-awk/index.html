@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="sedsed is a stream editer for filtering and transforming text. First of all, we need to know the following three points:  replace command: s pattern space and hold space man sed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Consolidating the foundation of Linux, sed and awk">
+<meta property="og:url" content="http://huaqianlee.github.io/2021/04/29/Linux/Consolidating-the-foundation-of-Linux-sed-and-awk/index.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="sedsed is a stream editer for filtering and transforming text. First of all, we need to know the following three points:  replace command: s pattern space and hold space man sed">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-29T15:08:19.000Z">
+<meta property="article:modified_time" content="2021-05-21T15:57:31.270Z">
+<meta property="article:author" content="Andy.Lee">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://huaqianlee.github.io/2021/04/29/Linux/Consolidating-the-foundation-of-Linux-sed-and-awk/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Consolidating the foundation of Linux, sed and awk | Andy.Lee's  Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Andy.Lee's  Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Good good study, day day up !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">115</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">30</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2021/04/29/Linux/Consolidating-the-foundation-of-Linux-sed-and-awk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Consolidating the foundation of Linux, sed and awk
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Apr 29 2021 23:08:19" itemprop="dateCreated datePublished" datetime="2021-04-29T23:08:19+08:00">Apr 29 2021</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: May 21 2021 23:57:31" itemprop="dateModified" datetime="2021-05-21T23:57:31+08:00">May 21 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h1><p><code>sed</code> is a stream editer for filtering and transforming text.</p>
+<p>First of all, we need to know the following three points:</p>
+<ul>
+<li>replace command: <code>s</code></li>
+<li>pattern space and hold space</li>
+<li><code>man sed</code></li>
+</ul>
+<a id="more"></a>
+<h2 id="tips-and-example"><a href="#tips-and-example" class="headerlink" title="tips and example"></a>tips and example</h2><h3 id="Basis"><a href="#Basis" class="headerlink" title="Basis"></a>Basis</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">&#x27;s/old/new/&#x27;</span> file</span><br><span class="line"></span><br><span class="line"><span class="comment"># -e , add the commands to be executed</span></span><br><span class="line">sed -e <span class="string">&#x27;s/old/new/&#x27;</span> -e <span class="string">&#x27;s/old/new/&#x27;</span> file</span><br><span class="line"><span class="comment"># -&gt; equals</span></span><br><span class="line">sed <span class="string">&#x27;s/old/new/;s/old/new/&#x27;</span> file</span><br><span class="line"></span><br><span class="line"><span class="comment"># add the contents of script-file to the commands to be executed</span></span><br><span class="line">sed -f &lt;script&gt; file</span><br><span class="line"></span><br><span class="line"><span class="comment"># Replace and re-write the original file</span></span><br><span class="line">sed -i <span class="string">&#x27;s/old/new/&#x27;</span> <span class="string">&#x27;s/old/new/&#x27;</span> file</span><br></pre></td></tr></table></figure>
+
+<h3 id="separator"><a href="#separator" class="headerlink" title="separator"></a>separator</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># separator can be &#x27;!&#x27;, &#x27;#&#x27;,&#x27;@&#x27; .... not only &#x27;/&#x27;</span></span><br><span class="line">sed <span class="string">&#x27;s!/!abc!&#x27;</span> file <span class="comment"># replace &#x27;/&#x27; with &#x27;abc&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="regex"><a href="#regex" class="headerlink" title="regex"></a>regex</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">&#x27;s/&lt;regex&gt;/new/&#x27;</span> file</span><br><span class="line">sed -r <span class="string">&#x27;s/&lt;extended regex&gt;/new/&#x27;</span> file</span><br><span class="line">head -5 /etc/passwd | sed <span class="string">&#x27;s/...//&#x27;</span> <span class="comment"># delete the first three characters of the first 5 lines</span></span><br><span class="line">head -5 /etc/passwd | sed <span class="string">&#x27;s/s*bin//&#x27;</span> <span class="comment"># delete the first bin,sbin,ssbin... of the first 5 lines</span></span><br><span class="line">grep root /etc/passwd | sed <span class="string">&#x27;s/^root//&#x27;</span> <span class="comment"># delete the root at start of line</span></span><br><span class="line">sed -r <span class="string">&#x27;s/(a.*b)/\1:\1/&#x27;</span> file <span class="comment"># (a.*b):(a.*b), .* -&gt; means 0 or more any char(&#x27;.&#x27;);  `\1` means the first ()</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Advanced-sed"><a href="#Advanced-sed" class="headerlink" title="Advanced sed"></a>Advanced sed</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /s/old/new/2 # replace the second match</span></span><br><span class="line"><span class="comment"># /s/old/new/g  # Globally replace</span></span><br><span class="line"><span class="comment"># /s/old/new/p # Print(Output) the replaced line(pattern space) one more time</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># p, P, -n </span></span><br><span class="line">sed -n <span class="string">&#x27;/s/old/new/p&#x27;</span> <span class="comment"># Only output the replaced line, &#x27;-n&#x27; to stop the default output.</span></span><br><span class="line">sed -n <span class="string">&#x27;/&lt;regex&gt;/p&#x27;</span> 	  <span class="comment"># Only output the &lt;regex&gt; line</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># d, D</span></span><br><span class="line">sed <span class="string">&#x27;/&lt;regex&gt;/d;=&#x27;</span> <span class="comment"># when encounter &lt;regex&gt; , delete the pattern space and exit the current sed motion, &#x27;=&#x27; print the line number</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># /&lt;regex&gt;/s/old/new/g</span></span><br><span class="line"><span class="comment"># &lt;line num&gt;s/old/new/g</span></span><br><span class="line"><span class="string">&#x27;/root/s/bash/!/&#x27;</span> <span class="comment"># replace bash with ! in the line including root. </span></span><br><span class="line">1,<span class="variable">$s</span>/old/new/g <span class="comment"># replace from the first line to the last line</span></span><br><span class="line"><span class="string">&#x27;/^bin/,$s/nologin/!/g&#x27;</span> <span class="comment"># replace from the bin start of line to the end of line </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># a[ppend],i[nsert],c[modify]</span></span><br><span class="line">sed <span class="string">&#x27;&lt;regex&gt;/a &lt;content&gt;&#x27;</span> <span class="comment"># append &lt;content&gt; at the next line of &lt;regex&gt;</span></span><br><span class="line">sed <span class="string">&#x27;&lt;regex&gt;/i &lt;content&gt;&#x27;</span> <span class="comment"># insert &lt;content&gt; at the previous line of &lt;regex&gt;</span></span><br><span class="line">sed <span class="string">&#x27;&lt;regex&gt;/c &lt;content&gt;&#x27;</span> <span class="comment"># Modify the line of &lt;regex&gt; as &lt;content&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># r,w</span></span><br><span class="line">sed <span class="string">&#x27;&lt;regex&gt;/r &lt;file&gt;&#x27;</span>	  <span class="comment"># Read &lt;file&gt; and append to &lt;regex&gt;</span></span><br><span class="line">sed <span class="string">&#x27;&lt;regex&gt;/w file&quot;&#x27;</span>     <span class="comment"># Write the  &lt;regex&gt; line to file</span></span><br><span class="line">sed -n <span class="string">&#x27;/s/old/new/w file.txt&#x27;</span> <span class="comment"># write the replaced lines to file.txt</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># q -&gt; quit, time summarize system resource usage </span></span><br><span class="line">time sed <span class="string">&#x27;10q&#x27;</span> 		<span class="comment"># Faster, read and print 10 lines and then quit</span></span><br><span class="line">time sed -n <span class="string">&#x27;1,10p&#x27;</span>	<span class="comment"># Slower, read all and filter 10 lines</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># n,N - Read the next line of input into the pattern space</span></span><br><span class="line">sed <span class="string">&#x27;N;s/&lt;first line&gt;\n&lt;second line&gt;/&lt;new line&gt;&#x27;</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment"># hold space, line break exists in default.</span></span><br><span class="line"><span class="comment"># h H # Copy pattern space to hold space</span></span><br><span class="line"><span class="comment"># g G # Copy hold space to pattern space</span></span><br><span class="line"><span class="comment"># x   # swith hold space and pattern space</span></span><br><span class="line"><span class="comment">#  4 ways to concatenate and print files in reverse</span></span><br><span class="line">cat -n file | tac</span><br><span class="line">cat -n file | sed -n <span class="string">&#x27;1h;1!G;$1x;$p&#x27;</span></span><br><span class="line">cat -n file | sed -n <span class="string">&#x27;!G;h;$p&#x27;</span></span><br><span class="line">cat -n file | sed -n <span class="string">&#x27;G;h;$!d&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Remeber to use <code>man sed</code>.</p>
+</blockquote>
+<h1 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h1><p><code>awk</code> is a pattern scanning and processing language, likes a little system.</p>
+<p>Fist of all, we need to know the following four points:</p>
+<ul>
+<li>record means line</li>
+<li>field means the content separeted by separator.</li>
+<li>How to write?<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BEGAIN action: BEGIN&#123;&#125;</span><br><span class="line">Main action: &#123;&#125;</span><br><span class="line">END action: END&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>man awk</code></li>
+</ul>
+<h2 id="Tips-and-example"><a href="#Tips-and-example" class="headerlink" title="Tips and example"></a>Tips and example</h2><h3 id="Basis-1"><a href="#Basis-1" class="headerlink" title="Basis"></a>Basis</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The separator is space or tab in default.</span></span><br><span class="line"><span class="variable">$0</span>: Represents the entire line of text.</span><br><span class="line"><span class="variable">$1</span>: Represents the first field.</span><br><span class="line"><span class="variable">$2</span>: Represents the second field.</span><br><span class="line"><span class="variable">$n</span>: Represents the n field.</span><br><span class="line"><span class="variable">$NF</span>: Represents the last field.</span><br><span class="line"></span><br><span class="line">awk <span class="string">&#x27;&#123;print $1,$2,$3&#125;&#x27;</span> file <span class="comment"># Separate each line with space and tab ,and print the first three field. </span></span><br><span class="line">awk -F <span class="string">&#x27;,&#x27;</span> <span class="string">&#x27;&#123;print $1,$2,$3&#125;&#x27;</span> file <span class="comment"># Separate each line with &#x27;,&#x27; and print the first three field.</span></span><br><span class="line">awk <span class="string">&#x27;/^menu/&#123;print $0&#125;&#x27;</span> /boot/grub2/grub.cfg <span class="comment"># print the line starting with &#x27;menu&#x27;</span></span><br><span class="line">awk -F <span class="string">&quot;&#x27;&quot;</span> <span class="string">&#x27;/^menu/&#123;print $2&#125;&#x27;</span> /boot/grub2/grub.cfg <span class="comment"># print the second field(kernel version) of lines with &quot;&#x27;&quot;</span></span><br><span class="line">awk -F <span class="string">&quot;&#x27;&quot;</span> <span class="string">&#x27;/^menu/&#123;print x++,$2&#125;&#x27;</span> /boot/grub2/grub.cfg <span class="comment"># print kernel version with line number, x is 0 in default</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Built-in-Variables"><a href="#Built-in-Variables" class="headerlink" title="Built-in Variables"></a>Built-in Variables</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">NF: The number of fields <span class="keyword">in</span> the current input record</span><br><span class="line">NR: The total number of input records seen so far</span><br><span class="line">FS: The input field separator, a space by default, default separator is decided by this var.</span><br><span class="line">OFS: The output field separator, a space by default </span><br><span class="line">FNR: The input record number <span class="keyword">in</span> the current input file</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get username</span></span><br><span class="line">head -5 /etc/passwd | awk -F <span class="string">&quot;:&quot;</span> <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> </span><br><span class="line">head -5 /etc/passwd | awk <span class="string">&#x27;BEGIN&#123;FS=&quot;:&quot;&#125;&#123;print $1&#125;&#x27;</span></span><br><span class="line">head -5 /etc/passwd | awk <span class="string">&#x27;BEGIN&#123;FS=&quot;:&quot;;OFS=&quot;-&quot;&#125;&#123;print $1,$2&#125;&#x27;</span> <span class="comment"># username-$2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Separete line with &#x27;:&#x27; and output fields</span></span><br><span class="line">head -5 /etc/passwd | awk <span class="string">&#x27;BEGIN&#123;RS=&quot;:&quot;&#125;&#123;print $0&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Add line number before fields</span></span><br><span class="line">head -5 /etc/passwd | awk <span class="string">&#x27;&#123;print NR,$0&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">awk <span class="string">&#x27;&#123;print FNR,$0&#125;&#x27;</span> /etc/hosts /etc/hosts <span class="comment"># Sort all file lines separately</span></span><br><span class="line">awk <span class="string">&#x27;&#123;print NR,$0&#125;&#x27;</span> /etc/hosts /etc/hosts <span class="comment"># Sort all file lines uniformly</span></span><br><span class="line"></span><br><span class="line">head -5 /etc/passwd | awk <span class="string">&#x27;BEGIN&#123;FS=&quot;:&quot;&#125;&#123;print $NF&#125;&#x27;</span> <span class="comment"># the last field of every record(line)</span></span><br><span class="line">head -5 /etc/passwd | awk <span class="string">&#x27;BEGIN&#123;FS=&quot;:&quot;&#125;&#123;print NF&#125;&#x27;</span>  <span class="comment"># the total nubmer of fields of every record</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Expr"><a href="#Expr" class="headerlink" title="Expr"></a>Expr</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">var = <span class="string">&quot;name&quot;</span></span><br><span class="line">var = <span class="string">&quot;string1&quot;</span> <span class="string">&quot;string2&quot;</span></span><br><span class="line">var = <span class="variable">$1</span> <span class="comment"># the first field</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Array</span></span><br><span class="line">arr[subscript]=vaule <span class="comment"># subscript could be any character</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(var <span class="keyword">in</span> arr)</span><br><span class="line">	delete arr[var] <span class="comment"># delete array</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Operator</span></span><br><span class="line">++, --, +=, -=, *=, /+, %=, ^=</span><br><span class="line">+, -, *, /, *, ^</span><br><span class="line"></span><br><span class="line"><span class="comment"># Comparison</span></span><br><span class="line">&lt; &gt; &lt;= &gt;= == != ~ !~</span><br><span class="line"></span><br><span class="line"><span class="comment"># Logical</span></span><br><span class="line">&amp;&amp; || ?</span><br><span class="line"></span><br><span class="line"><span class="comment"># Branch</span></span><br><span class="line"><span class="keyword">if</span>()</span><br><span class="line">	awk</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span></span><br><span class="line">	awk</span><br><span class="line">[<span class="keyword">else</span></span><br><span class="line">	awk</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loop</span></span><br><span class="line"><span class="keyword">while</span>()</span><br><span class="line">    awk</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    awk</span><br><span class="line">&#125;<span class="keyword">while</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(;;) <span class="comment"># same as c language</span></span><br><span class="line">   awk</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loop control</span></span><br><span class="line"><span class="built_in">break</span></span><br><span class="line"><span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Score-example"><a href="#Score-example" class="headerlink" title="Score example"></a>Score example</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create score.txt</span></span><br><span class="line">cat &gt; score.txt &lt;&lt;EOF</span><br><span class="line">student1 70 80 70 90 50</span><br><span class="line">student2 70 80 70 90 50</span><br><span class="line">student3 80 80 70 90 50</span><br><span class="line">student4 60 80 70 90 50</span><br><span class="line">student5 90 80 70 90 50</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">awk <span class="string">&#x27;&#123;if($2&gt;=80) print $1&#125;&#x27;</span> score.txt <span class="comment"># output name got more than 80</span></span><br><span class="line">awk <span class="string">&#x27;&#123;if($2&gt;=80) &#123;print $1? print $2&#125;&#125;&#x27;</span> score.txt <span class="comment"># output name and the first score</span></span><br><span class="line">head -1 score.txt | awk <span class="string">&#x27;&#123;for(c=2;c&lt;=NF;c++) print $c&#125;&#x27;</span><span class="comment"># output the first student&#x27;s score</span></span><br><span class="line">head -1 score.txt | awk <span class="string">&#x27;&#123;for(c=2;c&lt;=NF;c++) sum+=$c;print sum&#125;&#x27;</span><span class="comment"># output the total score of the first student</span></span><br><span class="line">awk <span class="string">&#x27;&#123;sum=0; for(c=2;c&lt;=NF;c++) sum+=$c;print sum&#125;&#x27;</span> score.txt <span class="comment"># output the total score of all students</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Store and print the sum of avarage score</span></span><br><span class="line">awk <span class="string">&#x27;&#123; sum=0; for(column=2;column&lt;=NF;column++) sum+=$column;avg[$1]=sum/(NF-1)&#125;END&#123; for(student in avg) print student,avg[student]&#125;&#x27;</span> score.txt  </span><br><span class="line"></span><br><span class="line"><span class="comment"># Store all avarage score and get sum, print avarage of the sum of avarage score</span></span><br><span class="line">awk <span class="string">&#x27;&#123; sum=0; for(column=2;column&lt;=NF;column++) sum+=$column;avg[$1]=sum/(NF-1)&#125;END&#123; for(student in avg) sum2+=avg[student];print sum2/NR&#125;&#x27;</span> score.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Script"><a href="#Script" class="headerlink" title="Script"></a>Script</h3><h4 id="ARGC-and-ARGV"><a href="#ARGC-and-ARGV" class="headerlink" title="ARGC and ARGV"></a>ARGC and ARGV</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ARGC : The num of argument</span></span><br><span class="line"><span class="comment"># ARGV : The arguments</span></span><br><span class="line">cat &gt; arg.awk &lt;&lt;EOF</span><br><span class="line">BEGIN&#123;</span><br><span class="line">    <span class="keyword">for</span>(x=0;x&lt;ARGC;x++)</span><br><span class="line">        <span class="built_in">print</span> ARGV[x]</span><br><span class="line">    <span class="built_in">print</span> ARGC</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">awk -f arg.awk 1 2 3 4 5</span><br></pre></td></tr></table></figure>
+
+<h4 id="Score-example-again"><a href="#Score-example-again" class="headerlink" title="Score example again"></a>Score example again</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; result.awk &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">    sum = 0</span><br><span class="line">    <span class="keyword">for</span>( column = 2; column &lt;= NF; column++ )</span><br><span class="line">        sum+ = <span class="variable">$column</span></span><br><span class="line">    avg[<span class="variable">$1</span>] = sum / (NF - 1)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( avg[<span class="variable">$1</span>] &gt;= 80 )</span><br><span class="line">        letter = <span class="string">&quot;A&quot;</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>( avg[<span class="variable">$1</span>] &gt;= 70 )</span><br><span class="line">        letter = <span class="string">&quot;B&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        letter = <span class="string">&quot;C&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span> <span class="variable">$1</span>,avg[<span class="variable">$1</span>],letter</span><br><span class="line"></span><br><span class="line">    letter_all[letter]++</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">END&#123;</span><br><span class="line">    <span class="keyword">for</span>( student <span class="keyword">in</span> avg )</span><br><span class="line">        sum_all += avg[student]</span><br><span class="line">    avg_all = sum_all / NR</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;avg_all&quot;</span>,<span class="variable">$avg_all</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>( student <span class="keyword">in</span> avg )</span><br><span class="line">        <span class="keyword">if</span>( avg[student] &gt; avg_all )</span><br><span class="line">            above++</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(avg[student] == avg_all)</span><br><span class="line">            equal++</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            below++</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;above&quot;</span>,above</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;equal&quot;</span>,equal</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;below&quot;</span>,below</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;A:&quot;</span>,letter_all[<span class="string">&quot;A&quot;</span>]</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;B:&quot;</span>,letter_all[<span class="string">&quot;B&quot;</span>]</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;C:&quot;</span>,letter_all[<span class="string">&quot;C&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">awk -f result.awk score.txt</span><br></pre></td></tr></table></figure>
+
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Numeric Functions</span></span><br><span class="line">sin(),cos(),int(),rand(),srand()...</span><br><span class="line"></span><br><span class="line"><span class="comment"># Strings Funcitons</span></span><br><span class="line">sub(r, s [, t]), index(s, t)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Custom Functions, need to be before BEGIN</span></span><br><span class="line"><span class="keyword">function</span> func ( arg ) &#123;</span><br><span class="line">	awk</span><br><span class="line">	<span class="built_in">return</span> var</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">awk <span class="string">&#x27;function double(str) &#123;return str str&#125; BEGIN&#123; print double(&quot;Hello awk!&quot;)&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/29/Linux/Consolidating-the-foundation-of-Linux-shell/" rel="next" title="Consolidating the foundation of Linux, shell">
+      Consolidating the foundation of Linux, shell <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sed"><span class="nav-number">1.</span> <span class="nav-text">sed</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tips-and-example"><span class="nav-number">1.1.</span> <span class="nav-text">tips and example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basis"><span class="nav-number">1.1.1.</span> <span class="nav-text">Basis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#separator"><span class="nav-number">1.1.2.</span> <span class="nav-text">separator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#regex"><span class="nav-number">1.1.3.</span> <span class="nav-text">regex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advanced-sed"><span class="nav-number">1.1.4.</span> <span class="nav-text">Advanced sed</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#awk"><span class="nav-number">2.</span> <span class="nav-text">awk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tips-and-example"><span class="nav-number">2.1.</span> <span class="nav-text">Tips and example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basis-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">Basis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Built-in-Variables"><span class="nav-number">2.2.</span> <span class="nav-text">Built-in Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expr"><span class="nav-number">2.3.</span> <span class="nav-text">Expr</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Score-example"><span class="nav-number">2.3.1.</span> <span class="nav-text">Score example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Script"><span class="nav-number">2.3.2.</span> <span class="nav-text">Script</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ARGC-and-ARGV"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">ARGC and ARGV</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Score-example-again"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">Score example again</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">3.</span> <span class="nav-text">Function</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy.Lee"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Andy.Lee</p>
+  <div class="site-description" itemprop="description">Just need to enjoy life.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huaqianlee@gmail.com" title="E-Mail → mailto:huaqianlee@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/huaqianlee" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/huaqianlee" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/huaqianlee" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/huaqianlee" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'af176630d44392cdef8f',
+      clientSecret: '63681992881b6f3ecd24146470e5aaf7d068fe14',
+      repo        : 'huaqianlee.github.io',
+      owner       : 'huaqianlee',
+      admin       : ['huaqianlee'],
+      id          : '766917b8c9341dc13e34b34205cb7a17',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
