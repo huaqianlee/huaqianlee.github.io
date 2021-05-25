@@ -28,7 +28,7 @@
 <meta property="og:description" content="Linux TipsRecord the commands that I use more frequently in the form of a memo, and will continue to increase according to usage in the future.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-25T14:39:20.000Z">
-<meta property="article:modified_time" content="2020-11-25T14:40:37.261Z">
+<meta property="article:modified_time" content="2021-05-25T14:36:19.500Z">
 <meta property="article:author" content="Andy.Lee">
 <meta name="twitter:card" content="summary">
 
@@ -218,10 +218,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: Nov 25 2020 22:39:20 / Modified: 22:40:37" itemprop="dateCreated datePublished" datetime="2020-11-25T22:39:20+08:00">Nov 25 2020</time>
+              <time title="Created: Nov 25 2020 22:39:20" itemprop="dateCreated datePublished" datetime="2020-11-25T22:39:20+08:00">Nov 25 2020</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: May 25 2021 22:36:19" itemprop="dateModified" datetime="2021-05-25T22:36:19+08:00">May 25 2021</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -261,8 +267,443 @@
 </tr>
 <tr>
 <td></td>
+<td><code>shopt -s histappend</code></td>
+<td>Sync history in multiple terminal</td>
+</tr>
+<tr>
+<td></td>
+<td><code>shopt -s cdspell</code></td>
+<td>Correct the typos of cd</td>
+</tr>
+<tr>
+<td></td>
+<td><code>&amp;&amp;</code></td>
+<td>run the following command only when the previous is successful</td>
+</tr>
+<tr>
+<td></td>
+<td><code>;</code></td>
+<td>run the following command regardless of success of first one</td>
+</tr>
+<tr>
+<td></td>
+<td><code>which &lt;cmd&gt;</code>,<code>file &lt;file&gt;</code>,<code>command -V &lt;cmd&gt;</code></td>
+<td>Examine executable file</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pushd [-n] &lt;dir&gt;</code>,<code>dirs -l -v</code><br><code>popd [-n]  [+N | -N]</code></td>
+<td>Manage directories with stack</td>
+</tr>
+<tr>
+<td></td>
+<td><code>dmesg -w</code></td>
+<td>Wait for new messages</td>
+</tr>
+<tr>
+<td></td>
+<td><code>less -N +F</code></td>
+<td>view logfiles and number the lines</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ls -ld</code></td>
+<td>list directories themselves, not their contents</td>
+</tr>
+<tr>
+<td></td>
+<td><code>flock -xn &quot;/tmp/f.lock&quot; c &quot;filename.sh&quot;</code></td>
+<td>Lock ‘filename.sh’ with flock</td>
+</tr>
+<tr>
+<td></td>
+<td><code>LANG=C stat file</code></td>
+<td>Display file  status in English</td>
+</tr>
+<tr>
+<td></td>
+<td><code>time &lt;cmd&gt;</code></td>
+<td>run <cmd> and summarize system resource usage of <cmd></td>
+</tr>
+<tr>
+<td></td>
+<td><code>tac</code></td>
+<td>conatenate and print files in reverse,`cat -n file</td>
+</tr>
+<tr>
+<td></td>
+<td><code>r</code></td>
+<td>repeat the previous cmd</td>
+</tr>
+<tr>
+<td></td>
+<td><code>bash -i script</code></td>
+<td>Make the shell interactive</td>
+</tr>
+<tr>
+<td></td>
+<td><code>shred -u &lt;file&gt;</code></td>
+<td>Overwrite file and remove it, better way to delete than ‘rm -rf file’</td>
+</tr>
+<tr>
+<td></td>
+<td><code>nl</code></td>
+<td>number lines of contents, `ls</td>
+</tr>
+<tr>
+<td></td>
+<td><code>split &lt;prefix&gt;</code>, <code>cat preifx* &gt; file</code></td>
+<td>split , merge file</td>
+</tr>
+<tr>
+<td></td>
+<td><code>killall</code></td>
+<td>kill processes by name</td>
+</tr>
+<tr>
+<td></td>
+<td><code>fc</code></td>
+<td>fix and execute commands from history in editor</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl-X-E</code></td>
+<td>execute commands in editor</td>
+</tr>
+<tr>
+<td></td>
+<td><code>touch -t 2104250101 &lt;file&gt;</code></td>
+<td>Change the timestamp of file</td>
+</tr>
+<tr>
+<td></td>
+<td><code>touch -r &lt;file1&gt; &lt;file2&gt;</code></td>
+<td>file1’s times instead of current time</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl-D</code></td>
+<td>Stop current cmd or bash …</td>
+</tr>
+<tr>
+<td></td>
+<td><code>dd</code></td>
+<td>Convert and copy a file, ‘man dd’</td>
+</tr>
+<tr>
+<td></td>
+<td><code>hexdump, hd -C &lt;binary&gt;</code></td>
+<td>ASCII, decimal, hexadecimal, octal dump</td>
+</tr>
+<tr>
+<td></td>
+<td><code>select-editor</code></td>
+<td>Choose the default editor</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ranger</code></td>
+<td>man ranger, ‘?’ in ranger</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sl -F</code></td>
+<td>A funny command</td>
+</tr>
+<tr>
+<td></td>
+<td><code>apropos</code></td>
+<td>search the manual page names and descriptions,eg:<code>apropos &quot;list directory&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>echo &gt; /dev/&lt;udp or tcp&gt;/&lt;server ip&gt;/&lt;port&gt;</code></td>
+<td>Check net</td>
+</tr>
+<tr>
+<td></td>
+<td><code>2&gt;&amp;1</code></td>
+<td>2 means stderr, &amp;1 means stdout</td>
+</tr>
+<tr>
+<td></td>
+<td><code>bind -p</code></td>
+<td>to check the shortcut</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - _</code></td>
+<td>undo</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ls -alrRt</code></td>
+<td><code>-r</code>: reverse, <code>-R</code>: Recursive</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cp -ar(R)pv</code></td>
+<td><code>-p</code> keep mode,ownership,timestamps; <code>-r</code> equals <code>-R</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>tail -nf</code></td>
+<td>Output the last n line appended data as the file grows</td>
+</tr>
+<tr>
+<td></td>
+<td><code>more/less</code></td>
+<td>File perusal filter for crt viewing, <code>less</code> opposite of more</td>
+</tr>
+<tr>
+<td></td>
+<td><code>wc</code></td>
+<td>Print newline, word, and byte couts for each file,<code>-l</code> line</td>
+</tr>
+<tr>
+<td></td>
+<td><code>tar -czf/cjf</code></td>
+<td><code>-j</code> bzip2, .tar.bz2, max compression; <code>-z</code> gzip, tar.gz</td>
+</tr>
+<tr>
+<td></td>
+<td><code>whatis &lt;cmd&gt;</code></td>
+<td>display one-line manual page description</td>
+</tr>
+<tr>
+<td><strong>Move:</strong></td>
+<td><code>Ctrl - t</code></td>
+<td>swap two characters</td>
+</tr>
+<tr>
+<td></td>
+<td><code>!!</code>, <code>!-1</code></td>
+<td>Refer to the previous command</td>
+</tr>
+<tr>
+<td></td>
+<td><code>!*</code> or <code>Alt+.</code></td>
+<td>Refer to the previous parameters</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl-R</code></td>
+<td>Search command from history, doulbe to search next</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ALT - t</code></td>
+<td>swap two words</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ALT - .</code></td>
+<td>prints last argument from previous command</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - x - *</code></td>
+<td>expand glob/star</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - arrows</code></td>
+<td>move forward a word</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ALT - f</code></td>
+<td>move forward a word</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ALT - b</code></td>
+<td>move backward a word</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Alt-Backspace</code></td>
+<td>delete forward a word</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - x , Ctrl - e</code></td>
+<td>Edit command with editor</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - e</code></td>
+<td>move cursor to end</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - a</code></td>
+<td>move cursor to start</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - xx</code></td>
+<td>move to the opposite end of the line</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - u</code></td>
+<td>cuts everything before the cursor</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - k</code></td>
+<td>cuts everything after the cursor</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - y</code></td>
+<td>pastes from the buffer</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl-W</code></td>
+<td>cuts one word before the cursor</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - L</code></td>
+<td>clears screen</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl - shift - c/v</code></td>
+<td>copy/paste into terminal</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl-Insert</code>, <code>Shift-Insert</code></td>
+<td>copy/paste</td>
+</tr>
+<tr>
+<td></td>
+<td><code>Ctrl-Z</code>,<code>fg</code>, <code>bg</code></td>
+<td>Pasue the current process, foregroud/backgroud it</td>
+</tr>
+<tr>
+<td><strong>System:</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>lscpu</code>, <code>cat /proc/cpuinfo</code></td>
+<td>information about cpu</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ps [-eLf]</code></td>
+<td>Get information about process including threads</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pstree -p, -a</code></td>
+<td>Get information about process with tree</td>
+</tr>
+<tr>
+<td></td>
+<td><code>nice</code>, <code>renice</code></td>
+<td>alter priority of process</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ulimit -a</code></td>
+<td>get and set user limits</td>
+</tr>
+<tr>
+<td></td>
+<td><code>free -m</code>, <code>cat /proc/meminfo</code></td>
+<td>information about memory</td>
+</tr>
+<tr>
+<td></td>
+<td><code>lsblk</code>, <code>cat /proc/partitions</code></td>
+<td>formation harddisk and partition</td>
+</tr>
+<tr>
+<td></td>
+<td><code>df -h</code></td>
+<td>infromation about partition</td>
+</tr>
+<tr>
+<td></td>
+<td><code>mount | column -t</code></td>
+<td>status about mounted partition</td>
+</tr>
+<tr>
+<td></td>
+<td><code>hostname</code></td>
+<td>show or set the hostname</td>
+</tr>
+<tr>
+<td></td>
+<td><code>w</code></td>
+<td>show who is logged on and what they are doing</td>
+</tr>
+<tr>
+<td></td>
+<td><code>id</code></td>
+<td>print user and group IDs</td>
+</tr>
+<tr>
+<td></td>
+<td><code>last</code></td>
+<td>show a listing of last logged in users</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cut -d: -f1 /etc/passwd</code></td>
+<td>show all users</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cut -d: -f1 /etc/group</code></td>
+<td>show all groups</td>
+</tr>
+<tr>
+<td></td>
+<td><code>chkconfig ?list | grep on</code></td>
+<td>show all on system service</td>
+</tr>
+<tr>
+<td></td>
+<td><code>uptime</code></td>
+<td>show operation time,user number,load</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ls</code>, <code>du</code>, <code>ln</code>, <code>rmdir</code>, <code>rm</code>, <code>cp</code>, <code>mv</code>, <code>cat</code>, <code>tail</code>, <code>less</code>, <code>grep</code>, <code>find</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>htop</code>, <code>top</code></td>
+<td>display processes, 1 - extend top information</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sudo dpkg --get-selections | grep linux-image</code><br><code>cat /proc/version</code><br><code>grep menuentry /boot/grub/grub.cfg</code></td>
+<td>Kernel version</td>
+</tr>
+<tr>
+<td></td>
+<td><code>apt-cache search package</code></td>
+<td>query the APT cache</td>
+</tr>
+<tr>
+<td></td>
 <td><code>apt update</code></td>
 <td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>uname -a , -r</code><br><code>cat /proc/version</code><br><code>cat /etc/issue</code><br><code>lsb_release -a</code></td>
+<td>print system information</td>
 </tr>
 <tr>
 <td></td>
@@ -305,36 +746,6 @@
 <td>Log out</td>
 </tr>
 <tr>
-<td>1</td>
-<td><code>ls -alrRt</code></td>
-<td><code>-r</code>: reverse, <code>-R</code>: Recursive</td>
-</tr>
-<tr>
-<td></td>
-<td><code>cp -ar(R)pv</code></td>
-<td><code>-p</code> keep mode,ownership,timestamps; <code>-r</code> equals <code>-R</code></td>
-</tr>
-<tr>
-<td></td>
-<td><code>tail -nf</code></td>
-<td>Output the last n line appended data as the file grows</td>
-</tr>
-<tr>
-<td></td>
-<td><code>more/less</code></td>
-<td>File perusal filter for crt viewing, <code>less</code> opposite of more</td>
-</tr>
-<tr>
-<td></td>
-<td><code>wc</code></td>
-<td>Print newline, word, and byte couts for each file,<code>-l</code> line</td>
-</tr>
-<tr>
-<td></td>
-<td><code>tar -czf/cjf</code></td>
-<td><code>-j</code> bzip2, .tar.bz2, max compression; <code>-z</code> gzip, tar.gz</td>
-</tr>
-<tr>
 <td></td>
 <td><code>$(date &quot;+%Y%m%d-%H%M%S&quot;)</code></td>
 <td>Get the current system time</td>
@@ -350,9 +761,19 @@
 <td>unmount sshfs <name>, <code> umount -l name</code> for busy error</td>
 </tr>
 <tr>
-<td><strong>Supper Mode</strong></td>
+<td><strong>Supper Mode:</strong></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>rename &#39;s/old_name/new-name/&#39; *.txt</code></td>
+<td>rename files</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cp | mv test.sh&#123;,.bk&#125;</code></td>
+<td>rename quickly</td>
 </tr>
 <tr>
 <td></td>
@@ -410,6 +831,31 @@
 <td>Embeded memeory analysis tool</td>
 </tr>
 <tr>
+<td><strong>schedule:</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>at &lt;time&gt;</code> + <Ctrl-D></td>
+<td>Execute some commands on <time></td>
+</tr>
+<tr>
+<td></td>
+<td><code>cron</code></td>
+<td>Daemon to execute scheduled commands,<code>/etc/cron.*, /etc/ancrontab</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>crontab -e</code>,<code>crontab -l</code></td>
+<td>Edit, list the scheduled commands</td>
+</tr>
+<tr>
+<td></td>
+<td><code>anacron</code></td>
+<td>run commands periodically</td>
+</tr>
+<tr>
 <td><strong>Directory:</strong></td>
 <td></td>
 <td></td>
@@ -440,7 +886,62 @@
 <td>Copy files to and from archives</td>
 </tr>
 <tr>
-<td><strong>Other</strong></td>
+<td><strong>Network:</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>`lspci</td>
+<td>grep -i ‘eth’`</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ifconfig -a</code></td>
+<td>information about all net port</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ethtool eth0</code></td>
+<td>Details of eth0</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ping &lt;remote host address&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>ssh</code>, <code>sshfs</code>, <code>scp</code></td>
+<td>remote login, mount, copy</td>
+</tr>
+<tr>
+<td></td>
+<td><code>iptables -L</code></td>
+<td>information about firewall</td>
+</tr>
+<tr>
+<td></td>
+<td><code>service iptables status</code></td>
+<td>status about firewall</td>
+</tr>
+<tr>
+<td></td>
+<td><code>service iptables stop</code></td>
+<td>Close firewall</td>
+</tr>
+<tr>
+<td></td>
+<td><code>route -n</code></td>
+<td>show the IP routing table</td>
+</tr>
+<tr>
+<td></td>
+<td><code>netstat -lntp,-antp,-s,-at,-au,-lt</code></td>
+<td>information about port,conection,…</td>
+</tr>
+<tr>
+<td><strong>Others:</strong></td>
 <td></td>
 <td></td>
 </tr>
@@ -461,8 +962,8 @@
 </tr>
 <tr>
 <td></td>
-<td>`while true; do adb shell cat /proc/interrupts</td>
-<td>grep kgsl; sleep 0.5; done`</td>
+<td><code>while true; do adb shell cat /proc/interrupts | grep kgsl; sleep 0.5; done</code></td>
+<td></td>
 </tr>
 <tr>
 <td></td>
@@ -512,7 +1013,7 @@
 <tr>
 <td></td>
 <td><code>readelf</code></td>
-<td>Displays information about ELF files,`readelf -hlSVAI vmlinux</td>
+<td>Displays information about ELF files,<code>readelf -hlSVAI vmlinux</code></td>
 </tr>
 <tr>
 <td></td>
@@ -590,6 +1091,11 @@
 <td>Format of Executable and Linking Format(ELF) files</td>
 </tr>
 </tbody></table>
+<h2 id="Add-default-CDPATH"><a href="#Add-default-CDPATH" class="headerlink" title="Add default CDPATH"></a>Add default CDPATH</h2><pre><code class="bash">export CDPATH=&#39;$CDPATH:...&#39;
+export CDPATH=&#39;~:/var/log:/etc&#39;
+lee@lee-pc:~$ cd fonts
+/etc/fonts
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Modify user</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">sudo chown -R $(whoami) file</span><br></pre></td></tr></table></figure></code></pre>
 
     </div>
 
@@ -671,7 +1177,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-Tips"><span class="nav-number">1.</span> <span class="nav-text">Linux Tips</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-Tips"><span class="nav-number">1.</span> <span class="nav-text">Linux Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-default-CDPATH"><span class="nav-number">1.1.</span> <span class="nav-text">Add default CDPATH</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
