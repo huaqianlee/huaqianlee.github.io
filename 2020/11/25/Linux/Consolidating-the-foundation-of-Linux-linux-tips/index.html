@@ -28,7 +28,7 @@
 <meta property="og:description" content="Linux TipsRecord the commands that I use more frequently in the form of a memo, and will continue to increase according to usage in the future.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-25T14:39:20.000Z">
-<meta property="article:modified_time" content="2021-05-25T14:36:19.500Z">
+<meta property="article:modified_time" content="2021-05-25T14:40:15.850Z">
 <meta property="article:author" content="Andy.Lee">
 <meta name="twitter:card" content="summary">
 
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: May 25 2021 22:36:19" itemprop="dateModified" datetime="2021-05-25T22:36:19+08:00">May 25 2021</time>
+                <time title="Modified: May 25 2021 22:40:15" itemprop="dateModified" datetime="2021-05-25T22:40:15+08:00">May 25 2021</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1091,11 +1091,9 @@
 <td>Format of Executable and Linking Format(ELF) files</td>
 </tr>
 </tbody></table>
-<h2 id="Add-default-CDPATH"><a href="#Add-default-CDPATH" class="headerlink" title="Add default CDPATH"></a>Add default CDPATH</h2><pre><code class="bash">export CDPATH=&#39;$CDPATH:...&#39;
-export CDPATH=&#39;~:/var/log:/etc&#39;
-lee@lee-pc:~$ cd fonts
-/etc/fonts
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Modify user</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">sudo chown -R $(whoami) file</span><br></pre></td></tr></table></figure></code></pre>
+<h2 id="Add-default-CDPATH"><a href="#Add-default-CDPATH" class="headerlink" title="Add default CDPATH"></a>Add default CDPATH</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> CDPATH=<span class="string">&#x27;$CDPATH:...&#x27;</span></span><br><span class="line"><span class="built_in">export</span> CDPATH=<span class="string">&#x27;~:/var/log:/etc&#x27;</span></span><br><span class="line">lee@lee-pc:~$ <span class="built_in">cd</span> fonts</span><br><span class="line">/etc/fonts</span><br></pre></td></tr></table></figure>
+
+<h1 id="Modify-user"><a href="#Modify-user" class="headerlink" title="Modify user"></a>Modify user</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R $(whoami) file</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -1177,7 +1175,7 @@ lee@lee-pc:~$ cd fonts
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-Tips"><span class="nav-number">1.</span> <span class="nav-text">Linux Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-default-CDPATH"><span class="nav-number">1.1.</span> <span class="nav-text">Add default CDPATH</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-Tips"><span class="nav-number">1.</span> <span class="nav-text">Linux Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-default-CDPATH"><span class="nav-number">1.1.</span> <span class="nav-text">Add default CDPATH</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Modify-user"><span class="nav-number">2.</span> <span class="nav-text">Modify user</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
