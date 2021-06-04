@@ -28,7 +28,7 @@
 <meta property="og:description" content="BasicHere is A little basic knowledge of shell. env123456$USER$UID$PATHset | more # check the variables including shell-local variables(including shell functions)env | less # check the variables excep">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-29T15:08:16.000Z">
-<meta property="article:modified_time" content="2021-05-25T14:21:26.718Z">
+<meta property="article:modified_time" content="2021-06-04T14:45:06.938Z">
 <meta property="article:author" content="Andy.Lee">
 <meta name="twitter:card" content="summary">
 
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: May 25 2021 22:21:26" itemprop="dateModified" datetime="2021-05-25T22:21:26+08:00">May 25 2021</time>
+                <time title="Modified: Jun 4 2021 22:45:06" itemprop="dateModified" datetime="2021-06-04T22:45:06+08:00">Jun 4 2021</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,8 +265,8 @@
 <td>script name</td>
 </tr>
 <tr>
-<td>$<n></td>
-<td>the <n>th parameter</td>
+<td>$&lt;n&gt;</td>
+<td>the &lt;n&gt;th parameter</td>
 </tr>
 <tr>
 <td>$#</td>
@@ -471,6 +471,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">whiptail --yesno <span class="string">&quot;would you like to continue?&quot;</span> 10 40</span><br><span class="line">RESULT=$?</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$RESULT</span> = 0 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;you clicked yes&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;you clicked no&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Suggestions"><a href="#Suggestions" class="headerlink" title="Suggestions"></a>Suggestions</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Avoid:</span></span><br><span class="line">rm -rf -- <span class="string">&quot;<span class="variable">$&#123;dir&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Good:</span></span><br><span class="line">rm --recursive --force -- <span class="string">&quot;<span class="variable">$&#123;dir&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Don?t use:</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$&#123;foo&#125;</span>&quot;</span></span><br><span class="line">  [...]</span><br><span class="line">  <span class="built_in">cd</span> ..</span><br><span class="line"><span class="comment"># but</span></span><br><span class="line"></span><br><span class="line">  (</span><br><span class="line">    <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$&#123;foo&#125;</span>&quot;</span></span><br><span class="line">    [...]</span><br><span class="line">  )</span><br><span class="line"><span class="comment"># pushd and popd may also be useful:</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">pushd</span> <span class="string">&quot;<span class="variable">$&#123;foo&#125;</span>&quot;</span></span><br><span class="line">  [...]</span><br><span class="line">  <span class="built_in">popd</span></span><br></pre></td></tr></table></figure>
+
     </div>
 
     
