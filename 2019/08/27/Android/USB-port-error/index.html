@@ -28,10 +28,11 @@
 <meta property="og:description" content="Term DFP - Downstream Facing Port下行端口，可以理解为 Host 的 Type-c 端口或者作为 Host 的 hub ，DFP 提供 VBUS，可以提供数据。在协议规范中 DFP 特指数据的下行传输，笼统意义上指的是数据下行和对外提供电源的设备。典型的 DFP 设备是电源适配器。  UFP - Upstream Facing port上行端口，可以理解为 Devi">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-08-27T14:11:32.000Z">
-<meta property="article:modified_time" content="2019-09-01T06:22:00.451Z">
+<meta property="article:modified_time" content="2021-07-23T15:08:48.699Z">
 <meta property="article:author" content="Andy.Lee">
 <meta property="article:tag" content="Bug">
 <meta property="article:tag" content="Qualcomm">
+<meta property="article:tag" content="USB">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://huaqianlee.github.io/2019/08/27/Android/USB-port-error/">
@@ -123,17 +124,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">115</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">114</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">19</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">30</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -228,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Sep 1 2019 14:22:00" itemprop="dateModified" datetime="2019-09-01T14:22:00+08:00">Sep 1 2019</time>
+                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +237,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                  <a href="/categories/Android-Tree/" itemprop="url" rel="index"><span itemprop="name">Android Tree</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android-Tree/Kernel/" itemprop="url" rel="index"><span itemprop="name">Kernel</span></a>
                 </span>
             </span>
 
@@ -280,6 +285,7 @@
 
 <h2 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h2><p>此方案与方案二类似，</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/drivers/power/supply/qcom/smb-lib.c b/drivers/power/supply/qcom/smb-lib.c</span><br><span class="line">--- a/drivers/power/supply/qcom/smb-lib.c</span><br><span class="line">+++ b/drivers/power/supply/qcom/smb-lib.c</span><br><span class="line">@@ <span class="number">-4378</span>,<span class="number">12</span> +<span class="number">4378</span>,<span class="number">28</span> @@</span><br><span class="line"> <span class="meta">#<span class="meta-keyword">ifdef</span> FEATURE__DET_DRIVER</span></span><br><span class="line"> 	<span class="comment">/* configure power role for default */</span></span><br><span class="line"> 	_power_role_val.intval = _det_get_default_power_role();  <span class="comment">// 获取需要设定端口模式</span></span><br><span class="line">-	rc = smblib_set_prop_typec_power_role(chg, &amp;_power_role_val);</span><br><span class="line">-	<span class="keyword">if</span> (rc &lt; <span class="number">0</span>) &#123;</span><br><span class="line">-		smblib_err(chg,</span><br><span class="line">-			<span class="string">&quot;Couldn&#x27;t configure power role for %d rc=%d\n&quot;</span>, _power_role_val.intval, rc);</span><br><span class="line">+	<span class="keyword">if</span>(_power_role_val.intval == POWER_SUPPLY_TYPEC_PR_SINK)&#123;</span><br><span class="line">+		rc = smblib_masked_write(chg, TYPE_C_INTRPT_ENB_SOFTWARE_CTRL_REG, TYPEC_DISABLE_CMD_BIT, TYPEC_DISABLE_CMD_BIT);</span><br><span class="line">+		<span class="keyword">if</span>(rc &lt; <span class="number">0</span>)</span><br><span class="line">+			smblib_err(chg, <span class="string">&quot;Couldn&#x27;t disable type-c\n&quot;</span>);</span><br><span class="line">+</span><br><span class="line">+		msleep(<span class="number">200</span>);  # 延时等 PSI 修改 USB 为 DRP 完成，然后我们再修改为 UFP</span><br><span class="line">+		rc = smblib_masked_write(chg, TYPE_C_INTRPT_ENB_SOFTWARE_CTRL_REG, UFP_EN_CMD_BIT | DFP_EN_CMD_BIT, UFP_EN_CMD_BIT);</span><br><span class="line">+		<span class="keyword">if</span>(rc &lt; <span class="number">0</span>)</span><br><span class="line">+			smblib_err(chg, <span class="string">&quot;Couldn&#x27;t configure power role for %d rc=%d\n&quot;</span>, _power_role_val.intval, rc);</span><br><span class="line">+</span><br><span class="line">+		msleep(<span class="number">10</span>);</span><br><span class="line">+		rc = smblib_masked_write(chg, TYPE_C_INTRPT_ENB_SOFTWARE_CTRL_REG, TYPEC_DISABLE_CMD_BIT, <span class="number">0</span>);</span><br><span class="line">+		<span class="keyword">if</span>(rc &lt; <span class="number">0</span>)</span><br><span class="line">+			smblib_err(chg, <span class="string">&quot;Couldn&#x27;t enable type-c\n&quot;</span>);</span><br><span class="line">+	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">+		rc = smblib_set_prop_typec_power_role(chg, &amp;_power_role_val); <span class="comment">// write 3 bit， if 中的内容部分算此函数的子集，只是提取出来添加了 TYPEC_DISABLE_CMD_BIT 和延时</span></span><br><span class="line">+		<span class="keyword">if</span>(rc &lt; <span class="number">0</span>)</span><br><span class="line">+			smblib_err(chg, <span class="string">&quot;Couldn&#x27;t configure power role for %d rc=%d\n&quot;</span>, _power_role_val.intval, rc);</span><br><span class="line"> 	&#125;</span><br><span class="line"> <span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"> 	<span class="comment">/* enable DRP */</span></span><br><span class="line"> 	rc = smblib_masked_write(chg, TYPE_C_INTRPT_ENB_SOFTWARE_CTRL_REG,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -290,6 +296,7 @@
           <div class="post-tags">
               <a href="/tags/Bug/" rel="tag"># Bug</a>
               <a href="/tags/Qualcomm/" rel="tag"># Qualcomm</a>
+              <a href="/tags/USB/" rel="tag"># USB</a>
           </div>
 
         
@@ -380,20 +387,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

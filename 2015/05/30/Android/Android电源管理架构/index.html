@@ -20,23 +20,24 @@
     var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。 ##高通的引导体系结构SBL- Second BootLoader">
+  <meta name="description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。 高通的引导体系结构SBL- Second BootLoader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 电源管理架构">
 <meta property="og:url" content="http://huaqianlee.github.io/2015/05/30/Android/Android%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
-<meta property="og:description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。 ##高通的引导体系结构SBL- Second BootLoader">
+<meta property="og:description" content="对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。 高通的引导体系结构SBL- Second BootLoader">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png">
 <meta property="article:published_time" content="2015-05-30T08:04:45.000Z">
-<meta property="article:modified_time" content="2019-04-06T14:25:27.014Z">
+<meta property="article:modified_time" content="2021-07-23T15:08:48.699Z">
 <meta property="article:author" content="Andy.Lee">
 <meta property="article:tag" content="Qualcomm">
 <meta property="article:tag" content="源码分析">
 <meta property="article:tag" content="电源管理">
+<meta property="article:tag" content="Power">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg">
 
@@ -129,17 +130,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">115</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">114</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">19</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">30</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -234,7 +235,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Apr 6 2019 22:25:27" itemprop="dateModified" datetime="2019-04-06T22:25:27+08:00">Apr 6 2019</time>
+                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +243,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                  <a href="/categories/Android-Tree/" itemprop="url" rel="index"><span itemprop="name">Android Tree</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android-Tree/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
                 </span>
             </span>
 
@@ -258,24 +263,26 @@
 
       
         <p>　　对于移动设备，电源管理是相当重要的一部分，因为现在在公司主要负责电源管理部分，所以借用Google对其研究了一下，再结合自己的工作经验，准备接下来写一系列相关的文章。因为现在还研究得不够，所以最初的文章会不够深入。不过我会慢慢研究，然后写一些比较详细的解读。</p>
-<p>##高通的引导体系结构<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong></p>
+<h2 id="高通的引导体系结构"><a href="#高通的引导体系结构" class="headerlink" title="高通的引导体系结构"></a>高通的引导体系结构</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155304921b788-8a63-472f-be7c-2220a98cf428.jpg" alt="boot"><br><strong>SBL- Second BootLoader</strong></p>
 <a id="more"></a>
-<p>##电源管理框图<br>　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图补上来。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg" alt="power"></p>
-<p>##主要文件及路径</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kernel\kernel\power\*</span><br><span class="line">   arch\arm\match-xxx\pm.c</span><br><span class="line">   driver\power\*</span><br><span class="line">   system\core\charger\charger.c   - 关机充电信息，显示充电<span class="built_in">log</span>等</span><br><span class="line">   上层文件太分散，待后期文件详解再一一列出</span><br></pre></td></tr></table></figure>
-<p>##Android结构<br>　　Android的电源管理主要通过锁和定时器来切换系统的状态(即三种低功耗状态)，使系统功耗降到最低。 电源管理架构分为四大部分： APP，Framework，Hal，Kernel。</p>
-<p>###应用层(APP)<br>　　应用层主要指应用程序及其他使用电源管理的service。</p>
-<p>###架构层(Framework)<br>　　Framework层为APP提供API接口及协调电源的管理工作，主要包含：</p>
+<h2 id="电源管理框图"><a href="#电源管理框图" class="headerlink" title="电源管理框图"></a>电源管理框图</h2><p>　　这里先借用网上一张老版本的图片，后面再自己绘制一张详细的框图补上来。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/20155305061d93f-df42-46c4-ae36-bd18648583b1.jpg" alt="power"></p>
+<h2 id="主要文件及路径"><a href="#主要文件及路径" class="headerlink" title="主要文件及路径"></a>主要文件及路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kernel\kernel\power\*</span><br><span class="line">   arch\arm\match-xxx\pm.c</span><br><span class="line">   driver\power\*</span><br><span class="line">   system\core\charger\charger.c   - 关机充电信息，显示充电<span class="built_in">log</span>等</span><br><span class="line">   上层文件太分散，待后期文件详解再一一列出</span><br></pre></td></tr></table></figure>
+<h2 id="Android结构"><a href="#Android结构" class="headerlink" title="Android结构"></a>Android结构</h2><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(即三种低功耗状态)，使系统功耗降到最低。 电源管理架构分为四大部分： APP，Framework，Hal，Kernel。</p>
+<h3 id="应用层-APP"><a href="#应用层-APP" class="headerlink" title="应用层(APP)"></a>应用层(APP)</h3><p>　　应用层主要指应用程序及其他使用电源管理的service。</p>
+<h3 id="架构层-Framework"><a href="#架构层-Framework" class="headerlink" title="架构层(Framework)"></a>架构层(Framework)</h3><p>　　Framework层为APP提供API接口及协调电源的管理工作，主要包含：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PowerManager.java  // 提供给应用层调用</span><br><span class="line">PowerManagerService.java  // 核心文件</span><br><span class="line">com_android_server_PowerManagerService.cpp、</span><br><span class="line">Power.java  // 提供底层的函数接口,与JNI交互</span><br><span class="line">android_os_Power.cpp  //jni交互文件</span><br></pre></td></tr></table></figure>
 <p>　　这一层的功能相对比较复杂,比如系统状态的切换，背光的调节及开关，Wake Lock的申请和释放等等，但这一层跟硬件平台无关。</p>
-<p>###Hal层<br>　　Hal层为一个Power.c文件，该文件通过sysfs的方式与kernel进行通信。主要功能有申请wake_lock，释放wake_lock，设置屏幕状态等。所有对电源管理的调用应通过Android的PowerManager API来完成。</p>
-<p>###Kernel层<br>　　Kernel层的电源管理方案实现主要包含三部分：</p>
+<h3 id="Hal层"><a href="#Hal层" class="headerlink" title="Hal层"></a>Hal层</h3><p>　　Hal层为一个Power.c文件，该文件通过sysfs的方式与kernel进行通信。主要功能有申请wake_lock，释放wake_lock，设置屏幕状态等。所有对电源管理的调用应通过Android的PowerManager API来完成。</p>
+<h3 id="Kernel层"><a href="#Kernel层" class="headerlink" title="Kernel层"></a>Kernel层</h3><p>　　Kernel层的电源管理方案实现主要包含三部分：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kernel\power\：实现了系统电源管理框架机制</span><br><span class="line">Arch\arm(or mips or powerpc)\mach-XXX\pm.c:实现对特定板的处理器电源管理</span><br><span class="line">drivers\power:是设备电源管理的基础框架，为驱动提供了电源管理接口. 实现了针对所有设备的sysfs操作函数.</span><br></pre></td></tr></table></figure>
 <p>　　android提供了三种低功耗状态：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">earlysuspend //让某些设备选择进入某种功耗较低的状态，如LCD灭掉</span><br><span class="line"><span class="built_in">suspend</span> // 除电源模块以外的外围模块和CPU均不工作，只有内存保持自刷新的一个工作状态</span><br><span class="line">hibernation// 所有内存镜像都被写入到磁盘中，然后系统关机，重启后系统将恢复到关机之前的状态</span><br></pre></td></tr></table></figure>
-<h2 id=""><a href="#" class="headerlink" title="　"></a>　</h2><p>　<br>###电源管理机制<br>　　Android的电源管理主要通过锁和定时器来切换系统的状态(如上述三种低功耗状态),使系统功耗降到最低.<br>　<br>####实现流程<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png" alt="framework">
+<h2 id=""><a href="#" class="headerlink" title="　"></a>　</h2><p>　</p>
+<h3 id="电源管理机制"><a href="#电源管理机制" class="headerlink" title="电源管理机制"></a>电源管理机制</h3><p>　　Android的电源管理主要通过锁和定时器来切换系统的状态(如上述三种低功耗状态),使系统功耗降到最低.
 　</p>
-<p>####状态切换流程<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png" alt="state"></p>
+<h4 id="实现流程"><a href="#实现流程" class="headerlink" title="实现流程"></a>实现流程</h4><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/2015530390bc951-ede6-47dd-83ce-c1a6aced6e82.png" alt="framework">
+　</p>
+<h4 id="状态切换流程"><a href="#状态切换流程" class="headerlink" title="状态切换流程"></a>状态切换流程</h4><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201553020e46e8e-7570-483b-9ea2-375cf4ae59d2.png" alt="state"></p>
 
     </div>
 
@@ -288,6 +295,7 @@
               <a href="/tags/Qualcomm/" rel="tag"># Qualcomm</a>
               <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag"># 源码分析</a>
               <a href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/" rel="tag"># 电源管理</a>
+              <a href="/tags/Power/" rel="tag"># Power</a>
           </div>
 
         
@@ -362,7 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">　</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E9%80%9A%E7%9A%84%E5%BC%95%E5%AF%BC%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">高通的引导体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%A1%86%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">电源管理框图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%96%87%E4%BB%B6%E5%8F%8A%E8%B7%AF%E5%BE%84"><span class="nav-number">3.</span> <span class="nav-text">主要文件及路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">Android结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82-APP"><span class="nav-number">4.1.</span> <span class="nav-text">应用层(APP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E5%B1%82-Framework"><span class="nav-number">4.2.</span> <span class="nav-text">架构层(Framework)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hal%E5%B1%82"><span class="nav-number">4.3.</span> <span class="nav-text">Hal层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel%E5%B1%82"><span class="nav-number">4.4.</span> <span class="nav-text">Kernel层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">　</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6"><span class="nav-number">5.1.</span> <span class="nav-text">电源管理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B"><span class="nav-number">5.1.1.</span> <span class="nav-text">实现流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E5%88%87%E6%8D%A2%E6%B5%81%E7%A8%8B"><span class="nav-number">5.1.2.</span> <span class="nav-text">状态切换流程</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -378,20 +386,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
