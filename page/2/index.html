@@ -119,12 +119,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">115</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">116</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">29</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -189,6 +189,106 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/11/13/Android/pstore/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/13/Android/pstore/" class="post-title-link" itemprop="url">Pstore 的一些记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Nov 13 2020 0:00:51" itemprop="dateCreated datePublished" datetime="2020-11-13T00:00:51+08:00">Nov 13 2020</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android-Tree/" itemprop="url" rel="index"><span itemprop="name">Android Tree</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android-Tree/Kernel/" itemprop="url" rel="index"><span itemprop="name">Kernel</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="What-is-pstore？"><a href="#What-is-pstore？" class="headerlink" title="What is pstore？"></a>What is pstore？</h1><p><code>pstore, persistent storage</code>, 是一个存储内核日志或者内核 panic 的文件系统，内核会把相关信息存储在一个不能被其他用户重写的指定 RAM 区域，下一次启动时，这个区域会被挂载到 <code>/pstore</code>，一般在 <code>/sys/fs/pstore</code>, 这样我们就可以访问这些数据了。</p>
+<p>pstore 在内核中的开关是 CONFIG_PSTORE，pstore 提供的是一套可扩展的机制，提供如下类型：</p>
+<ul>
+<li>PSTORE_TYPE_DMESG, 表示内核日志</li>
+<li>PSTORE_TYPE_MCE, 表示硬件错误</li>
+<li>PSTORE_TYPE_CONSOLE, 表示控制台输出,所有内核信息。</li>
+<li>PSTORE_TYPE_FTRACE, 表示函数调用序列, ftrace 信息。</li>
+</ul>
+<p>ramoops 指的是采用 ram 保存 oops 信息的一个功能，这个功能从 3.10.40 开始采用 pstore 机制来实现，内核中的开关控制：</p>
+<ul>
+<li>PSTORE_PMSG，用户空间信息，/dev/pmsg0，pmsg-ramoops-<ID></li>
+<li>PSTORE_CONSOLE，控制台输出，所有内核信息，console-ramoops-<ID></li>
+<li>PSTORE_FTRACE，函数调用序列, ftrace 信息。</li>
+<li>PSTORE_RAM， panic/oops 信息</li>
+</ul>
+<h1 id="How-to-config"><a href="#How-to-config" class="headerlink" title="How to config?"></a>How to config?</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/13/Android/pstore/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1034,93 +1134,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/11/17/Git/Some-knowledge-about-git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/17/Git/Some-knowledge-about-git/" class="post-title-link" itemprop="url">Oh, the Git! - Basic</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Nov 17 2019 23:38:05" itemprop="dateCreated datePublished" datetime="2019-11-17T23:38:05+08:00">Nov 17 2019</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:24:59" itemprop="dateModified" datetime="2021-07-24T12:24:59+08:00">Jul 24 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>Git has always been a must-have skill for developers, I will submize a series of blogs related to it, although I don’t know too much about git now.</p>
-<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2">Pro Git</a> is the best guide of git, I need to read it when I have plenty of time so that I can check for gaps.</p>
-<h1 id="VCS-Version-Control-System"><a href="#VCS-Version-Control-System" class="headerlink" title="VCS(Version Control System)"></a>VCS(Version Control System)</h1><h2 id="Central-VCS"><a href="#Central-VCS" class="headerlink" title="Central VCS"></a>Central VCS</h2><p>Central VCS mainly includes <code>SVN</code> and <code>CVS</code>, its newwork architecture is client-server.<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/Central%20VCS.jpg" alt="Central VCS"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/17/Git/Some-knowledge-about-git/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1192,14 +1205,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-count">116</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
