@@ -4,29 +4,6 @@
   
     
     <entry>
-      <title>Linux 设备驱动之字符设备驱动</title>
-      <link href="2021/07/25/Linux/Linux-Device-Drivers-the-Char-Device-Driver/"/>
-      <url>2021/07/25/Linux/Linux-Device-Drivers-the-Char-Device-Driver/</url>
-      
-        <content type="html"><![CDATA[<p>前面三年工作中做了 Performance，Security，Power（thermal）等多方面的工作，自己忙于业务上的事情，也没有太多业余的时间，在这些方面没有形成技术积累，甚是遗憾。</p><p>今年工作中培训指导应届生时，发现自己需要再巩固一下自己的 Linux 技能树了。今天先来聊聊字符设备。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Linux Tree </category>
-          
-          <category> Device Drivers </category>
-          
-          <category> 字符设备 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>写在 2021 年 7 月</title>
       <link href="2021/07/24/Life/Writen-in-2021-July/"/>
       <url>2021/07/24/Life/Writen-in-2021-July/</url>
