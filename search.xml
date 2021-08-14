@@ -4,31 +4,6 @@
   
     
     <entry>
-      <title>C 语言编码规范</title>
-      <link href="2021/08/09/C_C++/Coding-style-for-C/"/>
-      <url>2021/08/09/C_C++/Coding-style-for-C/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> C/C++ </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 编码规范 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>写在 2021 年 7 月</title>
       <link href="2021/07/24/Life/Writen-in-2021-July/"/>
       <url>2021/07/24/Life/Writen-in-2021-July/</url>
@@ -1378,33 +1353,6 @@
         <tags>
             
             <tag> App </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Linux 设备驱动之字符设备驱动</title>
-      <link href="2017/07/25/Linux/Linux-Device-Drivers-the-Char-Device-Driver/"/>
-      <url>2017/07/25/Linux/Linux-Device-Drivers-the-Char-Device-Driver/</url>
-      
-        <content type="html"><![CDATA[<h1 id="字符设备驱动是什么样子的"><a href="#字符设备驱动是什么样子的" class="headerlink" title="字符设备驱动是什么样子的"></a>字符设备驱动是什么样子的</h1><h1 id="应用程序和内核空间交互的一个关键变量：设备号"><a href="#应用程序和内核空间交互的一个关键变量：设备号" class="headerlink" title="应用程序和内核空间交互的一个关键变量：设备号"></a>应用程序和内核空间交互的一个关键变量：设备号</h1><h1 id="字符设备在-Linux-中怎么运作的"><a href="#字符设备在-Linux-中怎么运作的" class="headerlink" title="字符设备在 Linux 中怎么运作的"></a>字符设备在 Linux 中怎么运作的</h1><h1 id="聊聊几个关键的数据结构"><a href="#聊聊几个关键的数据结构" class="headerlink" title="聊聊几个关键的数据结构"></a>聊聊几个关键的数据结构</h1><h1 id="open-是怎么工作的"><a href="#open-是怎么工作的" class="headerlink" title="open 是怎么工作的"></a>open 是怎么工作的</h1><h1 id="怎么写一个简单的字符设备伪代码"><a href="#怎么写一个简单的字符设备伪代码" class="headerlink" title="怎么写一个简单的字符设备伪代码"></a>怎么写一个简单的字符设备伪代码</h1><h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><h1 id="什么是字符设备"><a href="#什么是字符设备" class="headerlink" title="什么是字符设备"></a>什么是字符设备</h1><p>左边的这幅图片中的键盘和串口就是很典型的两个字符设备。</p><p>在 Linux 中， 字符设备是驱动程序通过发送或者接收字符与之通信的设备。通过字符设备可以直接访问到硬件，不需要任何缓冲。<br>如果站在用户空间来看字符设备，其是一个文件（相信大家应该都知道了，在Linux的世界里，一切皆文件），如果站在内核空间来看字符设备，其就是一个结构体。<br>这个你们先听一下了解一下，后面会讲到</p><h1 id="char-driver-overview"><a href="#char-driver-overview" class="headerlink" title="char driver overview"></a>char driver overview</h1><p>接下来，我们来看一下Linux中的字符设备驱动具体是什么样子的。</p><p>字符驱动主要是kernel driver module这一部分， 驱动里面我们会实现一些操作字符设备的函数，譬如 open， read， write。这些函数就对应与我们用户空间文件操作函数</p><p>从这幅图我们也能看到字符设备的整个工作流程，有几个关键的部分：硬件，驱动，VFS，应用程序。VFS 是 Virtual File system 的简写，也就是虚拟文件系统，其在内核空间，主要给用户空间的应用程序提供（更准确点讲是不同的用户空间文件系统，比如ext4，这个你们现在了解一下就可以了）接口，这样子用户空间就不用关注底层实现，调用 write 函数就会直接写入内核中的字符设备，并最终反应到硬件。</p><p>首先开机的时候或者说挂载驱动的时候， driver 会在 VFS 中去注册字符设备。 然后也会通过 class_create 和 device_create 等去创建应用空间可以访问的文件（或者说设备节点）。完成这些动作后用户空间就可以通过系统调用访问字符设备了。</p><h1 id="The-Device-number"><a href="#The-Device-number" class="headerlink" title="The Device number"></a>The Device number</h1><p>用户空间和内核怎么取得联系的呢？ 答案就是 device number， device number 分为major number 和 minor number</p><p>major number  表明这个设备使用的哪一份 driver，  0，1，2 … 代表 instance 设备实例，在Linux 中 driver 和 device 的关系有点向面向对象编程语言里面的类与实例， 一个 driver 可以对应多个 设备。（这句话，我觉得你们可以记录一下，因为我没有写到 PPT）</p><p>比如我们有一个 rtc 设备，注册驱动的时候 major 分配为 5. minor 为 0 ， 那么在用户空间就可以看到设备号。主 5 次 0</p><p>假如我有多个 rtc 设备， 大家觉得设备号会是怎么分配呢？ 有谁愿意来讲一下吗</p><p>对，不管多少设备，只要是同类型的，都可以使用同一份驱动，只是会有多个设备实例</p><p>比如说我们可以看下系统中的设备文件： c 开头表明是字符设备 tty</p><p>Okay， 这部分就是关于 Device number，大家有什么疑问吗</p><h1 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work"></a>How does it work</h1><p>如果我们要写一个字符设备驱动，应该怎么做呢？<br>我们主要需要完成如下四件事情： 1…<br>在驱动中基于不同的硬件去实现文件的操作函数。</p><p>然后呢我们看一下需要在内核驱动中用到如下这些 api ，通过 VFS 注册 字符设备</p><p>在 Linux 驱动中，只要有注册，就会有卸载，因为我们需要把申请的变量或者内存给释放掉， 比如通过xxx申请设备号，不用的时候就需要通过 unregister 去释放掉， 注册了 cdev， 就要移除掉</p><p>接下来，我们看一下 这些关键函数和结构体的头文件， 作为初学者，有时候会不知道应该引入哪些头文件，这个可以作为参考，还有我们可以通过搜索、查看官方文档、查看代码去找到相应的头文件。</p><p>创建、删除，这种对应的一般都是在同一个头文件</p><p>Okay，接下来我们看一些关键的函数<br>首先 alloc_xxx<br>name：编号相关联的设备名称. (/proc/devices); 本组设备的驱动名称</p><p>当我们去跟代码时，可能会发现不是用的这些函数，而是用 register_chrdev_region 去创建设备号， 这个函数是当你清楚应该设置什么设备号时使用，一般不建议用这个函数。</p><p>看了这么多函数，你们有发现什么比较重要的东西吗？</p><p>几乎每个函数都用到了一个结构体 struct cdev，对吧？</p><p>注册字符设备的关键函数<br>cdev</p><p>接下来我们就看看字符设备驱动中比较关键的几个结构体。</p><p>This module ， owner 。。。</p><p>iNode 和 file可以暂时不用去详细了解，只需要知道有这么两个东西，然后它们大概是用来干什么的即可。</p><p>file_operations 比较重要</p><p>symbols:<br>存在的目的就是让外部软件可以知道kernel文件内部实际分配的位置</p><p>Unix 明确区分文件内容和文件信息<br>inode 是一种 VFS 数据结构（struct inode），用于保存有关文件的一般信息。<br>VFS“文件”数据结构（结构文件）跟踪用户进程对打开文件的交互<br>Inode 包含文件系统处理文件所需的所有信息。<br>每个文件都有自己的 inode 对象，文件系统使用它来标识文件<br>每个 inode 对象都与一个 inode 编号相关联，该编号唯一标识文件系统中的文件。<br>在创建新文件（常规文件或设备）时，将创建 inode 对象并将其存储在内存中。</p><p>inode_operations 先大概了解下，感受下它是做什么的就可以了，等熟悉一些再去深入研究</p><p>每当打开文件时，都会在内核空间中创建一个文件对象。 每次打开常规文件或设备文件都会有一个文件对象。<br>存储有关打开文件和进程之间交互的信息<br>此信息仅在进程打开文件期间存在于内核内存中。 与 inode 不同，文件对象的内容不会写回磁盘。</p><p>接下来我们主要讲一讲动态加载外部模块，intree modules 留给课后你们去实现</p><p>Summary of key information</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Linux Tree </category>
-          
-          <category> Device Drivers </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 设备驱动 </tag>
             
         </tags>
       
