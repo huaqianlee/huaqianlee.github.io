@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在大数据早已普及的今日，尤其随着 5G 技术和移动设备的逐渐普及，各种有线或无线的传输技术也迎来了迅猛发展，内容日新月异、错综复杂，你又能窥探其中多少呢？本文将简单介绍高速影音传输技术 MIPI， 主要基于 CSI-2 。 MIPI（Mobile Industry Processor Interface， 移动产业处理器接口） Alliance， 即 MIPI 联盟发起并为移动应用处理器制定了开放">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MIPI CSI 接口定义与协议层介绍">
+<meta property="og:url" content="http://huaqianlee.github.io/Camera/MIPI%20interface%20overview.html">
+<meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
+<meta property="og:description" content="在大数据早已普及的今日，尤其随着 5G 技术和移动设备的逐渐普及，各种有线或无线的传输技术也迎来了迅猛发展，内容日新月异、错综复杂，你又能窥探其中多少呢？本文将简单介绍高速影音传输技术 MIPI， 主要基于 CSI-2 。 MIPI（Mobile Industry Processor Interface， 移动产业处理器接口） Alliance， 即 MIPI 联盟发起并为移动应用处理器制定了开放">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY_CSI.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY_CSI.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/PHY-Chars.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/CSI2_Layer.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY_Distribution.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY_Merging.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY_Distribution.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY_Merging.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/multi-lane-n.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/multi-lane-m.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/llp-overview.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY-LP.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY-LP.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY-SP.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY-SP.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/DI.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/VC.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Interleaved_Data.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Embedded-Data.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/ECC-Example.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Checksum.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Packet-Spacing.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Single-Packet.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Multi-Packet.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Frame-Line-Blanking.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/HSYNC-VSYNC-Blanking.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/General-Frame-Format.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Digital-Interlaced-Video.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Digital-Interlaced-Video-with-Accurate-Sync.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Data-Clock.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Interleaved-Data-Transmission.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Packet-Interleaved-Transmission.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Frame-Interleaved-Transmission.png">
+<meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/VC-Interleaving.png">
+<meta property="article:published_time" content="2021-09-22T04:49:10.000Z">
+<meta property="article:modified_time" content="2021-10-01T00:55:34.988Z">
+<meta property="article:author" content="Andy.Lee">
+<meta property="article:tag" content="MIPI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY_CSI.png">
+
+<link rel="canonical" href="http://huaqianlee.github.io/Camera/MIPI%20interface%20overview">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>MIPI CSI 接口定义与协议层介绍 | Andy.Lee's  Blog
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Andy.Lee's  Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Good good study, day day up !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">115</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">MIPI CSI 接口定义与协议层介绍
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <p>在大数据早已普及的今日，尤其随着 5G 技术和移动设备的逐渐普及，各种有线或无线的传输技术也迎来了迅猛发展，内容日新月异、错综复杂，你又能窥探其中多少呢？本文将简单介绍高速影音传输技术 MIPI， 主要基于 CSI-2 。</p>
+<p>MIPI（Mobile Industry Processor Interface， 移动产业处理器接口） Alliance， 即 MIPI 联盟发起并为移动应用处理器制定了开放标准和一种规范。主要是手机内部的接口（摄像头、显示屏接口、射频/基带接口）等标准化，从而减少手机内部接口的复杂程度及增加设计的灵活性。MIPI 联盟下面有不同的工作组，分别定义的一系列接口标准，比如 CSI（Camera Serial Interface， 摄像头串行接口）、DSI（Display Serial Interface，显示串行接口）、DigRF（射频接口）、SLIMBUS（麦克风、喇叭接口）等，其优点是更低功耗，更高数据传输数量和更小的空间。</p>
+<h1 id="Definitions-and-Acronyms"><a href="#Definitions-and-Acronyms" class="headerlink" title="Definitions and Acronyms"></a>Definitions and Acronyms</h1><a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Lane</td>
+<td>A unidirectional, point-to-point, 2- or 3-wire interface used for high-speed serial clock or data transmission</td>
+</tr>
+<tr>
+<td>Packet</td>
+<td>A group of bytes organized in a specified way to transfer data across the interface</td>
+</tr>
+<tr>
+<td>Payload</td>
+<td>Application data only – with all sync, header, ECC and checksum and other protocol-related information removed</td>
+</tr>
+<tr>
+<td>SLM（Sleep Mode）</td>
+<td>a leakage level only power consumption mode</td>
+</tr>
+<tr>
+<td>VC（Virtual Channel）</td>
+<td>Multiple independent data streams for up to four peripherals</td>
+</tr>
+<tr>
+<td>BER</td>
+<td>Bit Error Rate</td>
+</tr>
+<tr>
+<td>CCI</td>
+<td>Camera Control Interface</td>
+</tr>
+<tr>
+<td>CIL</td>
+<td>Control and Interface Logic</td>
+</tr>
+<tr>
+<td>CRC</td>
+<td>Cyclic Redundancy Check</td>
+</tr>
+<tr>
+<td>CSI</td>
+<td>Camera Serial Interface</td>
+</tr>
+<tr>
+<td>CSPS</td>
+<td>Chroma Shifted Pixel Sampling</td>
+</tr>
+<tr>
+<td>DDR</td>
+<td>Dual Data Rate</td>
+</tr>
+<tr>
+<td>DI</td>
+<td>Data Identifier</td>
+</tr>
+<tr>
+<td>DT</td>
+<td>Data Type</td>
+</tr>
+<tr>
+<td>ECC</td>
+<td>Error Correction Code</td>
+</tr>
+<tr>
+<td>EoT</td>
+<td>End of Transmission</td>
+</tr>
+<tr>
+<td>EXIF</td>
+<td>Exchangeable Image File Format</td>
+</tr>
+<tr>
+<td>FE</td>
+<td>Frame End</td>
+</tr>
+<tr>
+<td>FS</td>
+<td>Frame Start</td>
+</tr>
+<tr>
+<td>HS</td>
+<td>High Speed; identifier for operation mode</td>
+</tr>
+<tr>
+<td>HS-RX</td>
+<td>High-Speed Receiver</td>
+</tr>
+<tr>
+<td>HS-TX</td>
+<td>High-Speed Transmitter</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td>Inter-Integrated Circuit</td>
+</tr>
+<tr>
+<td>JFIF</td>
+<td>JPEG File Interchange Format</td>
+</tr>
+<tr>
+<td>JPEG</td>
+<td>Joint Photographic Expert Group</td>
+</tr>
+<tr>
+<td>LE</td>
+<td>Line End</td>
+</tr>
+<tr>
+<td>LLP</td>
+<td>Low Level Protocol</td>
+</tr>
+<tr>
+<td>LS</td>
+<td>Line Start</td>
+</tr>
+<tr>
+<td>LSB</td>
+<td>Least Significant Bit</td>
+</tr>
+<tr>
+<td>LSS</td>
+<td>Least Significant Symbol</td>
+</tr>
+<tr>
+<td>LP</td>
+<td>Low-Power; identifier for operation mode</td>
+</tr>
+<tr>
+<td>LP-RX</td>
+<td>Low-Power Receiver (Large-Swing Single Ended)</td>
+</tr>
+<tr>
+<td>LP-TX</td>
+<td>Low-Power Transmitter (Large-Swing Single Ended)</td>
+</tr>
+<tr>
+<td>MSB</td>
+<td>Most Significant Bit</td>
+</tr>
+<tr>
+<td>MSS</td>
+<td>Most Significant Symbol</td>
+</tr>
+<tr>
+<td>PF</td>
+<td>Packet Footer</td>
+</tr>
+<tr>
+<td>PH</td>
+<td>Packet Header</td>
+</tr>
+<tr>
+<td>PI</td>
+<td>Packet Identifier</td>
+</tr>
+<tr>
+<td>PT</td>
+<td>Packet Type</td>
+</tr>
+<tr>
+<td>PHY</td>
+<td>Physical Layer</td>
+</tr>
+<tr>
+<td>PPI</td>
+<td>PHY Protocol Interface</td>
+</tr>
+<tr>
+<td>RGB</td>
+<td>Color representation (Red, Green, Blue)</td>
+</tr>
+<tr>
+<td>RX</td>
+<td>Receiver</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>Serial Clock (for CCI)</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>Serial Data (for CCI)</td>
+</tr>
+<tr>
+<td>SLM</td>
+<td>Sleep Mode</td>
+</tr>
+<tr>
+<td>SoT</td>
+<td>Start of Transmission</td>
+</tr>
+<tr>
+<td>TX</td>
+<td>Transmitter</td>
+</tr>
+<tr>
+<td>ULPS</td>
+<td>Ultra low Power State</td>
+</tr>
+<tr>
+<td>VGA</td>
+<td>Video Graphics Array</td>
+</tr>
+<tr>
+<td>YUV</td>
+<td>Color representation (Y for luminance, U &amp; V for chrominance)</td>
+</tr>
+</tbody></table>
+<h1 id="CSI-2-Brief"><a href="#CSI-2-Brief" class="headerlink" title="CSI-2 Brief"></a>CSI-2 Brief</h1><p>CSI-2 替 MIPI 定义了两种高速数据传输接口（物理层选项）和一组控制接口的标准。</p>
+<ul>
+<li>D-PHY 物理层选项</li>
+<li>C-PHY 物理层选项</li>
+<li>CCI(Camera Control Interface)</li>
+</ul>
+<h2 id="D-PHY"><a href="#D-PHY" class="headerlink" title="D-PHY"></a>D-PHY</h2><p>MIPI 联盟定义的常见的 D-PHY 接口支持高速（HS）和低速（LP）模式，为 1 路单向差分接口，分为：</p>
+<ul>
+<li>2 组差分时钟（clk）</li>
+<li>1 或者多组差分数据通道（data lanes)</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY_CSI.png" alt="D-PHY CSI"></p>
+<h2 id="C-PHY"><a href="#C-PHY" class="headerlink" title="C-PHY"></a>C-PHY</h2><p>另一种常见的 C-PHY 接口，为 1 或多路单向 3-wire 串行数据通道， 每路有自己的时钟。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY_CSI.png" alt="C-PHY CSI"></p>
+<h2 id="M-PHY"><a href="#M-PHY" class="headerlink" title="M-PHY"></a>M-PHY</h2><p>聊到了 C-PHY 和 D-PHY，也顺便提一下 M-PHY， M-PHY 目前接触比较少, 其在功耗和性能方面有更多的考量，三种 PHY 的特性如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/PHY-Chars.png" alt="PHY-Chars"></p>
+<h2 id="CCI"><a href="#CCI" class="headerlink" title="CCI"></a>CCI</h2><p>参见如上两幅图片的 CCI 部分。D-PHY 和 C-PHY 的 CCI 接口是一组与 I2C 标准协议兼容的双向控制接口， 兼容 I2C 的高速模式（400 KHZ）和 7 位从设备地址，不支持多主设备模式。CCI 是 I2C 协议的一个子集，然后其在 I2C 上面定义了一个附加的数据协议层。详见 CSI-2 Spec。</p>
+<h1 id="CSI-2-Layer-Definitions"><a href="#CSI-2-Layer-Definitions" class="headerlink" title="CSI-2 Layer Definitions"></a>CSI-2 Layer Definitions</h1><p>CSI-2 就协议的层级来看，大致可以分为 3 层：</p>
+<ul>
+<li>物理层（PHY Layer）： 定义传输媒介、电器特性、IO 电路、同步机制、指定 SoT（Start of Transmission） 和 EoT（End of Transmission）信号等。如 M-PHY， D-PHY, C-PHY 等。</li>
+<li>协议层（Protocol Layer）： 定义传输数据时，如何标记和交错多个数据流（Data Stream），以便接收端重建每个数据流。</li>
+<li>应用层（Application Layer）： 对数据流进行处理，如分析，编解码。</li>
+</ul>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/CSI2_Layer.png" alt="CSI2 Layer"></p>
+<h1 id="Multi-Lane-Distribution-and-Merging"><a href="#Multi-Lane-Distribution-and-Merging" class="headerlink" title="Multi-Lane Distribution and Merging"></a>Multi-Lane Distribution and Merging</h1><p>MIPI 会通过 CSI 的 LDF (Lane Distribution Function) 将数据平均且有序地分配到每一条 Lane。</p>
+<p>D-PHY：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY_Distribution.png" alt="D-PHY Distribution"><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY_Merging.png" alt="D-PHY Merging"></p>
+<p>C-PHY:</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY_Distribution.png" alt="C-PHY Distribution"><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY_Merging.png" alt="C-PHY Merging"></p>
+<h1 id="Multi-Lane-Interoperability"><a href="#Multi-Lane-Interoperability" class="headerlink" title="Multi-Lane Interoperability"></a>Multi-Lane Interoperability</h1><p>一般会采用最通用硬件配置，譬如 D-PHY 的 4 组 Data Lan 和 1 组 Clock。但是有时也会存在发送端和接收端 Data Lan 不匹配的问题，如果使用不适当的配置，就会影响 MIPI 传输的性能。</p>
+<p>譬如： M Lanes 的传输端， N Lanes 的接收端。</p>
+<ol>
+<li><p>M &lt;= N, 传输端小于等于接收端时，不会有性能问题。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/multi-lane-n.png" alt="multi-lane n"></p>
+</li>
+<li><p>M &gt; N, 传输断大于接收端时，就会有性能问题。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/multi-lane-m.png" alt="multi-lane m"></p>
+</li>
+</ol>
+<h1 id="Protocol-Layer"><a href="#Protocol-Layer" class="headerlink" title="Protocol Layer"></a>Protocol Layer</h1><p>MIPI 协议层可以分为 3 级：</p>
+<ul>
+<li>通道管理（Lane Management）： 将传输的数据流分配到一个或多个通道，并在接收端恢复原始数据流。</li>
+<li>LLP （Low Level Protocol）： 将数据里封装成不同形式的长包和短包。</li>
+<li>封拆像素包（Pixel Packing/Unpacking）： 传输端将像素包拆为 bytes，接收端将 bytes 还原。</li>
+</ul>
+<h2 id="Low-Level-Protocol"><a href="#Low-Level-Protocol" class="headerlink" title="Low Level Protocol"></a>Low Level Protocol</h2><p>LLP （Low Level Protocol） 是一种面向字节、基于数据包的协议，支持使用短包和长包格式传输任意数据。主要特性如下：</p>
+<ul>
+<li>8-bit</li>
+<li>每 link 支持最多 4 个 VC （Virtual Channels）通道</li>
+<li>数据的类型、像素深度和格式的描述符 （type，pixel depth and format）</li>
+</ul>
+<h2 id="Packet-Format"><a href="#Packet-Format" class="headerlink" title="Packet Format"></a>Packet Format</h2><p>如下图所示，有长包和短包两种数据包结构，其格式和大小依赖于物理层的选择（D-PHY or C-PHY）。 每种物理层接口都是以退出低功耗状态（LPS， Low Power State）， 发送一个 SOT 短包作为开始，然后通过长包发送数据，最后以发送一个 EoT 短包，切换回低功耗状态为结束。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/llp-overview.png" alt="llp overview"></p>
+<h3 id="Long-Packet-Format"><a href="#Long-Packet-Format" class="headerlink" title="Long Packet Format"></a>Long Packet Format</h3><p>长包由 DT 值 0x10～0x37 进行标识， 详情见 Data Type(DT) 章节。</p>
+<h4 id="What-does-D-PHY-Long-Packet-look-like"><a href="#What-does-D-PHY-Long-Packet-look-like" class="headerlink" title="What does D-PHY Long Packet look like?"></a>What does D-PHY Long Packet look like?</h4><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY-LP.png" alt="D-PHY-LP"></p>
+<h4 id="What-does-C-PHY-Long-Packet-look-like"><a href="#What-does-C-PHY-Long-Packet-look-like" class="headerlink" title="What does C-PHY Long Packet look like?"></a>What does C-PHY Long Packet look like?</h4><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY-LP.png" alt="C-PHY-LP"></p>
+<h3 id="Short-Packet-Format"><a href="#Short-Packet-Format" class="headerlink" title="Short Packet Format"></a>Short Packet Format</h3><p>D-PHY 和 C-PHY 的短包有一定的差异，短包与相应协议长包的包头（PH）相匹配，没有包脚（PF）和长包数据（Paket Filler）， 另需把包头的 WC 字段用短包数据替换，短包的数据由 DT 值 0x00～0x0F 标示。详情见 Data Type(DT) 章节。</p>
+<p>对于帧同步短包，短包数据为帧号； 对于行同步短包，短包数据为行号；对于通用短包，短包数据为用户自定义。</p>
+<h4 id="What-does-D-PHY-Short-Packet-look-like"><a href="#What-does-D-PHY-Short-Packet-look-like" class="headerlink" title="What does D-PHY Short Packet look like?"></a>What does D-PHY Short Packet look like?</h4><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY-SP.png" alt="D-PHY-LP"></p>
+<h4 id="What-does-C-PHY-Short-Packet-look-like"><a href="#What-does-C-PHY-Short-Packet-look-like" class="headerlink" title="What does C-PHY Short Packet look like?"></a>What does C-PHY Short Packet look like?</h4><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/C-PHY-SP.png" alt="C-PHY-LP"></p>
+<h2 id="Data-Identifier-DI"><a href="#Data-Identifier-DI" class="headerlink" title="Data Identifier (DI)"></a>Data Identifier (DI)</h2><p>DI 字节由 VC（Virtual Chanel) 和 DT (Data Type) 两部分组成。如下图：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/DI.png" alt="DI"></p>
+<h2 id="Virtual-Chanel-Identifier"><a href="#Virtual-Chanel-Identifier" class="headerlink" title="Virtual Chanel Identifier"></a>Virtual Chanel Identifier</h2><p>虚拟通道标识符是为数据流中交错的不同数据流提供单独的通道，接收器会监控并拆分交错的数据流到合适的通道。 MIPI 联盟规定最多可以支持 4 路数据流，也就是 4 路 VC。外设中的虚拟通道标识符应该是可编程的，以允许主机处理器控制数据流的解复用方式。逻辑信道的原理如下图：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/VC.png" alt="VC"></p>
+<p>交错的数据流格式示例如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Interleaved_Data.png" alt="Interleaved_Data"></p>
+<blockquote>
+<p>总共三组</p>
+</blockquote>
+<h2 id="Data-Type-DT"><a href="#Data-Type-DT" class="headerlink" title="Data Type(DT)"></a>Data Type(DT)</h2><p>DT 指定数据的格式和内容，支持最大 64 个 DT，总共有 8 种不同的类型，每种支持 8 个 DT，前两个类型代表短包，其余的代表长包。如下：</p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00 to 0x07</td>
+<td>Synchronization Short Packet Data Types</td>
+</tr>
+<tr>
+<td>0x08 to 0x0F</td>
+<td>Generic Short Packet Data Types</td>
+</tr>
+<tr>
+<td>0x10 to 0x17</td>
+<td>Generic Long Packet Data Types</td>
+</tr>
+<tr>
+<td>0x18 to 0x1F</td>
+<td>YUV Data</td>
+</tr>
+<tr>
+<td>0x20 to 0x27</td>
+<td>RGB Data</td>
+</tr>
+<tr>
+<td>0x28 to 0x2F</td>
+<td>RAW Data</td>
+</tr>
+<tr>
+<td>0x30 to 0x37</td>
+<td>User Defined Byte-based Data</td>
+</tr>
+<tr>
+<td>0x38 to 0x3F</td>
+<td>Reserved</td>
+</tr>
+</tbody></table>
+<p>同步短包又分为帧同步和行同步：  </p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00</td>
+<td>Frame Start Code</td>
+</tr>
+<tr>
+<td>0x01</td>
+<td>Frame End Code</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>Line Start Code (Optional)</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>Line End Code (Optional)</td>
+</tr>
+<tr>
+<td>0x04 to 0x07</td>
+<td>Reserved</td>
+</tr>
+</tbody></table>
+<p>通用短包：  </p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x08</td>
+<td>Generic Short Packet Code 1</td>
+</tr>
+<tr>
+<td>0x09</td>
+<td>Generic Short Packet Code 2</td>
+</tr>
+<tr>
+<td>0x0A</td>
+<td>Generic Short Packet Code 3</td>
+</tr>
+<tr>
+<td>0x0B</td>
+<td>Generic Short Packet Code 4</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td>Generic Short Packet Code 5</td>
+</tr>
+<tr>
+<td>0x0D</td>
+<td>Generic Short Packet Code 6</td>
+</tr>
+<tr>
+<td>0x0E</td>
+<td>Generic Short Packet Code 7</td>
+</tr>
+<tr>
+<td>0x0F</td>
+<td>Generic Short Packet Code 8</td>
+</tr>
+</tbody></table>
+<p>通用长包：  </p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x10</td>
+<td>Null</td>
+</tr>
+<tr>
+<td>0x11</td>
+<td>Blanking Data</td>
+</tr>
+<tr>
+<td>0x12</td>
+<td>Embedded 8-bit non Image Data</td>
+</tr>
+<tr>
+<td>0x13</td>
+<td>Reserved</td>
+</tr>
+<tr>
+<td>0x14</td>
+<td>Reserved</td>
+</tr>
+<tr>
+<td>0x15</td>
+<td>Reserved</td>
+</tr>
+<tr>
+<td>0x16</td>
+<td>Reserved</td>
+</tr>
+<tr>
+<td>0x17</td>
+<td>Reserved</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>接收端需要忽略 Null 和 Blanking Data 数据类型的包的内容， 空包（Null）没有任何意义，消隐包（Blanking Data）可以作为视频流帧之间的消隐行。<br>在帧的开头可能有 0 或多行嵌入数据，这部分被称之为帧头（FS），在帧的末尾可能有 0 或多行嵌入数据，这部分被称之为帧尾。如果行存在 Embedded 数据，则 DI 中需要包含其 DT。如下图：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Embedded-Data.png" alt="Embedded-Data"></p>
+</blockquote>
+<h2 id="Error-Correction-Code-ECC-for-D-PHY"><a href="#Error-Correction-Code-ECC-for-D-PHY" class="headerlink" title="Error Correction Code (ECC) for D-PHY"></a>Error Correction Code (ECC) for D-PHY</h2><p>包头的 ECC 允许纠正 DI 和 WC 的 1-bit 错误并为 D-PHY 检测 2-bit 错误，因此， ECC 的 D[7:6] 应该为 0。DI[7:0] 应映射到 ECC 输入的 D[7:0]，WC[7:0] 映射到 D[15:8]， WC[15:8] 映射到 D[23:16]。如下图：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/ECC-Example.png" alt="ECC Example"></p>
+<h2 id="Checksum-Generation-for-C-PHY"><a href="#Checksum-Generation-for-C-PHY" class="headerlink" title="Checksum Generation for C-PHY"></a>Checksum Generation for C-PHY</h2><p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Checksum.png" alt="Checksum"></p>
+<blockquote>
+<p>ECC 在 C-PHY 无效</p>
+</blockquote>
+<h2 id="Packet-Spacing"><a href="#Packet-Spacing" class="headerlink" title="Packet Spacing"></a>Packet Spacing</h2><p>MIPI 数据包由 EoT， LPS， SoT 分隔开，在协议包之间必须有一个进入和退出 LPS（低功耗）的状态切换，称之为包间隔（Packet Spacing）。其不必是 8 位字的倍数，因为接收器将在下一个数据包的包头之前的 SoT 序列期间重新同步到正确的字节边界。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Packet-Spacing.png" alt="Packet-Spacing"></p>
+<p>单包实例如下：</p>
+<blockquote>
+<p>图中的 VVALID、HVALID和DVALID 为虚拟的帧同步(VSYNC)、行同步(HSYNC)和有效数据同步（DE，亦可称为数据使能信号）信号。</p>
+</blockquote>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Single-Packet.png" alt="Single-Packet"></p>
+<p>多包实例如下：  </p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Multi-Packet.png" alt="Multi-Packet"></p>
+<p>从上图也可以看到，从 LLP 封包 Checksum、EoT、LPS、SOT，一直到 PH，正好处于行同步信号为低，这段区间就是每行的 Blanking 区间。</p>
+<h2 id="Line-and-Frame-Blanking"><a href="#Line-and-Frame-Blanking" class="headerlink" title="Line and Frame Blanking"></a>Line and Frame Blanking</h2><p>长包 EoF， 下一个长包 SoF，以及之间的 LPS 称之为 Line Blanking； 帧尾（FE）后的 EoT，下一帧帧头（FS）前的 SoT，以及之间的 LPS 称之为 Frame Blanking。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Frame-Line-Blanking.png" alt="Frame-Line-Blanking"></p>
+<p>再从行同步和帧同步的角度，来看看帧尾和帧头之间的 LPS （VSYNC 区域），即 Frame Blanking，以及行尾行头之间的 Line Blanking，会更加容易理解。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/HSYNC-VSYNC-Blanking.png" alt="HSYNC-VSYNC-Blanking"></p>
+<h2 id="Frame-and-Line-Synchronization-Packets"><a href="#Frame-and-Line-Synchronization-Packets" class="headerlink" title="Frame and Line Synchronization Packets"></a>Frame and Line Synchronization Packets</h2><p>帧头（FS）帧尾（FE）之间至少包含 1～n 个图像数据长包，0～n 个代表同步讯号的短包，也就是说行头（SoT）行尾（EoT）的短包是可以省略的。</p>
+<h2 id="Frame-Format-Examples"><a href="#Frame-Format-Examples" class="headerlink" title="Frame Format Examples"></a>Frame Format Examples</h2><p>YUV、RGB 和 RAW 数据的每一个长包包含 1 行图像数据。</p>
+<p>通用帧格式实例如下，行头（SoT）行尾（EoT）的短包被省略，且帧头（FS）和第一个长包，以及最后一个长包和帧尾（FE）之间的 LPS 要尽可能的短，如下画圈部分。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/General-Frame-Format.png" alt="General-Frame-Format"></p>
+<p>数字隔行视频格式实例：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Digital-Interlaced-Video.png" alt="Digital-Interlaced-Video"></p>
+<p>精确同步的数字隔行视频格式实例如下，未省略行头行尾的短包。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Digital-Interlaced-Video-with-Accurate-Sync.png" alt="Digital-Interlaced-Video-with-Accurate-Sync"></p>
+<p>如下为高速模式下数据和时钟的关系图，可以清楚地了解到高低速序号， LPS 的转变过程。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Data-Clock.png" alt="Data-Clock"></p>
+<h2 id="Data-Interleaving"><a href="#Data-Interleaving" class="headerlink" title="Data Interleaving"></a>Data Interleaving</h2><p>数据交错（Data Interleaving）主要有两种方式：1. 通过 DT 区分； 2. 通过 VC 区分。</p>
+<h3 id="Data-Type-Interleaving"><a href="#Data-Type-Interleaving" class="headerlink" title="Data Type Interleaving"></a>Data Type Interleaving</h3><p>所有的包使用同一 VC，然后独立的 DT，共享帧头（FS）帧尾（FE）和行头（SoT）行尾（EoT）, 如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Interleaved-Data-Transmission.png" alt="Interleaved-Data-Transmission"></p>
+<p>按包交错的格式如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Packet-Interleaved-Transmission.png" alt="Packet-Interleaved-Transmission"></p>
+<p>按帧交错的格式如下：</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/Frame-Interleaved-Transmission.png" alt="Frame-Interleaved-Transmission"></p>
+<h3 id="Virtual-Channel-Identifier-Interleaving"><a href="#Virtual-Channel-Identifier-Interleaving" class="headerlink" title="Virtual Channel Identifier Interleaving"></a>Virtual Channel Identifier Interleaving</h3><p>每一个 VC 拥有自己的帧头（FS）和帧尾（FE），而且每一个 VC 还可以继续通过 DT 来扩展数据通路。</p>
+<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/VC-Interleaving.png" alt="VC-Interleaving"></p>
+<h1 id="Data-Formats"><a href="#Data-Formats" class="headerlink" title="Data Formats"></a>Data Formats</h1><p>Primary 代表广泛采用的数据格式，MIPI 联盟规定发送端需要支持至少一个 primary 格式，接收端需要支持所有的 Primary 数据格式。</p>
+<table>
+<thead>
+<tr>
+<th>Data Format</th>
+<th>Primary</th>
+<th>Secondary</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YUV420 8-bit (legacy)</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>YUV420 8-bit</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>YUV420 10-bit</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>YUV420 8-bit (CSPS)</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>YUV420 10-bit (CSPS)</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>YUV422 8-bit</td>
+<td>P</td>
+<td></td>
+</tr>
+<tr>
+<td>YUV422 10-bit</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>RGB888</td>
+<td>P</td>
+<td></td>
+</tr>
+<tr>
+<td>RGB666</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>RGB565</td>
+<td>P</td>
+<td></td>
+</tr>
+<tr>
+<td>RGB555</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>RGB444</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>RAW6</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>RAW7</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>RAW8</td>
+<td>P</td>
+<td></td>
+</tr>
+<tr>
+<td>RAW10</td>
+<td>P</td>
+<td></td>
+</tr>
+<tr>
+<td>RAW12</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>RAW14</td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>Generic 8-bit Long Packet Data Types</td>
+<td>P</td>
+<td></td>
+</tr>
+<tr>
+<td>User Defined Byte-based Data (Note 1)</td>
+<td>P</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>Specification for Camera Serial Interface 2 (CSI-2)。</p>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Definitions-and-Acronyms"><span class="nav-number">1.</span> <span class="nav-text">Definitions and Acronyms</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSI-2-Brief"><span class="nav-number">2.</span> <span class="nav-text">CSI-2 Brief</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#D-PHY"><span class="nav-number">2.1.</span> <span class="nav-text">D-PHY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-PHY"><span class="nav-number">2.2.</span> <span class="nav-text">C-PHY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#M-PHY"><span class="nav-number">2.3.</span> <span class="nav-text">M-PHY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CCI"><span class="nav-number">2.4.</span> <span class="nav-text">CCI</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSI-2-Layer-Definitions"><span class="nav-number">3.</span> <span class="nav-text">CSI-2 Layer Definitions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multi-Lane-Distribution-and-Merging"><span class="nav-number">4.</span> <span class="nav-text">Multi-Lane Distribution and Merging</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multi-Lane-Interoperability"><span class="nav-number">5.</span> <span class="nav-text">Multi-Lane Interoperability</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Layer"><span class="nav-number">6.</span> <span class="nav-text">Protocol Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Low-Level-Protocol"><span class="nav-number">6.1.</span> <span class="nav-text">Low Level Protocol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Packet-Format"><span class="nav-number">6.2.</span> <span class="nav-text">Packet Format</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Long-Packet-Format"><span class="nav-number">6.2.1.</span> <span class="nav-text">Long Packet Format</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-does-D-PHY-Long-Packet-look-like"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">What does D-PHY Long Packet look like?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-does-C-PHY-Long-Packet-look-like"><span class="nav-number">6.2.1.2.</span> <span class="nav-text">What does C-PHY Long Packet look like?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Short-Packet-Format"><span class="nav-number">6.2.2.</span> <span class="nav-text">Short Packet Format</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-does-D-PHY-Short-Packet-look-like"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">What does D-PHY Short Packet look like?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-does-C-PHY-Short-Packet-look-like"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">What does C-PHY Short Packet look like?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Identifier-DI"><span class="nav-number">6.3.</span> <span class="nav-text">Data Identifier (DI)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Virtual-Chanel-Identifier"><span class="nav-number">6.4.</span> <span class="nav-text">Virtual Chanel Identifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Type-DT"><span class="nav-number">6.5.</span> <span class="nav-text">Data Type(DT)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-Correction-Code-ECC-for-D-PHY"><span class="nav-number">6.6.</span> <span class="nav-text">Error Correction Code (ECC) for D-PHY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Checksum-Generation-for-C-PHY"><span class="nav-number">6.7.</span> <span class="nav-text">Checksum Generation for C-PHY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Packet-Spacing"><span class="nav-number">6.8.</span> <span class="nav-text">Packet Spacing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Line-and-Frame-Blanking"><span class="nav-number">6.9.</span> <span class="nav-text">Line and Frame Blanking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Frame-and-Line-Synchronization-Packets"><span class="nav-number">6.10.</span> <span class="nav-text">Frame and Line Synchronization Packets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Frame-Format-Examples"><span class="nav-number">6.11.</span> <span class="nav-text">Frame Format Examples</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Interleaving"><span class="nav-number">6.12.</span> <span class="nav-text">Data Interleaving</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Type-Interleaving"><span class="nav-number">6.12.1.</span> <span class="nav-text">Data Type Interleaving</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virtual-Channel-Identifier-Interleaving"><span class="nav-number">6.12.2.</span> <span class="nav-text">Virtual Channel Identifier Interleaving</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Formats"><span class="nav-number">7.</span> <span class="nav-text">Data Formats</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy.Lee"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Andy.Lee</p>
+  <div class="site-description" itemprop="description">Just need to enjoy life.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huaqianlee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huaqianlee@gmail.com" title="E-Mail → mailto:huaqianlee@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/huaqianlee" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/huaqianlee" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/huaqianlee" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/huaqianlee" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;huaqianlee" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.github.io/" title="http:&#x2F;&#x2F;huaqianlee.github.io&#x2F;">Andy.Lee's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huaqianlee.me/" title="http:&#x2F;&#x2F;huaqianlee.me&#x2F;" rel="noopener" target="_blank">Andy.Lee's Cabin</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy.Lee</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'af176630d44392cdef8f',
+      clientSecret: '63681992881b6f3ecd24146470e5aaf7d068fe14',
+      repo        : 'huaqianlee.github.io',
+      owner       : 'huaqianlee',
+      admin       : ['huaqianlee'],
+      id          : '5710d40be3663ff58939c29398612c62',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
