@@ -21,9 +21,9 @@
   </script>
 
   <meta name="description" content="在大数据早已普及的今日，尤其随着 5G 技术和移动设备的逐渐普及，各种有线或无线的传输技术也迎来了迅猛发展，内容日新月异、错综复杂，你又能窥探其中多少呢？本文将简单介绍高速影音传输技术 MIPI， 主要基于 CSI-2 。 MIPI（Mobile Industry Processor Interface， 移动产业处理器接口） Alliance， 即 MIPI 联盟发起并为移动应用处理器制定了开放">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:title" content="MIPI CSI 接口定义与协议层介绍">
-<meta property="og:url" content="http://huaqianlee.github.io/Camera/MIPI%20interface%20overview.html">
+<meta property="og:url" content="http://huaqianlee.github.io/2021/09/22/Camera/MIPI%20interface%20overview/index.html">
 <meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
 <meta property="og:description" content="在大数据早已普及的今日，尤其随着 5G 技术和移动设备的逐渐普及，各种有线或无线的传输技术也迎来了迅猛发展，内容日新月异、错综复杂，你又能窥探其中多少呢？本文将简单介绍高速影音传输技术 MIPI， 主要基于 CSI-2 。 MIPI（Mobile Industry Processor Interface， 移动产业处理器接口） Alliance， 即 MIPI 联盟发起并为移动应用处理器制定了开放">
 <meta property="og:locale" content="en_US">
@@ -68,7 +68,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/camera/D-PHY_CSI.png">
 
-<link rel="canonical" href="http://huaqianlee.github.io/Camera/MIPI%20interface%20overview">
+<link rel="canonical" href="http://huaqianlee.github.io/2021/09/22/Camera/MIPI%20interface%20overview/">
 
 
 <script id="page-configurations">
@@ -76,13 +76,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>MIPI CSI 接口定义与协议层介绍 | Andy.Lee's  Blog
-</title>
+  <title>MIPI CSI 接口定义与协议层介绍 | Andy.Lee's  Blog</title>
   
 
 
@@ -158,17 +157,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">115</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">116</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">29</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">33</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -225,33 +224,72 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="en">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">MIPI CSI 接口定义与协议层介绍
-</h1>
-
-<div class="post-meta">
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2021/09/22/Camera/MIPI%20interface%20overview/">
 
-</div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
 
-</header>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MIPI CSI 接口定义与协议层介绍
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Sep 22 2021 12:49:10" itemprop="dateCreated datePublished" datetime="2021-09-22T12:49:10+08:00">Sep 22 2021</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Oct 1 2021 8:55:34" itemprop="dateModified" datetime="2021-10-01T08:55:34+08:00">Oct 1 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Multimedia/" itemprop="url" rel="index"><span itemprop="name">Multimedia</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Multimedia/Camera/" itemprop="url" rel="index"><span itemprop="name">Camera</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      
-      
-      <div class="post-body">
-          <p>在大数据早已普及的今日，尤其随着 5G 技术和移动设备的逐渐普及，各种有线或无线的传输技术也迎来了迅猛发展，内容日新月异、错综复杂，你又能窥探其中多少呢？本文将简单介绍高速影音传输技术 MIPI， 主要基于 CSI-2 。</p>
+        <p>在大数据早已普及的今日，尤其随着 5G 技术和移动设备的逐渐普及，各种有线或无线的传输技术也迎来了迅猛发展，内容日新月异、错综复杂，你又能窥探其中多少呢？本文将简单介绍高速影音传输技术 MIPI， 主要基于 CSI-2 。</p>
 <p>MIPI（Mobile Industry Processor Interface， 移动产业处理器接口） Alliance， 即 MIPI 联盟发起并为移动应用处理器制定了开放标准和一种规范。主要是手机内部的接口（摄像头、显示屏接口、射频/基带接口）等标准化，从而减少手机内部接口的复杂程度及增加设计的灵活性。MIPI 联盟下面有不同的工作组，分别定义的一系列接口标准，比如 CSI（Camera Serial Interface， 摄像头串行接口）、DSI（Display Serial Interface，显示串行接口）、DigRF（射频接口）、SLIMBUS（麦克风、喇叭接口）等，其优点是更低功耗，更高数据传输数量和更小的空间。</p>
 <h1 id="Definitions-and-Acronyms"><a href="#Definitions-and-Acronyms" class="headerlink" title="Definitions and Acronyms"></a>Definitions and Acronyms</h1><a id="more"></a>
 
@@ -840,16 +878,35 @@
 </tbody></table>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>Specification for Camera Serial Interface 2 (CSI-2)。</p>
 
-      </div>
-      
-      
-      
     </div>
-    
 
     
     
     
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MIPI/" rel="tag"># MIPI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/24/Life/Writen-in-2021-July/" rel="next" title="写在 2021 年 7 月">
+      写在 2021 年 7 月 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
 
 
           </div>
@@ -917,20 +974,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-count">116</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1071,7 +1128,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'huaqianlee.github.io',
       owner       : 'huaqianlee',
       admin       : ['huaqianlee'],
-      id          : '5710d40be3663ff58939c29398612c62',
+      id          : '2488d165d0d721501fd78746feb93908',
         language: '',
       distractionFreeMode: true
     });
