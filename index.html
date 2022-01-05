@@ -119,12 +119,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">116</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">117</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">31</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">32</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -189,6 +189,115 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2022/12/25/Linux/How-to-prepare-SDK-for-Yocto-Linux-Ubuntu-on-Qualcomm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/25/Linux/How-to-prepare-SDK-for-Yocto-Linux-Ubuntu-on-Qualcomm/" class="post-title-link" itemprop="url">How to prepare SDK for Yocto Linux/Ubuntu on Qualcomm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Dec 25 2022 22:30:32" itemprop="dateCreated datePublished" datetime="2022-12-25T22:30:32+08:00">Dec 25 2022</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jan 5 2022 22:35:17" itemprop="dateModified" datetime="2022-01-05T22:35:17+08:00">Jan 5 2022</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Tree/" itemprop="url" rel="index"><span itemprop="name">Linux Tree</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Tree/Ycoto/" itemprop="url" rel="index"><span itemprop="name">Ycoto</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="What-does-SDK-mean-in-current-context"><a href="#What-does-SDK-mean-in-current-context" class="headerlink" title="What does SDK mean in current context?"></a>What does SDK mean in current context?</h1><p>很多时候，我们需要闭源一部分源码， 然后再把整个源码仓库共享给指定人员。这个源码仓库就称之为 SDK。</p>
+<h1 id="How-to-make-SDK-based-on-Yocto-build-system"><a href="#How-to-make-SDK-based-on-Yocto-build-system" class="headerlink" title="How to make SDK based on Yocto build system"></a>How to make SDK based on Yocto build system</h1><p>根据目前的调查结论，基于 Yocto 编译系统做 SDK 主要有如下三种方式，本文主要介绍第一种方式，也会稍微介绍下第二、三种方式。</p>
+<ul>
+<li>将闭源部分源码做成 prebuilt 包;</li>
+<li>重写 <code>do_install</code> 任务直接安装闭源部分源码生成的 deb 包;</li>
+<li>将源码编译成二进制并替换，修改 Makefile 文件。</li>
+</ul>
+<p>最开始倾向于以 2、3 的方式来做 SDK， 深入调查后发现 1 才是最合适的方式，原因有三：</p>
+<ul>
+<li>高通有开发一个基于 <code>qprebuilt.bbclass</code> 类来实现的半成品 prebuilt 功能， 而且高通的闭源源码也是按照这种方式处理的。</li>
+<li>直接安装预编译的 deb 包是一个糟糕的决定，会给以后带来很多不确定性和不可追溯性。</li>
+<li>编译二进制并替换的方式在 Yocto 中逻辑更为复杂，且不符合官方推荐的标准做法。</li>
+</ul>
+<h2 id="Create-Prebuilt-tarball"><a href="#Create-Prebuilt-tarball" class="headerlink" title="Create Prebuilt tarball"></a>Create Prebuilt tarball</h2><p>制作预编译包是官方比较推荐的一种方式，详细过程请查看 “Lessons and Gains of making prebuilt sdk” 部分。现以 RB5 LU 为例将准备步骤简单总结如下，其分为两种情况：</p>
+<ul>
+<li>可以生成中间产物，用中间产物创建；</li>
+<li>不能生成中间产物，直接取最终产物创建。</li>
+</ul>
+<blockquote>
+<p>我们也可以跳过第一种情况，直接按照第二种方式准备所有模块的预编译包，可以直接跳过如下第 2 步。</p>
+</blockquote>
+<ol>
+<li>找到并修改闭源代码对应的 bb 文件, 添加如下两行代码。</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RB5 LU 需要修改如下文件：</span></span><br><span class="line"><span class="comment"># poky/meta-qti-bsp-prop/classes/qprebuilt.bbclass</span></span><br><span class="line"><span class="comment"># poky/meta-qti-bsp-prop/recipes-bsp/sensors/sensors-see_git.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-bt/recipes/bt-app/bt-app_git.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-bt/recipes/bt-cert/bt-cert_git.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-bt/recipes/bthost-ipc/bthost-ipc_git.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-bt/recipes/fluoride/fluoride_git.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-bt/recipes/libbt-vendor/libbt-vendor_git.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-camera-prop/recipes/camx/camx_0.1.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-camera-prop/recipes/camx/camxlib_0.1.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-camera-prop/recipes/camx/chicdk_0.1.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-gst-prop/recipes/secure-gst/secure-gst.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-robotics-prop/recipes/imud/imud.bb</span></span><br><span class="line"><span class="comment"># poky/meta-qti-sensors-prop/recipes/sensors/sensors-see-qti_git.bb</span></span><br><span class="line"></span><br><span class="line">RM_WORK_EXCLUDE += <span class="string">&quot;<span class="variable">$&#123;PN&#125;</span>&quot;</span> <span class="comment"># 也可以添加所有模块到 local.conf， 譬如： RM_WORK_EXCLUDE += &quot;camx chicdk ...&quot;</span></span><br><span class="line">inherit qprebuilt <span class="comment"># 如果 bb 文件已经继承了此类，就不需要增加此行</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/25/Linux/How-to-prepare-SDK-for-Yocto-Linux-Ubuntu-on-Qualcomm/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1047,91 +1156,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/11/05/Linux/Consolidating-the-foundation-of-Linux-linux-tips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/05/Linux/Consolidating-the-foundation-of-Linux-linux-tips/" class="post-title-link" itemprop="url">Consolidating the foundation of Linux, linux tips</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Nov 5 2020 22:39:20" itemprop="dateCreated datePublished" datetime="2020-11-05T22:39:20+08:00">Nov 5 2020</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Aug 11 2021 21:15:28" itemprop="dateModified" datetime="2021-08-11T21:15:28+08:00">Aug 11 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Tree/" itemprop="url" rel="index"><span itemprop="name">Linux Tree</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Tree/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Linux-Tips"><a href="#Linux-Tips" class="headerlink" title="Linux Tips"></a>Linux Tips</h1><p>Record the commands that I use more frequently in the form of a memo, and will continue to increase according to usage in the future.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/05/Linux/Consolidating-the-foundation-of-Linux-linux-tips/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1203,14 +1227,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1280,7 +1304,7 @@
 <div class="copyright">
   
   &copy; 2014 – 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
