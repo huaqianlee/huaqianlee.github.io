@@ -119,7 +119,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">117</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">118</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -189,6 +189,94 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2016/04/02/Uav/uav-board-debugging/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/02/Uav/uav-board-debugging/" class="post-title-link" itemprop="url">无人机开发主板调试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Apr 2 2016 21:01:57" itemprop="dateCreated datePublished" datetime="2016-04-02T21:01:57+08:00">Apr 2 2016</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 24 2021 12:53:30" itemprop="dateModified" datetime="2021-07-24T12:53:30+08:00">Jul 24 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Discovery/" itemprop="url" rel="index"><span itemprop="name">Discovery</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Discovery/Uav/" itemprop="url" rel="index"><span itemprop="name">Uav</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题一-：-新板子不能开机，关键点：板子2-32（ddr-emmc）换为了2-16"><a href="#问题一-：-新板子不能开机，关键点：板子2-32（ddr-emmc）换为了2-16" class="headerlink" title="问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 ."></a>问题一 ： 新板子不能开机，关键点：板子2+32（ddr+emmc）换为了2+16 .</h2><p>自己的uav主板回来后将软件刷入板子(高通msm8074), 板子不能正常启动.</p>
+<p>通过分析log， 发现死在boot_images\core\boot\secboot3\hw\msm8974\sbl1\sbl1_mc.c 中 sbl1_tlmm_init() —&gt; boot_gpio_init()， 当我屏蔽此函数后， log如下：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Format: Log Type - Time(microsec) - Message </span><br><span class="line">Log <span class="built_in">type</span>: B - since boot(excluding boot rom). D - delta </span><br><span class="line">B - 41663 - SBL1, Start </span><br><span class="line">B - 46909 - scatterload_region &amp;&amp; ram_init, Start </span><br><span class="line">D - 30 - scatterload_region &amp;&amp; ram_init, Delta </span><br><span class="line">B - 63897 - pm_device_init, Start </span><br><span class="line">D - 27297 - pm_device_init, Delta </span><br><span class="line">B - 91317 - boot_flash_init, Start </span><br><span class="line">D - 10919 - boot_flash_init, Delta </span><br><span class="line">B - 102632 - boot_config_data_table_init, Start </span><br><span class="line">D - 134932 - boot_config_data_table_init, Delta </span><br><span class="line">B - 239150 - sbl1_ddr_set_params, Start </span><br><span class="line">B - 241773 - Pre_DDR_clock_init, Start </span><br><span class="line">D - 274 - Pre_DDR_clock_init, Delta </span><br><span class="line">D - 0 - sbl1_ddr_set_params, Delta </span><br><span class="line">B - 255773 - pm_driver_init, Start </span><br><span class="line">D - 16134 - pm_driver_init, Delta </span><br><span class="line">B - 271907 - clock_init, Start </span><br><span class="line">D - 152 - clock_init, Delta </span><br><span class="line">B - 274988 - Image Load, Start </span><br><span class="line">B - 295209 - Tz Execution, Start </span><br><span class="line">D - 193065 - Tz Execution, Delta </span><br><span class="line">B - 496387 - Image Load, Start </span><br><span class="line">B - 506361 - Signal PBL to Jump to RPM FW </span><br><span class="line">B - 506605 - sbl1_wait_for_ddr_training, Start   </span><br><span class="line">B - 540399 - 1<span class="comment">######################################################### </span></span><br><span class="line">D - 45323 - sbl1_wait_for_ddr_training, Delta </span><br><span class="line"><span class="comment">#不屏蔽boot_gpio_init()函数,则停在此处， boot_gpio_init()中</span></span><br><span class="line">B - 558302 - 11<span class="comment">#########################################################   </span></span><br><span class="line">B - 685884 - Image Load, Start </span><br><span class="line">B - 689391 - WDT Execution, Start </span><br><span class="line">D - 213 - WDT Execution, Delta </span><br><span class="line">B - 694790 - Image Load, Start </span><br><span class="line">B - 707905 - sbl1_efs_handle_cookies, Start </span><br></pre></td></tr></table></figure>
+<p>　</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/04/02/Uav/uav-board-debugging/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -979,92 +1067,6 @@ git commit</code></pre>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/" class="post-title-link" itemprop="url">Android源码bootable解析之bootloader LK(little kernel)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Jul 25 2015 15:56:13" itemprop="dateCreated datePublished" datetime="2015-07-25T15:56:13+08:00">Jul 25 2015</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-Tree/" itemprop="url" rel="index"><span itemprop="name">Android Tree</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-Tree/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记得当初学Linux时候，bootloader 代码相对来说还比较简单，主要几个汇编文件加上几个C文件，编译一个uboot就ok了。做Android驱动后，发现Android专门做了一个目录bootable来实现boot等相关功能。功能也比较多，所以就准备来研究一下这一部分。今天就先研究一下LK，LK全称为Little Kernel，是AP模块bootloader中实现的一个微型系统。</p>
-<h2 id="boot架构"><a href="#boot架构" class="headerlink" title="boot架构"></a>boot架构</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/07/25/Android/Android%E6%BA%90%E7%A0%81bootable%E8%A7%A3%E6%9E%90%E4%B9%8BLK-bootloader-little-kernel/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1136,7 +1138,7 @@ git commit</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">118</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
