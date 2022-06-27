@@ -119,17 +119,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">124</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">119</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">34</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">33</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">34</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">33</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -189,481 +189,6 @@
 
           <div class="content index posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/10/10/Android/performance-debug-guide/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/10/Android/performance-debug-guide/" class="post-title-link" itemprop="url">Android 性能调试手册</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Oct 10 2020 23:17:46" itemprop="dateCreated datePublished" datetime="2020-10-10T23:17:46+08:00">Oct 10 2020</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-Tree/" itemprop="url" rel="index"><span itemprop="name">Android Tree</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-Tree/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>俗话说“雨过留痕，雁过留声”，之前因为工作需要折腾了小几个月的性能 BUG，还是得留下一点东西，这是第一篇：Android 性能调试手册，这篇文章简单聊聊工作中应该怎么进行性能分析。因为没有深入研究 Performance 相关内容，所以保留出错的权利。</p>
-<h1 id="0-写在开头"><a href="#0-写在开头" class="headerlink" title="0. 写在开头"></a>0. 写在开头</h1><p>在我司处理 Performance 问题时，大多数情况不会像顶级大厂那样优化每一帧，尽量榨干每一个硬件的性能。因为没有前人提供经验，全是自己总结的，如果存在有失偏颇的地方，你也只能看着。我理解的主要处理方式如下：</p>
-<ul>
-<li><p>第一种，推不解。</p>
-<ul>
-<li>gaps 小， 个人经验是 10% 以内即可以尝试推不解，譬如：问题机 Chrome 启动时间为 800 ms， 对比机为 750 ms。</li>
-<li>分析出时间消耗，列出与对比机的对比， 详细阐述差分部分，一般来说大部分差分是原生代码引起，或者 gaps 很小。</li>
-</ul>
-</li>
-<li><p>第二种嘛，当然就是想办法解决或优化了。</p>
-</li>
-</ul>
-<h1 id="1-怎么开始？"><a href="#1-怎么开始？" class="headerlink" title="1. 怎么开始？"></a>1. 怎么开始？</h1><p>针对任何性能问题，我觉得第一步都先需要做如下三个确认：</p>
-<ol start="0">
-<li>确认问题现象，最好自己复现一次。</li>
-<li>确认有没有大量 crash 发生。</li>
-<li>查看 kernel footprint（config）， 确认是否使用 perf config： msmxxx-perf_defconfig。</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/10/Android/performance-debug-guide/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/10/10/Android/breakdown-from-touch-input-to-drawing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/10/Android/breakdown-from-touch-input-to-drawing/" class="post-title-link" itemprop="url">APP 启动，触摸事件和 UI 绘制的简单分析示例</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Oct 10 2020 23:17:21" itemprop="dateCreated datePublished" datetime="2020-10-10T23:17:21+08:00">Oct 10 2020</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-Tree/" itemprop="url" rel="index"><span itemprop="name">Android Tree</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-Tree/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>“雨过留痕，雁过留声”的第二篇：APP 启动，触摸事件和 UI 绘制的简单分析示例，此文通过 systrace 分析一个示例 APP 的启动、触摸事件和 UI 绘制的流程和时间消耗。本文的示例 APP （<a target="_blank" rel="noopener" href="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/android/Performance/SimpleApplication.apk">SimpleApplication.apk</a>）只有一个简单的按钮， 点击按钮时会改变屏幕的颜色。同样因为没有深入研究 Performance 相关内容，所以保留出错的权利。</p>
-<blockquote>
-<p>如果对第一篇感兴趣，请查看： <a href="http://huaqianlee.github.io/2020/10/10/Android/performance_debug_guide.html">Android 性能调试手册</a>.</p>
-</blockquote>
-<h1 id="0-写在开头"><a href="#0-写在开头" class="headerlink" title="0. 写在开头"></a>0. 写在开头</h1><p>我一开始看到 systrace 文件时，是一脸懵逼的，所以在开始正文之前先简单说一下 systrace 文件中的一些基本信息，如下：</p>
-<ul>
-<li><code>Frames</code>: 一个圆圈代表一帧。  <ul>
-<li>绿色：正常；</li>
-<li>黄色、红色： 异常，如卡顿、掉帧(Jank) 等，可能是它的渲染时间超过了 16.67ms（60fps）。</li>
-<li>点击圆圈可查看详细信息</li>
-</ul>
-</li>
-<li><code>Alerts</code>: 右侧标签,跟踪记录中出现的问题以及这些问题导致出现卡顿的频率</li>
-<li><code>system_server  iq</code>: 第一帧的触发</li>
-<li><code>gfx3d_clk</code> : GPU 频率</li>
-<li><code>iq in systemsever</code> : 触发中断</li>
-<li><code>bindApplication, activityStart ...</code>： 表示冷启动， 热启动不会有这些信息。</li>
-<li><code>surfaceflinger</code>-&gt;<code>UI Thread</code>-&gt;<code>HIDL::IComposerClient:setPowerMode_2_2:client</code>: 代表 LCD 上电时间  <blockquote>
-<p>一般使用 Chrome 打开 systrace.html， 右上角的 <code>？</code>  也可以提供一些基本的帮助</p>
-</blockquote>
-</li>
-</ul>
-<h1 id="1-获取-systrace"><a href="#1-获取-systrace" class="headerlink" title="1. 获取 systrace"></a>1. 获取 systrace</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a. python systrace.py gfx input view <span class="built_in">sched</span> am wm dalvik freq idle power video app -b 40960 -t 10 -o traceout.html</span><br><span class="line"></span><br><span class="line">Explaination of these categories:</span><br><span class="line">gfx - Graphics</span><br><span class="line">input - Input</span><br><span class="line">view - View System</span><br><span class="line">wm - Window Manager</span><br><span class="line">am - Activity Manager</span><br><span class="line">hal - Hardware Modules</span><br><span class="line">res - Resource Loading</span><br><span class="line">dalvik - Dalvik VM</span><br><span class="line">power - Power Management</span><br><span class="line"><span class="built_in">sched</span> - CPU Scheduling	</span><br><span class="line">freq - CPU Frequency</span><br><span class="line">idle - CPU Idle</span><br><span class="line"></span><br><span class="line">b. Motion: Click icon of SimpleApplication to open it, click first time to change background as white, click sencond time to change background as black.</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/10/Android/breakdown-from-touch-input-to-drawing/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/" class="post-title-link" itemprop="url">How to build intranet gitbook with docker</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Oct 10 2020 22:23:38" itemprop="dateCreated datePublished" datetime="2020-10-10T22:23:38+08:00">Oct 10 2020</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:24:59" itemprop="dateModified" datetime="2021-07-24T12:24:59+08:00">Jul 24 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>之前折腾局域网搭建 Gitbook，并写了一篇简易教程：<a href="http://huaqianlee.github.io/2019/05/05/Git/gitlab-jenkins-gitbook-to-create-LAN-gitbook/">Gitbook + Jenkins + Gitlab 搭建内网自动构建的 Gitbook</a>。最近兴趣使然又用 docker 搭建了一套方便部署的内网 Gitbook 镜像，因此也总结一篇简易教程如下。</p>
-<h1 id="Install-Docker"><a href="#Install-Docker" class="headerlink" title="Install Docker"></a>Install Docker</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install docker</span><br></pre></td></tr></table></figure>
-
-<h1 id="Gitbook"><a href="#Gitbook" class="headerlink" title="Gitbook"></a>Gitbook</h1><h2 id="Gitbook-Image"><a href="#Gitbook-Image" class="headerlink" title="Gitbook Image"></a>Gitbook Image</h2><p>下载 Gitbook Docker 镜像，我选择了 <a target="_blank" rel="noopener" href="https://hub.docker.com/r/billryan/gitbook">billryan/gitbook 镜像</a>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull billryan/gitbook</span><br></pre></td></tr></table></figure>
-
-<p><code>mkdir gitbook</code> 创建一个 gitbook 路径，我们也可以将启动的镜像存储为另一个镜像：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># init</span></span><br><span class="line">docker run --rm -v <span class="string">&quot;<span class="variable">$PWD</span>/gitbook:/gitbook&quot;</span> -p 4000:4000 billryan/gitbook gitbook init</span><br><span class="line"><span class="comment"># serve</span></span><br><span class="line">docker run --rm -v <span class="string">&quot;<span class="variable">$PWD</span>/gitbook:/gitbook&quot;</span> -p 4000:4000 billryan/gitbook gitbook serve</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker ps <span class="comment"># Get CONTAINER ID of gitbook</span></span><br><span class="line">docker commit &lt;CONTAINER ID&gt; andylee/gitbook:1.0</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/" class="post-title-link" itemprop="url">Oh, the Git! - detached HEAD</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Mar 8 2020 18:49:40" itemprop="dateCreated datePublished" datetime="2020-03-08T18:49:40+08:00">Mar 8 2020</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:24:59" itemprop="dateModified" datetime="2021-07-24T12:24:59+08:00">Jul 24 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><code>detached HEAD</code> is a common situation, sometimes useful, sometimes dangerous. It doesn’t point to any branches, so it will be cleaned by <code>git</code>.</p>
-<p>The current commit history is as follows:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline --all --graph</span><br><span class="line">* 5ea3cec (HEAD -&gt; master) Modify README.md of src</span><br><span class="line">* 2b6e826 Same file, same blob</span><br><span class="line">* 1ff08f2 Modify README.md.</span><br><span class="line">* 8c19a38 Add Copyright notice.</span><br><span class="line">* 318c11a Copy css to lib.</span><br><span class="line">| * 1134f9e (dev) Make graph more readability</span><br><span class="line">| * 71c40d3 Modify README.md <span class="keyword">in</span> dev branch.</span><br><span class="line">|/</span><br><span class="line">* ce4297f Add image.</span><br><span class="line">| * 2cb23ac (dev-1.0) README <span class="keyword">for</span> dev-1.0 branch.</span><br><span class="line">|/</span><br><span class="line">* 6fc4b44 (tag: kikoff_tag) Copy doc README.md</span><br><span class="line">* 726c6c0 Add <span class="built_in">source</span> README.md</span><br><span class="line">* c8ff9c5 Add README</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/03/08/Git/Some-knowledge-about-git-detached-HEAD/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/03/07/Git/Some-knowledge-about-git-local-git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/07/Git/Some-knowledge-about-git-local-git/" class="post-title-link" itemprop="url">Oh, the Git! - local .git</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Mar 7 2020 18:42:33" itemprop="dateCreated datePublished" datetime="2020-03-07T18:42:33+08:00">Mar 7 2020</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:24:59" itemprop="dateModified" datetime="2021-07-24T12:24:59+08:00">Jul 24 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><code>.git</code> directory acts a major role in <code>git</code> VCS. We can do local verson management directly depended on <code>.git</code> directory. I will parse <code>.git</code> in current topic. </p>
-<h1 id="Directory-tree"><a href="#Directory-tree" class="headerlink" title="Directory tree"></a>Directory tree</h1><p>First, I created a project and managed it through <code>git</code>, its directory tree is as follows:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── doc</span><br><span class="line">│   └── README.md</span><br><span class="line">├── .git</span><br><span class="line">│   ├── COMMIT_EDITMSG</span><br><span class="line">│   ├── config</span><br><span class="line">│   ├── description</span><br><span class="line">│   ├── HEAD</span><br><span class="line">│   ├── hooks</span><br><span class="line">│   │   ├── applypatch-msg.sample</span><br><span class="line">│   │   ├── commit-msg.sample</span><br><span class="line">│   │   ├── fsmonitor-watchman.sample</span><br><span class="line">│   │   ├── post-update.sample</span><br><span class="line">│   │   ├── pre-applypatch.sample</span><br><span class="line">│   │   ├── pre-commit.sample</span><br><span class="line">│   │   ├── prepare-commit-msg.sample</span><br><span class="line">│   │   ├── pre-push.sample</span><br><span class="line">│   │   ├── pre-rebase.sample</span><br><span class="line">│   │   ├── pre-receive.sample</span><br><span class="line">│   │   └── update.sample</span><br><span class="line">│   ├── index</span><br><span class="line">│   ├── info</span><br><span class="line">│   │   └── exclude</span><br><span class="line">│   ├── logs</span><br><span class="line">│   │   ├── HEAD</span><br><span class="line">│   │   └── refs</span><br><span class="line">│   │       └── heads</span><br><span class="line">│   │           ├── dev</span><br><span class="line">│   │           ├── dev-1.0</span><br><span class="line">│   │           └── master</span><br><span class="line">│   ├── objects</span><br><span class="line">│   │   ├── 02</span><br><span class="line">│   │   │   ├── 40351d75b3f451e0ec4b399c38c3758f007152</span><br><span class="line">│   │   │   └── d8eae705ebf203142fd2f381d3b216dde2b28f</span><br><span class="line">|   |   |...</span><br><span class="line">│   │   ├── c8</span><br><span class="line">│   │   │   └── ff9c55ce2651d8380a14bee5b43b37e14fa7fc</span><br><span class="line">│   │   ├── f0</span><br><span class="line">│   │   │   └── 45488f3fa9a350ac01f48f2b000fe51a53f5aa</span><br><span class="line">│   │   ├── info</span><br><span class="line">│   │   └── pack</span><br><span class="line">│   ├── ORIG_HEAD</span><br><span class="line">│   └── refs</span><br><span class="line">│       ├── heads</span><br><span class="line">│       │   ├── dev</span><br><span class="line">│       │   ├── dev-1.0</span><br><span class="line">│       │   └── master</span><br><span class="line">│       └── tags</span><br><span class="line">│           └── kikoff_tag</span><br><span class="line">├── img</span><br><span class="line">│   └── check.png</span><br><span class="line">├── lib</span><br><span class="line">│   └── css_practice_1.html</span><br><span class="line">├── README.md</span><br><span class="line">└── src</span><br><span class="line">    └── README.md</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/03/07/Git/Some-knowledge-about-git-local-git/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
       
   
   
@@ -1110,10 +635,447 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/20/ARTS/Eighth-week-of-ARTs/" class="post-title-link" itemprop="url">The eighth week of ARTs</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Oct 20 2019 22:52:39" itemprop="dateCreated datePublished" datetime="2019-10-20T22:52:39+08:00">Oct 20 2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 24 2021 12:55:16" itemprop="dateModified" datetime="2021-07-24T12:55:16+08:00">Jul 24 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/" itemprop="url" rel="index"><span itemprop="name">Laboratory</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">Remove Duplicates from Sorted Array</a><br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java">Java</a></p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/20/ARTS/Eighth-week-of-ARTs/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/13/ARTS/Seventh-week-of-ARTs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/13/ARTS/Seventh-week-of-ARTs/" class="post-title-link" itemprop="url">The seventh week of ARTs</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Oct 13 2019 22:45:09" itemprop="dateCreated datePublished" datetime="2019-10-13T22:45:09+08:00">Oct 13 2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 24 2021 12:55:16" itemprop="dateModified" datetime="2021-07-24T12:55:16+08:00">Jul 24 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/" itemprop="url" rel="index"><span itemprop="name">Laboratory</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/merge-two-sorted-lists/">Merge Two Sorted Lists</a><br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/MergeTwoSortedLists.java">Java</a></p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/13/ARTS/Seventh-week-of-ARTs/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/06/ARTS/Sixth-week-of-ARTs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/06/ARTS/Sixth-week-of-ARTs/" class="post-title-link" itemprop="url">The sixth week of ARTs</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Oct 6 2019 22:44:44" itemprop="dateCreated datePublished" datetime="2019-10-06T22:44:44+08:00">Oct 6 2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 24 2021 12:55:16" itemprop="dateModified" datetime="2021-07-24T12:55:16+08:00">Jul 24 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/" itemprop="url" rel="index"><span itemprop="name">Laboratory</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-parentheses/">Valid Parentheses</a><br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/python/ValidParentheses.py">Python</a></p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>I read <a target="_blank" rel="noopener" href="https://organizationsandmarkets.com/2010/08/31/how-to-read-an-academic-article/">How to Read an Academic Article</a> this week. It teaches me to read academic article by sharing handout. It simply summarizes the method of fast reading, a lot of them maybe be a cliche, but the summary is very helpful.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/06/ARTS/Sixth-week-of-ARTs/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/09/29/ARTS/Fifth-week-of-ARTS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/29/ARTS/Fifth-week-of-ARTS/" class="post-title-link" itemprop="url">The fifth week of ARTS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Sep 29 2019 22:44:56" itemprop="dateCreated datePublished" datetime="2019-09-29T22:44:56+08:00">Sep 29 2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 24 2021 12:55:16" itemprop="dateModified" datetime="2021-07-24T12:55:16+08:00">Jul 24 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/" itemprop="url" rel="index"><span itemprop="name">Laboratory</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/longest-common-prefix/">Longest Common Prefix</a><br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/LongestCommonPrefix.java">Java</a></p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>I always want to change the mind of my loves, but I didn’t use the good way to do it. So I read <a target="_blank" rel="noopener" href="https://forge.medium.com/how-to-change-a-mind-1774681b9369">How to Change a Mind</a> this week.</p>
+<p>To be honesty, I can’t get this article well, it is a little hard to me. But I got the following opinions from this topic.</p>
+<ol>
+<li>Firstly we should think or do like the people who we want to change.</li>
+<li>For scams, we should let the people lose the faith in the person not in the scams, it will be a better way. Quote the sentence:  <blockquote>
+<p>“Dylan did not need to lose his faith in what his elders were saying; he needed to lose his faith in them.” </p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/29/ARTS/Fifth-week-of-ARTS/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/09/22/ARTS/Fourth-week-of-ARTS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/22/ARTS/Fourth-week-of-ARTS/" class="post-title-link" itemprop="url">The fourth week of ARTS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Sep 22 2019 22:44:01" itemprop="dateCreated datePublished" datetime="2019-09-22T22:44:01+08:00">Sep 22 2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 24 2021 12:55:16" itemprop="dateModified" datetime="2021-07-24T12:55:16+08:00">Jul 24 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/" itemprop="url" rel="index"><span itemprop="name">Laboratory</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/roman-to-integer/">Roman to Integer</a><br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RomantoInteger.java">Java Solution:</a></p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>Today I access <a href="">Medium</a>,This article called <a target="_blank" rel="noopener" href="https://medium.com/free-code-camp/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83"><code>Putting comments in code: the good, the bad, and the ugly.</code></a> got into my eyes first. So I choose it as my <code>Review</code>.</p>
+<p>This article mainly says the cliche <code>“Good code is self-documenting.”</code> It tells the good, the bad, and the ugly when it comes to commenting our code. </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/22/ARTS/Fourth-week-of-ARTS/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1181,20 +1143,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-count">119</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
