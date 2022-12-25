@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Platform Information :　System:    Ａndroid4.4.4　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        &amp;#x68;&amp;#x75;&amp;#x61;&amp;#x71;&amp;#x69;&amp;#x61;&amp;#x6e;&amp;#x6c;&amp;#101;&amp;#101;&amp;#64;&amp;#x67;&amp;#109;&amp;#97;&amp;#x69;&amp;#">
+  <meta name="description" content="Platform Information :　System:    Ａndroid4.4.4　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        &amp;#x68;&amp;#x75;&amp;#x61;&amp;#x71;&amp;#105;&amp;#97;&amp;#110;&amp;#108;&amp;#x65;&amp;#101;&amp;#x40;&amp;#x67;&amp;#109;&amp;#x61;&amp;#x69;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android电池监控系统(BMS)之一电池系统架构">
 <meta property="og:url" content="http://huaqianlee.github.io/2015/06/06/Android/Android%E7%94%B5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F-BMS-%E4%B9%8B%E7%94%B5%E6%B1%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
-<meta property="og:description" content="Platform Information :　System:    Ａndroid4.4.4　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        &amp;#x68;&amp;#x75;&amp;#x61;&amp;#x71;&amp;#x69;&amp;#x61;&amp;#x6e;&amp;#x6c;&amp;#101;&amp;#101;&amp;#64;&amp;#x67;&amp;#109;&amp;#97;&amp;#x69;&amp;#">
+<meta property="og:description" content="Platform Information :　System:    Ａndroid4.4.4　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        &amp;#x68;&amp;#x75;&amp;#x61;&amp;#x71;&amp;#105;&amp;#97;&amp;#110;&amp;#108;&amp;#x65;&amp;#101;&amp;#x40;&amp;#x67;&amp;#109;&amp;#x61;&amp;#x69;&amp;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201566Android-bms-arch.png">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201566battery-info.png">
@@ -127,12 +127,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">119</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">123</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">33</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">34</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -259,7 +259,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        <a href="mailto:&#x68;&#x75;&#x61;&#x71;&#x69;&#x61;&#x6e;&#x6c;&#101;&#101;&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#109;">&#x68;&#x75;&#x61;&#x71;&#x69;&#x61;&#x6e;&#x6c;&#101;&#101;&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#109;</a></em></p>
+        <p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        <a href="mailto:&#x68;&#x75;&#x61;&#x71;&#105;&#97;&#110;&#108;&#x65;&#101;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;">&#x68;&#x75;&#x61;&#x71;&#105;&#97;&#110;&#108;&#x65;&#101;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;</a></em></p>
 <p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。<br>##电池系统架构<br>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
 <p>自上而下，Android电池监控系统分为如下几个部分：</p>
 <p>###电池信息查看APP<br>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：</p>
@@ -415,14 +415,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">119</span>
+          <span class="site-state-item-count">123</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">

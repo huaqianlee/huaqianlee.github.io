@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"huaqianlee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":"ture","color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Platform Information :　System:    Ａndroid5.1　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        &amp;#104;&amp;#117;&amp;#x61;&amp;#x71;&amp;#105;&amp;#97;&amp;#x6e;&amp;#108;&amp;#101;&amp;#x65;&amp;#x40;&amp;#x67;&amp;#109;&amp;#x61;&amp;#105;&amp;#1">
+  <meta name="description" content="Platform Information :　System:    Ａndroid5.1　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        &amp;#x68;&amp;#x75;&amp;#x61;&amp;#x71;&amp;#105;&amp;#x61;&amp;#110;&amp;#x6c;&amp;#x65;&amp;#x65;&amp;#x40;&amp;#x67;&amp;#109;&amp;#x61;&amp;#105;&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高通Android设备启动流程分析(从power-on上电到Home Lanucher启动)">
 <meta property="og:url" content="http://huaqianlee.github.io/2015/08/23/Android/%E9%AB%98%E9%80%9AAndroid%E8%AE%BE%E5%A4%87%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90-%E4%BB%8Epower-on%E4%B8%8A%E7%94%B5%E5%88%B0Home-Lanucher%E5%90%AF%E5%8A%A8/index.html">
 <meta property="og:site_name" content="Andy.Lee&#39;s  Blog">
-<meta property="og:description" content="Platform Information :　System:    Ａndroid5.1　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        &amp;#104;&amp;#117;&amp;#x61;&amp;#x71;&amp;#105;&amp;#97;&amp;#x6e;&amp;#108;&amp;#101;&amp;#x65;&amp;#x40;&amp;#x67;&amp;#109;&amp;#x61;&amp;#105;&amp;#1">
+<meta property="og:description" content="Platform Information :　System:    Ａndroid5.1　Platform:  Qualcomm msm8916　Author:     Andy Lee　Email:        &amp;#x68;&amp;#x75;&amp;#x61;&amp;#x71;&amp;#105;&amp;#x61;&amp;#110;&amp;#x6c;&amp;#x65;&amp;#x65;&amp;#x40;&amp;#x67;&amp;#109;&amp;#x61;&amp;#105;&amp;#">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogandroidarchitecture.jpg">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogbootflow.png">
@@ -129,12 +129,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">119</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">123</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">33</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">34</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -261,7 +261,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><em>Platform Information :<br>　System:    Ａndroid5.1<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        <a href="mailto:&#104;&#117;&#x61;&#x71;&#105;&#97;&#x6e;&#108;&#101;&#x65;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;">&#104;&#117;&#x61;&#x71;&#105;&#97;&#x6e;&#108;&#101;&#x65;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;</a></em></p>
+        <p><em>Platform Information :<br>　System:    Ａndroid5.1<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        <a href="mailto:&#x68;&#x75;&#x61;&#x71;&#105;&#x61;&#110;&#x6c;&#x65;&#x65;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#109;">&#x68;&#x75;&#x61;&#x71;&#105;&#x61;&#110;&#x6c;&#x65;&#x65;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#109;</a></em></p>
 <p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>在我第一次接触Android得时候，我就很想知道Android设备在按下电源键后是怎么启动到主界面的，但是到现在为止也没有完全理清这个过程，所以就决定从按下power键开始来分析一下这个流程。虽然Android基于Linux内核开发的一个操作系统，但是在init进程后Android附加了很多其他操作，所以其启动流程还是有比较大的差别的，关于Linux系统的启动流程可以参考我的另一篇博文：<a href="http://huaqianlee.github.io/2015/08/21/Linux/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">深入理解linux启动过程</a>。</p>
 <p>因为我现在工作中用到的是高通的源码，并且高通也是目前Android手机的主流芯片，所以我就按照高通的msm8916来分析了，不过其他的也应该大同小异。<br>　<br>首先来看一下官方给出的Android系统架构：</p>
 <a id="more"></a>　
@@ -708,14 +708,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">119</span>
+          <span class="site-state-item-count">123</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
