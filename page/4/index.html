@@ -119,17 +119,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">123</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">127</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">34</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">35</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">34</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -189,6 +189,357 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/11/25/Linux/How-to-save-dead-ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/25/Linux/How-to-save-dead-ubuntu/" class="post-title-link" itemprop="url">Ubuntu 卡死了怎么办？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Nov 25 2019 22:42:53" itemprop="dateCreated datePublished" datetime="2019-11-25T22:42:53+08:00">Nov 25 2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 22 2021 23:38:22" itemprop="dateModified" datetime="2021-07-22T23:38:22+08:00">Jul 22 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Tree/" itemprop="url" rel="index"><span itemprop="name">Linux Tree</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Tree/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在使用 Ubuntu 的时候，有时候会遇到卡死的问题，然后电脑完全不能使用。这时候怎么办呢，我通常是通过如下两种方式进行处理：  </p>
+<h2 id="Kill-process"><a href="#Kill-process" class="headerlink" title="Kill process"></a><code>Kill process</code></h2><p>当我们明确知道什么进程导致系统卡死的时候，譬如文件管理器，我们可以通过如下两种方式进入字符终端找到假死的进程然后 kill 掉。  </p>
+<ol>
+<li><code>Ctrl + Alt + F1</code> 进入，<code>Ctrl + Alt + F7</code>  回到 UI 。</li>
+<li><code>ssh user@ip</code> 远程登入。</li>
+</ol>
+<p>杀死进程的方式，我常用的有三种，如下：</p>
+<ol>
+<li><code>Top</code> 或者 <code>htop</code> 找到造成假死的进程并 <code>kill</code>。</li>
+<li>通过名字或者进程 PID 去杀进程。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ps -A |grep nautilus  <span class="comment"># 查看文件管理器的 PID</span></span><br><span class="line"><span class="built_in">kill</span> PID</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以名字的形式杀掉进程</span></span><br><span class="line">killall nautilus </span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="Log-out"><a href="#Log-out" class="headerlink" title="Log out"></a><code>Log out</code></h2><p>注销桌面重新登录：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pkill Xorg</span><br><span class="line">或者</span><br><span class="line">sudo restart lightdm</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/11/17/Git/Some-knowledge-about-git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/17/Git/Some-knowledge-about-git/" class="post-title-link" itemprop="url">Oh, the Git! - Basic</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Nov 17 2019 23:38:05" itemprop="dateCreated datePublished" datetime="2019-11-17T23:38:05+08:00">Nov 17 2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 24 2021 12:24:59" itemprop="dateModified" datetime="2021-07-24T12:24:59+08:00">Jul 24 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>Git has always been a must-have skill for developers, I will submize a series of blogs related to it, although I don’t know too much about git now.</p>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2">Pro Git</a> is the best guide of git, I need to read it when I have plenty of time so that I can check for gaps.</p>
+<h1 id="VCS-Version-Control-System"><a href="#VCS-Version-Control-System" class="headerlink" title="VCS(Version Control System)"></a>VCS(Version Control System)</h1><h2 id="Central-VCS"><a href="#Central-VCS" class="headerlink" title="Central VCS"></a>Central VCS</h2><p>Central VCS mainly includes <code>SVN</code> and <code>CVS</code>, its newwork architecture is client-server.<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vcs/Central%20VCS.jpg" alt="Central VCS"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/17/Git/Some-knowledge-about-git/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/23/ARTS/Ninth-week-of-ARTS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/23/ARTS/Ninth-week-of-ARTS/" class="post-title-link" itemprop="url">The ninth week of ARTS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Oct 23 2019 0:00:43" itemprop="dateCreated datePublished" datetime="2019-10-23T00:00:43+08:00">Oct 23 2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 24 2021 12:55:16" itemprop="dateModified" datetime="2021-07-24T12:55:16+08:00">Jul 24 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/" itemprop="url" rel="index"><span itemprop="name">Laboratory</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-element/">Remove Element</a>.<br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveElement.java">Java</a>.</p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>I found a usage of “repo init … –reference” this week, I want to know more, so I read <a target="_blank" rel="noopener" href="https://forum.xda-developers.com/android/software/guide-android-repo-mirroring-t3170869">Android Repo Mirroring</a> this week.</p>
+<p>This article explains “repo mirroring” in a simple and clear way through examples.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/23/ARTS/Ninth-week-of-ARTS/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/10/20/ARTS/Eighth-week-of-ARTs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/20/ARTS/Eighth-week-of-ARTs/" class="post-title-link" itemprop="url">The eighth week of ARTs</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Oct 20 2019 22:52:39" itemprop="dateCreated datePublished" datetime="2019-10-20T22:52:39+08:00">Oct 20 2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Jul 24 2021 12:55:16" itemprop="dateModified" datetime="2021-07-24T12:55:16+08:00">Jul 24 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/" itemprop="url" rel="index"><span itemprop="name">Laboratory</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laboratory/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">Remove Duplicates from Sorted Array</a><br>Solution: <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/java/RemoveDuplicatesfromSortedArray.java">Java</a></p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/20/ARTS/Eighth-week-of-ARTs/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -722,360 +1073,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/09/08/Linux/A-little-basic-knowledge-of-the-shell/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/09/08/Linux/A-little-basic-knowledge-of-the-shell/" class="post-title-link" itemprop="url">A little basic knowledge of shell</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Sep 8 2019 13:07:57" itemprop="dateCreated datePublished" datetime="2019-09-08T13:07:57+08:00">Sep 8 2019</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 22 2021 23:34:18" itemprop="dateModified" datetime="2021-07-22T23:34:18+08:00">Jul 22 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Tree/" itemprop="url" rel="index"><span itemprop="name">Linux Tree</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Tree/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>I don’t know what to share for ARTS this week. So I summarize a little knowledge of the shell.</p>
-<h2 id="What-is-a-shell"><a href="#What-is-a-shell" class="headerlink" title="What is a shell"></a>What is a shell</h2><p>A shell is a software interface that is ofthen a command line interface that enables the user to interact with the computer. In linux, we can check all supported shell via the following way.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/09/08/Linux/A-little-basic-knowledge-of-the-shell/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/09/07/ARTS/Second-week-of-ARTS-Hurry/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/09/07/ARTS/Second-week-of-ARTS-Hurry/" class="post-title-link" itemprop="url">The second week of ARTS: Hurry</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Sep 7 2019 20:49:00" itemprop="dateCreated datePublished" datetime="2019-09-07T20:49:00+08:00">Sep 7 2019</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:55:16" itemprop="dateModified" datetime="2021-07-24T12:55:16+08:00">Jul 24 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Laboratory/" itemprop="url" rel="index"><span itemprop="name">Laboratory</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Laboratory/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>Title：<a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-integer/">Reverse Integer</a><br>Solution：<a target="_blank" rel="noopener" href="https://github.com/huaqianlee/LeetcodeSolutions/blob/master/algorithms/c/reverseInteger.c">C solution</a></p>
-<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>Because I am learnning python, I was attracted by the <a target="_blank" rel="noopener" href="https://medium.com/free-code-camp/learning-python-from-zero-to-hero-120ea540b567">Learning Python: From Zero to Hero</a> article of <a target="_blank" rel="noopener" href="http://medium.com/">Medium</a>.  </p>
-<p>This article is very good ,  it almost show all the python-related knowledge in a limited page. Such as , variables, conditional statements, looping, collection/array, key-value collection, iterate , classes and objects, encapsulation, inheritance, etc.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/09/07/ARTS/Second-week-of-ARTS-Hurry/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/08/31/Linux/Process-and-thread-in-linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/31/Linux/Process-and-thread-in-linux/" class="post-title-link" itemprop="url">Process and thread in linux</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Aug 31 2019 17:35:46" itemprop="dateCreated datePublished" datetime="2019-08-31T17:35:46+08:00">Aug 31 2019</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 22 2021 23:39:04" itemprop="dateModified" datetime="2021-07-22T23:39:04+08:00">Jul 22 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Tree/" itemprop="url" rel="index"><span itemprop="name">Linux Tree</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Tree/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>没有太多时间去查看详细源代码，所以仍然有很多不清晰或者理解不到位的地方，后续将 Linux 相关知识学习得更深入的时候再来更新一次。  </p>
-</blockquote>
-<h1 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h1><p>在 Linux 中，进程和线程几乎没有什么区别，主要的区别就是线程共享同样的虚拟内存地址空间。对于 kernel 来说，进程和线程都是一个可运行的 task 。</p>
-<p>线程创建函数 pthread_create() 会调用 clone(), 而进程创建函数 fork() 最终也是调用 clone()。我们查看<a target="_blank" rel="noopener" href="https://linux.die.net/man/2/clone">clone</a>函数的介绍时，可以看到 clone() 的参数 flags 用来指明子‘进程’和父‘进程’共享什么，所以可以说进程就是不共享任何东西的一个典型线程（一个不成熟的观点，不一定正确）。<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/process_thread_to_task.jpeg" alt="process_thread_to_task">  </p>
-<blockquote>
-<p>摘录线程库发展史：Linux threading libraries evolution: Linux Threads, NGPT, NPTL. The library is part of gilbc, programmer interface is POSIX pthreads.  </p>
-</blockquote>
-<h1 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/31/Linux/Process-and-thread-in-linux/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2019/08/31/ARTS/First-week-of-ARTS-Start/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/31/ARTS/First-week-of-ARTS-Start/" class="post-title-link" itemprop="url">The first week of ARTS: Start</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Aug 31 2019 16:39:35" itemprop="dateCreated datePublished" datetime="2019-08-31T16:39:35+08:00">Aug 31 2019</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:55:16" itemprop="dateModified" datetime="2021-07-24T12:55:16+08:00">Jul 24 2021</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Laboratory/" itemprop="url" rel="index"><span itemprop="name">Laboratory</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Laboratory/ARTS/" itemprop="url" rel="index"><span itemprop="name">ARTS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="ARTS-简单介绍"><a href="#ARTS-简单介绍" class="headerlink" title="ARTS 简单介绍"></a>ARTS 简单介绍</h1><p>Algorithm：<br>主要是为了编程训练和学习。每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。</p>
-<p>Review：<br>主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是 <a target="_blank" rel="noopener" href="http://medium.com/">Medium</a>（需要梯子）以及各个公司的技术 blog，如 Netflix 的。</p>
-<p>Tip：<br>主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。</p>
-<p>Share：<br>主要是为了建立你的影响力，能够输出价值观。分享一篇有观点和思考的技术文章。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/31/ARTS/First-week-of-ARTS-Start/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1147,20 +1144,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">127</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
