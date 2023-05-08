@@ -11495,11 +11495,6 @@ eg:
       </tags>
   </entry>
   <entry>
-    <title>test</title>
-    <url>/2023/05/06/test/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>Andy Lee&#39;s C coding style</title>
     <url>/2021/08/09/C_C++/Coding-style-for-C/</url>
     <content><![CDATA[<p>This document describes C code style used by Andy Lee in his projects and libraries.</p>
@@ -11593,6 +11588,8 @@ eg:
 </li>
 </ul>
 <h1 id="General-Rules"><a href="#General-Rules" class="headerlink" title="General Rules"></a>General Rules</h1><p>In short, consistency matters.</p>
+<span id="more"></span>
+
 <p>And, if you are working on upstream or existing projects, please follow the original coding style.</p>
 <p>For example, Linux Kernel community requires its own coding style strictly, so we should follow <a href="https://www.kernel.org/doc/html/v6.1/process/coding-style.html">Linux kernel coding style</a>.</p>
 <blockquote>

@@ -119,7 +119,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">127</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">126</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -189,591 +189,6 @@
 
           <div class="content index posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2021/08/09/C_C++/Coding-style-for-C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/09/C_C++/Coding-style-for-C/" class="post-title-link" itemprop="url">Andy Lee's C coding style</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: Aug 9 2021 23:36:00" itemprop="dateCreated datePublished" datetime="2021-08-09T23:36:00+08:00">Aug 9 2021</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: May 8 2023 21:22:14" itemprop="dateModified" datetime="2023-05-08T21:22:14+08:00">May 8 2023</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>This document describes C code style used by Andy Lee in his projects and libraries.</p>
-<h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1><ul>
-<li><a href="#andy-lee's-c-coding-style">Andy Lee’s C coding style</a><ul>
-<li><a href="#table-of-Contents">Table of Contents</a></li>
-<li><a href="#general-rules">General Rules</a></li>
-<li><a href="#formatting">Formatting</a><ul>
-<li><a href="#indentation">Indentation</a><ul>
-<li><a href="#common-case">Common Case</a></li>
-<li><a href="#exception-case">Exception Case</a></li>
-</ul>
-</li>
-<li><a href="#braces,-parentheses-and-spaces-placement">Braces, Parentheses and Spaces placement</a><ul>
-<li><a href="#braces">Braces</a></li>
-<li><a href="#parentheses">Parentheses</a></li>
-<li><a href="#spaces">Spaces</a></li>
-</ul>
-</li>
-<li><a href="#line-break">Line Break</a></li>
-<li><a href="#if-then-else-formatting">If then Else Formatting</a></li>
-<li><a href="#switch-formatting">Switch Formatting</a></li>
-</ul>
-</li>
-<li><a href="#naming-also-declaration">Naming Also Declaration</a><ul>
-<li><a href="#make-names-fit">Make Names Fit</a></li>
-<li><a href="#function-names">Function Names</a></li>
-<li><a href="#variable-names">Variable Names</a><ul>
-<li><a href="#local-variable-names">Local Variable Names</a></li>
-<li><a href="#global-variable-names">Global Variable Names</a></li>
-</ul>
-</li>
-<li><a href="#structure-names">Structure Names</a></li>
-<li><a href="#pointer">Pointer</a></li>
-<li><a href="#global-constants">Global Constants</a></li>
-<li><a href="#macro-names">Macro Names</a></li>
-<li><a href="#enum-names">Enum Names</a></li>
-</ul>
-</li>
-<li><a href="#functions">Functions</a><ul>
-<li><a href="#unwritten-rules">Unwritten Rules</a></li>
-</ul>
-</li>
-<li><a href="#structures,-enumerations,-typedefs">Structures, Enumerations, Typedefs</a><ul>
-<li><a href="#structure-requirements">Structure Requirements</a></li>
-<li><a href="#labeled-identifiers-explained">Labeled Identifiers Explained</a></li>
-<li><a href="#typedef">Typedef</a></li>
-</ul>
-</li>
-<li><a href="#variables,-macro-and-constants">Variables, Macro and Constants</a><ul>
-<li><a href="#floating-point-variables">Floating-point Variables</a></li>
-<li><a href="#do-not-put-data-definitions-in-header-files">Do Not Put Data Definitions in Header Files</a></li>
-</ul>
-</li>
-<li><a href="#miscellaneous">Miscellaneous</a><ul>
-<li><a href="#no-magic-number">No Magic Number</a></li>
-<li><a href="#no-#ifdef-in-.c-file">No #ifdef in .c file</a></li>
-<li><a href="##if-is-preferred-not-#ifdef">#if is preferred not #ifdef</a></li>
-<li><a href="#prefer-inline-functions-over-macros">Prefer Inline funcitons over Macros</a></li>
-<li><a href="#use-header-file-guard">Use Header File Guard</a></li>
-<li><a href="#do-not-default-if-test-to-nonzero">Do Not Default If Test To Nonzero</a></li>
-<li><a href="#usually-avoid-embedded-assignments">Usually avoid Embedded Assignments</a></li>
-<li><a href="#use-of-goto,-continue,-break-and-?:">Use of Goto, Continue, Break and ?:</a></li>
-<li><a href="#mixing-c-and-c++">Mixing C and C++</a></li>
-<li><a href="#document-null-statements">Document Null Statements</a></li>
-<li><a href="#error-return-check-policy">Error Return Check Policy</a></li>
-</ul>
-</li>
-<li><a href="#commenting">Commenting</a> <ul>
-<li><a href="#comment-style">Comment Style</a></li>
-<li><a href="#commenting-to-closing-braces">Commenting to Closing Braces</a></li>
-<li><a href="#commenting-out-large-code-blocks">Commenting Out Large Code Blocks</a></li>
-<li><a href="#include-statement-documentation">Include Statement Documentation</a></li>
-</ul>
-</li>
-<li><a href="#documentation">Documentation</a><ul>
-<li><a href="#gotcha-keywords">Gotcha Keywords</a></li>
-<li><a href="#file-header">File header</a></li>
-<li><a href="#function-header">Function header</a></li>
-<li><a href="#formatting">Formatting</a></li>
-<li><a href="#how-do-they-look-like?">How Do They Look Like?</a></li>
-<li><a href="#tips-and-tricks">Tips and Tricks</a><ul>
-<li><a href="#vs-code">VS Code</a></li>
-<li><a href="#vim">Vim</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#reference">Reference</a></li>
-</ul>
-</li>
-</ul>
-<h1 id="General-Rules"><a href="#General-Rules" class="headerlink" title="General Rules"></a>General Rules</h1><p>In short, consistency matters.</p>
-<p>And, if you are working on upstream or existing projects, please follow the original coding style.</p>
-<p>For example, Linux Kernel community requires its own coding style strictly, so we should follow <a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/v6.1/process/coding-style.html">Linux kernel coding style</a>.</p>
-<blockquote>
-<p>The link is the latest version currently, in case there is any updates, please always check the latest version.</p>
-</blockquote>
-<h1 id="Formatting"><a href="#Formatting" class="headerlink" title="Formatting"></a>Formatting</h1><p>Mainly follow K&amp;R style:</p>
-<p><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/C/indentation.pngt" alt="indetation-k&amp;r"></p>
-<h2 id="Indentation"><a href="#Indentation" class="headerlink" title="Indentation"></a>Indentation</h2><h3 id="Common-Case"><a href="#Common-Case" class="headerlink" title="Common Case"></a>Common Case</h3><p>Use only spaces, and indent 4 spaces at a time.</p>
-<p>We use spaces for indentation. Do not use tabs in your code. You should set your editor to emit spaces when you hit the tab key. For example, we can configure vim as follows.</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span> <span class="comment">&quot; set tab&#x27;s width to 4</span></span><br><span class="line"><span class="keyword">set</span> expandtab <span class="comment">&quot; replace tab with space</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span> <span class="comment">&quot; set indentation to 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Kernel programming, cinoptions to set no switch indention</span></span><br><span class="line"><span class="keyword">au</span> BufRead /path/<span class="keyword">to</span>/kernel/* <span class="keyword">setlocal</span> <span class="built_in">shiftwidth</span>=<span class="number">8</span> softtabstop=<span class="number">8</span> tabstop=<span class="number">8</span> cinoptions=:<span class="number">0</span>,g0,(<span class="number">0</span>,w1</span><br></pre></td></tr></table></figure>
-
-<h3 id="Exception-Case"><a href="#Exception-Case" class="headerlink" title="Exception Case"></a>Exception Case</h3><p>If you are developing Linux kernel, please</p>
-<ul>
-<li>Use tabs.</li>
-<li>All tabs are 8 characters.</li>
-<li>If your code is indenting too deeply, fix your code.<blockquote>
-<p>More detailed please visit <a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/v6.1/process/coding-style.html#indentation">Linux kernel coding style - Indentation</a>.</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Braces-Parentheses-and-Spaces-Placement"><a href="#Braces-Parentheses-and-Spaces-Placement" class="headerlink" title="Braces, Parentheses and Spaces Placement"></a>Braces, Parentheses and Spaces Placement</h2><h3 id="Braces"><a href="#Braces" class="headerlink" title="Braces"></a>Braces</h3><ul>
-<li>Opening brace last on the line.</li>
-<li>Closing brace first on the line.</li>
-<li>Exception for functions.</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// All non-function statement blocks (if, switch, for, while, do)</span></span><br><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">    <span class="comment">// Do something ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (condition) &#123;</span><br><span class="line">    <span class="comment">// Do something ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    <span class="comment">// Do something ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (action) &#123;</span><br><span class="line">    <span class="comment">// Do something ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Functions</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Note that the closing brace is empty on a line of its own, except in the cases where it is followed by a continuation of the same statement, like a while in a do-statement or an else in an if-statement:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">&#125; <span class="keyword">while</span> (condition);</span><br></pre></td></tr></table></figure>
-
-<p>and</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x == y) &#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (x &gt; y) &#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Do not unnecessarily use braces where a single statement will do.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition)</span><br><span class="line">    action();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Only when a short statement</span></span><br><span class="line"><span class="keyword">if</span> (condition) action();</span><br></pre></td></tr></table></figure>
-
-<p>and</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition)</span><br><span class="line">	do_this();</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	do_that();</span><br></pre></td></tr></table></figure>
-
-<p>This does not apply if only one branch of a conditional statement is a single statement, it must keep the consistency.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">	do_this();</span><br><span class="line">	do_that();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	otherwise();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>All while and do statements must have braces when a loop contains more than a single simple statement.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (ture)</span><br><span class="line">	do_something();</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="title function_">do_something</span><span class="params">()</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">	do_this();</span><br><span class="line">	do_that();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">	do_this();</span><br><span class="line">	do_that();</span><br><span class="line">&#125; <span class="keyword">while</span> (<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Parentheses"><a href="#Parentheses" class="headerlink" title="Parentheses"></a>Parentheses</h3><p>Parentheses () with key words and function policy.</p>
-<ul>
-<li>Do not put parentheses next to keywords, put a space between.</li>
-<li>Do put parentheses next to function name.</li>
-<li>Do not use parentheses in return statement when is not necessary.</li>
-<li>Do not add spaces around (inside) parenthesized expressions.</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (condition) &#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span> arg1, <span class="type">int</span> arg2)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func(arg1, arg2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Don&#x27;t</span></span><br><span class="line"><span class="keyword">return</span> (<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Don&#x27;t</span></span><br><span class="line"><span class="keyword">sizeof</span>( <span class="type">int</span> );</span><br></pre></td></tr></table></figure>
-
-<h3 id="Spaces"><a href="#Spaces" class="headerlink" title="Spaces"></a>Spaces</h3><p>The use of spaces depends (mostly) on function-versus-keyword usage. Use a space after (most) keywords except sizeof, typeof, alignof and <strong>attribute</strong>, which look somewhat like functions.</p>
-<p>So use a space after these keywords:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>, <span class="keyword">switch</span>, <span class="keyword">case</span>, <span class="keyword">for</span>, <span class="keyword">do</span>, <span class="keyword">while</span></span><br></pre></td></tr></table></figure>
-
-<p>but not with sizeof, typeof, alignof, or <strong>attribute</strong>. E.g.,</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> file);</span><br></pre></td></tr></table></figure>
-
-<p>Use one space around (on each side of) most binary and ternary operators, such as any of these:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=  +  -  &lt;  &gt;  *  /  %  |  &amp;  ^  &lt;=  &gt;=  ==  !=  ?  :</span><br></pre></td></tr></table></figure>
-
-<p>but no space after unary operators:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&amp;  *  +  -  ~  !  <span class="keyword">sizeof</span>  typeof  <span class="keyword">alignof</span>  __attribute__  defined</span><br><span class="line"></span><br><span class="line"><span class="comment">// Such as</span></span><br><span class="line">&amp;x *x +x -x ~x !x <span class="title function_">sizeof</span><span class="params">(x)</span> ... <span class="title function_">defined</span><span class="params">(x)</span></span><br></pre></td></tr></table></figure>
-
-<p>no space before or after the increment &amp; decrement unary operators:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">++  --</span><br></pre></td></tr></table></figure>
-
-<p>and no space around the <code>.</code> and <code>-&gt;</code> structure member operators.</p>
-<h2 id="Line-Break"><a href="#Line-Break" class="headerlink" title="Line Break"></a>Line Break</h2><ul>
-<li>The preferred limit on the length of a single line is 80 columns.</li>
-<li>Statements longer than 80 columns should be broken into sensible chunks, unless exceeding 80 columns significantly increases readability and does not hide information.</li>
-<li>Descendants are always substantially shorter than the parent and are placed substantially to the right. A very commonly used style is to align descendants to a function open parenthesis.</li>
-<li>These same rules are applied to function headers with a long argument list.</li>
-<li>Never break user-visible strings such as log messages because that breaks the ability to grep for them.</li>
-</ul>
-<h2 id="If-then-Else-Formatting"><a href="#If-then-Else-Formatting" class="headerlink" title="If then Else Formatting"></a>If then Else Formatting</h2><p>The common approach is:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (condition) &#123;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// not handled cases or log message</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>If one <code>else if</code> statement exists then it is usually a good idea to always have an <code>else</code> block for finding not handled cases, maybe put a log message in the else even if there is no corrective action taken.</p>
-<h2 id="Switch-Formatting"><a href="#Switch-Formatting" class="headerlink" title="Switch Formatting"></a>Switch Formatting</h2><ul>
-<li>Falling through a case statement into the next case statement shall be permitted as long as a comment is included.</li>
-<li>The default case should always be present and trigger an error if it should not be reached, yet is reached.</li>
-<li>If you need to create variables put all the codes in a block.</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (action) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    <span class="comment">// Do something ...</span></span><br><span class="line"><span class="comment">/* comments */</span></span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    <span class="comment">// Do something ...</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:	&#123;</span><br><span class="line">	<span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">// Do something ...</span></span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="comment">// Do something ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Naming-Also-Declaration"><a href="#Naming-Also-Declaration" class="headerlink" title="Naming Also Declaration"></a>Naming Also Declaration</h1><h2 id="Make-Names-Fit"><a href="#Make-Names-Fit" class="headerlink" title="Make Names Fit"></a>Make Names Fit</h2><p>Names are the heart of the programming. If the name is appropriate everything fits together naturally, relationships are clear, meaning is derivable, and reasoning from common human expectations works as expected.</p>
-<p>So, please</p>
-<ul>
-<li>Be descriptive</li>
-<li>Be concise</li>
-<li>No Mixed Case</li>
-<li>No encoding type within the name</li>
-<li>Global variables only when necessary</li>
-<li>Local variables short ant to the point</li>
-</ul>
-<p>If you find all your names could be Thing and Dolt then you should probably revisit your design.</p>
-<h2 id="Function-Names"><a href="#Function-Names" class="headerlink" title="Function Names"></a>Function Names</h2><p>Usually every function performs an action, so the name should make sure what it does.</p>
-<table>
-<thead>
-<tr>
-<th>Maybe</th>
-<th>Better</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>error_check()</code></td>
-<td><code>check_for_error</code></td>
-</tr>
-<tr>
-<td><code>data_file()</code></td>
-<td><code>dump_data_to_file</code></td>
-</tr>
-<tr>
-<td><code>moving()</code></td>
-<td><code>is_moving</code></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>This also makes functions and data objects more distinguishable.</p>
-</blockquote>
-<p>Structures and variables are often nouns. By making function names verbs and following other naming convention programs can be read more naturally.</p>
-<p>Prefixes are sometimes useful:</p>
-<ul>
-<li>is - to ask a question about something</li>
-<li>get - to get a value</li>
-<li>set - to set a value<blockquote>
-<p><code>is_hit_retry_limit()</code>, <code>get_retry_count()</code>, <code>set_retry_count()</code>.</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Variable-Names"><a href="#Variable-Names" class="headerlink" title="Variable Names"></a>Variable Names</h2><p>One statement per line, there should be only one statement per line unless the statements are closely related.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Don&#x27;t</span></span><br><span class="line"><span class="type">int</span> *a, *x;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Do</span></span><br><span class="line"><span class="type">int</span> *a;</span><br><span class="line"><span class="type">int</span> *x;</span><br></pre></td></tr></table></figure>
-
-<p>Suffixes are sometimes suggested:</p>
-<ul>
-<li>max - to mean the maximum value something can have</li>
-<li>count - the current count of a running count variable</li>
-<li>key - key value<blockquote>
-<p>retry_max to mean the maximum number of retries, retry_count to mean the current retry count.</p>
-</blockquote>
-</li>
-</ul>
-<p>If a variable represents time, weight, or some other unit then include the unit in the name is a good idea.</p>
-<table>
-<thead>
-<tr>
-<th>Maybe</th>
-<th>Better</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>int timeout</code></td>
-<td><code>int timeout_msecs</code></td>
-</tr>
-<tr>
-<td><code>int length</code></td>
-<td><code>int length_cm</code></td>
-</tr>
-<tr>
-<td><code>int my_weight</code></td>
-<td><code>int32 my_weight_lbs</code></td>
-</tr>
-</tbody></table>
-<h3 id="Local-Variable-Names"><a href="#Local-Variable-Names" class="headerlink" title="Local Variable Names"></a>Local Variable Names</h3><ul>
-<li>Use all lower case letters.</li>
-<li>Use ‘_’ as the word separator.</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">handle_error</span> <span class="params">(<span class="type">int</span> error_number)</span> &#123;</span><br><span class="line">	<span class="type">int</span>				error = OsErr();</span><br><span class="line">	Time			time_of_error;</span><br><span class="line">	ErrorProcessor	error_processor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Global-Variable-Names"><a href="#Global-Variable-Names" class="headerlink" title="Global Variable Names"></a>Global Variable Names</h3><p>Good to be prepended with a ‘g_’. Global variables should be avoided whenever possible, follow the same rules of local variable when you do need a global variable.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> g_count = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Structure-Names"><a href="#Structure-Names" class="headerlink" title="Structure Names"></a>Structure Names</h2><p>Use underscore(‘_’) to separate name components which also use all lower case letters.</p>
-<p>When declaring variables in structures, declare them organized use in manner to attempt to minimize memory wastage because of compiler alignment issue, then by size, and then by alphabetical order.</p>
-<table>
-<tr>
-<td><b> Don't <b></td>
-<td><b> Better <b></td>
-</tr>
-<tr>
-<td>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">x</span> &#123;</span></span><br><span class="line">  <span class="type">int</span> a;</span><br><span class="line">  <span class="type">char</span> *b;</span><br><span class="line">  <span class="type">int</span> c;</span><br><span class="line">  <span class="type">char</span> *d</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</td>
-<td>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">x</span> &#123;</span></span><br><span class="line">  <span class="type">int</span> a;</span><br><span class="line">  <span class="type">int</span> c;</span><br><span class="line">  <span class="type">char</span> *b;</span><br><span class="line">  <span class="type">char</span> *d</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</td>
-</tr>
-</table>
-
-<p>Sometimes, it may be useful to use a meaning prefix for each member name. For example, for <code>struct car</code> the prefix could be <code>sc_brand</code>, <code>sc_*</code>.</p>
-<p>Major structures should be declared at the top of the file in which they are used, or in separate header files, if they are used in multiple source files.</p>
-<p>Use of structures should be separate declarations and should be <code>extern</code> if declared in a header file.</p>
-<p>Each variable gets its own type and line, although an exception can be made when declaring bit fields (to clarify that it’s part of the one bit fields).</p>
-<blockquote>
-<p>The use of bit fields in general is discouraged.</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *<span class="title">next</span>;</span>	<span class="comment">/* List of active foo */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">mumble</span> <span class="title">amumble</span>;</span>	<span class="comment">/* Comment for mumble */</span></span><br><span class="line">	<span class="type">int</span> bar;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> baz:<span class="number">1</span>,	<span class="comment">/* Bitfield; line up entries if desired */</span></span><br><span class="line">		     fuz:<span class="number">5</span>,</span><br><span class="line">		     zap:<span class="number">2</span>;</span><br><span class="line">	<span class="type">uint8_t</span> flag;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> *<span class="title">foohead</span>;</span>		<span class="comment">/* Head of global foo list */</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Pointer"><a href="#Pointer" class="headerlink" title="Pointer"></a>Pointer</h2><p>Place the <code>*</code> close to the variable name and the function name not pointer type.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *name = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> <span class="title function_">memparse</span><span class="params">(<span class="type">char</span> *ptr, <span class="type">char</span> **retptr)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">match_strdup</span><span class="params">(<span class="type">substring_t</span> *s)</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Global-Constants"><a href="#Global-Constants" class="headerlink" title="Global Constants"></a>Global Constants</h2><p>Global constants should be all capitalized with ‘_’ separators.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> GLOBAL_MAXIMUM_NUM = <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Macro-Names"><a href="#Macro-Names" class="headerlink" title="Macro Names"></a>Macro Names</h2><p>Put <code>#define</code> and <code>macros</code> in all upper with ‘_’ separator. Macros should be capitalized, parenthesized, and should avoid side-effects.</p>
-<p>If it’s a inline expansion of a function, the function should be defined all in lowercase, the macro has the same name all in uppercase.</p>
-<p>If the macro is an expression, warp the expression in parenthesis.</p>
-<p>If the macro is more than a single statement, use <code>do &#123;...&#125; while(0)</code>, so that a trailing semicolon works. Right-justify the backslashes, which makes it easier to read.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a,b) ((a &gt; b) ? a : b)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IS_ERR(value) unlikely(value &gt;= MAX_VALUE)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	MACRO(v, w, x, y)   \</span></span><br><span class="line"><span class="meta">	do &#123;					\</span></span><br><span class="line"><span class="meta">	v = (x) + (y);			\</span></span><br><span class="line"><span class="meta">	w = (y) + 2;			\</span></span><br><span class="line"><span class="meta">&#125; while (0)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Don&#x27;t</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ADD(x, y) x + y</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Must be:</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ADD(x, y) ((x) + (y))</span></span><br></pre></td></tr></table></figure>
-
-<p>Make Macro Name unique.</p>
-<ul>
-<li>Prepend macro names with package names is a good idea.</li>
-<li>Avoid simple and common names like MAX and MIN.</li>
-</ul>
-<h2 id="Enum-Names"><a href="#Enum-Names" class="headerlink" title="Enum Names"></a>Enum Names</h2><p>Labels all upper case with “_” word separators, no comma on the last element.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enum pin_state_type &#123;</span><br><span class="line">    PIN_ON,</span><br><span class="line">    PIN_OFF</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Make a label for an error state is useful to be able to say an enum is not in any of its valid states. Make a label for uninitialized or error state, make it the first label if possible.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> &#123;</span>STATE_ERR, STATE_OPEN, STATE_RUNNING, STATE_PAUSING, STATE_DYING&#125;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h1><ul>
-<li>Do one thing, and do it well.</li>
-<li>Short, one or two screens of code.<ul>
-<li>The idea is that each method represents a technical for archiving a single objective.</li>
-</ul>
-</li>
-<li>OK to have longer function doing small different things.</li>
-<li>If more than 10 local variables, too complex.</li>
-</ul>
-<h2 id="Unwritten-Rules"><a href="#Unwritten-Rules" class="headerlink" title="Unwritten Rules"></a>Unwritten Rules</h2><p>Use code that is already present, such as:</p>
-<ul>
-<li>String functions</li>
-<li>Byte order functions</li>
-<li>Linked lists</li>
-</ul>
-<h1 id="Structures-Enumerations-Typedefs"><a href="#Structures-Enumerations-Typedefs" class="headerlink" title="Structures, Enumerations, Typedefs"></a>Structures, Enumerations, Typedefs</h1><h2 id="Structure-Requirements"><a href="#Structure-Requirements" class="headerlink" title="Structure Requirements"></a>Structure Requirements</h2><p>Use reference counting:</p>
-<blockquote>
-<p>“If another thread can find your data<br> structure, and you do not have a<br> reference count on it, you almost<br> certainly have a bug.”</p>
-</blockquote>
-<h2 id="Labeled-Identifiers-Explained"><a href="#Labeled-Identifiers-Explained" class="headerlink" title="Labeled Identifiers Explained"></a>Labeled Identifiers Explained</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">foo</span> &#123;</span></span><br><span class="line">   <span class="type">int</span> a;</span><br><span class="line">   <span class="type">int</span> b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Old way:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">foo</span> <span class="title">bar</span> =</span></span><br><span class="line">&#123;</span><br><span class="line">    A_INIT,</span><br><span class="line">    B_INIT</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Labeled way:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">foo</span> <span class="title">bar</span> =</span> &#123;</span><br><span class="line">   a:  A_INIT,</span><br><span class="line">   b:  B_INIT,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Also good</span></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">foo</span> <span class="title">bar</span> =</span> &#123;</span><br><span class="line">   .a =  A_INIT,</span><br><span class="line">   .b =  B_INIT,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Typedef"><a href="#Typedef" class="headerlink" title="Typedef"></a>Typedef</h2><p>If possible, do not use typedef, which hides the real type of the variable.</p>
-<h1 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h1><p>Always initialize all variables is good.</p>
-<h2 id="Floating-point-Variables"><a href="#Floating-point-Variables" class="headerlink" title="Floating-point Variables"></a>Floating-point Variables</h2><p>Don’t use floating-point variables where discrete values are needed. Using a float for a loop counter is a great way to shoot yourself in the foot.</p>
-<p>Always test floating-point numbers as <code>&lt;=</code> or <code>&gt;=</code>, never use an exact comparison (<code>==</code> or <code>!=</code>).</p>
-<h2 id="Do-Not-Put-Data-Definitions-in-Header-Files"><a href="#Do-Not-Put-Data-Definitions-in-Header-Files" class="headerlink" title="Do Not Put Data Definitions in Header Files"></a>Do Not Put Data Definitions in Header Files</h2><p>For example:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * aheader.h</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Miscellaneous"><a href="#Miscellaneous" class="headerlink" title="Miscellaneous"></a>Miscellaneous</h1><h2 id="No-magic-number"><a href="#No-magic-number" class="headerlink" title="No magic number"></a>No magic number</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="number">22</span> == foo)</span><br><span class="line">	start_thermo_nuclear_war();</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">19</span> == foo)</span><br><span class="line">	refund_lotso_money();</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">16</span> == foo)</span><br><span class="line">	infinite_loop();</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	cry_cause_im_lost();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>   PRESIDENT_WENT_CRAZY  (22)</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> WE_GOOFED= <span class="number">19</span>;</span><br><span class="line"><span class="class"><span class="keyword">enum</span>  &#123;</span></span><br><span class="line">   THEY_DIDNT_PAY= <span class="number">16</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (PRESIDENT_WENT_CRAZY == foo)</span><br><span class="line">	start_thermo_nuclear_war();</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (WE_GOOFED            == foo)</span><br><span class="line">	refund_lotso_money();</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (THEY_DIDNT_PAY       == foo)</span><br><span class="line">	infinite_loop();</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    happy_days_i_know_why_im_here();</span><br></pre></td></tr></table></figure>
-
-<h2 id="No-ifdef-in-c-file"><a href="#No-ifdef-in-c-file" class="headerlink" title="No #ifdef in .c file"></a>No #ifdef in .c file</h2><p><code>#ifdef</code> belongs to .h file, make it happen in .h file. Let the compiler do the work.</p>
-<p>Before:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// drivers/usb/hid_core.c</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">hid_process_event</span> <span class="params">(<span class="keyword">struct</span> hid_device *hid, <span class="keyword">struct</span> hid_field *field,</span></span><br><span class="line"><span class="params">                                  <span class="keyword">struct</span> hid_usage *usage, __s32 value)</span></span><br><span class="line">&#123;</span><br><span class="line">        hid_dump_input(usage, value);</span><br><span class="line">        <span class="keyword">if</span> (hid-&gt;claimed &amp; HID_CLAIMED_INPUT)</span><br><span class="line">                hidinput_hid_event(hid, field, usage, value);</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_USB_HIDDEV</span></span><br><span class="line">        <span class="keyword">if</span> (hid-&gt;claimed &amp; HID_CLAIMED_HIDDEV)</span><br><span class="line">                hiddev_hid_event(hid, usage-&gt;hid, value);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>After:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// include/linux/hiddev.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_USB_HIDDEV</span></span><br><span class="line">        <span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">hiddev_hid_event</span> <span class="params">(<span class="keyword">struct</span> hid_device *, <span class="type">unsigned</span> <span class="type">int</span> usage,</span></span><br><span class="line"><span class="params">                                          <span class="type">int</span> value)</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        <span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">hiddev_hid_event</span> <span class="params">(<span class="keyword">struct</span> hid_device *hid,</span></span><br><span class="line"><span class="params">                                                  <span class="type">unsigned</span> <span class="type">int</span> usage, <span class="type">int</span> value)</span></span><br><span class="line">                                                 &#123; &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// drivers/usb/hid_core.c</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">hid_process_event</span> <span class="params">(<span class="keyword">struct</span> hid_device *hid, <span class="keyword">struct</span> hid_field *field,</span></span><br><span class="line"><span class="params">                                  <span class="keyword">struct</span> hid_usage *usage, __s32 value)</span></span><br><span class="line">&#123;</span><br><span class="line">        hid_dump_input(usage, value); </span><br><span class="line">        <span class="keyword">if</span> (hid-&gt;claimed &amp; HID_CLAIMED_INPUT)</span><br><span class="line">                hidinput_hid_event(hid, field, usage, value);</span><br><span class="line">        <span class="keyword">if</span> (hid-&gt;claimed &amp; HID_CLAIMED_HIDDEV)</span><br><span class="line">                hiddev_hid_event(hid, usage-&gt;hid, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="if-is-preferred-not-ifdef"><a href="#if-is-preferred-not-ifdef" class="headerlink" title="#if is preferred not #ifdef"></a>#if is preferred not #ifdef</h2><p>Use <code>#if</code> MACRO not <code>#ifdef</code> MACRO. Someone might write code like:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> DEBUG</span></span><br><span class="line">        temporary_debugger_break();</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<p>Always use <code>#if</code>, if you have to use the preprocessor. This works fine, and does the right thing, even if <code>DEBUG</code> is not defined at all (!)</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> DEBUG</span></span><br><span class="line">        temporary_debugger_break();</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<p>If you really need to test whether a symbol is defined or not, test it with the defined() construct, which allows you to add more things later to the conditional without editing text that’s already in the program:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> !defined(USER_NAME)</span></span><br><span class="line"> <span class="meta">#<span class="keyword">define</span> USER_NAME <span class="string">&quot;C Language&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Prefer-Inline-functions-over-Macros"><a href="#Prefer-Inline-functions-over-Macros" class="headerlink" title="Prefer Inline functions over Macros"></a>Prefer Inline functions over Macros</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span>  MAX(x,y)   (((x) &gt; (y) ? (x) : (y))    <span class="comment">// Get the maximum</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">inline</span> <span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">	 <span class="keyword">return</span> (x &gt; y ? x : y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Use-Header-File-Guard"><a href="#Use-Header-File-Guard" class="headerlink" title="Use Header File Guard"></a>Use Header File Guard</h2><p>Include files should protect against multiple inclusion through the use of macros that guard the files.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MY_CODE_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MY_CODE_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// MY_CODE_H</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Do-Not-Default-If-Test-To-Nonzero"><a href="#Do-Not-Default-If-Test-To-Nonzero" class="headerlink" title="Do Not Default If Test To Nonzero"></a>Do Not Default If Test To Nonzero</h2><p>The non-zero test is often defaulted for predicates and other functions or expressions which meet the following restrictions: Returns 0 for false, nothing else.</p>
-<p>Is named so that the meaning of a true return is absolutely obvious. Call a predicate is_valid(), not check_valid().</p>
-<p>Otherwise:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Not</span></span><br><span class="line"><span class="keyword">if</span> (f())</span><br><span class="line"><span class="keyword">if</span> (!(size%<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// Better</span></span><br><span class="line"><span class="keyword">if</span> (FAILED != f())</span><br><span class="line"><span class="keyword">if</span>(<span class="number">0</span> == (size%<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
-
-<h2 id="Usually-avoid-Embedded-Assignments"><a href="#Usually-avoid-Embedded-Assignments" class="headerlink" title="Usually avoid Embedded Assignments"></a>Usually avoid Embedded Assignments</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = b + c;</span><br><span class="line">d = a + r;</span><br></pre></td></tr></table></figure>
-
-<p>Should not be replaced by</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = (a = b + c) + r;</span><br></pre></td></tr></table></figure>
-
-<p>There is a time and a place for embedded assignment statements. In some constructs there is no better way to accomplish the results without making the code bulkier and less readable.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (EOF != (c = getchar())) &#123;</span><br><span class="line">      process the character</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Use-of-Goto-Continue-Break-and"><a href="#Use-of-Goto-Continue-Break-and" class="headerlink" title="Use of Goto, Continue, Break and ?:"></a>Use of Goto, Continue, Break and ?:</h2><p><code>goto</code> should be used sparingly, the main place where it can be usefully employed is to break out several levels of initialization with sequence, switch, for, and while nesting with a success or failure return code.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (...) &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="keyword">goto</span> error;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">error:</span><br><span class="line">    <span class="comment">// clean up the mess</span></span><br></pre></td></tr></table></figure>
-
-<p><code>continue</code> and <code>break</code> like goto should be used sparingly as they are magic in code. Mixing <code>continue</code> with <code>break</code> in the same loop is a sure way to disaster.</p>
-<p><code>?:</code></p>
-<ul>
-<li>Put the condition in parentheses</li>
-<li>If possible, make the action simple or a function</li>
-<li>Put the action for the then and else statement on a separate line unless it can be clearly put on one line.</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(condition) ? func1() : func2()</span><br><span class="line"></span><br><span class="line">(condition)</span><br><span class="line">    ? <span class="type">long</span> statement</span><br><span class="line">    : another <span class="type">long</span> statement</span><br></pre></td></tr></table></figure>
-
-<h2 id="Mixing-C-and-C"><a href="#Mixing-C-and-C" class="headerlink" title="Mixing C and C++"></a>Mixing C and C++</h2><p>Calling C Functions from C++</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="type">int</span> <span class="title function_">strncpy</span><span class="params">(...)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="type">int</span> <span class="title function_">my_great_function</span><span class="params">()</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> <span class="title function_">strncpy</span><span class="params">(...)</span>;</span><br><span class="line">   <span class="type">int</span> <span class="title function_">my_great_function</span><span class="params">()</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Creating a C Function in C++</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="type">void</span> <span class="title function_">a_c_function_in_cplusplus</span><span class="params">(<span class="type">int</span> a)</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Make the C code compatible with C++ linkers.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// all of your legacy C code here</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Document-Null-Statements"><a href="#Document-Null-Statements" class="headerlink" title="Document Null Statements"></a>Document Null Statements</h2><p>Always document a null body for a <code>for</code> or <code>while</code> statement so that it is clear that the null body is intentional and not missing code.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (*dest++ = *src++)</span><br><span class="line">&#123;</span><br><span class="line">      ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Error-Return-Check-Policy"><a href="#Error-Return-Check-Policy" class="headerlink" title="Error Return Check Policy"></a>Error Return Check Policy</h2><p>Check every system call for an error return, unless you know you wish to ignore errors. For example, printf returns an error code but rarely would you check for its return code. In which case you can cast the return to (void) if you really care.</p>
-<p>Include the system error text for every system error message.</p>
-<p>Check every call to malloc or realloc unless you know your versions of these calls do the right thing. You might want to have your own wrapper for these calls, including new, so you can do the right thing always and developers don’t have to make memory checks everywhere.</p>
-<h1 id="Commenting"><a href="#Commenting" class="headerlink" title="Commenting"></a>Commenting</h1><p>Good to have, but must be done correctly.</p>
-<p>Bad comments:</p>
-<ul>
-<li>Explain how code works</li>
-<li>Over-commenting</li>
-<li>Say who wrote the function</li>
-<li>Have last modified date</li>
-<li>Have other trivial things</li>
-</ul>
-<p>Good comments:</p>
-<ul>
-<li>Explain what</li>
-<li>Explain why</li>
-<li>Avoid putting comments inside a function body unless small comments</li>
-</ul>
-<h2 id="Comment-Style"><a href="#Comment-Style" class="headerlink" title="Comment Style"></a>Comment Style</h2><p>Use either the <code>//</code> or <code>/* */</code> syntax, as long as you are consistent.</p>
-<p>You can use either the <code>//</code> or the <code>/* */</code> syntax; however, be consistent with how you comment and what style you use where. </p>
-<p>And please:</p>
-<ul>
-<li>Put a space next to <code>//</code>.</li>
-<li>Put a space next to ‘/<em>‘ and a space before ‘</em>/‘ </li>
-</ul>
-<h2 id="Commenting-to-Closing-Braces"><a href="#Commenting-to-Closing-Braces" class="headerlink" title="Commenting to Closing Braces"></a>Commenting to Closing Braces</h2><p>If you do need a long statement, add comments to closing braces is good.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (condition) &#123;</span><br><span class="line">    <span class="keyword">if</span> (valid)&#123;</span><br><span class="line">		<span class="comment">/* Do something ... */</span></span><br><span class="line">	<span class="comment">/* if valid */</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="comment">// Do something ...</span></span><br><span class="line">	&#125; <span class="comment">/* not valid */</span></span><br><span class="line">&#125; <span class="comment">/* end condition */</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Commenting-Out-Large-Code-Blocks"><a href="#Commenting-Out-Large-Code-Blocks" class="headerlink" title="Commenting Out Large Code Blocks"></a>Commenting Out Large Code Blocks</h2><ol>
-<li>Using <code>#if 0</code></li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">example</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	great looking code</span><br><span class="line"></span><br><span class="line">	<span class="meta">#<span class="keyword">if</span> 0</span></span><br><span class="line">	<span class="comment">// lots of code</span></span><br><span class="line">	<span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	<span class="comment">// more code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>Use Descriptive Macro Names Instead of <code>#if 0</code></li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> NOT_YET_IMPLEMENTED</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> OBSOLETE</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> TEMP_DISABLED</span></span><br><span class="line"><span class="comment">// Add a short comment explaining why it is not implemented, obsolete or temporarily disabled.</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Include-Statement-Documentation"><a href="#Include-Statement-Documentation" class="headerlink" title="Include Statement Documentation"></a>Include Statement Documentation</h2><p>Include statements should be documented, telling the user why a particular file was included.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Kernel include files come first.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Non-local includes in brackets. */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* If it&#x27;s a network program, put the network include files next.</span></span><br><span class="line"><span class="comment">* Group the includes files by subdirectory.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Then there&#x27;s a blank line, followed by the /usr include files.</span></span><br><span class="line"><span class="comment">* The /usr include files should be sorted!</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h1><p>Comments Should Tell a Story, use a document extraction system like <a target="_blank" rel="noopener" href="https://www.doxygen.nl/">Doxgen</a>.</p>
-<h2 id="Gotcha-Keywords"><a href="#Gotcha-Keywords" class="headerlink" title="Gotcha Keywords"></a>Gotcha Keywords</h2><ul>
-<li><p><code>@author</code>:<br>specifies the author of the module.</p>
-</li>
-<li><p><code>@version</code>:<br>specifies the version of the module.</p>
-</li>
-<li><p><code>@file</code>:<br>Denote this comment related to the file.</p>
-</li>
-<li><p><code>@brief</code>:<br>Explain the module in brief.</p>
-</li>
-<li><p><code>@param</code>:<br>specifies a parameter into a function.</p>
-</li>
-<li><p><code>@return</code>:<br>specifies what a function returns.</p>
-</li>
-<li><p><code>@deprecated</code>:<br>says that a function is not to be used anymore.</p>
-</li>
-<li><p><code>@see</code>:<br>creates a link in the documentation to the file/function/variable to consult to get a better understanding on what the current block of code does.</p>
-</li>
-<li><p><code>@todo</code>:<br>what remains to be done</p>
-</li>
-<li><p><code>@bug</code>:<br>report a bug found in the piece of code</p>
-</li>
-</ul>
-<h2 id="File-Header"><a href="#File-Header" class="headerlink" title="File Header"></a>File Header</h2><p><code>@version</code> is an optional item, which we usually don’t add it unless we are coding an API file.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @file</span></span><br><span class="line"><span class="comment"> * @brief</span></span><br><span class="line"><span class="comment"> * @author Name &lt;email&gt;</span></span><br><span class="line"><span class="comment"> * @version 0.1    Name</span></span><br><span class="line"><span class="comment"> *          0.2    Name    description</span></span><br><span class="line"><span class="comment"> *          0.3    Name    description</span></span><br><span class="line"><span class="comment"> * @date</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @copyright Copyright (c) Andy Lee, &quot;%Y&quot;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Function-Header"><a href="#Function-Header" class="headerlink" title="Function Header"></a>Function Header</h2><p>Function header should be in the file where they are declared, which means that most likely the functions will have a header in the .h file. However, functions with no explicit prototype declaration in the .h file, should have a function header in the c file.</p>
-<p>In common, it should be in the header file if header file exists, sometimes only in c file, such as main function.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param argc</span></span><br><span class="line"><span class="comment"> * @param argv[]</span></span><br><span class="line"><span class="comment"> * @return 0</span></span><br><span class="line"><span class="comment"> *         -1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> == argc)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Formatting-1"><a href="#Formatting-1" class="headerlink" title="Formatting"></a>Formatting</h2><p>Once the count of snippets is equaling or more than 3, for better readability more than 4 spaces are suggested from the 3rd snippet. Such as the following comment.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @version 0.1    Name</span></span><br><span class="line"><span class="comment"> *          0.2    Name    description</span></span><br><span class="line"><span class="comment"> *          0.3    Name    description</span></span><br><span class="line"><span class="comment"> * @return  0     means nothing</span></span><br><span class="line"><span class="comment"> *          -1    means something</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="How-Do-They-Look-Like"><a href="#How-Do-They-Look-Like" class="headerlink" title="How Do They Look Like?"></a>How Do They Look Like?</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @file api.h</span></span><br><span class="line"><span class="comment"> * @brief example for file header</span></span><br><span class="line"><span class="comment"> * @author Li Hua Qian &lt;huaqianlee@gmail.com&gt;</span></span><br><span class="line"><span class="comment"> * @version 0.1    Li, Huaqian</span></span><br><span class="line"><span class="comment"> *          0.2    Andy, Lee    example for version 0.2</span></span><br><span class="line"><span class="comment"> *          0.3    Andy, Lee    example for version 0.3</span></span><br><span class="line"><span class="comment"> * @date 2023-04-04</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @copyright Copyright (c) Andy Lee, 2023</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief example for function header</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param argc</span></span><br><span class="line"><span class="comment"> * @param argv[]</span></span><br><span class="line"><span class="comment"> * @return 0     means nothing</span></span><br><span class="line"><span class="comment"> *         -1    means something</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> == argc)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Tips-and-Tricks"><a href="#Tips-and-Tricks" class="headerlink" title="Tips and Tricks"></a>Tips and Tricks</h2><h3 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h3><ol>
-<li>Install <code>Doxygen Documentation Generator</code> extension.</li>
-<li>Go to <code>Doxygen Comment</code> setting.</li>
-<li>Click <code>Edit in settings.json</code> of <code>&#39;Doxdocgen&gt;File:CopyrightTag&#39;</code>, and fill in the following similar content.<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;doxdocgen.file.fileOrder&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;file&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;author&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;brief&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;empty&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;copyright&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;empty&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;custom&quot;</span></span><br><span class="line">      <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;doxdocgen.file.copyrightTag&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;@copyright Copyright (c) Andy Lee, &#123;year&#125;&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;doxdocgen.generic.authorTag&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@author &#123;author&#125; &lt;&#123;email&#125;&gt;&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;doxdocgen.generic.authorEmail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;huaqianlee@gmail.com&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;doxdocgen.generic.authorName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Li Hua Qian&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Open the settings.json file by <code>&lt;Ctrl-P&gt; ~/.config/Code/User/settings.json</code> directly can also archive the target of step 2 and 3.</p>
-</blockquote>
-</li>
-<li>More please refer to the extension ‘README’.<blockquote>
-<p>Sometimes some unexpected white spaces will be added by this extension, <code>&lt;Ctrl-Shift-P&gt; Trim Trailing Whitespace</code> or <code> Ctrl-K Ctrl-X</code> can remove them easily.</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h3><ol>
-<li>Add <code>&#39;huaqianlee/DoxygenToolkit.vim&#39;</code> into <code>.vimrc</code> to install the extension.</li>
-<li>Add the following basic configuration into <code>.vimrc</code>.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let g:DoxygenToolkit_authorName=&quot;Li Hua Qian &lt;huaqianlee@gmail.com&gt;&quot;</span><br><span class="line">let g:DoxygenToolkit_yearString = strftime(&quot;%Y&quot;)</span><br><span class="line">let g:DoxygenToolkit_copyrightString = &quot;Copyright (c) Andy Lee, &quot;.g:DoxygenToolkit_yearString</span><br><span class="line"># let g:DoxygenToolkit_versionString = &quot;0.1&quot;</span><br><span class="line">let g:DoxygenToolkit_compactDoc = &quot;yes&quot;</span><br></pre></td></tr></table></figure></li>
-<li><code>:DoxAuthor</code> to add file header, <code>:Dox</code> to add function header, more please refer to <a target="_blank" rel="noopener" href="https://github.com/huaqianlee/DoxygenToolkit.vim">huaqianlee/DoxygenToolkit.vim</a>.</li>
-</ol>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/v6.1/process/coding-style.html">Linux kernel coding style.</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.doc.ic.ac.uk/lab/cplus/cstyle.html">Recommended C Style and Coding Standards.</a></li>
-<li><a target="_blank" rel="noopener" href="https://users.ece.cmu.edu/~eno/coding/CCodingStandard.html">NetBSD C Coding Standard.</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
       
   
   
@@ -1630,6 +1045,91 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2020/11/05/Linux/Consolidating-the-foundation-of-Linux-linux-tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/05/Linux/Consolidating-the-foundation-of-Linux-linux-tips/" class="post-title-link" itemprop="url">Consolidating the foundation of Linux, linux tips</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Nov 5 2020 22:39:20" itemprop="dateCreated datePublished" datetime="2020-11-05T22:39:20+08:00">Nov 5 2020</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Aug 11 2021 21:15:28" itemprop="dateModified" datetime="2021-08-11T21:15:28+08:00">Aug 11 2021</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Tree/" itemprop="url" rel="index"><span itemprop="name">Linux Tree</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Tree/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linux-Tips"><a href="#Linux-Tips" class="headerlink" title="Linux Tips"></a>Linux Tips</h1><p>Record the commands that I use more frequently in the form of a memo, and will continue to increase according to usage in the future.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/05/Linux/Consolidating-the-foundation-of-Linux-linux-tips/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1701,7 +1201,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">127</span>
+          <span class="site-state-item-count">126</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

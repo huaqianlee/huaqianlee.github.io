@@ -119,7 +119,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">127</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">126</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -189,63 +189,6 @@
 
           <div class="content index posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2023/05/06/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy.Lee">
-      <meta itemprop="description" content="Just need to enjoy life.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy.Lee's  Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/06/test/" class="post-title-link" itemprop="url">test</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: May 6 2023 22:40:41" itemprop="dateCreated datePublished" datetime="2023-05-06T22:40:41+08:00">May 6 2023</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
       
   
   
@@ -1071,6 +1014,177 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://huaqianlee.github.io/2021/08/09/C_C++/Coding-style-for-C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy.Lee">
+      <meta itemprop="description" content="Just need to enjoy life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy.Lee's  Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/09/C_C++/Coding-style-for-C/" class="post-title-link" itemprop="url">Andy Lee's C coding style</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: Aug 9 2021 23:36:00" itemprop="dateCreated datePublished" datetime="2021-08-09T23:36:00+08:00">Aug 9 2021</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: May 8 2023 21:28:54" itemprop="dateModified" datetime="2023-05-08T21:28:54+08:00">May 8 2023</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>This document describes C code style used by Andy Lee in his projects and libraries.</p>
+<h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1><ul>
+<li><a href="#andy-lee's-c-coding-style">Andy Lee’s C coding style</a><ul>
+<li><a href="#table-of-Contents">Table of Contents</a></li>
+<li><a href="#general-rules">General Rules</a></li>
+<li><a href="#formatting">Formatting</a><ul>
+<li><a href="#indentation">Indentation</a><ul>
+<li><a href="#common-case">Common Case</a></li>
+<li><a href="#exception-case">Exception Case</a></li>
+</ul>
+</li>
+<li><a href="#braces,-parentheses-and-spaces-placement">Braces, Parentheses and Spaces placement</a><ul>
+<li><a href="#braces">Braces</a></li>
+<li><a href="#parentheses">Parentheses</a></li>
+<li><a href="#spaces">Spaces</a></li>
+</ul>
+</li>
+<li><a href="#line-break">Line Break</a></li>
+<li><a href="#if-then-else-formatting">If then Else Formatting</a></li>
+<li><a href="#switch-formatting">Switch Formatting</a></li>
+</ul>
+</li>
+<li><a href="#naming-also-declaration">Naming Also Declaration</a><ul>
+<li><a href="#make-names-fit">Make Names Fit</a></li>
+<li><a href="#function-names">Function Names</a></li>
+<li><a href="#variable-names">Variable Names</a><ul>
+<li><a href="#local-variable-names">Local Variable Names</a></li>
+<li><a href="#global-variable-names">Global Variable Names</a></li>
+</ul>
+</li>
+<li><a href="#structure-names">Structure Names</a></li>
+<li><a href="#pointer">Pointer</a></li>
+<li><a href="#global-constants">Global Constants</a></li>
+<li><a href="#macro-names">Macro Names</a></li>
+<li><a href="#enum-names">Enum Names</a></li>
+</ul>
+</li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#unwritten-rules">Unwritten Rules</a></li>
+</ul>
+</li>
+<li><a href="#structures,-enumerations,-typedefs">Structures, Enumerations, Typedefs</a><ul>
+<li><a href="#structure-requirements">Structure Requirements</a></li>
+<li><a href="#labeled-identifiers-explained">Labeled Identifiers Explained</a></li>
+<li><a href="#typedef">Typedef</a></li>
+</ul>
+</li>
+<li><a href="#variables,-macro-and-constants">Variables, Macro and Constants</a><ul>
+<li><a href="#floating-point-variables">Floating-point Variables</a></li>
+<li><a href="#do-not-put-data-definitions-in-header-files">Do Not Put Data Definitions in Header Files</a></li>
+</ul>
+</li>
+<li><a href="#miscellaneous">Miscellaneous</a><ul>
+<li><a href="#no-magic-number">No Magic Number</a></li>
+<li><a href="#no-#ifdef-in-.c-file">No #ifdef in .c file</a></li>
+<li><a href="##if-is-preferred-not-#ifdef">#if is preferred not #ifdef</a></li>
+<li><a href="#prefer-inline-functions-over-macros">Prefer Inline funcitons over Macros</a></li>
+<li><a href="#use-header-file-guard">Use Header File Guard</a></li>
+<li><a href="#do-not-default-if-test-to-nonzero">Do Not Default If Test To Nonzero</a></li>
+<li><a href="#usually-avoid-embedded-assignments">Usually avoid Embedded Assignments</a></li>
+<li><a href="#use-of-goto,-continue,-break-and-?:">Use of Goto, Continue, Break and ?:</a></li>
+<li><a href="#mixing-c-and-c++">Mixing C and C++</a></li>
+<li><a href="#document-null-statements">Document Null Statements</a></li>
+<li><a href="#error-return-check-policy">Error Return Check Policy</a></li>
+</ul>
+</li>
+<li><a href="#commenting">Commenting</a> <ul>
+<li><a href="#comment-style">Comment Style</a></li>
+<li><a href="#commenting-to-closing-braces">Commenting to Closing Braces</a></li>
+<li><a href="#commenting-out-large-code-blocks">Commenting Out Large Code Blocks</a></li>
+<li><a href="#include-statement-documentation">Include Statement Documentation</a></li>
+</ul>
+</li>
+<li><a href="#documentation">Documentation</a><ul>
+<li><a href="#gotcha-keywords">Gotcha Keywords</a></li>
+<li><a href="#file-header">File header</a></li>
+<li><a href="#function-header">Function header</a></li>
+<li><a href="#formatting">Formatting</a></li>
+<li><a href="#how-do-they-look-like?">How Do They Look Like?</a></li>
+<li><a href="#tips-and-tricks">Tips and Tricks</a><ul>
+<li><a href="#vs-code">VS Code</a></li>
+<li><a href="#vim">Vim</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="General-Rules"><a href="#General-Rules" class="headerlink" title="General Rules"></a>General Rules</h1><p>In short, consistency matters.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/09/C_C++/Coding-style-for-C/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1142,7 +1256,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">127</span>
+          <span class="site-state-item-count">126</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
