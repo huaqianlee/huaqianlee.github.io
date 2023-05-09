@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/C/indentation.png">
 <meta property="article:published_time" content="2021-08-09T15:36:00.000Z">
-<meta property="article:modified_time" content="2023-05-09T14:37:46.382Z">
+<meta property="article:modified_time" content="2023-05-09T14:56:56.700Z">
 <meta property="article:author" content="Andy.Lee">
 <meta property="article:tag" content="coding style">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: May 9 2023 22:37:46" itemprop="dateModified" datetime="2023-05-09T22:37:46+08:00">May 9 2023</time>
+                <time title="Modified: May 9 2023 22:56:56" itemprop="dateModified" datetime="2023-05-09T22:56:56+08:00">May 9 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -463,15 +463,15 @@
 </thead>
 <tbody><tr>
 <td><code>error_check()</code></td>
-<td><code>check_for_error</code></td>
+<td><code>check_for_error()</code></td>
 </tr>
 <tr>
 <td><code>data_file()</code></td>
-<td><code>dump_data_to_file</code></td>
+<td><code>dump_data_to_file()</code></td>
 </tr>
 <tr>
 <td><code>moving()</code></td>
-<td><code>is_moving</code></td>
+<td><code>is_moving()</code></td>
 </tr>
 </tbody></table>
 <blockquote>
@@ -525,12 +525,12 @@
 <li>Use all lower case letters.</li>
 <li>Use ‘_’ as the word separator.</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">handle_error</span> <span class="params">(<span class="type">int</span> error_number)</span> &#123;</span><br><span class="line">	<span class="type">int</span>					error = os_err();</span><br><span class="line">	<span class="type">time_t</span>				time_of_error;</span><br><span class="line">	<span class="type">error_processor_t</span>	error_processor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">handle_error</span> <span class="params">(<span class="type">int</span> error_number)</span> &#123;</span><br><span class="line">    <span class="type">int</span>                 error = os_err();</span><br><span class="line">    <span class="type">time_t</span>              time_of_error;</span><br><span class="line">    <span class="type">error_processor_t</span>	error_processor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="Global-Variable-Names"><a href="#Global-Variable-Names" class="headerlink" title="Global Variable Names"></a>Global Variable Names</h3><p>Good to be prepended with a ‘g_’. Global variables should be avoided whenever possible, follow the same rules of local variable when you do need a global variable.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> g_count = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="Type-Names"><a href="#Type-Names" class="headerlink" title="Type Names"></a>Type Names</h2><p>Type names are all lowercase, and good to end with a “_t” suffix, e.g.:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">foo</span> &#123;</span></span><br><span class="line">	<span class="type">char</span> *name;</span><br><span class="line">&#125; <span class="type">foo_t</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">foo</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> *name;</span><br><span class="line">&#125; <span class="type">foo_t</span>;</span><br></pre></td></tr></table></figure>
 
 <p>If possible, do not use typedef, which hides the real type of the variable.</p>
 <h2 id="Structure-Names"><a href="#Structure-Names" class="headerlink" title="Structure Names"></a>Structure Names</h2><p>Use underscore(<code>_</code>) to separate name components, use all lower case letters.</p>
