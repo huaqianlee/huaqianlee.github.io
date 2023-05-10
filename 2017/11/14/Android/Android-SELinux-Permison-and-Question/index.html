@@ -28,7 +28,7 @@
 <meta property="og:description" content="由于现做的是MTK平台，源码路径基于MTK， 不过高通大同小异  说明Android 5.0以后完全引入了 SEAndroid&#x2F;SELinux 安全机制，这样即使拥有 root 权限或 chmod 777 ，仍然无法再JNI以上访问内核节点。  其实在 Android 4.4 就有限制的启用此安全机制了。后面内容都按照 5.0  以后介绍，4.4 会有些许差异。  SELinux ModeSEL">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-11-14T14:26:02.000Z">
-<meta property="article:modified_time" content="2021-07-23T15:08:48.699Z">
+<meta property="article:modified_time" content="2023-02-20T15:01:35.899Z">
 <meta property="article:author" content="Andy.Lee">
 <meta property="article:tag" content="MTK">
 <meta property="article:tag" content="App">
@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:35" itemprop="dateModified" datetime="2023-02-20T23:01:35+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,20 +264,20 @@
 </blockquote>
 <h2 id="SELinux-Mode"><a href="#SELinux-Mode" class="headerlink" title="SELinux Mode"></a>SELinux Mode</h2><p>SELinux 分为两种模式，Android 5.0 后所有进程都使用 enforcing mode。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enforcing mode: 限制访问</span><br><span class="line">permissive mode: 只审查权限，不限制</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="SELinux-Policy文件路径"><a href="#SELinux-Policy文件路径" class="headerlink" title="SELinux Policy文件路径"></a>SELinux Policy文件路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Google 原生目录 </span></span><br><span class="line">external/sepolicy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 厂家目录，高通将 mediatek 换为 qcom</span></span><br><span class="line">alps\device\mediatek\common\sepolicy</span><br><span class="line">alps\device\mediatek\&lt;platform&gt;\sepolicy</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>编译时将以合并的方式将厂家policy追加到Google原生。</p>
 </blockquote>
 <h2 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h2><p>没有权限时可以在内核找到如下 log ：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># avc: denied  &#123; 操作权限  &#125;  for pid=7201  comm=“进程名”  scontext=u:r:源类型:s0  tcontext=u:r:目标类型:s0  tclass=访问类型 permissive=0</span></span><br><span class="line"></span><br><span class="line">avc: denied &#123;getattr <span class="built_in">read</span>&#125; <span class="keyword">for</span> pid=7201 comm=<span class="string">&quot;xxx.xxx&quot;</span> scontext=u:r:system_app:s0 tcontext=u:r:shell_data_file:s0 tclass=dir permissive=0</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># avc: denied  &#123; 操作权限  &#125;  for pid=7201  comm=“进程名”  scontext=u:r:源类型:s0  tcontext=u:r:目标类型:s0  tclass=访问类型 permissive=0</span></span><br><span class="line"></span><br><span class="line">avc: denied &#123;getattr <span class="built_in">read</span>&#125; <span class="keyword">for</span> pid=7201 <span class="built_in">comm</span>=<span class="string">&quot;xxx.xxx&quot;</span> scontext=u:r:system_app:s0 tcontext=u:r:shell_data_file:s0 tclass=<span class="built_in">dir</span> permissive=0</span><br></pre></td></tr></table></figure>
 
 <h2 id="权限修改"><a href="#权限修改" class="headerlink" title="权限修改"></a>权限修改</h2><p>主要有三种方式，前两种只能用来测试，第三种是推荐的正式处理方式。</p>
 <h3 id="adb在线修改seLinux"><a href="#adb在线修改seLinux" class="headerlink" title="adb在线修改seLinux"></a>adb在线修改seLinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Enforcing - 表示已打开 ，Permissive - 表示已关闭</span></span><br><span class="line">getenforce;     //获取当前seLinux状态</span><br><span class="line">setenforce 1;   //打开seLinux</span><br><span class="line">setenforce 0;   //关闭seLinux</span><br></pre></td></tr></table></figure>
 <h3 id="kernel中关闭"><a href="#kernel中关闭" class="headerlink" title="kernel中关闭"></a>kernel中关闭</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alps\kernel-3.18\arch\arm64\configs\xxx_defconfig</span></span><br><span class="line">CONFIG_SECURITY_SELINUX=y // 屏蔽此配置项</span><br></pre></td></tr></table></figure>
 
 <h3 id="SELinux-Sepolicy中添加权限"><a href="#SELinux-Sepolicy中添加权限" class="headerlink" title="SELinux Sepolicy中添加权限"></a>SELinux Sepolicy中添加权限</h3><p>修改相应源类型.te文件（基本以源进程名命名），添加如下一行语句：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line">allow  源类型 目标类型:访问类型 &#123;操作权限&#125;; // 注意分号</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例，具体写法参考源码</span></span><br><span class="line">allow system_app shell_data_file:dir&#123;getattr <span class="built_in">read</span> write&#125;;</span><br><span class="line">allow mediaserver tfa9897_device:chr_file &#123; open <span class="built_in">read</span> write &#125;; </span><br><span class="line">allow system_server tfa9897_device:chr_file rw_file_perms; </span><br><span class="line"></span><br><span class="line">chr_file - 字符设备  file - 普通文件 dir - 目录</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line">allow  源类型 目标类型:访问类型 &#123;操作权限&#125;; // 注意分号</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例，具体写法参考源码</span></span><br><span class="line">allow system_app shell_data_file:<span class="built_in">dir</span>&#123;getattr <span class="built_in">read</span> write&#125;;</span><br><span class="line">allow mediaserver tfa9897_device:chr_file &#123; open <span class="built_in">read</span> write &#125;; </span><br><span class="line">allow system_server tfa9897_device:chr_file rw_file_perms; </span><br><span class="line"></span><br><span class="line">chr_file - 字符设备  file - 普通文件 <span class="built_in">dir</span> - 目录</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>通常很少修改Google default 的policy, 推荐更新mediatek 下面的相关的policy. </p>
 </blockquote>
@@ -291,7 +291,8 @@ mmm external/sepolicy
 make -j24 ramdisk-nodeps &amp; make -j24 bootimage-nodeps
 
 # 整编
-make -j24</code></pre>
+make -j24
+</code></pre>
 
     </div>
 

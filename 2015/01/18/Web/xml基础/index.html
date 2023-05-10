@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogxml.png">
 <meta property="article:published_time" content="2015-01-17T16:13:28.000Z">
-<meta property="article:modified_time" content="2021-07-24T04:53:30.360Z">
+<meta property="article:modified_time" content="2023-02-20T15:01:38.903Z">
 <meta property="article:author" content="Andy.Lee">
 <meta property="article:tag" content="xml">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:53:30" itemprop="dateModified" datetime="2021-07-24T12:53:30+08:00">Jul 24 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,13 +270,7 @@
 <p>###注释<br>&lt;!–注释–&gt;  // 注释语句必须写在XML声明语句后面</p>
 <p>###CDATA区</p>
 <p>CDATA(character data)区用于让解析引擎不对其进行处理,按照原始内容显示. </p>
-<pre><code class="bash">格式:&lt;![CDATA[ 内容 ]]&gt;
-eg:
-  &lt;![CDATA[
-      &lt;itcast&gt;
-          &lt;br/&gt;
-      &lt;/itcast&gt;
-  ]]&gt;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">格式:&lt;![CDATA[ 内容 ]]&gt;</span><br><span class="line">eg:</span><br><span class="line">  &lt;![CDATA[</span><br><span class="line">      &lt;itcast&gt;</span><br><span class="line">          &lt;br/&gt;</span><br><span class="line">      &lt;/itcast&gt;</span><br><span class="line">  ]]&gt;</span><br></pre></td></tr></table></figure>
 <p>###转义字符<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogxml.png" alt="escape"><br>###处理指令</p>
 <p>处理指令，简称PI （processing instruction）。处理指令用来指挥解析引擎如何解析XML文档内容。例如，在XML文档中可以使用xml-stylesheet指令，通知XML解析引擎，应用css文件显示xml文档内容。<br><?xml-stylesheet type="text/css" href="1.css"?><br>处理指令必须以“<?”作为开头，以“?>”作为结尾，XML声明语句就是最常见的一种处理指令。 </p>
 

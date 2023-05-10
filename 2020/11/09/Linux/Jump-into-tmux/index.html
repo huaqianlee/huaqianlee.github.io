@@ -28,7 +28,7 @@
 <meta property="og:description" content="之前为了让终端炫酷好用，配置了 Terminator + Oh My ZSH + autosuggestions + highlighting + Agnoster theme + powerline fonts + solarized colors，可是终端的反应速度受到了影响，移植性也不高，最主要的是对于我来说，Terminator 不够 Terminal + Tmux 酷，所以最近决定切回">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-09T15:06:19.000Z">
-<meta property="article:modified_time" content="2021-08-11T13:15:21.585Z">
+<meta property="article:modified_time" content="2023-02-20T15:01:38.187Z">
 <meta property="article:author" content="Andy.Lee">
 <meta name="twitter:card" content="summary">
 
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Aug 11 2021 21:15:21" itemprop="dateModified" datetime="2021-08-11T21:15:21+08:00">Aug 11 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +255,7 @@
       
         <p>之前为了让终端炫酷好用，配置了 <code>Terminator + Oh My ZSH + autosuggestions + highlighting + Agnoster theme + powerline fonts + solarized colors</code>，可是终端的反应速度受到了影响，移植性也不高，最主要的是对于我来说，<code>Terminator</code> 不够 <code>Terminal + Tmux</code> 酷，所以最近决定切回 <code>Terminal + Tmux </code>。</p>
 <p><code>Terminal</code> 是 <code>Ubuntu</code> 自带的终端，就不做介绍了。今天主要聊聊<code>Tmux</code> 的基本用法，做一个备忘录。 <code>Tmux</code> 除了分屏功能外，还有一个功能我很喜欢，即 <code>persistent</code>，也就是运行在 <code>Tmux</code> 中的程序在其断开前会一直保持运行状态。譬如：远程登录服务器，通过 <code>Tmux</code> 运行程序，即使本地登录客户端断开，程序也会保持运行，除非我们在服务器端退出 <code>Tmux</code> 或者重启服务器。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p><code>Tmux</code> 中的所有命令在执行前都需要一个前缀， 默认为 <code>C-b</code>。</p>
 <blockquote>

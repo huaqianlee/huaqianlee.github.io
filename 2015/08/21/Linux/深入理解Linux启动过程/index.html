@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogfigure2.gif">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogfigure3.gif">
 <meta property="article:published_time" content="2015-08-21T13:23:41.000Z">
-<meta property="article:modified_time" content="2021-07-22T15:35:37.833Z">
+<meta property="article:modified_time" content="2023-02-20T15:01:38.283Z">
 <meta property="article:author" content="Andy.Lee">
 <meta property="article:tag" content="译文">
 <meta name="twitter:card" content="summary">
@@ -231,7 +231,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 22 2021 23:35:37" itemprop="dateModified" datetime="2021-07-22T23:35:37+08:00">Jul 22 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,7 +262,7 @@
 <p><strong>第一篇完全译文，因为自己对技术和英文的热爱，所以决定翻译此文，水平有限，所以肯定会有不恰当的地方，欢迎移驾至原地址：<a target="_blank" rel="noopener" href="http://www.ibm.com/developerworks/linux/library/l-linuxboot/">http://www.ibm.com/developerworks/linux/library/l-linuxboot/</a></strong><br>注：因为想写一篇博文来阐述并理清Android启动的完全过程，发现了这篇文章，觉得写得十分好，帮我解答了很多疑惑。</p>
 </blockquote>
 <p>##引言<br>Linux系统的启动过程由很多阶段组成，但是无论你是启动标准的x86桌面还是启动嵌入式PowerPC目标，许多流程都是惊人的相似的。这篇文章从初始化引导程序到第一个用户空间应用程序探索Linux启动进程。顺着这个流程，你将知道很多和启动相关的主题，比如：引导程序，内核解压, 初始RAM磁盘,以及其他Linux引导元素。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>早期，引导计算机启动需要插入一条带有引导程序的纸带或者手动控制带有地址/数据/控制开关的面板加载启动程序。今天的计算机<br>装备了简化启动进程的工具，不过并不一定使这个过程变得简单了。</p>
 <p>我们先从Linux启动的顶层视图开始分析，以便你能有一个整体的认识。然后我们将回顾每一个分离的步骤。顺着这个流程的源码引用将帮助你浏览内核树结构，以便在以后深入分析。</p>
 <p>##概述<br>图一将为你展示两万英里的视图。</p>
@@ -276,7 +276,7 @@
 <p>鉴于BIOS的不同用途，BIOS主要由两部分组成：上电自检代码和运行服务。在上电自检完成后，上电自检代码从内存被清除，但是运行服务被保留并且对目标操作系统仍然有效。</p>
 <p>要引导一个操作系统，BIOS运行时会按照CMOS的设置定义的顺序来搜索处于活动状态并且可以引导的设备。引导设备可以为软盘，CD-ROM，硬盘的分区，网络上的设备以及U盘。</p>
 <p>Linux一般从MBR包含初级引导程序的硬盘启动。MBR是一个512字节的扇区，位于硬盘的第一扇区（0道0柱1扇区）。在MBR被加载到RAM中后，由BIOS去控制它。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">提取MBR（主引导记录）</span><br><span class="line"></span><br><span class="line">可以通过如下命令查看你的MBR：</span><br><span class="line"><span class="comment"># dd if=/dev/hda of=mbr.bin bs=512 count=1</span></span><br><span class="line"><span class="comment"># od -xa mbr.bin</span></span><br><span class="line"></span><br><span class="line">dd命令：需要root权限，从/dev/hda（第一个集成驱动电路或IDE驱动器）中读取512字节内容并写到mbr.bin文件。</span><br><span class="line">od命令：以hex和ASCII格式打印二进制文件</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">提取MBR（主引导记录）</span><br><span class="line"></span><br><span class="line">可以通过如下命令查看你的MBR：</span><br><span class="line"><span class="comment"># dd if=/dev/hda of=mbr.bin bs=512 count=1</span></span><br><span class="line"><span class="comment"># od -xa mbr.bin</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">dd</span>命令：需要root权限，从/dev/hda（第一个集成驱动电路或IDE驱动器）中读取512字节内容并写到mbr.bin文件。</span><br><span class="line"><span class="built_in">od</span>命令：以hex和ASCII格式打印二进制文件</span><br></pre></td></tr></table></figure>
 
 <p>##第一阶段引导程序<br>初级引导程序位于512字节的MBR镜像，MBR镜像由一个小型分区表和代码组成（见Figure 2）。前446字节是初级引导程序代码，包括执行代码和错误信息。接下来的64字节是一个分区表，包含4个16字节的分区记录。MBR最后的两字节定义了一个magic数字（0xaa55）。这个magic数字用来校验检查MBR。</p>
 <p><strong>Figure 2. Anatomy of the MBR</strong><br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogfigure2.gif" alt="Figure 2"></p>

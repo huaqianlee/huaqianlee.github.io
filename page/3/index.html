@@ -224,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Aug 15 2021 21:31:08" itemprop="dateModified" datetime="2021-08-15T21:31:08+08:00">Aug 15 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -309,7 +309,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:24:59" itemprop="dateModified" datetime="2021-07-24T12:24:59+08:00">Jul 24 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:37" itemprop="dateModified" datetime="2023-02-20T23:01:37+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -338,13 +338,13 @@
       
           <p><a href="http://huaqianlee.github.io/2019/09/15/Git/How-does-android-repo-work/">How does the repo of android source code work ?</a></p>
 <h1 id="repo"><a href="#repo" class="headerlink" title=".repo"></a>.repo</h1><p>通常情况下， Android 的 <code>.repo</code> 里面有如下内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls .repo</span><br><span class="line">manifests  manifests.git  manifest.xml  project.list  project-objects  projects  repo</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> .repo</span><br><span class="line">manifests  manifests.git  manifest.xml  project.list  project-objects  projects  repo</span><br></pre></td></tr></table></figure>
 
 <h1 id="manifests"><a href="#manifests" class="headerlink" title="manifests"></a>manifests</h1><p><code>manifests</code> 路径是项目 manifest 仓的 <code>git checkout</code>，其中的 <code>.git</code> 是 <code>manifest.git</code> 的软链接，追踪 <code>repo init --manifest-branch</code> 指定的分支。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.repo$ ls manifests/.git/</span><br><span class="line">config       HEAD   index  logs     ORIG_HEAD    refs      shallow</span><br><span class="line">description  hooks  info   objects  packed-refs  rr-cache  svn</span><br><span class="line"></span><br><span class="line">.repo$ ls manifests.git/</span><br><span class="line">branches  description  HEAD   info  objects      refs      svn</span><br><span class="line">config    FETCH_HEAD   hooks  logs  packed-refs  rr-cache</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.repo$ <span class="built_in">ls</span> manifests/.git/</span><br><span class="line">config       HEAD   index  logs     ORIG_HEAD    refs      shallow</span><br><span class="line">description  hooks  info   objects  packed-refs  rr-cache  svn</span><br><span class="line"></span><br><span class="line">.repo$ <span class="built_in">ls</span> manifests.git/</span><br><span class="line">branches  description  HEAD   info  objects      refs      svn</span><br><span class="line">config    FETCH_HEAD   hooks  logs  packed-refs  rr-cache</span><br></pre></td></tr></table></figure>
 
 <p>不管远程分支名字是什么，<code>manifests</code> 的本地分支命名为 default。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.repo$ cat manifests/.git/HEAD </span><br><span class="line">ref: refs/heads/default  </span><br><span class="line"></span><br><span class="line">.repo$ cat manifests.git/config  </span><br><span class="line"><span class="comment"># cat manifests/.git/config</span></span><br><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = <span class="literal">true</span></span><br><span class="line">[filter <span class="string">&quot;lfs&quot;</span>]</span><br><span class="line">	smudge = git-lfs smudge --skip -- %f</span><br><span class="line">[remote <span class="string">&quot;origin&quot;</span>]</span><br><span class="line">	url = https://&lt;url&gt;/platform/manifest.git</span><br><span class="line">	fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">[branch <span class="string">&quot;default&quot;</span>]</span><br><span class="line">	remote = origin</span><br><span class="line">	merge = refs/heads/&lt;remote_branch_name&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.repo$ <span class="built_in">cat</span> manifests/.git/HEAD </span><br><span class="line">ref: refs/heads/default  </span><br><span class="line"></span><br><span class="line">.repo$ <span class="built_in">cat</span> manifests.git/config  </span><br><span class="line"><span class="comment"># cat manifests/.git/config</span></span><br><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = <span class="literal">true</span></span><br><span class="line">[filter <span class="string">&quot;lfs&quot;</span>]</span><br><span class="line">	smudge = git-lfs smudge --skip -- %f</span><br><span class="line">[remote <span class="string">&quot;origin&quot;</span>]</span><br><span class="line">	url = https://&lt;url&gt;/platform/manifest.git</span><br><span class="line">	fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">[branch <span class="string">&quot;default&quot;</span>]</span><br><span class="line">	remote = origin</span><br><span class="line">	merge = refs/heads/&lt;remote_branch_name&gt;</span><br></pre></td></tr></table></figure>
 
 <h1 id="manifests-git"><a href="#manifests-git" class="headerlink" title="manifests.git"></a>manifests.git</h1><p><code>manifests.git</code> 是当前项目 <code>manifest</code> 仓的一个没有工作空间的 <code>checkout</code>，即只 <code>checkout</code> <code>.git</code> ，追踪<code>repo init --manifest-url</code> 指定的 Git 仓。不能手动修改这部分，如果需要修改的话，可重新运行 <code>repo init</code> 来更新设置。</p>
 <h2 id="repo-config-json"><a href="#repo-config-json" class="headerlink" title=".repo_config.json"></a>.repo_config.json</h2><p>缓存 <code>manifests.git/config</code>，用来提升 <code>repo</code> 的速度。</p>
@@ -407,7 +407,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:36" itemprop="dateModified" datetime="2023-02-20T23:01:36+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -509,7 +509,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:36" itemprop="dateModified" datetime="2023-02-20T23:01:36+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -616,7 +616,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:24:59" itemprop="dateModified" datetime="2021-07-24T12:24:59+08:00">Jul 24 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:37" itemprop="dateModified" datetime="2023-02-20T23:01:37+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -650,7 +650,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull billryan/gitbook</span><br></pre></td></tr></table></figure>
 
 <p><code>mkdir gitbook</code> 创建一个 gitbook 路径，我们也可以将启动的镜像存储为另一个镜像：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># init</span></span><br><span class="line">docker run --rm -v <span class="string">&quot;<span class="variable">$PWD</span>/gitbook:/gitbook&quot;</span> -p 4000:4000 billryan/gitbook gitbook init</span><br><span class="line"><span class="comment"># serve</span></span><br><span class="line">docker run --rm -v <span class="string">&quot;<span class="variable">$PWD</span>/gitbook:/gitbook&quot;</span> -p 4000:4000 billryan/gitbook gitbook serve</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker ps <span class="comment"># Get CONTAINER ID of gitbook</span></span><br><span class="line">docker commit &lt;CONTAINER ID&gt; andylee/gitbook:1.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># init</span></span><br><span class="line">docker run --<span class="built_in">rm</span> -v <span class="string">&quot;<span class="variable">$PWD</span>/gitbook:/gitbook&quot;</span> -p 4000:4000 billryan/gitbook gitbook init</span><br><span class="line"><span class="comment"># serve</span></span><br><span class="line">docker run --<span class="built_in">rm</span> -v <span class="string">&quot;<span class="variable">$PWD</span>/gitbook:/gitbook&quot;</span> -p 4000:4000 billryan/gitbook gitbook serve</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker ps <span class="comment"># Get CONTAINER ID of gitbook</span></span><br><span class="line">docker commit &lt;CONTAINER ID&gt; andylee/gitbook:1.0</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/10/10/Git/How-to-build-intranet-gitbook-with-docker/#more" rel="contents">
@@ -708,7 +708,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:24:59" itemprop="dateModified" datetime="2021-07-24T12:24:59+08:00">Jul 24 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:37" itemprop="dateModified" datetime="2023-02-20T23:01:37+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -795,7 +795,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:24:59" itemprop="dateModified" datetime="2021-07-24T12:24:59+08:00">Jul 24 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:37" itemprop="dateModified" datetime="2023-02-20T23:01:37+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -882,7 +882,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jan 14 2023 11:55:41" itemprop="dateModified" datetime="2023-01-14T11:55:41+08:00">Jan 14 2023</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -968,7 +968,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 22 2021 23:33:35" itemprop="dateModified" datetime="2021-07-22T23:33:35+08:00">Jul 22 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1005,7 +1005,7 @@
 </ol>
 <h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p><code>init</code> is the first process, it commonly locates on <code>/sbin/init</code>, if kernel can’t find <code>init</code>, it will try to run <code>/bin/sh</code>, if the operation fails , the OS will fail to start successfully. </p>
 <p><code>init</code> has 7 runlevels, we can check the default runlevel and runlevels in <code>/etc/inittab</code>. As follows:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Default runlevel. The runlevels used are:</span><br><span class="line">#   0 - halt (Do NOT set initdefault to this)</span><br><span class="line">#   1 - Single user mode(root)</span><br><span class="line">#   2 - Multiuser, without NFS (The same as 3, if you do not have networking)</span><br><span class="line">#   3 - Full multiuser mode(standard runlevel)</span><br><span class="line">#   4 - unused(secure mode)</span><br><span class="line">#   5 - X11(user interface)</span><br><span class="line">#   6 - reboot (Do NOT set initdefault to this)</span><br><span class="line">#</span><br><span class="line">id:5:initdefault:</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Default runlevel. The runlevels used are:</span><br><span class="line">#   0 - halt (Do NOT set initdefault to this)</span><br><span class="line">#   1 - Single user mode(root)</span><br><span class="line">#   2 - Multiuser, without NFS (The same as 3, if you do not have networking)</span><br><span class="line">#   3 - Full multiuser mode(standard runlevel)</span><br><span class="line">#   4 - unused(secure mode)</span><br><span class="line">#   5 - X11(user interface)</span><br><span class="line">#   6 - reboot (Do NOT set initdefault to this)</span><br><span class="line">#</span><br><span class="line">id:5:initdefault:</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/02/06/Linux/Consolidating-the-foundation-of-Linux-basic-cmds/#more" rel="contents">
@@ -1063,7 +1063,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 22 2021 23:38:22" itemprop="dateModified" datetime="2021-07-22T23:38:22+08:00">Jul 22 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">

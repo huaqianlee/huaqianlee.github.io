@@ -1222,7 +1222,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c17f1c;
+  background: #1d12a7;
   border-radius: 50%;
   content: ' ';
   display: inline-block;

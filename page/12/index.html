@@ -224,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:44:50" itemprop="dateModified" datetime="2021-07-24T12:44:50+08:00">Jul 24 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:37" itemprop="dateModified" datetime="2023-02-20T23:01:37+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,7 +310,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:36" itemprop="dateModified" datetime="2023-02-20T23:01:36+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -337,7 +337,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        <a href="mailto:&#104;&#x75;&#97;&#113;&#x69;&#x61;&#x6e;&#x6c;&#x65;&#x65;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;">&#104;&#x75;&#97;&#113;&#x69;&#x61;&#x6e;&#x6c;&#x65;&#x65;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;</a></em></p>
+          <p><em>Platform Information :<br>　System:    Ａndroid4.4.4<br>　Platform:  Qualcomm msm8916<br>　Author:     Andy Lee<br>　Email:        <a href="mailto:&#x68;&#x75;&#x61;&#x71;&#x69;&#97;&#x6e;&#108;&#101;&#x65;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#109;">&#x68;&#x75;&#x61;&#x71;&#x69;&#97;&#x6e;&#108;&#101;&#x65;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#109;</a></em></p>
 <p><strong>如有错误欢迎指出，共同学习，共同进步</strong><br>　<br>　　电池对移动设备的重要性不言而喻，所以电池监控系统也是Android的重中之重。今天就结合工作中的内容来分析一下电池监控系统。<br>##电池系统架构<br>　　Android中的电池使用方式包括AC（即电源适配器）、Wireless（无线充电）、USB、Battery 等不同的模式。在APP层，通常包括电池状态显示等功能。在framework层 ，主要包括从底层获取电池信息、电池管理、LED控制、绘制更新充电图标等功能。因此，bms主要负责电池状态信息读取和更新相应状态。其架构如下：　<br>　<br>　　<img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/201566Android-bms-arch.png" alt="电池系统架构"></p>
 <p>自上而下，Android电池监控系统分为如下几个部分：</p>
 <p>###电池信息查看APP<br>　　此部分主要是指查看电池信息的APP，比如电池医生、手机内置的电池信息查看APP等。这里就用工作的为例，在拨号状态下输入*#360*#，则会打开电池信息查看APP。如下所示：</p>
@@ -398,7 +398,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:36" itemprop="dateModified" datetime="2023-02-20T23:01:36+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -484,7 +484,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:35" itemprop="dateModified" datetime="2023-02-20T23:01:35+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -569,7 +569,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 22 2021 23:35:45" itemprop="dateModified" datetime="2021-07-22T23:35:45+08:00">Jul 22 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -598,7 +598,7 @@
       
           <p>　　因之前工作需要在kernel里存取数据到文件中，特意研究了一下怎么做，我们应尽可能避免直接操作文件I/O，选择通过调用VFS（虚拟文件系统）的函数来实现，我的实现demo如下：</p>
 <p>##Includes</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/fs.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;asm/segment.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;asm/uaccess.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/buffer_head.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/fs.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;asm/segment.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;asm/uaccess.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/buffer_head.h&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>##Opening a file </p>
           <!--noindex-->
             <div class="post-button">
@@ -657,7 +657,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:36" itemprop="dateModified" datetime="2023-02-20T23:01:36+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -743,7 +743,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:37" itemprop="dateModified" datetime="2023-02-20T23:01:37+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -826,7 +826,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:53:30" itemprop="dateModified" datetime="2021-07-24T12:53:30+08:00">Jul 24 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -917,7 +917,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:53:30" itemprop="dateModified" datetime="2021-07-24T12:53:30+08:00">Jul 24 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -958,13 +958,7 @@
 <p>###注释<br>&lt;!–注释–&gt;  // 注释语句必须写在XML声明语句后面</p>
 <p>###CDATA区</p>
 <p>CDATA(character data)区用于让解析引擎不对其进行处理,按照原始内容显示. </p>
-<pre><code class="bash">格式:&lt;![CDATA[ 内容 ]]&gt;
-eg:
-  &lt;![CDATA[
-      &lt;itcast&gt;
-          &lt;br/&gt;
-      &lt;/itcast&gt;
-  ]]&gt;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">格式:&lt;![CDATA[ 内容 ]]&gt;</span><br><span class="line">eg:</span><br><span class="line">  &lt;![CDATA[</span><br><span class="line">      &lt;itcast&gt;</span><br><span class="line">          &lt;br/&gt;</span><br><span class="line">      &lt;/itcast&gt;</span><br><span class="line">  ]]&gt;</span><br></pre></td></tr></table></figure>
 <p>###转义字符<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/blogxml.png" alt="escape"><br>###处理指令</p>
 <p>处理指令，简称PI （processing instruction）。处理指令用来指挥解析引擎如何解析XML文档内容。例如，在XML文档中可以使用xml-stylesheet指令，通知XML解析引擎，应用css文件显示xml文档内容。<br><?xml-stylesheet type="text/css" href="1.css"?><br>处理指令必须以“<?”作为开头，以“?>”作为结尾，XML声明语句就是最常见的一种处理指令。 </p>
 
@@ -1017,7 +1011,7 @@ eg:
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 22 2021 23:37:18" itemprop="dateModified" datetime="2021-07-22T23:37:18+08:00">Jul 22 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">

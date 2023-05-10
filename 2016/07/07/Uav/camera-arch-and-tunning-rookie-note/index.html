@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/cmos_rolling_shutter.jpg">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/stripe.jpg">
 <meta property="article:published_time" content="2016-07-07T15:37:41.000Z">
-<meta property="article:modified_time" content="2021-07-24T04:53:30.352Z">
+<meta property="article:modified_time" content="2023-02-20T15:01:38.740Z">
 <meta property="article:author" content="Andy.Lee">
 <meta property="article:tag" content="Qualcomm">
 <meta name="twitter:card" content="summary">
@@ -242,7 +242,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 24 2021 12:53:30" itemprop="dateModified" datetime="2021-07-24T12:53:30+08:00">Jul 24 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,7 +273,7 @@
 <p>菜鸟笔记，因为对camera不是很了解，肯定会有很多疏漏，也会记录一些现在不是很明白的杂乱信息，以便以后知识面扩展了后看到有所帮助。由于自己没有耐心图片一张张重画,就直接拍下了自己手写笔记的照片,笔记图片中的字很丑，将就将就</p>
 </blockquote>
 <p>##VFE<br>VFE为Video Front End的简写，这属于硬件部分，对于高通通过Chromatix 工具，可以产生对此流程有用的tuning file，用于配置。 VFE 流程图如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/vfe.png" alt="VFE FLOW"></p>
-<a id="more"></a>
+<span id="more"></span>
 <p>###MIPI<br>现在的camera基本都采用MIPI接口， MIPI以一种采用差分方式按位传输数据的接口。只有四条引脚（DN、DP，CN、CP）。</p>
 <p>###数据<br>根据自己的理解我大致将VFE根据数据格式分为四个部分：</p>
 <ul>
@@ -304,7 +304,7 @@
 <p>现在的cmos基本都是使用rolling shutter， 方式如下：<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/cmos_rolling_shutter.jpg" alt="cmos_rolling_shutter"></p>
 <p>####附 糊涂笔记<br>VT clock —&gt; banding  （50HZ/60HZ/AUTO/OFF —&gt;app上的配置）<br><img src="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/stripe.jpg" alt="stripe"></p>
 <p>####driver_info.txt<br>Chromatix Tool会用到的一个Sensor info文件，内容与<root_dir>\mm-camera\mm-camera2\media-controller\modules\sensors\sensor_libs\imx214\imx214_lib.c 相关，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. max frame rate  ---&gt; depends on sensor register and project</span><br><span class="line">2. min line count ---&gt; value &#x3D; 1, depends on sensor property # 1 line * 1 pixel  clock * cloumnum &#x3D; min exposure time</span><br><span class="line">3. max line count in max fps. # max line count &#x3D; FL - offset</span><br><span class="line">4. max line count  ---&gt; FL * (maxfps&#x2F;minfps) - offset</span><br><span class="line">5.raw image width</span><br><span class="line">6. raw image height</span><br><span class="line">7. bayer pattern</span><br><span class="line">8.bits per pixel</span><br><span class="line">9. packed or not ---&gt; 1: mipi; 0: others,depend on sensor</span><br><span class="line">10~13. crop ---&gt; crop掉无效边，top、right、bottom、left.</span><br><span class="line">14~16 blacklevel ---&gt; 厂商单位 12bits  &#x2F; 16(2的4次方) -&gt;8bit</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. max frame rate  ---&gt; depends on sensor register and project</span><br><span class="line">2. min line count ---&gt; value = 1, depends on sensor property # 1 line * 1 pixel  clock * cloumnum = min exposure time</span><br><span class="line">3. max line count in max fps. # max line count = FL - offset</span><br><span class="line">4. max line count  ---&gt; FL * (maxfps/minfps) - offset</span><br><span class="line">5.raw image width</span><br><span class="line">6. raw image height</span><br><span class="line">7. bayer pattern</span><br><span class="line">8.bits per pixel</span><br><span class="line">9. packed or not ---&gt; 1: mipi; 0: others,depend on sensor</span><br><span class="line">10~13. crop ---&gt; crop掉无效边，top、right、bottom、left.</span><br><span class="line">14~16 blacklevel ---&gt; 厂商单位 12bits  / 16(2的4次方) -&gt;8bit</span><br></pre></td></tr></table></figure>
 
     </div>
 

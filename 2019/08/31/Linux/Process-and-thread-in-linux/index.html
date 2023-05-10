@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/process_thread_to_task.jpeg">
 <meta property="article:published_time" content="2019-08-31T09:35:46.000Z">
-<meta property="article:modified_time" content="2021-07-22T15:39:04.120Z">
+<meta property="article:modified_time" content="2023-02-20T15:01:38.260Z">
 <meta property="article:author" content="Andy.Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://andylee-1258982386.cos.ap-chengdu.myqcloud.com/linux/process_thread_to_task.jpeg">
@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 22 2021 23:39:04" itemprop="dateModified" datetime="2021-07-22T23:39:04+08:00">Jul 22 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:38" itemprop="dateModified" datetime="2023-02-20T23:01:38+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,7 +263,7 @@
 <blockquote>
 <p>摘录线程库发展史：Linux threading libraries evolution: Linux Threads, NGPT, NPTL. The library is part of gilbc, programmer interface is POSIX pthreads.  </p>
 </blockquote>
-<h1 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h1><a id="more"></a>
+<h1 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h1><span id="more"></span>
 <p>Linux 中的线程是 “1-1” 模型, 而不是 “1-N” 或者 “M-N” 模型。下面简单介绍一下线程模型。</p>
 <h2 id="“1-1”-模型"><a href="#“1-1”-模型" class="headerlink" title="“1-1” 模型"></a>“1-1” 模型</h2><p>将每个用户级线程映射到一个内核级线程（即 task）。<br>优点：<br>消耗更少的资源，比如内存（虚拟的和物理的）和 内核对象（object）。并且也会更少地上下文切换，从而提高性能，在理想情况下，当你拥有和运行线程一样多的处理器的时候，将可能几乎没有上下文切换。<br>缺点：<br>可能是延迟更大：如果池中的所有线程都忙，并且您添加了新的短任务，则可能需要等待很长时间才能开始执行。</p>
 <h2 id="“1-N”-模型"><a href="#“1-N”-模型" class="headerlink" title="“1-N” 模型"></a>“1-N” 模型</h2><p>将多个用户级线程映射到一个内核级线程,早期 OS 的线程实现方式。<br>优点:<br>内核不干涉线程的任何生命活动和上下文切换。线程的管理在用户空间进行,因而效率比较高;<br>缺点:<br>一个进程中的多个线程只能调度到一个CPU，这种约束限制了可用的并行总量，并且如果某个线程 block 了，其他线程都只能等着。</p>

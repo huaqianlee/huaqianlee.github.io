@@ -28,7 +28,7 @@
 <meta property="og:description" content="MDB协议简介MDB&#x2F;ICP协议为一个主从接口的串口通信标准的协议， 规定波特率为9600bps，总线有唯一主机（vending machine controller, VMC）和最多32个从机外设，每个外设设有唯一的地址和命令，且由主机初始化。 电源上电、总线复位或外设收到一个复位命令，所对应的外设都被禁止。在顺序初始化外设期间，VMC通过外设的应答来选择被外设所支持的特征。  协议推荐所以主控">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-11-08T14:22:45.000Z">
-<meta property="article:modified_time" content="2021-07-22T15:20:05.338Z">
+<meta property="article:modified_time" content="2023-02-20T15:01:37.127Z">
 <meta property="article:author" content="Andy.Lee">
 <meta property="article:tag" content="Protocol">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 22 2021 23:20:05" itemprop="dateModified" datetime="2021-07-22T23:20:05+08:00">Jul 22 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:37" itemprop="dateModified" datetime="2023-02-20T23:01:37+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,7 +259,7 @@
 <blockquote>
 <p>协议推荐所以主控制器VMC和外设都需支持所有低等级标准</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="通信格式"><a href="#通信格式" class="headerlink" title="通信格式"></a>通信格式</h3><h4 id="字节格式"><a href="#字节格式" class="headerlink" title="字节格式"></a>字节格式</h4><p>一个字节定义为11位：1个起始位+8个数据位+1个模式位+1个停止位。</p>
 <ul>

@@ -28,10 +28,10 @@
 <meta property="og:description" content="最近工作业余时间一直在自学Android，Google I&#x2F;O 2017 惊闻Kotlin成为Google支持的官方语言，当然得紧跟“中央”的脚步，开始程序入门必备之HelloWord，殊不知这个HelloWord充满了曲折。 了解Kotlin知道了Kotlin之后就开始在网上搜集相关资料，发现了如下个人觉得比较好的资料：Getting started with Android and Kotli">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-05-23T00:09:56.000Z">
-<meta property="article:modified_time" content="2021-07-23T15:08:48.699Z">
+<meta property="article:modified_time" content="2023-02-20T15:01:36.321Z">
 <meta property="article:author" content="Andy.Lee">
-<meta property="article:tag" content="App">
 <meta property="article:tag" content="Android Studio">
+<meta property="article:tag" content="App">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://huaqianlee.github.io/2017/05/23/Android/Kotlin-HElloWorld/">
@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: Jul 23 2021 23:08:48" itemprop="dateModified" datetime="2021-07-23T23:08:48+08:00">Jul 23 2021</time>
+                <time title="Modified: Feb 20 2023 23:01:36" itemprop="dateModified" datetime="2023-02-20T23:01:36+08:00">Feb 20 2023</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,7 +257,7 @@
       
         <p>最近工作业余时间一直在自学Android，Google I/O 2017 惊闻Kotlin成为Google支持的官方语言，当然得紧跟“中央”的脚步，开始程序入门必备之HelloWord，殊不知这个HelloWord充满了曲折。</p>
 <h2 id="了解Kotlin"><a href="#了解Kotlin" class="headerlink" title="了解Kotlin"></a>了解Kotlin</h2><p>知道了Kotlin之后就开始在网上搜集相关资料，发现了如下个人觉得比较好的资料：<br><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/tutorials/kotlin-android.html">Getting started with Android and Kotlin</a><br><a target="_blank" rel="noopener" href="https://github.com/JetBrains/kotlin">kotlin项目</a><br><a target="_blank" rel="noopener" href="https://github.com/JetBrains/kotlin-examples">kotlin配置及与java的互操作</a><br><a target="_blank" rel="noopener" href="https://github.com/Kotlin/kotlin-koans">kotlin语法练习</a><br><a href="doc/kotlin-docs.pdf">Kotlin1.1手册</a><br><a target="_blank" rel="noopener" href="http://tanfujun.com/kotlin-web-site-cn/docs/reference/">kotlin中文网</a><br><a target="_blank" rel="noopener" href="https://kotlinlang.org/">kotlin官网</a><br><a target="_blank" rel="noopener" href="https://github.com/huanglizhuo/kotlin-in-chinese">中文kotlin项目</a></p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="曲折之路"><a href="#曲折之路" class="headerlink" title="曲折之路"></a>曲折之路</h2><h3 id="安装插件-HelloWorld"><a href="#安装插件-HelloWorld" class="headerlink" title="安装插件+HelloWorld"></a>安装插件+HelloWorld</h3><p>自己一直是使用的Android Studio的稳定版，通过<strong>File-&gt;setting-&gt;Install JetBrains Plugins</strong>安装了Kotlin插件。安装完成后会发现<strong>Tools-&gt;Kotlin</strong>工具，可以进行相关Kotlin操作。</p>
 <p>插件装好后，新建HelloWord项目，新建完成后打开MainActivity.java，然后通过<strong>Code-&gt;Convert Java File to Kotlin File</strong>或者<strong>Ctrl+Alt+Shift+K</strong>将其转换为kt文件，Android Studio将自动在build.gradle文件添加依赖，如下：</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ext.kotlin_version = <span class="string">&#x27;1.1.2-4&#x27;</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">classpath</span> <span class="string">&quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;</span></span><br></pre></td></tr></table></figure>
@@ -272,7 +272,7 @@
 <p>血的教训：Linux开发机千万要用之前的稳定版本，不要升级到最新系统。</p>
 </blockquote>
 <h3 id="终见证奇迹"><a href="#终见证奇迹" class="headerlink" title="终见证奇迹"></a>终见证奇迹</h3><p>Android3.0+ubuntu16.01 不成功，最终用回2.3.2+kotlin插件，老天总算没让继续折腾，通过3.0更新了Kotlin版本后，在2.3.2中一下就编译过了，赶紧如下添加一点代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class KotlinActivity : AppCompatActivity() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> lateinit <span class="keyword">var</span> hello_view:android.widget.TextView</span><br><span class="line">    <span class="comment">//private lateinit var hello_anko:android.widget.TextView</span></span><br><span class="line"></span><br><span class="line">    <span class="function">override fun <span class="title">onCreate</span><span class="params">(savedInstanceState: Bundle?)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_kotlin)</span><br><span class="line"></span><br><span class="line">        hello_view = findViewById(R.id.hello_view) as android.widget.TextView</span><br><span class="line">        hello_view.text = <span class="string">&quot;Hello, Kotlin! &quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">KotlinActivity</span> : AppCompatActivity() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> lateinit <span class="keyword">var</span> hello_view:android.widget.TextView</span><br><span class="line">    <span class="comment">//private lateinit var hello_anko:android.widget.TextView</span></span><br><span class="line"></span><br><span class="line">    override fun <span class="title function_">onCreate</span><span class="params">(savedInstanceState: Bundle?)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_kotlin)</span><br><span class="line"></span><br><span class="line">        hello_view = findViewById(R.id.hello_view) as android.widget.TextView</span><br><span class="line">        hello_view.text = <span class="string">&quot;Hello, Kotlin! &quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>编译下载，终于在手机里面看到了：Hello，Kotlin！。</p>
 <p>不过仍然有一个小瑕疵，由于兼容性有些问题，总会有IDE Error和Plugin Error提示，不过就这样子将就用了，不准备耗掉大量时间来折腾系统了，相信随着Google的更新和系统补丁，这些问题终将解决。</p>
 <h2 id="Anko项目"><a href="#Anko项目" class="headerlink" title="Anko项目"></a>Anko项目</h2><p>尝试了一下比较火的开源项目<a target="_blank" rel="noopener" href="https://github.com/Kotlin/anko">Anko</a>，通过Anko实现HelloWord。<br>引入依赖，我这里选择了自己能用到的部分依赖，如下：</p>
@@ -299,8 +299,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/App/" rel="tag"># App</a>
               <a href="/tags/Android-Studio/" rel="tag"># Android Studio</a>
+              <a href="/tags/App/" rel="tag"># App</a>
           </div>
 
         
