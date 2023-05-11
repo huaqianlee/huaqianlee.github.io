@@ -451,7 +451,7 @@
 <li>No Mixed Case</li>
 <li>No encoding type within the name</li>
 <li>Global variables only when necessary</li>
-<li>Local variables short ant to the point</li>
+<li>Local variables short and to the point</li>
 </ul>
 <p>If you find all your names could be Thing and Dolt then you should probably revisit your design.</p>
 <h2 id="File-Names"><a href="#File-Names" class="headerlink" title="File Names"></a>File Names</h2><p>Filenames should be all lowercase with words separated by underscores (<code>_</code>). </p>
