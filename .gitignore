@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+
+# Hexo blog output
+blog/public/
+blog/.deploy_git/
+blog/db.json
+blog/node_modules/
+
+# Astro
+astro/dist/
+astro/node_modules/
