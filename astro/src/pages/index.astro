@@ -12,14 +12,6 @@ import Layout from '../layouts/Layout.astro';
       <div class="line boot">[  <span class="ok">OK</span>  ] Reached target Multi-User System</div>
       <div class="line boot dim">────────────────────────────────────────────────</div>
 
-      <!-- Header -->
-      <div class="hostname">
-        <span class="cyan">huaqianlee</span><span class="dim">@</span><span class="green">github</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span>
-        <span class="cursor blink">_</span>
-      </div>
-
-      <div class="gap"></div>
-
       <!-- cat about.md -->
       <div class="cmd-line">
         <span class="prompt"><span class="cyan">huaqianlee</span><span class="dim">@</span><span class="green">github</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span></span>
@@ -132,9 +124,6 @@ import Layout from '../layouts/Layout.astro';
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
   .blink { animation: blink 1.2s step-end infinite; }
   .cursor { color: #4caf50; font-weight: 700; }
-
-  .hostname { font-size: 1.1rem; margin-bottom: .4rem; }
-  .hostname .cursor { font-size: 1.3rem; }
 
   .footer {
     margin-top: 2.5rem;
