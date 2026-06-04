@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="projects">
+  <main class="terminal">
+    <div class="container">
+      <div class="cmd-line">
+        <span class="prompt"><span class="cyan">huaqianlee</span><span class="dim">@</span><span class="green">github</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span></span>
+        <span class="cmd">find projects/ -type f -name "*.md" | head -10</span>
+      </div>
+
+      <div class="gap"></div>
+
+      <div class="output">
+        <p class="dim">./android/bms-power-management.md</p>
+        <p class="dim">./android/i2c-driver-architecture.md</p>
+        <p class="dim">./linux/kernel-memory-management.md</p>
+        <p class="dim">./linux/bootloader-analysis.md</p>
+        <p class="dim">./uav/drone-flight-software.md</p>
+        <p class="dim">./tools/reproducible-builds.md</p>
+      </div>
+
+      <div class="gap"></div>
+
+      <div class="cmd-line">
+        <span class="prompt"><span class="cyan">huaqianlee</span><span class="dim">@</span><span class="green">github</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span></span>
+        <span class="cmd">cat README.md</span>
+      </div>
+
+      <div class="gap"></div>
+
+      <div class="output">
+        <h1 class="section-title"><span class="cyan">#</span> Projects</h1>
+
+        <div class="project-list">
+          <div class="project">
+            <div class="project-header">
+              <span class="project-icon">📱</span>
+              <span class="project-name">Android Power Management</span>
+              <span class="project-lang"><span class="dim">[</span>C<span class="dim">]</span></span>
+            </div>
+            <div class="project-desc">Battery management system (BMS) driver analysis, charger drivers (smb135x, linear), PMIC voter, battery architecture across Qualcomm & MTK platforms.</div>
+            <div class="project-links">
+              <a href="/blog/">blog posts →</a>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="project-header">
+              <span class="project-icon">🐧</span>
+              <span class="project-name">Linux Kernel Drivers</span>
+              <span class="project-lang"><span class="dim">[</span>C<span class="dim">]</span></span>
+            </div>
+            <div class="project-desc">I2C driver architecture, input subsystem analysis, device tree, bootloader analysis (sbl1, LK), process & thread internals, memory management.</div>
+            <div class="project-links">
+              <a href="/blog/">blog posts →</a>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="project-header">
+              <span class="project-icon">🔧</span>
+              <span class="project-name">Embedded Tooling</span>
+              <span class="project-lang"><span class="dim">[</span>Shell<span class="dim">]</span></span>
+            </div>
+            <div class="project-desc">Git workflows, Vim/tmux environment setup, shell scripting, Yocto SDK preparation for Qualcomm platforms, and reproducible build systems.</div>
+            <div class="project-links">
+              <a href="/blog/">blog posts →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="gap"></div>
+
+        <div class="nav-back">
+          <span class="dim">$ </span><a href="/">cd ~</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  .section-title { font-size: 1rem; margin: 1rem 0 .6rem; font-weight: 500; }
+  .project-list { display: flex; flex-direction: column; gap: 1.2rem; }
+  .project { border-left: 2px solid #1e2329; padding-left: 1rem; }
+  .project-header { margin-bottom: .3rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .project-icon { font-size: 1rem; }
+  .project-name { color: #e6db74; font-weight: 500; }
+  .project-lang { font-size: .8rem; }
+  .project-desc { color: #b3b1ad; font-size: .9rem; line-height: 1.7; margin-bottom: .3rem; }
+  .project-links { font-size: .85rem; }
+  .nav-back { margin-top: 2rem; font-size: .9rem; }
+</style>

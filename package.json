@@ -1,0 +1,11 @@
+{
+  "name": "huaqianlee.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd astro && npm run dev",
+    "dev:blog": "cd blog && node node_modules/hexo/bin/hexo server",
+    "build": "bash scripts/build.sh",
+    "preview": "cd astro && npm run preview"
+  }
+}

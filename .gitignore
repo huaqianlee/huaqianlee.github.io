@@ -2,6 +2,7 @@ node_modules/
 dist/
 .DS_Store
 *.log
+.omo/
 
 # Hexo blog output
 blog/public/
@@ -12,3 +13,9 @@ blog/node_modules/
 # Astro
 astro/dist/
 astro/node_modules/
+astro/.astro/
+
+# blog/source had its own .git (now removed, tracked in outer repo)
+blog/source/.git
+# old_next is a standalone git repo (historical NexT v5), not a submodule
+blog/themes/old_next/

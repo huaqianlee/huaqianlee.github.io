@@ -1,0 +1,19 @@
+
+next/.git
+next/.github
+
+next/.DS_Store
+next/.idea/
+next/*.log
+next/*.iml
+next/node_modules/
+
+next/# Ignore unused verdors' files
+next/source/vendors/fancybox/*
+!next/source/vendors/fancybox/source/
+
+next/source/vendors/font-awesome/less/
+next/source/vendors/font-awesome/scss/
+
+next/source/vendors/ua-parser-js/*
+!next/source/vendors/ua-parser-js/dist/

@@ -1,0 +1,40 @@
+---
+export interface Props {
+  title?: string;
+}
+
+const { title = "Andy.Lee" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} &mdash; Andy.Lee</title>
+    <meta name="description" content="Embedded Systems & Linux Kernel Engineer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { font-size: 16px; scroll-behavior: smooth; }
+      body {
+        font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+        background: #0a0e14;
+        color: #b3b1ad;
+        line-height: 1.7;
+        min-height: 100vh;
+      }
+      a { color: #00d4ff; text-decoration: none; transition: color .2s; }
+      a:hover { color: #66e6ff; text-decoration: underline; }
+      ::selection { background: #00d4ff33; color: #fff; }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #0a0e14; }
+      ::-webkit-scrollbar-thumb { background: #2d343a; border-radius: 3px; }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

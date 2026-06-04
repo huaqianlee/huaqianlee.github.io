@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="about">
+  <main class="terminal">
+    <div class="container">
+      <div class="cmd-line">
+        <span class="prompt"><span class="cyan">huaqianlee</span><span class="dim">@</span><span class="green">github</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span></span>
+        <span class="cmd">cat about.md</span>
+      </div>
+
+      <div class="gap"></div>
+
+      <div class="output">
+        <h1 class="section-title"><span class="cyan">#</span> About Me</h1>
+
+        <p class="desc">
+          I'm an embedded systems engineer with over 10 years of experience in
+          <span class="highlight">Linux kernel</span> and
+          <span class="highlight">Android system</span> development.
+          I specialize in low-level system programming, power management,
+          bootloaders, and hardware bring-up.
+        </p>
+
+        <div class="gap"></div>
+
+        <h2 class="section-title"><span class="green">##</span> Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-cat">
+            <div class="skill-title">Languages</div>
+            <div class="skill-items">C · C++ · Java · Python · Shell</div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-title">Kernel</div>
+            <div class="skill-items">Linux Drivers · Device Tree · BSP · Bootloader · Power Management</div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-title">Android</div>
+            <div class="skill-items">AOSP · HAL · BMS · SELinux · System Services</div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-title">Tools</div>
+            <div class="skill-items">Git · Vim · tmux · GDB · JTAG · Yocto · Docker</div>
+          </div>
+        </div>
+
+        <div class="gap"></div>
+
+        <h2 class="section-title"><span class="magenta">###</span> Experience</h2>
+        <div class="timeline">
+          <div class="exp-item">
+            <div class="exp-year"><span class="dim">[2014 ~ ]</span></div>
+            <div class="exp-detail">Embedded systems engineering, focusing on <span class="highlight">Qualcomm/MTK</span> platforms, Linux kernel drivers, Android system optimization, and power management.</div>
+          </div>
+        </div>
+
+        <div class="gap"></div>
+
+        <div class="nav-back">
+          <span class="dim">$ </span><a href="/">cd ~</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  .section-title { font-size: 1rem; margin: 1rem 0 .6rem; font-weight: 500; }
+  .desc { line-height: 1.9; max-width: 640px; }
+  .highlight { color: #00d4ff; }
+  .skills-grid { display: grid; gap: .8rem; }
+  .skill-title { color: #e6db74; font-size: .85rem; margin-bottom: .2rem; }
+  .skill-items { color: #b3b1ad; font-size: .9rem; }
+  .timeline { margin: .4rem 0; }
+  .exp-item { display: flex; gap: 1rem; line-height: 1.8; }
+  .exp-year { white-space: nowrap; min-width: 5rem; }
+  .exp-detail { color: #b3b1ad; }
+  .nav-back { margin-top: 2rem; font-size: .9rem; }
+  @media (max-width: 600px) {
+    .exp-item { flex-direction: column; gap: .2rem; }
+    .exp-year { min-width: auto; }
+  }
+</style>
