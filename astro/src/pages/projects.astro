@@ -30,16 +30,68 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="gap"></div>
 
-      <div class="output">
-        <h1 class="section-title"><span class="cyan">#</span> Projects</h1>
-
-        <div class="project-list">
-          <div class="project">
-            <div class="project-header">
-              <span class="project-icon">📱</span>
-              <span class="project-name">Android Power Management</span>
-              <span class="project-lang"><span class="dim">[</span>C<span class="dim">]</span></span>
+        <div class="output">
+          <div class="project-list">
+            <div class="project">
+              <div class="project-header">
+                <span class="project-icon">📷</span>
+                <span class="project-name">IoT Camera Platform</span>
+                <span class="project-lang"><span class="dim">[</span>C · C++ · Shell<span class="dim">]</span></span>
+              </div>
+              <div class="project-desc">Built IoT Camera team (9 members) as Manager/TPM. Independently developed vehicle Camera POC (SM6125+Ubuntu) with MAX9296+MAX96705 link, optimized CPU/GPU allocation for frame-sync performance. Refactored Android Display HAL for SPI screen compatibility.</div>
+              <div class="project-links">
+                <a href="/blog/">blog posts →</a>
+              </div>
             </div>
+
+            <div class="project">
+              <div class="project-header">
+                <span class="project-icon">📱</span>
+                <span class="project-name">Android Power Management</span>
+                <span class="project-lang"><span class="dim">[</span>C<span class="dim">]</span></span>
+              </div>
+              <div class="project-desc">BMS driver analysis, charger drivers (smb135x, linear), PMIC voter, USB multi-port expansion (1→3 universal solution), performance optimization, thermal management on Qualcomm & MTK platforms.</div>
+              <div class="project-links">
+                <a href="/blog/">blog posts →</a>
+              </div>
+            </div>
+
+            <div class="project">
+              <div class="project-header">
+                <span class="project-icon">🐧</span>
+                <span class="project-name">Linux Kernel &amp; Bootloader</span>
+                <span class="project-lang"><span class="dim">[</span>C<span class="dim">]</span></span>
+              </div>
+              <div class="project-desc">I2C driver architecture, input subsystem, device tree, bootloader analysis (sbl1, LK), process/thread internals, memory management, XBL troubleshooting.</div>
+              <div class="project-links">
+                <a href="/blog/">blog posts →</a>
+              </div>
+            </div>
+
+            <div class="project">
+              <div class="project-header">
+                <span class="project-icon">✈️</span>
+                <span class="project-name">Drone &amp; UAV Software</span>
+                <span class="project-lang"><span class="dim">[</span>C · Python<span class="dim">]</span></span>
+              </div>
+              <div class="project-desc">PX4 flight control on Qualcomm Snapdragon Flight (MSM8074). BSP bring-up on Linaro — IMU (MPU9250), GPS, Magnetic sensors. Camera architecture tuning on UAV platforms.</div>
+              <div class="project-links">
+                <a href="/blog/">blog posts →</a>
+              </div>
+            </div>
+
+            <div class="project">
+              <div class="project-header">
+                <span class="project-icon">🔧</span>
+                <span class="project-name">Embedded Tooling &amp; Automation</span>
+                <span class="project-lang"><span class="dim">[</span>Shell · Python<span class="dim">]</span></span>
+              </div>
+              <div class="project-desc">Git workflows, Yocto SDK preparation for Qualcomm platforms, automated debugging scripts, local Gitbook server for team knowledge sharing, compilation/ debugging automation tools.</div>
+              <div class="project-links">
+                <a href="/blog/">blog posts →</a>
+              </div>
+            </div>
+          </div>
             <div class="project-desc">Battery management system (BMS) driver analysis, charger drivers (smb135x, linear), PMIC voter, battery architecture across Qualcomm & MTK platforms.</div>
             <div class="project-links">
               <a href="/blog/">blog posts →</a>

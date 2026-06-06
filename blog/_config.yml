@@ -109,6 +109,10 @@ stylus:
 	compress:true
 exclude_generator:
 
+# Skip rendering for pre-built HTML files (e.g., resume)
+skip_render:
+  - 'resume_*.html'
+
 search:
   path: search.xml # search.json
   field: post

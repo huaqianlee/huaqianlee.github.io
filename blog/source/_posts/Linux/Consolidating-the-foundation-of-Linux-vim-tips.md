@@ -484,6 +484,22 @@ Insert mode -> Ctrl-R<register>
 `:global/pattern/print`, `:g/pattern`   -> Display all <pattern> lines in a new window
 ```
 
+## Syntastic
+
+Syntax checking plugin configuration:
+
+```vim
+" statusline
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+```
+
 # Vim cheat sheet for programmers
 ![vim_cheat_sheet_for_programmers_print](/image/linux/vim/vim_cheat_sheet_for_programmers_print.png)
 

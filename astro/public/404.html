@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andy.Lee &mdash; Page Not Found</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      background: #0a0e14; color: #b3b1ad;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 2rem;
+    }
+    .box { max-width: 600px; }
+    h1 { color: #e6db74; font-size: 1.2rem; margin-bottom: .8rem; }
+    p  { line-height: 1.8; font-size: .9rem; }
+    a  { color: #00d4ff; }
+    .dim { color: #626a73; }
+    .cursor { animation: blink 1.2s step-end infinite; color: #4caf50; }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1><span class="dim">$</span> page not found <span class="cursor">_</span></h1>
+    <p>The page you are looking for may have moved.</p>
+    <p style="margin-top:.4rem;"><a href="/">cd ~</a></p>
+  </div>
+
+  <script>
+    (function() {
+      var path = window.location.pathname;
+      // Redirect old blog URL patterns to /blog/ prefix
+      // Matches: /YYYY/... , /archives/..., /categories/..., /tags/..., /page/...
+      // Also matches /resume_cn.html, /resume_en.html, /journal/...
+      var oldBlogPattern = /^\/(\d{4}\/|archives\/|categories\/|tags\/|page\/|resume_|journal\/)/;
+      if (oldBlogPattern.test(path) && !path.startsWith('/blog/')) {
+        window.location.replace('/blog' + path);
+      }
+    })();
+  </script>
+</body>
+</html>

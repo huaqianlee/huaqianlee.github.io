@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="resume">
+  <main class="terminal">
+    <div class="container">
+      <div class="cmd-line">
+        <span class="prompt"><span class="cyan">huaqianlee</span><span class="dim">@</span><span class="green">github</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span></span>
+        <span class="cmd">open resume_cn.html</span>
+      </div>
+
+      <div class="gap"></div>
+
+      <div class="output">
+        <p>正在加载简历...</p>
+        <p class="dim">如果未自动跳转，<a href="/resume_cn.html">点击此处</a>。</p>
+      </div>
+
+      <div class="gap"></div>
+
+      <div class="nav-back">
+        <span class="dim">$ </span><a href="/">cd ~</a>
+        <span class="dim"> | </span>
+        <a href="/resume-en">English version →</a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  window.location.replace('/resume_cn.html');
+</script>
+
+<style is:global>
+  .nav-back { margin-top: 2rem; font-size: .9rem; }
+</style>

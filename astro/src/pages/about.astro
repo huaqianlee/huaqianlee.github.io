@@ -16,11 +16,10 @@ import Layout from '../layouts/Layout.astro';
         <h1 class="section-title"><span class="cyan">#</span> About Me</h1>
 
         <p class="desc">
-          I'm an embedded systems engineer with over 10 years of experience in
-          <span class="highlight">Linux kernel</span> and
-          <span class="highlight">Android system</span> development.
-          I specialize in low-level system programming, power management,
-          bootloaders, and hardware bring-up.
+          Embedded Systems / Linux Kernel Engineer with <span class="highlight">10+ years</span> of experience in
+          Android/Linux/Embedded development, including 2 years as Manager and TPM.
+          Proficient in <span class="highlight">C/C++</span>, Java, Python, Shell.
+          Experienced on Qualcomm (MSM8909/8916/8974/SDM450/SM6125/SM8250) and MTK (MTK6570/6739) platforms.
         </p>
 
         <div class="gap"></div>
@@ -29,36 +28,81 @@ import Layout from '../layouts/Layout.astro';
         <div class="skills-grid">
           <div class="skill-cat">
             <div class="skill-title">Languages</div>
-            <div class="skill-items">C · C++ · Java · Python · Shell</div>
+            <div class="skill-items">C<span class="dim">†</span> · C++<span class="dim">†</span> · Java<span class="dim">†</span> · Python · Shell<span class="dim">†</span></div>
           </div>
           <div class="skill-cat">
-            <div class="skill-title">Kernel</div>
-            <div class="skill-items">Linux Drivers · Device Tree · BSP · Bootloader · Power Management</div>
+            <div class="skill-title">Kernel &amp; BSP</div>
+            <div class="skill-items">Linux Drivers · Device Tree · Bootloader · Power Management · Performance · Thermal</div>
           </div>
           <div class="skill-cat">
             <div class="skill-title">Android</div>
-            <div class="skill-items">AOSP · HAL · BMS · SELinux · System Services</div>
+            <div class="skill-items">AOSP · HAL · BMS · Charger · USB · SELinux · Camera · Display</div>
           </div>
           <div class="skill-cat">
             <div class="skill-title">Tools</div>
-            <div class="skill-items">Git · Vim · tmux · GDB · JTAG · Yocto · Docker</div>
+            <div class="skill-items">Git<span class="dim">†</span> · Vim<span class="dim">†</span> · Docker · Yocto · Android Studio · Ubuntu<span class="dim">†</span></div>
+          </div>
+        </div>
+        <p class="dim footnote"><span class="dim">†</span> frequently used</p>
+
+        <div class="gap"></div>
+
+        <h2 class="section-title"><span class="magenta">###</span> Work Experience</h2>
+        <div class="timeline">
+          <div class="exp-item">
+            <div class="exp-year"><span class="dim">[2018 - ]</span></div>
+            <div class="exp-detail">
+              <div class="exp-company">Thunder Software Technology — <span class="dim">Senior Engineer / TPM / Team Leader</span></div>
+              <div class="exp-desc">Built IoT Camera team (9 members), delivered European/American projects, developed vehicle Camera POC (SM6125+Ubuntu), refactored Android Display HAL for SPI screen, managed pre-sales to after-sales.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-year"><span class="dim">[2017 - 2018]</span></div>
+            <div class="exp-detail">
+              <div class="exp-company">EASTAEON Technology — <span class="dim">BSP Engineer</span></div>
+              <div class="exp-desc">MTK platform (MTK6570/6739) BSP development — LCD, TP, Camera, Charger/Battery.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-year"><span class="dim">[2014 - 2017]</span></div>
+            <div class="exp-detail">
+              <div class="exp-company">IDEA INTERNATIONAL — <span class="dim">Embedded Engineer</span></div>
+              <div class="exp-desc">Qualcomm platform (MSM8916/8909/8974) driver development — power, charger, LCD, Camera. Drone BSP &amp; flight control on Linaro system — IMU, GPS, sensor bring-up.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-year"><span class="dim">[2011 - 2013]</span></div>
+            <div class="exp-detail">
+              <div class="exp-company">Chengdu WXL Communication — <span class="dim">Embedded Developer</span></div>
+              <div class="exp-desc">Samsung platform &amp; STM32 embedded development — schematic design, MCU programming, Linux porting.</div>
+            </div>
           </div>
         </div>
 
         <div class="gap"></div>
 
-        <h2 class="section-title"><span class="magenta">###</span> Experience</h2>
-        <div class="timeline">
-          <div class="exp-item">
-            <div class="exp-year"><span class="dim">[2014 ~ ]</span></div>
-            <div class="exp-detail">Embedded systems engineering, focusing on <span class="highlight">Qualcomm/MTK</span> platforms, Linux kernel drivers, Android system optimization, and power management.</div>
-          </div>
+        <h2 class="section-title"><span class="blue">####</span> Education</h2>
+        <div class="edu-item">
+          <span class="dim">[2008 - 2012]</span> Sichuan Technology and Business University
+          <span class="dim">—</span> Electronic Information Engineering
+          <span class="dim">·</span> Bachelor of Engineering
         </div>
+
+        <div class="gap"></div>
+
+        <h2 class="section-title"><span class="yellow">#####</span> Honors</h2>
+        <ul class="honors-list">
+          <li>"Craftsman" Award 2021</li>
+          <li>National Electronic Design Contest — 2nd Prize (Sichuan) 2011</li>
+          <li>National Electronic Design Contest — 3rd Prize 2011</li>
+        </ul>
 
         <div class="gap"></div>
 
         <div class="nav-back">
           <span class="dim">$ </span><a href="/">cd ~</a>
+          <span class="dim"> | </span>
+          <a href="/resume">📄 resume</a>
         </div>
       </div>
     </div>
@@ -72,10 +116,16 @@ import Layout from '../layouts/Layout.astro';
   .skills-grid { display: grid; gap: .8rem; }
   .skill-title { color: #e6db74; font-size: .85rem; margin-bottom: .2rem; }
   .skill-items { color: #b3b1ad; font-size: .9rem; }
-  .timeline { margin: .4rem 0; }
-  .exp-item { display: flex; gap: 1rem; line-height: 1.8; }
-  .exp-year { white-space: nowrap; min-width: 5rem; }
+  .footnote { font-size: .8rem; margin-top: .3rem; }
+  .yellow { color: #e6db74; }
+  .timeline { margin: .4rem 0; display: flex; flex-direction: column; gap: .8rem; }
+  .exp-item { display: flex; gap: 1rem; line-height: 1.7; }
+  .exp-year { white-space: nowrap; min-width: 5rem; font-size: .9rem; padding-top: .1rem; }
   .exp-detail { color: #b3b1ad; }
+  .exp-company { color: #e6db74; font-size: .92rem; }
+  .exp-desc { font-size: .88rem; margin-top: .15rem; }
+  .edu-item { color: #b3b1ad; font-size: .9rem; line-height: 1.8; }
+  .honors-list { color: #b3b1ad; font-size: .9rem; line-height: 1.9; padding-left: 1.2rem; }
   .nav-back { margin-top: 2rem; font-size: .9rem; }
   @media (max-width: 600px) {
     .exp-item { flex-direction: column; gap: .2rem; }
