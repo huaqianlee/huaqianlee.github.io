@@ -109,9 +109,7 @@ stylus:
 	compress:true
 exclude_generator:
 
-# Skip rendering for pre-built HTML files (e.g., resume)
-skip_render:
-  - 'resume_*.html'
+# resume HTML served from astro/public/ (single source of truth)
 
 search:
   path: search.xml # search.json
