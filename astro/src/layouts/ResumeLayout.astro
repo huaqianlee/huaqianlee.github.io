@@ -1,0 +1,92 @@
+---
+export interface Props {
+  title: string;
+  lang?: string;
+  description?: string;
+}
+const { title, lang = 'zh-CN', description = 'Andy Lee — Embedded / Linux / Android Engineer resume' } = Astro.props;
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="profile" />
+    {site && <meta property="og:url" content={`${site}${Astro.url.pathname}`} />}
+    <meta name="twitter:card" content="summary" />
+    <style is:global>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --ink: #1a1d21;
+        --ink-soft: #4a5158;
+        --ink-faint: #8a9299;
+        --accent: #1f6feb;
+        --rule: #e3e6ea;
+        --paper: #ffffff;
+        --page-bg: #eceef1;
+        --tag-bg: #f2f4f7;
+      }
+      html { font-size: 15px; -webkit-text-size-adjust: 100%; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+        background: var(--page-bg);
+        color: var(--ink);
+        line-height: 1.55;
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      .page {
+        max-width: 800px;
+        margin: 2rem auto;
+        background: var(--paper);
+        padding: 3rem 3.2rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .08), 0 8px 24px rgba(0, 0, 0, .06);
+        border-radius: 4px;
+      }
+
+      /* Toolbar — hidden when printing */
+      .toolbar {
+        max-width: 800px;
+        margin: 1.5rem auto -0.5rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        font-size: .9rem;
+      }
+      .toolbar a { color: var(--ink-soft); }
+      .toolbar a:hover { color: var(--accent); }
+
+      @media (max-width: 720px) {
+        .page { margin: 1rem; padding: 1.8rem 1.4rem; }
+        .toolbar { margin: 1rem; }
+      }
+
+      @media print {
+        :root { --page-bg: #fff; }
+        body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .toolbar { display: none !important; }
+        .page {
+          max-width: none;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          border-radius: 0;
+        }
+        a { color: var(--ink); }
+        @page { size: A4; margin: 10mm 13mm; }
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

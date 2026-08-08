@@ -1,0 +1,123 @@
+name: Andy Lee · 李华乾
+title: Software Engineer
+
+contact:
+  - label: Homepage
+    value: huaqianlee.github.io
+    href: http://huaqianlee.github.io
+  - label: Tel
+    value: 199-xxxx-xxxx
+  - label: Email
+    value: huaqianlee@gmail.com
+    href: mailto:huaqianlee@gmail.com
+  - label: Github
+    value: github.com/huaqianlee
+    href: http://github.com/huaqianlee
+
+profile:
+  - More than 10 years of experience in Android/Linux/Embedded development, and 2 years of Manager and TPM experience.
+  - Familiar with C/C++, Java, Python, Shell, etc.; like to write scripts to improve work efficiency.
+  - Proficient in Linux kernel driver development and familiar with Java and Python programming.
+  - Familiar with embedded Linux C advanced application programming and kernel mechanisms.
+  - Familiar with Qualcomm platforms (MSM8909/8916, MSM8974, SDM450, etc.) and MTK platforms (MTK6570/6739, etc.).
+  - Experienced in development and maintenance of power, peripherals, performance, power consumption, and stability.
+  - Good English listening, speaking, reading and writing skills.
+
+experience:
+  - company: Thunder Software Technology Co., Ltd
+    period: Apr. 2018 – Present
+    roles:
+      - title: IoT Camera Product Development
+        paragraphs:
+          - Took on the role of IoT Camera Manager and project TPM, completed part of the Camera development work, built the IoT Camera team, and delivered projects.
+        items:
+          - Independently developed the all-in-one PoC of the in-vehicle (SM6125 + Ubuntu) Camera. Without official support, brought up the MAX9296+MAX96705 link by writing scripts that ran thousands of iterations, and secured Camera performance (frame sync, no frame drop) through reasonable CPU/GPU resource allocation — later turned into a sales solution.
+          - Promoted to head of IoT Camera in late 2020; set up the IoT Camera team (currently 9 members) responsible for pre-sales, development and after-sales of multimedia projects.
+          - Served as TPM on European/American projects, acting as the bridge for technical communication and pulling resources to solve and drive difficult, high-risk problems.
+          - On one European project with unbalanced resources and high difficulty, kept it on track using 70% of resources by breaking down tasks and focusing on the single most important thing each day; refactored Android Display HAL to make an SPI screen the Android default screen while staying compatible with the Qualcomm Camera architecture.
+      - title: Android Phone Development
+        paragraphs:
+          - Responsible for BSP and System development and maintenance on Qualcomm platforms (MSM8909/SM6125/SDM660/SM8250, etc.), across Android and Linux (Yocto)—power management, Charger/Battery, USB, Performance, Thermal, Camera, System, Stability, Security, power consumption, etc.
+        items:
+          - Delivered many customer-specific Charger/Battery/USB requirements, e.g. expanding one USB interface into three and turning it into a universal solution.
+          - Porting and bug maintenance across individual modules.
+          - Repeatedly helped resolve difficult and urgent issues (XBL, performance, stability, version management), keeping projects on schedule.
+          - Set up a local-network Gitbook server and initiated technical output from team members, forming effective technical precipitation.
+          - Produced multiple documents and tools to improve R&D efficiency, such as bring-up guides, module debugging guides, and automation tools for compilation and debugging.
+  - company: EASTAEON Technology Co., Ltd
+    period: Nov. 2017 – Mar. 2018
+    roles:
+      - title: Android Phone Development
+        paragraphs:
+          - Responsible for BSP development on MTK platforms (MTK6570/6739), including LCD/TP/Camera, Charger/Battery, barcode scanner, etc.
+        items: []
+  - company: IDEA INTERNATIONAL DEVELOPMENT LIMITED
+    period: Oct. 2014 – Oct. 2017
+    roles:
+      - title: Android Phone & Drone Development
+        paragraphs:
+          - Mobile development mainly covered drivers on Qualcomm platforms (MSM8916/8909, MSM8974) — power management, Charger/Battery, LCD/TP/Camera — solving problems at both responsibility and system level.
+          - Drone development covered BSP and flight-control system development on the Qualcomm MSM8074 Linaro system, guaranteeing bring-up and correct operation of the ESC board, IMU, GPS, Magnetic sensors, etc.
+        items: []
+  - company: Chengdu WXL Communication Technology Co., Ltd
+    period: Oct. 2011 – Aug. 2013
+    roles:
+      - title: IoT Design & Development
+        paragraphs:
+          - Embedded development on Samsung and STM32 platforms, including schematic drawing, microcontroller programming, Samsung-platform Linux porting, and Linux application programming.
+        items: []
+
+talks:
+  - title: 原来你是这样的 VCS！
+    url: http://huaqianlee.github.io/2020/11/13/Git/vcs-repo-git/
+  - title: How to develop and debug kernel?
+    url: http://huaqianlee.github.io/2020/11/16/Linux/How-to-develop-and-debug-kernel/
+  - title: Virtualization vs Containerization
+    url: http://huaqianlee.github.io/2021/10/25/Linux/Virtualization-vs-Containerization/
+  - title: 'Linux Device Driver: the Char Device Driver'
+    url: http://huaqianlee.github.io/2020/12/25/Linux/Linux-Device-Driver-the-Char-Device-Driver/
+  - title: How to prepare SDK for Yocto Linux/Ubuntu on Qualcomm?
+    url: http://huaqianlee.github.io/2021/12/25/Linux/How-to-prepare-SDK-for-Yocto-Linux-Ubuntu-on-Qualcomm/
+  - title: MIPI CSI 接口定义与协议层介绍
+    url: http://huaqianlee.github.io/2021/09/22/Camera/MIPI%20interface%20overview/
+
+skills:
+  - - name: C/C++
+      url: http://www.cplusplus.com/
+      frequent: true
+    - name: Java
+      url: https://www.java.com/en/
+      frequent: true
+    - name: Shell
+      url: http://zh.wikipedia.org/wiki/Unix_shell
+      frequent: true
+    - name: Python
+      url: https://www.python.org/
+    - name: HTML
+      url: https://html.spec.whatwg.org/multipage/
+  - - name: Vim
+      url: http://www.vim.org
+      frequent: true
+    - name: Git
+      url: http://git-scm.com
+      frequent: true
+    - name: Android Studio
+      frequent: true
+    - name: Docker
+      url: https://www.docker.com/
+    - name: Ubuntu Linux
+      url: http://ubuntu.com
+      frequent: true
+    - name: MySQL
+      url: http://mysql.com
+
+education: Sep. 2008 – Jul. 2012　Sichuan Technology and Business University　Electronic Information Engineering　Bachelor of Engineering
+
+honors:
+  - '"Craftsman" Award, 2021'
+  - National English Certificate Band 4 (CET-4)
+  - National Computer Rank Examination Level 2
+  - National Electronic Design Contest — 2nd Prize, Sichuan Province (2011.11)
+  - National Electronic Design Contest — 3rd Prize, National (2011.12)
+
+thanks: Thank you for taking the time to read my resume.

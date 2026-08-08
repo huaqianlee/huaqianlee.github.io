@@ -6,9 +6,15 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "resume:pdf": "node scripts/resume-pdf.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.0.0",
+    "@fontsource/jetbrains-mono": "^5.0.0",
     "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.40.0"
   }
 }

@@ -110,23 +110,21 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style is:global>
-  .section-title { font-size: 1rem; margin: 1rem 0 .6rem; font-weight: 500; }
+  /* about-specific — shared utilities (.section-title/.nav-back/.yellow) live in Layout.astro */
   .desc { line-height: 1.9; max-width: 640px; }
-  .highlight { color: #00d4ff; }
+  .highlight { color: var(--c-cyan); }
   .skills-grid { display: grid; gap: .8rem; }
-  .skill-title { color: #e6db74; font-size: .85rem; margin-bottom: .2rem; }
-  .skill-items { color: #b3b1ad; font-size: .9rem; }
-  .footnote { font-size: .8rem; margin-top: .3rem; }
-  .yellow { color: #e6db74; }
+  .skill-title { color: var(--c-yellow); font-size: .85rem; margin-bottom: .2rem; }
+  .skill-items { color: var(--fg); font-size: .9rem; }
+  .footnote { font-size: var(--fs-xs); margin-top: .3rem; }
   .timeline { margin: .4rem 0; display: flex; flex-direction: column; gap: .8rem; }
   .exp-item { display: flex; gap: 1rem; line-height: 1.7; }
   .exp-year { white-space: nowrap; min-width: 5rem; font-size: .9rem; padding-top: .1rem; }
-  .exp-detail { color: #b3b1ad; }
-  .exp-company { color: #e6db74; font-size: .92rem; }
+  .exp-detail { color: var(--fg); }
+  .exp-company { color: var(--c-yellow); font-size: .92rem; }
   .exp-desc { font-size: .88rem; margin-top: .15rem; }
-  .edu-item { color: #b3b1ad; font-size: .9rem; line-height: 1.8; }
-  .honors-list { color: #b3b1ad; font-size: .9rem; line-height: 1.9; padding-left: 1.2rem; }
-  .nav-back { margin-top: 2rem; font-size: .9rem; }
+  .edu-item { color: var(--fg); font-size: .9rem; line-height: 1.8; }
+  .honors-list { color: var(--fg); font-size: .9rem; line-height: 1.9; padding-left: 1.2rem; }
   @media (max-width: 600px) {
     .exp-item { flex-direction: column; gap: .2rem; }
     .exp-year { min-width: auto; }

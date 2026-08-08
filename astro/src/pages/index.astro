@@ -90,53 +90,35 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style is:global>
-  .terminal { padding: 2rem 1rem; max-width: 820px; margin: 0 auto; }
-  .container { animation: fadeIn .8s ease-out; }
+  /* index-specific — shared terminal utilities live in Layout.astro */
+  .boot { font-size: .82rem; color: var(--c-dim); line-height: 1.6; }
+  .boot .ok { color: var(--c-green); font-weight: 500; }
 
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-  .boot { font-size: .82rem; color: #626a73; line-height: 1.6; }
-  .boot .ok { color: #4caf50; font-weight: 500; }
-  .dim { color: #626a73; }
-  .cyan { color: #00d4ff; }
-  .green { color: #4caf50; }
-  .blue { color: #42a5f5; }
-  .magenta { color: #ce93d8; }
-  .gap { height: .6rem; }
-
-  /* Prompt + command lines */
-  .cmd-line { line-height: 2; }
-  .prompt { user-select: none; }
-  .cmd { color: #e6db74; }
-
-  /* Output blocks */
-  .output { margin: .2rem 0 .4rem 1.2rem; }
   .info-table { border-collapse: collapse; }
-  .info-table .key { color: #e6db74; padding-right: .6rem; vertical-align: top; white-space: nowrap; }
-  .info-table .sep { color: #626a73; padding-right: .6rem; }
-  .info-table .val { color: #b3b1ad; }
+  .info-table .key { color: var(--c-yellow); padding-right: .6rem; vertical-align: top; white-space: nowrap; }
+  .info-table .sep { color: var(--c-dim); padding-right: .6rem; }
+  .info-table .val { color: var(--fg); }
 
-  .ascii-name { color: #00d4ff; font-size: .7rem; line-height: 1.15; margin-bottom: .5rem; }
+  .ascii-name { color: var(--c-cyan); font-size: .7rem; line-height: 1.15; margin-bottom: .5rem; }
   .ls-output { line-height: 1.8; font-size: .9rem; }
   .help-output { line-height: 2; }
-  .help-output a { color: #b3b1ad; }
-  .help-output a:hover { color: #00d4ff; }
+  .help-output a { color: var(--fg); }
+  .help-output a:hover { color: var(--c-cyan); }
 
   /* Blinking cursor */
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
   .blink { animation: blink 1.2s step-end infinite; }
-  .cursor { color: #4caf50; font-weight: 700; }
+  .cursor { color: var(--c-green); font-weight: 700; }
 
   .footer {
     margin-top: 2.5rem;
     padding-top: 1rem;
-    border-top: 1px solid #1e2329;
-    font-size: .85rem;
+    border-top: 1px solid var(--rule);
+    font-size: var(--fs-sm);
     display: flex; gap: 1rem;
   }
 
   @media (max-width: 600px) {
-    .terminal { padding: 1rem .6rem; font-size: .85rem; }
     .ascii-name { font-size: .5rem; }
   }
 </style>

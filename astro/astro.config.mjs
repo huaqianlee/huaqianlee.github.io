@@ -1,9 +1,11 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://huaqianlee.github.io',
   outDir: '../dist',
   publicDir: './public',
+  integrations: [sitemap()],
   server: {
     port: 4321,
   },

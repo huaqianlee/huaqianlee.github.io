@@ -1,0 +1,123 @@
+name: 李华乾 · Andy Lee
+title: 软件工程师
+
+contact:
+  - label: 个人博客
+    value: huaqianlee.github.io
+    href: http://huaqianlee.github.io
+  - label: 联系电话
+    value: 199-xxxx-xxxx
+  - label: 电子邮箱
+    value: huaqianlee@gmail.com
+    href: mailto:huaqianlee@gmail.com
+  - label: Github
+    value: github.com/huaqianlee
+    href: http://github.com/huaqianlee
+
+profile:
+  - 在 Android、Linux 及嵌入式开发领域有 10 年以上工作经验，两年 Manager、TPM 管理经验。
+  - 熟悉 C/C++、Java、Python、Shell 等，喜欢写脚本提高工作效率。
+  - 精通 Linux 内核驱动程序开发，熟悉 Java 和 Python 编程。
+  - 熟悉 Qualcomm 平台（MSM8909/8974、SDM450/660 等）、MTK 平台（MTK6570/6739 等）。
+  - 有丰富的 Power、性能、功耗、稳定性等方面的开发和维护经验。
+  - 英语听说读写能力良好，能自如交流。
+
+experience:
+  - company: 成都中科创达软件股份有限公司
+    period: 2018.04 ~ 至今
+    roles:
+      - title: IoT 相机产品开发
+        paragraphs:
+          - 承担 IoT Camera Manager 和项目 TPM 的角色，完成部分 Camera 开发工作，同时构建与管理团队并保证项目交付。
+        items:
+          - 独自开发完成车载（SM6125 + Ubuntu）Camera 多合一的 PoC，在没有官方支持的情况下，通过编写脚本跑了上千次可能性完成 MAX9296+MAX96705 的链路打通，通过 CPU、GPU 等资源合理分配保证 Camera 性能，帧同步且无掉帧问题，并将此项目做成了一个销售方案。
+          - 2020 年底升为 IoT Camera 负责人，组建 IoT Camera 团队以满足公司业务需要，目前团队成员 9 人，负责多媒体项目售前、开发与售后。
+          - 承担欧美项目 TPM 角色，作为技术沟通的桥梁保证项目顺利进行，协助或拉通资源解决并推进疑难与高风险问题。
+          - 某欧美项目在资源组成较为不合理且难度很高的情况下，通过拆解任务、协调所有内部资源每天只做最重要的一件事，用 70% 的资源保证项目正常推进；重构 Android Display HAL 解决了以 SPI 屏为 Android 默认屏并兼容高通 Camera 架构的难题。
+      - title: Android 手机开发
+        paragraphs:
+          - 负责高通平台（MSM8909/SM6125/SDM660/SM8250 等）的 BSP 和 System 相关开发和维护工作，技术方向为 Android 和 Linux（Yocto），包括电源管理、Charger/Battery、USB、Performance、Thermal、Camera、System、Stability、Security、功耗等。
+        items:
+          - 实现了大量客户定制的 Charger/Battery/USB 等相关需求，如将一个 USB 接口扩展为三个接口的 USB，并将其提前做成通用方案。
+          - 各个模块的 Porting 及 BUG 维护。
+          - 多次协助解决疑难和紧急问题，包括 xbl、性能、稳定性及版本管理等各方面，守住项目节点。
+          - 搭建了局网 Gitbook 服务器并发起组员技术输出，有效形成技术沉淀。
+          - 总结输出多份文档和工具，帮助大家提高研发效率，如 Bring up 指南、各种模块调试指南以及编译和调试的自动化工具。
+  - company: 深圳东方拓宇科技有限公司
+    period: 2017.11 ~ 2018.03
+    roles:
+      - title: Android 手机开发
+        paragraphs:
+          - 负责联发科平台（MTK6570/6739）的 BSP 开发和维护，主要涉及 Charger/Battery、扫码头和三大件等模块的 Porting 和维护工作。
+        items: []
+  - company: 深圳思路名扬通讯技术股份有限公司
+    period: 2014.09 ~ 2017.10
+    roles:
+      - title: Android 手机和无人机开发
+        paragraphs:
+          - 手机终端部分主要负责高通平台（MSM8916/8909/8974 等）的驱动开发和维护，如 Charger/Battery 模块，解决开关机充放电及睡眠功耗遇到的一切问题，调试三大件并解决待机电流大、自动重启、死机等功能性问题。
+          - 无人机开发负责高通 8074 平台所有 BSP 部分工作，Bring-up Linaro(Linux) 并保证无人机的外设、电调板、IMU/地磁/GPS 等正确工作。
+        items: []
+  - company: 成都无线龙通讯科技有限公司
+    period: 2011.11 ~ 2013.08
+    roles:
+      - title: IoT 设计与开发
+        paragraphs:
+          - 负责基于 Samsung、STM32、8051 平台的“智能蔬菜大棚系统”和“物联网协议分析仪”两款产品的开发，包括原理图、PCB 绘制，单片机编程，Linux 系统移植和应用开发。
+        items: []
+
+talks:
+  - title: 原来你是这样的 VCS！
+    url: http://huaqianlee.github.io/2020/11/13/Git/vcs-repo-git/
+  - title: How to develop and debug kernel?
+    url: http://huaqianlee.github.io/2020/11/16/Linux/How-to-develop-and-debug-kernel/
+  - title: Virtualization vs Containerization
+    url: http://huaqianlee.github.io/2021/10/25/Linux/Virtualization-vs-Containerization/
+  - title: 'Linux Device Driver: the Char Device Driver'
+    url: http://huaqianlee.github.io/2020/12/25/Linux/Linux-Device-Driver-the-Char-Device-Driver/
+  - title: How to prepare SDK for Yocto Linux/Ubuntu on Qualcomm?
+    url: http://huaqianlee.github.io/2021/12/25/Linux/How-to-prepare-SDK-for-Yocto-Linux-Ubuntu-on-Qualcomm/
+  - title: MIPI CSI 接口定义与协议层介绍
+    url: http://huaqianlee.github.io/2021/09/22/Camera/MIPI%20interface%20overview/
+
+skills:
+  - - name: C/C++
+      url: http://www.cplusplus.com/
+      frequent: true
+    - name: Java
+      url: https://www.java.com/en/
+      frequent: true
+    - name: Shell
+      url: http://zh.wikipedia.org/wiki/Unix_shell
+      frequent: true
+    - name: Python
+      url: https://www.python.org/
+      frequent: true
+    - name: HTML
+      url: https://html.spec.whatwg.org/multipage/
+  - - name: Vim
+      url: http://www.vim.org
+      frequent: true
+    - name: Git
+      url: http://git-scm.com
+      frequent: true
+    - name: Android Studio
+      frequent: true
+    - name: Docker
+      url: https://www.docker.com/
+    - name: Ubuntu Linux
+      url: http://ubuntu.com
+      frequent: true
+    - name: MySQL
+      url: http://mysql.com
+
+education: 2008.09 – 2012.07　四川工商学院　电子信息工程　本科
+
+honors:
+  - 2021 年度“超级工匠”
+  - 全国英语四级
+  - 全国计算机二级
+  - 全国电子设计大赛四川省二等奖（2011.11）
+  - 全国电子设计大赛全国三等奖（2011.12）
+
+thanks: 感谢您花时间阅读我的简历，期望能成为你们这个大家庭中的一员。

@@ -1,0 +1,239 @@
+---
+import type { ResumeData } from '../content.config';
+
+export interface Props {
+  data: ResumeData;
+  lang: 'cn' | 'en';
+}
+const { data, lang } = Astro.props;
+
+const L = {
+  cn: {
+    profile: '简介',
+    experience: '工作经历',
+    talks: '分享与讲义',
+    skills: '技能',
+    education: '教育背景',
+    honors: '证书与荣誉',
+    thanks: '感谢',
+    home: '← 返回主页',
+    switch: 'English resume',
+    download: '下载 PDF',
+    frequentNote: '带 † 的是我比较熟悉、常用的。',
+  },
+  en: {
+    profile: 'Profile',
+    experience: 'Work Experience',
+    talks: 'Sharing & Handouts',
+    skills: 'Skills',
+    education: 'Education',
+    honors: 'Honors & Awards',
+    thanks: 'Thanks',
+    home: '← Home',
+    switch: '中文简历',
+    download: 'Download PDF',
+    frequentNote: 'Items marked † are the ones I use frequently.',
+  },
+}[lang];
+
+const switchHref = lang === 'cn' ? '/resume-en' : '/resume';
+const pdfHref = lang === 'cn' ? '/resume_cn.pdf' : '/resume_en.pdf';
+---
+
+<nav class="toolbar">
+  <a href="/">{L.home}</a>
+  <a href={switchHref}>{L.switch}</a>
+  <a href={pdfHref}>{L.download} ↓</a>
+</nav>
+
+<main class="page resume">
+  <header class="head">
+    <h1>{data.name}</h1>
+    <p class="subtitle">{data.title}</p>
+    <ul class="contact">
+      {data.contact.map((c) => (
+        <li>
+          <span class="c-label">{c.label}</span>
+          {c.href ? <a href={c.href}>{c.value}</a> : <span>{c.value}</span>}
+        </li>
+      ))}
+    </ul>
+  </header>
+
+  <section>
+    <h2>{L.profile}</h2>
+    <ul class="bullets prof">
+      {data.profile.map((p) => <li>{p}</li>)}
+    </ul>
+  </section>
+
+  <section>
+    <h2>{L.experience}</h2>
+    {data.experience.map((exp) => (
+      <div class="exp">
+        <div class="exp-head">
+          <span class="company">{exp.company}</span>
+          <span class="period">{exp.period}</span>
+        </div>
+        {exp.roles.map((role) => (
+          <div class="role">
+            <h3>{role.title}</h3>
+            {role.paragraphs.map((para) => <p>{para}</p>)}
+            {role.items.length > 0 && (
+              <ul class="bullets">
+                {role.items.map((it) => <li>{it}</li>)}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    ))}
+  </section>
+
+  <section>
+    <h2>{L.talks}</h2>
+    <ul class="talks">
+      {data.talks.map((t) => (
+        <li><a href={t.url} target="_blank" rel="noopener">{t.title}</a></li>
+      ))}
+    </ul>
+  </section>
+
+  <section>
+    <h2>{L.skills}</h2>
+    <p class="note">{L.frequentNote}</p>
+    {data.skills.map((row) => (
+      <p class="skill-row">
+        {row.map((s) => (
+          <span class="skill">
+            {s.url ? <a href={s.url} target="_blank" rel="noopener">{s.name}</a> : <span>{s.name}</span>}
+            {s.frequent && <sup class="dagger">†</sup>}
+          </span>
+        ))}
+      </p>
+    ))}
+  </section>
+
+  <section>
+    <h2>{L.education}</h2>
+    <p class="edu">{data.education}</p>
+  </section>
+
+  <section>
+    <h2>{L.honors}</h2>
+    <ul class="bullets">
+      {data.honors.map((h) => <li>{h}</li>)}
+    </ul>
+  </section>
+
+  <section class="thanks">
+    <h2>{L.thanks}</h2>
+    <p>{data.thanks}</p>
+  </section>
+</main>
+
+<style is:global>
+  .resume { color: var(--ink); }
+
+  /* ── Header ── */
+  .resume .head { margin-bottom: 1.15rem; }
+  .resume h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -.01em; line-height: 1.1; }
+  .resume .subtitle { color: var(--accent); font-size: 1rem; font-weight: 600; margin-top: .2rem; }
+  .resume .contact {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem 1.1rem;
+    margin-top: .7rem;
+    padding-top: .7rem;
+    border-top: 1px solid var(--rule);
+    font-size: .84rem;
+    color: var(--ink-soft);
+  }
+  .resume .contact .c-label { color: var(--ink-faint); margin-right: .35rem; }
+
+  /* ── Section headings ── */
+  .resume section { margin-bottom: .95rem; }
+  .resume h2 {
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    margin-bottom: .55rem;
+  }
+  .resume h2::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  /* ── Experience ── */
+  .resume .exp { margin-bottom: .8rem; }
+  .resume .exp:last-child { margin-bottom: 0; }
+  .resume .exp-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .resume .company { font-weight: 700; font-size: 1.02rem; color: var(--ink); }
+  .resume .period {
+    color: var(--ink-faint);
+    font-size: .82rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .resume .role { margin-top: .4rem; }
+  .resume .role:first-of-type { margin-top: .3rem; }
+  .resume .role h3 { font-size: .9rem; font-weight: 600; color: var(--accent); margin-bottom: .25rem; }
+  .resume .role p { margin: .2rem 0; color: var(--ink-soft); }
+
+  /* ── Bullets ── */
+  .resume .bullets { list-style: none; margin: .3rem 0; }
+  .resume .bullets li { position: relative; padding-left: 1.05rem; margin: .22rem 0; color: var(--ink-soft); }
+  .resume .bullets li::before {
+    content: '';
+    position: absolute;
+    left: .05rem;
+    top: .62em;
+    width: .32rem;
+    height: .32rem;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: .5;
+  }
+  .resume .prof li { color: var(--ink); }
+
+  /* ── Talks ── */
+  .resume .talks { list-style: none; }
+  .resume .talks li { position: relative; padding-left: 1.05rem; margin: .28rem 0; }
+  .resume .talks li::before { content: '›'; position: absolute; left: 0; color: var(--ink-faint); font-weight: 700; }
+
+  /* ── Skills ── */
+  .resume .note { color: var(--ink-faint); font-size: .82rem; margin-bottom: .55rem; }
+  .resume .skill-row { margin: .35rem 0; line-height: 1.85; }
+  .resume .skill {
+    display: inline-block;
+    margin-right: .4rem;
+    padding: .12rem .55rem;
+    background: var(--tag-bg);
+    border-radius: 4px;
+    font-size: .85rem;
+  }
+  .resume .skill a { color: var(--ink); }
+  .resume .skill a:hover { color: var(--accent); }
+  .resume .dagger { color: var(--accent); font-size: .7em; margin-left: .05rem; }
+
+  /* ── Education / Thanks ── */
+  .resume .edu { color: var(--ink-soft); }
+  .resume .thanks p { color: var(--ink-soft); font-style: italic; }
+
+  /* ── Print: flow naturally, only protect small units ── */
+  @media print {
+    .resume h2, .resume h3 { break-after: avoid; }
+    .resume .exp-head { break-after: avoid; }
+    .resume .bullets li, .resume .talks li { break-inside: avoid; }
+    .resume .skill { background: var(--tag-bg) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
