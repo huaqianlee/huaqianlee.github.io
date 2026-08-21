@@ -567,8 +567,8 @@ comments:
   # Available values: tabs | buttons
   style: tabs
   # Choose a comment system to be displayed by default.
-  # Available values: changyan | disqus | disqusjs | gitalk | livere | valine
-  active:
+  # Available values: changyan | disqus | disqusjs | giscus | gitalk | livere | valine
+  active: giscus
   # Setting `true` means remembering the comment system selected by the visitor.
   storage: true
   # Lazyload all comment systems.
@@ -647,17 +647,28 @@ livere_uid: # <your_uid>
 #  # Available values: en | es-ES | fr | ru | zh-CN | zh-TW
 #  language:
 gitalk:
-  enable: true  
-  github_id: huaqianlee 
+  enable: false
+  github_id: huaqianlee
   repo: huaqianlee.github.io
-  client_id: af176630d44392cdef8f 
-  client_secret: 63681992881b6f3ecd24146470e5aaf7d068fe14 
-  admin_user: huaqianlee 
-  distraction_free_mode: true # Facebook-like distraction free mode
-  # Gitalk's display language depends on user's browser or system environment
-  # If you want everyone visiting your site to see a uniform language, you can set a force language value
-  # Available values: en, es-ES, fr, ru, zh-CN, zh-TW
+  client_id: af176630d44392cdef8f
+  client_secret:
+  admin_user: huaqianlee
+  distraction_free_mode: true
   language:
+
+giscus:
+  enable: true
+  repo: huaqianlee/huaqianlee.github.io
+  repo_id: MDEwOlJlcG9zaXRvcnkyODQ3MjI3Nw==
+  category: Announcements
+  category_id: ""
+  mapping: pathname
+  strict: 0
+  reactions_enabled: 1
+  emit_metadata: 0
+  input_position: bottom
+  theme: light
+  language: zh-CN
 
 
 # ---------------------------------------------------------------
