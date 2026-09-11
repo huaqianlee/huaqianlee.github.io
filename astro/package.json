@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.0.0",
     "@fontsource/jetbrains-mono": "^5.0.0",
-    "astro": "^5.0.0"
+    "astro": "^7.3.2"
   },
   "devDependencies": {
     "playwright": "^1.40.0"
